@@ -1,0 +1,11 @@
+.DS_Store
+
+# project
+EvoRadio.xcworkspace
+xcuserdata/
+
+# pod
+Pods/
+
+# test files
+Test/

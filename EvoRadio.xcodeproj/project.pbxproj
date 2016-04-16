@@ -1,0 +1,419 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29258049669E5F330022BB /* Pods_EvoRadio.framework */; };
+		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
+		909E659E1CC0831100B0C49B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 909E659D1CC0831100B0C49B /* Info.plist */; };
+		909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E659F1CC0831B00B0C49B /* MainViewController.swift */; };
+		909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A01CC0831B00B0C49B /* ViewController.swift */; };
+		909E65A41CC0837800B0C49B /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A31CC0837800B0C49B /* TabBar.swift */; };
+		909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909E65A51CC083A500B0C49B /* Assets.xcassets */; };
+		909E65AD1CC083BB00B0C49B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 909E65AB1CC083BB00B0C49B /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		8A29258049669E5F330022BB /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
+		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		909E659D1CC0831100B0C49B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		909E659F1CC0831B00B0C49B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
+		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
+		909E65A31CC0837800B0C49B /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBar.swift; path = Views/TabBar.swift; sourceTree = "<group>"; };
+		909E65A51CC083A500B0C49B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		909E65AC1CC083BB00B0C49B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		902FBCCA1CBEAC020051A93B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8A29258049669E5F330022BB /* Pods_EvoRadio.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		902FBCC41CBEAC010051A93B = {
+			isa = PBXGroup;
+			children = (
+				902FBCCF1CBEAC020051A93B /* EvoRadio */,
+				902FBCCE1CBEAC020051A93B /* Products */,
+				B461353B916D64FF79E130B1 /* Pods */,
+				5A94393BB0E9EEBD2CED84BF /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		902FBCCE1CBEAC020051A93B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				902FBCCD1CBEAC020051A93B /* EvoRadio.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		902FBCCF1CBEAC020051A93B /* EvoRadio */ = {
+			isa = PBXGroup;
+			children = (
+				902FBCD01CBEAC020051A93B /* AppDelegate.swift */,
+				909E659B1CC0827D00B0C49B /* Controllers */,
+				909E659A1CC07D2F00B0C49B /* Views */,
+				909E65AE1CC0840700B0C49B /* Models */,
+				909E65AF1CC0842100B0C49B /* Extensions */,
+				909E65B11CC0843700B0C49B /* Utils */,
+				909E659C1CC0831100B0C49B /* Resources */,
+			);
+			path = EvoRadio;
+			sourceTree = "<group>";
+		};
+		909E659A1CC07D2F00B0C49B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				909E65A31CC0837800B0C49B /* TabBar.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		909E659B1CC0827D00B0C49B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				909E659F1CC0831B00B0C49B /* MainViewController.swift */,
+				909E65A01CC0831B00B0C49B /* ViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		909E659C1CC0831100B0C49B /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				909E659D1CC0831100B0C49B /* Info.plist */,
+				909E65A51CC083A500B0C49B /* Assets.xcassets */,
+				909E65AB1CC083BB00B0C49B /* LaunchScreen.storyboard */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		909E65AE1CC0840700B0C49B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		909E65AF1CC0842100B0C49B /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		909E65B11CC0843700B0C49B /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B461353B916D64FF79E130B1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */,
+				FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		902FBCCC1CBEAC020051A93B /* EvoRadio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 902FBCDF1CBEAC020051A93B /* Build configuration list for PBXNativeTarget "EvoRadio" */;
+			buildPhases = (
+				639835856B81C9E6CE30994C /* Check Pods Manifest.lock */,
+				902FBCC91CBEAC020051A93B /* Sources */,
+				902FBCCA1CBEAC020051A93B /* Frameworks */,
+				902FBCCB1CBEAC020051A93B /* Resources */,
+				E339869DE481EA59E214B84B /* Embed Pods Frameworks */,
+				EC5B78D310CCD90B1AAE94C4 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EvoRadio;
+			productName = EvoRadio;
+			productReference = 902FBCCD1CBEAC020051A93B /* EvoRadio.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		902FBCC51CBEAC010051A93B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = JQTech;
+				TargetAttributes = {
+					902FBCCC1CBEAC020051A93B = {
+						CreatedOnToolsVersion = 7.3;
+					};
+				};
+			};
+			buildConfigurationList = 902FBCC81CBEAC010051A93B /* Build configuration list for PBXProject "EvoRadio" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 902FBCC41CBEAC010051A93B;
+			productRefGroup = 902FBCCE1CBEAC020051A93B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				902FBCCC1CBEAC020051A93B /* EvoRadio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		902FBCCB1CBEAC020051A93B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909E65AD1CC083BB00B0C49B /* LaunchScreen.storyboard in Resources */,
+				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
+				909E659E1CC0831100B0C49B /* Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		639835856B81C9E6CE30994C /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E339869DE481EA59E214B84B /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EC5B78D310CCD90B1AAE94C4 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		902FBCC91CBEAC020051A93B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,
+				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
+				909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */,
+				909E65A41CC0837800B0C49B /* TabBar.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		909E65AB1CC083BB00B0C49B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				909E65AC1CC083BB00B0C49B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		902FBCDD1CBEAC020051A93B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		902FBCDE1CBEAC020051A93B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		902FBCE01CBEAC020051A93B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		902FBCE11CBEAC020051A93B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		902FBCC81CBEAC010051A93B /* Build configuration list for PBXProject "EvoRadio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				902FBCDD1CBEAC020051A93B /* Debug */,
+				902FBCDE1CBEAC020051A93B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		902FBCDF1CBEAC020051A93B /* Build configuration list for PBXNativeTarget "EvoRadio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				902FBCE01CBEAC020051A93B /* Debug */,
+				902FBCE11CBEAC020051A93B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 902FBCC51CBEAC010051A93B /* Project object */;
+}
