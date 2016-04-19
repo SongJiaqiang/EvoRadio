@@ -10,10 +10,10 @@ import UIKit
 
 class Device: NSObject {
 
-    static func screenWidth() -> CGFloat {
+    static func width() -> CGFloat {
         return UIScreen.mainScreen().bounds.size.width
     }
-    static func screenHeight() -> CGFloat {
+    static func height() -> CGFloat {
         return UIScreen.mainScreen().bounds.size.height
     }
     

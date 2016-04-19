@@ -6,8 +6,16 @@
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import Cocoa
+import UIKit
 
 class NavigationController: UINavigationController {
-
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return false
+    }
+    
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+    
 }

@@ -1,5 +1,5 @@
 //
-//  TableViewController.swift
+//  ChannelViewController.swift
 //  EvoRadio
 //
 //  Created by Whisper-JQ on 16/4/18.
@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 
-class TableViewController: UITableViewController {
+class ChannelViewController: UITableViewController {
 
     let cellID = "cellID"
     
@@ -27,11 +27,15 @@ class TableViewController: UITableViewController {
     // http://www.lavaradio.com/api/radio.listAllNowChannels.json
     func listAllNowChannels() {
         
-        api.fetch_all_now_channels({[weak self] (responseDict) in
+        api.fetch_all_now_channels({[weak self] (responseData) in
             
-            let firstList = responseDict.first
+            let count = UInt32(responseData.count)
             
-            self?.dataSource = Channel.channelsWithDict(firstList!["channels"] as! [[String : AnyObject]])
+            let random = Int(arc4random_uniform(count))
+            
+            let anyList = responseData[random]
+            
+            self?.dataSource = Channel.channelsWithDict(anyList["channels"] as! [[String : AnyObject]])
             
             self?.tableView.reloadData()
             }, onFailed: nil)
@@ -51,7 +55,7 @@ class TableViewController: UITableViewController {
         
         cell!.textLabel?.text = channel.channelName
         cell!.detailTextLabel?.text = channel.radioName
-        cell!.imageView?.kf_setImageWithURL(NSURL(string: channel.picURL!)!, placeholderImage: UIImage(named: "placeholder_cover"))
+        cell!.imageView?.kf_setImageWithURL(NSURL(string: channel.picURL!)!, placeholderImage: UIImage.placeholder_cover())
         
         return cell!
     }
@@ -60,6 +64,9 @@ class TableViewController: UITableViewController {
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
+        let channel = dataSource[indexPath.row]
+        
+        navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
         
     }
 
