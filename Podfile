@@ -6,6 +6,7 @@ target 'EvoRadio' do
 
 pod 'Alamofire', '~>3.3'
 pod 'Kingfisher', '~>2.2'
+pod 'SnapKit', '~>0.20.0'
 
 
 end
