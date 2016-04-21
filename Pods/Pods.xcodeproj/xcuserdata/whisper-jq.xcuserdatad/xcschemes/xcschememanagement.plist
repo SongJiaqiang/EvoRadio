@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFSoundManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Alamofire.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6CC475F1EE78443AF61462C68DB3AF3D</key>
+		<key>51E0397BEBBE343CB9413CD3EAAD1163</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,7 +42,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8572CBF0E5B78EEE4E6AC760F5785FA1</key>
+		<key>8DFA2EEC431415A779007D813A965BBB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E5A7524B1697F1081585F999E6EE59CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

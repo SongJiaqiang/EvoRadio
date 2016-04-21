@@ -15,13 +15,16 @@ class PlayerBar: UIView {
     private var playButton = UIButton()
     
     
-    
     init() {
         super.init(frame: CGRectMake(0, Device.width()-50, Device.width(), 50))
         
         insertGradientLayer()
         
         prepareUI()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlayerBar.onTap))
+        addGestureRecognizer(tapGesture)
+        userInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -80,5 +83,10 @@ class PlayerBar: UIView {
         }
         
         
+    }
+    
+    //MARK: event
+    func onTap(gesture: UITapGestureRecognizer) {
+        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(PlayerViewController(), animated: true, completion: nil)
     }
 }

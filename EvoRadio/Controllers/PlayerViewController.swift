@@ -7,6 +7,9 @@
 //
 
 import UIKit
+import Alamofire
+import AFSoundManager
+import SnapKit
 
 class PlayerViewController: ViewController {
     let cellID = "audioCellID"
@@ -17,10 +20,22 @@ class PlayerViewController: ViewController {
     private var controlView = UIView()
 
     var listTableView: UITableView?
+    var listTableViewConstraint: Constraint? = nil
+    
+    //MARK: instance
+    class var playerController: PlayerViewController {
+        struct Static {
+            static var onceToken: dispatch_once_t = 0
+            static var instance: PlayerViewController! = nil
+        }
+        dispatch_once(&Static.onceToken) { () -> Void in
+            Static.instance = PlayerViewController()
+        }
+        return Static.instance
+    }
     
     convenience init(program: Program) {
         self.init()
-        
         self.program = program
     }
     
@@ -31,16 +46,13 @@ class PlayerViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
-        
         prepareBackgroundView()
         prepareCoverView()
         prepareNavigationBar()
         
         preparePlayerControlView()
         prepareToolsView()
-        
-        
+     
     }
 
     func prepareBackgroundView() {
@@ -143,7 +155,7 @@ class PlayerViewController: ViewController {
         let infoButton = UIButton()
         toolsView.addSubview(infoButton)
         infoButton.setImage(UIImage(named: "icon_info"), forState: .Normal)
-        infoButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
         infoButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
             make.center.equalTo(toolsView.center)
@@ -152,7 +164,8 @@ class PlayerViewController: ViewController {
         let downloadButton = UIButton()
         toolsView.addSubview(downloadButton)
         downloadButton.setImage(UIImage(named: "icon_download"), forState: .Normal)
-        downloadButton.addTarget(self, action: #selector(PlayerViewController.nextButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        downloadButton.setImage(UIImage(named: "icon_downloaded"), forState: .Selected)
+        downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadButtonPressed(_:)), forControlEvents: .TouchUpInside)
         downloadButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
             make.centerY.equalTo(toolsView.snp_centerY)
@@ -162,7 +175,7 @@ class PlayerViewController: ViewController {
         let shareButton = UIButton()
         toolsView.addSubview(shareButton)
         shareButton.setImage(UIImage(named: "icon_share"), forState: .Normal)
-        shareButton.addTarget(self, action: #selector(PlayerViewController.prevButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        shareButton.addTarget(self, action: #selector(PlayerViewController.shareButtonPressed(_:)), forControlEvents: .TouchUpInside)
         shareButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
             make.centerY.equalTo(toolsView.snp_centerY)
@@ -184,6 +197,7 @@ class PlayerViewController: ViewController {
         let playButton = UIButton()
         controlView.addSubview(playButton)
         playButton.setImage(UIImage(named: "icon_player_start"), forState: .Normal)
+        playButton.setImage(UIImage(named: "icon_player_pause"), forState: .Selected)
         playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(50, 50))
@@ -269,18 +283,18 @@ class PlayerViewController: ViewController {
     
     func prepareListTableView() {
         if let _ = listTableView {
-            
+            listTableViewConstraint?.updateOffset(0)
         }else {
             listTableView = UITableView()
             view.addSubview(listTableView!)
             listTableView!.delegate = self
             listTableView!.dataSource = self
             listTableView!.frame = CGRectMake(0, 0, Device.width(), Device.width())
-            listTableView?.snp_makeConstraints(closure: { (make) in
+            listTableView?.snp_makeConstraints(closure: {[weak self] (make) in
                 make.size.equalTo(CGSizeMake(Device.width(), Device.width()))
-                make.bottom.equalTo(view.snp_bottom)
-                make.left.equalTo(view.snp_left)
-                make.right.equalTo(view.snp_right)
+                self?.listTableViewConstraint = make.bottom.equalTo((self?.view.snp_bottom)!).constraint
+                make.left.equalTo((self?.view.snp_left)!)
+                make.right.equalTo((self?.view.snp_right)!)
             })
             
             listTableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
@@ -298,6 +312,9 @@ class PlayerViewController: ViewController {
         api.fetch_songs(programID, onSuccess: {[weak self] (responseData) in
             
             if responseData.count > 0 {
+                // download first audio file
+                
+                
                 
                 let newData = Song.songsWithDict(responseData)
                 
@@ -314,13 +331,20 @@ class PlayerViewController: ViewController {
     
     //MARK: event
     func playButtonPressed(button: UIButton) {
+        button.selected = !button.selected
+        
+        if button.selected {
+            MusicManager.sharedManager.playItem()
+        }else {
+            MusicManager.sharedManager.pauseItem()
+        }
         
     }
     func nextButtonPressed(button: UIButton) {
-        
+        MusicManager.sharedManager.playNext()
     }
     func prevButtonPressed(button: UIButton) {
-        
+        MusicManager.sharedManager.playPrev()
     }
     func repeatButtonPressed(button: UIButton) {
         
@@ -331,15 +355,53 @@ class PlayerViewController: ViewController {
 
     }
     func heartButtonPressed(button: UIButton) {
-        
+        button.selected = !button.selected
     }
     func downloadButtonPressed(button: UIButton) {
-        
+        button.selected = !button.selected
     }
     func shareButtonPressed(button: UIButton) {
         
     }
     func infoButtonPressed(button: UIButton) {
+        
+    }
+    
+    
+    func downloadFile(audioURL: String) {
+        
+        // check file exit
+        
+        
+        let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
+        
+        Alamofire.download(.GET, audioURL, destination: { temporaryURL, response -> NSURL in
+            
+            let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
+            
+            if !directoryURLs.isEmpty {
+                return directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
+            }
+            
+            return temporaryURL
+        })
+        
+        
+        Alamofire.download(.GET, audioURL, destination: destination).progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
+            print("\(bytesRead)-\(totalBytesRead)-\(totalBytesExpectedToRead)")
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                // update ui
+            }
+        }.response { (request, response, data, error) in
+            if let error = error {
+                print("Download failed with error: \(error)")
+            }else {
+                print("Download file successfully")
+            }
+        }
+        
+        
         
     }
 
@@ -361,5 +423,19 @@ extension PlayerViewController: UITableViewDataSource, UITableViewDelegate {
         cell?.imageView?.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover())
         
         return cell!
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        // 1. download file
+        let song = dataSource[indexPath.row]
+        
+//        self.downloadFile(song.audioURL!)
+
+        Downloader.downloader.downloadFile(song.audioURL!)
+        // 2. play audio
+        
+        self.listTableViewConstraint?.updateOffset(Device.width())
     }
 }
