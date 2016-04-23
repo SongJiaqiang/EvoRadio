@@ -7,12 +7,17 @@
 //
 
 import UIKit
+import SnapKit
 
 class TabBar: UIView {
+    let itemWidth:CGFloat = Device.width()*0.2
     
     var titles: [String]?
     var currentIndex: Int = 0
     private var sortView = UIView()
+    private var lineConstraint: Constraint?
+    
+    var delegate: TabBarDelegate?
     
     convenience init(titles: [String]) {
         self.init()
@@ -53,10 +58,10 @@ class TabBar: UIView {
             sortButton.tag = i
             sortButton.addTarget(self, action: #selector(TabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
             sortView.addSubview(sortButton)
-            let labelWidth:CGFloat = Device.width()*0.2
+            
             sortButton.snp_makeConstraints { (make) in
-                make.width.equalTo(labelWidth)
-                make.leftMargin.equalTo(labelWidth * CGFloat(i))
+                make.width.equalTo(itemWidth)
+                make.leftMargin.equalTo(itemWidth * CGFloat(i))
                 make.height.equalTo(34)
                 make.bottom.equalTo(sortView.snp_bottom)
             }
@@ -75,11 +80,11 @@ class TabBar: UIView {
         let maskLine = UIView()
         line.addSubview(maskLine)
         maskLine.backgroundColor = UIColor.goldColor()
-        maskLine.snp_makeConstraints { (make) in
+        maskLine.snp_makeConstraints {[weak self] (make) in
             make.width.equalTo(Device.width()*0.2)
             make.height.equalTo(2)
             make.bottom.equalTo(line.snp_bottom)
-            make.left.equalTo(line.snp_left)
+            self?.lineConstraint = make.left.equalTo(line.snp_left).constraint
         }
         
         
@@ -87,16 +92,27 @@ class TabBar: UIView {
     
     func sortButtonPressed(button: UIButton) {
         print("selected item \(titles![button.tag])")
+        
+        delegate?.tabBarSelectedItemAtIndex(button.tag)
+    }
+    
+    func updateLineConstraint(offsetX: CGFloat) {
+        lineConstraint?.updateOffset(offsetX)
     }
     
     func setCurrentIndex(index: Int, animated: Bool) {
         currentIndex = index
         
+        lineConstraint?.updateOffset(itemWidth*CGFloat(index))
+
         if animated {
             // do animation
-            
         }
         
     }
     
+}
+
+protocol TabBarDelegate {
+    func tabBarSelectedItemAtIndex(index: Int)
 }

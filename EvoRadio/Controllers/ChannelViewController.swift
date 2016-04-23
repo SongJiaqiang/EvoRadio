@@ -33,6 +33,7 @@ class ChannelViewController: UIViewController {
 
         prepareTableView()
         
+//        tableView.mj_header.beginRefreshing()
     }
     
     
@@ -123,3 +124,5 @@ extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
 }
+
+

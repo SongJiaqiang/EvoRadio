@@ -39,6 +39,7 @@ class MainViewController: ViewController {
         
         sortTabBar = TabBar(titles: ["时刻", "活动", "情绪", "文化", "个人"])
         view.addSubview(sortTabBar)
+        sortTabBar.delegate = self
         sortTabBar.snp_makeConstraints { (make) in
             make.height.equalTo(34)
             make.top.equalTo(view.snp_top).inset(64)
@@ -70,6 +71,7 @@ class MainViewController: ViewController {
         contentView.showsVerticalScrollIndicator = false
         contentView.showsHorizontalScrollIndicator = false
         contentView.clipsToBounds = true
+        contentView.delegate = self
         contentView.snp_makeConstraints { (make) in
             make.top.equalTo(sortTabBar.snp_bottom)
             make.bottom.equalTo(playerBar.snp_top)
@@ -82,3 +84,27 @@ class MainViewController: ViewController {
     
     
 }
+
+extension MainViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        
+        self.sortTabBar.updateLineConstraint(offsetX*0.2)
+    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        
+        let pageIndex = (offsetX+Device.width()) / Device.width()
+        
+        
+        
+    }
+}
+
+extension MainViewController: TabBarDelegate {
+    func tabBarSelectedItemAtIndex(index: Int) {
+        self.contentView.setContentOffset(CGPointMake(Device.width()*CGFloat(index), 0), animated: true)
+    }
+}
+
