@@ -6,7 +6,7 @@
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 /*
  {
  "channel_id": "129",
@@ -27,6 +27,7 @@ class Channel: NSObject {
     var channelNameShengmu: String?
     var radioID: String?
     var radioName: String?
+    var programNum: String?
     var programFine: String?
     var pubTime: String?
     var sortOrder: String?
@@ -42,6 +43,7 @@ class Channel: NSObject {
         channel.radioID = dict["radio_id"] as? String
         channel.radioName = dict["radio_name"] as? String
         channel.programFine = dict["program_fine"] as? String
+        channel.programNum = dict["program_num"] as? String
         channel.pubTime = dict["pub_time"] as? String
         channel.sortOrder = dict["sort_order"] as? String
         channel.picURL = dict["pic_url"] as? String

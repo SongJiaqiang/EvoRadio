@@ -1,0 +1,15 @@
+//
+//  EvoRadio-Bridge-Header.pch
+//  EvoRadio
+//
+//  Created by Whisper-JQ on 16/4/22.
+//  Copyright © 2016年 JQTech. All rights reserved.
+//
+
+#ifndef EvoRadio_Bridge_Header_pch
+#define EvoRadio_Bridge_Header_pch
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+
+#endif /* EvoRadio_Bridge_Header_pch */

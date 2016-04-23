@@ -87,11 +87,15 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-EvoRadio/AFSoundManager.framework"
   install_framework "Pods-EvoRadio/Alamofire.framework"
   install_framework "Pods-EvoRadio/Kingfisher.framework"
+  install_framework "Pods-EvoRadio/MJRefresh.framework"
   install_framework "Pods-EvoRadio/SnapKit.framework"
+  install_framework "Pods-EvoRadio/leveldb.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-EvoRadio/AFSoundManager.framework"
   install_framework "Pods-EvoRadio/Alamofire.framework"
   install_framework "Pods-EvoRadio/Kingfisher.framework"
+  install_framework "Pods-EvoRadio/MJRefresh.framework"
   install_framework "Pods-EvoRadio/SnapKit.framework"
+  install_framework "Pods-EvoRadio/leveldb.framework"
 fi

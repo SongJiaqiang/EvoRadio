@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MJRefresh.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EvoRadio.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -29,10 +34,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>leveldb.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>396A920FFB2606E232F227AB360DDB00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>51E0397BEBBE343CB9413CD3EAAD1163</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6847254D016329D4A531D34ED2B6DF81</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -42,12 +62,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8DFA2EEC431415A779007D813A965BBB</key>
+		<key>B6C00D838021F77D64E72A6EB96EE4F1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E5A7524B1697F1081585F999E6EE59CF</key>
+		<key>CC70D12E947A8BD3B94B4DF3C9A7327A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

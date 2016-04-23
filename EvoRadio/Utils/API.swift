@@ -18,17 +18,23 @@ class API {
         return "\(host)\(api)"
     }
     
-    
-    func fetch_all_now_channels(onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
+    func fetch_all_channels(onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
         
-        let endpoint = commonEP("api/radio.listAllNowChannels.json")
+        if let responseData = CoreDB.getAllChannels() {
+            onSuccess(responseData)
+            return
+        }
         
+        let endpoint = commonEP("api/radio.listAllChannels.json")
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {
                 let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
                 if dict["err"] as! String == "hapn.ok" {
                     print("request is OK")
-                    onSuccess(dict["data"] as! [[String : AnyObject]])
+                    
+                    let responseData = dict["data"] as! [[String : AnyObject]]
+                    onSuccess(responseData)
+                    CoreDB.saveAllChannels(responseData)
                 }
                 
             } catch let error as NSError {
@@ -37,13 +43,36 @@ class API {
                     onFailed!(error)
                 }
             }
-            
-            
         }
+        
     }
     
-    func fetch_now_channels(week: Int, times: Int) {
+    func fetch_all_now_channels(onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
         
+        if let responseData = CoreDB.getAllNowChannels() {
+            onSuccess(responseData)
+            return
+        }
+        
+        let endpoint = commonEP("api/radio.listAllNowChannels.json")
+        Alamofire.request(.GET, endpoint).responseJSON { (response) in
+            do {
+                let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
+                if dict["err"] as! String == "hapn.ok" {
+                    print("request is OK")
+                    
+                    let responseData = dict["data"] as! [[String : AnyObject]]
+                    onSuccess(responseData)
+                    CoreDB.saveAllNowChannels(responseData)
+                }
+                
+            } catch let error as NSError {
+                print("convert error:\(error)")
+                if let _ = onFailed {
+                    onFailed!(error)
+                }
+            }
+        }
     }
     
     func fetch_programs(channelID:String, page: Page, onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
@@ -85,6 +114,7 @@ class API {
             
         }
     }
+
     
 }
 

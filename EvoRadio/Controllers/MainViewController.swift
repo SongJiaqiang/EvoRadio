@@ -14,9 +14,14 @@ class MainViewController: ViewController {
 
     private var sortTabBar: TabBar!
     private var playerBar: PlayerBar!
-    private var contentView = UIView()
+    private var contentView = UIScrollView()
     
-    private var nowViewController: ChannelViewController?
+    private var nowViewController = ChannelViewController(radioID: 0)
+    private var channel1Controller = ChannelViewController(radioID: 1)
+    private var channel2Controller = ChannelViewController(radioID: 2)
+    private var channel3Controller = ChannelViewController(radioID: 3)
+    private var personalController = PersonalViewController()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +32,7 @@ class MainViewController: ViewController {
         preparePlayerBar()
         prepareContentView()
         
-        addChildViewController(ChannelViewController(), inView: contentView)
+        addChildViewControllers([nowViewController, channel1Controller, channel2Controller,channel3Controller,personalController], inView: contentView)
     }
     
     func prepareTabBar() {
@@ -59,7 +64,11 @@ class MainViewController: ViewController {
     
     func prepareContentView() {
 //        contentView.backgroundColor = UIColor.whiteColor()
+        
         view.addSubview(contentView)
+        contentView.pagingEnabled = true
+        contentView.showsVerticalScrollIndicator = false
+        contentView.showsHorizontalScrollIndicator = false
         contentView.clipsToBounds = true
         contentView.snp_makeConstraints { (make) in
             make.top.equalTo(sortTabBar.snp_bottom)
@@ -68,6 +77,7 @@ class MainViewController: ViewController {
             make.right.equalTo(view.snp_right)
         }
         
+        contentView.contentSize = CGSizeMake(Device.width()*5, 0)
     }
     
     

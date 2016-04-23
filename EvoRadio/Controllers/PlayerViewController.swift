@@ -69,14 +69,16 @@ class PlayerViewController: ViewController {
     
     func prepareCoverView() {
         
+        let coverWidth: CGFloat = 200
         let coverView = UIImageView()
         view.addSubview(coverView)
+        coverView.clipsToBounds = true
+        coverView.layer.cornerRadius = coverWidth*0.5
+        
         coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
         coverView.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(Device.width(), Device.width()))
-            make.top.equalTo(view.snp_top)
-            make.left.equalTo(view.snp_left)
-        
+            make.size.equalTo(CGSizeMake(coverWidth, coverWidth))
+            make.center.equalTo(view.snp_center)
         }
         
     }
@@ -313,8 +315,6 @@ class PlayerViewController: ViewController {
             
             if responseData.count > 0 {
                 // download first audio file
-                
-                
                 
                 let newData = Song.songsWithDict(responseData)
                 
