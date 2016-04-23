@@ -95,8 +95,9 @@ extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
-        let pageIndex = (offsetX+Device.width()) / Device.width()
+        let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width()) + 1
         
+        sortTabBar.updateCurrentIndex(pageIndex)
         
         
     }

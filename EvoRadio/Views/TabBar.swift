@@ -16,7 +16,7 @@ class TabBar: UIView {
     var currentIndex: Int = 0
     private var sortView = UIView()
     private var lineConstraint: Constraint?
-    
+    var itemButtons = [UIButton]()
     var delegate: TabBarDelegate?
     
     convenience init(titles: [String]) {
@@ -25,7 +25,7 @@ class TabBar: UIView {
         self.titles = titles
         
         prepareUI()
-        
+        sortButtonPressed(itemButtons.first!)
     }
     
     override init(frame: CGRect) {
@@ -51,20 +51,22 @@ class TabBar: UIView {
         
         let count = titles!.count
         for i in 0..<count {
-            let sortButton = UIButton()
-            sortButton.setTitleColor(UIColor.goldColor(), forState: .Normal)
-            sortButton.titleLabel?.font = UIFont.sizeOf14()
-            sortButton.setTitle(titles![i], forState: .Normal)
-            sortButton.tag = i
-            sortButton.addTarget(self, action: #selector(TabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
-            sortView.addSubview(sortButton)
+            let button = UIButton()
+            button.setTitleColor(UIColor.blackColor6(), forState: .Normal)
+            button.setTitleColor(UIColor.goldColor(), forState: .Selected)
+            button.titleLabel?.font = UIFont.sizeOf14()
+            button.setTitle(titles![i], forState: .Normal)
+            button.tag = i
+            button.addTarget(self, action: #selector(TabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
+            sortView.addSubview(button)
             
-            sortButton.snp_makeConstraints { (make) in
+            button.snp_makeConstraints { (make) in
                 make.width.equalTo(itemWidth)
                 make.leftMargin.equalTo(itemWidth * CGFloat(i))
                 make.height.equalTo(34)
                 make.bottom.equalTo(sortView.snp_bottom)
             }
+            itemButtons.append(button)
         }
         
         let line = UIView()
@@ -87,27 +89,29 @@ class TabBar: UIView {
             self?.lineConstraint = make.left.equalTo(line.snp_left).constraint
         }
         
-        
     }
     
     func sortButtonPressed(button: UIButton) {
-        print("selected item \(titles![button.tag])")
         
         delegate?.tabBarSelectedItemAtIndex(button.tag)
+        
+        updateCurrentIndex(button.tag)
     }
     
     func updateLineConstraint(offsetX: CGFloat) {
         lineConstraint?.updateOffset(offsetX)
+
     }
     
-    func setCurrentIndex(index: Int, animated: Bool) {
+    func updateCurrentIndex(index: Int) {
         currentIndex = index
         
-        lineConstraint?.updateOffset(itemWidth*CGFloat(index))
-
-        if animated {
-            // do animation
+        for v in sortView.subviews {
+            if v.isKindOfClass(UIButton) {
+                (v as! UIButton).selected = false
+            }
         }
+        itemButtons[index].selected = true
         
     }
     

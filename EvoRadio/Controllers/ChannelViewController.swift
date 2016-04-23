@@ -33,7 +33,7 @@ class ChannelViewController: UIViewController {
 
         prepareTableView()
         
-//        tableView.mj_header.beginRefreshing()
+        tableView.mj_header.beginRefreshing()
     }
     
     
