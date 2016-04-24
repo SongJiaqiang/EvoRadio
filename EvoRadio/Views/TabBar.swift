@@ -32,7 +32,6 @@ class TabBar: UIView {
         super.init(frame: frame)
         
         backgroundColor = UIColor(netHex: 0x1C1C1D)
-        
     }
     
     
@@ -40,7 +39,6 @@ class TabBar: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    
     
     func prepareUI() {
         
@@ -88,8 +86,9 @@ class TabBar: UIView {
             make.bottom.equalTo(line.snp_bottom)
             self?.lineConstraint = make.left.equalTo(line.snp_left).constraint
         }
-        
     }
+    
+    
     
     func sortButtonPressed(button: UIButton) {
         
@@ -98,21 +97,24 @@ class TabBar: UIView {
         updateCurrentIndex(button.tag)
     }
     
+    func updateTitles(titles: [String]){
+        for i in 0..<itemButtons.count {
+            let title = titles[i].stringByReplacingOccurrencesOfString("电台", withString: "")
+            itemButtons[i].setTitle(title, forState: .Normal)
+        }
+    }
+    
     func updateLineConstraint(offsetX: CGFloat) {
         lineConstraint?.updateOffset(offsetX)
-
     }
     
     func updateCurrentIndex(index: Int) {
         currentIndex = index
         
-        for v in sortView.subviews {
-            if v.isKindOfClass(UIButton) {
-                (v as! UIButton).selected = false
-            }
+        for btn in itemButtons {
+            btn.selected = false
         }
         itemButtons[index].selected = true
-        
     }
     
 }

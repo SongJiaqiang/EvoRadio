@@ -14,7 +14,7 @@ import MJRefresh
 
 class ChannelViewController: UIViewController {
 
-    let cellID = "cellID"
+    let cellID = "channelCellID"
     
     var dataSource = [Channel]()
     var radioID: Int = 0
@@ -91,6 +91,9 @@ class ChannelViewController: UIViewController {
         
     }
 
+    func updateChannels() {
+        tableView.mj_header.beginRefreshing()
+    }
 }
 
 extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {

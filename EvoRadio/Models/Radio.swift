@@ -20,11 +20,15 @@ class Radio: NSObject {
         radio.radioName = dict["radio_name"] as? String
         
         let channelsData = dict["channels"] as? [[String : AnyObject]]
-        var channels = [Channel]()
-        for item in channelsData! {
-            channels.append(Channel.channelWithDict(item))
+        if let _ = channelsData {
+            var channels = [Channel]()
+            for item in channelsData! {
+                channels.append(Channel.channelWithDict(item))
+            }
+            radio.channels = channels
+        }else {
+            radio.channels = nil
         }
-        radio.channels = channels
         
         return radio
     }
@@ -35,6 +39,25 @@ class Radio: NSObject {
             radios.append(Radio.radioWithDict(dict))
         }
         return radios
+    }
+    
+    class func dictForRadio(radio: Radio) -> [String : AnyObject]{
+        var radioDict = [String : AnyObject]()
+        radioDict["radio_id"] = radio.radioID
+        radioDict["radio_name"] = radio.radioName
+        
+        return radioDict
+    }
+    class func dictArrayForRadios(radios: [Radio]) -> [[String : AnyObject]]{
+        var dictArray = [[String : AnyObject]]()
+        for radio in radios {
+            var radioDict = [String : AnyObject]()
+            radioDict["radio_id"] = radio.radioID
+            radioDict["radio_name"] = radio.radioName
+            
+            dictArray.append(radioDict)
+        }
+        return dictArray
     }
 }
 

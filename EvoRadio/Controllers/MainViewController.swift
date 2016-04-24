@@ -17,10 +17,10 @@ class MainViewController: ViewController {
     private var contentView = UIScrollView()
     
     private var nowViewController = ChannelViewController(radioID: 0)
-    private var channel1Controller = ChannelViewController(radioID: 1)
-    private var channel2Controller = ChannelViewController(radioID: 2)
-    private var channel3Controller = ChannelViewController(radioID: 3)
     private var personalController = PersonalViewController()
+    private var channel1Controller = ChannelViewController()
+    private var channel2Controller = ChannelViewController()
+    private var channel3Controller = ChannelViewController()
     
     
     override func viewDidLoad() {
@@ -32,12 +32,24 @@ class MainViewController: ViewController {
         preparePlayerBar()
         prepareContentView()
         
+        let customRadios = CoreDB.getCustomRadios()
+        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
+        channel2Controller.radioID = customRadios[1]["radio_id"] as! Int
+        channel3Controller.radioID = customRadios[2]["radio_id"] as! Int
         addChildViewControllers([nowViewController, channel1Controller, channel2Controller,channel3Controller,personalController], inView: contentView)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.customRadiosChanged), name: "CustomRadiosChanged", object: nil)
     }
     
     func prepareTabBar() {
-        
-        sortTabBar = TabBar(titles: ["时刻", "活动", "情绪", "文化", "个人"])
+        let customRadios = CoreDB.getCustomRadios()
+//        customRadios.filter({$key == "name"})
+        var titles = ["时刻"]
+        for item in customRadios {
+            titles.append(item["radio_name"] as! String)
+        }
+        titles.append("我的")
+        sortTabBar = TabBar(titles: titles)
         view.addSubview(sortTabBar)
         sortTabBar.delegate = self
         sortTabBar.snp_makeConstraints { (make) in
@@ -82,6 +94,24 @@ class MainViewController: ViewController {
         contentView.contentSize = CGSizeMake(Device.width()*5, 0)
     }
     
+    //MARK: event
+    func customRadiosChanged(notification: NSNotification) {
+        let customRadios = CoreDB.getCustomRadios()
+        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
+        channel2Controller.radioID = customRadios[1]["radio_id"] as! Int
+        channel3Controller.radioID = customRadios[2]["radio_id"] as! Int
+        
+        var titles = ["时刻"]
+        for item in customRadios {
+            titles.append(item["radio_name"] as! String)
+        }
+        titles.append("我的")
+        sortTabBar.updateTitles(titles)
+        
+        channel1Controller.updateChannels()
+        channel2Controller.updateChannels()
+        channel3Controller.updateChannels()
+    }
     
 }
 

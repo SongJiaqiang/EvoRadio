@@ -41,6 +41,7 @@
 		90E7FB591CC536720018A532 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB581CC536720018A532 /* Images.swift */; };
 		90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */; };
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
+		DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -88,6 +89,7 @@
 		90E7FB581CC536720018A532 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; };
 		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 				90E7FB561CC4DDC70018A532 /* PlayerViewController.swift */,
 				90659F131CC9451E0026539F /* PersonalViewController.swift */,
 				903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */,
+				DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -379,6 +382,7 @@
 				90659F271CC9C1A50026539F /* CoreDB.swift in Sources */,
 				90E7FB4B1CC4B6C50018A532 /* API.swift in Sources */,
 				90E7FB4D1CC4BD5B0018A532 /* Channel.swift in Sources */,
+				DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
 				90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */,
 				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,

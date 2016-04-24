@@ -10,6 +10,7 @@ import Foundation
 
 let ALLCHANNELS = "all_channels"
 let ALLNOWCHANNELS = "all_now_channels"
+let CUSTOMRADIOS = "custom_radios"
 
 
 
@@ -50,6 +51,22 @@ class CoreDB {
             return responseData as? [[String : AnyObject]]
         }
         return nil
+    }
+    
+    class func saveCustomRadios(customRadios: [[String: AnyObject]]) {
+        WLevelDb.sharedDb().setObject(customRadios, forKey: CUSTOMRADIOS)
+    }
+    
+    class func getCustomRadios() -> [[String: AnyObject]]{
+        let customRadios = WLevelDb.sharedDb().objectForKey(CUSTOMRADIOS)
+        if let _ = customRadios {
+            return customRadios as! [[String : AnyObject]]
+        }
+        return [
+            ["radio_id": 1, "radio_name": "活动"],
+            ["radio_id": 2, "radio_name": "情绪"],
+            ["radio_id": 6, "radio_name": "餐饮"]
+        ]
     }
     
 }

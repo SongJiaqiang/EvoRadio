@@ -64,7 +64,11 @@ class PlayerViewController: ViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        backgroundView.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+        if let _ = program {
+            backgroundView.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+        }else {
+            backgroundView.image = UIImage.placeholder_cover()
+        }
     }
     
     func prepareCoverView() {
@@ -75,7 +79,11 @@ class PlayerViewController: ViewController {
         coverView.clipsToBounds = true
         coverView.layer.cornerRadius = coverWidth*0.5
         
-        coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
+        if let _ = program {
+            coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
+        }else {
+            coverView.image = UIImage.placeholder_cover()
+        }
         coverView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(coverWidth, coverWidth))
             make.center.equalTo(view.snp_center)
@@ -112,7 +120,11 @@ class PlayerViewController: ViewController {
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.whiteColor()
-        titleLabel.text = program.programName
+        if let _ = program {
+            titleLabel.text = program.programName
+        }else {
+            titleLabel.text = ""
+        }
         titleLabel.snp_makeConstraints { (make) in
             make.height.equalTo(44)
             make.left.equalTo(navBar.snp_left)
@@ -351,7 +363,9 @@ class PlayerViewController: ViewController {
     }
     func listButtonPressed(button: UIButton) {
         prepareListTableView()
-        listProgramSongs()
+        if let _ = program {
+            listProgramSongs()
+        }
 
     }
     func heartButtonPressed(button: UIButton) {
@@ -367,43 +381,6 @@ class PlayerViewController: ViewController {
         
     }
     
-    
-    func downloadFile(audioURL: String) {
-        
-        // check file exit
-        
-        
-        let destination = Alamofire.Request.suggestedDownloadDestination(directory: .DocumentDirectory, domain: .UserDomainMask)
-        
-        Alamofire.download(.GET, audioURL, destination: { temporaryURL, response -> NSURL in
-            
-            let directoryURLs = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-            
-            if !directoryURLs.isEmpty {
-                return directoryURLs[0].URLByAppendingPathComponent(response.suggestedFilename!)
-            }
-            
-            return temporaryURL
-        })
-        
-        
-        Alamofire.download(.GET, audioURL, destination: destination).progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
-            print("\(bytesRead)-\(totalBytesRead)-\(totalBytesExpectedToRead)")
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                // update ui
-            }
-        }.response { (request, response, data, error) in
-            if let error = error {
-                print("Download failed with error: \(error)")
-            }else {
-                print("Download file successfully")
-            }
-        }
-        
-        
-        
-    }
 
 }
 

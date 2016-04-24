@@ -12,11 +12,18 @@ class PersonalViewController: ViewController {
     
     let cellID = "PersonalCellID"
     
-    var dataSource: [[String:String]] = [
-        ["key":"download", "title":"我的下载"],
-        ["key":"collection", "title":"我的收藏"],
-        ["key":"history", "title":"最近播放"],
-        ["key":"setting", "title":"设置"]
+    var dataSource = [
+        [
+            ["key":"custom", "title":"定制电台"]
+        ],
+        [
+            ["key":"download", "title":"我的下载"],
+            ["key":"collection", "title":"我的收藏"],
+            ["key":"history", "title":"最近播放"]
+        ],
+        [
+            ["key":"setting", "title":"设置"]
+        ]
     ]
     
     var tableView = UITableView()
@@ -37,25 +44,40 @@ class PersonalViewController: ViewController {
 
 
 extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return dataSource.count
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.dataSource.count
+        let section = dataSource[section]
+        return section.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
         
-        let item = dataSource[indexPath.row]
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+        cell?.accessoryType = .DisclosureIndicator
+        
+        let section = dataSource[indexPath.section]
+        let item = section[indexPath.row]
         cell?.textLabel?.text = item["title"]
         
+        if item["key"] == "custom" {
+            cell?.detailTextLabel?.text = "活动、情绪、餐饮"
+        }
         return cell!
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        let item = dataSource[indexPath.row]
+        let section = dataSource[indexPath.section]
+        let item = section[indexPath.row]
         let key:String = item["key"]!
         switch  key {
+        case "custom":
+            navigationController?.pushViewController(CustomRadioViewController(), animated: true)
+            break
         case "download":
             
             break
@@ -70,5 +92,9 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
             break
         default: break
         }
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 20
     }
 }
