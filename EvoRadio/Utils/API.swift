@@ -114,6 +114,25 @@ class API {
             
         }
     }
+    
+    func fetch_userinfo(onSuccess: [String : AnyObject] -> Void, onFailed: (NSError -> Void)?) {
+        let endpoint = commonEP("api/user.getUserInfo")
+        
+        Alamofire.request(.GET, endpoint).responseJSON { (response) in
+            do {
+                let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
+                if dict["err"] as! String == "hapn.ok" {
+                    onSuccess(dict["data"] as! [String : AnyObject])
+                }
+                
+            } catch let error as NSError {
+                print("convert error:\(error)")
+                if let _ = onFailed {
+                    onFailed!(error)
+                }
+            }
+        }
+    }
 
     
 }

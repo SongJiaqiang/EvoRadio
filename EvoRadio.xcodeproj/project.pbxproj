@@ -42,6 +42,7 @@
 		90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */; };
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
 		DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */; };
+		DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +91,7 @@
 		90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; };
+		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -217,6 +219,7 @@
 				90E7FB4E1CC4C3170018A532 /* Program.swift */,
 				90E7FB521CC4CAF80018A532 /* Song.swift */,
 				90E7FB501CC4C3680018A532 /* User.swift */,
+				DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */,
 				90E7FB511CC4C3680018A532 /* User.swift in Sources */,
 				90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */,
+				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
 				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
