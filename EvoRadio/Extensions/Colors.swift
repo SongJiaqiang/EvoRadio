@@ -48,6 +48,9 @@ extension UIColor {
         return UIColor(netHex: 0x4C4C4C)
     }
     static func blackColor6() -> UIColor{
+        return UIColor(netHex: 0x979797)
+    }
+    static func blackColor7() -> UIColor{
         return UIColor(netHex: 0xBFBFBF)
     }
 

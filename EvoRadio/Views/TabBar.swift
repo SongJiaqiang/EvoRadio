@@ -50,7 +50,7 @@ class TabBar: UIView {
         let count = titles!.count
         for i in 0..<count {
             let button = UIButton()
-            button.setTitleColor(UIColor.blackColor6(), forState: .Normal)
+            button.setTitleColor(UIColor.blackColor7(), forState: .Normal)
             button.setTitleColor(UIColor.goldColor(), forState: .Selected)
             button.titleLabel?.font = UIFont.sizeOf14()
             button.setTitle(titles![i], forState: .Normal)

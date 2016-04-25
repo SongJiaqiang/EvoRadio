@@ -43,6 +43,8 @@
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
 		DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */; };
 		DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */; };
+		DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */; };
+		DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF1E7E11CCE7CA300B554A2 /* Measure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,6 +94,8 @@
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionViewCell.swift; path = Views/ChannelCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBF1E7E11CCE7CA300B554A2 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -182,6 +186,7 @@
 			children = (
 				909E65A31CC0837800B0C49B /* TabBar.swift */,
 				90E7FB011CC3E99D0018A532 /* PlayerBar.swift */,
+				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -243,6 +248,7 @@
 				90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */,
 				90ECDFCF1CC877380061CB6F /* Downloader.swift */,
 				90659F261CC9C1A50026539F /* CoreDB.swift */,
+				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -406,7 +412,9 @@
 				909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */,
 				90E7FB4F1CC4C3170018A532 /* Program.swift in Sources */,
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
+				DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */,
 				90E7FB551CC4D4330018A532 /* ProgramViewController.swift in Sources */,
+				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				909E65A41CC0837800B0C49B /* TabBar.swift in Sources */,

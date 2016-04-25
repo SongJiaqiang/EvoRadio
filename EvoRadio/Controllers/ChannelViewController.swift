@@ -13,12 +13,11 @@ import MJRefresh
 
 
 class ChannelViewController: UIViewController {
-
     let cellID = "channelCellID"
     
+    var collectionView: UICollectionView?
     var dataSource = [Channel]()
     var radioID: Int = 0
-    let tableView = UITableView()
     
     // init with radioID, if now, pass 0
     convenience init(radioID: Int) {
@@ -31,25 +30,39 @@ class ChannelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        prepareTableView()
+        prepareCollectionView()
         
-        tableView.mj_header.beginRefreshing()
+        collectionView!.mj_header.beginRefreshing()
     }
     
-    
-    func prepareTableView() {
+
+    func prepareCollectionView() {
         
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.snp_makeConstraints { (make) in
+        let layout = UICollectionViewFlowLayout()
+        let margin: CGFloat = 15
+        let itemW: CGFloat = channelCollectionCellWidth
+        let itemH: CGFloat = itemW + 30
+        
+        layout.itemSize = CGSizeMake(itemW, itemH)
+        layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
+        layout.minimumInteritemSpacing = margin
+        
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        view.addSubview(collectionView!)
+        collectionView!.delegate = self
+        collectionView!.dataSource = self
+        collectionView!.registerClass(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.backgroundColor = UIColor.clearColor()
+        collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.tableHeaderRefresh))
+        
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.mjHeaderRefresh))
+        
+        
     }
     
-    func tableHeaderRefresh() {
+    func mjHeaderRefresh() {
         
         if radioID == 0 {
             listAllNowChannels()
@@ -70,8 +83,8 @@ class ChannelViewController: UIViewController {
                     break
                 }
             }
-            self?.tableView.reloadData()
-            self?.tableView.mj_header.endRefreshing()
+            self?.collectionView!.reloadData()
+            self?.collectionView!.mj_header.endRefreshing()
             }, onFailed: nil)
     }
     
@@ -85,47 +98,45 @@ class ChannelViewController: UIViewController {
             self?.dataSource.removeAll()
             self?.dataSource.appendContentsOf(Channel.channelsWithDict(anyList["channels"] as! [[String : AnyObject]]))
             
-            self?.tableView.reloadData()
-            self?.tableView.mj_header.endRefreshing()
+            self?.collectionView!.reloadData()
+            self?.collectionView!.mj_header.endRefreshing()
             }, onFailed: nil)
         
     }
 
     func updateChannels() {
-        tableView.mj_header.beginRefreshing()
+        collectionView!.mj_header.beginRefreshing()
     }
 }
 
-extension ChannelViewController: UITableViewDataSource, UITableViewDelegate {
+
+extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         
-        let channel = dataSource[indexPath.row]
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ChannelCollectionViewCell
         
-        cell!.textLabel?.text = channel.channelName
-        cell!.detailTextLabel?.text = channel.radioName
-        cell!.imageView?.kf_setImageWithURL(NSURL(string: channel.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+        let channel = dataSource[indexPath.item]
+        cell.updateContent(channel)
         
-        return cell!
+        return cell
     }
     
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
-        let channel = dataSource[indexPath.row]
-        
+        let channel = dataSource[indexPath.item]
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
-        
     }
+    
 }
 
 

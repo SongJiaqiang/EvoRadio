@@ -70,7 +70,7 @@ extension CustomRadioViewController: UITableViewDataSource, UITableViewDelegate 
         
         let radio = dataSource[indexPath.row]
         cell!.textLabel?.text = radio.radioName
-        cell?.textLabel?.textColor = UIColor.blackColor6()
+        cell?.textLabel?.textColor = UIColor.blackColor7()
 
         let aView = UIImageView()
         aView.image = UIImage(named: "icon_check")

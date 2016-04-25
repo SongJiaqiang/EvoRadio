@@ -75,7 +75,7 @@ class PlayerBar: UIView {
         addSubview(subTitleLabel)
         subTitleLabel.text = "活动电台 - 睡眠"
         subTitleLabel.font = UIFont.sizeOf10()
-        subTitleLabel.textColor = UIColor.blackColor6()
+        subTitleLabel.textColor = UIColor.blackColor7()
         subTitleLabel.snp_makeConstraints { (make) in
             make.left.equalTo(coverView.snp_right).inset(-10)
             make.right.equalTo(playButton.snp_left).inset(10)
