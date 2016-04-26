@@ -32,5 +32,22 @@ class User: NSObject {
     var uName: String?
     var userType: String?
     var picURL: String?
+ 
+    class func userWithDict(dict: [String : AnyObject]) -> User {
+        let user = User()
+        user.uID = dict["uid"] as? String
+        user.uName = dict["uname"] as? String
+        user.userType = dict["user_type"] as? String
+        user.picURL = dict["pic_url"] as? String
+        
+        return user
+    }
     
+    class func usersWithDict(dicts: [[String : AnyObject]]) -> [User] {
+        var users = [User]()
+        for dict in dicts {
+            users.append(User.userWithDict(dict))
+        }
+        return users
+    }
 }

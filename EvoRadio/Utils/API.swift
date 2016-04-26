@@ -15,7 +15,10 @@ class API {
     let host = "http://www.lavaradio.com/"
     
     func commonEP(api:String) -> String{
-        return "\(host)\(api)"
+        let url = "\(host)\(api)"
+        print("request url--> \(url)")
+        
+        return url
     }
     
     func fetch_all_channels(onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
@@ -76,7 +79,8 @@ class API {
     }
     
     func fetch_programs(channelID:String, page: Page, onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
-        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(page.index)&_sz=\(page.size)")
+        let _pn = (page.index+page.size-1) / page.size
+        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
         
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {

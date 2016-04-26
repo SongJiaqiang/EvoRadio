@@ -53,7 +53,8 @@ class TabBar: UIView {
             button.setTitleColor(UIColor.blackColor7(), forState: .Normal)
             button.setTitleColor(UIColor.goldColor(), forState: .Selected)
             button.titleLabel?.font = UIFont.sizeOf14()
-            button.setTitle(titles![i], forState: .Normal)
+            let title = titles![i].stringByReplacingOccurrencesOfString("电台", withString: "")
+            button.setTitle(title, forState: .Normal)
             button.tag = i
             button.addTarget(self, action: #selector(TabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
             sortView.addSubview(button)

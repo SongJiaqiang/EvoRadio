@@ -15,7 +15,7 @@ import MJRefresh
 class ChannelViewController: UIViewController {
     let cellID = "channelCellID"
     
-    var collectionView: UICollectionView?
+    private var collectionView: UICollectionView?
     var dataSource = [Channel]()
     var radioID: Int = 0
     
@@ -57,12 +57,12 @@ class ChannelViewController: UIViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.mjHeaderRefresh))
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
         
         
     }
     
-    func mjHeaderRefresh() {
+    func headerRefresh() {
         
         if radioID == 0 {
             listAllNowChannels()

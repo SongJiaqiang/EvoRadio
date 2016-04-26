@@ -57,7 +57,7 @@ class Program: NSObject {
     var playNum: String?
     var shareNum: String?
     var refLink: String?
-    var vip_Level: String?
+    var vipLevel: String?
     var auditStatus: String?
     var status: String?
     var sortOrder: String?
@@ -74,12 +74,34 @@ class Program: NSObject {
         program.programName = dict["program_name"] as? String
         program.programDesc = dict["program_desc"] as? String
         program.picURL = dict["pic_url"] as? String
+        program.createTime = dict["create_time"] as? String
+        program.modifyTime = dict["modify_time"] as? String
+        program.pubTime = dict["pub_time"] as? String
+        program.applyTime = dict["apply_time"] as? String
+        program.subscribeNum = dict["subscribe_num"] as? String
+        program.songNum = dict["song_num"] as? String
+        program.playNum = dict["play_num"] as? String
+        program.shareNum = dict["share_num"] as? String
+        program.refLink = dict["ref_link"] as? String
+        program.vipLevel = dict["vip_level"] as? String
+        program.auditStatus = dict["audit_status"] as? String
+        program.status = dict["status"] as? String
+        program.sortOrder = dict["sort_order"] as? String
+        program.uID = dict["uid"] as? String
         
-        let coverDict = dict["cover"] as! [String : AnyObject]
-        let num = coverDict["num"] as! Int
-        let pics = coverDict["pics"] as! [String]
-        program.cover = Cover(num: num, pics: pics)
+        if let u =  dict["user"]{
+            program.user = User.userWithDict(u as! [String : AnyObject])
+        }
         
+        if let co = dict["cover"] {
+            let num = co["num"] as! Int
+            let pics = co["pics"] as! [String]
+            program.cover = Cover(num: num, pics: pics)
+        }
+        
+        if let ch = dict["channels"] {
+            program.channels = Channel.channelsWithDict(ch as! [[String : AnyObject]])
+        }
         
         return program
     }

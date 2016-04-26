@@ -9,14 +9,14 @@
 import UIKit
 import MJRefresh
 
-class ProgramViewController: UIViewController {
+class ProgramViewController: ViewController {
     let cellID = "programCellID"
     
     var channel: Channel!
     var dataSource = [Program]()
-    private var tableView = UITableView()
+    private var collectionView: UICollectionView?
     private var endOfFeed = false
-    private let pageSize: Int = 10
+    private let pageSize: Int = 30
     
     convenience init(channel: Channel) {
         self.init()
@@ -29,36 +29,44 @@ class ProgramViewController: UIViewController {
 
         title = channel.channelName
         
-        prepareTableView()
+        prepareCollectionView()
         
-        tableView.mj_header.beginRefreshing()
+        collectionView!.mj_header.beginRefreshing()
     }
     
-    
-    func prepareTableView() {
+    func prepareCollectionView() {
         
-        view.addSubview(tableView)
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.snp_makeConstraints { (make) in
+        let layout = UICollectionViewFlowLayout()
+        let margin: CGFloat = 15
+        let itemW: CGFloat = programCollectionCellWidth
+        let itemH: CGFloat = itemW + 30
+        
+        layout.itemSize = CGSizeMake(itemW, itemH)
+        layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
+        layout.minimumInteritemSpacing = margin
+        
+        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        view.addSubview(collectionView!)
+        collectionView!.delegate = self
+        collectionView!.dataSource = self
+        collectionView!.registerClass(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.backgroundColor = UIColor.clearColor()
+        collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.tableHeaderRefresh))
-        
-        tableView.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.tableFooterRefresh))
-        
-        
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
+        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
     }
+
     
-    func tableHeaderRefresh() {
+    func headerRefresh() {
         listChannelPrograms(true)
     }
     
-    func tableFooterRefresh() {
+    func footerRefresh() {
         if endOfFeed {
-            tableView.mj_footer.endRefreshing()
+            collectionView!.mj_footer.endRefreshing()
         }else {
             listChannelPrograms(false)
         }
@@ -83,24 +91,24 @@ class ProgramViewController: UIViewController {
                 
                 self?.dataSource.appendContentsOf(newData)
                 
-                self?.tableView.reloadData()
+                self?.collectionView!.reloadData()
                 self?.endRefreshing()
             }else {
                 self?.endOfFeed = true
                 self?.endRefreshing()
-                self?.tableView.mj_footer.endRefreshingWithNoMoreData()
+                self?.collectionView!.mj_footer.endRefreshingWithNoMoreData()
             }
             
             }, onFailed: nil)
     }
     
     func endRefreshing() {
-        if tableView.mj_header.isRefreshing() {
-            tableView.mj_header.endRefreshing()
+        if collectionView!.mj_header.isRefreshing() {
+            collectionView!.mj_header.endRefreshing()
         }
         
-        if tableView.mj_footer.isRefreshing() {
-            tableView.mj_footer.endRefreshing()
+        if collectionView!.mj_footer.isRefreshing() {
+            collectionView!.mj_footer.endRefreshing()
         }
         
     }
@@ -136,3 +144,35 @@ extension ProgramViewController: UITableViewDelegate, UITableViewDataSource {
         
     }
 }
+
+
+extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 3
+    }
+    
+    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataSource.count
+    }
+    
+    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ProgramCollectionViewCell
+        
+        let program = dataSource[indexPath.item]
+        cell.updateContent(program)
+        
+        return cell
+    }
+    
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        
+        let program = dataSource[indexPath.item]
+        let player = PlayerViewController(program: program)
+        presentViewController(player, animated: true, completion: nil)
+    }
+    
+}
+
