@@ -14,6 +14,7 @@ import MJRefresh
 
 class ChannelViewController: UIViewController {
     let cellID = "channelCellID"
+    let headerID = "channelHeaderID"
     
     private var collectionView: UICollectionView?
     var dataSource = [Channel]()
@@ -25,6 +26,13 @@ class ChannelViewController: UIViewController {
         
         self.radioID = radioID
         
+        if radioID == 0 {
+            Device.defaultNotificationCenter().addObserver(self, selector: #selector(ChannelViewController.nowTimeChanged(_:)), name: NOWTIME_CHANGED, object: nil)
+        }
+    }
+    
+    deinit{
+        Device.defaultNotificationCenter().removeObserver(self, name: NOWTIME_CHANGED, object: nil)
     }
     
     override func viewDidLoad() {
@@ -52,12 +60,16 @@ class ChannelViewController: UIViewController {
         collectionView!.delegate = self
         collectionView!.dataSource = self
         collectionView!.registerClass(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+
         collectionView!.backgroundColor = UIColor.clearColor()
         collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
+        
+//        if radioID == 0 {
+//            collectionView!.registerClass(ChannelCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
+//        }
         
         
     }
@@ -91,15 +103,19 @@ class ChannelViewController: UIViewController {
     func listAllNowChannels() {
         
         api.fetch_all_now_channels({[weak self] (responseData) in
-            let count = UInt32(responseData.count)
-            let random = Int(arc4random_uniform(count))
-            let anyList = responseData[random]
+            let week = CoreDB.currentDayOfWeek()
+            let time = CoreDB.currentTimeOfDay()
+            
+            let anyList = responseData[week*8+time]
             
             self?.dataSource.removeAll()
             self?.dataSource.appendContentsOf(Channel.channelsWithDict(anyList["channels"] as! [[String : AnyObject]]))
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()
+            if self?.radioID == 0 {
+                self?.collectionView!.mj_header.hidden = true
+            }
             }, onFailed: nil)
         
     }
@@ -107,10 +123,27 @@ class ChannelViewController: UIViewController {
     func updateChannels() {
         collectionView!.mj_header.beginRefreshing()
     }
+    
+    func nowTimeChanged(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            let dayIndex = userInfo["dayIndex"] as! Int
+            let timeIndex = userInfo["timeIndex"] as! Int
+
+            api.fetch_all_now_channels({[weak self] (responseData) in
+                let someList = responseData[dayIndex*8+timeIndex]
+
+                self?.dataSource.removeAll()
+                self?.dataSource.appendContentsOf(Channel.channelsWithDict(someList["channels"] as! [[String : AnyObject]]))
+                self?.collectionView!.reloadData()
+                }, onFailed: nil)
+        }
+        
+    }
 }
 
 
-extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 2
@@ -125,7 +158,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ChannelCollectionViewCell
         
         let channel = dataSource[indexPath.item]
-        cell.updateContent(channel)
+        cell.updateContent(channel, isNow: !Bool(radioID))
         
         return cell
     }
@@ -136,6 +169,21 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
         let channel = dataSource[indexPath.item]
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
     }
+    
+//    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+//        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerID, forIndexPath: indexPath) as! ChannelCollectionHeaderView
+//        
+//        return headerView
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        
+//        if radioID == 0 {
+//            return CGSizeMake(Device.width(), 100)
+//        }
+//        
+//        return CGSizeZero
+//    }
     
 }
 

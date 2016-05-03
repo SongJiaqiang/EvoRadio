@@ -54,8 +54,8 @@ class PlayerBar: UIView {
         }
         
         addSubview(playButton)
-        playButton.setTitle("播放", forState: .Normal)
-        
+        playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
+        playButton.setImage(UIImage(named: "player_play_prs"), forState: .Highlighted)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
             make.rightMargin.equalTo(-10)

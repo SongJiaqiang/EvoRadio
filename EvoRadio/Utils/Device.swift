@@ -44,6 +44,18 @@ class Device: NSObject {
     static func frontWindow() -> UIWindow {
         return UIApplication.sharedApplication().windows.last!
     }
+    static func mainScreen() -> UIScreen {
+        return UIScreen.mainScreen()
+    }
+    static func shareApplication() -> UIApplication {
+        return UIApplication.sharedApplication()
+    }
+    static func defaultNotificationCenter() -> NSNotificationCenter {
+        return NSNotificationCenter.defaultCenter()
+    }
+    static func fileManager() -> NSFileManager {
+        return NSFileManager.defaultManager()
+    }
 }
 
 

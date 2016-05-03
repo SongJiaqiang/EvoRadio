@@ -57,6 +57,7 @@ class ProgramViewController: ViewController {
         
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
         collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
+        collectionView!.mj_footer.automaticallyHidden = true
     }
 
     
@@ -93,6 +94,7 @@ class ProgramViewController: ViewController {
                 
                 self?.collectionView!.reloadData()
                 self?.endRefreshing()
+                
             }else {
                 self?.endOfFeed = true
                 self?.endRefreshing()

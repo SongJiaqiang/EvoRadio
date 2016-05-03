@@ -43,7 +43,11 @@
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
 		DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */; };
 		DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */; };
+		DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */; };
+		DBB79DA31CD046E6006189B3 /* SelectiveTimePanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */; };
+		DBB79DA51CD11935006189B3 /* Dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79DA41CD11935006189B3 /* Dates.swift */; };
 		DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */; };
+		DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBDC7F471CD90A8D0093812C /* Constants.swift */; };
 		DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */; };
 		DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF1E7E11CCE7CA300B554A2 /* Measure.swift */; };
 /* End PBXBuildFile section */
@@ -95,7 +99,11 @@
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionHeaderView.swift; path = Views/ChannelCollectionHeaderView.swift; sourceTree = "<group>"; };
+		DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectiveTimePanel.swift; path = Views/SelectiveTimePanel.swift; sourceTree = "<group>"; };
+		DBB79DA41CD11935006189B3 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramCollectionViewCell.swift; path = Views/ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBDC7F471CD90A8D0093812C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionViewCell.swift; path = Views/ChannelCollectionViewCell.swift; sourceTree = "<group>"; };
 		DBF1E7E11CCE7CA300B554A2 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
@@ -189,7 +197,9 @@
 				909E65A31CC0837800B0C49B /* TabBar.swift */,
 				90E7FB011CC3E99D0018A532 /* PlayerBar.swift */,
 				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
+				DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */,
 				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
+				DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -238,6 +248,7 @@
 				9054AE0F1CC3BFB400E876FF /* Colors.swift */,
 				90E7FAFF1CC3E4E60018A532 /* Fonts.swift */,
 				90E7FB581CC536720018A532 /* Images.swift */,
+				DBB79DA41CD11935006189B3 /* Dates.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -252,6 +263,7 @@
 				90ECDFCF1CC877380061CB6F /* Downloader.swift */,
 				90659F261CC9C1A50026539F /* CoreDB.swift */,
 				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
+				DBDC7F471CD90A8D0093812C /* Constants.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -402,8 +414,10 @@
 				9054AE101CC3BFB400E876FF /* Colors.swift in Sources */,
 				90E7FB491CC4AC080018A532 /* ChannelViewController.swift in Sources */,
 				90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */,
+				DBB79DA51CD11935006189B3 /* Dates.swift in Sources */,
 				90E7FB511CC4C3680018A532 /* User.swift in Sources */,
 				90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */,
+				DBB79DA31CD046E6006189B3 /* SelectiveTimePanel.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
@@ -417,12 +431,14 @@
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
 				DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */,
 				DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */,
+				DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */,
 				90E7FB551CC4D4330018A532 /* ProgramViewController.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				909E65A41CC0837800B0C49B /* TabBar.swift in Sources */,
 				90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */,
+				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

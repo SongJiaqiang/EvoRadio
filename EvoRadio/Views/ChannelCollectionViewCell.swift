@@ -12,7 +12,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     
     let picImageView = UIImageView()
     let channelNameLabel = UILabel()
-    let radioNameLabel = UILabel()
+    let tipLabel = UILabel()
     let playButton = UIButton()
 
     var channel: Channel?
@@ -50,10 +50,10 @@ class ChannelCollectionViewCell: UICollectionViewCell {
             make.right.equalTo(snp_right)
         }
         
-        addSubview(radioNameLabel)
-        radioNameLabel.font = UIFont.systemFontOfSize(10)
-        radioNameLabel.textColor = UIColor.blackColor6()
-        radioNameLabel.snp_makeConstraints { (make) in
+        addSubview(tipLabel)
+        tipLabel.font = UIFont.systemFontOfSize(10)
+        tipLabel.textColor = UIColor.blackColor6()
+        tipLabel.snp_makeConstraints { (make) in
             make.height.equalTo(12)
             make.top.equalTo(channelNameLabel.snp_bottom)
             make.left.equalTo(snp_left)
@@ -79,7 +79,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateContent(channel: Channel) {
+    func updateContent(channel: Channel, isNow: Bool) {
         self.channel = channel
         
         if let picURL = channel.picURL {
@@ -90,15 +90,19 @@ class ChannelCollectionViewCell: UICollectionViewCell {
             channelNameLabel.text = channelName
         }
         
-        if let radioID = channel.radioID {
-            
-            let allChannels = CoreDB.getAllChannels()
-            for c in allChannels! {
-                if c["radio_id"] as? Int == Int(radioID) {
-                    radioNameLabel.text = c["radio_name"] as? String
+        if isNow {
+            if let radioID = channel.radioID {
+                let allChannels = CoreDB.getAllChannels()
+                for c in allChannels! {
+                    if c["radio_id"] as? Int == Int(radioID) {
+                        tipLabel.text = c["radio_name"] as? String
+                    }
                 }
             }
-            
+        }else {
+            if let programNum = channel.programNum {
+                tipLabel.text = "节目(\(programNum))"
+            }
         }
     }
 }

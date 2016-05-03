@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-
+import MJRefresh
 
 class MainViewController: ViewController {
 
@@ -92,6 +92,7 @@ class MainViewController: ViewController {
         }
         
         contentView.contentSize = CGSizeMake(Device.width()*5, 0)
+        
     }
     
     //MARK: event
@@ -130,6 +131,14 @@ extension MainViewController: UIScrollViewDelegate {
         sortTabBar.updateCurrentIndex(pageIndex)
         
         
+    }
+    
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        let offsetX = scrollView.contentOffset.x        
+        if offsetX < -80 {
+            let panel = SelectiveTimePanel(frame: Device.keyWindow().bounds)
+            Device.keyWindow().addSubview(panel)
+        }
     }
 }
 

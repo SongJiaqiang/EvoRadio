@@ -31,13 +31,19 @@ class PersonalViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        prepareTableView()
+    }
+    
+    func prepareTableView() {
         view.addSubview(tableView)
+        tableView.backgroundColor = UIColor.clearColor()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.separatorStyle = .None
+        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
     }
     
 }
@@ -57,10 +63,13 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
         cell?.accessoryType = .DisclosureIndicator
+        cell?.backgroundColor = UIColor.blackColor3()
+        cell?.textLabel?.textColor = UIColor.blackColor7()
         
         let section = dataSource[indexPath.section]
         let item = section[indexPath.row]
         cell?.textLabel?.text = item["title"]
+
         
         if item["key"] == "custom" {
             cell?.detailTextLabel?.text = "活动、情绪、餐饮"
@@ -92,6 +101,12 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
             break
         default: break
         }
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let header = UIView()
+        header.backgroundColor = UIColor.clearColor()
+        return header
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
