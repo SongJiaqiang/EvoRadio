@@ -16,13 +16,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        // 清除选择时刻缓存
+        CoreDB.clearSelectedIndexes()
         
+        
+        // 设置根控制器
+        setupRootControllerAndVisible()
+        return true
+    }
+    
+    func setupRootControllerAndVisible() {
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+
         let homeNavC = NavigationController(rootViewController: MainViewController())
         window?.rootViewController = homeNavC
         window?.makeKeyAndVisible()
-        
-        return true
+    }
+    
     }
 
     func applicationWillResignActive(application: UIApplication) {

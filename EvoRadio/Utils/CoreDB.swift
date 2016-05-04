@@ -75,11 +75,10 @@ class CoreDB {
     }
     
     class func currentDayOfWeek() -> Int {
-        return NSDate.getSomeDate([.WeekdayOrdinal])
+        return NSDate.getSomeDate([.Weekday])-1
     }
     class func currentDayOfWeekString() -> String {
-        let ordinalDay = NSDate.getSomeDate([.WeekdayOrdinal])
-        return CoreDB.getAllDaysOfWeek()[ordinalDay]
+        return CoreDB.getAllDaysOfWeek()[CoreDB.currentDayOfWeek()]
     }
     
     class func getAllTimesOfDay() -> [String] {
@@ -125,6 +124,7 @@ class CoreDB {
     class func saveSelectedIndexes(indexes: [String : Int]) {
         WLevelDb.sharedDb().setObject(indexes, forKey: SELECTEDINDEXES)
     }
+    
     class func getSelectedIndexes() -> [String : Int]? {
         if let indexes = WLevelDb.sharedDb().objectForKey(SELECTEDINDEXES) {
             return indexes as? [String : Int]
@@ -132,6 +132,11 @@ class CoreDB {
             return nil
         }
     }
+    // 清除选择时刻缓存
+    class func clearSelectedIndexes() {
+        WLevelDb.sharedDb().removeObjectForKey(SELECTEDINDEXES)
+    }
+    
     
     
 }
