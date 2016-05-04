@@ -17,7 +17,7 @@ extension UIImage {
         return self.imageWithRenderingMode(.AlwaysOriginal)
     }
     
-    static func color(color: UIColor, size destSize: CGSize? = nil) -> UIImage {
+    static func rectImage(color: UIColor, size destSize: CGSize? = nil) -> UIImage {
         let size:CGSize
         if let destSize = destSize {
             size = destSize
@@ -31,6 +31,16 @@ extension UIImage {
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         return image.resizableImageWithCapInsets(UIEdgeInsetsZero)
+    }
+    
+    static func circleImage(color: UIColor, radius: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(CGSizeMake(radius*2, radius*2))
+        let ctx = UIGraphicsGetCurrentContext()
+        color.set()
+        CGContextFillEllipseInRect(ctx, CGRectMake(0, 0, radius*2, radius*2))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return image
     }
     
     func resizeImage(size: CGSize) -> UIImage {

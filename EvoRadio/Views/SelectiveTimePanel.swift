@@ -172,8 +172,8 @@ class SelectiveTimePanel: UIView {
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.setBackgroundImage(UIImage.color(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
-            button.setBackgroundImage(UIImage.color(UIColor(netHex: 0x457fca)), forState: .Selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), forState: .Selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.daysButtonPressed(_:)), forControlEvents: .TouchUpInside)
             button.tag = 10+i
             daysContentView.addSubview(button)
@@ -196,8 +196,8 @@ class SelectiveTimePanel: UIView {
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.setBackgroundImage(UIImage.color(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
-            button.setBackgroundImage(UIImage.color(UIColor(netHex: 0x457fca)), forState: .Selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), forState: .Selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.timesButtonPressed(_:)), forControlEvents: .TouchUpInside)
             button.tag = 20+i
             timesContentView.addSubview(button)
