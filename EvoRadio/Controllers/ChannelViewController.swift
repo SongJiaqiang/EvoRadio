@@ -67,7 +67,7 @@ class ChannelViewController: UIViewController {
         }
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
         
-//        if radioID == 0 {
+        //        if radioID == 0 {
 //            collectionView!.registerClass(ChannelCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
 //        }
         
@@ -85,10 +85,10 @@ class ChannelViewController: UIViewController {
     }
     
     func listAllChannels() {
-        api.fetch_all_channels({[weak self] (responseData) in
+        api.fetch_all_channels({[weak self] (items) in
             
-            let radios = Radio.radiosWithDict(responseData)
-            for radio in radios {
+            for reflect in items {
+                let radio = reflect as! Radio
                 if radio.radioID == self?.radioID {
                     self?.dataSource.removeAll()
                     self?.dataSource.appendContentsOf(radio.channels!)
@@ -109,14 +109,16 @@ class ChannelViewController: UIViewController {
             let anyList = responseData[week*8+time]
             
             self?.dataSource.removeAll()
-            self?.dataSource.appendContentsOf(Channel.channelsWithDict(anyList["channels"] as! [[String : AnyObject]]))
+            
+            let channels = Channel.parses(arr: anyList["channels"] as! NSArray)
+            self?.dataSource.appendContentsOf(channels as! [Channel])
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()
             if self?.radioID == 0 {
                 self?.collectionView!.mj_header.hidden = true
             }
-            }, onFailed: nil)
+        }, onFailed: nil)
         
     }
 
@@ -140,6 +142,7 @@ class ChannelViewController: UIViewController {
         }
         
     }
+    
 }
 
 
@@ -159,7 +162,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let channel = dataSource[indexPath.item]
         cell.updateContent(channel, isNow: !Bool(radioID))
-        
+        cell.delegate = self
         return cell
     }
     
@@ -185,6 +188,25 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
 //        return CGSizeZero
 //    }
     
+}
+
+extension ChannelViewController: ChannelCollectionViewCellDelegate {
+    
+    func playMusicOfChannel(channelID: String) {
+        
+        let pageIndex: Int = Int(arc4random_uniform(10))
+        api.fetch_programs(channelID, page: Page(index: pageIndex, size: 1), onSuccess: { (reflects) in
+            
+            if reflects.count > 0 {
+//                let program = Program.programWithDict(responseData.first!)
+                let program = reflects.first as! Program
+                let player = PlayerViewController(program: program)
+                player.autoPlaying = true
+                Device.rootController().presentViewController(player, animated: true, completion: nil)
+            }
+            
+            }, onFailed: nil)
+    }
 }
 
 

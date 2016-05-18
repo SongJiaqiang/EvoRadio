@@ -6,22 +6,6 @@
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-/*
- 
- {
- "uname": "那个_初次见面",
- "email": "",
- "sex": "0",
- "birthday": "20130715",
- "purl": "http://img4.lavaradio.com/435/303/4353037169678968356X.jpg",
- "third": [
- {
- "third_type": "1",
- "nickname": "那个_初次见面"
- }
- ]
- }
- */
 
 import Foundation
 
@@ -30,7 +14,7 @@ struct ThirdLogin {
     var nickname: String
 }
 
-class LoginUser: NSObject {
+class LoginUser: Reflect {
     
     var uID: String?
     var uName: String?
@@ -38,6 +22,14 @@ class LoginUser: NSObject {
     var birthday: String?
     var pURL: String?
     var third: ThirdLogin?
+    
+    override func mappingDict() -> [String : String]? {
+        return [
+            "uID":"uid",
+            "uName":"uname",
+            "pURL":"purl",
+        ]
+    }
     
     class func userWithDict(dict: [String : AnyObject]) -> LoginUser {
         let user = LoginUser()

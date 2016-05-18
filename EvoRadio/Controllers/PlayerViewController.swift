@@ -15,12 +15,16 @@ class PlayerViewController: ViewController {
     let cellID = "audioCellID"
     
     var program: Program!
+    var autoPlaying: Bool = false
     var dataSource = [Song]()
     private var backgroundView = UIImageView()
     private var controlView = UIView()
+    private var playerBar: PlayerBar!
 
-    var listTableView: UITableView?
+    var listTableView = UITableView()
     var listTableViewConstraint: Constraint? = nil
+    
+    var delegate: PlayerViewControllerDelegate?
     
     //MARK: instance
     class var playerController: PlayerViewController {
@@ -47,12 +51,26 @@ class PlayerViewController: ViewController {
         super.viewDidLoad()
         
         prepareBackgroundView()
-        prepareCoverView()
+        prepareListTableView()
         prepareNavigationBar()
-        
         preparePlayerControlView()
         prepareToolsView()
      
+        listProgramSongs()
+        
+        setupPlayingInfo()
+        
+
+    }
+    
+    func setupPlayingInfo() {
+        let artWork = MPMediaItemArtwork(image: UIImage.placeholder_cover())
+        let info = [MPMediaItemPropertyTitle: "那些花儿",
+                    MPMediaItemPropertyArtist: "朴树",
+                    MPMediaItemPropertyArtwork: artWork,
+                    MPMediaItemPropertyLyrics: "歌词，歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词"
+                    ]
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
     }
 
     func prepareBackgroundView() {
@@ -321,23 +339,29 @@ class PlayerViewController: ViewController {
     
     func listProgramSongs() {
         
-        let programID = program.programID!
-        
-        api.fetch_songs(programID, onSuccess: {[weak self] (responseData) in
+        if let _ = program {
+            let programID = program.programID!
             
-            if responseData.count > 0 {
-                // download first audio file
+            api.fetch_songs(programID, onSuccess: {[weak self] (items) in
                 
-                let newData = Song.songsWithDict(responseData)
+                if items.count > 0 {
+                    // download first audio file
+                    
+                    let newData = items as! [Song]
+                    self?.dataSource.appendContentsOf(newData)
+                    
+                    self?.listTableView.reloadData()
+                    
+                    if self?.autoPlaying == true {
+                        let song = newData.first
+                        Downloader.downloader.downloadFile(song!.audioURL!)
+                    }
+                }else {
+                    print("This program has no one song")
+                }
                 
-                self?.dataSource.appendContentsOf(newData)
-                
-                self?.listTableView!.reloadData()
-            }else {
-                print("This program has no one song")
-            }
-            
-            }, onFailed: nil)
+                }, onFailed: nil)
+        }
         
     }
     

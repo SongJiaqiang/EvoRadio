@@ -7,32 +7,22 @@
 //
 
 import UIKit
-/*
- "user": {
- "uid": "59",
- "uname": "庞舸",
- "user_type": "6",
- "pri_login": 0,
- "pri_create_program": 1,
- "pri_item_view": 1,
- "pri_item_edit": 0,
- "pri_audit_program": 0,
- "pri_user_page": 1,
- "pri_timer": 0,
- "pri_sc": 1,
- "pri_vod": 0,
- "pri_qd": 0,
- "pri_cp": 0,
- "pri_lavahome_simple": 0,
- "pic_url": "http://img3.lavaradio.com/143/727/1437278527257050584.jpg"
- },
- */
-class User: NSObject {
+
+class User: Reflect {
     var uID: String?
     var uName: String?
     var userType: String?
     var picURL: String?
  
+    override func mappingDict() -> [String : String]? {
+        return [
+            "uID":"uid",
+            "uName":"uname",
+            "userType":"user_type",
+            "picURL":"pic_url",
+        ]
+    }
+    
     class func userWithDict(dict: [String : AnyObject]) -> User {
         let user = User()
         user.uID = dict["uid"] as? String

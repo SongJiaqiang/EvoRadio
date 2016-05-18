@@ -64,9 +64,9 @@ class CoreDB {
             return customRadios as! [[String : AnyObject]]
         }
         return [
-            ["radio_id": 1, "radio_name": "活动"],
-            ["radio_id": 2, "radio_name": "情绪"],
-            ["radio_id": 6, "radio_name": "餐饮"]
+            ["radio_id": NSNumber(int: 1), "radio_name": "活动"],
+            ["radio_id": NSNumber(int: 2), "radio_name": "情绪"],
+            ["radio_id": NSNumber(int: 6), "radio_name": "餐饮"]
         ]
     }
     

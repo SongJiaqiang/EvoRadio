@@ -81,11 +81,11 @@ class ProgramViewController: ViewController {
             pageIndex = 0
         }
         
-        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (responseData) in
+        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
             
-            if responseData.count > 0 {
-                let newData = Program.programsWithDict(responseData)
-                
+            if items.count > 0 {
+//                let newData = Program.programsWithDict(responseData)
+                let newData = items as! [Program]
                 if isRefresh {
                     self?.dataSource.removeAll()
                 }

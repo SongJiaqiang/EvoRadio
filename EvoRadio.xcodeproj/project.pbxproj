@@ -8,6 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29258049669E5F330022BB /* Pods_EvoRadio.framework */; };
+		9024AE0C1CEB0FEF005A720F /* Reflect+ArcFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE011CEB0FEF005A720F /* Reflect+ArcFile.swift */; };
+		9024AE0D1CEB0FEF005A720F /* Reflect+Parse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE031CEB0FEF005A720F /* Reflect+Parse.swift */; };
+		9024AE0E1CEB0FEF005A720F /* Reflect+Convert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE051CEB0FEF005A720F /* Reflect+Convert.swift */; };
+		9024AE0F1CEB0FEF005A720F /* Reflect+Class.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE071CEB0FEF005A720F /* Reflect+Class.swift */; };
+		9024AE101CEB0FEF005A720F /* Reflect+Other.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE081CEB0FEF005A720F /* Reflect+Other.swift */; };
+		9024AE111CEB0FEF005A720F /* Reflect+Property.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE091CEB0FEF005A720F /* Reflect+Property.swift */; };
+		9024AE121CEB0FEF005A720F /* Reflect+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE0A1CEB0FEF005A720F /* Reflect+Type.swift */; };
+		9024AE131CEB0FEF005A720F /* Reflect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9024AE0B1CEB0FEF005A720F /* Reflect.swift */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
@@ -55,6 +63,14 @@
 /* Begin PBXFileReference section */
 		8A29258049669E5F330022BB /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
+		9024AE011CEB0FEF005A720F /* Reflect+ArcFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+ArcFile.swift"; sourceTree = "<group>"; };
+		9024AE031CEB0FEF005A720F /* Reflect+Parse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Parse.swift"; sourceTree = "<group>"; };
+		9024AE051CEB0FEF005A720F /* Reflect+Convert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Convert.swift"; sourceTree = "<group>"; };
+		9024AE071CEB0FEF005A720F /* Reflect+Class.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Class.swift"; sourceTree = "<group>"; };
+		9024AE081CEB0FEF005A720F /* Reflect+Other.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Other.swift"; sourceTree = "<group>"; };
+		9024AE091CEB0FEF005A720F /* Reflect+Property.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Property.swift"; sourceTree = "<group>"; };
+		9024AE0A1CEB0FEF005A720F /* Reflect+Type.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Reflect+Type.swift"; sourceTree = "<group>"; };
+		9024AE0B1CEB0FEF005A720F /* Reflect.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reflect.swift; sourceTree = "<group>"; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -129,6 +145,53 @@
 				8A29258049669E5F330022BB /* Pods_EvoRadio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		9024ADFF1CEB0FEF005A720F /* Reflect */ = {
+			isa = PBXGroup;
+			children = (
+				9024AE001CEB0FEF005A720F /* Coding */,
+				9024AE021CEB0FEF005A720F /* Dict2Model */,
+				9024AE041CEB0FEF005A720F /* Model2Dict */,
+				9024AE061CEB0FEF005A720F /* Reflect */,
+				9024AE0B1CEB0FEF005A720F /* Reflect.swift */,
+			);
+			path = Reflect;
+			sourceTree = "<group>";
+		};
+		9024AE001CEB0FEF005A720F /* Coding */ = {
+			isa = PBXGroup;
+			children = (
+				9024AE011CEB0FEF005A720F /* Reflect+ArcFile.swift */,
+			);
+			path = Coding;
+			sourceTree = "<group>";
+		};
+		9024AE021CEB0FEF005A720F /* Dict2Model */ = {
+			isa = PBXGroup;
+			children = (
+				9024AE031CEB0FEF005A720F /* Reflect+Parse.swift */,
+			);
+			path = Dict2Model;
+			sourceTree = "<group>";
+		};
+		9024AE041CEB0FEF005A720F /* Model2Dict */ = {
+			isa = PBXGroup;
+			children = (
+				9024AE051CEB0FEF005A720F /* Reflect+Convert.swift */,
+			);
+			path = Model2Dict;
+			sourceTree = "<group>";
+		};
+		9024AE061CEB0FEF005A720F /* Reflect */ = {
+			isa = PBXGroup;
+			children = (
+				9024AE071CEB0FEF005A720F /* Reflect+Class.swift */,
+				9024AE081CEB0FEF005A720F /* Reflect+Other.swift */,
+				9024AE091CEB0FEF005A720F /* Reflect+Property.swift */,
+				9024AE0A1CEB0FEF005A720F /* Reflect+Type.swift */,
+			);
+			path = Reflect;
 			sourceTree = "<group>";
 		};
 		902FBCC41CBEAC010051A93B = {
@@ -256,6 +319,7 @@
 		909E65B11CC0843700B0C49B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9024ADFF1CEB0FEF005A720F /* Reflect */,
 				90659F1B1CC9C0B70026539F /* levelDb */,
 				902F6B6F1CC3C4EA00F43C2E /* Device.swift */,
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
@@ -413,14 +477,17 @@
 				90659F181CC9B6440026539F /* Radio.swift in Sources */,
 				9054AE101CC3BFB400E876FF /* Colors.swift in Sources */,
 				90E7FB491CC4AC080018A532 /* ChannelViewController.swift in Sources */,
+				9024AE0E1CEB0FEF005A720F /* Reflect+Convert.swift in Sources */,
 				90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */,
 				DBB79DA51CD11935006189B3 /* Dates.swift in Sources */,
+				9024AE101CEB0FEF005A720F /* Reflect+Other.swift in Sources */,
 				90E7FB511CC4C3680018A532 /* User.swift in Sources */,
 				90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */,
 				DBB79DA31CD046E6006189B3 /* SelectiveTimePanel.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
+				9024AE0F1CEB0FEF005A720F /* Reflect+Class.swift in Sources */,
 				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
 				90E7FB531CC4CAF80018A532 /* Song.swift in Sources */,
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
@@ -432,12 +499,17 @@
 				DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */,
 				DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */,
 				DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */,
+				9024AE0C1CEB0FEF005A720F /* Reflect+ArcFile.swift in Sources */,
+				9024AE0D1CEB0FEF005A720F /* Reflect+Parse.swift in Sources */,
 				90E7FB551CC4D4330018A532 /* ProgramViewController.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				909E65A41CC0837800B0C49B /* TabBar.swift in Sources */,
+				9024AE121CEB0FEF005A720F /* Reflect+Type.swift in Sources */,
+				9024AE111CEB0FEF005A720F /* Reflect+Property.swift in Sources */,
 				90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */,
+				9024AE131CEB0FEF005A720F /* Reflect.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -536,6 +608,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -554,6 +630,10 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/build/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -7,21 +7,8 @@
 //
 
 import Foundation
-/*
- {
- "channel_id": "129",
- "radio_id": "1",
- "channel_name": "醒来",
- "program_fine": "246",
- "pub_time": "1416640291",
- "sort_order": "0",
- "status": "1",
- "channel_name_shengmu": "cl",
- "radio_name": "活动电台",
- "pic_url": "http://img2.lavaradio.com/176/269/176269667730103844X.jpg"
- },
- */
-class Channel: NSObject {
+
+class Channel: Reflect {
     var channelID: String?
     var channelName: String?
     var channelNameShengmu: String?
@@ -34,6 +21,21 @@ class Channel: NSObject {
     var picURL: String?
     var status: String?
     var recommend: String?
+    
+    override func mappingDict() -> [String : String]? {
+        return [
+            "channelID":"channel_id",
+            "channelName":"channel_name",
+            "channelNameShengmu":"channel_name_shengmu",
+            "radioID":"radio_id",
+            "radioName":"radio_name",
+            "programNum":"program_num",
+            "programFine":"program_fine",
+            "pubTime":"pub_time",
+            "sortOrder":"sort_order",
+            "picURL":"pic_url",
+        ]
+    }
     
     class func channelWithDict(dict: [String : AnyObject]) -> Channel {
         let channel = Channel()

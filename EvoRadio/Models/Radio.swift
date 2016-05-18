@@ -8,37 +8,17 @@
 
 import Foundation
 
-class Radio: NSObject {
+class Radio: Reflect {
     
-    var radioID: Int?
+    var radioID: NSNumber?
     var radioName: String?
     var channels: [Channel]?
     
-    class func radioWithDict(dict: [String : AnyObject]) -> Radio {
-        let radio = Radio()
-        radio.radioID = dict["radio_id"] as? Int
-        radio.radioName = dict["radio_name"] as? String
-        
-        let channelsData = dict["channels"] as? [[String : AnyObject]]
-        if let _ = channelsData {
-            var channels = [Channel]()
-            for item in channelsData! {
-                channels.append(Channel.channelWithDict(item))
-            }
-            radio.channels = channels
-        }else {
-            radio.channels = nil
-        }
-        
-        return radio
-    }
-    
-    class func radiosWithDict(dicts: [[String : AnyObject]]) -> [Radio] {
-        var radios = [Radio]()
-        for dict in dicts {
-            radios.append(Radio.radioWithDict(dict))
-        }
-        return radios
+    override func mappingDict() -> [String : String]? {
+        return [
+            "radioID":"radio_id",
+            "radioName":"radio_name"
+        ]
     }
     
     class func dictForRadio(radio: Radio) -> [String : AnyObject]{
@@ -48,6 +28,7 @@ class Radio: NSObject {
         
         return radioDict
     }
+    
     class func dictArrayForRadios(radios: [Radio]) -> [[String : AnyObject]]{
         var dictArray = [[String : AnyObject]]()
         for radio in radios {
@@ -56,6 +37,9 @@ class Radio: NSObject {
             radioDict["radio_name"] = radio.radioName
             
             dictArray.append(radioDict)
+            
+            let data = "".dataUsingEncoding(NSUTF8StringEncoding)
+            let dic = NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions())
         }
         return dictArray
     }
