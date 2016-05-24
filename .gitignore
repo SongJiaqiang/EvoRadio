@@ -1,11 +1,11 @@
 .DS_Store
 
 # project
-EvoRadio.xcworkspace
-xcuserdata/
+# xcuserdata/
+# EvoRadio.xcworkspace/xcuserdata/
 
 # pod
-Pods/
+# Pods/
 
 # test files
 Test/

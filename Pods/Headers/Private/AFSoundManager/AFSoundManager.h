@@ -1,0 +1,1 @@
+../../../AFSoundManager/Classes/AFSoundManager.h

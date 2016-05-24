@@ -1,0 +1,6 @@
+framework module AFSoundManager {
+  umbrella header "AFSoundManager-umbrella.h"
+
+  export *
+  module * { export * }
+}
