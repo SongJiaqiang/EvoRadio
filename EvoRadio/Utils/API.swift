@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-
+import EVReflection
 
 let api = API()
 
@@ -22,31 +22,33 @@ class API {
         return url
     }
     
-    func fetch_all_channels(onSuccess: [Reflect] -> Void, onFailed: (NSError -> Void)?) {
+    func fetch_all_channels(onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         
         if let responseData = CoreDB.getAllChannels() {
-            let items = Radio.parses(arr: responseData)
+            let items = [Radio].init(dictArray: responseData)
             onSuccess(items)
             return
         }
         
         let endpoint = commonEP("api/radio.listAllChannels.json")
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
-            
-            do {
-                let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
-                if dict["err"] as! String == "hapn.ok" {
-                    let responseData = dict["data"] as! [[String : AnyObject]]
-                    CoreDB.saveAllChannels(responseData)
+            if response.result.isSuccess {
+                do {
+                    let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
+                    if dict["err"] as! String == "hapn.ok" {
+                        let responseData = dict["data"] as! [[String : AnyObject]]
+                        CoreDB.saveAllChannels(responseData)
+                        
+                        let items = [Radio].init(dictArray: responseData)
+                        
+                        onSuccess(items)
+                    }
                     
-                    let items = Radio.parses(arr: responseData)
-                    onSuccess(items)
-                }
-                
-            } catch let error as NSError {
-                print("convert error:\(error)")
-                if let _ = onFailed {
-                    onFailed!(error)
+                } catch let error as NSError {
+                    print("convert error:\(error)")
+                    if let _ = onFailed {
+                        onFailed!(error)
+                    }
                 }
             }
         }
@@ -62,8 +64,8 @@ class API {
         
         let endpoint = commonEP("api/radio.listAllNowChannels.json")
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
-            do {
-                let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
+            if response.result.isSuccess {
+                let dict = (response.result.value as! String).jsonToDictionary()
                 if dict["err"] as! String == "hapn.ok" {
                     print("request is OK")
                     
@@ -72,17 +74,13 @@ class API {
                     
                     onSuccess(responseData)
                 }
-                
-            } catch let error as NSError {
-                print("convert error:\(error)")
-                if let _ = onFailed {
-                    onFailed!(error)
-                }
+            }else {
+                onFailed!(response.result.error!)
             }
         }
     }
     
-    func fetch_programs(channelID:String, page: Page, onSuccess: [Reflect] -> Void, onFailed: (NSError -> Void)?) {
+    func fetch_programs(channelID:String, page: Page, onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
         
@@ -92,7 +90,7 @@ class API {
                 let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
 
                 if dict["err"] as! String == "hapn.ok" {
-                    let items = Program.parses(arr: dict["data"]!["lists"] as! NSArray)
+                    let items = [Program](dictArray: dict["data"]!["lists"] as? [NSDictionary])
                     onSuccess(items)
                 }
                 
@@ -107,14 +105,14 @@ class API {
         }
     }
     
-    func fetch_songs(programID: String,  onSuccess: [Reflect] -> Void, onFailed: (NSError -> Void)?) {
+    func fetch_songs(programID: String,  onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         let endpoint = commonEP("api/play.playProgram.json?program_id=\(programID)")
         
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {
                 let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
                 if dict["err"] as! String == "hapn.ok" {
-                    let items = Song.parses(arr: dict["data"]!["songs"] as! NSArray)
+                    let items = [Song](dictArray: dict["data"]!["songs"] as? [NSDictionary])
                     onSuccess(items)
                 }
                 

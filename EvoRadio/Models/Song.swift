@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import EVReflection
 
-class Song: Reflect {
+class Song: EVObject {
 
     var songID: String?
     var jujingID: String?
@@ -27,20 +28,20 @@ class Song: Reflect {
     var picURL: String?
     var status: String?
     
-    override func mappingDict() -> [String : String]? {
+    override func propertyMapping() -> [(String?, String?)] {
         return [
-            "songID":"song_id",
-            "jujingID":"jujing_id",
-            "programID":"program_id",
-            "songName":"song_name",
-            "artistID":"artist_id",
-            "salbumID":"salbum_id",
-            "salbumsName":"salbums_name",
-            "artistsName":"artists_name",
-            "playNum":"play_num",
-            "shareNum":"share_num",
-            "audioURL":"audio_url",
-            "picURL":"pic_url"
+            ("songID", "song_id"),
+            ("jujingID", "jujing_id"),
+            ("programID", "program_id"),
+            ("songName", "song_name"),
+            ("artistID", "artist_id"),
+            ("salbumID", "salbum_id"),
+            ("salbumsName", "salbums_name"),
+            ("artistsName", "artists_name"),
+            ("playNum", "play_num"),
+            ("shareNum", "share_num"),
+            ("audioURL", "audio_url"),
+            ("picURL", "pic_url")
         ]
     }
 }

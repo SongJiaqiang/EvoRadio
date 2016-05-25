@@ -25,7 +25,7 @@ class CustomRadioViewController: UIViewController {
         prepareTableView()
         
         let customRadiosData = CoreDB.getCustomRadios()
-        selectedRadios = Radio.parses(arr: customRadiosData) as! [Radio]
+        selectedRadios = [Radio](dictArray: customRadiosData)
         
         api.fetch_all_channels({[weak self] (items) in
             

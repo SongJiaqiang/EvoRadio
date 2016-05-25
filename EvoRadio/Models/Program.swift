@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import EVReflection
 
-class Program: Reflect {
+class Program: EVObject{
     var programID: String?
     var programName: String?
     var programDesc: String?
@@ -33,41 +34,26 @@ class Program: Reflect {
     var lavadj: String?
     var recommend: String?
     
-    override func mappingDict() -> [String : String]? {
+    override func propertyMapping() -> [(String?, String?)] {
         return [
-            "programID":"program_id",
-            "programName":"program_name",
-            "programDesc":"program_desc",
-            "picURL":"pic_url",
-            "createTime":"create_time",
-            "modifyTime":"modify_time",
-            "pubTime":"pub_time",
-            "applyTime":"apply_time",
-            "subscribeNum":"subscribe_num",
-            "songNum":"song_num",
-            "playNum":"play_num",
-            "shareNum":"share_num",
-            "refLink":"ref_link",
-            "vipLevel":"vip_level",
-            "auditStatus":"audit_status",
-            "sortOrder":"sort_order",
-            "uID":"uid"
+            ("programID", "program_id"),
+            ("programName", "program_name"),
+            ("programDesc", "program_desc"),
+            ("picURL", "pic_url"),
+            ("createTime", "create_time"),
+            ("modifyTime", "modify_time"),
+            ("pubTime", "pub_time"),
+            ("applyTime", "apply_time"),
+            ("subscribeNum", "subscribe_num"),
+            ("songNum", "song_num"),
+            ("playNum", "play_num"),
+            ("shareNum", "share_num"),
+            ("refLink", "ref_link"),
+            ("vipLevel", "vip_level"),
+            ("auditStatus", "audit_status"),
+            ("sortOrder", "sort_order"),
+            ("uID", "uid")
         ]
     }
     
-}
-
-
-
-class Cover: Reflect {
-    var num: NSNumber?
-    var pics: [String]?
-    
-    convenience init(num: NSNumber, pics: [String]) {
-        self.init()
-        
-        self.num = num
-        self.pics = pics
-    }
-
 }

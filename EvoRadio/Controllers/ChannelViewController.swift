@@ -110,8 +110,8 @@ class ChannelViewController: UIViewController {
             
             self?.dataSource.removeAll()
             
-            let channels = Channel.parses(arr: anyList["channels"] as! NSArray)
-            self?.dataSource.appendContentsOf(channels as! [Channel])
+            let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
+            self?.dataSource.appendContentsOf(channels)
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()

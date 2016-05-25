@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import EVReflection
 
-class Channel: Reflect {
+class Channel: EVObject {
     var channelID: String?
     var channelName: String?
     var channelNameShengmu: String?
@@ -22,18 +23,18 @@ class Channel: Reflect {
     var status: String?
     var recommend: String?
     
-    override func mappingDict() -> [String : String]? {
+    override func propertyMapping() -> [(String?, String?)] {
         return [
-            "channelID":"channel_id",
-            "channelName":"channel_name",
-            "channelNameShengmu":"channel_name_shengmu",
-            "radioID":"radio_id",
-            "radioName":"radio_name",
-            "programNum":"program_num",
-            "programFine":"program_fine",
-            "pubTime":"pub_time",
-            "sortOrder":"sort_order",
-            "picURL":"pic_url",
+            ("channelID", "channel_id"),
+            ("channelName", "channel_name"),
+            ("channelNameShengmu", "channel_name_shengmu"),
+            ("radioID", "radio_id"),
+            ("radioName", "radio_name"),
+            ("programNum", "program_num"),
+            ("programFine", "program_fine"),
+            ("pubTime", "pub_time"),
+            ("sortOrder", "sort_order"),
+            ("picURL", "pic_url")
         ]
     }
     

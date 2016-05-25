@@ -8,13 +8,14 @@
 
 
 import Foundation
+import EVReflection
 
 struct ThirdLogin {
     var thirdType: String
     var nickname: String
 }
 
-class LoginUser: Reflect {
+class LoginUser: EVObject {
     
     var uID: String?
     var uName: String?
@@ -23,11 +24,11 @@ class LoginUser: Reflect {
     var pURL: String?
     var third: ThirdLogin?
     
-    override func mappingDict() -> [String : String]? {
+    override func propertyMapping() -> [(String?, String?)] {
         return [
-            "uID":"uid",
-            "uName":"uname",
-            "pURL":"purl",
+            ("uID", "uid"),
+            ("uName", "uname"),
+            ("pURL", "purl")
         ]
     }
     

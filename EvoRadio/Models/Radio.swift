@@ -7,17 +7,18 @@
 //
 
 import Foundation
+import EVReflection
 
-class Radio: Reflect {
+class Radio: EVObject {
     
     var radioID: NSNumber?
     var radioName: String?
     var channels: [Channel]?
     
-    override func mappingDict() -> [String : String]? {
+    override func propertyMapping() -> [(String?, String?)] {
         return [
-            "radioID":"radio_id",
-            "radioName":"radio_name"
+            ("radioID", "radio_id"),
+            ("radioName", "radio_name")
         ]
     }
     
@@ -37,9 +38,6 @@ class Radio: Reflect {
             radioDict["radio_name"] = radio.radioName
             
             dictArray.append(radioDict)
-            
-            let data = "".dataUsingEncoding(NSUTF8StringEncoding)
-            let dic = NSJSONSerialization.dataWithJSONObject(data, options: NSJSONWritingOptions())
         }
         return dictArray
     }
