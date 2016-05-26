@@ -14,17 +14,13 @@ class PlayerBar: UIView {
     private var subTitleLabel = UILabel()
     private var playButton = UIButton()
     
+    var delegate: PlayerBarDelegate?
     
     init() {
         super.init(frame: CGRectMake(0, Device.width()-50, Device.width(), 50))
         
         insertGradientLayer()
-        
         prepareUI()
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlayerBar.onTap))
-        addGestureRecognizer(tapGesture)
-        userInteractionEnabled = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -54,8 +50,9 @@ class PlayerBar: UIView {
         }
         
         addSubview(playButton)
-        playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
-        playButton.setImage(UIImage(named: "player_play_prs"), forState: .Highlighted)
+        playButton.setImage(UIImage(named: "player_play_border"), forState: .Normal)
+        playButton.setImage(UIImage(named: "player_play_border_prs"), forState: .Highlighted)
+        playButton.addTarget(self, action: #selector(PlayerBar.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
             make.rightMargin.equalTo(-10)
@@ -82,11 +79,39 @@ class PlayerBar: UIView {
             make.top.equalTo(snp_centerY)
         }
         
-        
+        let tap = UIGestureRecognizer(target: self, action: #selector(PlayerBar.onTap(_:)))
+        addGestureRecognizer(tap)
+        userInteractionEnabled = true
     }
     
     //MARK: event
     func onTap(gesture: UITapGestureRecognizer) {
-        UIApplication.sharedApplication().keyWindow?.rootViewController?.presentViewController(PlayerViewController(), animated: true, completion: nil)
+        delegate?.playerBarPressed()
     }
+    
+    func playButtonPressed(button: UIButton) {
+        
+        if MusicManager.sharedManager.soundQueue?.status == .Playing {
+            MusicManager.sharedManager.pauseItem()
+            button.selected = false
+        }else {
+            MusicManager.sharedManager.playItem()
+            button.selected = true
+        }
+        
+    }
+}
+
+enum SlideDirection {
+    case Horizontal
+    case Vertical
+}
+
+protocol PlayerBarDelegate {
+    
+    func playerBarPressed()
+    func playerBarPressedOnStart()
+    func playerBarPressedOnCover()
+    func playerBarSlided(direction: SlideDirection, offset: CGPoint)
+    
 }

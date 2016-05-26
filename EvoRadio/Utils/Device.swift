@@ -16,6 +16,9 @@ class Device: NSObject {
     static func height() -> CGFloat {
         return UIScreen.mainScreen().bounds.size.height
     }
+    static func size() -> CGSize {
+        return UIScreen.mainScreen().bounds.size
+    }
     
     static func systemVersionString() -> String{
         return UIDevice.currentDevice().systemVersion
@@ -44,6 +47,10 @@ class Device: NSObject {
     static func frontWindow() -> UIWindow {
         return UIApplication.sharedApplication().windows.last!
     }
+    static func rootController() -> UIViewController {
+        return UIApplication.sharedApplication().keyWindow!.rootViewController!
+    }
+    
     static func mainScreen() -> UIScreen {
         return UIScreen.mainScreen()
     }

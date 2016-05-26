@@ -62,6 +62,7 @@ class ChannelViewController: UIViewController {
         collectionView!.registerClass(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
 
         collectionView!.backgroundColor = UIColor.clearColor()
+        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
         collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
@@ -200,9 +201,12 @@ extension ChannelViewController: ChannelCollectionViewCellDelegate {
             if reflects.count > 0 {
 //                let program = Program.programWithDict(responseData.first!)
                 let program = reflects.first as! Program
-                let player = PlayerViewController(program: program)
-                player.autoPlaying = true
-                Device.rootController().presentViewController(player, animated: true, completion: nil)
+                
+                playerControler.program = program
+                playerControler.autoPlaying = true
+                playerControler.refreshPlaylist = true
+                playerView.hide()
+                Device.rootController().presentViewController(playerControler, animated: true, completion: nil)
             }
             
             }, onFailed: nil)

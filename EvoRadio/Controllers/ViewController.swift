@@ -10,6 +10,10 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    deinit {
+        print("\(NSStringFromClass(self.classForCoder)) deinit")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,16 +45,16 @@ class ViewController: UIViewController {
     
     func addChildViewController(childController: UIViewController, inView: UIView) {
         addChildViewController(childController)
-        childController.view.frame = inView.bounds
         inView.addSubview(childController.view)
+        childController.view.frame = inView.bounds
     }
     
     func addChildViewControllers(childControllers: [UIViewController], inView: UIView) {
         for i in 0..<childControllers.count {
             let controller = childControllers[i]
             addChildViewController(controller)
-            controller.view.frame = CGRectMake(Device.width()*CGFloat(i), 0, inView.bounds.width, inView.bounds.height)
             inView.addSubview(controller.view)
+            controller.view.frame = CGRectMake(Device.width()*CGFloat(i), 0, inView.bounds.width, inView.bounds.height)
         }
     }
 

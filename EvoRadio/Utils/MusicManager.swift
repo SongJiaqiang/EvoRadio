@@ -62,8 +62,37 @@ class MusicManager: NSObject {
 //        soundQueue?.playItem(soundItems.last)
     }
     
+    func updatePlayingInfo() {
+        
+        let currentItem = soundQueue?.getCurrentItem()
+        
+        var title = ""
+        if let _ = currentItem!.title {
+            title = currentItem!.title
+        }
+        
+        var artist = ""
+        if let _ = currentItem!.artist {
+            artist = currentItem!.artist
+        }
+        
+        var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
+        if let _ = currentItem!.artwork {
+            artwork = MPMediaItemArtwork(image:currentItem!.artwork)
+        }
+        
+        
+        
+        let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
+                    MPMediaItemPropertyArtist: artist,
+                    MPMediaItemPropertyArtwork: artwork
+        ]
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+    }
+    
     func playItem() {
         soundQueue?.playCurrentItem()
+        updatePlayingInfo()
     }
     
     func pauseItem() {
@@ -72,9 +101,13 @@ class MusicManager: NSObject {
     
     func playNext() {
         soundQueue?.playNextItem()
+        updatePlayingInfo()
     }
     
     func playPrev() {
         soundQueue?.playPreviousItem()
+        updatePlayingInfo()
     }
+    
+    
 }

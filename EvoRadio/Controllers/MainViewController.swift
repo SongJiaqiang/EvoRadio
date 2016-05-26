@@ -11,16 +11,20 @@ import SnapKit
 import MJRefresh
 
 class MainViewController: ViewController {
-
+    let barHeight: CGFloat = 50
+    
     private var sortTabBar: TabBar!
     private var playerBar: PlayerBar!
+    private var playerView: UIView!
     private var contentView = UIScrollView()
+    private var playerViewTopConstraint: Constraint?
     
     private var nowViewController = ChannelViewController(radioID: 0)
     private var personalController = PersonalViewController()
     private var channel1Controller = ChannelViewController()
     private var channel2Controller = ChannelViewController()
     private var channel3Controller = ChannelViewController()
+    private var playerController = PlayerViewController()
     
     
     override func viewDidLoad() {
@@ -29,14 +33,8 @@ class MainViewController: ViewController {
         title = "Evo Radio"
     
         prepareTabBar()
-        preparePlayerBar()
         prepareContentView()
-        
-        let customRadios = CoreDB.getCustomRadios()
-        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        channel2Controller.radioID = customRadios[1]["radio_id"] as! Int
-        channel3Controller.radioID = customRadios[2]["radio_id"] as! Int
-        addChildViewControllers([nowViewController, channel1Controller, channel2Controller,channel3Controller,personalController], inView: contentView)
+//        preparePlayerView()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.customRadiosChanged), name: "CustomRadiosChanged", object: nil)
     }
@@ -61,18 +59,33 @@ class MainViewController: ViewController {
         
     }
     
-    func preparePlayerBar() {
-        playerBar = PlayerBar()
-        view.addSubview(playerBar)
-        playerBar.snp_makeConstraints { (make) in
-            make.height.equalTo(50)
-            make.bottom.equalTo(view.snp_bottom)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
+    func preparePlayerView() {
+        
+        playerView = UIView()
+        playerView.backgroundColor = UIColor.goldColor()
+        Device.keyWindow().addSubview(playerView)
+        playerView.snp_makeConstraints { (make) in
+            make.size.equalTo(Device.size())
+            make.leftMargin.equalTo(0)
+            make.right.equalTo(0)
+            playerViewTopConstraint = make.topMargin.equalTo(Device.height()-barHeight).constraint
         }
         
         
-        
+        playerView.addSubview(playerController.view)
+        playerController.view.snp_makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+        }
+//        
+//        playerBar = PlayerBar()
+//        playerView.addSubview(playerBar)
+//        playerBar.delegate = self
+//        playerBar.snp_makeConstraints { (make) in
+//            make.height.equalTo(barHeight)
+//            make.topMargin.equalTo(0)
+//            make.leftMargin.equalTo(0)
+//            make.rightMargin.equalTo(0)
+//        }
     }
     
     func prepareContentView() {
@@ -86,12 +99,19 @@ class MainViewController: ViewController {
         contentView.delegate = self
         contentView.snp_makeConstraints { (make) in
             make.top.equalTo(sortTabBar.snp_bottom)
-            make.bottom.equalTo(playerBar.snp_top)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
+            make.bottomMargin.equalTo(0)
+            make.left.equalTo(0)
+            make.right.equalTo(0)
         }
         
         contentView.contentSize = CGSizeMake(Device.width()*5, 0)
+        
+        
+        let customRadios = CoreDB.getCustomRadios()
+        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
+        channel2Controller.radioID = customRadios[1]["radio_id"] as! Int
+        channel3Controller.radioID = customRadios[2]["radio_id"] as! Int
+        addChildViewControllers([nowViewController, channel1Controller, channel2Controller,channel3Controller,personalController], inView: contentView)
         
     }
     

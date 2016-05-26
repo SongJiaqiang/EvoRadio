@@ -11,15 +11,19 @@ import Alamofire
 import AFSoundManager
 import SnapKit
 
+let playerControler = PlayerViewController.instance
+
 class PlayerViewController: ViewController {
     let cellID = "audioCellID"
     
     var program: Program!
     var autoPlaying: Bool = false
+    var refreshPlaylist: Bool = false
     var dataSource = [Song]()
     private var backgroundView = UIImageView()
     private var controlView = UIView()
     private var playerBar: PlayerBar!
+    let coverImageView = UIImageView()
 
     var listTableView = UITableView()
     var listTableViewConstraint: Constraint? = nil
@@ -27,7 +31,7 @@ class PlayerViewController: ViewController {
     var delegate: PlayerViewControllerDelegate?
     
     //MARK: instance
-    class var playerController: PlayerViewController {
+    class var instance: PlayerViewController {
         struct Static {
             static var onceToken: dispatch_once_t = 0
             static var instance: PlayerViewController! = nil
@@ -38,17 +42,13 @@ class PlayerViewController: ViewController {
         return Static.instance
     }
     
-    convenience init(program: Program) {
-        self.init()
-        self.program = program
-    }
-    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("viewDidLoad")
         
         prepareBackgroundView()
         prepareListTableView()
@@ -56,21 +56,22 @@ class PlayerViewController: ViewController {
         preparePlayerControlView()
         prepareToolsView()
      
-        listProgramSongs()
-        
-        setupPlayingInfo()
-        
-
     }
     
-    func setupPlayingInfo() {
-        let artWork = MPMediaItemArtwork(image: UIImage.placeholder_cover())
-        let info = [MPMediaItemPropertyTitle: "那些花儿",
-                    MPMediaItemPropertyArtist: "朴树",
-                    MPMediaItemPropertyArtwork: artWork,
-                    MPMediaItemPropertyLyrics: "歌词，歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词歌词"
-                    ]
-        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        print("viewWillAppear")
+        if refreshPlaylist {
+            listProgramSongs()
+            refreshPlaylist = false
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        print("viewWillDisappear")
+        
+        playerView.show()
     }
 
     func prepareBackgroundView() {
@@ -153,8 +154,8 @@ class PlayerViewController: ViewController {
         
         let closeButton = UIButton()
         navBar.addSubview(closeButton)
-        closeButton.setImage(UIImage(named: "icon_down"), forState: .Normal)
-        closeButton.addTarget(self, action: #selector(PlayerViewController.dismiss), forControlEvents: .TouchUpInside)
+        closeButton.setImage(UIImage(named: "arrow_down"), forState: .Normal)
+        closeButton.addTarget(self, action: #selector(PlayerViewController.closeButtonPressed), forControlEvents: .TouchUpInside)
         closeButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
             make.leftMargin.equalTo(10)
@@ -163,25 +164,40 @@ class PlayerViewController: ViewController {
         
         let timerButton = UIButton()
         navBar.addSubview(timerButton)
-        timerButton.setImage(UIImage(named: "icon_timer"), forState: .Normal)
-        timerButton.addTarget(self, action: #selector(PlayerViewController.dismiss), forControlEvents: .TouchUpInside)
+        timerButton.setImage(UIImage(named: "timer"), forState: .Normal)
+        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed), forControlEvents: .TouchUpInside)
         timerButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
             make.rightMargin.equalTo(-10)
             make.bottom.equalTo(navBar.snp_bottom)
         }
         
+        
+//        playerBar = PlayerBar()
+//        navBar.addSubview(playerBar)
+//        playerBar.snp_makeConstraints { (make) in
+//            make.height.equalTo(50)
+//            make.topMargin.equalTo(0)
+//            make.leftMargin.equalTo(0)
+//            make.rightMargin.equalTo(0)
+//        }
+//        
+//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlayerViewController.onPlayerBarTap))
+//        playerBar.addGestureRecognizer(tapGesture)
+//        playerBar.userInteractionEnabled = true
+//        
     }
 
     func prepareToolsView() {
         
         let toolsView = UIView()
         view.addSubview(toolsView)
+//        toolsView.backgroundColor = UIColor(white: 0.5, alpha: 0.8)
         toolsView.snp_makeConstraints { (make) in
-            make.height.equalTo(80)
+            make.height.equalTo(50)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
-            make.bottom.equalTo(controlView.snp_top)
+            make.bottom.equalTo(view.snp_bottom)
         }
         
         let infoButton = UIButton()
@@ -215,55 +231,14 @@ class PlayerViewController: ViewController {
         }
         
         
-    }
-    
-    func preparePlayerControlView() {
-        view.addSubview(controlView)
-        controlView.snp_makeConstraints { (make) in
-            make.height.equalTo(100)
-            make.bottom.equalTo(view.snp_bottom)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
-        }
-        
-        let playButton = UIButton()
-        controlView.addSubview(playButton)
-        playButton.setImage(UIImage(named: "icon_player_start"), forState: .Normal)
-        playButton.setImage(UIImage(named: "icon_player_pause"), forState: .Selected)
-        playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(50, 50))
-            make.center.equalTo(controlView.center)
-        }
-        
-        let nextButton = UIButton()
-        controlView.addSubview(nextButton)
-        nextButton.setImage(UIImage(named: "icon_player_next"), forState: .Normal)
-        nextButton.addTarget(self, action: #selector(PlayerViewController.nextButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        nextButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 40))
-            make.centerY.equalTo(controlView.snp_centerY)
-            make.left.equalTo(playButton.snp_right).inset(-10)
-        }
-        
-        let prevButton = UIButton()
-        controlView.addSubview(prevButton)
-        prevButton.setImage(UIImage(named: "icon_player_prev"), forState: .Normal)
-        prevButton.addTarget(self, action: #selector(PlayerViewController.prevButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        prevButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 40))
-            make.centerY.equalTo(controlView.snp_centerY)
-            make.right.equalTo(playButton.snp_left).inset(-10)
-        }
-        
         let repeatButton = UIButton()
         controlView.addSubview(repeatButton)
         repeatButton.setImage(UIImage(named: "icon_repeat"), forState: .Normal)
         repeatButton.addTarget(self, action: #selector(PlayerViewController.repeatButtonPressed(_:)), forControlEvents: .TouchUpInside)
         repeatButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
-            make.centerY.equalTo(controlView.snp_centerY)
-            make.right.equalTo(prevButton.snp_left).inset(-20)
+            make.centerY.equalTo(toolsView.snp_centerY)
+            make.right.equalTo(downloadButton.snp_left).inset(-30)
         }
         
         let listButton = UIButton()
@@ -272,12 +247,61 @@ class PlayerViewController: ViewController {
         listButton.addTarget(self, action: #selector(PlayerViewController.listButtonPressed(_:)), forControlEvents: .TouchUpInside)
         listButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
+            make.centerY.equalTo(toolsView.snp_centerY)
+            make.left.equalTo(shareButton.snp_right).inset(-30)
+        }
+
+        
+    }
+    
+    func preparePlayerControlView() {
+        view.addSubview(controlView)
+        controlView.backgroundColor = UIColor(white: 0.2, alpha: 1)
+        controlView.snp_makeConstraints { (make) in
+            make.height.equalTo(Device.height()-Device.width())
+            make.bottom.equalTo(view.snp_bottom)
+            make.left.equalTo(view.snp_left)
+            make.right.equalTo(view.snp_right)
+        }
+        
+        let playButton = UIButton()
+        controlView.addSubview(playButton)
+        playButton.clipsToBounds = true
+        playButton.layer.cornerRadius = 25
+        playButton.layer.borderColor = UIColor.whiteColor().CGColor
+        playButton.layer.borderWidth = 1
+        playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
+        playButton.setImage(UIImage(named: "player_pause"), forState: .Selected)
+        playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        playButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(50, 50))
+            make.center.equalTo(controlView.center)
+        }
+        
+        let nextButton = UIButton()
+        controlView.addSubview(nextButton)
+        nextButton.setImage(UIImage(named: "player_next"), forState: .Normal)
+        nextButton.addTarget(self, action: #selector(PlayerViewController.nextButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        nextButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(40, 40))
             make.centerY.equalTo(controlView.snp_centerY)
-            make.left.equalTo(nextButton.snp_right).inset(-20)
+            make.left.equalTo(playButton.snp_right).inset(-20)
+        }
+        
+        let prevButton = UIButton()
+        controlView.addSubview(prevButton)
+        prevButton.setImage(UIImage(named: "player_prev"), forState: .Normal)
+        prevButton.addTarget(self, action: #selector(PlayerViewController.prevButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        prevButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(40, 40))
+            make.centerY.equalTo(controlView.snp_centerY)
+            make.right.equalTo(playButton.snp_left).inset(-20)
         }
         
         let slider = UISlider()
         controlView.addSubview(slider)
+        let thumbImage = UIImage.circleImage(UIColor.whiteColor(), radius: 6)
+        slider.setThumbImage(thumbImage, forState: .Normal)
         controlView.tintColor = UIColor.goldColor()
         slider.snp_makeConstraints { (make) in
             make.height.equalTo(20)
@@ -310,31 +334,40 @@ class PlayerViewController: ViewController {
             make.centerY.equalTo(slider.snp_centerY)
         }
         
-        
     }
     
     func prepareListTableView() {
-        if let _ = listTableView {
-            listTableViewConstraint?.updateOffset(0)
+        view.addSubview(listTableView)
+        listTableView.delegate = self
+        listTableView.dataSource = self
+        listTableView.backgroundColor = UIColor.clearColor()
+        listTableView.bounces = false
+        listTableView.snp_makeConstraints(closure: {(make) in
+            make.height.equalTo(Device.width())
+            make.top.equalTo(view.snp_top)
+            make.left.equalTo(view.snp_left)
+            make.right.equalTo(view.snp_right)
+        })
+        
+        listTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        
+        let headerView = UIView()
+        headerView.frame = CGRectMake(0, 0, Device.width(), Device.width())
+        
+        
+        headerView.addSubview(coverImageView)
+        coverImageView.contentMode = .ScaleAspectFill
+        coverImageView.clipsToBounds = true
+        if let _ = program {
+            coverImageView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
         }else {
-            listTableView = UITableView()
-            view.addSubview(listTableView!)
-            listTableView!.delegate = self
-            listTableView!.dataSource = self
-            listTableView!.frame = CGRectMake(0, 0, Device.width(), Device.width())
-            listTableView?.snp_makeConstraints(closure: {[weak self] (make) in
-                make.size.equalTo(CGSizeMake(Device.width(), Device.width()))
-                self?.listTableViewConstraint = make.bottom.equalTo((self?.view.snp_bottom)!).constraint
-                make.left.equalTo((self?.view.snp_left)!)
-                make.right.equalTo((self?.view.snp_right)!)
-            })
-            
-            listTableView!.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
+            coverImageView.image = UIImage.placeholder_cover()
         }
-    }
-    
-    func dismiss() {
-        dismissViewControllerAnimated(true, completion: nil)
+        coverImageView.snp_makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+        }
+        
+        listTableView.tableHeaderView = headerView
     }
     
     func listProgramSongs() {
@@ -350,8 +383,8 @@ class PlayerViewController: ViewController {
                     let newData = items as! [Song]
                     self?.dataSource.appendContentsOf(newData)
                     
+                    self?.updateCover()
                     self?.listTableView.reloadData()
-                    
                     if self?.autoPlaying == true {
                         let song = newData.first
                         Downloader.downloader.downloadFile(song!.audioURL!)
@@ -367,6 +400,10 @@ class PlayerViewController: ViewController {
     
     //MARK: event
     func playButtonPressed(button: UIButton) {
+        if program == nil{
+            return
+        }
+        
         button.selected = !button.selected
         
         if button.selected {
@@ -386,10 +423,6 @@ class PlayerViewController: ViewController {
         
     }
     func listButtonPressed(button: UIButton) {
-        prepareListTableView()
-        if let _ = program {
-            listProgramSongs()
-        }
 
     }
     func heartButtonPressed(button: UIButton) {
@@ -405,6 +438,27 @@ class PlayerViewController: ViewController {
         
     }
     
+    func closeButtonPressed() {
+        delegate?.playerViewWillClose()
+        
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func timerButtonPressed() {
+        
+    }
+    
+    func onPlayerBarTap(gesture: UITapGestureRecognizer) {
+        delegate?.playerViewWillOpen()
+    }
+    
+    func updateCover() {
+        if let _ = program {
+            coverImageView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
+        }else {
+            coverImageView.image = UIImage.placeholder_cover()
+        }
+    }
 
 }
 
@@ -439,4 +493,9 @@ extension PlayerViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.listTableViewConstraint?.updateOffset(Device.width())
     }
+}
+
+protocol PlayerViewControllerDelegate {
+    func playerViewWillOpen()
+    func playerViewWillClose()
 }

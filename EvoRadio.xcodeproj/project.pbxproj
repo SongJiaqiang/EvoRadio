@@ -28,7 +28,10 @@
 		909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A01CC0831B00B0C49B /* ViewController.swift */; };
 		909E65A41CC0837800B0C49B /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A31CC0837800B0C49B /* TabBar.swift */; };
 		909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909E65A51CC083A500B0C49B /* Assets.xcassets */; };
+		90A1F61D1CEC1F720055D013 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90A1F61C1CEC1F720055D013 /* PlayerView.swift */; };
 		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
+		90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */; };
+		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
 		90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFD1CC3DB720018A532 /* NavigationController.swift */; };
 		90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFF1CC3E4E60018A532 /* Fonts.swift */; };
 		90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB011CC3E99D0018A532 /* PlayerBar.swift */; };
@@ -86,7 +89,10 @@
 		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
 		909E65A31CC0837800B0C49B /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBar.swift; path = Views/TabBar.swift; sourceTree = "<group>"; };
 		909E65A51CC083A500B0C49B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
+		90A1F61C1CEC1F720055D013 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; };
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVReflections.swift; sourceTree = "<group>"; };
+		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
+		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		90E7FAFD1CC3DB720018A532 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = Controllers/NavigationController.swift; sourceTree = "<group>"; };
 		90E7FAFF1CC3E4E60018A532 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		90E7FB011CC3E99D0018A532 /* PlayerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerBar.swift; path = Views/PlayerBar.swift; sourceTree = "<group>"; };
@@ -200,6 +206,7 @@
 			children = (
 				909E65A31CC0837800B0C49B /* TabBar.swift */,
 				90E7FB011CC3E99D0018A532 /* PlayerBar.swift */,
+				90A1F61C1CEC1F720055D013 /* PlayerView.swift */,
 				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
 				DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */,
 				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
@@ -255,6 +262,7 @@
 				90E7FB581CC536720018A532 /* Images.swift */,
 				DBB79DA41CD11935006189B3 /* Dates.swift */,
 				90B95CA21CF54B2E00105090 /* EVReflections.swift */,
+				90B95CAB1CF6F4FA00105090 /* Windows.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -266,6 +274,7 @@
 				902F6B6F1CC3C4EA00F43C2E /* Device.swift */,
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
 				90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */,
+				90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */,
 				90ECDFCF1CC877380061CB6F /* Downloader.swift */,
 				90659F261CC9C1A50026539F /* CoreDB.swift */,
 				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
@@ -426,6 +435,8 @@
 				DBB79DA31CD046E6006189B3 /* SelectiveTimePanel.swift in Sources */,
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
+				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
+				90A1F61D1CEC1F720055D013 /* PlayerView.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
 				90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */,
@@ -437,6 +448,7 @@
 				909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */,
 				90E7FB4F1CC4C3170018A532 /* Program.swift in Sources */,
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
+				90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */,
 				DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */,
 				DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */,
 				DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */,

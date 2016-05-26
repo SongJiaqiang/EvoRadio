@@ -29,8 +29,6 @@ class Downloader: NSObject {
         let url = NSURL(string: fileURL)!
         if soundFileExitsWithURL(url) {
             print("File is exit")
-            
-            
             return
         }
         

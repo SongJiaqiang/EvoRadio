@@ -16,7 +16,7 @@ class ProgramViewController: ViewController {
     var dataSource = [Program]()
     private var collectionView: UICollectionView?
     private var endOfFeed = false
-    private let pageSize: Int = 30
+    private let pageSize: Int = 60
     
     convenience init(channel: Channel) {
         self.init()
@@ -141,8 +141,8 @@ extension ProgramViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let program = dataSource[indexPath.row]
-        let player = PlayerViewController(program: program)
-        presentViewController(player, animated: true, completion: nil)
+        playerControler.program = program
+        presentViewController(playerControler, animated: true, completion: nil)
         
     }
 }
@@ -172,8 +172,11 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
         let program = dataSource[indexPath.item]
-        let player = PlayerViewController(program: program)
-        presentViewController(player, animated: true, completion: nil)
+        playerControler.program = program
+        playerControler.autoPlaying = true
+        playerControler.refreshPlaylist = true
+        playerView.hide()
+        presentViewController(playerControler, animated: true, completion: nil)
     }
     
 }

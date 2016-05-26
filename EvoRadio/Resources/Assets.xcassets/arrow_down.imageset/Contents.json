@@ -2,12 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon_timer.png",
+      "filename" : "arrow_down.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_timer@2x.png",
+      "filename" : "arrow_down@2x.png",
       "scale" : "2x"
     },
     {

@@ -13,26 +13,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
         
+        // 设置音乐远程控制（在iPhone控制面板和锁屏界面操作）
+        setupRemoteControl()
         
         // 设置根控制器
         setupRootControllerAndVisible()
+        
+        // 准备播放界面
+        preparePlayer()
+        
         return true
     }
     
     func setupRootControllerAndVisible() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-
-        let homeNavC = NavigationController(rootViewController: MainViewController())
+        
+        let controller = MainViewController()
+        let homeNavC = NavigationController(rootViewController: controller)
         window?.rootViewController = homeNavC
         window?.makeKeyAndVisible()
     }
     
+    func preparePlayer() {
+        playerView.prepare()
+    }
+    
+    func setupRemoteControl() {
+        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+        becomeFirstResponder()
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -55,6 +68,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    override func canBecomeFirstResponder() -> Bool {
+        return true
+    }
+    
+    override func remoteControlReceivedWithEvent(event: UIEvent?) {
+        if let e = event {
+            if e.type == .RemoteControl {
+                switch e.subtype {
+                case .RemoteControlPause:
+                    print("RemoteControlPause")
+                    MusicManager.sharedManager.pauseItem()
+                    break;
+                case .RemoteControlStop:
+                    print("RemoteControlPause")
+                    break;
+                case .RemoteControlPlay:
+                    print("RemoteControlPlay")
+                    MusicManager.sharedManager.playItem()
+                    break;
+                case .RemoteControlTogglePlayPause:
+                    print("RemoteControlTogglePlayPause")
+                    break;
+                case .RemoteControlNextTrack:
+                    print("RemoteControlNextTrack")
+                    MusicManager.sharedManager.playNext()
+                    break;
+                case .RemoteControlPreviousTrack:
+                    print("RemoteControlPreviousTrack")
+                    MusicManager.sharedManager.playPrev()
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+        
+
     }
 
 

@@ -13,3 +13,5 @@ let collectionViewMargin: CGFloat = 15
 
 let channelCollectionCellWidth = (Device.width() - collectionViewMargin * 3) / 2
 let programCollectionCellWidth = (Device.width() - collectionViewMargin * 4) / 3
+
+let playerBarHeight: CGFloat = 50
