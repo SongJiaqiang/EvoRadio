@@ -8,46 +8,38 @@
 
 import Foundation
 
-let ALLCHANNELS = "all_channels"
-let ALLNOWCHANNELS = "all_now_channels"
-let CUSTOMRADIOS = "custom_radios"
-let SELECTEDINDEXES = "selected_indexes"
+let KEY_ALLCHANNELS = "all_channels"
+let KEY_ALLNOWCHANNELS = "all_now_channels"
+let KEY_CUSTOMRADIOS = "custom_radios"
+let KEY_SELECTEDINDEXES = "selected_indexes"
+let KEY_PLAYLSIT = "playlist"
 
 
+let leveldb: WLevelDb = WLevelDb.sharedDb()
 
 class CoreDB {
-    
-    let leveldb: WLevelDb
- 
-    init() {
-        leveldb = WLevelDb.sharedDb()
-    }
-    
-    func dbTest() {
-        leveldb.setObject("Hello LevelDb", forKey: "hi")
-    }
     
     class func clearAll() {
         WLevelDb.sharedDb().removeAllObjects()
     }
     
     class func saveAllChannels(responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: ALLCHANNELS)
+        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_ALLCHANNELS)
     }
     
     class func getAllChannels() -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(ALLCHANNELS)
+        let responseData = WLevelDb.sharedDb().objectForKey(KEY_ALLCHANNELS)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
         return nil
     }
     class func saveAllNowChannels(responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: ALLNOWCHANNELS)
+        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_ALLNOWCHANNELS)
     }
     
     class func getAllNowChannels() -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(ALLNOWCHANNELS)
+        let responseData = WLevelDb.sharedDb().objectForKey(KEY_ALLNOWCHANNELS)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
@@ -55,11 +47,11 @@ class CoreDB {
     }
     
     class func saveCustomRadios(customRadios: [[String: AnyObject]]) {
-        WLevelDb.sharedDb().setObject(customRadios, forKey: CUSTOMRADIOS)
+        WLevelDb.sharedDb().setObject(customRadios, forKey: KEY_CUSTOMRADIOS)
     }
     
     class func getCustomRadios() -> [[String: AnyObject]]{
-        let customRadios = WLevelDb.sharedDb().objectForKey(CUSTOMRADIOS)
+        let customRadios = WLevelDb.sharedDb().objectForKey(KEY_CUSTOMRADIOS)
         if let _ = customRadios {
             return customRadios as! [[String : AnyObject]]
         }
@@ -122,11 +114,11 @@ class CoreDB {
     }
     
     class func saveSelectedIndexes(indexes: [String : Int]) {
-        WLevelDb.sharedDb().setObject(indexes, forKey: SELECTEDINDEXES)
+        WLevelDb.sharedDb().setObject(indexes, forKey: KEY_SELECTEDINDEXES)
     }
     
     class func getSelectedIndexes() -> [String : Int]? {
-        if let indexes = WLevelDb.sharedDb().objectForKey(SELECTEDINDEXES) {
+        if let indexes = WLevelDb.sharedDb().objectForKey(KEY_SELECTEDINDEXES) {
             return indexes as? [String : Int]
         }else {
             return nil
@@ -134,9 +126,23 @@ class CoreDB {
     }
     // 清除选择时刻缓存
     class func clearSelectedIndexes() {
-        WLevelDb.sharedDb().removeObjectForKey(SELECTEDINDEXES)
+        WLevelDb.sharedDb().removeObjectForKey(KEY_SELECTEDINDEXES)
     }
     
     
+    // 存储播放列表
+    class func savePlaylist(songs: [Song]) {
+        let songsDict = songs.toDictionaryArray()
+        WLevelDb.sharedDb().setObject(songsDict, forKey: KEY_PLAYLSIT)
+    }
+    
+    class func getPlaylist() -> [Song] {
+        var songs = [Song]()
+        if let songsDict = leveldb.objectForKey(KEY_PLAYLSIT) {
+            songs = [Song](dictArray: songsDict as? [NSDictionary])
+        }
+        
+        return songs
+    }
     
 }

@@ -11,8 +11,8 @@ import AFSoundManager
 
 class MusicManager: NSObject {
     
-    var soundQueue: AFSoundQueue?
-    var soundItems = [AFSoundItem]()
+    private var soundQueue: AFSoundQueue?
+    private var soundItems = [AFSoundItem]()
     
     //MARK: instance
     class var sharedManager: MusicManager {
@@ -27,39 +27,46 @@ class MusicManager: NSObject {
         return Static.instance
     }
     
-    override init() {
-        super.init()
+    func addMusicToList(filePath: String) -> Int {
         
-        soundQueue?.listenFeedbackUpdatesWithBlock({ (currentItem) in
-            print("\(currentItem.duration) - \(currentItem.timePlayed)")
-            }, andFinishedBlock: { (nextItem) in
-                
-                print("finished and next one")
-        })
-    }
-    
-    func addMusicToList(filePath: String) {
+        if indexOfItemWithPath(filePath) > 0 {
+            return indexOfItemWithPath(filePath)
+        }
         
         let soundItem = AFSoundItem(localResource: "", atPath: filePath)
         
         soundItems.append(soundItem)
-        if let soundQueue = soundQueue {
-            soundQueue.addItem(soundItem)
+        if let _ = soundQueue {
+            soundQueue!.addItem(soundItem)
         }else {
             soundQueue = AFSoundQueue(items: soundItems)
             
             soundQueue!.listenFeedbackUpdatesWithBlock({ (currentItem) in
                 
                 print("\(currentItem.duration) - \(currentItem.timePlayed)")
+                let userInfo = [
+                    "duration":currentItem.duration,
+                    "timePlayed":currentItem.timePlayed
+                ]
                 
-                }, andFinishedBlock: { (nextItem) in
-                    
-                    print("finished and next one")
+                NotificationManager.instance.postPlayMusicProgressChangedNotification(userInfo)
+                
+                }, andFinishedBlock: {[weak self] (nextItem) in
+                    print("Finished and next one")
+                    if nextItem == nil {
+                        print("Haven't next")
+                    }else {
+                        NotificationManager.instance.postPlayMusicProgressEndedNotification(["nextItem":nextItem])
+                    }
+                    self?.playNext()
             })
         }
         
-        
-//        soundQueue?.playItem(soundItems.last)
+        return soundItems.count-1
+    }
+    
+    func clearList() {
+        soundQueue?.clearQueue()
     }
     
     func updatePlayingInfo() {
@@ -81,13 +88,16 @@ class MusicManager: NSObject {
             artwork = MPMediaItemArtwork(image:currentItem!.artwork)
         }
         
-        
-        
         let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
                     MPMediaItemPropertyArtist: artist,
                     MPMediaItemPropertyArtwork: artwork
         ]
         MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+    }
+    
+    func playItemAtIndex(index: Int) {
+        soundQueue?.playItemAtIndex(index)
+        updatePlayingInfo()
     }
     
     func playItem() {
@@ -100,14 +110,50 @@ class MusicManager: NSObject {
     }
     
     func playNext() {
-        soundQueue?.playNextItem()
+        
+        if soundQueue?.getCurrentItem() == soundItems.last {
+            soundQueue?.playItemAtIndex(0)
+        }else {
+            soundQueue?.playNextItem()
+        }
+        
         updatePlayingInfo()
     }
     
     func playPrev() {
-        soundQueue?.playPreviousItem()
+        if soundQueue?.indexOfCurrentItem() == 0 {
+            soundQueue?.playItemAtIndex(soundItems.count-1)
+        }else {
+            soundQueue?.playPreviousItem()
+        }
         updatePlayingInfo()
     }
     
+    func isPlaying() -> Bool{
+        if soundQueue?.status == .Playing {
+            return true
+        }else {
+            return false
+        }
+    }
+    
+    
+    func isPlayingOfSong(filePath: String) -> Bool {
+        return (soundQueue?.getCurrentItem().URL.absoluteString.containsString(filePath))!
+    }
+    
+    func indexOfItemWithPath(filePath: String) -> Int {
+        for item in soundItems {
+            if item.URL.path?.containsString(filePath) == true {
+                return soundItems.indexOf(item)!
+            }
+        }
+        
+        return -1
+    }
+    
+    func playAtSecond(second: Int) {
+        soundQueue?.playAtSecond(second)
+    }
     
 }

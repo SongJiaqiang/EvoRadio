@@ -20,10 +20,17 @@ class PlayerViewController: ViewController {
     var autoPlaying: Bool = false
     var refreshPlaylist: Bool = false
     var dataSource = [Song]()
+    
     private var backgroundView = UIImageView()
     private var controlView = UIView()
     private var playerBar: PlayerBar!
     let coverImageView = UIImageView()
+    let progressSlider = UISlider()
+    let currentTimeLabel = UILabel()
+    let totalTimeLabel = UILabel()
+    let playButton = UIButton()
+    let nextButton = UIButton()
+    let prevButton = UIButton()
 
     var listTableView = UITableView()
     var listTableViewConstraint: Constraint? = nil
@@ -56,6 +63,12 @@ class PlayerViewController: ViewController {
         preparePlayerControlView()
         prepareToolsView()
      
+        if program == nil {
+            PlaylistManager.instance.savedList()
+        }
+        
+        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
+        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -264,7 +277,7 @@ class PlayerViewController: ViewController {
             make.right.equalTo(view.snp_right)
         }
         
-        let playButton = UIButton()
+        
         controlView.addSubview(playButton)
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 25
@@ -278,7 +291,6 @@ class PlayerViewController: ViewController {
             make.center.equalTo(controlView.center)
         }
         
-        let nextButton = UIButton()
         controlView.addSubview(nextButton)
         nextButton.setImage(UIImage(named: "player_next"), forState: .Normal)
         nextButton.addTarget(self, action: #selector(PlayerViewController.nextButtonPressed(_:)), forControlEvents: .TouchUpInside)
@@ -288,7 +300,7 @@ class PlayerViewController: ViewController {
             make.left.equalTo(playButton.snp_right).inset(-20)
         }
         
-        let prevButton = UIButton()
+        
         controlView.addSubview(prevButton)
         prevButton.setImage(UIImage(named: "player_prev"), forState: .Normal)
         prevButton.addTarget(self, action: #selector(PlayerViewController.prevButtonPressed(_:)), forControlEvents: .TouchUpInside)
@@ -298,40 +310,37 @@ class PlayerViewController: ViewController {
             make.right.equalTo(playButton.snp_left).inset(-20)
         }
         
-        let slider = UISlider()
-        controlView.addSubview(slider)
-        let thumbImage = UIImage.circleImage(UIColor.whiteColor(), radius: 6)
-        slider.setThumbImage(thumbImage, forState: .Normal)
-        controlView.tintColor = UIColor.goldColor()
-        slider.snp_makeConstraints { (make) in
+        controlView.addSubview(progressSlider)
+        progressSlider.setThumbImage(UIImage(named: "dot_white")!, forState: .Normal)
+        progressSlider.tintColor = UIColor.goldColor()
+        progressSlider.addTarget(self, action: #selector(PlayerViewController.progressSliderChanged(_:)), forControlEvents: .ValueChanged)
+        progressSlider.snp_makeConstraints { (make) in
             make.height.equalTo(20)
             make.left.equalTo(controlView.snp_left).inset(50)
             make.right.equalTo(controlView.snp_right).inset(50)
             make.top.equalTo(controlView.snp_top)
         }
         
-        let currentTimeLabel = UILabel()
         controlView.addSubview(currentTimeLabel)
         currentTimeLabel.textAlignment = .Center
         currentTimeLabel.font = UIFont.sizeOf10()
         currentTimeLabel.textColor = UIColor.whiteColor()
-        currentTimeLabel.text = "01:43"
+        currentTimeLabel.text = "0:00"
         currentTimeLabel.snp_makeConstraints { (make) in
             make.left.equalTo(view.snp_left)
-            make.right.equalTo(slider.snp_left)
-            make.centerY.equalTo(slider.snp_centerY)
+            make.right.equalTo(progressSlider.snp_left)
+            make.centerY.equalTo(progressSlider.snp_centerY)
         }
         
-        let totalTimeLabel = UILabel()
         controlView.addSubview(totalTimeLabel)
         totalTimeLabel.textAlignment = .Center
         totalTimeLabel.font = UIFont.sizeOf10()
         totalTimeLabel.textColor = UIColor.whiteColor()
-        totalTimeLabel.text = "04:21"
+        totalTimeLabel.text = "0:00"
         totalTimeLabel.snp_makeConstraints { (make) in
             make.right.equalTo(view.snp_right)
-            make.left.equalTo(slider.snp_right)
-            make.centerY.equalTo(slider.snp_centerY)
+            make.left.equalTo(progressSlider.snp_right)
+            make.centerY.equalTo(progressSlider.snp_centerY)
         }
         
     }
@@ -380,14 +389,26 @@ class PlayerViewController: ViewController {
                 if items.count > 0 {
                     // download first audio file
                     
-                    let newData = items as! [Song]
-                    self?.dataSource.appendContentsOf(newData)
+                    let songs = items as! [Song]
+                    self?.dataSource = songs
+                    PlaylistManager.instance.saveList(songs)
                     
                     self?.updateCover()
                     self?.listTableView.reloadData()
                     if self?.autoPlaying == true {
-                        let song = newData.first
-                        Downloader.downloader.downloadFile(song!.audioURL!)
+                        self?.autoPlaying = false
+                        let song = songs.first
+                        Downloader.downloader.downloadFile(song!.audioURL!, complete: {(filePath) -> Void in
+                            
+                            // play music
+                            MusicManager.sharedManager.clearList()
+                            let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
+                            MusicManager.sharedManager.playItemAtIndex(itemIndex)
+                            
+                            }, progress: { (velocity, progress) in
+                                
+                            print("(\(velocity)MB/S - \(progress*100)%)")
+                        })
                     }
                 }else {
                     print("This program has no one song")
@@ -452,12 +473,40 @@ class PlayerViewController: ViewController {
         delegate?.playerViewWillOpen()
     }
     
+    func progressSliderChanged(slider: UISlider) {
+        let timePlayed = slider.value
+        MusicManager.sharedManager.playAtSecond(Int(timePlayed))
+    }
+    
     func updateCover() {
         if let _ = program {
             coverImageView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
         }else {
             coverImageView.image = UIImage.placeholder_cover()
         }
+    }
+    
+    func playMusicProgressChanged(noti: NSNotification) {
+        if let userInfo = noti.userInfo {
+            let duration = userInfo["duration"]
+            let timePlayed = userInfo["timePlayed"]
+        
+            progressSlider.minimumValue = 0
+            progressSlider.maximumValue = duration as! Float
+            progressSlider.value = timePlayed as! Float
+            
+            totalTimeLabel.text = NSDate.secondsToMinuteString(duration as! Int)
+            currentTimeLabel.text = NSDate.secondsToMinuteString(timePlayed as! Int)
+            
+            playButton.selected = true
+        }
+    
+        
+    }
+    
+    func playMusicProgressEnded(noti: NSNotification) {
+        print("Play ended")
+        playButton.selected = false
     }
 
 }
@@ -488,8 +537,17 @@ extension PlayerViewController: UITableViewDataSource, UITableViewDelegate {
         
 //        self.downloadFile(song.audioURL!)
 
-        Downloader.downloader.downloadFile(song.audioURL!)
-        // 2. play audio
+        Downloader.downloader.downloadFile(song.audioURL!, complete: {(filePath) -> Void in
+            
+            // 2. play audio
+            if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
+                let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
+                MusicManager.sharedManager.playItemAtIndex(itemIndex)
+            }
+            
+            }, progress: { (velocity, progress) in
+            print("\(velocity)MB/S - \(progress*100)%)")
+        })
         
         self.listTableViewConstraint?.updateOffset(Device.width())
     }

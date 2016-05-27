@@ -173,7 +173,7 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let program = dataSource[indexPath.item]
         playerControler.program = program
-        playerControler.autoPlaying = true
+//        playerControler.autoPlaying = true
         playerControler.refreshPlaylist = true
         playerView.hide()
         presentViewController(playerControler, animated: true, completion: nil)

@@ -91,7 +91,7 @@ class PlayerBar: UIView {
     
     func playButtonPressed(button: UIButton) {
         
-        if MusicManager.sharedManager.soundQueue?.status == .Playing {
+        if MusicManager.sharedManager.isPlaying() {
             MusicManager.sharedManager.pauseItem()
             button.selected = false
         }else {

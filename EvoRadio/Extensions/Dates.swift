@@ -30,4 +30,16 @@ extension NSDate {
         return value
     }
     
+    class func secondsToMinuteString(seconds: Int) -> String {
+        
+        if seconds < 0 {
+            return "0:00"
+        }
+        
+        let minuteValue = seconds / 60
+        let secondValue = seconds % 60
+        
+        return "\(minuteValue):\(NSString(format: "%02d", secondValue))"
+    }
+    
 }

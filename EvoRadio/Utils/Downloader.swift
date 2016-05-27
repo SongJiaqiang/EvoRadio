@@ -25,10 +25,21 @@ class Downloader: NSObject {
         return Static.instance
     }
     
-    func downloadFile(fileURL: String) {
+    func downloadFile(fileURL: String, complete: ((String) -> Void)?, progress:((Float, Float) -> Void)?) {
         let url = NSURL(string: fileURL)!
-        if soundFileExitsWithURL(url) {
+        if let exitUrl = soundFileExitsWithURL(url) {
             print("File is exit")
+            if let _ = complete {
+                complete!(exitUrl.path!)
+            }
+            
+//            MusicManager.sharedManager.addMusicToList(exitUrl.path!)
+//            if MusicManager.sharedManager.isPlaying() {
+//                MusicManager.sharedManager.playNext()
+//            }else {
+//                MusicManager.sharedManager.playItem()
+//            }
+            
             return
         }
         
@@ -58,26 +69,26 @@ class Downloader: NSObject {
                 print("download error: \(error)")
             }else {
                 print("download finished")
-                // play music
-                MusicManager.sharedManager.addMusicToList(finalDirector.path!)
-                MusicManager.sharedManager.playItem()
+                
+                if let _ = complete {
+                    complete!(finalDirector.path!)
+                }
             }
         }.progress { (bytesRead, totalBytesRead, totalBytesExpectedToRead) in
-            print("\(bytesRead)-\(totalBytesRead)-\(totalBytesExpectedToRead)")
-            
-            dispatch_async(dispatch_get_main_queue()) {
-                // update ui
+            if let _ = progress {
+                progress!(Float(bytesRead)/1000.0, (Float(totalBytesRead) / Float(totalBytesExpectedToRead)))
             }
+
         }
     }
     
-    func soundFileExitsWithURL(fileURL: NSURL) -> Bool{
+    func soundFileExitsWithURL(fileURL: NSURL) -> NSURL?{
         let fileManager = NSFileManager.defaultManager()
         let directoryURLs = fileManager.URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
         let downloadDirector = directoryURLs[0].URLByAppendingPathComponent("download")
         
         if !fileManager.fileExistsAtPath(downloadDirector.path!) {
-            return false
+            return nil
         }else {
             // Listing All Files In A Directory
             var contents: [NSURL]
@@ -86,7 +97,7 @@ class Downloader: NSObject {
                 
                 for url in contents {
                     if url.path!.containsString(fileURL.lastPathComponent!) {
-                        return true
+                        return url
                     }
                 }
             }catch let error as NSError {
@@ -94,6 +105,6 @@ class Downloader: NSObject {
             }
         }
         
-        return false
+        return nil
     }
 }
