@@ -33,6 +33,9 @@ typedef void (^itemFinishedBlock)(AFSoundItem *nextItem);
 -(void)playItem:(AFSoundItem *)item;
 -(void)playItemAtIndex:(NSInteger)index;
 
+-(void)playAtSecond:(NSInteger)second;
+
+
 -(AFSoundItem *)getCurrentItem;
 -(NSInteger)indexOfCurrentItem;
 

@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'B848ADBF9E27F1DA9FB7D9EA'
+               BlueprintIdentifier = '8FA2681F3D22D768C57CA268'
                BlueprintName = 'Pods-EvoRadio'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_EvoRadio.framework'>

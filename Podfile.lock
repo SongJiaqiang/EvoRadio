@@ -8,7 +8,7 @@ PODS:
   - SnapKit (0.20.0)
 
 DEPENDENCIES:
-  - AFSoundManager (~> 2.0)
+  - AFSoundManager (~> 2.1)
   - Alamofire (~> 3.3)
   - EVReflection (~> 2.6)
   - Kingfisher (~> 2.2)

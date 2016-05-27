@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '91759B059D150E6A52EF07C7'
+               BlueprintIdentifier = '1B2F5FD6D1455901E1304629'
                BlueprintName = 'AFSoundManager'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'AFSoundManager.framework'>

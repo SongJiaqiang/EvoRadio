@@ -179,6 +179,10 @@
     }
 }
 
+-(void)playAtSecond:(NSInteger)second {
+    [_queuePlayer playAtSecond:second];
+}
+
 -(AFSoundItem *)getCurrentItem {
     
     return _queuePlayer.currentItem;
