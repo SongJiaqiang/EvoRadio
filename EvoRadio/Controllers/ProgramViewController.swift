@@ -141,7 +141,7 @@ extension ProgramViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         let program = dataSource[indexPath.row]
-        playerControler.program = program
+//        playerControler.program = program
         presentViewController(playerControler, animated: true, completion: nil)
         
     }
@@ -172,11 +172,15 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         collectionView.deselectItemAtIndexPath(indexPath, animated: true)
         
         let program = dataSource[indexPath.item]
-        playerControler.program = program
-//        playerControler.autoPlaying = true
-        playerControler.refreshPlaylist = true
-        playerView.hide()
-        presentViewController(playerControler, animated: true, completion: nil)
+        
+//        playerControler.program = program
+//        playerControler.refreshPlaylist = true
+//        playerView.hide()
+//        presentViewController(playerControler, animated: true, completion: nil)
+        
+        let listController = SongListViewController()
+        listController.program = program
+        navigationController?.pushViewController(listController, animated: true)
     }
     
 }

@@ -60,6 +60,7 @@ class Downloader: NSObject {
 
         let finalDirector = downloadDirector.URLByAppendingPathComponent(url.lastPathComponent!)
         
+        
         Alamofire.download(.GET, fileURL, destination: { temporaryURL, response -> NSURL in
             
             return finalDirector

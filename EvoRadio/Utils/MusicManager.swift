@@ -42,8 +42,7 @@ class MusicManager: NSObject {
             soundQueue = AFSoundQueue(items: soundItems)
             
             soundQueue!.listenFeedbackUpdatesWithBlock({ (currentItem) in
-                
-                print("\(currentItem.duration) - \(currentItem.timePlayed)")
+//                print("\(currentItem.duration) - \(currentItem.timePlayed)")
                 let userInfo = [
                     "duration":currentItem.duration,
                     "timePlayed":currentItem.timePlayed
@@ -139,7 +138,11 @@ class MusicManager: NSObject {
     
     
     func isPlayingOfSong(filePath: String) -> Bool {
-        return (soundQueue?.getCurrentItem().URL.absoluteString.containsString(filePath))!
+        if let cItem = soundQueue?.getCurrentItem() {
+            return cItem.URL.absoluteString.containsString(filePath)
+        }else {
+            return false
+        }
     }
     
     func indexOfItemWithPath(filePath: String) -> Int {
@@ -154,6 +157,14 @@ class MusicManager: NSObject {
     
     func playAtSecond(second: Int) {
         soundQueue?.playAtSecond(second)
+    }
+    
+    func currentItem() -> AFSoundItem? {
+        if let cItem = soundQueue?.getCurrentItem() {
+            return cItem
+        }else {
+            return nil
+        }
     }
     
 }

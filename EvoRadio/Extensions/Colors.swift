@@ -53,5 +53,5 @@ extension UIColor {
     static func blackColor7() -> UIColor{
         return UIColor(netHex: 0xBFBFBF)
     }
-
+    
 }

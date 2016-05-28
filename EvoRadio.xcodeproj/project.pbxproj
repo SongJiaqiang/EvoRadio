@@ -33,6 +33,8 @@
 		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
 		90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */; };
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
+		90D775461CF9F89700899492 /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775451CF9F89700899492 /* SongListViewController.swift */; };
+		90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775481CFA37F800899492 /* CDCoverImageView.swift */; };
 		90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFD1CC3DB720018A532 /* NavigationController.swift */; };
 		90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFF1CC3E4E60018A532 /* Fonts.swift */; };
 		90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB011CC3E99D0018A532 /* PlayerBar.swift */; };
@@ -95,6 +97,8 @@
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVReflections.swift; sourceTree = "<group>"; };
 		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
+		90D775451CF9F89700899492 /* SongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongListViewController.swift; path = Controllers/SongListViewController.swift; sourceTree = "<group>"; };
+		90D775481CFA37F800899492 /* CDCoverImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDCoverImageView.swift; path = Views/CDCoverImageView.swift; sourceTree = "<group>"; };
 		90E7FAFD1CC3DB720018A532 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = Controllers/NavigationController.swift; sourceTree = "<group>"; };
 		90E7FAFF1CC3E4E60018A532 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
 		90E7FB011CC3E99D0018A532 /* PlayerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerBar.swift; path = Views/PlayerBar.swift; sourceTree = "<group>"; };
@@ -213,6 +217,7 @@
 				DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */,
 				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
 				DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */,
+				90D775481CFA37F800899492 /* CDCoverImageView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -225,6 +230,7 @@
 				909E659F1CC0831B00B0C49B /* MainViewController.swift */,
 				90E7FB481CC4AC080018A532 /* ChannelViewController.swift */,
 				90E7FB541CC4D4330018A532 /* ProgramViewController.swift */,
+				90D775451CF9F89700899492 /* SongListViewController.swift */,
 				90E7FB561CC4DDC70018A532 /* PlayerViewController.swift */,
 				90659F131CC9451E0026539F /* PersonalViewController.swift */,
 				903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */,
@@ -442,6 +448,7 @@
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				90A1F61D1CEC1F720055D013 /* PlayerView.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
+				90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
 				90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */,
 				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
@@ -457,6 +464,7 @@
 				DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */,
 				DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */,
 				90E7FB551CC4D4330018A532 /* ProgramViewController.swift in Sources */,
+				90D775461CF9F89700899492 /* SongListViewController.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,

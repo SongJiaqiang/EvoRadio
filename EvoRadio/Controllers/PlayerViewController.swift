@@ -10,30 +10,27 @@ import UIKit
 import Alamofire
 import AFSoundManager
 import SnapKit
+import GPUImage
 
 let playerControler = PlayerViewController.instance
 
 class PlayerViewController: ViewController {
-    let cellID = "audioCellID"
     
-    var program: Program!
-    var autoPlaying: Bool = false
-    var refreshPlaylist: Bool = false
-    var dataSource = [Song]()
+    var song: Song?
     
-    private var backgroundView = UIImageView()
+    private var coverImageView = CDCoverImageView()
+    var backgroundGPUImageView = GPUImageView()
+    var filterImage: GPUImagePicture?
+    let blurFilter = GPUImageiOSBlurFilter()
+    
     private var controlView = UIView()
     private var playerBar: PlayerBar!
-    let coverImageView = UIImageView()
     let progressSlider = UISlider()
     let currentTimeLabel = UILabel()
     let totalTimeLabel = UILabel()
     let playButton = UIButton()
     let nextButton = UIButton()
     let prevButton = UIButton()
-
-    var listTableView = UITableView()
-    var listTableViewConstraint: Constraint? = nil
     
     var delegate: PlayerViewControllerDelegate?
     
@@ -58,14 +55,9 @@ class PlayerViewController: ViewController {
         print("viewDidLoad")
         
         prepareBackgroundView()
-        prepareListTableView()
-        prepareNavigationBar()
         preparePlayerControlView()
         prepareToolsView()
-     
-        if program == nil {
-            PlaylistManager.instance.savedList()
-        }
+        prepareNavigationBar()
         
         NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
         NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
@@ -74,10 +66,17 @@ class PlayerViewController: ViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         print("viewWillAppear")
-        if refreshPlaylist {
-            listProgramSongs()
-            refreshPlaylist = false
+        
+        if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
+            coverImageView.image = artwork
+            configureFilterImage()
+        }else {
+            coverImageView.kf_setImageWithURL(NSURL(string: song!.picURL!)!)
+            coverImageView.kf_setImageWithURL(NSURL(string: song!.picURL!)!, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                self?.configureFilterImage()
+            })
         }
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -88,19 +87,33 @@ class PlayerViewController: ViewController {
     }
 
     func prepareBackgroundView() {
+        view.addSubview(coverImageView)
+        coverImageView.contentMode = .ScaleAspectFill
+        coverImageView.clipsToBounds = true
+        coverImageView.layer.cornerRadius = 120
+        coverImageView.layer.borderWidth = 40
+        coverImageView.layer.borderColor = UIColor(white: 0, alpha: 0.6).CGColor
+        coverImageView.snp_makeConstraints { (make) in
+//            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.size.equalTo(CGSizeMake(240, 240))
+            make.centerX.equalTo(view.snp_centerX)
+//            make.center.equalTo(CGPointMake(Device.width()*0.5, (Device.height()-200-64)*0.5+64))
+            let topMargin = (Device.height()-200-64)*0.5-100+64
+            make.topMargin.equalTo(topMargin)
+        }
         
-        view.addSubview(backgroundView)
-        backgroundView.contentMode = .ScaleAspectFill
-        backgroundView.alpha = 0.1
-        backgroundView.snp_makeConstraints { (make) in
+//        view.addSubview(backgroundGPUImageView)
+        view.insertSubview(backgroundGPUImageView, belowSubview: coverImageView)
+        backgroundGPUImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
+        backgroundGPUImageView.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        
-        if let _ = program {
-            backgroundView.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
-        }else {
-            backgroundView.image = UIImage.placeholder_cover()
-        }
+//        
+//        if let _ = program {
+//            backgroundView.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+//        }else {
+//            backgroundView.image = UIImage.placeholder_cover()
+//        }
     }
     
     func prepareCoverView() {
@@ -111,11 +124,11 @@ class PlayerViewController: ViewController {
         coverView.clipsToBounds = true
         coverView.layer.cornerRadius = coverWidth*0.5
         
-        if let _ = program {
-            coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
-        }else {
-            coverView.image = UIImage.placeholder_cover()
-        }
+//        if let _ = program {
+//            coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
+//        }else {
+//            coverView.image = UIImage.placeholder_cover()
+//        }
         coverView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(coverWidth, coverWidth))
             make.center.equalTo(view.snp_center)
@@ -135,25 +148,25 @@ class PlayerViewController: ViewController {
             make.right.equalTo(view.snp_right)
         }
         
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [
-            UIColor(netHex: 0x1C1C1C, alpha: 1.0).CGColor,
-            UIColor(netHex: 0x1C1C1C, alpha: 0.8).CGColor,
-            UIColor(netHex: 0x1C1C1C, alpha: 0.0).CGColor
-        ]
-        gradientLayer.locations = [0.0, 0.2, 1.0]
-        gradientLayer.startPoint = CGPointMake(0.5, 0)
-        gradientLayer.endPoint = CGPointMake(0.5, 1)
-        gradientLayer.frame = CGRectMake(0, 0, Device.width(), navBarHeight)
-        navBar.layer.insertSublayer(gradientLayer, atIndex: 0)
+//        let gradientLayer = CAGradientLayer()
+//        gradientLayer.colors = [
+//            UIColor(netHex: 0x1C1C1C, alpha: 1.0).CGColor,
+//            UIColor(netHex: 0x1C1C1C, alpha: 0.8).CGColor,
+//            UIColor(netHex: 0x1C1C1C, alpha: 0.0).CGColor
+//        ]
+//        gradientLayer.locations = [0.0, 0.2, 1.0]
+//        gradientLayer.startPoint = CGPointMake(0.5, 0)
+//        gradientLayer.endPoint = CGPointMake(0.5, 1)
+//        gradientLayer.frame = CGRectMake(0, 0, Device.width(), navBarHeight)
+//        navBar.layer.insertSublayer(gradientLayer, atIndex: 0)
         
         let titleLabel = UILabel()
         navBar.addSubview(titleLabel)
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.whiteColor()
-        if let _ = program {
-            titleLabel.text = program.programName
+        if let cItem = MusicManager.sharedManager.currentItem() {
+            titleLabel.text = cItem.title
         }else {
             titleLabel.text = ""
         }
@@ -269,14 +282,13 @@ class PlayerViewController: ViewController {
     
     func preparePlayerControlView() {
         view.addSubview(controlView)
-        controlView.backgroundColor = UIColor(white: 0.2, alpha: 1)
+//        controlView.backgroundColor = UIColor(white: 0.2, alpha: 1)
         controlView.snp_makeConstraints { (make) in
-            make.height.equalTo(Device.height()-Device.width())
+            make.height.equalTo(200)
             make.bottom.equalTo(view.snp_bottom)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
         }
-        
         
         controlView.addSubview(playButton)
         playButton.clipsToBounds = true
@@ -345,83 +357,10 @@ class PlayerViewController: ViewController {
         
     }
     
-    func prepareListTableView() {
-        view.addSubview(listTableView)
-        listTableView.delegate = self
-        listTableView.dataSource = self
-        listTableView.backgroundColor = UIColor.clearColor()
-        listTableView.bounces = false
-        listTableView.snp_makeConstraints(closure: {(make) in
-            make.height.equalTo(Device.width())
-            make.top.equalTo(view.snp_top)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
-        })
-        
-        listTableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        
-        let headerView = UIView()
-        headerView.frame = CGRectMake(0, 0, Device.width(), Device.width())
-        
-        
-        headerView.addSubview(coverImageView)
-        coverImageView.contentMode = .ScaleAspectFill
-        coverImageView.clipsToBounds = true
-        if let _ = program {
-            coverImageView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
-        }else {
-            coverImageView.image = UIImage.placeholder_cover()
-        }
-        coverImageView.snp_makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
-        }
-        
-        listTableView.tableHeaderView = headerView
-    }
-    
-    func listProgramSongs() {
-        
-        if let _ = program {
-            let programID = program.programID!
-            
-            api.fetch_songs(programID, onSuccess: {[weak self] (items) in
-                
-                if items.count > 0 {
-                    // download first audio file
-                    
-                    let songs = items as! [Song]
-                    self?.dataSource = songs
-                    PlaylistManager.instance.saveList(songs)
-                    
-                    self?.updateCover()
-                    self?.listTableView.reloadData()
-                    if self?.autoPlaying == true {
-                        self?.autoPlaying = false
-                        let song = songs.first
-                        Downloader.downloader.downloadFile(song!.audioURL!, complete: {(filePath) -> Void in
-                            
-                            // play music
-                            MusicManager.sharedManager.clearList()
-                            let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
-                            MusicManager.sharedManager.playItemAtIndex(itemIndex)
-                            
-                            }, progress: { (velocity, progress) in
-                                
-                            print("(\(velocity)MB/S - \(progress*100)%)")
-                        })
-                    }
-                }else {
-                    print("This program has no one song")
-                }
-                
-                }, onFailed: nil)
-        }
-        
-    }
-    
     //MARK: event
     func playButtonPressed(button: UIButton) {
-        if program == nil{
+        
+        if MusicManager.sharedManager.currentItem() == nil{
             return
         }
         
@@ -478,14 +417,6 @@ class PlayerViewController: ViewController {
         MusicManager.sharedManager.playAtSecond(Int(timePlayed))
     }
     
-    func updateCover() {
-        if let _ = program {
-            coverImageView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
-        }else {
-            coverImageView.image = UIImage.placeholder_cover()
-        }
-    }
-    
     func playMusicProgressChanged(noti: NSNotification) {
         if let userInfo = noti.userInfo {
             let duration = userInfo["duration"]
@@ -508,49 +439,19 @@ class PlayerViewController: ViewController {
         print("Play ended")
         playButton.selected = false
     }
-
-}
-
-extension PlayerViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+    //MARK: other
+    func configureFilterImage() {
+        
+        filterImage = GPUImagePicture(image: coverImageView.image)
+        filterImage!.addTarget(blurFilter as GPUImageInput, atTextureLocation: 1)
+        blurFilter.useNextFrameForImageCapture()
+        blurFilter.addTarget(backgroundGPUImageView)
+        filterImage!.processImage()
+        
+        blurFilter.blurRadiusInPixels = 10
     }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
-        
-        let song = dataSource[indexPath.row]
-        
-        cell?.textLabel?.text = song.songName
-        cell?.detailTextLabel?.text = song.artistsName
-        cell?.imageView?.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover())
-        
-        return cell!
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        // 1. download file
-        let song = dataSource[indexPath.row]
-        
-//        self.downloadFile(song.audioURL!)
 
-        Downloader.downloader.downloadFile(song.audioURL!, complete: {(filePath) -> Void in
-            
-            // 2. play audio
-            if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
-                let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
-                MusicManager.sharedManager.playItemAtIndex(itemIndex)
-            }
-            
-            }, progress: { (velocity, progress) in
-            print("\(velocity)MB/S - \(progress*100)%)")
-        })
-        
-        self.listTableViewConstraint?.updateOffset(Device.width())
-    }
 }
 
 protocol PlayerViewControllerDelegate {

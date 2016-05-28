@@ -200,11 +200,11 @@ extension ChannelViewController: ChannelCollectionViewCellDelegate {
             
             if reflects.count > 0 {
 //                let program = Program.programWithDict(responseData.first!)
-                let program = reflects.first as! Program
                 
-                playerControler.program = program
-                playerControler.autoPlaying = true
-                playerControler.refreshPlaylist = true
+                let randomIndex = arc4random_uniform(UInt32(reflects.count))
+                let program = reflects[Int(randomIndex)] as! Program
+                
+//                playerControler.program = program
                 playerView.hide()
                 Device.rootController().presentViewController(playerControler, animated: true, completion: nil)
             }
