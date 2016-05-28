@@ -11,7 +11,7 @@ pod 'AFSoundManager', '~> 2.1'
 pod 'leveldb', '~> 1.18'
 pod 'MJRefresh', '~> 3.1.0'
 pod 'EVReflection', '~> 2.6'
-
+pod 'GPUImage', '~> 0.1.7'
 
 end
 

@@ -2,6 +2,7 @@ PODS:
   - AFSoundManager (2.1)
   - Alamofire (3.3.1)
   - EVReflection (2.33.3)
+  - GPUImage (0.1.7)
   - Kingfisher (2.2.2)
   - leveldb (1.18)
   - MJRefresh (3.1.0)
@@ -11,6 +12,7 @@ DEPENDENCIES:
   - AFSoundManager (~> 2.1)
   - Alamofire (~> 3.3)
   - EVReflection (~> 2.6)
+  - GPUImage (~> 0.1.7)
   - Kingfisher (~> 2.2)
   - leveldb (~> 1.18)
   - MJRefresh (~> 3.1.0)
@@ -20,6 +22,7 @@ SPEC CHECKSUMS:
   AFSoundManager: 232af6154e736e6b2d8c93fafebfafd14fad7510
   Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
   EVReflection: 6bd52883617c745514e8fabb5d4208e42079f907
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
