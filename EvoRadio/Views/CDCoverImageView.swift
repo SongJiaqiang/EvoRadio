@@ -7,18 +7,58 @@
 //
 
 import UIKit
+import pop
+
 
 class CDCoverImageView: UIImageView {
 
+    var rotateAnimation:POPBasicAnimation
     
-    override func drawRect(rect: CGRect) {
-        super.drawRect(rect)
-        
-        let holeRect = CGRectMake((rect.size.width-40)*0.5, (rect.size.height-40)*0.5, 40, 40)
-        
-        let holeRectIntersection = CGRectIntersection(holeRect, rect)
-        UIColor.clearColor().setFill()
-        UIRectFill(holeRectIntersection)
-    }
+    var rotateTimer: CADisplayLink?
 
+    override init(frame: CGRect) {
+        
+        self.rotateAnimation = POPBasicAnimation(propertyNamed: kPOPLayerRotation)
+        
+        super.init(frame: frame)
+        
+        rotateAnimation.toValue = M_PI * 2
+        rotateAnimation.duration = 16
+        rotateAnimation.repeatForever = true
+        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotateAnimation.beginTime = CACurrentMediaTime()+0.2
+        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
+        
+        pauseAnimate()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    deinit {
+        if let _ = rotateTimer {
+            rotateTimer?.invalidate()
+            rotateTimer = nil
+        }
+    }
+    
+    func resetAnimation() {
+        
+        rotateAnimation.toValue = 0
+        rotateAnimation.duration = 0.5
+        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
+        
+    }
+    
+    func pauseAnimate() {
+        rotateAnimation.paused = true
+    }
+    
+    func resumeAnimate() {
+        rotateAnimation.paused = false
+    }
+    
+    
+    
 }

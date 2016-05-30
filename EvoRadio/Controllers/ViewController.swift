@@ -35,7 +35,7 @@ class ViewController: UIViewController {
     func insertGradientLayer() {
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.blackColor3().CGColor,UIColor.blackColor5().CGColor]
+        gradientLayer.colors = [UIColor.grayColor3().CGColor,UIColor.grayColor5().CGColor]
         gradientLayer.locations = [0, 1]
         gradientLayer.startPoint = CGPointMake(0, 0)
         gradientLayer.endPoint = CGPointMake(1, 1)

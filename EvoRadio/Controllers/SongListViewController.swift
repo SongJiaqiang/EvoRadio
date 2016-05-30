@@ -15,7 +15,7 @@ class SongListViewController: ViewController {
     var program: Program!
     var dataSource = [Song]()
 
-    var tableView = UITableView()
+    var tableView = UITableView(frame: CGRectZero, style: .Grouped)
     var coverImageView = UIImageView()
     
     
@@ -44,6 +44,7 @@ class SongListViewController: ViewController {
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clearColor()
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.separatorStyle = .None
 //        tableView.bounces = false
         tableView.snp_makeConstraints(closure: {(make) in
             make.edges.equalTo(UIEdgeInsetsZero)
@@ -53,7 +54,7 @@ class SongListViewController: ViewController {
 //            make.right.equalTo(view.snp_right)
         })
         
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
         
         let headerView = UIView()
         headerView.frame = CGRectMake(0, 0, Device.width(), Device.width())
@@ -117,22 +118,20 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! SongListTableViewCell
+        cell.delegate = self
         
         let song = dataSource[indexPath.row]
+        cell.updateSongInfo(song)
         
-        cell?.textLabel?.text = song.songName
-        cell?.detailTextLabel?.text = song.artistsName
-        cell?.imageView?.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover())
-        
-        return cell!
+        return cell
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let header = UIView(frame: CGRectMake(0,0,tableView.bounds.width,40))
+        let headerView = UIView(frame: CGRectMake(0,0,tableView.bounds.width,40))
         
         let playButton = UIButton()
-        header.addSubview(playButton)
+        headerView.addSubview(playButton)
         playButton.titleLabel?.font = UIFont.systemFontOfSize(12)
         playButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
         playButton.clipsToBounds = true
@@ -140,46 +139,63 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         playButton.setTitle("Play All", forState: .Normal)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(80, 30))
-            make.centerY.equalTo(header.snp_centerY)
+            make.centerY.equalTo(headerView.snp_centerY)
             make.leftMargin.equalTo(10)
         }
         
-        return header
+        let separatorView = UIView()
+        headerView.addSubview(separatorView)
+        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.snp_makeConstraints { (make) in
+            make.height.equalTo(1.0/Device.screenScale())
+            make.left.equalTo(headerView.snp_left)
+            make.right.equalTo(headerView.snp_right)
+            make.bottom.equalTo(headerView.snp_bottom)
+        }
+        
+        return headerView
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
     }
     
-    
-    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         // 1. download file
         let song = dataSource[indexPath.row]
-        
-        Downloader.downloader.downloadFile(song.audioURL!, complete: {[weak self] (filePath) -> Void in
-            
-            // 2. play audio
-            if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
-                let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
-                MusicManager.sharedManager.playItemAtIndex(itemIndex)
-
-                playerView.hide()
-                playerControler.song = song
-            }
-            
-            self?.presentViewController(playerControler, animated: true, completion: nil)
-            
-            }, progress: { (velocity, progress) in
-                print("\(velocity)MB/S - \(progress*100)%)")
-        })
+        playerControler.song = song
+        NotificationManager.instance.postUpdatePlayerControllerNotification()
+        presentViewController(playerControler, animated: true, completion: nil)
     }
 }
 
-class songListCell: UITableViewCell {
-    
-    
-    
+extension SongListViewController: SongListTableViewCellDelegate {
+    func openToolPanelOfSong(song: Song) {
+        
+        let alertController = UIAlertController()
+        let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
+            print("add to playlist")
+            MusicManager.sharedManager.appendSongToPlaylist(song)
+        })
+        let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
+            print("add to collecte")
+        })
+        let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+            print("download music")
+        })
+        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
+            print("sharing")
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(cancelAction)
+        
+        navigationController!.presentViewController(alertController, animated: true, completion: nil)
+    }
 }

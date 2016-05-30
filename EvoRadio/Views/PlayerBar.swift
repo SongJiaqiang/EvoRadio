@@ -21,6 +21,13 @@ class PlayerBar: UIView {
         
         insertGradientLayer()
         prepareUI()
+        
+        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerBar.playMusicProgressChanged(_:)))
+        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerBar.playMusicProgressEnded(_:)))
+    }
+    
+    deinit {
+        NotificationManager.instance.removeObserver(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -72,7 +79,7 @@ class PlayerBar: UIView {
         addSubview(subTitleLabel)
         subTitleLabel.text = "活动电台 - 睡眠"
         subTitleLabel.font = UIFont.sizeOf10()
-        subTitleLabel.textColor = UIColor.blackColor7()
+        subTitleLabel.textColor = UIColor.grayColor7()
         subTitleLabel.snp_makeConstraints { (make) in
             make.left.equalTo(coverView.snp_right).inset(-10)
             make.right.equalTo(playButton.snp_left).inset(10)
@@ -99,6 +106,19 @@ class PlayerBar: UIView {
             button.selected = true
         }
         
+    }
+    
+    
+    func playMusicProgressChanged(noti: NSNotification) {
+        if let _ = noti.userInfo {
+            playButton.selected = true
+        }
+        
+        
+    }
+    
+    func playMusicProgressEnded(noti: NSNotification) {
+        playButton.selected = false
     }
 }
 

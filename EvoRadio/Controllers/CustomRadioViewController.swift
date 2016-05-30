@@ -70,7 +70,7 @@ extension CustomRadioViewController: UITableViewDataSource, UITableViewDelegate 
         
         let radio = dataSource[indexPath.row]
         cell!.textLabel?.text = radio.radioName
-        cell?.textLabel?.textColor = UIColor.blackColor7()
+        cell?.textLabel?.textColor = UIColor.grayColor7()
 
         let aView = UIImageView()
         aView.image = UIImage(named: "icon_check")
@@ -80,7 +80,7 @@ extension CustomRadioViewController: UITableViewDataSource, UITableViewDelegate 
         
         for r in selectedRadios {
             if r.radioID == radio.radioID {
-                cell?.textLabel?.textColor = UIColor.blackColor5()
+                cell?.textLabel?.textColor = UIColor.grayColor5()
                 if selectedRadios.count != 3 {
                     aView.image = UIImage(named: "icon_checked_error")
                 }else {

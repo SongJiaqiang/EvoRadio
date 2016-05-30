@@ -19,6 +19,9 @@ class Device: NSObject {
     static func size() -> CGSize {
         return UIScreen.mainScreen().bounds.size
     }
+    static func screenScale() -> CGFloat {
+        return UIScreen.mainScreen().scale
+    }
     
     static func systemVersionString() -> String{
         return UIDevice.currentDevice().systemVersion

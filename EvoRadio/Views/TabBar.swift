@@ -50,7 +50,7 @@ class TabBar: UIView {
         let count = titles!.count
         for i in 0..<count {
             let button = UIButton()
-            button.setTitleColor(UIColor.blackColor7(), forState: .Normal)
+            button.setTitleColor(UIColor.grayColor7(), forState: .Normal)
             button.setTitleColor(UIColor.goldColor(), forState: .Selected)
             button.titleLabel?.font = UIFont.sizeOf14()
             let title = titles![i].stringByReplacingOccurrencesOfString("电台", withString: "")

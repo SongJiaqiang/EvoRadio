@@ -11,6 +11,7 @@ import Foundation
 
 let NOTI_PLAYMUSICPROGRESS_CHANGED = "play_music_progress_changed"
 let NOTI_PLAYMUSICPROGRESS_ENDED = "play_music_progress_ended"
+let NOTI_UPDATE_PLAYERCONTROLLER = "update_playercontroller"
 
 class NotificationManager {
     
@@ -46,6 +47,12 @@ class NotificationManager {
     }
     func addPlayMusicProgressEndedObserver(target: AnyObject, action: Selector) {
         Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_PLAYMUSICPROGRESS_ENDED, object: nil)
+    }
+    func postUpdatePlayerControllerNotification() {
+        Device.defaultNotificationCenter().postNotificationName(NOTI_UPDATE_PLAYERCONTROLLER, object: nil)
+    }
+    func addUpdatePlayerControllerObserver(target: AnyObject, action: Selector) {
+        Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_UPDATE_PLAYERCONTROLLER, object: nil)
     }
     
     

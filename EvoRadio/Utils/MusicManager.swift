@@ -13,6 +13,8 @@ class MusicManager: NSObject {
     
     private var soundQueue: AFSoundQueue?
     private var soundItems = [AFSoundItem]()
+    var playlist = [Song]()
+    var currentIndex: Int = -1
     
     //MARK: instance
     class var sharedManager: MusicManager {
@@ -61,10 +63,30 @@ class MusicManager: NSObject {
             })
         }
         
+        
         return soundItems.count-1
     }
     
+    func appendSongsToPlaylist(songs: [Song]) {
+        for song in songs {
+            appendSongToPlaylist(song)
+        }
+    }
+    
+    func appendSongToPlaylist(song: Song){
+        
+        for item in playlist {
+            if item.songID == song.songID {
+                return
+            }
+        }
+        
+        playlist.append(song)
+    }
+    
     func clearList() {
+        currentIndex = -1
+        playlist.removeAll()
         soundQueue?.clearQueue()
     }
     

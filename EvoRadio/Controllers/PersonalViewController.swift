@@ -63,8 +63,8 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
         cell?.accessoryType = .DisclosureIndicator
-        cell?.backgroundColor = UIColor.blackColor3()
-        cell?.textLabel?.textColor = UIColor.blackColor7()
+        cell?.backgroundColor = UIColor.grayColor3()
+        cell?.textLabel?.textColor = UIColor.grayColor7()
         
         let section = dataSource[indexPath.section]
         let item = section[indexPath.row]

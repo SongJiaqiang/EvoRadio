@@ -106,7 +106,7 @@ class API {
     }
     
     func fetch_songs(programID: String,  onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
-        let endpoint = commonEP("api/play.playProgram.json?program_id=\(programID)&device=iPhone%20OS%209.3&&luid=NgDXJv3Ua8Wr9c16oWrYaSRSgHW7w2nJrvDJYqh8wmV%2FEZNttdQljvGg2naofMJ6eRKUd6nFLMGq98B%2F%2FX%2FBeyhDlCr8wjPUpPDOLfh6wC0sFpJ5oMA30A%3D%3D&")
+        let endpoint = commonEP("api/play.playProgram.json?program_id=\(programID)")
         
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {

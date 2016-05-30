@@ -39,7 +39,7 @@ class PlayerView: UIView {
     }
 
     func prepare() {
-        backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.grayColor()
         
         let window = Device.keyWindow()
         window.addSubview(self)

@@ -35,6 +35,7 @@
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
 		90D775461CF9F89700899492 /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775451CF9F89700899492 /* SongListViewController.swift */; };
 		90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775481CFA37F800899492 /* CDCoverImageView.swift */; };
+		90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */; };
 		90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFD1CC3DB720018A532 /* NavigationController.swift */; };
 		90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FAFF1CC3E4E60018A532 /* Fonts.swift */; };
 		90E7FB021CC3E99D0018A532 /* PlayerBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB011CC3E99D0018A532 /* PlayerBar.swift */; };
@@ -76,7 +77,7 @@
 		9054AE0F1CC3BFB400E876FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		90659F0F1CC92CA30026539F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		90659F111CC92CB00026539F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
-		90659F131CC9451E0026539F /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalViewController.swift; path = Controllers/PersonalViewController.swift; sourceTree = "<group>"; };
+		90659F131CC9451E0026539F /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PersonalViewController.swift; path = Controllers/PersonalViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90659F171CC9B6440026539F /* Radio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		90659F1C1CC9C0B70026539F /* WLevelDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelDb.h; sourceTree = "<group>"; };
 		90659F1D1CC9C0B70026539F /* WLevelDb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelDb.mm; sourceTree = "<group>"; };
@@ -87,21 +88,23 @@
 		90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelWriteBatch.mm; sourceTree = "<group>"; };
 		90659F261CC9C1A50026539F /* CoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDB.swift; sourceTree = "<group>"; };
 		90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.pch"; sourceTree = "<group>"; };
+		9096D78A1CFC0FED00DA6923 /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-ahavzujveykrtgbwgjeponlruqip/Build/Products/Debug-iphonesimulator/pop.framework"; sourceTree = "<group>"; };
 		909E659D1CC0831100B0C49B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		909E659F1CC0831B00B0C49B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
-		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; };
-		909E65A31CC0837800B0C49B /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TabBar.swift; path = Views/TabBar.swift; sourceTree = "<group>"; };
+		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		909E65A31CC0837800B0C49B /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TabBar.swift; path = Views/TabBar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		909E65A51CC083A500B0C49B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		909E818B1CF8129500571A76 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
-		90A1F61C1CEC1F720055D013 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; };
+		90A1F61C1CEC1F720055D013 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVReflections.swift; sourceTree = "<group>"; };
 		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
 		90D775451CF9F89700899492 /* SongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongListViewController.swift; path = Controllers/SongListViewController.swift; sourceTree = "<group>"; };
 		90D775481CFA37F800899492 /* CDCoverImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDCoverImageView.swift; path = Views/CDCoverImageView.swift; sourceTree = "<group>"; };
+		90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongListTableViewCell.swift; path = Views/SongListTableViewCell.swift; sourceTree = "<group>"; };
 		90E7FAFD1CC3DB720018A532 /* NavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NavigationController.swift; path = Controllers/NavigationController.swift; sourceTree = "<group>"; };
 		90E7FAFF1CC3E4E60018A532 /* Fonts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		90E7FB011CC3E99D0018A532 /* PlayerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerBar.swift; path = Views/PlayerBar.swift; sourceTree = "<group>"; };
+		90E7FB011CC3E99D0018A532 /* PlayerBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayerBar.swift; path = Views/PlayerBar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90E7FB481CC4AC080018A532 /* ChannelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelViewController.swift; path = Controllers/ChannelViewController.swift; sourceTree = "<group>"; };
 		90E7FB4A1CC4B6C50018A532 /* API.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		90E7FB4C1CC4BD5B0018A532 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
@@ -113,14 +116,14 @@
 		90E7FB581CC536720018A532 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
-		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; };
+		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionHeaderView.swift; path = Views/ChannelCollectionHeaderView.swift; sourceTree = "<group>"; };
 		DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectiveTimePanel.swift; path = Views/SelectiveTimePanel.swift; sourceTree = "<group>"; };
 		DBB79DA41CD11935006189B3 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
-		DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramCollectionViewCell.swift; path = Views/ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ProgramCollectionViewCell.swift; path = Views/ProgramCollectionViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DBDC7F471CD90A8D0093812C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionViewCell.swift; path = Views/ChannelCollectionViewCell.swift; sourceTree = "<group>"; };
+		DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ChannelCollectionViewCell.swift; path = Views/ChannelCollectionViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DBF1E7E11CCE7CA300B554A2 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
 		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -140,6 +143,7 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9096D78A1CFC0FED00DA6923 /* pop.framework */,
 				90659F111CC92CB00026539F /* AudioToolbox.framework */,
 				90659F0F1CC92CA30026539F /* MediaPlayer.framework */,
 				8A29258049669E5F330022BB /* Pods_EvoRadio.framework */,
@@ -210,12 +214,11 @@
 		909E659A1CC07D2F00B0C49B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				90D7754C1CFA992300899492 /* Cell */,
 				909E65A31CC0837800B0C49B /* TabBar.swift */,
 				90E7FB011CC3E99D0018A532 /* PlayerBar.swift */,
 				90A1F61C1CEC1F720055D013 /* PlayerView.swift */,
-				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
 				DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */,
-				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
 				DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */,
 				90D775481CFA37F800899492 /* CDCoverImageView.swift */,
 			);
@@ -290,6 +293,16 @@
 				909E818B1CF8129500571A76 /* NotificationManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		90D7754C1CFA992300899492 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
+				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
+				90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */,
+			);
+			name = Cell;
 			sourceTree = "<group>";
 		};
 		B461353B916D64FF79E130B1 /* Pods */ = {
@@ -430,6 +443,7 @@
 				90659F271CC9C1A50026539F /* CoreDB.swift in Sources */,
 				90E7FB4B1CC4B6C50018A532 /* API.swift in Sources */,
 				90E7FB4D1CC4BD5B0018A532 /* Channel.swift in Sources */,
+				90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */,
 				DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
 				90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */,
