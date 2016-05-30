@@ -18,7 +18,7 @@ class PlayerViewController: ViewController {
     
     var song: Song?
     
-    private var coverImageView = CDCoverImageView()
+    private var coverImageView = CDCoverImageView(frame: CGRectZero)
     var backgroundGPUImageView = GPUImageView()
     var filterImage: GPUImagePicture?
     let blurFilter = GPUImageiOSBlurFilter()
@@ -46,6 +46,8 @@ class PlayerViewController: ViewController {
         return Static.instance
     }
     
+   
+    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
@@ -61,29 +63,24 @@ class PlayerViewController: ViewController {
         
         NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
         NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
+        NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController))
+        
+        
+        updatePlayerController()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        print("viewWillAppear")
-        
-        if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
-            coverImageView.image = artwork
-            configureFilterImage()
-        }else {
-            coverImageView.kf_setImageWithURL(NSURL(string: song!.picURL!)!)
-            coverImageView.kf_setImageWithURL(NSURL(string: song!.picURL!)!, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                self?.configureFilterImage()
-            })
-        }
+        playerView.hide()
+
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        print("viewWillDisappear")
-        
         playerView.show()
+        
+        
     }
 
     func prepareBackgroundView() {
@@ -91,18 +88,16 @@ class PlayerViewController: ViewController {
         coverImageView.contentMode = .ScaleAspectFill
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = 120
-        coverImageView.layer.borderWidth = 40
+        coverImageView.layer.borderWidth = 10
         coverImageView.layer.borderColor = UIColor(white: 0, alpha: 0.6).CGColor
+        coverImageView.image = UIImage.placeholder_cover()
         coverImageView.snp_makeConstraints { (make) in
-//            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
             make.size.equalTo(CGSizeMake(240, 240))
             make.centerX.equalTo(view.snp_centerX)
-//            make.center.equalTo(CGPointMake(Device.width()*0.5, (Device.height()-200-64)*0.5+64))
             let topMargin = (Device.height()-200-64)*0.5-100+64
             make.topMargin.equalTo(topMargin)
         }
         
-//        view.addSubview(backgroundGPUImageView)
         view.insertSubview(backgroundGPUImageView, belowSubview: coverImageView)
         backgroundGPUImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
         backgroundGPUImageView.snp_makeConstraints { (make) in
@@ -188,30 +183,17 @@ class PlayerViewController: ViewController {
             make.bottom.equalTo(navBar.snp_bottom)
         }
         
-        let timerButton = UIButton()
-        navBar.addSubview(timerButton)
-        timerButton.setImage(UIImage(named: "timer"), forState: .Normal)
-        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed), forControlEvents: .TouchUpInside)
-        timerButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 40))
-            make.rightMargin.equalTo(-10)
-            make.bottom.equalTo(navBar.snp_bottom)
-        }
-        
-        
-//        playerBar = PlayerBar()
-//        navBar.addSubview(playerBar)
-//        playerBar.snp_makeConstraints { (make) in
-//            make.height.equalTo(50)
-//            make.topMargin.equalTo(0)
-//            make.leftMargin.equalTo(0)
-//            make.rightMargin.equalTo(0)
+//        let timerButton = UIButton()
+//        navBar.addSubview(timerButton)
+//        timerButton.setImage(UIImage(named: "timer"), forState: .Normal)
+//        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed), forControlEvents: .TouchUpInside)
+//        timerButton.snp_makeConstraints { (make) in
+//            make.size.equalTo(CGSizeMake(40, 40))
+//            make.rightMargin.equalTo(-10)
+//            make.bottom.equalTo(navBar.snp_bottom)
 //        }
-//        
-//        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(PlayerViewController.onPlayerBarTap))
-//        playerBar.addGestureRecognizer(tapGesture)
-//        playerBar.userInteractionEnabled = true
-//        
+        
+  
     }
 
     func prepareToolsView() {
@@ -431,8 +413,6 @@ class PlayerViewController: ViewController {
             
             playButton.selected = true
         }
-    
-        
     }
     
     func playMusicProgressEnded(noti: NSNotification) {
@@ -440,9 +420,36 @@ class PlayerViewController: ViewController {
         playButton.selected = false
     }
     
+    func updatePlayerController() {
+        if let _ = song {
+            Downloader.downloader.downloadFile(song!.audioURL!, complete: {[weak self] (filePath) -> Void in
+                // 2. play audio
+                if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
+                    let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
+                    MusicManager.sharedManager.playItemAtIndex(itemIndex)
+                    
+                    self?.updateCoverImage()
+                }
+                
+                }, progress: { (velocity, progress) in
+                    print("\(velocity)MB/S - \(progress*100)%)")
+            })
+        }
+    }
+    
+    func updateCoverImage() {
+        if let picUrl = song?.picURL {
+            coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                self?.configureFilterImage()
+                })
+        }else if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
+            coverImageView.image = artwork
+            configureFilterImage()
+        }
+    }
+    
     //MARK: other
     func configureFilterImage() {
-        
         filterImage = GPUImagePicture(image: coverImageView.image)
         filterImage!.addTarget(blurFilter as GPUImageInput, atTextureLocation: 1)
         blurFilter.useNextFrameForImageCapture()
