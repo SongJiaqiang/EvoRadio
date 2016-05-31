@@ -156,16 +156,20 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         return headerView
     }
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 54
+    }
+    
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 42
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
-        // 1. download file
         let song = dataSource[indexPath.row]
-        playerControler.song = song
+        MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
+        
         NotificationManager.instance.postUpdatePlayerControllerNotification()
         presentViewController(playerControler, animated: true, completion: nil)
     }
@@ -177,7 +181,7 @@ extension SongListViewController: SongListTableViewCellDelegate {
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
             print("add to playlist")
-            MusicManager.sharedManager.appendSongToPlaylist(song)
+            MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
         })
         let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
             print("add to collecte")

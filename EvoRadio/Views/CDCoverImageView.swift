@@ -22,14 +22,7 @@ class CDCoverImageView: UIImageView {
         
         super.init(frame: frame)
         
-        rotateAnimation.toValue = M_PI * 2
-        rotateAnimation.duration = 16
-        rotateAnimation.repeatForever = true
-        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
-        rotateAnimation.beginTime = CACurrentMediaTime()+0.2
-        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
-        
-        pauseAnimate()
+//        prepareAnimation()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -41,6 +34,19 @@ class CDCoverImageView: UIImageView {
             rotateTimer?.invalidate()
             rotateTimer = nil
         }
+    }
+    
+    
+    func prepareAnimation()  {
+        
+        rotateAnimation.toValue = M_PI * 2
+        rotateAnimation.duration = 16
+        rotateAnimation.repeatForever = true
+        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotateAnimation.beginTime = CACurrentMediaTime()+0.2
+        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
+        
+        pauseAnimate()
     }
     
     func resetAnimation() {

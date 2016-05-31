@@ -44,7 +44,6 @@ class MusicManager: NSObject {
             soundQueue = AFSoundQueue(items: soundItems)
             
             soundQueue!.listenFeedbackUpdatesWithBlock({ (currentItem) in
-//                print("\(currentItem.duration) - \(currentItem.timePlayed)")
                 let userInfo = [
                     "duration":currentItem.duration,
                     "timePlayed":currentItem.timePlayed
@@ -54,34 +53,48 @@ class MusicManager: NSObject {
                 
                 }, andFinishedBlock: {[weak self] (nextItem) in
                     print("Finished and next one")
-                    if nextItem == nil {
-                        print("Haven't next")
-                    }else {
+                    if let _ = nextItem {
                         NotificationManager.instance.postPlayMusicProgressEndedNotification(["nextItem":nextItem])
+                    }else {
+                        print("Haven't next")
                     }
                     self?.playNext()
+                    
             })
         }
-        
         
         return soundItems.count-1
     }
     
-    func appendSongsToPlaylist(songs: [Song]) {
+    func appendSongsToPlaylist(songs: [Song], autoPlay: Bool) {
+        if songs.count == 0 {
+            return
+        }
+        
         for song in songs {
-            appendSongToPlaylist(song)
+            appendSongToPlaylist(song, autoPlay: false)
+        }
+        
+        if autoPlay {
+            currentIndex = playlist.indexOf(songs.first!)!
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
         }
     }
     
-    func appendSongToPlaylist(song: Song){
+    func appendSongToPlaylist(song: Song, autoPlay: Bool){
         
         for item in playlist {
             if item.songID == song.songID {
                 return
             }
         }
-        
         playlist.append(song)
+        
+        if autoPlay {
+            currentIndex = playlist.indexOf(song)!
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
+        }
+        
     }
     
     func clearList() {
@@ -92,62 +105,72 @@ class MusicManager: NSObject {
     
     func updatePlayingInfo() {
         
-        let currentItem = soundQueue?.getCurrentItem()
-        
-        var title = ""
-        if let _ = currentItem!.title {
-            title = currentItem!.title
+        if let currentItem = soundQueue?.getCurrentItem() {
+            
+            var title = ""
+            if let _ = currentItem.title {
+                title = currentItem.title
+            }
+            
+            var artist = ""
+            if let _ = currentItem.artist {
+                artist = currentItem.artist
+            }
+            
+            var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
+            if let _ = currentItem.artwork {
+                artwork = MPMediaItemArtwork(image:currentItem.artwork)
+            }
+            
+            let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
+                                            MPMediaItemPropertyArtist: artist,
+                                            MPMediaItemPropertyArtwork: artwork
+            ]
+            MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
         }
-        
-        var artist = ""
-        if let _ = currentItem!.artist {
-            artist = currentItem!.artist
-        }
-        
-        var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
-        if let _ = currentItem!.artwork {
-            artwork = MPMediaItemArtwork(image:currentItem!.artwork)
-        }
-        
-        let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
-                    MPMediaItemPropertyArtist: artist,
-                    MPMediaItemPropertyArtwork: artwork
-        ]
-        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
     }
     
     func playItemAtIndex(index: Int) {
+        soundQueue?.status = .Playing
         soundQueue?.playItemAtIndex(index)
         updatePlayingInfo()
     }
     
     func playItem() {
+        soundQueue?.status = .Playing
         soundQueue?.playCurrentItem()
         updatePlayingInfo()
     }
     
     func pauseItem() {
+        soundQueue?.status = .Paused
         soundQueue?.pause()
     }
     
     func playNext() {
+//        soundQueue?.status = .Playing
+//        if soundQueue?.getCurrentItem() == soundItems.last {
+//            soundQueue?.playItemAtIndex(0)
+//        }else {
+//            soundQueue?.playNextItem()
+//        }
+//        updatePlayingInfo()
         
-        if soundQueue?.getCurrentItem() == soundItems.last {
-            soundQueue?.playItemAtIndex(0)
-        }else {
-            soundQueue?.playNextItem()
-        }
-        
-        updatePlayingInfo()
+        incrementIndex()
+        NotificationManager.instance.postUpdatePlayerControllerNotification()
     }
     
     func playPrev() {
-        if soundQueue?.indexOfCurrentItem() == 0 {
-            soundQueue?.playItemAtIndex(soundItems.count-1)
-        }else {
-            soundQueue?.playPreviousItem()
-        }
-        updatePlayingInfo()
+//        soundQueue?.status = .Playing
+//        if soundQueue?.indexOfCurrentItem() == 0 {
+//            soundQueue?.playItemAtIndex(soundItems.count-1)
+//        }else {
+//            soundQueue?.playPreviousItem()
+//        }
+//        updatePlayingInfo()
+        
+        decrementIndex()
+        NotificationManager.instance.postUpdatePlayerControllerNotification()
     }
     
     func isPlaying() -> Bool{
@@ -186,6 +209,29 @@ class MusicManager: NSObject {
             return cItem
         }else {
             return nil
+        }
+    }
+    
+    func currentSong() -> Song? {
+        print("Play music at index \(currentIndex)")
+        if currentIndex < 0 {
+            return nil
+        }else {
+            return playlist[currentIndex]
+        }
+    }
+    
+    func incrementIndex() {
+        currentIndex += 1
+        if currentIndex >= playlist.count {
+            currentIndex = 0
+        }
+    }
+    
+    func decrementIndex() {
+        currentIndex -= 1
+        if currentIndex < 0 {
+            currentIndex = playlist.count-1
         }
     }
     

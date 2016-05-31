@@ -14,7 +14,6 @@ class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
     private var sortTabBar: TabBar!
-    private var playerBar: PlayerBar!
     private var playerView: UIView!
     private var contentView = UIScrollView()
     private var playerViewTopConstraint: Constraint?

@@ -16,21 +16,19 @@ let playerControler = PlayerViewController.instance
 
 class PlayerViewController: ViewController {
     
-    var song: Song?
-    
     private var coverImageView = CDCoverImageView(frame: CGRectZero)
     var backgroundGPUImageView = GPUImageView()
     var filterImage: GPUImagePicture?
     let blurFilter = GPUImageiOSBlurFilter()
     
     private var controlView = UIView()
-    private var playerBar: PlayerBar!
     let progressSlider = UISlider()
     let currentTimeLabel = UILabel()
     let totalTimeLabel = UILabel()
     let playButton = UIButton()
     let nextButton = UIButton()
     let prevButton = UIButton()
+    let titleLabel = UILabel()
     
     var delegate: PlayerViewControllerDelegate?
     
@@ -63,6 +61,7 @@ class PlayerViewController: ViewController {
         
         NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
         NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
+        NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerViewController.playMusicProgressPaused(_:)))
         NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController))
         
         
@@ -71,15 +70,14 @@ class PlayerViewController: ViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        playerView.hide()
+        PlayerView.instance.hide()
 
         
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        playerView.show()
-        
+        PlayerView.instance.show()
         
     }
 
@@ -155,23 +153,17 @@ class PlayerViewController: ViewController {
 //        gradientLayer.frame = CGRectMake(0, 0, Device.width(), navBarHeight)
 //        navBar.layer.insertSublayer(gradientLayer, atIndex: 0)
         
-        let titleLabel = UILabel()
+        
         navBar.addSubview(titleLabel)
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.whiteColor()
-        if let cItem = MusicManager.sharedManager.currentItem() {
-            titleLabel.text = cItem.title
-        }else {
-            titleLabel.text = ""
-        }
         titleLabel.snp_makeConstraints { (make) in
             make.height.equalTo(44)
-            make.left.equalTo(navBar.snp_left)
-            make.right.equalTo(navBar.snp_right)
+            make.leftMargin.equalTo(60)
+            make.rightMargin.equalTo(-60)
             make.bottom.equalTo(navBar.snp_bottom)
         }
-        
         
         let closeButton = UIButton()
         navBar.addSubview(closeButton)
@@ -273,10 +265,6 @@ class PlayerViewController: ViewController {
         }
         
         controlView.addSubview(playButton)
-        playButton.clipsToBounds = true
-        playButton.layer.cornerRadius = 25
-        playButton.layer.borderColor = UIColor.whiteColor().CGColor
-        playButton.layer.borderWidth = 1
         playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
         playButton.setImage(UIImage(named: "player_pause"), forState: .Selected)
         playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
@@ -346,30 +334,36 @@ class PlayerViewController: ViewController {
             return
         }
         
-        button.selected = !button.selected
-        
-        if button.selected {
-            MusicManager.sharedManager.playItem()
-        }else {
+        if MusicManager.sharedManager.isPlaying() {
             MusicManager.sharedManager.pauseItem()
+            NotificationManager.instance.postPlayMusicProgressPausedNotification()
+            button.selected = false
+        }else {
+            MusicManager.sharedManager.playItem()
+            button.selected = true
         }
         
     }
     func nextButtonPressed(button: UIButton) {
         MusicManager.sharedManager.playNext()
     }
+    
     func prevButtonPressed(button: UIButton) {
         MusicManager.sharedManager.playPrev()
     }
+    
     func repeatButtonPressed(button: UIButton) {
         
     }
+    
     func listButtonPressed(button: UIButton) {
 
     }
+    
     func heartButtonPressed(button: UIButton) {
         button.selected = !button.selected
     }
+    
     func downloadButtonPressed(button: UIButton) {
         button.selected = !button.selected
     }
@@ -416,19 +410,21 @@ class PlayerViewController: ViewController {
     }
     
     func playMusicProgressEnded(noti: NSNotification) {
-        print("Play ended")
+        playButton.selected = false
+    }
+    
+    func playMusicProgressPaused(noti: NSNotification) {
         playButton.selected = false
     }
     
     func updatePlayerController() {
-        if let _ = song {
-            Downloader.downloader.downloadFile(song!.audioURL!, complete: {[weak self] (filePath) -> Void in
-                // 2. play audio
+        if let song = MusicManager.sharedManager.currentSong() {
+            updateCoverImage(song)
+            
+            Downloader.downloader.downloadFile(song.audioURL!, complete: {(filePath) -> Void in
                 if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
                     let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
                     MusicManager.sharedManager.playItemAtIndex(itemIndex)
-                    
-                    self?.updateCoverImage()
                 }
                 
                 }, progress: { (velocity, progress) in
@@ -437,8 +433,10 @@ class PlayerViewController: ViewController {
         }
     }
     
-    func updateCoverImage() {
-        if let picUrl = song?.picURL {
+    func updateCoverImage(song: Song) {
+        titleLabel.text = song.songName
+        
+        if let picUrl = song.picURL {
             coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
                 self?.configureFilterImage()
                 })

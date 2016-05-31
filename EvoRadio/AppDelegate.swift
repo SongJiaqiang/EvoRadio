@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preparePlayer() {
-        playerView.prepare()
+        PlayerView.instance.prepare()
     }
     
     func setupRemoteControl() {

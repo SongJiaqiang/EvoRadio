@@ -13,7 +13,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     let picImageView = UIImageView()
     let channelNameLabel = UILabel()
     let radioNameLabel = UILabel()
-//    let playButton = UIButton()
+    let playButton = UIButton()
     
     var program: Program?
     var delegate: ProgramCollectionViewCellDelegate?
@@ -59,7 +59,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             make.left.equalTo(snp_left)
             make.right.equalTo(snp_right)
         }
-/*
+        
         addSubview(playButton)
         playButton.setImage(UIImage(named: "player_play_border"), forState: .Normal)
         playButton.setImage(UIImage(named: "player_play_border_prs"), forState: .Highlighted)
@@ -69,16 +69,16 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             make.leftMargin.equalTo(5)
             make.bottom.equalTo(picImageView.snp_bottom).offset(-5)
         }
- */
+
         
     }
     
     //MARK: event
-//    func playButtonPressed(button: UIButton) {
-//        if let p = program {
-//            delegate?.playMusicOfProgram(p.programID!)
-//        }
-//    }
+    func playButtonPressed(button: UIButton) {
+        if let p = program {
+            delegate?.playMusicOfProgram(p.programID!)
+        }
+    }
     
     func updateContent(program: Program) {
         self.program = program

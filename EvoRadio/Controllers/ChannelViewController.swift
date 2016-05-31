@@ -149,10 +149,6 @@ class ChannelViewController: UIViewController {
 
 extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
-    }
-    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -199,14 +195,16 @@ extension ChannelViewController: ChannelCollectionViewCellDelegate {
         api.fetch_programs(channelID, page: Page(index: pageIndex, size: 1), onSuccess: { (reflects) in
             
             if reflects.count > 0 {
-//                let program = Program.programWithDict(responseData.first!)
-                
                 let randomIndex = arc4random_uniform(UInt32(reflects.count))
                 let program = reflects[Int(randomIndex)] as! Program
+                api.fetch_songs(program.programID!, onSuccess: { (songs) in
+                    if songs.count > 0 {
+                        MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
+                        Device.keyWindow().topMostController()!.presentViewController(playerControler, animated: true, completion: nil)
+                    }
+                    
+                    }, onFailed: nil)
                 
-//                playerControler.program = program
-                playerView.hide()
-                Device.rootController().presentViewController(playerControler, animated: true, completion: nil)
             }
             
             }, onFailed: nil)

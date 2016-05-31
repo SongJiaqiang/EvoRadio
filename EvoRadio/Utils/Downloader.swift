@@ -32,14 +32,6 @@ class Downloader: NSObject {
             if let _ = complete {
                 complete!(exitUrl.path!)
             }
-            
-//            MusicManager.sharedManager.addMusicToList(exitUrl.path!)
-//            if MusicManager.sharedManager.isPlaying() {
-//                MusicManager.sharedManager.playNext()
-//            }else {
-//                MusicManager.sharedManager.playItem()
-//            }
-            
             return
         }
         

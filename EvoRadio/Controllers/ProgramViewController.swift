@@ -117,43 +117,8 @@ class ProgramViewController: ViewController {
 
 }
 
-
-// MARK: - Table view data source
-extension ProgramViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
-    }
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
-        
-        let program = dataSource[indexPath.row]
-        
-        cell?.textLabel?.text = program.programName
-        cell?.detailTextLabel?.text = program.programDesc
-        cell?.imageView?.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
-        
-        return cell!
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        
-        let program = dataSource[indexPath.row]
-//        playerControler.program = program
-        presentViewController(playerControler, animated: true, completion: nil)
-        
-    }
-}
-
-
 extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 3
-    }
-    
+
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -164,6 +129,7 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let program = dataSource[indexPath.item]
         cell.updateContent(program)
+        cell.delegate = self
         
         return cell
     }
@@ -173,15 +139,22 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let program = dataSource[indexPath.item]
         
-//        playerControler.program = program
-//        playerControler.refreshPlaylist = true
-//        playerView.hide()
-//        presentViewController(playerControler, animated: true, completion: nil)
-        
         let listController = SongListViewController()
         listController.program = program
         navigationController?.pushViewController(listController, animated: true)
     }
     
+}
+
+extension ProgramViewController: ProgramCollectionViewCellDelegate {
+    func playMusicOfProgram(programID: String) {
+        api.fetch_songs(programID, onSuccess: { (songs) in
+            if songs.count > 0 {
+                MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
+                Device.keyWindow().topMostController()!.presentViewController(playerControler, animated: true, completion: nil)
+            }
+            
+            }, onFailed: nil)
+    }
 }
 

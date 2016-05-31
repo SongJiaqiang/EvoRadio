@@ -65,15 +65,18 @@ class API {
         let endpoint = commonEP("api/radio.listAllNowChannels.json")
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             if response.result.isSuccess {
-                let dict = (response.result.value as! String).jsonToDictionary()
-                if dict["err"] as! String == "hapn.ok" {
-                    print("request is OK")
+                do {
+                    let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
                     
-                    let responseData = dict["data"] as! [[String : AnyObject]]
-                    CoreDB.saveAllNowChannels(responseData)
-                    
-                    onSuccess(responseData)
-                }
+                    if dict["err"] as! String == "hapn.ok" {
+                        print("request is OK")
+                        
+                        let responseData = dict["data"] as! [[String : AnyObject]]
+                        CoreDB.saveAllNowChannels(responseData)
+                        
+                        onSuccess(responseData)
+                    }
+                } catch {}
             }else {
                 onFailed!(response.result.error!)
             }
