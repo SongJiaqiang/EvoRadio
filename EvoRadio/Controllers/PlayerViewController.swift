@@ -269,7 +269,7 @@ class PlayerViewController: ViewController {
         playButton.setImage(UIImage(named: "player_pause"), forState: .Selected)
         playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(50, 50))
+            make.size.equalTo(CGSizeMake(60, 60))
             make.center.equalTo(controlView.center)
         }
         
