@@ -14,6 +14,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     let channelNameLabel = UILabel()
     let radioNameLabel = UILabel()
     let playButton = UIButton()
+    let vipView = UIView()
     
     var program: Program?
     var delegate: ProgramCollectionViewCellDelegate?
@@ -70,6 +71,16 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             make.bottom.equalTo(picImageView.snp_bottom).offset(-5)
         }
 
+        addSubview(vipView)
+        vipView.backgroundColor = UIColor.goldColor()
+        vipView.clipsToBounds = true
+        vipView.layer.cornerRadius = 2
+        vipView.hidden = true
+        vipView.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(4, 4))
+            make.rightMargin.equalTo(-2)
+            make.bottomMargin.equalTo(-2)
+        }
         
     }
     
@@ -99,6 +110,15 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             }
             
         }
+        
+        if let vip = program.vipLevel {
+            if Int(vip) > 0 {
+                vipView.hidden = false
+            }else {
+                vipView.hidden = true
+            }
+        }
+        
     }
 }
 

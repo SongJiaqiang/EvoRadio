@@ -80,8 +80,7 @@ class SongListViewController: ViewController {
         
         if let _ = program {
             let programID = program.programID!
-            
-            api.fetch_songs(programID, onSuccess: {[weak self] (items) in
+            api.fetch_songs(programID, isVIP: true, onSuccess: {[weak self] (items) in
                 
                 if items.count > 0 {
                     let songs = items as! [Song]

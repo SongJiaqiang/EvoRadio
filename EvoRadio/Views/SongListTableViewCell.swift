@@ -27,6 +27,12 @@ class SongListTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
+//        selectionStyle = .None
+        
+        let v = UIView()
+        v.backgroundColor = UIColor.grayColor2()
+        selectedBackgroundView = v
+        
         prepareUI()
     }
     

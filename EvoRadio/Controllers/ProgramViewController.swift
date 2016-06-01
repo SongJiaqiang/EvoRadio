@@ -148,7 +148,7 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(programID: String) {
-        api.fetch_songs(programID, onSuccess: { (songs) in
+        api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
                 Device.keyWindow().topMostController()!.presentViewController(playerControler, animated: true, completion: nil)
