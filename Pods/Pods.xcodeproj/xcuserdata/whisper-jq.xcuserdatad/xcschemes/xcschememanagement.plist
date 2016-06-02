@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MZDownloadManager-MZDownloadManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MZDownloadManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-EvoRadio.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -57,12 +67,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FECB44B840DDDFEB8230C525882B6AE</key>
+		<key>19B8BA764916E9DAAF4E4E661C31C930</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3317BC8839ADFF9DEE271133D7991E9F</key>
+		<key>2458180418DFFEC5A8AA3D5D2A12F47D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -82,12 +92,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C28BF5B64316CFD94F2E75E5E62AE5BC</key>
+		<key>A15A48AADA6E4935D5F2708482520A32</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>C3C2090211A29BD5E3D9489627F6F807</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>CBA79B32517DCB2E03CFD043C08D1C51</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -98,6 +113,11 @@
 			<true/>
 		</dict>
 		<key>EA0DD8ED489933744D70DD4A9719ED01</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EB0B202F5859E389890D58E284B48E94</key>
 		<dict>
 			<key>primary</key>
 			<true/>
