@@ -60,6 +60,9 @@ class Device: NSObject {
     static func shareApplication() -> UIApplication {
         return UIApplication.sharedApplication()
     }
+    static func appDelegate() -> AppDelegate {
+        return UIApplication.sharedApplication().delegate as! AppDelegate
+    }
     static func defaultNotificationCenter() -> NSNotificationCenter {
         return NSNotificationCenter.defaultCenter()
     }

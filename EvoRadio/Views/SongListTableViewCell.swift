@@ -27,11 +27,10 @@ class SongListTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-//        selectionStyle = .None
-        
         let v = UIView()
         v.backgroundColor = UIColor.grayColor2()
         selectedBackgroundView = v
+        backgroundColor = UIColor.clearColor()
         
         prepareUI()
     }
@@ -39,15 +38,8 @@ class SongListTableViewCell: UITableViewCell {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
 
     func prepareUI() {
-        
-        backgroundColor = UIColor.clearColor()
         
         contentView.addSubview(coverImageView)
         coverImageView.image = UIImage.placeholder_cover()

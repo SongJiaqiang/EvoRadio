@@ -365,7 +365,11 @@ class PlayerViewController: ViewController {
     }
     
     func downloadButtonPressed(button: UIButton) {
-        button.selected = !button.selected
+        if let cSong = MusicManager.sharedManager.currentSong() {
+            CoreDB.addSongToDownloadingList(cSong)
+            
+            button.selected = true
+        }
     }
     func shareButtonPressed(button: UIButton) {
         

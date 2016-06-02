@@ -88,16 +88,16 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(CustomRadioViewController(), animated: true)
             break
         case "download":
-            
+            navigationController?.pushViewController(DownloadViewController(), animated: true)
             break
         case "collection":
-            
+            navigationController?.pushViewController(DownloadViewController(), animated: true)
             break
         case "history":
-            
+            navigationController?.pushViewController(DownloadViewController(), animated: true)
             break
         case "setting":
-            self.navigationController?.pushViewController(SettingViewController(), animated: true)
+            navigationController?.pushViewController(SettingViewController(), animated: true)
             break
         default: break
         }

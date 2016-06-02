@@ -8,11 +8,24 @@
 
 import Foundation
 
+//  开始播放
 let NOTI_PLAYMUSICPROGRESS_STARTED = "play_music_progress_started"
+// 播放中
 let NOTI_PLAYMUSICPROGRESS_CHANGED = "play_music_progress_changed"
+// 播放结束
 let NOTI_PLAYMUSICPROGRESS_ENDED = "play_music_progress_ended"
+// 播放暂停
 let NOTI_PLAYMUSICPROGRESS_PAUSED = "play_music_progress_paused"
+// 更新播放控制器
 let NOTI_UPDATE_PLAYERCONTROLLER = "update_playercontroller"
+// 下载列表发生变化
+let NOTI_DOWNLOADING_LIST_CHANGED = "downloading_list_changed"
+// 已下载列表发生变化
+let NOTI_DOWNLOADED_LIST_CHANGED = "downloaded_list_changed"
+// 下载一首歌曲文件成功
+let NOTI_DOWNLOAD_A_SONG_FINISHED = "download_a_song_finished"
+
+
 
 class NotificationManager {
     
@@ -71,6 +84,19 @@ class NotificationManager {
         Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_UPDATE_PLAYERCONTROLLER, object: nil)
     }
     
+    func postDownloadingListChangedNotification(userInfo: [NSObject : AnyObject]) {
+        Device.defaultNotificationCenter().postNotificationName(NOTI_DOWNLOADING_LIST_CHANGED, object: nil, userInfo: userInfo)
+    }
+    func addDownloadingListChangedObserver(target: AnyObject, action: Selector) {
+        Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_DOWNLOADING_LIST_CHANGED, object: nil)
+    }
+    
+    func postDownloadASongFinishedNotification(userInfo: [NSObject : AnyObject]) {
+        Device.defaultNotificationCenter().postNotificationName(NOTI_DOWNLOAD_A_SONG_FINISHED, object: nil, userInfo: userInfo)
+    }
+    func addDownloadASongFinishedObserver(target: AnyObject, action: Selector) {
+        Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_DOWNLOAD_A_SONG_FINISHED, object: nil)
+    }
     
     
     

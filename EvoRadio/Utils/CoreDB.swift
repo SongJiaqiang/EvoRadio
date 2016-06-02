@@ -13,6 +13,8 @@ let KEY_ALLNOWCHANNELS = "all_now_channels"
 let KEY_CUSTOMRADIOS = "custom_radios"
 let KEY_SELECTEDINDEXES = "selected_indexes"
 let KEY_PLAYLSIT = "playlist"
+let KEY_DOWNLOADED_LIST = "downloaded_list"
+let KEY_DOWNLOADING_LIST = "downloading_list"
 
 
 let leveldb: WLevelDb = WLevelDb.sharedDb()
@@ -135,7 +137,7 @@ class CoreDB {
         let songsDict = songs.toDictionaryArray()
         WLevelDb.sharedDb().setObject(songsDict, forKey: KEY_PLAYLSIT)
     }
-    
+    /** 获取播放列表 */
     class func getPlaylist() -> [Song] {
         var songs = [Song]()
         if let songsDict = leveldb.objectForKey(KEY_PLAYLSIT) {
@@ -144,5 +146,134 @@ class CoreDB {
         
         return songs
     }
+    
+    /** 已下载的歌曲数据 */
+    class func addSongToDownloadedList(song: Song) {
+        let dict = song.toDictionary()
+        var newSongs: [NSDictionary]
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+            for item in (songs as! [NSDictionary]) {
+                if (item["song_id"] as! String) == song.songID {
+                    return
+                }
+            }
+            newSongs = songs as! [NSDictionary]
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        newSongs.append(dict)
+        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADED_LIST)
+    }
+    
+    /** 获取已下载歌曲数据 */
+    class func getDownloadedSongs() -> [Song]? {
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+            return [Song](dictArray: songs as? [NSDictionary])
+        }
+        
+        return nil
+    }
+    
+    /** 获取已下载歌单数据 */
+    class func getDownloadedPrograms() -> [Program] {
+        let programs = [Program]()
+        
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+            
+            (songs as! [NSDictionary])
+            
+//            for song in songs {
+//                var songList =
+//            }
+            
+        }
+        
+        return programs
+    }
+    
+    /** 添加歌曲下载 */
+    class func addSongToDownloadingList(song: Song) {
+        let dict = song.toDictionary()
+        var newSongs: [NSDictionary]
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+            for item in (songs as! [NSDictionary]) {
+                if (item["song_id"] as! String) == song.songID {
+                    return
+                }
+            }
+            newSongs = songs as! [NSDictionary]
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        newSongs.append(dict)
+        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        
+        NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
+    }
+    
+    /** 添加一波歌曲下载 */
+    class func addSongsToDownloadingList(songs: [Song]) {
+        var newSongs: [NSDictionary]
+        if let songsArray = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+            newSongs = songsArray as! [NSDictionary]
+            for song in songs {
+                var isExit = false
+                for item in (songsArray as! [NSDictionary]) {
+                    if (item["song_id"] as! String) == song.songID {
+                        isExit = true
+                        break
+                    }
+                }
+                if !isExit {
+                    let dict = song.toDictionary()
+                    newSongs.append(dict)
+                }
+            }
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        
+        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        
+        NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
+    }
+    
+    /** 删除一首歌曲下载数据 */
+    class func removeSongFromDownloadingList(song: Song) {
+        var newSongs: [NSDictionary]
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+            newSongs = songs as! [NSDictionary]
+            for item in newSongs {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.removeAtIndex(newSongs.indexOf(item)!)
+                    break
+                }
+            }
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        
+        NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
+    }
+    
+    /** 删除所有歌曲下载数据 */
+    class func removeAllFromDownloadingList() {
+        if let _ = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+            leveldb.removeObjectForKey(KEY_DOWNLOADING_LIST)
+        }
+        
+        NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song]()])
+    }
+    
+    /** 获取正在下载的歌曲数据 */
+    class func getDownloadingSongs() -> [Song]? {
+        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+            return [Song](dictArray: songs as? [NSDictionary])
+        }else {
+            return nil
+        }
+    }
+
     
 }

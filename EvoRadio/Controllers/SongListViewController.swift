@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MZDownloadManager
 
 class SongListViewController: ViewController {
 
@@ -112,7 +113,6 @@ class SongListViewController: ViewController {
 extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("dataSource count: \(dataSource.count)")
         return dataSource.count
     }
     
@@ -140,6 +140,20 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
             make.size.equalTo(CGSizeMake(80, 30))
             make.centerY.equalTo(headerView.snp_centerY)
             make.leftMargin.equalTo(10)
+        }
+        
+        let addButton = UIButton()
+        headerView.addSubview(addButton)
+        addButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        addButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
+        addButton.clipsToBounds = true
+        addButton.layer.cornerRadius = 15
+        addButton.setTitle("More", forState: .Normal)
+        addButton.addTarget(self, action: #selector(SongListViewController.moreButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        addButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(120, 30))
+            make.centerY.equalTo(headerView.snp_centerY)
+            make.left.equalTo(playButton.snp_right).offset(12)
         }
         
         let separatorView = UIView()
@@ -172,21 +186,19 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         NotificationManager.instance.postUpdatePlayerControllerNotification()
         presentViewController(playerControler, animated: true, completion: nil)
     }
-}
-
-extension SongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(song: Song) {
-        
+    
+    func moreButtonPressed(button: UIButton) {
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
             print("add to playlist")
-            MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
+            MusicManager.sharedManager.appendSongsToPlaylist(self.dataSource, autoPlay: false)
         })
         let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
             print("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
             print("download music")
+            CoreDB.addSongsToDownloadingList(self.dataSource)
         })
         let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
             print("sharing")
@@ -202,3 +214,34 @@ extension SongListViewController: SongListTableViewCellDelegate {
         navigationController!.presentViewController(alertController, animated: true, completion: nil)
     }
 }
+
+extension SongListViewController: SongListTableViewCellDelegate {
+    func openToolPanelOfSong(song: Song) {
+        
+        let alertController = UIAlertController()
+        let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
+            print("add to playlist")
+            MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
+        })
+        let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
+            print("add to collecte")
+        })
+        let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+            print("download music")
+            CoreDB.addSongToDownloadingList(song)
+        })
+        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
+            print("sharing")
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(cancelAction)
+        
+        navigationController!.presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+
