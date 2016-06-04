@@ -8,13 +8,17 @@
 
 import UIKit
 
+
 @UIApplicationMain
+
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        
+        prepareUMeng()
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
@@ -109,10 +113,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 }
             }
         }
-        
-
     }
 
+    func prepareUMeng() {
+        let config = UMAnalyticsConfig.sharedInstance()
+        config.appKey = UM_KEY
+        config.channelId = ""
+        
+        // 上报App版本
+        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
+        MobClick.setAppVersion(version as! String)
+        
+        // 设置加密
+        MobClick.setEncryptEnabled(true)
+        
+        // 开始统计
+        MobClick.startWithConfigure(config)
+        
+    }
 
 }
 

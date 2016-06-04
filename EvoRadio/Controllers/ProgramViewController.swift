@@ -149,6 +149,8 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(programID: String) {
+        TrackManager.playMusicTypeEvent(.ProgramCover)
+        
         api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.sharedManager.clearList()

@@ -190,7 +190,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension ChannelViewController: ChannelCollectionViewCellDelegate {
     
     func playMusicOfChannel(channelID: String) {
-        
+        TrackManager.playMusicTypeEvent(.ChannelCover)
         let pageIndex: Int = Int(arc4random_uniform(10))
         api.fetch_programs(channelID, page: Page(index: pageIndex, size: 1), onSuccess: { (reflects) in
             

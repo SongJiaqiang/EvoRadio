@@ -120,6 +120,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        TrackManager.playMusicTypeEvent(.DownloadedSongListCell)
         
         let song = dataSource[indexPath.row]
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
@@ -129,6 +130,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     }
     
     func playButtonPressed(button: UIButton) {
+        TrackManager.playMusicTypeEvent(.DownloadedSongList)
         if let songs = CoreDB.getDownloadedSongs() {
             MusicManager.sharedManager.clearList()
             MusicManager.sharedManager.appendSongsToPlaylist(songs, autoPlay: true)

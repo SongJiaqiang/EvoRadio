@@ -180,6 +180,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        TrackManager.playMusicTypeEvent(.SongListCell)
         
         let song = dataSource[indexPath.row]
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
@@ -189,6 +190,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func playButtonPressed(button: UIButton) {
+        TrackManager.playMusicTypeEvent(.SongList)
         if dataSource.count > 0 {
             MusicManager.sharedManager.clearList()
             MusicManager.sharedManager.appendSongsToPlaylist(dataSource, autoPlay: true)

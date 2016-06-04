@@ -61,6 +61,15 @@
 		90E7FB591CC536720018A532 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB581CC536720018A532 /* Images.swift */; };
 		90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */; };
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
+		90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A61D02C528002ECC8C /* libz.tbd */; };
+		90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A81D02C867002ECC8C /* CoreTelephony.framework */; };
+		90FB91AB1D02C877002ECC8C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91AA1D02C877002ECC8C /* libsqlite3.tbd */; };
+		90FB91AD1D02CDD6002ECC8C /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */; };
+		90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91AE1D02D4A3002ECC8C /* Security.framework */; };
+		90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91B01D02D4B7002ECC8C /* libiconv.tbd */; };
+		90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */; };
+		90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */; };
+		90FB91B71D02D503002ECC8C /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91B61D02D503002ECC8C /* CoreGraphics.framework */; };
 		DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */; };
 		DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */; };
 		DBB79DA11CCFC554006189B3 /* ChannelCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */; };
@@ -138,6 +147,15 @@
 		90E7FB581CC536720018A532 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Images.swift; sourceTree = "<group>"; };
 		90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
+		90FB91A61D02C528002ECC8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		90FB91A81D02C867002ECC8C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
+		90FB91AA1D02C877002ECC8C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrackManager.swift; sourceTree = "<group>"; };
+		90FB91AE1D02D4A3002ECC8C /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		90FB91B01D02D4B7002ECC8C /* libiconv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.tbd; path = usr/lib/libiconv.tbd; sourceTree = SDKROOT; };
+		90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
+		90FB91B61D02D503002ECC8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelCollectionHeaderView.swift; path = Views/ChannelCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -155,6 +173,14 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90FB91B71D02D503002ECC8C /* CoreGraphics.framework in Frameworks */,
+				90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */,
+				90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */,
+				90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */,
+				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
+				90FB91AB1D02C877002ECC8C /* libsqlite3.tbd in Frameworks */,
+				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
+				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,6 +191,14 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90FB91B61D02D503002ECC8C /* CoreGraphics.framework */,
+				90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */,
+				90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */,
+				90FB91B01D02D4B7002ECC8C /* libiconv.tbd */,
+				90FB91AE1D02D4A3002ECC8C /* Security.framework */,
+				90FB91AA1D02C877002ECC8C /* libsqlite3.tbd */,
+				90FB91A81D02C867002ECC8C /* CoreTelephony.framework */,
+				90FB91A61D02C528002ECC8C /* libz.tbd */,
 				9096D78A1CFC0FED00DA6923 /* pop.framework */,
 				90659F111CC92CB00026539F /* AudioToolbox.framework */,
 				90659F0F1CC92CA30026539F /* MediaPlayer.framework */,
@@ -323,6 +357,7 @@
 				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
 				DBDC7F471CD90A8D0093812C /* Constants.swift */,
 				909E818B1CF8129500571A76 /* NotificationManager.swift */,
+				90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -511,6 +546,7 @@
 				9097BB1F1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift in Sources */,
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
 				9097BB251CFEA6E900FA5BD9 /* DownloadedViewController.swift in Sources */,
+				90FB91AD1D02CDD6002ECC8C /* TrackManager.swift in Sources */,
 				90659F141CC9451E0026539F /* PersonalViewController.swift in Sources */,
 				90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */,
 				909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */,

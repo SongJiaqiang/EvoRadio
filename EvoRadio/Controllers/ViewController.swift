@@ -26,6 +26,20 @@ class ViewController: UIViewController {
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        // 友盟统计 － 进入页面
+        MobClick.beginLogPageView(NSStringFromClass(self.classForCoder))
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        // 友盟统计 － 退出页面
+        MobClick.endLogPageView(NSStringFromClass(self.classForCoder))
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         print("内存警告")

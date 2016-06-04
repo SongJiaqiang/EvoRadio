@@ -9,6 +9,7 @@ PODS:
   - MZDownloadManager (3.0)
   - pop (1.0.9)
   - SnapKit (0.20.0)
+  - UMengAnalytics (4.0.4)
 
 DEPENDENCIES:
   - AFSoundManager (~> 2.1)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - MZDownloadManager
   - pop (~> 1.0)
   - SnapKit (~> 0.20.0)
+  - UMengAnalytics
 
 SPEC CHECKSUMS:
   AFSoundManager: 232af6154e736e6b2d8c93fafebfafd14fad7510
@@ -33,5 +35,6 @@ SPEC CHECKSUMS:
   MZDownloadManager: fcb5e609595e520ca07192463c60cac61d752279
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
+  UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199
 
 COCOAPODS: 0.39.0
