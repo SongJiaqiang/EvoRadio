@@ -21,7 +21,7 @@ class ViewController: UIViewController {
         
         insertGradientLayer()
         
-        navigationController?.navigationBar.barTintColor = UIColor.blackColor()
+        navigationController?.navigationBar.barTintColor = UIColor.grayColor1()
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
     }
@@ -58,5 +58,13 @@ class ViewController: UIViewController {
         }
     }
 
+    func setupBackButton() {
+        let backItem = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .Plain, target: self, action: #selector(ViewController.goBack))
+        navigationItem.leftBarButtonItem = backItem
+    }
+    
+    func goBack() {
+        navigationController?.popViewControllerAnimated(true)
+    }
 }
 

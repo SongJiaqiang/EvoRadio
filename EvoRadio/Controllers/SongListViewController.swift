@@ -24,6 +24,7 @@ class SongListViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        setupBackButton()
         prepareTableView()
         
         if let _ = program {
@@ -46,13 +47,8 @@ class SongListViewController: ViewController {
         tableView.backgroundColor = UIColor.clearColor()
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
         tableView.separatorStyle = .None
-//        tableView.bounces = false
         tableView.snp_makeConstraints(closure: {(make) in
             make.edges.equalTo(UIEdgeInsetsZero)
-//            make.height.equalTo(Device.width())
-//            make.top.equalTo(view.snp_top)
-//            make.left.equalTo(view.snp_left)
-//            make.right.equalTo(view.snp_right)
         })
         
         tableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
@@ -132,28 +128,29 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let playButton = UIButton()
         headerView.addSubview(playButton)
         playButton.titleLabel?.font = UIFont.systemFontOfSize(12)
-        playButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
+        playButton.backgroundColor = UIColor.grayColor3()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", forState: .Normal)
+        playButton.addTarget(self, action: #selector(SongListViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(80, 30))
             make.centerY.equalTo(headerView.snp_centerY)
             make.leftMargin.equalTo(10)
         }
         
-        let addButton = UIButton()
-        headerView.addSubview(addButton)
-        addButton.titleLabel?.font = UIFont.systemFontOfSize(12)
-        addButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
-        addButton.clipsToBounds = true
-        addButton.layer.cornerRadius = 15
-        addButton.setTitle("More", forState: .Normal)
-        addButton.addTarget(self, action: #selector(SongListViewController.moreButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        addButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(120, 30))
+        let moreButton = UIButton()
+        headerView.addSubview(moreButton)
+        moreButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        moreButton.backgroundColor = UIColor.grayColor3()
+        moreButton.clipsToBounds = true
+        moreButton.layer.cornerRadius = 15
+        moreButton.setTitle("More", forState: .Normal)
+        moreButton.addTarget(self, action: #selector(SongListViewController.moreButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        moreButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(60, 30))
             make.centerY.equalTo(headerView.snp_centerY)
-            make.left.equalTo(playButton.snp_right).offset(12)
+            make.right.equalTo(headerView.snp_right).offset(-12)
         }
         
         let separatorView = UIView()
@@ -177,6 +174,10 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         return 42
     }
     
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
@@ -184,19 +185,27 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
         
         NotificationManager.instance.postUpdatePlayerControllerNotification()
-        presentViewController(playerControler, animated: true, completion: nil)
+        presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+    }
+    
+    func playButtonPressed(button: UIButton) {
+        if dataSource.count > 0 {
+            MusicManager.sharedManager.clearList()
+            MusicManager.sharedManager.appendSongsToPlaylist(dataSource, autoPlay: true)
+            Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+        }
     }
     
     func moreButtonPressed(button: UIButton) {
         let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
+        let action1 = UIAlertAction(title: "全部加入播放列表", style: .Default, handler: { (action) in
             print("add to playlist")
             MusicManager.sharedManager.appendSongsToPlaylist(self.dataSource, autoPlay: false)
         })
-        let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
+        let action2 = UIAlertAction(title: "收藏全部歌曲", style: .Default, handler: { (action) in
             print("add to collecte")
         })
-        let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+        let action3 = UIAlertAction(title: "下载全部歌曲", style: .Default, handler: { (action) in
             print("download music")
             CoreDB.addSongsToDownloadingList(self.dataSource)
         })
@@ -223,7 +232,7 @@ extension SongListViewController: SongListTableViewCellDelegate {
             print("add to playlist")
             MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
         })
-        let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
+        let action2 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
             print("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in

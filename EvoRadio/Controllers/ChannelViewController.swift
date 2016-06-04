@@ -199,8 +199,9 @@ extension ChannelViewController: ChannelCollectionViewCellDelegate {
                 let program = reflects[Int(randomIndex)] as! Program
                 api.fetch_songs(program.programID!, isVIP: true, onSuccess: { (songs) in
                     if songs.count > 0 {
+                        MusicManager.sharedManager.clearList()
                         MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                        Device.keyWindow().topMostController()!.presentViewController(playerControler, animated: true, completion: nil)
+                        Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
                     }
                     
                     }, onFailed: nil)

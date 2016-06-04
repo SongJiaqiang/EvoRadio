@@ -22,7 +22,7 @@ class CDCoverImageView: UIImageView {
         
         super.init(frame: frame)
         
-//        prepareAnimation()
+        prepareAnimation()
     }
     
     required init?(coder aDecoder: NSCoder) {

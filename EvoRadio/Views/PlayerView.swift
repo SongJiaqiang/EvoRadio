@@ -34,6 +34,7 @@ class PlayerView: UIView {
         super.init(frame: CGRectMake(0, Device.width()-playerBarHeight, Device.width(), playerBarHeight))
         
         insertGradientLayer()
+        prepare()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,7 +84,7 @@ class PlayerView: UIView {
         }
         
         contentView.addSubview(titleLabel)
-        titleLabel.text = "灵魂中的歌声"
+        titleLabel.text = "No music playing."
         titleLabel.font = UIFont.sizeOf12()
         titleLabel.textColor = UIColor.whiteColor()
         titleLabel.snp_makeConstraints { (make) in
@@ -93,7 +94,7 @@ class PlayerView: UIView {
         }
         
         contentView.addSubview(subTitleLabel)
-        subTitleLabel.text = "活动电台 - 睡眠"
+        subTitleLabel.text = "Oops~"
         subTitleLabel.font = UIFont.sizeOf10()
         subTitleLabel.textColor = UIColor.grayColor7()
         subTitleLabel.snp_makeConstraints { (make) in
@@ -138,7 +139,7 @@ class PlayerView: UIView {
         print("press player bar")
         
         hide()
-        Device.keyWindow().topMostController()?.presentViewController(playerControler, animated: true, completion: nil)
+        Device.keyWindow().topMostController()?.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
     }
     
     func playMusicProgressChanged(noti: NSNotification) {
@@ -159,16 +160,28 @@ class PlayerView: UIView {
         if let song = MusicManager.sharedManager.currentSong() {
             titleLabel.text = song.songName
             subTitleLabel.text = song.artistsName
-            coverView.kf_setImageWithURL(NSURL(string: song.picURL!)!)
+            coverView.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                if image == nil {
+                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
+                        self?.coverView.image = artwork
+                    }
+                }
+            })
         }
     }
     
     func show() {
+        self.hidden = false
         UIView.animateWithDuration(0.5, animations: {[weak self] Void in self?.alpha = 1 })
     }
     
     func hide() {
-        UIView.animateWithDuration(0.5, animations: {[weak self] Void in self?.alpha = 0 })
+        UIView.animateWithDuration(0.5, animations: {[weak self] Void in
+            self?.alpha = 0
+            
+            }, completion: {[weak self] Void in
+            self?.hidden = true
+        })
     }
     
 }

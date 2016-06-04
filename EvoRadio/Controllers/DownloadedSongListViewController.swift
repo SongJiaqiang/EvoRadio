@@ -87,6 +87,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", forState: .Normal)
+        playButton.addTarget(self, action: #selector(DownloadedSongListViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(80, 30))
             make.centerY.equalTo(headerView.snp_centerY)
@@ -113,6 +114,9 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
     }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -121,7 +125,15 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
         
         NotificationManager.instance.postUpdatePlayerControllerNotification()
-        presentViewController(playerControler, animated: true, completion: nil)
+        presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+    }
+    
+    func playButtonPressed(button: UIButton) {
+        if let songs = CoreDB.getDownloadedSongs() {
+            MusicManager.sharedManager.clearList()
+            MusicManager.sharedManager.appendSongsToPlaylist(songs, autoPlay: true)
+            Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+        }
     }
 
 }

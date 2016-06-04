@@ -35,6 +35,7 @@
 		9097BB2B1CFEC88A00FA5BD9 /* DownloadItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */; };
 		9097BB2D1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2C1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift */; };
 		9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */; };
+		9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB301D00380800FA5BD9 /* LastPlaylist.swift */; };
 		909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E659F1CC0831B00B0C49B /* MainViewController.swift */; };
 		909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A01CC0831B00B0C49B /* ViewController.swift */; };
 		909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909E65A51CC083A500B0C49B /* Assets.xcassets */; };
@@ -110,6 +111,7 @@
 		9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadItemQueue.swift; sourceTree = "<group>"; };
 		9097BB2C1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadingSongListTableViewCell.swift; path = Views/DownloadingSongListTableViewCell.swift; sourceTree = "<group>"; };
 		9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Strings.swift; sourceTree = "<group>"; };
+		9097BB301D00380800FA5BD9 /* LastPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LastPlaylist.swift; sourceTree = "<group>"; };
 		909E659D1CC0831100B0C49B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
 		909E659F1CC0831B00B0C49B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -287,6 +289,7 @@
 				90E7FB501CC4C3680018A532 /* User.swift */,
 				DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */,
 				9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */,
+				9097BB301D00380800FA5BD9 /* LastPlaylist.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -499,6 +502,7 @@
 				90B59E6A1CFD7AD0001E8F23 /* TabBar.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
+				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
 				90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */,

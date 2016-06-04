@@ -97,10 +97,24 @@ class MusicManager: NSObject {
         
     }
     
+    func removeSongFromPlaylist(song: Song) {
+        
+        for item in playlist {
+            if item.songID == song.songID {
+                let index = playlist.indexOf(item)
+                playlist.removeAtIndex(index!)
+                if index < currentIndex {
+                    currentIndex -= 1
+                }
+                return
+            }
+        }
+    }
+    
     func clearList() {
         currentIndex = -1
         playlist.removeAll()
-        soundQueue?.clearQueue()
+//        soundQueue?.clearQueue()
     }
     
     func updatePlayingInfo() {
@@ -148,27 +162,11 @@ class MusicManager: NSObject {
     }
     
     func playNext() {
-//        soundQueue?.status = .Playing
-//        if soundQueue?.getCurrentItem() == soundItems.last {
-//            soundQueue?.playItemAtIndex(0)
-//        }else {
-//            soundQueue?.playNextItem()
-//        }
-//        updatePlayingInfo()
-        
         incrementIndex()
         NotificationManager.instance.postUpdatePlayerControllerNotification()
     }
     
     func playPrev() {
-//        soundQueue?.status = .Playing
-//        if soundQueue?.indexOfCurrentItem() == 0 {
-//            soundQueue?.playItemAtIndex(soundItems.count-1)
-//        }else {
-//            soundQueue?.playPreviousItem()
-//        }
-//        updatePlayingInfo()
-        
         decrementIndex()
         NotificationManager.instance.postUpdatePlayerControllerNotification()
     }
@@ -213,7 +211,6 @@ class MusicManager: NSObject {
     }
     
     func currentSong() -> Song? {
-        print("Play music at index \(currentIndex)")
         if currentIndex < 0 {
             return nil
         }else {
@@ -232,6 +229,19 @@ class MusicManager: NSObject {
         currentIndex -= 1
         if currentIndex < 0 {
             currentIndex = playlist.count-1
+        }
+    }
+    
+    func loadLastPlaylist() {
+        if let lastPlaylist = CoreDB.getLastPlaylist() {
+            playlist = lastPlaylist.playlist!
+            currentIndex = (lastPlaylist.indexOfPlaylist?.integerValue)!
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
+        }
+    }
+    func saveLastPlaylist() {
+        if playlist.count > 0 {
+            CoreDB.saveLastPlaylist(playlist, indexOfPlaylist: currentIndex, timePlayed: 0)
         }
     }
     

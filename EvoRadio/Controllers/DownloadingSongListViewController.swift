@@ -150,6 +150,9 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
     }
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
@@ -223,7 +226,7 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
         
         let indexOfDatasource = dataSource.indexOf(song)!
         dataSource.removeAtIndex(indexOfDatasource)
-        tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexOfDatasource, inSection: 0)], withRowAnimation: .Left)
+        tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexOfDatasource, inSection: 0)], withRowAnimation: .Bottom)
         
         downloadingSongs.removeAtIndex(index)
         CoreDB.addSongToDownloadedList(song)

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CustomRadioViewController: UIViewController {
+class CustomRadioViewController: ViewController {
     let cellID = "customCellID"
 
     var tableView = UITableView()
@@ -18,6 +18,7 @@ class CustomRadioViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        setupBackButton()
         title = "定制电台"
         let rightItem = UIBarButtonItem(title: "确定", style: .Plain, target: self, action: #selector(CustomRadioViewController.rightItemPressed))
         navigationItem.rightBarButtonItem = rightItem

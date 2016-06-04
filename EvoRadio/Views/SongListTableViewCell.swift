@@ -52,9 +52,7 @@ class SongListTableViewCell: UITableViewCell {
         }
         
         contentView.addSubview(moreButton)
-        moreButton.setTitle("More", forState: .Normal)
-        moreButton.titleLabel?.font = UIFont.sizeOf10()
-        moreButton.setTitleColor(UIColor.grayColor7(), forState: .Normal)
+        moreButton.setImage(UIImage(named: "cell_more"), forState: .Normal)
         moreButton.clipsToBounds = true
         moreButton.layer.cornerRadius = 10
         moreButton.layer.borderColor = UIColor.grayColor7().CGColor

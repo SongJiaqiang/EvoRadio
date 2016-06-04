@@ -13,6 +13,7 @@ let KEY_ALLNOWCHANNELS = "all_now_channels"
 let KEY_CUSTOMRADIOS = "custom_radios"
 let KEY_SELECTEDINDEXES = "selected_indexes"
 let KEY_PLAYLSIT = "playlist"
+let KEY_LAST_PLAYLSIT = "last_playlist"
 let KEY_DOWNLOADED_LIST = "downloaded_list"
 let KEY_DOWNLOADING_LIST = "downloading_list"
 
@@ -147,6 +148,22 @@ class CoreDB {
         return songs
     }
     
+    /** 保存最后的播放列表 */
+    class func saveLastPlaylist(playlist:[Song], indexOfPlaylist: Int, timePlayed: Int) {
+        let lastPlaylist = LastPlaylist(list: playlist, index: indexOfPlaylist, time: timePlayed)
+        let playlistDict = lastPlaylist.toDictionary()
+        
+        WLevelDb.sharedDb().setObject(playlistDict, forKey: KEY_LAST_PLAYLSIT)
+    }
+    
+    /** 获取上次的播放列表 */
+    class func getLastPlaylist() -> LastPlaylist? {
+        if let lastPlaylist = leveldb.objectForKey(KEY_LAST_PLAYLSIT) {
+            return LastPlaylist(dictionary: lastPlaylist as! NSDictionary)
+        }
+        return nil
+    }
+    
     /** 已下载的歌曲数据 */
     class func addSongToDownloadedList(song: Song) {
         let dict = song.toDictionary()
@@ -275,5 +292,9 @@ class CoreDB {
         }
     }
 
+    class func savePlaylist() {
+        
+    }
+    
     
 }

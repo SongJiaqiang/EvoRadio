@@ -20,7 +20,7 @@ class DownloadViewController: ViewController {
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        setupBackButton()
         prepareSegmentControl()
         
         updateContentView()

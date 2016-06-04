@@ -12,9 +12,9 @@ import AFSoundManager
 import SnapKit
 import GPUImage
 
-let playerControler = PlayerViewController.instance
-
 class PlayerViewController: ViewController {
+    let cellID = "playerControllerPlaylistCellID"
+    let toolButtonWidth: CGFloat = 40
     
     private var coverImageView = CDCoverImageView(frame: CGRectZero)
     var backgroundGPUImageView = GPUImageView()
@@ -29,11 +29,12 @@ class PlayerViewController: ViewController {
     let nextButton = UIButton()
     let prevButton = UIButton()
     let titleLabel = UILabel()
-    
-    var delegate: PlayerViewControllerDelegate?
+    let playlistTableView = UITableView(frame: CGRectZero, style: .Grouped)
+    let playlistContentView = UIView()
+    var playlistTableViewBottomConstraint: Constraint?
     
     //MARK: instance
-    class var instance: PlayerViewController {
+    class var playerController: PlayerViewController {
         struct Static {
             static var onceToken: dispatch_once_t = 0
             static var instance: PlayerViewController! = nil
@@ -44,7 +45,6 @@ class PlayerViewController: ViewController {
         return Static.instance
     }
     
-   
     
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
@@ -52,42 +52,43 @@ class PlayerViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("viewDidLoad")
+        print("player viewDidLoad")
         
-        prepareBackgroundView()
-        preparePlayerControlView()
-        prepareToolsView()
-        prepareNavigationBar()
-        
-        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
-        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
-        NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerViewController.playMusicProgressPaused(_:)))
-        NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController))
-        
-        
-        updatePlayerController()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         PlayerView.instance.hide()
-
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         PlayerView.instance.show()
-        
     }
 
+    //MARK: prepare ui
+    func prepare() {
+        
+        prepareBackgroundView()
+        preparePlayerControlView()
+        prepareToolsView()
+        prepareNavigationBar()
+        prepareTableView()
+
+        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
+        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
+        NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerViewController.playMusicProgressPaused(_:)))
+        NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController))
+        
+    }
+    
     func prepareBackgroundView() {
         view.addSubview(coverImageView)
         coverImageView.contentMode = .ScaleAspectFill
         coverImageView.clipsToBounds = true
         coverImageView.layer.cornerRadius = 120
         coverImageView.layer.borderWidth = 10
-        coverImageView.layer.borderColor = UIColor(white: 0, alpha: 0.6).CGColor
+        coverImageView.layer.borderColor = UIColor(white: 0, alpha: 0.8).CGColor
         coverImageView.image = UIImage.placeholder_cover()
         coverImageView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(240, 240))
@@ -96,17 +97,12 @@ class PlayerViewController: ViewController {
             make.topMargin.equalTo(topMargin)
         }
         
+        backgroundGPUImageView.backgroundColor = UIColor.grayColor5()
         view.insertSubview(backgroundGPUImageView, belowSubview: coverImageView)
         backgroundGPUImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
         backgroundGPUImageView.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-//        
-//        if let _ = program {
-//            backgroundView.kf_setImageWithURL(NSURL(string: program.picURL!)!, placeholderImage: UIImage.placeholder_cover())
-//        }else {
-//            backgroundView.image = UIImage.placeholder_cover()
-//        }
     }
     
     func prepareCoverView() {
@@ -117,16 +113,10 @@ class PlayerViewController: ViewController {
         coverView.clipsToBounds = true
         coverView.layer.cornerRadius = coverWidth*0.5
         
-//        if let _ = program {
-//            coverView.kf_setImageWithURL(NSURL(string: program.cover!.pics!.first!)!, placeholderImage: UIImage.placeholder_cover())
-//        }else {
-//            coverView.image = UIImage.placeholder_cover()
-//        }
         coverView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(coverWidth, coverWidth))
             make.center.equalTo(view.snp_center)
         }
-        
     }
     
     func prepareNavigationBar() {
@@ -141,19 +131,6 @@ class PlayerViewController: ViewController {
             make.right.equalTo(view.snp_right)
         }
         
-//        let gradientLayer = CAGradientLayer()
-//        gradientLayer.colors = [
-//            UIColor(netHex: 0x1C1C1C, alpha: 1.0).CGColor,
-//            UIColor(netHex: 0x1C1C1C, alpha: 0.8).CGColor,
-//            UIColor(netHex: 0x1C1C1C, alpha: 0.0).CGColor
-//        ]
-//        gradientLayer.locations = [0.0, 0.2, 1.0]
-//        gradientLayer.startPoint = CGPointMake(0.5, 0)
-//        gradientLayer.endPoint = CGPointMake(0.5, 1)
-//        gradientLayer.frame = CGRectMake(0, 0, Device.width(), navBarHeight)
-//        navBar.layer.insertSublayer(gradientLayer, atIndex: 0)
-        
-        
         navBar.addSubview(titleLabel)
         titleLabel.textAlignment = .Center
         titleLabel.font = UIFont.sizeOf14()
@@ -167,29 +144,17 @@ class PlayerViewController: ViewController {
         
         let closeButton = UIButton()
         navBar.addSubview(closeButton)
-        closeButton.setImage(UIImage(named: "arrow_down"), forState: .Normal)
+        closeButton.setImage(UIImage(named: "nav_dismiss"), forState: .Normal)
         closeButton.addTarget(self, action: #selector(PlayerViewController.closeButtonPressed), forControlEvents: .TouchUpInside)
         closeButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
             make.leftMargin.equalTo(10)
             make.bottom.equalTo(navBar.snp_bottom)
         }
-        
-//        let timerButton = UIButton()
-//        navBar.addSubview(timerButton)
-//        timerButton.setImage(UIImage(named: "timer"), forState: .Normal)
-//        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed), forControlEvents: .TouchUpInside)
-//        timerButton.snp_makeConstraints { (make) in
-//            make.size.equalTo(CGSizeMake(40, 40))
-//            make.rightMargin.equalTo(-10)
-//            make.bottom.equalTo(navBar.snp_bottom)
-//        }
-        
   
     }
 
     func prepareToolsView() {
-        
         let toolsView = UIView()
         view.addSubview(toolsView)
 //        toolsView.backgroundColor = UIColor(white: 0.5, alpha: 0.8)
@@ -202,51 +167,51 @@ class PlayerViewController: ViewController {
         
         let infoButton = UIButton()
         toolsView.addSubview(infoButton)
-        infoButton.setImage(UIImage(named: "icon_info"), forState: .Normal)
+        infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
         infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
         infoButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.center.equalTo(toolsView.center)
         }
         
         let downloadButton = UIButton()
         toolsView.addSubview(downloadButton)
-        downloadButton.setImage(UIImage(named: "icon_download"), forState: .Normal)
-        downloadButton.setImage(UIImage(named: "icon_downloaded"), forState: .Selected)
+        downloadButton.setImage(UIImage(named: "player_download"), forState: .Normal)
+        downloadButton.setImage(UIImage(named: "player_download"), forState: .Selected)
         downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadButtonPressed(_:)), forControlEvents: .TouchUpInside)
         downloadButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
             make.right.equalTo(infoButton.snp_left).inset(-30)
         }
         
         let shareButton = UIButton()
         toolsView.addSubview(shareButton)
-        shareButton.setImage(UIImage(named: "icon_share"), forState: .Normal)
+        shareButton.setImage(UIImage(named: "player_share"), forState: .Normal)
         shareButton.addTarget(self, action: #selector(PlayerViewController.shareButtonPressed(_:)), forControlEvents: .TouchUpInside)
         shareButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
             make.left.equalTo(infoButton.snp_right).inset(-30)
         }
         
         
         let repeatButton = UIButton()
-        controlView.addSubview(repeatButton)
-        repeatButton.setImage(UIImage(named: "icon_repeat"), forState: .Normal)
+        toolsView.addSubview(repeatButton)
+        repeatButton.setImage(UIImage(named: "player_cycle_list"), forState: .Normal)
         repeatButton.addTarget(self, action: #selector(PlayerViewController.repeatButtonPressed(_:)), forControlEvents: .TouchUpInside)
         repeatButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
             make.right.equalTo(downloadButton.snp_left).inset(-30)
         }
         
         let listButton = UIButton()
-        controlView.addSubview(listButton)
-        listButton.setImage(UIImage(named: "icon_list"), forState: .Normal)
+        toolsView.addSubview(listButton)
+        listButton.setImage(UIImage(named: "player_list"), forState: .Normal)
         listButton.addTarget(self, action: #selector(PlayerViewController.listButtonPressed(_:)), forControlEvents: .TouchUpInside)
         listButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
             make.left.equalTo(shareButton.snp_right).inset(-30)
         }
@@ -277,7 +242,7 @@ class PlayerViewController: ViewController {
         nextButton.setImage(UIImage(named: "player_next"), forState: .Normal)
         nextButton.addTarget(self, action: #selector(PlayerViewController.nextButtonPressed(_:)), forControlEvents: .TouchUpInside)
         nextButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 40))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(controlView.snp_centerY)
             make.left.equalTo(playButton.snp_right).inset(-20)
         }
@@ -287,7 +252,7 @@ class PlayerViewController: ViewController {
         prevButton.setImage(UIImage(named: "player_prev"), forState: .Normal)
         prevButton.addTarget(self, action: #selector(PlayerViewController.prevButtonPressed(_:)), forControlEvents: .TouchUpInside)
         prevButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 40))
+            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
             make.centerY.equalTo(controlView.snp_centerY)
             make.right.equalTo(playButton.snp_left).inset(-20)
         }
@@ -327,6 +292,38 @@ class PlayerViewController: ViewController {
         
     }
     
+    func prepareTableView() {
+
+        view.addSubview(playlistContentView)
+        playlistContentView.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        playlistContentView.snp_makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsZero)
+        }
+        
+        let emptyButton = UIButton()
+        playlistContentView.addSubview(emptyButton)
+        emptyButton.addTarget(self, action: #selector(PlayerViewController.topPlaylistContent), forControlEvents: .TouchUpInside)
+        emptyButton.snp_makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsZero)
+        }
+        
+        playlistContentView.addSubview(playlistTableView)
+        playlistTableView.delegate = self
+        playlistTableView.dataSource = self
+        playlistTableView.backgroundColor = UIColor(white: 0, alpha: 0.8)
+        playlistTableView.separatorStyle = .None
+        playlistTableView.snp_makeConstraints(closure: {(make) in
+            make.height.equalTo(Device.height()*0.6)
+            make.left.equalTo(playlistContentView.snp_left)
+            make.right.equalTo(playlistContentView.snp_right)
+            playlistTableViewBottomConstraint = make.top.equalTo(playlistContentView.snp_bottom).offset(0).constraint
+        })
+        
+        playlistTableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
+        
+        playlistContentView.hidden = true
+    }
+    
     //MARK: event
     func playButtonPressed(button: UIButton) {
         
@@ -353,11 +350,13 @@ class PlayerViewController: ViewController {
     }
     
     func repeatButtonPressed(button: UIButton) {
+        print("repeatButtonPressed")
+        
         
     }
     
     func listButtonPressed(button: UIButton) {
-
+        showPlaylistTableView(true)
     }
     
     func heartButtonPressed(button: UIButton) {
@@ -372,24 +371,18 @@ class PlayerViewController: ViewController {
         }
     }
     func shareButtonPressed(button: UIButton) {
-        
+        print("shareButtonPressed")
     }
     func infoButtonPressed(button: UIButton) {
-        
+        print("infoButtonPressed")
     }
     
     func closeButtonPressed() {
-        delegate?.playerViewWillClose()
-        
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     func timerButtonPressed() {
         
-    }
-    
-    func onPlayerBarTap(gesture: UITapGestureRecognizer) {
-        delegate?.playerViewWillOpen()
     }
     
     func progressSliderChanged(slider: UISlider) {
@@ -432,38 +425,208 @@ class PlayerViewController: ViewController {
                 }
                 
                 }, progress: { (velocity, progress) in
-                    print("\(velocity)MB/S - \(progress*100)%)")
+                    print("progress: \(progress*100)%)")
             })
         }
     }
     
     func updateCoverImage(song: Song) {
         titleLabel.text = song.songName
+
         
         if let picUrl = song.picURL {
-            coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                self?.configureFilterImage()
-                })
-        }else if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
-            coverImageView.image = artwork
-            configureFilterImage()
+            coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                if let _ = image{
+                    self?.configureFilterImage(image!)
+                }else {
+                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
+                        self?.coverImageView.image = artwork
+                        self?.configureFilterImage(artwork)
+                    }
+                }
+            })
         }
     }
     
+    func topPlaylistContent() {
+        showPlaylistTableView(false)
+    }
+    
     //MARK: other
-    func configureFilterImage() {
-        filterImage = GPUImagePicture(image: coverImageView.image)
-        filterImage!.addTarget(blurFilter as GPUImageInput, atTextureLocation: 1)
+    func configureFilterImage(coverImage: UIImage) {
+        filterImage = GPUImagePicture(image: coverImage, smoothlyScaleOutput: true)
+        filterImage!.addTarget(blurFilter as GPUImageInput)
         blurFilter.useNextFrameForImageCapture()
         blurFilter.addTarget(backgroundGPUImageView)
         filterImage!.processImage()
         
         blurFilter.blurRadiusInPixels = 10
+        filterImage?.processImageWithCompletionHandler({[weak self] Void in
+            
+            self?.backgroundGPUImageView.alpha = 0.2
+            UIView.animateWithDuration(2, animations: { Void in
+                self?.backgroundGPUImageView.alpha = 1
+            })
+
+        })
+        
+    }
+    
+    func showPlaylistTableView(show: Bool) {
+        let offset: CGFloat = show ? -Device.height()*0.6 : 0
+        playlistTableViewBottomConstraint?.updateOffset(offset)
+        playlistTableView.setNeedsLayout()
+        
+        if show {
+            playlistContentView.hidden = false
+            playlistTableView.reloadData()
+            UIView.animateWithDuration(0.25, animations: {[weak self] Void in
+                self?.playlistTableView.layoutIfNeeded()
+                })
+        }else {
+            UIView.animateWithDuration(0.25, animations: {[weak self] Void in
+                self?.playlistTableView.layoutIfNeeded()
+                }, completion: {Void in
+                    self.playlistContentView.hidden = true
+            })
+        }
+    }
+    
+    func moreButtonPressed(button: UIButton) {
+        let alertController = UIAlertController()
+        let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
+            print("add to collecte")
+        })
+        let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+            print("download music")
+            CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
+        })
+        let action3 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
+            print("sharing")
+        })
+        let action4 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
+            print("remove all from playlist")
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(cancelAction)
+        
+        navigationController!.presentViewController(alertController, animated: true, completion: nil)
     }
 
+
 }
 
-protocol PlayerViewControllerDelegate {
-    func playerViewWillOpen()
-    func playerViewWillClose()
+extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return  MusicManager.sharedManager.playlist.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! SongListTableViewCell
+        cell.delegate = self
+        
+        let song =  MusicManager.sharedManager.playlist[indexPath.row]
+        cell.updateSongInfo(song)
+        
+        return cell
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRectMake(0,0,tableView.bounds.width,40))
+        
+        let downloadButton = UIButton()
+        headerView.addSubview(downloadButton)
+        downloadButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        downloadButton.backgroundColor = UIColor.grayColor3()
+        downloadButton.clipsToBounds = true
+        downloadButton.layer.cornerRadius = 15
+        downloadButton.setTitle("Download All", forState: .Normal)
+        downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadAllButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        downloadButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(100, 30))
+            make.centerY.equalTo(headerView.snp_centerY)
+            make.leftMargin.equalTo(10)
+        }
+        
+        let separatorView = UIView()
+        headerView.addSubview(separatorView)
+        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.snp_makeConstraints { (make) in
+            make.height.equalTo(1.0/Device.screenScale())
+            make.left.equalTo(headerView.snp_left)
+            make.right.equalTo(headerView.snp_right)
+            make.bottom.equalTo(headerView.snp_bottom)
+        }
+        
+        return headerView
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 48
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 42
+    }
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.01
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        MusicManager.sharedManager.currentIndex = indexPath.row
+        NotificationManager.instance.postUpdatePlayerControllerNotification()
+        
+        showPlaylistTableView(false)
+    }
+    
+    func downloadAllButtonPressed(button: UIButton) {
+        if MusicManager.sharedManager.playlist.count > 0 {
+            CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
+            showPlaylistTableView(false)
+        }
+    }
 }
+
+extension PlayerViewController: SongListTableViewCellDelegate {
+    func openToolPanelOfSong(song: Song) {
+        let row =  MusicManager.sharedManager.playlist.indexOf(song)
+        
+        let alertController = UIAlertController()
+
+        let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
+            print("add to collecte")
+        })
+        let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+            print("download music")
+            CoreDB.addSongToDownloadingList(song)
+        })
+        let action3 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
+            print("sharing")
+        })
+        
+        let action4 = UIAlertAction(title: "从列表中移除", style: .Default, handler: { (action) in
+            print("remove from playlist")
+            MusicManager.sharedManager.removeSongFromPlaylist(song)
+            self.playlistTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: row!, inSection: 0)], withRowAnimation: .Bottom)
+        })
+        
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(action4)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+}
+
