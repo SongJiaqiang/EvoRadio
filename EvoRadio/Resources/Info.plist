@@ -42,7 +42,7 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
-			<string>weibo</string>
+			<string>com.weibo</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>wb1389535360</string>
@@ -91,25 +91,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>Fabric</key>
-	<dict>
-		<key>APIKey</key>
-		<string>5bc73f380882d7ea9e1a16bf7a742543619bf198</string>
-		<key>Kits</key>
-		<array>
-			<dict>
-				<key>KitInfo</key>
-				<dict>
-					<key>consumerKey</key>
-					<string>7chxh6P4eP2FrnKzjPibwjkPf</string>
-					<key>consumerSecret</key>
-					<string>ju1iGi0y9Fg3n8yHSVgwEl9WnsNHv8GKdR3nJuKrSjZZeoF9Hm</string>
-				</dict>
-				<key>KitName</key>
-				<string>Twitter</string>
-			</dict>
-		</array>
-	</dict>
 	<key>FacebookAppID</key>
 	<string>1604171342932985</string>
 	<key>FacebookDisplayName</key>

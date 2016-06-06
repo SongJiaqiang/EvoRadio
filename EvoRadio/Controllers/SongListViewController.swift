@@ -32,6 +32,17 @@ class SongListViewController: ViewController {
             listProgramSongs()
         }
     }
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        PlayerView.instance.hide()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        PlayerView.instance.show()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -45,7 +56,6 @@ class SongListViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clearColor()
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
         tableView.separatorStyle = .None
         tableView.snp_makeConstraints(closure: {(make) in
             make.edges.equalTo(UIEdgeInsetsZero)
@@ -102,6 +112,24 @@ class SongListViewController: ViewController {
             coverImageView.image = UIImage.placeholder_cover()
         }
     }
+    
+//    func share(title: String, image: UIImage) {
+//        let shareText = "EvoRadio环境音乐电台，随时随地聆听你想要的音乐。"
+//        let shareUrl = "http://www.songjiaqiang.cn/evoradio"
+//        let shareImage = image ?? UIImage.placeholder_cover()
+//        let socialData = UMSocialData.defaultData()
+//        socialData.extConfig.title = title
+//        socialData.extConfig.qqData.url = shareUrl
+//        UMSocialSnsService.presentSnsIconSheetView(self,
+//                                                   appKey: UM_KEY,
+//                                                   shareText: shareText,
+//                                                   shareImage: shareImage,
+//                                                   shareToSnsNames: [
+//                                                    UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToSina, UMShareToTumblr, UMShareToFacebook, UMShareToTwitter
+//            ],
+//                                                   delegate: nil)
+//    }
+    
 
 
 }
@@ -211,15 +239,18 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
             print("download music")
             CoreDB.addSongsToDownloadingList(self.dataSource)
         })
-        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
-            print("sharing")
-        })
+//        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: {[weak self] (action) in
+//            print("sharing")
+//            let social  = SocialController(shareTitle: (self?.program.programName)!, shareText: (self?.program.programDesc)!, shareImage: (self?.coverImageView.image)!, shareUrl: DOMAIN)
+//            social.shareAudio = false
+//            self?.navigationController!.presentViewController(social, animated: true, completion: nil)
+//        })
         let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         
         alertController.addAction(action1)
         alertController.addAction(action2)
         alertController.addAction(action3)
-        alertController.addAction(action4)
+//        alertController.addAction(action4)
         alertController.addAction(cancelAction)
         
         navigationController!.presentViewController(alertController, animated: true, completion: nil)
@@ -241,15 +272,11 @@ extension SongListViewController: SongListTableViewCellDelegate {
             print("download music")
             CoreDB.addSongToDownloadingList(song)
         })
-        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
-            print("sharing")
-        })
         let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         
         alertController.addAction(action1)
         alertController.addAction(action2)
         alertController.addAction(action3)
-        alertController.addAction(action4)
         alertController.addAction(cancelAction)
         
         navigationController!.presentViewController(alertController, animated: true, completion: nil)

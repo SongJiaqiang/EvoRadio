@@ -66,6 +66,24 @@ extension UIImage {
         return newImage
     }
     
+    /** 
+        压缩图片尺寸到一定内存大小
+        memorySize: kb
+     */
+    func compressImageToLessThan(memorySize: Int) -> UIImage {
+        if memorySize < 1 {
+            return self
+        }
+        let imageData = UIImageJPEGRepresentation(self, 0.8)
+        if imageData?.length < memorySize*1000 {
+            return UIImage(data: imageData!)!
+        }else {
+            UIImage(data: imageData!)?.compressImageToLessThan(memorySize)
+        }
+        
+        return self
+    }
+    
     func alphaImage(alpha: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
         let ctx = UIGraphicsGetCurrentContext();

@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         prepareUMeng()
+        prepareSocial()
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
@@ -78,6 +79,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
+    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+        
+        WeiboSDK.handleOpenURL(url, delegate: nil)
+        return WXApi.handleOpenURL(url, delegate: nil)
+    }
+    
+    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
+        
+        WeiboSDK.handleOpenURL(url, delegate: nil)
+        return WXApi.handleOpenURL(url, delegate: nil)
+    }
+    
     override func canBecomeFirstResponder() -> Bool {
         return true
     }
@@ -131,6 +144,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MobClick.startWithConfigure(config)
         
     }
+    
+    func prepareSocial()  {
+        WXApi.registerApp(WECHAT_APP_ID)
+        
+        let _ = TencentOAuth(appId: QQ_APP_ID, andDelegate: nil)
+        
+        WeiboSDK.enableDebugMode(true)
+        WeiboSDK.registerApp(WEIBO_APP_KEY)
+    }
+    
+    
 
 }
 

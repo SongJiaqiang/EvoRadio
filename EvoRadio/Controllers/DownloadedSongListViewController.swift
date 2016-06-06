@@ -148,21 +148,14 @@ extension DownloadedSongListViewController: SongListTableViewCellDelegate {
             print("add to playlist")
             MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
         })
-        let action2 = UIAlertAction(title: "加入收藏列表", style: .Default, handler: { (action) in
+        let action2 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
             print("add to collecte")
         })
-        let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            print("download music")
-        })
-        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
-            print("sharing")
-        })
+        
         let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
         
         alertController.addAction(action1)
         alertController.addAction(action2)
-        alertController.addAction(action3)
-        alertController.addAction(action4)
         alertController.addAction(cancelAction)
         
         navigationController!.presentViewController(alertController, animated: true, completion: nil)

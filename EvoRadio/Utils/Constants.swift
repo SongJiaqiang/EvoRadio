@@ -8,7 +8,7 @@
 
 import Foundation
 
-let DOMAIN = "http://www.songjiaqiang.cn"
+let DOMAIN = "http://www.songjiaqiang.cn/evoradio"
 
 //MARK: notification names
 let NOWTIME_CHANGED = "NOWTIME_CHANGED"

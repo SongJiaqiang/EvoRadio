@@ -371,7 +371,8 @@ class PlayerViewController: ViewController {
         }
     }
     func shareButtonPressed(button: UIButton) {
-        print("shareButtonPressed")
+        let social  = SocialController(music: MusicManager.sharedManager.currentSong()!, shareImage: coverImageView.image!, shareText: "")
+        presentViewController(social, animated: true, completion: nil)
     }
     func infoButtonPressed(button: UIButton) {
         print("infoButtonPressed")
@@ -432,7 +433,8 @@ class PlayerViewController: ViewController {
     
     func updateCoverImage(song: Song) {
         titleLabel.text = song.songName
-
+        
+        
         
         if let picUrl = song.picURL {
             coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
@@ -505,10 +507,7 @@ class PlayerViewController: ViewController {
             print("download music")
             CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
         })
-        let action3 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
-            print("sharing")
-        })
-        let action4 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
+        let action3 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
             print("remove all from playlist")
         })
         let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
@@ -516,12 +515,27 @@ class PlayerViewController: ViewController {
         alertController.addAction(action1)
         alertController.addAction(action2)
         alertController.addAction(action3)
-        alertController.addAction(action4)
         alertController.addAction(cancelAction)
         
-        navigationController!.presentViewController(alertController, animated: true, completion: nil)
+        presentViewController(alertController, animated: true, completion: nil)
     }
-
+    
+//    func share(title: String, image: UIImage) {
+//        let shareText = "EvoRadio环境音乐电台，随时随地聆听你想要的音乐。"
+//        let shareUrl = "http://www.songjiaqiang.cn/evoradio"
+//        let shareImage = image ?? UIImage.placeholder_cover()
+//        let socialData = UMSocialData.defaultData()
+//        socialData.extConfig.title = title
+//        socialData.extConfig.qqData.url = shareUrl
+//        UMSocialSnsService.presentSnsIconSheetView(self,
+//                                                   appKey: UM_KEY,
+//                                                   shareText: shareText,
+//                                                   shareImage: shareImage,
+//                                                   shareToSnsNames: [
+//            UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToSina, UMShareToTumblr, UMShareToFacebook, UMShareToTwitter
+//            ],
+//                                                   delegate: self)
+//    }
 
 }
 
@@ -612,11 +626,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
             print("download music")
             CoreDB.addSongToDownloadingList(song)
         })
-        let action3 = UIAlertAction(title: "和好友分享", style: .Default, handler: { (action) in
-            print("sharing")
-        })
-        
-        let action4 = UIAlertAction(title: "从列表中移除", style: .Default, handler: { (action) in
+        let action3 = UIAlertAction(title: "从列表中移除", style: .Default, handler: { (action) in
             print("remove from playlist")
             MusicManager.sharedManager.removeSongFromPlaylist(song)
             self.playlistTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: row!, inSection: 0)], withRowAnimation: .Bottom)
@@ -627,10 +637,27 @@ extension PlayerViewController: SongListTableViewCellDelegate {
         alertController.addAction(action1)
         alertController.addAction(action2)
         alertController.addAction(action3)
-        alertController.addAction(action4)
         alertController.addAction(cancelAction)
         
         presentViewController(alertController, animated: true, completion: nil)
     }
 }
 
+
+//extension PlayerViewController: UMSocialUIDelegate {
+//        
+//    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
+////        switch response.responseCode{
+////        case UMSResponseCodeSuccess:
+////            print("share success")
+////            
+////            break
+////        default: break
+////        }
+//        if response.responseCode == UMSResponseCodeSuccess {
+//            print("share success")
+//        }else {
+//            print("share failed with : \(response.error)")
+//        }
+//    }
+//}

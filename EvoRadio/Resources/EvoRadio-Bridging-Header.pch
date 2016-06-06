@@ -16,5 +16,9 @@
 
 //MARK: UMeng
 #import <UMMobClick/MobClick.h>
+#import "WXApi.h"
+#import <TencentOpenAPI/TencentOAuth.h>
+#import <TencentOpenAPI/QQApiInterface.h>
+#import "WeiboSDK.h"
 
 #endif /* EvoRadio_Bridge_Header_pch */

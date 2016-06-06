@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29258049669E5F330022BB /* Pods_EvoRadio.framework */; };
+		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
+		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
+		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
+		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
+		900C725B1D057C71006EBE78 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72591D057C71006EBE78 /* TencentOpenAPI.framework */; };
+		900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
@@ -45,6 +51,11 @@
 		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
 		90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */; };
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
+		90C32B691D0586A500C87DAF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */; };
+		90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 90C32B661D0586A500C87DAF /* WeiboSDK.bundle */; };
+		90C32B6C1D0586D400C87DAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6B1D0586D400C87DAF /* CoreText.framework */; };
+		90C32B6E1D0586E200C87DAF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6D1D0586E200C87DAF /* ImageIO.framework */; };
+		90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */; };
 		90D775461CF9F89700899492 /* SongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775451CF9F89700899492 /* SongListViewController.swift */; };
 		90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D775481CFA37F800899492 /* CDCoverImageView.swift */; };
 		90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */; };
@@ -63,7 +74,6 @@
 		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
 		90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A61D02C528002ECC8C /* libz.tbd */; };
 		90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A81D02C867002ECC8C /* CoreTelephony.framework */; };
-		90FB91AB1D02C877002ECC8C /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91AA1D02C877002ECC8C /* libsqlite3.tbd */; };
 		90FB91AD1D02CDD6002ECC8C /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */; };
 		90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91AE1D02D4A3002ECC8C /* Security.framework */; };
 		90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91B01D02D4B7002ECC8C /* libiconv.tbd */; };
@@ -84,6 +94,15 @@
 /* Begin PBXFileReference section */
 		8A29258049669E5F330022BB /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
+		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; };
+		900C724C1D0563F0006EBE78 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
+		900C724D1D0563F0006EBE78 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		900C724E1D0563F0006EBE78 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
+		900C724F1D0563F0006EBE78 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
+		900C72501D0563F0006EBE78 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
+		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		900C72591D057C71006EBE78 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
+		900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -131,6 +150,22 @@
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EVReflections.swift; sourceTree = "<group>"; };
 		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlaylistManager.swift; sourceTree = "<group>"; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Windows.swift; sourceTree = "<group>"; };
+		90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		90C32B5D1D0586A500C87DAF /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
+		90C32B5E1D0586A500C87DAF /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
+		90C32B5F1D0586A500C87DAF /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
+		90C32B601D0586A500C87DAF /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
+		90C32B611D0586A500C87DAF /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
+		90C32B621D0586A500C87DAF /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
+		90C32B631D0586A500C87DAF /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
+		90C32B641D0586A500C87DAF /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
+		90C32B651D0586A500C87DAF /* WeiboSDK+Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeiboSDK+Statistics.h"; sourceTree = "<group>"; };
+		90C32B661D0586A500C87DAF /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		90C32B671D0586A500C87DAF /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		90C32B681D0586A500C87DAF /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
+		90C32B6B1D0586D400C87DAF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
+		90C32B6D1D0586E200C87DAF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
+		90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		90D775451CF9F89700899492 /* SongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongListViewController.swift; path = Controllers/SongListViewController.swift; sourceTree = "<group>"; };
 		90D775481CFA37F800899492 /* CDCoverImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDCoverImageView.swift; path = Views/CDCoverImageView.swift; sourceTree = "<group>"; };
 		90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SongListTableViewCell.swift; path = Views/SongListTableViewCell.swift; sourceTree = "<group>"; };
@@ -173,13 +208,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */,
+				90C32B6E1D0586E200C87DAF /* ImageIO.framework in Frameworks */,
+				90C32B6C1D0586D400C87DAF /* CoreText.framework in Frameworks */,
+				900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */,
 				90FB91B71D02D503002ECC8C /* CoreGraphics.framework in Frameworks */,
 				90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */,
 				90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */,
 				90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */,
+				900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
-				90FB91AB1D02C877002ECC8C /* libsqlite3.tbd in Frameworks */,
+				90C32B691D0586A500C87DAF /* libWeiboSDK.a in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
+				900C725B1D057C71006EBE78 /* TencentOpenAPI.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */,
 			);
@@ -191,6 +232,10 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */,
+				90C32B6D1D0586E200C87DAF /* ImageIO.framework */,
+				90C32B6B1D0586D400C87DAF /* CoreText.framework */,
+				900C72531D056439006EBE78 /* libsqlite3.0.tbd */,
 				90FB91B61D02D503002ECC8C /* CoreGraphics.framework */,
 				90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */,
 				90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */,
@@ -205,6 +250,37 @@
 				8A29258049669E5F330022BB /* Pods_EvoRadio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		900C724A1D0563F0006EBE78 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				90C32B5B1D0586A500C87DAF /* WeiboSDK */,
+				900C72581D057C71006EBE78 /* Tencent */,
+				900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */,
+			);
+			path = Libs;
+			sourceTree = "<group>";
+		};
+		900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */ = {
+			isa = PBXGroup;
+			children = (
+				900C724C1D0563F0006EBE78 /* libWeChatSDK.a */,
+				900C724D1D0563F0006EBE78 /* README.txt */,
+				900C724E1D0563F0006EBE78 /* WechatAuthSDK.h */,
+				900C724F1D0563F0006EBE78 /* WXApi.h */,
+				900C72501D0563F0006EBE78 /* WXApiObject.h */,
+			);
+			path = OpenSDK1.7.1;
+			sourceTree = "<group>";
+		};
+		900C72581D057C71006EBE78 /* Tencent */ = {
+			isa = PBXGroup;
+			children = (
+				900C72591D057C71006EBE78 /* TencentOpenAPI.framework */,
+				900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */,
+			);
+			path = Tencent;
 			sourceTree = "<group>";
 		};
 		902FBCC41CBEAC010051A93B = {
@@ -236,6 +312,7 @@
 				909E65AE1CC0840700B0C49B /* Models */,
 				909E65AF1CC0842100B0C49B /* Extensions */,
 				909E65B11CC0843700B0C49B /* Utils */,
+				900C724A1D0563F0006EBE78 /* Libs */,
 				909E659C1CC0831100B0C49B /* Resources */,
 			);
 			path = EvoRadio;
@@ -298,6 +375,7 @@
 				9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */,
 				9097BB201CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift */,
 				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
+				900C72481D054888006EBE78 /* SocialController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -360,6 +438,26 @@
 				90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		90C32B5B1D0586A500C87DAF /* WeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */,
+				90C32B5D1D0586A500C87DAF /* WBHttpRequest+WeiboGame.h */,
+				90C32B5E1D0586A500C87DAF /* WBHttpRequest+WeiboShare.h */,
+				90C32B5F1D0586A500C87DAF /* WBHttpRequest+WeiboToken.h */,
+				90C32B601D0586A500C87DAF /* WBHttpRequest+WeiboUser.h */,
+				90C32B611D0586A500C87DAF /* WBHttpRequest.h */,
+				90C32B621D0586A500C87DAF /* WBSDKBasicButton.h */,
+				90C32B631D0586A500C87DAF /* WBSDKCommentButton.h */,
+				90C32B641D0586A500C87DAF /* WBSDKRelationshipButton.h */,
+				90C32B651D0586A500C87DAF /* WeiboSDK+Statistics.h */,
+				90C32B661D0586A500C87DAF /* WeiboSDK.bundle */,
+				90C32B671D0586A500C87DAF /* WeiboSDK.h */,
+				90C32B681D0586A500C87DAF /* WeiboUser.h */,
+			);
+			path = WeiboSDK;
 			sourceTree = "<group>";
 		};
 		90D7754C1CFA992300899492 /* Cell */ = {
@@ -450,6 +548,9 @@
 				904BA46B1CC9129800CD374F /* music2.mp3 in Resources */,
 				904BA46C1CC9129800CD374F /* music3.mp3 in Resources */,
 				904BA46A1CC9129800CD374F /* music1.mp3 in Resources */,
+				900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
+				90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */,
+				900C72521D0563F0006EBE78 /* README.txt in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -532,6 +633,7 @@
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */,
+				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				90B59E6A1CFD7AD0001E8F23 /* TabBar.swift in Sources */,
@@ -665,10 +767,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/EvoRadio/Libs/Tencent",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EvoRadio/Libs/OpenSDK1.7.1",
+					"$(PROJECT_DIR)/EvoRadio/Libs/WeiboSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -687,10 +795,16 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
+					"$(PROJECT_DIR)/EvoRadio/Libs/Tencent",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/EvoRadio/Libs/OpenSDK1.7.1",
+					"$(PROJECT_DIR)/EvoRadio/Libs/WeiboSDK",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
