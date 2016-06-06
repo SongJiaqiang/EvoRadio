@@ -454,6 +454,10 @@ class PlayerViewController: ViewController {
     
     //MARK: other
     func configureFilterImage(coverImage: UIImage) {
+        if Device.shareApplication().applicationState == .Background {
+            return
+        }
+        
         filterImage = GPUImagePicture(image: coverImage, smoothlyScaleOutput: true)
         filterImage!.addTarget(blurFilter as GPUImageInput)
         blurFilter.useNextFrameForImageCapture()
