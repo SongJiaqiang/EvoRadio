@@ -112,26 +112,6 @@ class SongListViewController: ViewController {
             coverImageView.image = UIImage.placeholder_cover()
         }
     }
-    
-//    func share(title: String, image: UIImage) {
-//        let shareText = "EvoRadio环境音乐电台，随时随地聆听你想要的音乐。"
-//        let shareUrl = "http://www.songjiaqiang.cn/evoradio"
-//        let shareImage = image ?? UIImage.placeholder_cover()
-//        let socialData = UMSocialData.defaultData()
-//        socialData.extConfig.title = title
-//        socialData.extConfig.qqData.url = shareUrl
-//        UMSocialSnsService.presentSnsIconSheetView(self,
-//                                                   appKey: UM_KEY,
-//                                                   shareText: shareText,
-//                                                   shareImage: shareImage,
-//                                                   shareToSnsNames: [
-//                                                    UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToSina, UMShareToTumblr, UMShareToFacebook, UMShareToTwitter
-//            ],
-//                                                   delegate: nil)
-//    }
-    
-
-
 }
 
 extension SongListViewController: UITableViewDataSource, UITableViewDelegate {

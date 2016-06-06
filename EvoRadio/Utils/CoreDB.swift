@@ -11,6 +11,8 @@ import Foundation
 let KEY_ALLCHANNELS = "all_channels"
 let KEY_ALLNOWCHANNELS = "all_now_channels"
 let KEY_CUSTOMRADIOS = "custom_radios"
+let KEY_PROGRAMS = "programs"
+let KEY_SONGS = "songs"
 let KEY_SELECTEDINDEXES = "selected_indexes"
 let KEY_PLAYLSIT = "playlist"
 let KEY_LAST_PLAYLSIT = "last_playlist"
@@ -48,6 +50,31 @@ class CoreDB {
         }
         return nil
     }
+    
+    class func savePrograms(endpoint: String, responseData: [[String : AnyObject]]) {
+        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_PROGRAMS+endpoint)
+    }
+    
+    class func getPrograms(endpoint: String) -> [[String : AnyObject]]?{
+        let responseData = WLevelDb.sharedDb().objectForKey(KEY_PROGRAMS+endpoint)
+        if let _ = responseData {
+            return responseData as? [[String : AnyObject]]
+        }
+        return nil
+    }
+    
+    class func saveSongs(endpoint: String, responseData: [[String : AnyObject]]) {
+        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_SONGS+endpoint)
+    }
+    
+    class func getSongs(endpoint: String) -> [[String : AnyObject]]?{
+        let responseData = WLevelDb.sharedDb().objectForKey(KEY_SONGS+endpoint)
+        if let _ = responseData {
+            return responseData as? [[String : AnyObject]]
+        }
+        return nil
+    }
+    
     
     class func saveCustomRadios(customRadios: [[String: AnyObject]]) {
         WLevelDb.sharedDb().setObject(customRadios, forKey: KEY_CUSTOMRADIOS)

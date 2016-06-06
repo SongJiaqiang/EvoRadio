@@ -25,7 +25,7 @@ class API {
     func fetch_all_channels(onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         
         if let responseData = CoreDB.getAllChannels() {
-            let items = [Radio].init(dictArray: responseData)
+            let items = [Radio](dictArray: responseData)
             onSuccess(items)
             return
         }
@@ -87,13 +87,21 @@ class API {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
         
+        if let responseData = CoreDB.getPrograms(endpoint) {
+            let items = [Program](dictArray: responseData)
+            onSuccess(items)
+        }
+        
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {
                 
                 let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
 
                 if dict["err"] as! String == "hapn.ok" {
-                    let items = [Program](dictArray: dict["data"]!["lists"] as? [NSDictionary])
+                    let data = dict["data"]!["lists"] as? [[String : AnyObject]]
+                    CoreDB.savePrograms(endpoint, responseData: data!)
+                    
+                    let items = [Program](dictArray: data)
                     onSuccess(items)
                 }
                 
@@ -114,11 +122,19 @@ class API {
             endpoint = commonEP("api/play.sharePlayProgram.json?device=iPhone%20OS%209.3.2&luid=&isShare=1&program_id=\(programID)")
         }
         
+        if let responseData = CoreDB.getSongs(endpoint) {
+            let items = [Song](dictArray: responseData)
+            onSuccess(items)
+        }
+        
         Alamofire.request(.GET, endpoint).responseJSON { (response) in
             do {
                 let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
                 if dict["err"] as! String == "hapn.ok" {
-                    let items = [Song](dictArray: dict["data"]!["songs"] as? [NSDictionary])
+                    let data = dict["data"]!["songs"] as? [[String: AnyObject]]
+                    CoreDB.saveSongs(endpoint, responseData: data!)
+                    
+                    let items = [Song](dictArray: data!)
                     onSuccess(items)
                 }
                 
