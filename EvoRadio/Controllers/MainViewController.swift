@@ -147,9 +147,7 @@ extension MainViewController: UIScrollViewDelegate {
         
         let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width()) + 1
         
-        sortTabBar.updateCurrentIndex(pageIndex)
-        
-        
+        sortTabBar.updateCurrentIndex(max(min(pageIndex, 4), 0))
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
