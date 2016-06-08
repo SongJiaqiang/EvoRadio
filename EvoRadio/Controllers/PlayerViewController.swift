@@ -29,10 +29,14 @@ class PlayerViewController: ViewController {
     let nextButton = UIButton()
     let prevButton = UIButton()
     let loopButton = UIButton()
+    let timerButton = UIButton()
     let titleLabel = UILabel()
     let playlistTableView = UITableView(frame: CGRectZero, style: .Grouped)
     let playlistContentView = UIView()
     var playlistTableViewBottomConstraint: Constraint?
+    
+    var autoStopTimer: NSTimer?
+    var leftTime: NSTimeInterval = 3600
     
     lazy var downloadManager: DownloadManager = {[unowned self] in
         let sessionIdentifer = "cn.songjiaqiang.evoradio.player"
@@ -175,11 +179,20 @@ class PlayerViewController: ViewController {
             make.bottom.equalTo(view.snp_bottom)
         }
         
-        let infoButton = UIButton()
-        toolsView.addSubview(infoButton)
-        infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
-        infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        infoButton.snp_makeConstraints { (make) in
+//        let infoButton = UIButton()
+//        toolsView.addSubview(infoButton)
+//        infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
+//        infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
+//        infoButton.snp_makeConstraints { (make) in
+//            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
+//            make.center.equalTo(toolsView.center)
+//        }
+        
+        toolsView.addSubview(timerButton)
+        timerButton.setImage(UIImage(named: "player_timer"), forState: .Normal)
+        timerButton.setImage(UIImage(named: "player_timer_selected"), forState: .Selected)
+        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        timerButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.center.equalTo(toolsView.center)
         }
@@ -187,12 +200,12 @@ class PlayerViewController: ViewController {
         let downloadButton = UIButton()
         toolsView.addSubview(downloadButton)
         downloadButton.setImage(UIImage(named: "player_download"), forState: .Normal)
-        downloadButton.setImage(UIImage(named: "player_download"), forState: .Selected)
+        downloadButton.setImage(UIImage(named: "player_download_selected"), forState: .Selected)
         downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadButtonPressed(_:)), forControlEvents: .TouchUpInside)
         downloadButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.right.equalTo(infoButton.snp_left)
+            make.right.equalTo(timerButton.snp_left)
         }
         
         let shareButton = UIButton()
@@ -202,7 +215,7 @@ class PlayerViewController: ViewController {
         shareButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.left.equalTo(infoButton.snp_right)
+            make.left.equalTo(timerButton.snp_right)
         }
         
         toolsView.addSubview(loopButton)
@@ -389,8 +402,9 @@ class PlayerViewController: ViewController {
     func downloadButtonPressed(button: UIButton) {
         if let cSong = MusicManager.sharedManager.currentSong() {
             CoreDB.addSongToDownloadingList(cSong)
-            
             button.selected = true
+            
+            HudManager.showText("已经加入下载列表")
         }
     }
     func shareButtonPressed(button: UIButton) {
@@ -407,7 +421,49 @@ class PlayerViewController: ViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func timerButtonPressed() {
+    func timerButtonPressed(button: UIButton) {
+        if button.selected {
+            button.selected = false
+            if let _ = autoStopTimer {
+                autoStopTimer?.invalidate()
+                autoStopTimer = nil
+            }
+            
+        }else {
+            let alertController = UIAlertController(title: "设置自动停止播放时间", message: nil, preferredStyle: .ActionSheet)
+            let action1 = UIAlertAction(title: "10 minutes", style: .Default, handler: { (action) in
+                button.selected = true
+                self.leftTime = 600
+                if self.autoStopTimer == nil {
+                    self.autoStopTimer = NSTimer(timeInterval: 5, target: self, selector: #selector(PlayerViewController.autoStopHandle), userInfo: nil, repeats: true)
+                    NSRunLoop.mainRunLoop().addTimer(self.autoStopTimer!, forMode: NSRunLoopCommonModes)
+                }
+                
+            })
+            let action2 = UIAlertAction(title: "15 minutes", style: .Default, handler: { (action) in
+                button.selected = true
+                self.leftTime = 900
+            })
+            let action3 = UIAlertAction(title: "30 minutes", style: .Default, handler: { (action) in
+                button.selected = true
+                self.leftTime = 1800
+            })
+            let action4 = UIAlertAction(title: "1 hour", style: .Default, handler: { (action) in
+                button.selected = true
+                self.leftTime = 3600
+            })
+            let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+            
+            alertController.addAction(action1)
+            alertController.addAction(action2)
+            alertController.addAction(action3)
+            alertController.addAction(action4)
+            alertController.addAction(cancelAction)
+            
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+        
         
     }
     
@@ -455,23 +511,20 @@ class PlayerViewController: ViewController {
         }
     }
     
-    func updateCoverImage(song: Song) {
-        debugPrint("update cover image")
-        titleLabel.text = song.songName
-        
-        if let picUrl = song.picURL {
-            coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                if let _ = image{
-                    self?.configureFilterImage(image!)
-                }else {
-                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
-                        self?.coverImageView.image = artwork
-                        self?.configureFilterImage(artwork)
-                    }
-                }
-            })
+    func autoStopHandle() {
+        debugPrint("Timer: \(leftTime)")
+        leftTime -= 5
+        if leftTime <= 0 {
+            debugPrint("Time out, will stop music")
+            
+            autoStopTimer?.invalidate()
+            autoStopTimer = nil
+            
+            MusicManager.sharedManager.pauseItem()
+            timerButton.selected = false
         }
     }
+    
     
     //MARK: other
     func configureFilterImage(coverImage: UIImage) {
@@ -495,6 +548,25 @@ class PlayerViewController: ViewController {
 
         })
         
+    }
+    
+    
+    func updateCoverImage(song: Song) {
+        debugPrint("update cover image")
+        titleLabel.text = song.songName
+        
+        if let picUrl = song.picURL {
+            coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                if let _ = image{
+                    self?.configureFilterImage(image!)
+                }else {
+                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
+                        self?.coverImageView.image = artwork
+                        self?.configureFilterImage(artwork)
+                    }
+                }
+                })
+        }
     }
     
     func showPlaylistTableView(show: Bool) {
@@ -608,27 +680,6 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func moreButtonPressed(button: UIButton) {
-        let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
-            print("add to collecte")
-        })
-        let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
-        })
-        let action3 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
-            print("remove all from playlist")
-        })
-        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
-        
-        alertController.addAction(action1)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-        alertController.addAction(cancelAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
     func emptyButtonPressed(button: UIButton) {
         showPlaylistTableView(false)
     }
@@ -646,6 +697,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
             CoreDB.addSongToDownloadingList(song)
+            HudManager.showText("已经加入下载列表")
         })
         let action3 = UIAlertAction(title: "从列表中移除", style: .Default, handler: { (action) in
             MusicManager.sharedManager.removeSongFromPlaylist(song)
