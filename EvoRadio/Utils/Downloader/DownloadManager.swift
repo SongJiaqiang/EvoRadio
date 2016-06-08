@@ -329,7 +329,7 @@ extension DownloadManager {
         
         // 判断文件是否已存在
         if fileExistsWithName(fileName, atDirectory: designatedDirectory) {
-            debugPrint("文件已存在")
+            debugPrint("音乐已下载成功")
             self.delegate?.downloadRequestFinished(downloadModel, index: -1)
             return
         }
@@ -337,7 +337,7 @@ extension DownloadManager {
         // 判断是否已经开始在下载队列中
         for item in downloadingArray {
             if item.fileName == fileName && item.designatedDirectory == designatedDirectory {
-                debugPrint("文件正在下载")
+                debugPrint("音乐正在下载中")
                 return
             }
         }

@@ -69,6 +69,10 @@ class Device: NSObject {
     static func fileManager() -> NSFileManager {
         return NSFileManager.defaultManager()
     }
+    
+    static func isInBackground() -> Bool {
+        return Device.shareApplication().applicationState == .Background
+    }
 }
 
 

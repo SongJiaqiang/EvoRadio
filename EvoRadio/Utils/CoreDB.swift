@@ -8,16 +8,17 @@
 
 import Foundation
 
-let KEY_ALLCHANNELS = "all_channels"
-let KEY_ALLNOWCHANNELS = "all_now_channels"
-let KEY_CUSTOMRADIOS = "custom_radios"
-let KEY_PROGRAMS = "programs"
-let KEY_SONGS = "songs"
-let KEY_SELECTEDINDEXES = "selected_indexes"
-let KEY_PLAYLSIT = "playlist"
-let KEY_LAST_PLAYLSIT = "last_playlist"
-let KEY_DOWNLOADED_LIST = "downloaded_list"
-let KEY_DOWNLOADING_LIST = "downloading_list"
+let DB_ALLCHANNELS = "all_channels"
+let DB_ALLNOWCHANNELS = "all_now_channels"
+let DB_CUSTOMRADIOS = "custom_radios"
+let DB_PROGRAMS = "programs"
+let DB_SONGS = "songs"
+let DB_SELECTEDINDEXES = "selected_indexes"
+let DB_PLAYLSIT = "playlist"
+let DB_LAST_PLAYLSIT = "last_playlist"
+let DB_DOWNLOADED_LIST = "downloaded_list"
+let DB_DOWNLOADING_LIST = "downloading_list"
+let DB_PLAY_MODE = "play_mode"
 
 
 let leveldb: WLevelDb = WLevelDb.sharedDb()
@@ -29,22 +30,22 @@ class CoreDB {
     }
     
     class func saveAllChannels(responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_ALLCHANNELS)
+        WLevelDb.sharedDb().setObject(responseData, forKey: DB_ALLCHANNELS)
     }
     
     class func getAllChannels() -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(KEY_ALLCHANNELS)
+        let responseData = WLevelDb.sharedDb().objectForKey(DB_ALLCHANNELS)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
         return nil
     }
     class func saveAllNowChannels(responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_ALLNOWCHANNELS)
+        WLevelDb.sharedDb().setObject(responseData, forKey: DB_ALLNOWCHANNELS)
     }
     
     class func getAllNowChannels() -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(KEY_ALLNOWCHANNELS)
+        let responseData = WLevelDb.sharedDb().objectForKey(DB_ALLNOWCHANNELS)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
@@ -52,11 +53,11 @@ class CoreDB {
     }
     
     class func savePrograms(endpoint: String, responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_PROGRAMS+endpoint)
+        WLevelDb.sharedDb().setObject(responseData, forKey: DB_PROGRAMS+endpoint)
     }
     
     class func getPrograms(endpoint: String) -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(KEY_PROGRAMS+endpoint)
+        let responseData = WLevelDb.sharedDb().objectForKey(DB_PROGRAMS+endpoint)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
@@ -64,11 +65,11 @@ class CoreDB {
     }
     
     class func saveSongs(endpoint: String, responseData: [[String : AnyObject]]) {
-        WLevelDb.sharedDb().setObject(responseData, forKey: KEY_SONGS+endpoint)
+        WLevelDb.sharedDb().setObject(responseData, forKey: DB_SONGS+endpoint)
     }
     
     class func getSongs(endpoint: String) -> [[String : AnyObject]]?{
-        let responseData = WLevelDb.sharedDb().objectForKey(KEY_SONGS+endpoint)
+        let responseData = WLevelDb.sharedDb().objectForKey(DB_SONGS+endpoint)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }
@@ -77,11 +78,11 @@ class CoreDB {
     
     
     class func saveCustomRadios(customRadios: [[String: AnyObject]]) {
-        WLevelDb.sharedDb().setObject(customRadios, forKey: KEY_CUSTOMRADIOS)
+        WLevelDb.sharedDb().setObject(customRadios, forKey: DB_CUSTOMRADIOS)
     }
     
     class func getCustomRadios() -> [[String: AnyObject]]{
-        let customRadios = WLevelDb.sharedDb().objectForKey(KEY_CUSTOMRADIOS)
+        let customRadios = WLevelDb.sharedDb().objectForKey(DB_CUSTOMRADIOS)
         if let _ = customRadios {
             return customRadios as! [[String : AnyObject]]
         }
@@ -144,11 +145,11 @@ class CoreDB {
     }
     
     class func saveSelectedIndexes(indexes: [String : Int]) {
-        WLevelDb.sharedDb().setObject(indexes, forKey: KEY_SELECTEDINDEXES)
+        WLevelDb.sharedDb().setObject(indexes, forKey: DB_SELECTEDINDEXES)
     }
     
     class func getSelectedIndexes() -> [String : Int]? {
-        if let indexes = WLevelDb.sharedDb().objectForKey(KEY_SELECTEDINDEXES) {
+        if let indexes = WLevelDb.sharedDb().objectForKey(DB_SELECTEDINDEXES) {
             return indexes as? [String : Int]
         }else {
             return nil
@@ -156,19 +157,19 @@ class CoreDB {
     }
     // 清除选择时刻缓存
     class func clearSelectedIndexes() {
-        WLevelDb.sharedDb().removeObjectForKey(KEY_SELECTEDINDEXES)
+        WLevelDb.sharedDb().removeObjectForKey(DB_SELECTEDINDEXES)
     }
     
     
     // 存储播放列表
     class func savePlaylist(songs: [Song]) {
         let songsDict = songs.toDictionaryArray()
-        WLevelDb.sharedDb().setObject(songsDict, forKey: KEY_PLAYLSIT)
+        WLevelDb.sharedDb().setObject(songsDict, forKey: DB_PLAYLSIT)
     }
     /** 获取播放列表 */
     class func getPlaylist() -> [Song] {
         var songs = [Song]()
-        if let songsDict = leveldb.objectForKey(KEY_PLAYLSIT) {
+        if let songsDict = leveldb.objectForKey(DB_PLAYLSIT) {
             songs = [Song](dictArray: songsDict as? [NSDictionary])
         }
         
@@ -180,12 +181,12 @@ class CoreDB {
         let lastPlaylist = LastPlaylist(list: playlist, index: indexOfPlaylist, time: timePlayed)
         let playlistDict = lastPlaylist.toDictionary()
         
-        WLevelDb.sharedDb().setObject(playlistDict, forKey: KEY_LAST_PLAYLSIT)
+        WLevelDb.sharedDb().setObject(playlistDict, forKey: DB_LAST_PLAYLSIT)
     }
     
     /** 获取上次的播放列表 */
     class func getLastPlaylist() -> LastPlaylist? {
-        if let lastPlaylist = leveldb.objectForKey(KEY_LAST_PLAYLSIT) {
+        if let lastPlaylist = leveldb.objectForKey(DB_LAST_PLAYLSIT) {
             return LastPlaylist(dictionary: lastPlaylist as! NSDictionary)
         }
         return nil
@@ -195,7 +196,7 @@ class CoreDB {
     class func addSongToDownloadedList(song: Song) {
         let dict = song.toDictionary()
         var newSongs: [NSDictionary]
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADED_LIST) {
             for item in (songs as! [NSDictionary]) {
                 if (item["song_id"] as! String) == song.songID {
                     return
@@ -206,12 +207,12 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         newSongs.append(dict)
-        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADED_LIST)
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
     }
     
     /** 获取已下载歌曲数据 */
     class func getDownloadedSongs() -> [Song]? {
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADED_LIST) {
             return [Song](dictArray: songs as? [NSDictionary])
         }
         
@@ -222,7 +223,7 @@ class CoreDB {
     class func getDownloadedPrograms() -> [Program] {
         let programs = [Program]()
         
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADED_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADED_LIST) {
             
             (songs as! [NSDictionary])
             
@@ -239,7 +240,7 @@ class CoreDB {
     class func addSongToDownloadingList(song: Song) {
         let dict = song.toDictionary()
         var newSongs: [NSDictionary]
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADING_LIST) {
             for item in (songs as! [NSDictionary]) {
                 if (item["song_id"] as! String) == song.songID {
                     return
@@ -250,7 +251,7 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         newSongs.append(dict)
-        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
         
         NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
@@ -258,7 +259,7 @@ class CoreDB {
     /** 添加一波歌曲下载 */
     class func addSongsToDownloadingList(songs: [Song]) {
         var newSongs: [NSDictionary]
-        if let songsArray = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+        if let songsArray = leveldb.objectForKey(DB_DOWNLOADING_LIST) {
             newSongs = songsArray as! [NSDictionary]
             for song in songs {
                 var isExit = false
@@ -277,7 +278,7 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         
-        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
         
         NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
@@ -285,7 +286,7 @@ class CoreDB {
     /** 删除一首歌曲下载数据 */
     class func removeSongFromDownloadingList(song: Song) {
         var newSongs: [NSDictionary]
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADING_LIST) {
             newSongs = songs as! [NSDictionary]
             for item in newSongs {
                 if (item["song_id"] as! String) == song.songID {
@@ -296,15 +297,15 @@ class CoreDB {
         }else {
             newSongs = [NSDictionary]()
         }
-        leveldb.setObject(newSongs, forKey: KEY_DOWNLOADING_LIST)
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
         
         NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
     
     /** 删除所有歌曲下载数据 */
     class func removeAllFromDownloadingList() {
-        if let _ = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
-            leveldb.removeObjectForKey(KEY_DOWNLOADING_LIST)
+        if let _ = leveldb.objectForKey(DB_DOWNLOADING_LIST) {
+            leveldb.removeObjectForKey(DB_DOWNLOADING_LIST)
         }
         
         NotificationManager.instance.postDownloadingListChangedNotification(["songs":[Song]()])
@@ -312,7 +313,7 @@ class CoreDB {
     
     /** 获取正在下载的歌曲数据 */
     class func getDownloadingSongs() -> [Song]? {
-        if let songs = leveldb.objectForKey(KEY_DOWNLOADING_LIST) {
+        if let songs = leveldb.objectForKey(DB_DOWNLOADING_LIST) {
             return [Song](dictArray: songs as? [NSDictionary])
         }else {
             return nil
@@ -323,5 +324,16 @@ class CoreDB {
         
     }
     
+    class func changePlayerPlayMode(mode: String) {
+        leveldb.setObject(mode, forKey: DB_PLAY_MODE)
+    }
+    
+    class func playerPlayMode() -> String? {
+        if let mode = leveldb.objectForKey(DB_PLAY_MODE) {
+            return mode as? String
+        }else {
+            return nil
+        }
+    }
     
 }

@@ -9,6 +9,12 @@
 import UIKit
 import AFSoundManager
 
+enum SoundQueuePlayMode: String {
+    case ListLoop = "list_loop"
+    case SingleLoop = "single_loop"
+    case Random = "random"
+}
+
 class MusicManager: NSObject {
     
     private var soundQueue: AFSoundQueue?
@@ -53,12 +59,9 @@ class MusicManager: NSObject {
                 
                 }, andFinishedBlock: {[weak self] (nextItem) in
                     print("Finished and next one")
-                    if let _ = nextItem {
-                        NotificationManager.instance.postPlayMusicProgressEndedNotification(["nextItem":nextItem])
-                    }else {
-                        print("Haven't next")
-                    }
-                    self?.playNext()
+                    
+                    NotificationManager.instance.postPlayMusicProgressEndedNotification()
+                    self?.playNextWhenFinished()
                     
             })
         }
@@ -145,14 +148,14 @@ class MusicManager: NSObject {
     }
     
     func playItemAtIndex(index: Int) {
-        soundQueue?.status = .Playing
         soundQueue?.playItemAtIndex(index)
+        soundQueue?.status = .Playing
         updatePlayingInfo()
     }
     
     func playItem() {
-        soundQueue?.status = .Playing
         soundQueue?.playCurrentItem()
+        soundQueue?.status = .Playing
         updatePlayingInfo()
     }
     
@@ -164,6 +167,19 @@ class MusicManager: NSObject {
     func playNext() {
         incrementIndex()
         NotificationManager.instance.postUpdatePlayerControllerNotification()
+    }
+    
+    func playNextWhenFinished() {
+        let currentMode = currentPlayMode()
+        if currentMode == .Random {
+            currentIndex = Int(arc4random_uniform(UInt32(playlist.count)))
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
+        }else if currentMode == .ListLoop {
+            incrementIndex()
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
+        }else {
+            playAtSecond(0)
+        }
     }
     
     func playPrev() {
@@ -239,10 +255,45 @@ class MusicManager: NSObject {
             NotificationManager.instance.postUpdatePlayerControllerNotification()
         }
     }
+    
     func saveLastPlaylist() {
         if playlist.count > 0 {
             CoreDB.saveLastPlaylist(playlist, indexOfPlaylist: currentIndex, timePlayed: 0)
         }
     }
     
+    func changePlayMode() -> SoundQueuePlayMode {
+        var newMode: SoundQueuePlayMode = .ListLoop
+        if let mode = CoreDB.playerPlayMode() {
+            switch mode {
+            case SoundQueuePlayMode.ListLoop.rawValue:
+                    newMode = .SingleLoop
+            case SoundQueuePlayMode.SingleLoop.rawValue:
+                newMode = .Random
+            case SoundQueuePlayMode.Random.rawValue:
+                newMode = .ListLoop
+            default:
+                break
+            }
+        }
+        
+        CoreDB.changePlayerPlayMode(newMode.rawValue)
+        return newMode
+    }
+    
+    func currentPlayMode() -> SoundQueuePlayMode {
+        if let mode = CoreDB.playerPlayMode() {
+            switch mode {
+            case SoundQueuePlayMode.ListLoop.rawValue:
+                return.ListLoop
+            case SoundQueuePlayMode.SingleLoop.rawValue:
+                return .SingleLoop
+            case SoundQueuePlayMode.Random.rawValue:
+                return .Random
+            default:
+                break
+            }
+        }
+        return .ListLoop
+    }
 }

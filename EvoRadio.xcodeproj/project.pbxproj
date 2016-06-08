@@ -33,6 +33,7 @@
 		90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F201CC9C0B70026539F /* WLevelSnapshot.mm */; };
 		90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */; };
 		90659F271CC9C1A50026539F /* CoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F261CC9C1A50026539F /* CoreDB.swift */; };
+		9070928F1D07B51000E11D88 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9070928E1D07B51000E11D88 /* HudManager.swift */; };
 		9097BB1B1CFE898800FA5BD9 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */; };
 		9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9097BB1C1CFE8B6400FA5BD9 /* Test.xib */; };
 		9097BB1F1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */; };
@@ -133,6 +134,7 @@
 		90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelWriteBatch.mm; sourceTree = "<group>"; };
 		90659F261CC9C1A50026539F /* CoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDB.swift; sourceTree = "<group>"; };
 		90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.pch"; sourceTree = "<group>"; };
+		9070928E1D07B51000E11D88 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
 		9096D78A1CFC0FED00DA6923 /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-ahavzujveykrtgbwgjeponlruqip/Build/Products/Debug-iphonesimulator/pop.framework"; sourceTree = "<group>"; };
 		9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadViewController.swift; path = Controllers/DownloadViewController.swift; sourceTree = "<group>"; };
 		9097BB1C1CFE8B6400FA5BD9 /* Test.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
@@ -453,6 +455,7 @@
 				DBDC7F471CD90A8D0093812C /* Constants.swift */,
 				909E818B1CF8129500571A76 /* NotificationManager.swift */,
 				90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */,
+				9070928E1D07B51000E11D88 /* HudManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -651,6 +654,7 @@
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */,
+				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
 				9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */,
 				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,

@@ -20,5 +20,6 @@
 #import <TencentOpenAPI/TencentOAuth.h>
 #import <TencentOpenAPI/QQApiInterface.h>
 #import "WeiboSDK.h"
+#import <MBProgressHUD/MBProgressHUD.h>
 
 #endif /* EvoRadio_Bridge_Header_pch */

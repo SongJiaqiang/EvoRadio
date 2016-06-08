@@ -14,7 +14,7 @@ pod 'EVReflection', '~> 2.6'
 pod 'GPUImage', '~> 0.1.7'
 pod 'pop', '~> 1.0'
 pod 'UMengAnalytics'
-
+pod 'MBProgressHUD', '~> 0.9.2'
 
 end
 

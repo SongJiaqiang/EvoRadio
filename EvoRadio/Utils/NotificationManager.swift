@@ -63,8 +63,8 @@ class NotificationManager {
         Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_PLAYMUSICPROGRESS_CHANGED, object: nil)
     }
     
-    func postPlayMusicProgressEndedNotification(userInfo: [NSObject : AnyObject]) {
-        Device.defaultNotificationCenter().postNotificationName(NOTI_PLAYMUSICPROGRESS_ENDED, object: nil, userInfo: userInfo)
+    func postPlayMusicProgressEndedNotification() {
+        Device.defaultNotificationCenter().postNotificationName(NOTI_PLAYMUSICPROGRESS_ENDED, object: nil, userInfo: nil)
     }
     func addPlayMusicProgressEndedObserver(target: AnyObject, action: Selector) {
         Device.defaultNotificationCenter().addObserver(target, selector: action, name: NOTI_PLAYMUSICPROGRESS_ENDED, object: nil)

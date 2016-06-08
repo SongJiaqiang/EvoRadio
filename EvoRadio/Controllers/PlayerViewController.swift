@@ -14,7 +14,7 @@ import GPUImage
 
 class PlayerViewController: ViewController {
     let cellID = "playerControllerPlaylistCellID"
-    let toolButtonWidth: CGFloat = 40
+    let toolButtonWidth: CGFloat = 50
     
     private var coverImageView = CDCoverImageView(frame: CGRectZero)
     var backgroundGPUImageView = GPUImageView()
@@ -28,6 +28,7 @@ class PlayerViewController: ViewController {
     let playButton = UIButton()
     let nextButton = UIButton()
     let prevButton = UIButton()
+    let loopButton = UIButton()
     let titleLabel = UILabel()
     let playlistTableView = UITableView(frame: CGRectZero, style: .Grouped)
     let playlistContentView = UIView()
@@ -162,11 +163,13 @@ class PlayerViewController: ViewController {
     }
 
     func prepareToolsView() {
+        let itemWidth: CGFloat = min(Device.width() / 5, 60)
+        
         let toolsView = UIView()
         view.addSubview(toolsView)
 //        toolsView.backgroundColor = UIColor(white: 0.5, alpha: 0.8)
         toolsView.snp_makeConstraints { (make) in
-            make.height.equalTo(50)
+            make.height.equalTo(itemWidth)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
             make.bottom.equalTo(view.snp_bottom)
@@ -177,7 +180,7 @@ class PlayerViewController: ViewController {
         infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
         infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
         infoButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
+            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.center.equalTo(toolsView.center)
         }
         
@@ -187,9 +190,9 @@ class PlayerViewController: ViewController {
         downloadButton.setImage(UIImage(named: "player_download"), forState: .Selected)
         downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadButtonPressed(_:)), forControlEvents: .TouchUpInside)
         downloadButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
+            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.right.equalTo(infoButton.snp_left).inset(-30)
+            make.right.equalTo(infoButton.snp_left)
         }
         
         let shareButton = UIButton()
@@ -197,20 +200,18 @@ class PlayerViewController: ViewController {
         shareButton.setImage(UIImage(named: "player_share"), forState: .Normal)
         shareButton.addTarget(self, action: #selector(PlayerViewController.shareButtonPressed(_:)), forControlEvents: .TouchUpInside)
         shareButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
+            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.left.equalTo(infoButton.snp_right).inset(-30)
+            make.left.equalTo(infoButton.snp_right)
         }
         
-        
-        let repeatButton = UIButton()
-        toolsView.addSubview(repeatButton)
-        repeatButton.setImage(UIImage(named: "player_cycle_list"), forState: .Normal)
-        repeatButton.addTarget(self, action: #selector(PlayerViewController.repeatButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        repeatButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
+        toolsView.addSubview(loopButton)
+        loopButton.setImage(UIImage(named: "player_cycle_list"), forState: .Normal)
+        loopButton.addTarget(self, action: #selector(PlayerViewController.loopButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        loopButton.snp_makeConstraints { (make) in
+            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.right.equalTo(downloadButton.snp_left).inset(-30)
+            make.right.equalTo(downloadButton.snp_left)
         }
         
         let listButton = UIButton()
@@ -218,11 +219,12 @@ class PlayerViewController: ViewController {
         listButton.setImage(UIImage(named: "player_list"), forState: .Normal)
         listButton.addTarget(self, action: #selector(PlayerViewController.listButtonPressed(_:)), forControlEvents: .TouchUpInside)
         listButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(toolButtonWidth, toolButtonWidth))
+            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
             make.centerY.equalTo(toolsView.snp_centerY)
-            make.left.equalTo(shareButton.snp_right).inset(-30)
+            make.left.equalTo(shareButton.snp_right)
         }
 
+        loadDefaultData()
         
     }
     
@@ -309,7 +311,7 @@ class PlayerViewController: ViewController {
         
         let emptyButton = UIButton()
         playlistContentView.addSubview(emptyButton)
-        emptyButton.addTarget(self, action: #selector(PlayerViewController.topPlaylistContent), forControlEvents: .TouchUpInside)
+        emptyButton.addTarget(self, action: #selector(PlayerViewController.emptyButtonPressed(_:)), forControlEvents: .TouchUpInside)
         emptyButton.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsZero)
         }
@@ -356,10 +358,24 @@ class PlayerViewController: ViewController {
         MusicManager.sharedManager.playPrev()
     }
     
-    func repeatButtonPressed(button: UIButton) {
-        print("repeatButtonPressed")
+    func loopButtonPressed(button: UIButton) {
+        var imageAssetName: String
+        var showText: String
+        let newMode = MusicManager.sharedManager.changePlayMode()
+        switch newMode {
+        case .ListLoop:
+            imageAssetName = "player_cycle_list"
+            showText = "列表循环"
+        case .SingleLoop:
+            imageAssetName = "player_cycle_single"
+            showText = "单曲循环"
+        case .Random:
+            imageAssetName = "player_cycle_random"
+            showText = "随机播放"
+        }
         
-        
+        loopButton.setImage(UIImage(named: imageAssetName), forState: .Normal)
+        HudManager.showText(showText, inView: view)
     }
     
     func listButtonPressed(button: UIButton) {
@@ -378,8 +394,10 @@ class PlayerViewController: ViewController {
         }
     }
     func shareButtonPressed(button: UIButton) {
-        let social  = SocialController(music: MusicManager.sharedManager.currentSong()!, shareImage: coverImageView.image!, shareText: "")
-        presentViewController(social, animated: true, completion: nil)
+        if let currentSong = MusicManager.sharedManager.currentSong() {
+            let social  = SocialController(music: currentSong, shareImage: coverImageView.image!, shareText: "")
+            presentViewController(social, animated: true, completion: nil)
+        }
     }
     func infoButtonPressed(button: UIButton) {
         print("infoButtonPressed")
@@ -426,18 +444,19 @@ class PlayerViewController: ViewController {
         if let song = MusicManager.sharedManager.currentSong() {
             updateCoverImage(song)
             
-            print("download music")
             // new task
             let fileName = song.audioURL!.lastPathComponent()
             let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
             
             if !MusicManager.sharedManager.isPlayingOfSong(downloadPath.appendPathComponent(fileName)) {
+                print("download music")
                 downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath,dispalyInfo: nil)
             }
         }
     }
     
     func updateCoverImage(song: Song) {
+        debugPrint("update cover image")
         titleLabel.text = song.songName
         
         if let picUrl = song.picURL {
@@ -452,10 +471,6 @@ class PlayerViewController: ViewController {
                 }
             })
         }
-    }
-    
-    func topPlaylistContent() {
-        showPlaylistTableView(false)
     }
     
     //MARK: other
@@ -502,43 +517,21 @@ class PlayerViewController: ViewController {
         }
     }
     
-    func moreButtonPressed(button: UIButton) {
-        let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
-            print("add to collecte")
-        })
-        let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
-        })
-        let action3 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
-            print("remove all from playlist")
-        })
-        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+    func loadDefaultData() {
+        var imageAssetName: String
+        let currentMode = MusicManager.sharedManager.currentPlayMode()
+        switch currentMode {
+        case .ListLoop:
+            imageAssetName = "player_cycle_list"
+        case .SingleLoop:
+            imageAssetName = "player_cycle_single"
+        case .Random:
+            imageAssetName = "player_cycle_random"
+        }
+        loopButton.setImage(UIImage(named: imageAssetName), forState: .Normal)
         
-        alertController.addAction(action1)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-        alertController.addAction(cancelAction)
         
-        presentViewController(alertController, animated: true, completion: nil)
     }
-    
-//    func share(title: String, image: UIImage) {
-//        let shareText = "EvoRadio环境音乐电台，随时随地聆听你想要的音乐。"
-//        let shareUrl = "http://www.songjiaqiang.cn/evoradio"
-//        let shareImage = image ?? UIImage.placeholder_cover()
-//        let socialData = UMSocialData.defaultData()
-//        socialData.extConfig.title = title
-//        socialData.extConfig.qqData.url = shareUrl
-//        UMSocialSnsService.presentSnsIconSheetView(self,
-//                                                   appKey: UM_KEY,
-//                                                   shareText: shareText,
-//                                                   shareImage: shareImage,
-//                                                   shareToSnsNames: [
-//            UMShareToWechatSession, UMShareToWechatTimeline, UMShareToQQ, UMShareToQzone, UMShareToSina, UMShareToTumblr, UMShareToFacebook, UMShareToTwitter
-//            ],
-//                                                   delegate: self)
-//    }
 
 }
 
@@ -614,6 +607,32 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
             showPlaylistTableView(false)
         }
     }
+    
+    func moreButtonPressed(button: UIButton) {
+        let alertController = UIAlertController()
+        let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
+            print("add to collecte")
+        })
+        let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
+            CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
+        })
+        let action3 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
+            print("remove all from playlist")
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(cancelAction)
+        
+        presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func emptyButtonPressed(button: UIButton) {
+        showPlaylistTableView(false)
+    }
+    
 }
 
 extension PlayerViewController: SongListTableViewCellDelegate {
