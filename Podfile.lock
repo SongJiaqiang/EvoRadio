@@ -6,7 +6,6 @@ PODS:
   - Kingfisher (2.2.2)
   - leveldb (1.18)
   - MJRefresh (3.1.0)
-  - MZDownloadManager (3.0)
   - pop (1.0.9)
   - SnapKit (0.20.0)
   - UMengAnalytics (4.0.4)
@@ -19,7 +18,6 @@ DEPENDENCIES:
   - Kingfisher (~> 2.2)
   - leveldb (~> 1.18)
   - MJRefresh (~> 3.1.0)
-  - MZDownloadManager
   - pop (~> 1.0)
   - SnapKit (~> 0.20.0)
   - UMengAnalytics
@@ -32,7 +30,6 @@ SPEC CHECKSUMS:
   Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
-  MZDownloadManager: fcb5e609595e520ca07192463c60cac61d752279
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
   UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199

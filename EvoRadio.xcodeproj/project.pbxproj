@@ -14,6 +14,9 @@
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		900C725B1D057C71006EBE78 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72591D057C71006EBE78 /* TencentOpenAPI.framework */; };
 		900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */; };
+		9023EA021D06724A004BEE96 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA011D06724A004BEE96 /* DownloadManager.swift */; };
+		9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA031D06725B004BEE96 /* DownloadModel.swift */; };
+		9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA051D0672A2004BEE96 /* DownloadUtility.swift */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
@@ -103,6 +106,9 @@
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		900C72591D057C71006EBE78 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
 		900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
+		9023EA011D06724A004BEE96 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		9023EA031D06725B004BEE96 /* DownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadModel.swift; sourceTree = "<group>"; };
+		9023EA051D0672A2004BEE96 /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadUtility.swift; sourceTree = "<group>"; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -283,6 +289,16 @@
 			path = Tencent;
 			sourceTree = "<group>";
 		};
+		9023EA001D067233004BEE96 /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				9023EA011D06724A004BEE96 /* DownloadManager.swift */,
+				9023EA031D06725B004BEE96 /* DownloadModel.swift */,
+				9023EA051D0672A2004BEE96 /* DownloadUtility.swift */,
+			);
+			path = Downloader;
+			sourceTree = "<group>";
+		};
 		902FBCC41CBEAC010051A93B = {
 			isa = PBXGroup;
 			children = (
@@ -425,6 +441,7 @@
 		909E65B11CC0843700B0C49B /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				9023EA001D067233004BEE96 /* Downloader */,
 				90659F1B1CC9C0B70026539F /* levelDb */,
 				902F6B6F1CC3C4EA00F43C2E /* Device.swift */,
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
@@ -617,6 +634,7 @@
 				90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */,
 				DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
+				9023EA021D06724A004BEE96 /* DownloadManager.swift in Sources */,
 				90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */,
 				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,
 				90659F181CC9B6440026539F /* Radio.swift in Sources */,
@@ -633,12 +651,14 @@
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */,
+				9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */,
 				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				90B59E6A1CFD7AD0001E8F23 /* TabBar.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
+				9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */,
 				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */,
 				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,

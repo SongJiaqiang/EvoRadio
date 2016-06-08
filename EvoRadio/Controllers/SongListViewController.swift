@@ -242,14 +242,12 @@ extension SongListViewController: SongListTableViewCellDelegate {
         
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
-            print("add to playlist")
             MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
         })
         let action2 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
             print("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            print("download music")
             CoreDB.addSongToDownloadingList(song)
         })
         let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)

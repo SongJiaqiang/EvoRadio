@@ -15,17 +15,17 @@ extension String {
     }
     
     func appendPathComponent(component: String) -> String {
-        return (self as NSString).stringByAppendingPathComponent(component)
+        return self.stringByAppendingString("/").stringByAppendingString(component)
     }
     
     func appendPathComponents(components: [String]) -> String {
         
-        let newPath = (self as NSString)
+        var newPath: String = self
         for comp in components {
-            newPath.stringByAppendingPathComponent(comp)
+            newPath = newPath.stringByAppendingString("/").stringByAppendingString(comp)
         }
         
-        return newPath as String
+        return newPath
     }
     
 }

@@ -33,6 +33,13 @@ class PlayerViewController: ViewController {
     let playlistContentView = UIView()
     var playlistTableViewBottomConstraint: Constraint?
     
+    lazy var downloadManager: DownloadManager = {[unowned self] in
+        let sessionIdentifer = "cn.songjiaqiang.evoradio.player"
+        let completion = Device.appDelegate().backgroundSessionCompletionHandler
+        
+        return DownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
+        }()
+    
     //MARK: instance
     class var playerController: PlayerViewController {
         struct Static {
@@ -78,7 +85,7 @@ class PlayerViewController: ViewController {
         NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
         NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
         NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerViewController.playMusicProgressPaused(_:)))
-        NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController))
+        NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController(_:)))
         
     }
     
@@ -415,26 +422,23 @@ class PlayerViewController: ViewController {
         playButton.selected = false
     }
     
-    func updatePlayerController() {
+    func updatePlayerController(noti: NSNotification) {
         if let song = MusicManager.sharedManager.currentSong() {
             updateCoverImage(song)
             
-            Downloader.downloader.downloadFile(song.audioURL!, complete: {(filePath) -> Void in
-                if !MusicManager.sharedManager.isPlayingOfSong(filePath) {
-                    let itemIndex = MusicManager.sharedManager.addMusicToList(filePath)
-                    MusicManager.sharedManager.playItemAtIndex(itemIndex)
-                }
-                
-                }, progress: { (velocity, progress) in
-                    print("progress: \(progress*100)%)")
-            })
+            print("download music")
+            // new task
+            let fileName = song.audioURL!.lastPathComponent()
+            let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
+            
+            if !MusicManager.sharedManager.isPlayingOfSong(downloadPath.appendPathComponent(fileName)) {
+                downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath,dispalyInfo: nil)
+            }
         }
     }
     
     func updateCoverImage(song: Song) {
         titleLabel.text = song.songName
-        
-        
         
         if let picUrl = song.picURL {
             coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
@@ -504,7 +508,6 @@ class PlayerViewController: ViewController {
             print("add to collecte")
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            print("download music")
             CoreDB.addSongsToDownloadingList(MusicManager.sharedManager.playlist)
         })
         let action3 = UIAlertAction(title: "全部移除", style: .Default, handler: { (action) in
@@ -623,11 +626,9 @@ extension PlayerViewController: SongListTableViewCellDelegate {
             print("add to collecte")
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
-            print("download music")
             CoreDB.addSongToDownloadingList(song)
         })
         let action3 = UIAlertAction(title: "从列表中移除", style: .Default, handler: { (action) in
-            print("remove from playlist")
             MusicManager.sharedManager.removeSongFromPlaylist(song)
             self.playlistTableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: row!, inSection: 0)], withRowAnimation: .Bottom)
         })
@@ -644,20 +645,40 @@ extension PlayerViewController: SongListTableViewCellDelegate {
 }
 
 
-//extension PlayerViewController: UMSocialUIDelegate {
-//        
-//    func didFinishGetUMSocialDataInViewController(response: UMSocialResponseEntity!) {
-////        switch response.responseCode{
-////        case UMSResponseCodeSuccess:
-////            print("share success")
-////            
-////            break
-////        default: break
-////        }
-//        if response.responseCode == UMSResponseCodeSuccess {
-//            print("share success")
-//        }else {
-//            print("share failed with : \(response.error)")
-//        }
-//    }
-//}
+extension PlayerViewController: DownloadManagerDelegate {
+    /** 下载进度更新 */
+    func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
+        print("player downloading: \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
+        
+    }
+    /** 下载任务完成 */
+    func downloadRequestFinished(downloadModel: DownloadModel, index: Int) {
+        let itemIndex = MusicManager.sharedManager.addMusicToList((downloadModel.designatedDirectory?.appendPathComponent(downloadModel.fileName))!)
+        MusicManager.sharedManager.playItemAtIndex(itemIndex)
+    }
+    
+    func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]){}
+    
+    func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
+        print("download error")
+    }
+    
+    func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
+        print("download start")
+    }
+    func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
+        print("download paused")
+    }
+    
+    func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
+        print("download resumed")
+    }
+    func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
+        print("download retry")
+    }
+    
+    func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
+        print("download cancel")
+    }
+
+}

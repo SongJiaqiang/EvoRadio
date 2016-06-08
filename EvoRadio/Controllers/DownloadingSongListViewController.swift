@@ -11,11 +11,11 @@ import MZDownloadManager
 
 class DownloadingSongListViewController: ViewController {
     
-    lazy var downloadManager: MZDownloadManager = {[unowned self] in
-        let sessionIdentifer = "cn.songjiaqiang.evoradio"
+    lazy var downloadManager: DownloadManager = {[unowned self] in
+        let sessionIdentifer = "cn.songjiaqiang.evoradio.downloader"
         let completion = Device.appDelegate().backgroundSessionCompletionHandler
         
-        return MZDownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
+        return DownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
     }()
     
     let cellID = "downloadingSongCellID"
@@ -79,7 +79,7 @@ class DownloadingSongListViewController: ViewController {
         }
     }
     
-    func refreshCellForIndex(downloadModel: MZDownloadModel, index: Int) {
+    func refreshCellForIndex(downloadModel: DownloadModel, index: Int) {
         
     }
 
@@ -171,15 +171,12 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
             }else {
                 // new task
                 let fileName = song.audioURL!.lastPathComponent()
-                let downloadPath = MZUtility.getUniqueFileNameWithPath(MZUtility.baseFilePath.appendPathComponents(["download",song.programID!, fileName]))
+                let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
                 
-                downloadManager.addDownloadTask(downloadPath as String, fileURL: song.audioURL!)
+                downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath as String, dispalyInfo: nil)
                 downloadingSongs.append(song)
-                
             }
         }
-        
-        
     }
     
     func isDownloading(song: Song) -> Bool{
@@ -199,19 +196,10 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
 }
 
 
-extension DownloadingSongListViewController: MZDownloadManagerDelegate {
-    
-    func downloadRequestStarted(downloadModel: MZDownloadModel, index: Int) {
-        print("download start")
-    }
-    
-    func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [MZDownloadModel]) {
-        print("download interrupted")
-        tableView.reloadData()
-    }
-    
-    func downloadRequestDidUpdateProgress(downloadModel: MZDownloadModel, index: Int) {
-        print("downloading \(downloadModel.progress)")
+extension DownloadingSongListViewController: DownloadManagerDelegate {
+
+    func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
+        print("downloading \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
         
         let song = downloadingSongs[index]
         
@@ -220,7 +208,12 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
         cell.updateProgressBar(downloadModel.progress, speed: (received: (downloadModel.downloadedFile?.size)!, total: (downloadModel.file?.size)!))
     }
     
-    func downloadRequestFinished(downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]) {
+        print("download interrupted")
+        tableView.reloadData()
+    }
+    
+    func downloadRequestFinished(downloadModel: DownloadModel, index: Int) {
         print("download finished")
         let song = downloadingSongs[index]
         
@@ -235,14 +228,28 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
         NotificationManager.instance.postDownloadASongFinishedNotification(["song":song])
     }
     
-    func downloadRequestDidPaused(downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
+        print("download error")
+    }
+    
+    func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
+        print("download start")
+    }
+    func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
         print("download paused")
     }
     
-    func downloadRequestDidResumed(downloadModel: MZDownloadModel, index: Int) {
+    func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
         print("download resumed")
     }
-    
+    func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
+        print("download retry")
+    }
+
+    func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
+        print("download cancel")
+    }
+
     
     
 }
