@@ -136,10 +136,14 @@ class PlayerView: UIView {
     }
     
     func handleTap(gesture: UIGestureRecognizer) {
-        print("press player bar")
+        debugPrint("press player bar")
         
-        hide()
-        Device.keyWindow().topMostController()?.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+        if let _ = MusicManager.sharedManager.currentSong() {
+            hide()
+            Device.keyWindow().topMostController()?.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+        }else {
+            HudManager.showText("还没有播放歌曲")
+        }
     }
     
     func playMusicProgressChanged(noti: NSNotification) {
