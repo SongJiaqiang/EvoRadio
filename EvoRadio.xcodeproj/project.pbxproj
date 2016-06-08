@@ -20,11 +20,6 @@
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
-		904BA46A1CC9129800CD374F /* music1.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 904BA4621CC9129800CD374F /* music1.mp3 */; };
-		904BA46B1CC9129800CD374F /* music2.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 904BA4631CC9129800CD374F /* music2.mp3 */; };
-		904BA46C1CC9129800CD374F /* music3.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 904BA4641CC9129800CD374F /* music3.mp3 */; };
-		904BA46D1CC9129800CD374F /* music4.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 904BA4651CC9129800CD374F /* music4.mp3 */; };
-		904BA46E1CC9129800CD374F /* music5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 904BA4661CC9129800CD374F /* music5.mp3 */; };
 		9053D44F1CF483DB000392EF /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9053D44E1CF483DB000392EF /* Cover.swift */; };
 		9054AE101CC3BFB400E876FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9054AE0F1CC3BFB400E876FF /* Colors.swift */; };
 		90659F141CC9451E0026539F /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F131CC9451E0026539F /* PersonalViewController.swift */; };
@@ -114,11 +109,6 @@
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Controllers/SettingViewController.swift; sourceTree = "<group>"; };
-		904BA4621CC9129800CD374F /* music1.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music1.mp3; sourceTree = "<group>"; };
-		904BA4631CC9129800CD374F /* music2.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music2.mp3; sourceTree = "<group>"; };
-		904BA4641CC9129800CD374F /* music3.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music3.mp3; sourceTree = "<group>"; };
-		904BA4651CC9129800CD374F /* music4.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music4.mp3; sourceTree = "<group>"; };
-		904BA4661CC9129800CD374F /* music5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = music5.mp3; sourceTree = "<group>"; };
 		9053D44E1CF483DB000392EF /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
 		9054AE0F1CC3BFB400E876FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		90659F0F1CC92CA30026539F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
@@ -336,18 +326,6 @@
 			path = EvoRadio;
 			sourceTree = "<group>";
 		};
-		904BA4611CC9128900CD374F /* mp3 */ = {
-			isa = PBXGroup;
-			children = (
-				904BA4621CC9129800CD374F /* music1.mp3 */,
-				904BA4631CC9129800CD374F /* music2.mp3 */,
-				904BA4641CC9129800CD374F /* music3.mp3 */,
-				904BA4651CC9129800CD374F /* music4.mp3 */,
-				904BA4661CC9129800CD374F /* music5.mp3 */,
-			);
-			name = mp3;
-			sourceTree = "<group>";
-		};
 		90659F1B1CC9C0B70026539F /* levelDb */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,7 +380,6 @@
 			isa = PBXGroup;
 			children = (
 				90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */,
-				904BA4611CC9128900CD374F /* mp3 */,
 				9097BB1C1CFE8B6400FA5BD9 /* Test.xib */,
 			);
 			path = Resources;
@@ -562,12 +539,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				904BA46D1CC9129800CD374F /* music4.mp3 in Resources */,
-				904BA46E1CC9129800CD374F /* music5.mp3 in Resources */,
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
-				904BA46B1CC9129800CD374F /* music2.mp3 in Resources */,
-				904BA46C1CC9129800CD374F /* music3.mp3 in Resources */,
-				904BA46A1CC9129800CD374F /* music1.mp3 in Resources */,
 				900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */,
 				900C72521D0563F0006EBE78 /* README.txt in Resources */,
