@@ -31,7 +31,7 @@ class TabBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor(netHex: 0x1C1C1D)
+        backgroundColor = UIColor.grayColor2()
     }
     
     

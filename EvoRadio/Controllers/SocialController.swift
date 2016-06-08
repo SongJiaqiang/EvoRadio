@@ -31,6 +31,7 @@ class SocialController: UIViewController {
     var failedClosure: ((NSError) -> Void)?
     var cancelClosure: (() -> Void)?
     
+    //MARK: Life cycle
     convenience init(music: Song, shareImage: UIImage, shareText: String) {
         self.init()
         
@@ -75,7 +76,12 @@ class SocialController: UIViewController {
         
         prepareIconSheetView()
     }
-    
+
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
+
+    //MARK: prepare ui
     // Support WechatTimeline, WechatSession, QQ, SinaWeibo in china
     // Support Facebook, Twitter, Google+, Tumblr in foreign
     func prepareIconSheetView() {

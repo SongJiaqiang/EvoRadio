@@ -14,15 +14,15 @@ class PersonalViewController: ViewController {
     
     var dataSource = [
         [
-            ["key":"custom", "title":"定制电台"]
+            ["key":"custom", "title":"定制电台", "icon": "setting_custom"]
         ],
         [
-            ["key":"download", "title":"我的下载"],
-            ["key":"collection", "title":"我的收藏"],
-            ["key":"history", "title":"最近播放"]
+            ["key":"download", "title":"我的下载", "icon": "setting_download"],
+            ["key":"collection", "title":"我的收藏", "icon": "setting_hearts"],
+            ["key":"history", "title":"最近播放", "icon": "setting_history"]
         ],
         [
-            ["key":"setting", "title":"设置"]
+            ["key":"setting", "title":"设置", "icon": "setting_set"]
         ]
     ]
     
@@ -65,11 +65,14 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         cell?.accessoryType = .DisclosureIndicator
         cell?.backgroundColor = UIColor.grayColor3()
         cell?.textLabel?.textColor = UIColor.grayColor7()
+        let selectedView = UIView()
+        selectedView.backgroundColor = UIColor.grayColor2()
+        cell?.selectedBackgroundView = selectedView
         
         let section = dataSource[indexPath.section]
         let item = section[indexPath.row]
         cell?.textLabel?.text = item["title"]
-
+        cell?.imageView?.image = UIImage(named: item["icon"]!)
         
         if item["key"] == "custom" {
             cell?.detailTextLabel?.text = "活动、情绪、餐饮"

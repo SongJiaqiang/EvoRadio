@@ -29,7 +29,7 @@ class MainViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Evo Radio"
+        title = "EvoRadio"
     
         prepareTabBar()
         prepareContentView()
