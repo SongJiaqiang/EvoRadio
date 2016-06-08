@@ -135,7 +135,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
-        playButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        playButton.titleLabel?.font = UIFont.sizeOf12()
         playButton.backgroundColor = UIColor.grayColor3()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
@@ -149,7 +149,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let moreButton = UIButton()
         headerView.addSubview(moreButton)
-        moreButton.titleLabel?.font = UIFont.systemFontOfSize(12)
+        moreButton.titleLabel?.font = UIFont.sizeOf12()
         moreButton.backgroundColor = UIColor.grayColor3()
         moreButton.clipsToBounds = true
         moreButton.layer.cornerRadius = 15
@@ -198,11 +198,12 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func playButtonPressed(button: UIButton) {
-        TrackManager.playMusicTypeEvent(.SongList)
         if dataSource.count > 0 {
             MusicManager.sharedManager.clearList()
             MusicManager.sharedManager.appendSongsToPlaylist(dataSource, autoPlay: true)
             Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+            
+            TrackManager.playMusicTypeEvent(.SongList)
         }
     }
     

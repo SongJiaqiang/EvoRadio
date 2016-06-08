@@ -18,11 +18,12 @@ class PersonalViewController: ViewController {
         ],
         [
             ["key":"download", "title":"我的下载", "icon": "setting_download"],
-            ["key":"collection", "title":"我的收藏", "icon": "setting_hearts"],
+//            ["key":"collection", "title":"我的收藏", "icon": "setting_hearts"],
             ["key":"history", "title":"最近播放", "icon": "setting_history"]
         ],
         [
-            ["key":"setting", "title":"设置", "icon": "setting_set"]
+//            ["key":"setting", "title":"设置", "icon": "setting_set"],
+            ["key":"clean", "title":"清理缓存", "icon": "setting_clean"]
         ]
     ]
     
@@ -62,7 +63,6 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
-        cell?.accessoryType = .DisclosureIndicator
         cell?.backgroundColor = UIColor.grayColor3()
         cell?.textLabel?.textColor = UIColor.grayColor7()
         let selectedView = UIView()
@@ -77,6 +77,13 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         if item["key"] == "custom" {
             cell?.detailTextLabel?.text = "活动、情绪、餐饮"
         }
+        
+        if item["key"] == "clean" {
+            cell?.accessoryType = .None
+        }else {
+            cell?.accessoryType = .DisclosureIndicator
+        }
+        
         return cell!
     }
     
@@ -97,10 +104,16 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
             navigationController?.pushViewController(DownloadViewController(), animated: true)
             break
         case "history":
-            navigationController?.pushViewController(DownloadViewController(), animated: true)
+            navigationController?.pushViewController(HistorySongListViewController(), animated: true)
             break
         case "setting":
             navigationController?.pushViewController(SettingViewController(), animated: true)
+            break
+        case "clean":
+            HudManager.showAnnularDeterminate("正在清理...", completion: {
+                HudManager.showText("清理完成")
+                CoreDB.clearAll()
+            })
             break
         default: break
         }

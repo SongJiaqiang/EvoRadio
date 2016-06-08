@@ -29,6 +29,7 @@
 		90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */; };
 		90659F271CC9C1A50026539F /* CoreDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F261CC9C1A50026539F /* CoreDB.swift */; };
 		9070928F1D07B51000E11D88 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9070928E1D07B51000E11D88 /* HudManager.swift */; };
+		907092921D08313500E11D88 /* HistorySongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 907092911D08313500E11D88 /* HistorySongListViewController.swift */; };
 		9097BB1B1CFE898800FA5BD9 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */; };
 		9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9097BB1C1CFE8B6400FA5BD9 /* Test.xib */; };
 		9097BB1F1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */; };
@@ -125,6 +126,7 @@
 		90659F261CC9C1A50026539F /* CoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDB.swift; sourceTree = "<group>"; };
 		90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.pch"; sourceTree = "<group>"; };
 		9070928E1D07B51000E11D88 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HudManager.swift; sourceTree = "<group>"; };
+		907092911D08313500E11D88 /* HistorySongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistorySongListViewController.swift; path = Controllers/HistorySongListViewController.swift; sourceTree = "<group>"; };
 		9096D78A1CFC0FED00DA6923 /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-ahavzujveykrtgbwgjeponlruqip/Build/Products/Debug-iphonesimulator/pop.framework"; sourceTree = "<group>"; };
 		9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadViewController.swift; path = Controllers/DownloadViewController.swift; sourceTree = "<group>"; };
 		9097BB1C1CFE8B6400FA5BD9 /* Test.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
@@ -372,6 +374,7 @@
 				9097BB201CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift */,
 				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
 				900C72481D054888006EBE78 /* SocialController.swift */,
+				907092911D08313500E11D88 /* HistorySongListViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -660,6 +663,7 @@
 				9097BB2D1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
+				907092921D08313500E11D88 /* HistorySongListViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,

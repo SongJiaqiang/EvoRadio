@@ -150,12 +150,19 @@ class MusicManager: NSObject {
     func playItemAtIndex(index: Int) {
         soundQueue?.playItemAtIndex(index)
         soundQueue?.status = .Playing
+        
+        CoreDB.addSongToHistoryList(currentSong()!)
+        
         updatePlayingInfo()
+        
     }
     
     func playItem() {
         soundQueue?.playCurrentItem()
         soundQueue?.status = .Playing
+        
+        CoreDB.addSongToHistoryList(currentSong()!)
+        
         updatePlayingInfo()
     }
     

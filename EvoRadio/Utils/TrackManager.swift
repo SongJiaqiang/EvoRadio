@@ -15,6 +15,8 @@ enum PlayMusciType: String {
     case SongListCell = "SongListCell"
     case DownloadedSongList  = "DownloadedSongList"
     case DownloadedSongListCell = "DownloadedSongListCell"
+    case HistorySongList  = "HistorySongList"
+    case HistorySongListCell = "HistorySongListCell"
     case PlayerBar = "PlayerBar"
     case PlayerController = "PlayerController"
 }

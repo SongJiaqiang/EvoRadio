@@ -105,8 +105,8 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
-        playButton.titleLabel?.font = UIFont.systemFontOfSize(12)
-        playButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
+        playButton.titleLabel?.font = UIFont.sizeOf12()
+        playButton.backgroundColor = UIColor.grayColor3()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Start All", forState: .Normal)
@@ -118,8 +118,8 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         
         let deleteButton = UIButton()
         headerView.addSubview(deleteButton)
-        deleteButton.titleLabel?.font = UIFont.systemFontOfSize(12)
-        deleteButton.backgroundColor = UIColor(white: 0.2, alpha: 1)
+        deleteButton.titleLabel?.font = UIFont.sizeOf12()
+        deleteButton.backgroundColor = UIColor.grayColor3()
         deleteButton.clipsToBounds = true
         deleteButton.layer.cornerRadius = 15
         deleteButton.setTitle("Delete All", forState: .Normal)
@@ -163,18 +163,18 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         
         if cell.paused! {
             // pause task
-            downloadManager.pauseDownloadTaskAtIndex(indexPath.row)
+            self.downloadManager.pauseDownloadTaskAtIndex(indexPath.row)
         }else {
             if isDownloading(song) {
                 // resume task
-                downloadManager.resumeDownloadTaskAtIndex(downloadingSongs.indexOf(song)!)
+                self.downloadManager.resumeDownloadTaskAtIndex(self.downloadingSongs.indexOf(song)!)
             }else {
                 // new task
                 let fileName = song.audioURL!.lastPathComponent()
                 let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
                 
-                downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath as String, dispalyInfo: nil)
-                downloadingSongs.append(song)
+                self.downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath as String, dispalyInfo: nil)
+                self.downloadingSongs.append(song)
             }
         }
     }

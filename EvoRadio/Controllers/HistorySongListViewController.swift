@@ -1,16 +1,16 @@
 //
-//  DownloadedSongListViewController.swift
+//  HistorySongListViewController.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 6/1/16.
+//  Created by Whisper-JQ on 6/8/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 
 import UIKit
 
-class DownloadedSongListViewController: ViewController {
-
-    let cellID = "downloadedSongsCell"
+class HistorySongListViewController: ViewController {
+    
+    let cellID = "historySongsCell"
     
     let tableView = UITableView(frame: CGRectZero, style: .Grouped)
     var dataSource = [Song]()
@@ -18,7 +18,7 @@ class DownloadedSongListViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         view.backgroundColor = UIColor.yellowColor()
         
         prepareTableView()
@@ -27,7 +27,7 @@ class DownloadedSongListViewController: ViewController {
         
         NotificationManager.instance.addDownloadASongFinishedObserver(self, action: #selector(DownloadedSongListViewController.downloadASongFinished(_:)))
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -45,24 +45,24 @@ class DownloadedSongListViewController: ViewController {
         })
         
         tableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
-
+        
     }
     
     func loadDataSource() {
-        if let songs = CoreDB.getDownloadedSongs() {
+        if let songs = CoreDB.getHistorySongs() {
             dataSource.removeAll()
             dataSource.appendContentsOf(songs)
             tableView.reloadData()
         }
     }
-
-    //MARK: events 
+    
+    //MARK: events
     func downloadASongFinished(noti: NSNotification) {
         loadDataSource()
     }
-
+    
 }
-extension DownloadedSongListViewController: UITableViewDelegate, UITableViewDataSource {
+extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -87,7 +87,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", forState: .Normal)
-        playButton.addTarget(self, action: #selector(DownloadedSongListViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        playButton.addTarget(self, action: #selector(HistorySongListViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(80, 30))
             make.centerY.equalTo(headerView.snp_centerY)
@@ -101,7 +101,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
         clearButton.setTitle("Clear", forState: .Normal)
-        clearButton.addTarget(self, action: #selector(DownloadedSongListViewController.clearButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        clearButton.addTarget(self, action: #selector(HistorySongListViewController.clearButtonPressed(_:)), forControlEvents: .TouchUpInside)
         clearButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(60, 30))
             make.centerY.equalTo(headerView.snp_centerY)
@@ -134,7 +134,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        TrackManager.playMusicTypeEvent(.DownloadedSongListCell)
+        TrackManager.playMusicTypeEvent(.HistorySongListCell)
         
         let song = dataSource[indexPath.row]
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
@@ -144,12 +144,12 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     }
     
     func playButtonPressed(button: UIButton) {
-        if let songs = CoreDB.getDownloadedSongs() {
+        if let songs = CoreDB.getHistorySongs() {
             MusicManager.sharedManager.clearList()
             MusicManager.sharedManager.appendSongsToPlaylist(songs, autoPlay: true)
             Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
             
-            TrackManager.playMusicTypeEvent(.DownloadedSongList)
+            TrackManager.playMusicTypeEvent(.HistorySongList)
         }
     }
     
@@ -158,10 +158,10 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         dataSource.removeAll()
         tableView.reloadData()
     }
-
+    
 }
 
-extension DownloadedSongListViewController: SongListTableViewCellDelegate {
+extension HistorySongListViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(song: Song) {
         
         let alertController = UIAlertController()

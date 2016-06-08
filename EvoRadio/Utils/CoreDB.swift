@@ -18,6 +18,7 @@ let DB_PLAYLSIT = "playlist"
 let DB_LAST_PLAYLSIT = "last_playlist"
 let DB_DOWNLOADED_LIST = "downloaded_list"
 let DB_DOWNLOADING_LIST = "downloading_list"
+let DB_HISTORY_LIST = "history_list"
 let DB_PLAY_MODE = "play_mode"
 
 
@@ -26,7 +27,9 @@ let leveldb: WLevelDb = WLevelDb.sharedDb()
 class CoreDB {
     
     class func clearAll() {
-        WLevelDb.sharedDb().removeAllObjects()
+        CoreDB.clearHistory()
+        CoreDB.clearDownloadedList()
+        CoreDB.clearDownloadingList()
     }
     
     class func saveAllChannels(responseData: [[String : AnyObject]]) {
@@ -319,15 +322,21 @@ class CoreDB {
             return nil
         }
     }
+    
+    class func clearDownloadedList() {
+        leveldb.removeObjectForKey(DB_DOWNLOADED_LIST)
+    }
 
-    class func savePlaylist() {
-        
+    class func clearDownloadingList() {
+        leveldb.removeObjectForKey(DB_DOWNLOADING_LIST)
     }
     
+    /** 修改播放模式 */
     class func changePlayerPlayMode(mode: String) {
         leveldb.setObject(mode, forKey: DB_PLAY_MODE)
     }
     
+    /** 获取当前播放模式 */
     class func playerPlayMode() -> String? {
         if let mode = leveldb.objectForKey(DB_PLAY_MODE) {
             return mode as? String
@@ -335,5 +344,41 @@ class CoreDB {
             return nil
         }
     }
+    
+    class func getHistorySongs() -> [Song]? {
+        if let songs = leveldb.objectForKey(DB_HISTORY_LIST) {
+            return [Song](dictArray: songs as? [NSDictionary])
+        }else {
+            return nil
+        }
+    }
+    
+    
+    class func addSongToHistoryList(song: Song) {
+        let dict = song.toDictionary()
+        var newSongs: [NSDictionary]
+        if let songs = leveldb.objectForKey(DB_HISTORY_LIST) {
+            newSongs = songs as! [NSDictionary]
+            for item in newSongs {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.removeAtIndex(newSongs.indexOf(item)!)
+                    break
+                }
+            }
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        newSongs.insert(dict, atIndex: 0)
+        // The count can not exceed 100
+        if newSongs.count > 100 {
+            newSongs.removeLast()
+        }
+        leveldb.setObject(newSongs, forKey: DB_HISTORY_LIST)
+    }
+    
+    class func clearHistory() {
+        leveldb.removeObjectForKey(DB_HISTORY_LIST)
+    }
+    
     
 }
