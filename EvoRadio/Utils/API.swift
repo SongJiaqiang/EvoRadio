@@ -17,7 +17,7 @@ class API {
     
     func commonEP(api:String) -> String{
         let url = "\(host)\(api)"
-        print("request url--> \(url)")
+        debugPrint("request url--> \(url)")
         
         return url
     }
@@ -45,7 +45,7 @@ class API {
                     }
                     
                 } catch let error as NSError {
-                    print("convert error:\(error)")
+                    debugPrint("convert error:\(error)")
                     if let _ = onFailed {
                         onFailed!(error)
                     }
@@ -69,8 +69,6 @@ class API {
                     let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
                     
                     if dict["err"] as! String == "hapn.ok" {
-                        print("request is OK")
-                        
                         let responseData = dict["data"] as! [[String : AnyObject]]
                         CoreDB.saveAllNowChannels(responseData)
                         
@@ -107,7 +105,6 @@ class API {
                 
                 
             } catch let error as NSError {
-                print("convert error:\(error)")
                 if let _ = onFailed {
                     onFailed!(error)
                 }
@@ -139,7 +136,6 @@ class API {
                 }
                 
             } catch let error as NSError {
-                print("convert error:\(error)")
                 if let _ = onFailed {
                     onFailed!(error)
                 }
@@ -159,7 +155,6 @@ class API {
                 }
                 
             } catch let error as NSError {
-                print("convert error:\(error)")
                 if let _ = onFailed {
                     onFailed!(error)
                 }

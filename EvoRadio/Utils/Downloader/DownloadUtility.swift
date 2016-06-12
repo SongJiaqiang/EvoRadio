@@ -115,7 +115,7 @@ class DownloadUtility {
                 try url?.setResourceValue(NSNumber(bool: true), forKey: NSURLIsExcludedFromBackupKey)
                 return true
             } catch let error as NSError {
-                print("Set resource value failed with error: \(error)\nError excluding file: \(url?.lastPathComponent)")
+                debugPrint("Set resource value failed with error: \(error)\nError excluding file: \(url?.lastPathComponent)")
                 return false
             }
         }else {
@@ -133,7 +133,7 @@ class DownloadUtility {
             let freeSize = systemAttributes.objectForKey(NSFileSystemFreeSize)
             return freeSize?.longLongValue
         }catch let error as NSError {
-            print("Obtaining system memory info failed with error: \(error)")
+            debugPrint("Obtaining system memory info failed with error: \(error)")
             return nil
         }
     }

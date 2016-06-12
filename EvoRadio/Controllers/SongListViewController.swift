@@ -97,7 +97,7 @@ class SongListViewController: ViewController {
                     self?.updateCover()
                     self?.tableView.reloadData()
                 }else {
-                    print("This program has no songs")
+                    debugPrint("This program has no songs")
                 }
                 
             }, onFailed: nil)
@@ -210,18 +210,18 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     func moreButtonPressed(button: UIButton) {
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "全部加入播放列表", style: .Default, handler: { (action) in
-            print("add to playlist")
+            debugPrint("add to playlist")
             MusicManager.sharedManager.appendSongsToPlaylist(self.dataSource, autoPlay: false)
         })
         let action2 = UIAlertAction(title: "收藏全部歌曲", style: .Default, handler: { (action) in
-            print("add to collecte")
+            debugPrint("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载全部歌曲", style: .Default, handler: { (action) in
-            print("download music")
+            debugPrint("download music")
             CoreDB.addSongsToDownloadingList(self.dataSource)
         })
 //        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: {[weak self] (action) in
-//            print("sharing")
+//            debugPrint("sharing")
 //            let social  = SocialController(shareTitle: (self?.program.programName)!, shareText: (self?.program.programDesc)!, shareImage: (self?.coverImageView.image)!, shareUrl: DOMAIN)
 //            social.shareAudio = false
 //            self?.navigationController!.presentViewController(social, animated: true, completion: nil)
@@ -246,7 +246,7 @@ extension SongListViewController: SongListTableViewCellDelegate {
             MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
         })
         let action2 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
-            print("add to collecte")
+            debugPrint("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
             CoreDB.addSongToDownloadingList(song)

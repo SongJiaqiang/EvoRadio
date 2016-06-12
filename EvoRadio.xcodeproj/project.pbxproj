@@ -779,7 +779,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Debug;
@@ -807,7 +807,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Release;

@@ -64,7 +64,7 @@ class PlayerViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("player viewDidLoad")
+        debugPrint("player viewDidLoad")
         
     }
     
@@ -413,7 +413,7 @@ class PlayerViewController: ViewController {
         }
     }
     func infoButtonPressed(button: UIButton) {
-        print("infoButtonPressed")
+        debugPrint("infoButtonPressed")
     }
     
     func closeButtonPressed() {
@@ -504,7 +504,7 @@ class PlayerViewController: ViewController {
             let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
             
             if !MusicManager.sharedManager.isPlayingOfSong(downloadPath.appendPathComponent(fileName)) {
-                print("download music")
+                debugPrint("download music")
                 downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath,dispalyInfo: nil)
             }
         }
@@ -692,7 +692,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
         let alertController = UIAlertController()
 
         let action1 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
-            print("add to collecte")
+            debugPrint("add to collecte")
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .Default, handler: { (action) in
             CoreDB.addSongToDownloadingList(song)
@@ -718,7 +718,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
 extension PlayerViewController: DownloadManagerDelegate {
     /** 下载进度更新 */
     func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
-        print("player downloading: \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
+        debugPrint("player downloading: \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
         
     }
     /** 下载任务完成 */
@@ -730,25 +730,25 @@ extension PlayerViewController: DownloadManagerDelegate {
     func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]){}
     
     func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
-        print("download error")
+        debugPrint("download error")
     }
     
     func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
-        print("download start")
+        debugPrint("download start")
     }
     func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
-        print("download paused")
+        debugPrint("download paused")
     }
     
     func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
-        print("download resumed")
+        debugPrint("download resumed")
     }
     func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
-        print("download retry")
+        debugPrint("download retry")
     }
     
     func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
-        print("download cancel")
+        debugPrint("download cancel")
     }
 
 }

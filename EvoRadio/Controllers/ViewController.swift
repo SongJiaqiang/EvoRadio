@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
 
     deinit {
-        print("\(NSStringFromClass(self.classForCoder)) deinit")
+        debugPrint("\(NSStringFromClass(self.classForCoder)) deinit")
     }
     
     override func viewDidLoad() {
@@ -42,7 +42,7 @@ class ViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        print("内存警告")
+        debugPrint("内存警告")
     }
     
 

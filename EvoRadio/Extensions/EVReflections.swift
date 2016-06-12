@@ -28,7 +28,7 @@ public extension EVReflection {
         if let jsonDic = dictArray as? [Dictionary<String, AnyObject>]{
             let nsobjectype: NSObject.Type? = T.self as? NSObject.Type
             if nsobjectype == nil {
-                print("WARNING: EVReflection can only be used with types with NSObject as it's minimal base type")
+                debugPrint("WARNING: EVReflection can only be used with types with NSObject as it's minimal base type")
                 return result
             }
             
@@ -66,7 +66,7 @@ public extension String {
         do {
             jsonDict = try NSJSONSerialization.JSONObjectWithData(jsonData!, options: .AllowFragments) as! NSDictionary
         }catch let error as NSError {
-            print("Convert json data to json dictionary failed with error: \(error)")
+            debugPrint("Convert json data to json dictionary failed with error: \(error)")
         }
         return jsonDict
     }

@@ -28,7 +28,7 @@ class Downloader: NSObject {
     func downloadFile(fileURL: String, complete: ((String) -> Void)?, progress:((Float, Float) -> Void)?) {
         let url = NSURL(string: fileURL)!
         if let exitUrl = soundFileExitsWithURL(url) {
-            print("File is exit")
+            debugPrint("File is exit")
             if let _ = complete {
                 complete!(exitUrl.path!)
             }
@@ -46,7 +46,7 @@ class Downloader: NSObject {
             do {
                 try fileManager.createDirectoryAtURL(downloadDirector, withIntermediateDirectories: false, attributes: nil)
             }catch let error as NSError {
-                print("create director failed with error: \(error)")
+                debugPrint("create director failed with error: \(error)")
             }
         }
 
@@ -59,9 +59,9 @@ class Downloader: NSObject {
             
         }).response { (request, response, data, error) in
             if let error = error {
-                print("download error: \(error)")
+                debugPrint("download error: \(error)")
             }else {
-                print("download finished")
+                debugPrint("download finished")
                 
                 if let _ = complete {
                     complete!(finalDirector.path!)
@@ -94,7 +94,7 @@ class Downloader: NSObject {
                     }
                 }
             }catch let error as NSError {
-                print("List contents of directory failed with error: \(error)")
+                debugPrint("List contents of directory failed with error: \(error)")
             }
         }
         

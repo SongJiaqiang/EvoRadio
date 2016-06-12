@@ -199,7 +199,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
 extension DownloadingSongListViewController: DownloadManagerDelegate {
 
     func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
-        print("downloading \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
+        debugPrint("downloading \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
         
         let song = downloadingSongs[index]
         
@@ -209,12 +209,12 @@ extension DownloadingSongListViewController: DownloadManagerDelegate {
     }
     
     func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]) {
-        print("download interrupted")
+        debugPrint("download interrupted")
         tableView.reloadData()
     }
     
     func downloadRequestFinished(downloadModel: DownloadModel, index: Int) {
-        print("download finished")
+        debugPrint("download finished")
         let song = downloadingSongs[index]
         
         let indexOfDatasource = dataSource.indexOf(song)!
@@ -229,25 +229,25 @@ extension DownloadingSongListViewController: DownloadManagerDelegate {
     }
     
     func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
-        print("download error")
+        debugPrint("download error")
     }
     
     func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
-        print("download start")
+        debugPrint("download start")
     }
     func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
-        print("download paused")
+        debugPrint("download paused")
     }
     
     func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
-        print("download resumed")
+        debugPrint("download resumed")
     }
     func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
-        print("download retry")
+        debugPrint("download retry")
     }
 
     func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
-        print("download cancel")
+        debugPrint("download cancel")
     }
 
     

@@ -100,25 +100,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if e.type == .RemoteControl {
                 switch e.subtype {
                 case .RemoteControlPause:
-                    print("RemoteControlPause")
+                    debugPrint("RemoteControlPause")
                     MusicManager.sharedManager.pauseItem()
                     break;
                 case .RemoteControlStop:
-                    print("RemoteControlPause")
+                    debugPrint("RemoteControlPause")
                     break;
                 case .RemoteControlPlay:
-                    print("RemoteControlPlay")
+                    debugPrint("RemoteControlPlay")
                     MusicManager.sharedManager.playItem()
                     break;
                 case .RemoteControlTogglePlayPause:
-                    print("RemoteControlTogglePlayPause")
+                    debugPrint("RemoteControlTogglePlayPause")
                     break;
                 case .RemoteControlNextTrack:
-                    print("RemoteControlNextTrack")
+                    debugPrint("RemoteControlNextTrack")
                     MusicManager.sharedManager.playNext()
                     break;
                 case .RemoteControlPreviousTrack:
-                    print("RemoteControlPreviousTrack")
+                    debugPrint("RemoteControlPreviousTrack")
                     MusicManager.sharedManager.playPrev()
                     break;
                 default:

@@ -58,7 +58,7 @@ class MusicManager: NSObject {
                 NotificationManager.instance.postPlayMusicProgressChangedNotification(userInfo)
                 
                 }, andFinishedBlock: {[weak self] (nextItem) in
-                    print("Finished and next one")
+                    debugPrint("Finished and next one")
                     
                     NotificationManager.instance.postPlayMusicProgressEndedNotification()
                     self?.playNextWhenFinished()
