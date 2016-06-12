@@ -402,8 +402,7 @@ class PlayerViewController: ViewController {
     func downloadButtonPressed(button: UIButton) {
         if let cSong = MusicManager.sharedManager.currentSong() {
             CoreDB.addSongToDownloadingList(cSong)
-            button.selected = true
-            
+//            button.selected = true
             HudManager.showText("已经加入下载列表")
         }
     }

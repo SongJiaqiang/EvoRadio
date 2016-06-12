@@ -64,7 +64,7 @@ class PlayerView: UIView {
         
         // init coverImageView
         contentView.addSubview(coverView)
-        coverView.image = UIImage(named: "placeholder_cover")
+        coverView.image = UIImage(named: "cd_cover")
         coverView.clipsToBounds = true
         coverView.layer.cornerRadius = 20
         coverView.snp_makeConstraints { (make) in
@@ -84,7 +84,7 @@ class PlayerView: UIView {
         }
         
         contentView.addSubview(titleLabel)
-        titleLabel.text = "No music playing."
+        titleLabel.text = "还没有播放音乐"
         titleLabel.font = UIFont.sizeOf12()
         titleLabel.textColor = UIColor.whiteColor()
         titleLabel.snp_makeConstraints { (make) in
@@ -125,6 +125,10 @@ class PlayerView: UIView {
     
     //MARK: events
     func playButtonPressed(button: UIButton) {
+        guard let _ = MusicManager.sharedManager.currentSong() else{
+            return
+        }
+        
         if MusicManager.sharedManager.isPlaying() {
             MusicManager.sharedManager.pauseItem()
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
@@ -142,7 +146,7 @@ class PlayerView: UIView {
             hide()
             Device.keyWindow().topMostController()?.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
         }else {
-            HudManager.showText("还没有播放歌曲")
+            HudManager.showText("还没有播放音乐")
         }
     }
     
