@@ -198,7 +198,6 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func playButtonPressed(button: UIButton) {
         if dataSource.count > 0 {
-            MusicManager.sharedManager.clearList()
             MusicManager.sharedManager.appendSongsToPlaylist(dataSource, autoPlay: true)
             Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
             

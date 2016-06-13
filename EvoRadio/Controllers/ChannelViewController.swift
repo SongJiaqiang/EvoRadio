@@ -116,9 +116,9 @@ class ChannelViewController: UIViewController {
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()
-            if self?.radioID == 0 {
-                self?.collectionView!.mj_header.hidden = true
-            }
+//            if self?.radioID == 0 {
+//                self?.collectionView!.mj_header.hidden = true
+//            }
         }, onFailed: nil)
         
     }

@@ -22,6 +22,7 @@
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
 		9053D44F1CF483DB000392EF /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9053D44E1CF483DB000392EF /* Cover.swift */; };
 		9054AE101CC3BFB400E876FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9054AE0F1CC3BFB400E876FF /* Colors.swift */; };
+		905939541D0D543B00FF9848 /* SoundQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905939531D0D543B00FF9848 /* SoundQueues.swift */; };
 		9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059396A1D0E65A200FF9848 /* AVFoundation.framework */; };
 		9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90659F111CC92CB00026539F /* AudioToolbox.framework */; };
 		9059397F1D0E689F00FF9848 /* AmrCodecFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */; };
@@ -123,6 +124,7 @@
 		903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingViewController.swift; path = Controllers/SettingViewController.swift; sourceTree = "<group>"; };
 		9053D44E1CF483DB000392EF /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
 		9054AE0F1CC3BFB400E876FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		905939531D0D543B00FF9848 /* SoundQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundQueues.swift; sourceTree = "<group>"; };
 		9059396A1D0E65A200FF9848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmrCodecFMWK.framework; sourceTree = "<group>"; };
 		905939721D0E689F00FF9848 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
@@ -465,6 +467,7 @@
 				9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */,
 				9097BB281CFEC40400FA5BD9 /* Arrays.swift */,
 				9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */,
+				905939531D0D543B00FF9848 /* SoundQueues.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -715,6 +718,7 @@
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				907092921D08313500E11D88 /* HistorySongListViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
+				905939541D0D543B00FF9848 /* SoundQueues.swift in Sources */,
 				90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
 			);
@@ -831,7 +835,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Debug;
@@ -861,7 +865,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Release;
