@@ -133,13 +133,13 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             feedbackKit!.environment = YWEnvironmentRelease
             
             // 存储一些有参考价值的用户信息
-            feedbackKit!.extInfo = ["loginTime":NSDate().description,
-                                    "visitPath":"Main->我的->设置->反馈",
-                                    "customInfo":"My custom info"]
+//            feedbackKit!.extInfo = ["loginTime":NSDate().description,
+//                                    "visitPath":"Main->我的->设置->反馈",
+//                                    "customInfo":"My custom info"]
             
             // 配置FeedbackViewController的样式 https://baichuan.taobao.com/doc2/detail.htm?spm=a3c0d.7629140.0.0.WOXUmL&treeId=118&articleId=104173&docType=1
-            feedbackKit!.customUIPlist = ["bgColor":"#212121",
-                                          "color":"#FFFFFF"]
+//            feedbackKit!.customUIPlist = ["bgColor":"#212121",
+//                                          "color":"#FFFFFF"]
             
             let hud = MBProgressHUD.showHUDAddedTo(Device.keyWindow(), animated: true)
             feedbackKit!.makeFeedbackViewControllerWithCompletionBlock({[weak self] (feedbackController, error) in
