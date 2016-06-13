@@ -31,6 +31,13 @@ class Device: NSObject {
         return Float(sys)!
     }
     
+    static func appVersionString() -> String {
+        if let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] {
+            return version as! String
+        }
+        return "未知"
+    }
+    
     static func aboveIOS9() -> Bool{
         let sys = UIDevice.currentDevice().systemVersion
         return (Float(sys)! > 9.0)

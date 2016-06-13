@@ -22,8 +22,7 @@ class PersonalViewController: ViewController {
             ["key":"history", "title":"最近播放", "icon": "setting_history"]
         ],
         [
-//            ["key":"setting", "title":"设置", "icon": "setting_set"],
-            ["key":"clean", "title":"清理缓存", "icon": "setting_clean"]
+            ["key":"setting", "title":"设置", "icon": "setting_set"]
         ]
     ]
     
