@@ -816,8 +816,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jiaqiang Song (74F6LPZBKY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiaqiang Song (74F6LPZBKY)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -835,7 +835,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Debug;
@@ -846,8 +846,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jiaqiang Song (74F6LPZBKY)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jiaqiang Song (74F6LPZBKY)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -865,7 +865,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "13025427-e550-47d9-b0f5-083f40d23198";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
 			};
 			name = Release;
