@@ -2,7 +2,7 @@
 //  HudManager.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 6/8/16.
+//  Created by Jarvis on 6/8/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 

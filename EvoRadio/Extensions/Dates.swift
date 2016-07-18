@@ -2,7 +2,7 @@
 //  Dates.swift
 //  EvoRadio
 //
-//  Created by 宋佳强 on 16/4/27.
+//  Created by Jarvis on 16/4/27.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 

@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 16/4/14.
+//  Created by Jarvis on 16/4/14.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
@@ -38,11 +38,6 @@ class ViewController: UIViewController {
         
         // 友盟统计 － 退出页面
         MobClick.endLogPageView(NSStringFromClass(self.classForCoder))
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        debugPrint("内存警告")
     }
     
 

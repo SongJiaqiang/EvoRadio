@@ -2,7 +2,7 @@
 //  Device.swift
 //  CameraReqairman
 //
-//  Created by Whisper-JQ on 16/3/24.
+//  Created by Jarvis on 16/3/24.
 //  Copyright © 2016年 SongJiaqiang. All rights reserved.
 //
 

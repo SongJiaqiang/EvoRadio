@@ -2,7 +2,7 @@
 //  MainViewController.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 16/4/15.
+//  Created by Jarvis on 16/4/15.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 

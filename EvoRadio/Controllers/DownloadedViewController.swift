@@ -2,7 +2,7 @@
 //  DownloadedViewController.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 6/1/16.
+//  Created by Jarvis on 6/1/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 

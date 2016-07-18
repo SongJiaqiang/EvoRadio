@@ -2,7 +2,7 @@
 //  EVReflections.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 5/25/16.
+//  Created by Jarvis on 5/25/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 

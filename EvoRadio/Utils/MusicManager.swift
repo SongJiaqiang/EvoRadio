@@ -2,7 +2,7 @@
 //  MusicManager.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 16/4/21.
+//  Created by Jarvis on 16/4/21.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 

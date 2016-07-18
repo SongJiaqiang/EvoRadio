@@ -2,7 +2,7 @@
 //  CDCoverImageView.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 5/29/16.
+//  Created by Jarvis on 5/29/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 

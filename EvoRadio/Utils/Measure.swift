@@ -2,7 +2,7 @@
 //  Measure.swift
 //  EvoRadio
 //
-//  Created by 宋佳强 on 16/4/26.
+//  Created by Jarvis on 16/4/26.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 

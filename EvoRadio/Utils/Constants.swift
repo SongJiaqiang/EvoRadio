@@ -2,7 +2,7 @@
 //  Constants.swift
 //  EvoRadio
 //
-//  Created by 宋佳强 on 16/5/4.
+//  Created by Jarvis on 16/5/4.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 

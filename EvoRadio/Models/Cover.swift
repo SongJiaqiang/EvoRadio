@@ -2,7 +2,7 @@
 //  Cover.swift
 //  EvoRadio
 //
-//  Created by Whisper-JQ on 5/24/16.
+//  Created by Jarvis on 5/24/16.
 //  Copyright © 2016 JQTech. All rights reserved.
 //
 
