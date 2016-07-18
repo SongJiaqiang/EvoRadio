@@ -12,7 +12,7 @@ import EVReflection
 class User: EVObject {
     var uID: String?
     var uName: String?
-    var userType: String?
+    var userType: NSNumber? // JSON返回的数据有的是string，有的是int，郁闷啊！
     var picURL: String?
     var picUrl : String?
     
