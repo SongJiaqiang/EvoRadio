@@ -11,6 +11,7 @@ import Alamofire
 import AFSoundManager
 import SnapKit
 import GPUImage
+import StreamingKit
 
 class PlayerViewController: ViewController {
     let cellID = "playerControllerPlaylistCellID"
@@ -35,15 +36,10 @@ class PlayerViewController: ViewController {
     let playlistContentView = UIView()
     var playlistTableViewBottomConstraint: Constraint?
     
+    var progressTimer: NSTimer?
     var autoStopTimer: NSTimer?
     var leftTime: NSTimeInterval = 3600
     
-    lazy var downloadManager: DownloadManager = {[unowned self] in
-        let sessionIdentifer = "cn.songjiaqiang.evoradio.player"
-        let completion = Device.appDelegate().backgroundSessionCompletionHandler
-        
-        return DownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
-        }()
     
     //MARK: instance
     class var playerController: PlayerViewController {
@@ -57,7 +53,6 @@ class PlayerViewController: ViewController {
         return Static.instance
     }
     
-    
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
         return .LightContent
     }
@@ -65,6 +60,10 @@ class PlayerViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         debugPrint("player viewDidLoad")
+        
+        MusicManager.sharedManager.audioPlayer.delegate = self
+        progressTimer = NSTimer(timeInterval: 1, target: self, selector: #selector(progressHandle), userInfo: nil, repeats: true)
+        NSRunLoop.currentRunLoop().addTimer(progressTimer!, forMode: NSRunLoopCommonModes)
         
     }
     
@@ -87,9 +86,6 @@ class PlayerViewController: ViewController {
         prepareNavigationBar()
         prepareTableView()
 
-        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerViewController.playMusicProgressChanged(_:)))
-        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerViewController.playMusicProgressEnded(_:)))
-        NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerViewController.playMusicProgressPaused(_:)))
         NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController(_:)))
         
     }
@@ -253,7 +249,7 @@ class PlayerViewController: ViewController {
         
         controlView.addSubview(playButton)
         playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
-        playButton.setImage(UIImage(named: "player_pause"), forState: .Selected)
+        playButton.setImage(UIImage(named: "player_play_pressed"), forState: .Highlighted)
         playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(60, 60))
@@ -349,17 +345,15 @@ class PlayerViewController: ViewController {
     //MARK: event
     func playButtonPressed(button: UIButton) {
         
-        if MusicManager.sharedManager.currentItem() == nil{
+        if MusicManager.sharedManager.isStoped() {
             return
         }
         
         if MusicManager.sharedManager.isPlaying() {
             MusicManager.sharedManager.pauseItem()
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
-            button.selected = false
         }else {
-            MusicManager.sharedManager.playItem()
-            button.selected = true
+            MusicManager.sharedManager.resumeItem()
         }
         
     }
@@ -471,42 +465,10 @@ class PlayerViewController: ViewController {
         MusicManager.sharedManager.playAtSecond(Int(timePlayed))
     }
     
-    func playMusicProgressChanged(noti: NSNotification) {
-        if let userInfo = noti.userInfo {
-            let duration = userInfo["duration"]
-            let timePlayed = userInfo["timePlayed"]
-        
-            progressSlider.minimumValue = 0
-            progressSlider.maximumValue = duration as! Float
-            progressSlider.value = timePlayed as! Float
-            
-            totalTimeLabel.text = NSDate.secondsToMinuteString(duration as! Int)
-            currentTimeLabel.text = NSDate.secondsToMinuteString(timePlayed as! Int)
-            
-            playButton.selected = true
-        }
-    }
-    
-    func playMusicProgressEnded(noti: NSNotification) {
-        playButton.selected = false
-    }
-    
-    func playMusicProgressPaused(noti: NSNotification) {
-        playButton.selected = false
-    }
-    
     func updatePlayerController(noti: NSNotification) {
         if let song = MusicManager.sharedManager.currentSong() {
             updateCoverImage(song)
             
-            // new task
-            let fileName = song.audioURL!.lastPathComponent()
-            let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
-            
-            if !MusicManager.sharedManager.isPlayingOfSong(downloadPath.appendPathComponent(fileName)) {
-                debugPrint("download music")
-                downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath,dispalyInfo: nil)
-            }
         }
     }
     
@@ -522,6 +484,19 @@ class PlayerViewController: ViewController {
             MusicManager.sharedManager.pauseItem()
             timerButton.selected = false
         }
+    }
+    
+    func progressHandle() {
+        let duration:Float = Float(MusicManager.sharedManager.audioPlayer.duration)
+        let timePlayed: Float = Float(MusicManager.sharedManager.audioPlayer.progress)
+        
+        progressSlider.maximumValue = duration
+        progressSlider.value = timePlayed
+        
+        totalTimeLabel.text = NSDate.secondsToMinuteString(Int(duration))
+        currentTimeLabel.text = NSDate.secondsToMinuteString(Int(timePlayed))
+        
+        MusicManager.sharedManager.updatePlaybackTime(Double(timePlayed))
     }
     
     
@@ -558,11 +533,6 @@ class PlayerViewController: ViewController {
             coverImageView.kf_setImageWithURL(NSURL(string: picUrl)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
                 if let _ = image{
                     self?.configureFilterImage(image!)
-                }else {
-                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
-                        self?.coverImageView.image = artwork
-                        self?.configureFilterImage(artwork)
-                    }
                 }
                 })
         }
@@ -667,7 +637,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         MusicManager.sharedManager.currentIndex = indexPath.row
-        NotificationManager.instance.postUpdatePlayerControllerNotification()
+        MusicManager.sharedManager.playItem()
         
         showPlaylistTableView(false)
     }
@@ -714,41 +684,44 @@ extension PlayerViewController: SongListTableViewCellDelegate {
     }
 }
 
-
-extension PlayerViewController: DownloadManagerDelegate {
-    /** 下载进度更新 */
-    func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
-        debugPrint("player downloading: \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
+extension PlayerViewController: STKAudioPlayerDelegate {
+    func audioPlayer(audioPlayer: STKAudioPlayer, didStartPlayingQueueItemId queueItemId: NSObject) {
+        debugPrint("didStartPlayingQueueItemId: \(queueItemId)")
+    }
+    
+    func audioPlayer(audioPlayer: STKAudioPlayer, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject) {
+        debugPrint("didFinishBufferingSourceWithQueueItemId")
+        
         
     }
-    /** 下载任务完成 */
-    func downloadRequestFinished(downloadModel: DownloadModel, index: Int) {
-        let itemIndex = MusicManager.sharedManager.addMusicToList((downloadModel.designatedDirectory?.appendPathComponent(downloadModel.fileName))!)
-        MusicManager.sharedManager.playItemAtIndex(itemIndex)
+    
+    func audioPlayer(audioPlayer: STKAudioPlayer, didFinishPlayingQueueItemId queueItemId: NSObject, withReason stopReason: STKAudioPlayerStopReason, andProgress progress: Double, andDuration duration: Double) {
+        debugPrint("didFinishPlayingQueueItemId")
+        
     }
     
-    func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]){}
-    
-    func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
-        debugPrint("download error")
+    func audioPlayer(audioPlayer: STKAudioPlayer, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState) {
+        debugPrint("stateChanged: \(state)")
+        
+        if state == .Playing {
+            playButton.setImage(UIImage(named: "player_paused"), forState: .Normal)
+            playButton.setImage(UIImage(named: "player_paused_pressed"), forState: .Highlighted)
+            
+            NotificationManager.instance.postPlayMusicProgressStartedNotification()
+        }
+        else if state == .Paused {
+            playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
+            playButton.setImage(UIImage(named: "player_play_pressed"), forState: .Highlighted)
+            
+            NotificationManager.instance.postPlayMusicProgressPausedNotification()
+        }
+        else if state == .Stopped {
+            MusicManager.sharedManager.playNext()
+        }
+        
     }
     
-    func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
-        debugPrint("download start")
+    func audioPlayer(audioPlayer: STKAudioPlayer, unexpectedError errorCode: STKAudioPlayerErrorCode) {
+        debugPrint("unexpectedError")
     }
-    func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
-        debugPrint("download paused")
-    }
-    
-    func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
-        debugPrint("download resumed")
-    }
-    func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
-        debugPrint("download retry")
-    }
-    
-    func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
-        debugPrint("download cancel")
-    }
-
 }

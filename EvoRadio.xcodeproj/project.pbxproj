@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29258049669E5F330022BB /* Pods_EvoRadio.framework */; };
+		6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */; };
 		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
 		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
 		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
@@ -22,7 +23,6 @@
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
 		9053D44F1CF483DB000392EF /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9053D44E1CF483DB000392EF /* Cover.swift */; };
 		9054AE101CC3BFB400E876FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9054AE0F1CC3BFB400E876FF /* Colors.swift */; };
-		905939541D0D543B00FF9848 /* SoundQueues.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905939531D0D543B00FF9848 /* SoundQueues.swift */; };
 		9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059396A1D0E65A200FF9848 /* AVFoundation.framework */; };
 		9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90659F111CC92CB00026539F /* AudioToolbox.framework */; };
 		9059397F1D0E689F00FF9848 /* AmrCodecFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */; };
@@ -104,6 +104,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamingKitViewController.swift; path = Controllers/StreamingKitViewController.swift; sourceTree = "<group>"; };
 		8A29258049669E5F330022BB /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
 		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -124,7 +125,6 @@
 		903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SettingViewController.swift; path = Controllers/SettingViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9053D44E1CF483DB000392EF /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Cover.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9054AE0F1CC3BFB400E876FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Colors.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		905939531D0D543B00FF9848 /* SoundQueues.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SoundQueues.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9059396A1D0E65A200FF9848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmrCodecFMWK.framework; sourceTree = "<group>"; };
 		905939721D0E689F00FF9848 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
@@ -426,6 +426,7 @@
 				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
 				900C72481D054888006EBE78 /* SocialController.swift */,
 				907092911D08313500E11D88 /* HistorySongListViewController.swift */,
+				6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -467,7 +468,6 @@
 				9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */,
 				9097BB281CFEC40400FA5BD9 /* Arrays.swift */,
 				9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */,
-				905939531D0D543B00FF9848 /* SoundQueues.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -682,6 +682,7 @@
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */,
+				6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
 				9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */,
 				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
@@ -718,7 +719,6 @@
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,
 				907092921D08313500E11D88 /* HistorySongListViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
-				905939541D0D543B00FF9848 /* SoundQueues.swift in Sources */,
 				90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
 			);

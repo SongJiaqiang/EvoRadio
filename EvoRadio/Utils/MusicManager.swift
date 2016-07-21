@@ -7,7 +7,9 @@
 //
 
 import UIKit
-import AFSoundManager
+import StreamingKit
+import MediaPlayer
+import Kingfisher
 
 enum SoundQueuePlayMode: String {
     case ListLoop = "list_loop"
@@ -17,8 +19,9 @@ enum SoundQueuePlayMode: String {
 
 class MusicManager: NSObject {
     
-    private var soundQueue: AFSoundQueue?
-    private var soundItems = [AFSoundItem]()
+    var audioPlayer: STKAudioPlayer = STKAudioPlayer()
+    private var playTimer: NSTimer?
+
     var playlist = [Song]()
     var currentIndex: Int = -1
     
@@ -34,41 +37,7 @@ class MusicManager: NSObject {
         
         return Static.instance
     }
-    
-    func addMusicToList(filePath: String) -> Int {
-        
-        if indexOfItemWithPath(filePath) > 0 {
-            return indexOfItemWithPath(filePath)
-        }
-        
-        let soundItem = AFSoundItem(localResource: "", atPath: filePath)
-        
-        soundItems.append(soundItem)
-        if let _ = soundQueue {
-            soundQueue!.addItem(soundItem)
-        }else {
-            soundQueue = AFSoundQueue(items: soundItems)
-            
-            soundQueue!.listenFeedbackUpdatesWithBlock({ (currentItem) in
-                let userInfo = [
-                    "duration":currentItem.duration,
-                    "timePlayed":currentItem.timePlayed
-                ]
-                
-                NotificationManager.instance.postPlayMusicProgressChangedNotification(userInfo)
-                
-                }, andFinishedBlock: {[weak self] (nextItem) in
-                    debugPrint("Finished and next one")
-                    
-                    NotificationManager.instance.postPlayMusicProgressEndedNotification()
-                    self?.playNextWhenFinished()
-                    
-            })
-        }
-        
-        return soundItems.count-1
-    }
-    
+
     func appendSongsToPlaylist(songs: [Song], autoPlay: Bool) {
         if songs.count == 0 {
             return
@@ -81,6 +50,7 @@ class MusicManager: NSObject {
         if autoPlay {
             currentIndex = playlist.indexOf(songs.first!)!
             NotificationManager.instance.postUpdatePlayerControllerNotification()
+            playItem()
         }
     }
     
@@ -95,7 +65,7 @@ class MusicManager: NSObject {
         
         if autoPlay {
             currentIndex = playlist.indexOf(song)!
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            playItem()
         }
         
     }
@@ -120,60 +90,100 @@ class MusicManager: NSObject {
 //        soundQueue?.clearQueue()
     }
     
+    // 更新控制中心上的音乐信息 - 标题、专辑等
     func updatePlayingInfo() {
         
-        if let currentItem = soundQueue?.getCurrentItem() {
+        if let song = currentSong() {
             
             var title = ""
-            if let _ = currentItem.title {
-                title = currentItem.title
+            if let songName = song.songName {
+                title = songName
             }
             
             var artist = ""
-            if let _ = currentItem.artist {
-                artist = currentItem.artist
+            if let artistsName = song.artistsName {
+                artist = artistsName
+            }
+            
+            var duration: Double = 0
+            if let d = song.duration {
+                duration = Double(d)!
             }
             
             var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
-            if let _ = currentItem.artwork {
-                artwork = MPMediaItemArtwork(image:currentItem.artwork)
+            if let _ = song.picURL {
+                let downloader = KingfisherManager.sharedManager.downloader
+                downloader.downloadImageWithURL(NSURL(string: song.picURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
+                    if let _ = image {
+                        artwork = MPMediaItemArtwork(image:image!)
+                    }
+                    
+                    let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
+                        MPMediaItemPropertyArtist: artist,
+                        MPMediaItemPropertyArtwork: artwork,
+                        MPMediaItemPropertyPlaybackDuration: duration
+                    ]
+                    MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+                })
             }
             
-            let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
-                                            MPMediaItemPropertyArtist: artist,
-                                            MPMediaItemPropertyArtwork: artwork
-            ]
-            MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+            
         }
     }
     
+    // 更新控制中心上的音乐信息 - 时间
+    func updatePlaybackTime(elapsedTime: Double) {
+        
+        var playingInfo:[String:AnyObject] = MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo!
+        playingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime
+        
+        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = playingInfo
+    }
+    
     func playItemAtIndex(index: Int) {
-        soundQueue?.playItemAtIndex(index)
-        soundQueue?.status = .Playing
+        currentIndex = index
         
-        CoreDB.addSongToHistoryList(currentSong()!)
-        
-        updatePlayingInfo()
+        audioPlayer.pause()
+        playItem()
         
     }
     
     func playItem() {
-        soundQueue?.playCurrentItem()
-        soundQueue?.status = .Playing
         
-        CoreDB.addSongToHistoryList(currentSong()!)
+        if let cSong = currentSong() {
+            let audioURL = cSong.audioURL
+            audioPlayer.play(audioURL!)
+            
+            // 更新控制中心的音乐播放信息
+            updatePlayingInfo()
+            // 缓存播放列表
+            saveLastPlaylist()
+            // 缓存历史播放歌曲
+            CoreDB.addSongToHistoryList(currentSong()!)
+            
+            NotificationManager.instance.postUpdatePlayerControllerNotification()
+        }
         
-        updatePlayingInfo()
     }
     
     func pauseItem() {
-        soundQueue?.status = .Paused
-        soundQueue?.pause()
+        if audioPlayer.state == .Playing {
+            audioPlayer.pause()
+        }
     }
+    
+    func resumeItem() {
+        if audioPlayer.state == .Paused {
+            audioPlayer.resume()
+        }
+    }
+    
     
     func playNext() {
         incrementIndex()
-        NotificationManager.instance.postUpdatePlayerControllerNotification()
+        
+        audioPlayer.pause()
+        playItem()
     }
     
     func playNextWhenFinished() {
@@ -191,11 +201,21 @@ class MusicManager: NSObject {
     
     func playPrev() {
         decrementIndex()
-        NotificationManager.instance.postUpdatePlayerControllerNotification()
+        
+        audioPlayer.pause()
+        playItem()
     }
     
     func isPlaying() -> Bool{
-        if soundQueue?.status == .Playing {
+        if audioPlayer.state == .Playing {
+            return true
+        }else {
+            return false
+        }
+    }
+    
+    func isStoped() -> Bool{
+        if audioPlayer.state == .Stopped {
             return true
         }else {
             return false
@@ -203,38 +223,30 @@ class MusicManager: NSObject {
     }
     
     
-    func isPlayingOfSong(filePath: String) -> Bool {
-        if let cItem = soundQueue?.getCurrentItem() {
-            return cItem.URL.absoluteString.containsString(filePath)
-        }else {
-            return false
-        }
-    }
-    
-    func indexOfItemWithPath(filePath: String) -> Int {
-        for item in soundItems {
-            if item.URL.path?.containsString(filePath) == true {
-                return soundItems.indexOf(item)!
-            }
-        }
-        
-        return -1
-    }
+//    func isPlayingOfSong(filePath: String) -> Bool {
+//        if let cItem = soundQueue?.getCurrentItem() {
+//            return cItem.URL.absoluteString.containsString(filePath)
+//        }else {
+//            return false
+//        }
+//    }
+//    
+//    func indexOfItemWithPath(filePath: String) -> Int {
+//        for item in soundItems {
+//            if item.URL.path?.containsString(filePath) == true {
+//                return soundItems.indexOf(item)!
+//            }
+//        }
+//        
+//        return -1
+//    }
     
     func playAtSecond(second: Int) {
-        soundQueue?.playAtSecond(second)
-    }
-    
-    func currentItem() -> AFSoundItem? {
-        if let cItem = soundQueue?.getCurrentItem() {
-            return cItem
-        }else {
-            return nil
-        }
+        audioPlayer.seekToTime(Double(second))
     }
     
     func currentSong() -> Song? {
-        if currentIndex < 0 {
+        if currentIndex < 0 || playlist.count <= 0 {
             return nil
         }else {
             return playlist[currentIndex]

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVFoundation
 
 
 @UIApplicationMain
@@ -42,6 +43,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let controller = MainViewController()
         let homeNavC = NavigationController(rootViewController: controller)
         window?.rootViewController = homeNavC
+        
+//        let c = StreamingKitViewController()
+//        window?.rootViewController = c
+        
         window?.makeKeyAndVisible()
     }
     
@@ -53,6 +58,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupRemoteControl() {
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+        } catch let error as NSError {
+            debugPrint("set category error: \(error)")
+        }
+        
         UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
         becomeFirstResponder()
     }

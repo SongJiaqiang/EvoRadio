@@ -16,7 +16,7 @@ class ProgramViewController: ViewController {
     var dataSource = [Program]()
     private var collectionView: UICollectionView?
     private var endOfFeed = false
-    private let pageSize: Int = 60
+    private let pageSize: Int = 30
     
     convenience init(channel: Channel) {
         self.init()

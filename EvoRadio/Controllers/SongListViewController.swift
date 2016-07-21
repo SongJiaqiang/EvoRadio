@@ -192,7 +192,6 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let song = dataSource[indexPath.row]
         MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
         
-        NotificationManager.instance.postUpdatePlayerControllerNotification()
         presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
     }
     

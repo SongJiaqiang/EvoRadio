@@ -75,7 +75,7 @@ class PlayerView: UIView {
         
         contentView.addSubview(playButton)
         playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
-        playButton.setImage(UIImage(named: "player_pause"), forState: .Selected)
+        playButton.setImage(UIImage(named: "player_play_pressed"), forState: .Highlighted)
         playButton.addTarget(self, action: #selector(PlayerView.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(40, 40))
@@ -106,8 +106,7 @@ class PlayerView: UIView {
         let tap = UITapGestureRecognizer(target: self, action: #selector(PlayerView.handleTap(_:)))
         addGestureRecognizer(tap)
         
-        NotificationManager.instance.addPlayMusicProgressChangedObserver(self, action: #selector(PlayerView.playMusicProgressChanged(_:)))
-        NotificationManager.instance.addPlayMusicProgressEndedObserver(self, action: #selector(PlayerView.playMusicProgressEnded(_:)))
+        NotificationManager.instance.addPlayMusicProgressStartedObserver(self, action: #selector(PlayerView.playMusicProgressStarted(_:)))
         NotificationManager.instance.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerView.playMusicProgressPaused(_:)))
         NotificationManager.instance.addUpdatePlayerControllerObserver(self, action: #selector(PlayerView.updatePlayerBar))
     }
@@ -132,10 +131,8 @@ class PlayerView: UIView {
         if MusicManager.sharedManager.isPlaying() {
             MusicManager.sharedManager.pauseItem()
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
-            button.selected = false
         }else {
-            MusicManager.sharedManager.playItem()
-            button.selected = true
+            MusicManager.sharedManager.resumeItem()
         }
     }
     
@@ -150,31 +147,23 @@ class PlayerView: UIView {
         }
     }
     
-    func playMusicProgressChanged(noti: NSNotification) {
-        if let _ = noti.userInfo {
-            playButton.selected = true
-        }
-    }
     
-    func playMusicProgressEnded(noti: NSNotification) {
-        playButton.selected = false
+    func playMusicProgressStarted(noti: NSNotification) {
+        playButton.setImage(UIImage(named: "player_paused"), forState: .Normal)
+        playButton.setImage(UIImage(named: "player_paused_pressed"), forState: .Highlighted)
     }
     
     func playMusicProgressPaused(noti: NSNotification) {
-        playButton.selected = false
+        
+        playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
+        playButton.setImage(UIImage(named: "player_play_pressed"), forState: .Highlighted)
     }
     
     func updatePlayerBar() {
         if let song = MusicManager.sharedManager.currentSong() {
             titleLabel.text = song.songName
             subTitleLabel.text = song.artistsName
-            coverView.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                if image == nil {
-                    if let cItem = MusicManager.sharedManager.currentItem(), let artwork = cItem.artwork {
-                        self?.coverView.image = artwork
-                    }
-                }
-            })
+            coverView.kf_setImageWithURL(NSURL(string: song.picURL!)!, placeholderImage: UIImage.placeholder_cover())
         }
     }
     
