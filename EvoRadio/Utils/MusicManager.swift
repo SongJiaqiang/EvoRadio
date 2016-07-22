@@ -126,18 +126,17 @@ class MusicManager: NSObject {
                     MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
                 })
             }
-            
-            
         }
     }
     
     // 更新控制中心上的音乐信息 - 时间
     func updatePlaybackTime(elapsedTime: Double) {
-        
-        var playingInfo:[String:AnyObject] = MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo!
-        playingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime
-        
-        MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = playingInfo
+        if let info = MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo {
+            var playingInfo:[String:AnyObject] = info
+            playingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime
+            
+            MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = playingInfo
+        }
     }
     
     func playItemAtIndex(index: Int) {
