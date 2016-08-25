@@ -11,6 +11,5 @@ EvoRadio是一款音乐app，内容主要以场景、环境来给音乐分类，
 项目还有很多不完善的地方，如果有什么建议和疑问，请在Issues中提出。如果你对这个项目感兴趣，欢迎fork并提交Merge request。
 <br/>
 <br/>
-*音乐数据主要来源于lavaradio.com，仅用于学习研究。*
 
 
