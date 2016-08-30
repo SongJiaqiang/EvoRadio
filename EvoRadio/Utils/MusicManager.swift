@@ -189,13 +189,16 @@ class MusicManager: NSObject {
         let currentMode = currentPlayMode()
         if currentMode == .Random {
             currentIndex = Int(arc4random_uniform(UInt32(playlist.count)))
+            play()
             NotificationManager.instance.postUpdatePlayerControllerNotification()
         }else if currentMode == .ListLoop {
             incrementIndex()
+            play()
             NotificationManager.instance.postUpdatePlayerControllerNotification()
         }else {
-            playAtSecond(0)
+            play()
         }
+        
     }
     
     func playPrev() {

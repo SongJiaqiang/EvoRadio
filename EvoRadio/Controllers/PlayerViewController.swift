@@ -507,7 +507,6 @@ class PlayerViewController: ViewController {
     func updatePlayerController(noti: NSNotification) {
         if let song = MusicManager.sharedManager.currentSong() {
             updateCoverImage(song)
-            
         }
     }
     
