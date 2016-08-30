@@ -22,7 +22,11 @@ class CDCoverImageView: UIImageView {
         
         super.init(frame: frame)
         
-        prepareAnimation()
+        contentMode = .ScaleAspectFill
+        clipsToBounds = true
+        layer.cornerRadius = 120
+        layer.borderWidth = 10
+        layer.borderColor = UIColor(white: 0, alpha: 0.8).CGColor
     }
     
     required init?(coder aDecoder: NSCoder) {

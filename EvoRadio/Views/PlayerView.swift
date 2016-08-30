@@ -129,10 +129,10 @@ class PlayerView: UIView {
         }
         
         if MusicManager.sharedManager.isPlaying() {
-            MusicManager.sharedManager.pauseItem()
+            MusicManager.sharedManager.pause()
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
         }else {
-            MusicManager.sharedManager.resumeItem()
+            MusicManager.sharedManager.resume()
         }
     }
     

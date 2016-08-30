@@ -50,7 +50,7 @@ class MusicManager: NSObject {
         if autoPlay {
             currentIndex = playlist.indexOf(songs.first!)!
             NotificationManager.instance.postUpdatePlayerControllerNotification()
-            playItem()
+            play()
         }
     }
     
@@ -65,7 +65,7 @@ class MusicManager: NSObject {
         
         if autoPlay {
             currentIndex = playlist.indexOf(song)!
-            playItem()
+            play()
         }
         
     }
@@ -143,11 +143,11 @@ class MusicManager: NSObject {
         currentIndex = index
         
         audioPlayer.pause()
-        playItem()
+        play()
         
     }
     
-    func playItem() {
+    func play() {
         
         if let cSong = currentSong() {
             let audioURL = cSong.audioURL
@@ -165,13 +165,13 @@ class MusicManager: NSObject {
         
     }
     
-    func pauseItem() {
+    func pause() {
         if audioPlayer.state == .Playing {
             audioPlayer.pause()
         }
     }
     
-    func resumeItem() {
+    func resume() {
         if audioPlayer.state == .Paused {
             audioPlayer.resume()
         }
@@ -182,7 +182,7 @@ class MusicManager: NSObject {
         incrementIndex()
         
         audioPlayer.pause()
-        playItem()
+        play()
     }
     
     func playNextWhenFinished() {
@@ -202,11 +202,19 @@ class MusicManager: NSObject {
         decrementIndex()
         
         audioPlayer.pause()
-        playItem()
+        play()
     }
     
     func isPlaying() -> Bool{
         if audioPlayer.state == .Playing {
+            return true
+        }else {
+            return false
+        }
+    }
+    
+    func isPaused() -> Bool{
+        if audioPlayer.state == .Paused {
             return true
         }else {
             return false

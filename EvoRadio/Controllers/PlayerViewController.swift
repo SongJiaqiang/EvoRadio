@@ -8,7 +8,6 @@
 
 import UIKit
 import Alamofire
-import AFSoundManager
 import SnapKit
 import GPUImage
 import StreamingKit
@@ -40,6 +39,7 @@ class PlayerViewController: ViewController {
     var autoStopTimer: NSTimer?
     var leftTime: NSTimeInterval = 3600
     
+    var coverRotateAnimation: CABasicAnimation?;
     
     //MARK: instance
     class var playerController: PlayerViewController {
@@ -57,6 +57,7 @@ class PlayerViewController: ViewController {
         return .LightContent
     }
     
+    //MARK: life cycle functions
     override func viewDidLoad() {
         super.viewDidLoad()
         debugPrint("player viewDidLoad")
@@ -70,6 +71,14 @@ class PlayerViewController: ViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         PlayerView.instance.hide()
+        
+        if MusicManager.sharedManager.isPlaying() {
+            coverImageView.layer.removeAllAnimations()
+            coverRotateAnimation = nil
+            prepareAnimation()
+        } else if MusicManager.sharedManager.isPaused() {
+            coverRotateAnimation = nil
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -92,11 +101,6 @@ class PlayerViewController: ViewController {
     
     func prepareBackgroundView() {
         view.addSubview(coverImageView)
-        coverImageView.contentMode = .ScaleAspectFill
-        coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = 120
-        coverImageView.layer.borderWidth = 10
-        coverImageView.layer.borderColor = UIColor(white: 0, alpha: 0.8).CGColor
         coverImageView.image = UIImage.placeholder_cover()
         coverImageView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(240, 240))
@@ -342,27 +346,62 @@ class PlayerViewController: ViewController {
         playlistContentView.hidden = true
     }
     
-    //MARK: event
+    func prepareAnimation() {
+        if coverRotateAnimation == nil {
+            coverRotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
+            coverRotateAnimation!.duration = 30
+            coverRotateAnimation!.fromValue = NSNumber(double: 0)
+            coverRotateAnimation!.toValue = NSNumber(double: M_PI * 2)
+            coverRotateAnimation!.repeatCount = MAXFLOAT
+            coverRotateAnimation!.autoreverses = false
+            coverRotateAnimation!.cumulative = true
+            coverImageView.layer.speed = 1
+            coverImageView.layer.addAnimation(coverRotateAnimation!, forKey: "coverRotateAnimation")
+        }
+    }
+    
+    //MARK: events
     func playButtonPressed(button: UIButton) {
         
         if MusicManager.sharedManager.isStoped() {
             return
         }
         
-        if MusicManager.sharedManager.isPlaying() {
-            MusicManager.sharedManager.pauseItem()
+        if MusicManager.sharedManager.isPaused() {
+            MusicManager.sharedManager.resume()
+            
+            let stopTime = coverImageView.layer.timeOffset
+            coverImageView.layer.beginTime = 0
+            coverImageView.layer.timeOffset = 0
+            coverImageView.layer.speed = 1
+            let tempTime = coverImageView.layer.convertTime(CACurrentMediaTime(), fromLayer: nil) - stopTime
+            coverImageView.layer.beginTime = tempTime
+            
+            
+        } else if MusicManager.sharedManager.isPlaying() {
+            MusicManager.sharedManager.pause()
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
+            
+            let stopTime = coverImageView.layer.convertTime(CACurrentMediaTime(), fromLayer: nil)
+            coverImageView.layer.speed = 0
+            coverImageView.layer.timeOffset = stopTime
         }else {
-            MusicManager.sharedManager.resumeItem()
+            debugPrint("鬼知道发生了什么！")
         }
         
     }
     func nextButtonPressed(button: UIButton) {
         MusicManager.sharedManager.playNext()
+        
+        coverImageView.layer.removeAllAnimations()
+        coverRotateAnimation = nil
     }
     
     func prevButtonPressed(button: UIButton) {
         MusicManager.sharedManager.playPrev()
+        
+        coverImageView.layer.removeAllAnimations()
+        coverRotateAnimation = nil
     }
     
     func loopButtonPressed(button: UIButton) {
@@ -481,7 +520,7 @@ class PlayerViewController: ViewController {
             autoStopTimer?.invalidate()
             autoStopTimer = nil
             
-            MusicManager.sharedManager.pauseItem()
+            MusicManager.sharedManager.pause()
             timerButton.selected = false
         }
     }
@@ -637,7 +676,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         tableView.deselectRowAtIndexPath(indexPath, animated: true)
         
         MusicManager.sharedManager.currentIndex = indexPath.row
-        MusicManager.sharedManager.playItem()
+        MusicManager.sharedManager.play()
         
         showPlaylistTableView(false)
     }
@@ -687,6 +726,10 @@ extension PlayerViewController: SongListTableViewCellDelegate {
 extension PlayerViewController: STKAudioPlayerDelegate {
     func audioPlayer(audioPlayer: STKAudioPlayer, didStartPlayingQueueItemId queueItemId: NSObject) {
         debugPrint("didStartPlayingQueueItemId: \(queueItemId)")
+        
+        coverImageView.layer.removeAllAnimations()
+        coverRotateAnimation = nil
+        prepareAnimation()
     }
     
     func audioPlayer(audioPlayer: STKAudioPlayer, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject) {
@@ -708,6 +751,8 @@ extension PlayerViewController: STKAudioPlayerDelegate {
             playButton.setImage(UIImage(named: "player_paused_pressed"), forState: .Highlighted)
             
             NotificationManager.instance.postPlayMusicProgressStartedNotification()
+            
+            prepareAnimation()
         }
         else if state == .Paused {
             playButton.setImage(UIImage(named: "player_play"), forState: .Normal)
@@ -716,7 +761,7 @@ extension PlayerViewController: STKAudioPlayerDelegate {
             NotificationManager.instance.postPlayMusicProgressPausedNotification()
         }
         else if state == .Stopped {
-            MusicManager.sharedManager.playNext()
+            MusicManager.sharedManager.playNextWhenFinished()
         }
         
     }

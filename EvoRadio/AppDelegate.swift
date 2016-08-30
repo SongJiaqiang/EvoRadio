@@ -112,14 +112,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 switch e.subtype {
                 case .RemoteControlPause:
                     debugPrint("RemoteControlPause")
-                    MusicManager.sharedManager.pauseItem()
+                    MusicManager.sharedManager.pause()
                     break;
                 case .RemoteControlStop:
                     debugPrint("RemoteControlPause")
                     break;
                 case .RemoteControlPlay:
                     debugPrint("RemoteControlPlay")
-                    MusicManager.sharedManager.playItem()
+                    MusicManager.sharedManager.play()
                     break;
                 case .RemoteControlTogglePlayPause:
                     debugPrint("RemoteControlTogglePlayPause")
