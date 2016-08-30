@@ -16,7 +16,6 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     let playButton = UIButton()
 
     var channel: Channel?
-    var delegate: ChannelCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -59,26 +58,10 @@ class ChannelCollectionViewCell: UICollectionViewCell {
             make.left.equalTo(snp_left)
             make.right.equalTo(snp_right)
         }
-        
-        addSubview(playButton)
-        playButton.setImage(UIImage(named: "player_play_border"), forState: .Normal)
-        playButton.setImage(UIImage(named: "player_play_border_prs"), forState: .Highlighted)
-        playButton.addTarget(self, action: #selector(ChannelCollectionViewCell.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
-            make.leftMargin.equalTo(5)
-            make.bottom.equalTo(picImageView.snp_bottom).offset(-5)
-        }
-        
+
     }
     
     //MARK: event
-    func playButtonPressed(button: UIButton) {
-        if let c = channel {
-            delegate?.playMusicOfChannel(c.channelID!)
-        }
-    }
-    
     func updateContent(channel: Channel, isNow: Bool) {
         self.channel = channel
         
@@ -105,8 +88,4 @@ class ChannelCollectionViewCell: UICollectionViewCell {
             }
         }
     }
-}
-
-protocol ChannelCollectionViewCellDelegate {
-    func playMusicOfChannel(channelID: String)
 }

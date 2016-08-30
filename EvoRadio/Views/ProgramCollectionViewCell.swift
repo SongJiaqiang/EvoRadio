@@ -64,7 +64,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         addSubview(playButton)
         playButton.setImage(UIImage(named: "player_play_border"), forState: .Normal)
         playButton.setImage(UIImage(named: "player_play_border_prs"), forState: .Highlighted)
-        playButton.addTarget(self, action: #selector(ChannelCollectionViewCell.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        playButton.addTarget(self, action: #selector(ProgramCollectionViewCell.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
         playButton.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
             make.leftMargin.equalTo(5)
@@ -108,7 +108,6 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             if let channelName = c!.channelName {
                 radioNameLabel.text = channelName
             }
-            
         }
         
         if let vip = program.vipLevel {
@@ -118,7 +117,6 @@ class ProgramCollectionViewCell: UICollectionViewCell {
                 vipView.hidden = true
             }
         }
-        
     }
 }
 

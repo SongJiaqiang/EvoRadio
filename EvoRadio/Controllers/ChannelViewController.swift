@@ -159,7 +159,6 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
         
         let channel = dataSource[indexPath.item]
         cell.updateContent(channel, isNow: !Bool(radioID))
-        cell.delegate = self
         return cell
     }
     
@@ -187,29 +186,5 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
     
 }
 
-extension ChannelViewController: ChannelCollectionViewCellDelegate {
-    
-    func playMusicOfChannel(channelID: String) {
-        TrackManager.playMusicTypeEvent(.ChannelCover)
-        let pageIndex: Int = Int(arc4random_uniform(10))
-        api.fetch_programs(channelID, page: Page(index: pageIndex, size: 1), onSuccess: { (reflects) in
-            
-            if reflects.count > 0 {
-                let randomIndex = arc4random_uniform(UInt32(reflects.count))
-                let program = reflects[Int(randomIndex)] as! Program
-                api.fetch_songs(program.programID!, isVIP: true, onSuccess: { (songs) in
-                    if songs.count > 0 {
-                        MusicManager.sharedManager.clearList()
-                        MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                        Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
-                    }
-                    
-                    }, onFailed: nil)
-                
-            }
-            
-            }, onFailed: nil)
-    }
-}
 
 
