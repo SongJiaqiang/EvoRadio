@@ -40,6 +40,9 @@ class ViewController: UIViewController {
         MobClick.endLogPageView(NSStringFromClass(self.classForCoder))
     }
     
+    override func preferredStatusBarStyle() -> UIStatusBarStyle {
+        return .LightContent
+    }
 
     func insertGradientLayer() {
         
