@@ -13,12 +13,12 @@ class SocialController: UIViewController {
     
     let socials = ["WechatSession",
                    "WechatTimeline",
-                   "QQ",
                    "SinaWeibo",
                    "Facebook",
                    "Twitter",
-                   "Google+",
                    "Tumblr"]
+    
+    var backgroundControl: UIButton!
     
     var shareTitle: String?
     var shareText: String?
@@ -66,15 +66,22 @@ class SocialController: UIViewController {
         
         view.backgroundColor = UIColor.clearColor()
 
-        let emptyButton = UIButton()
-        view.addSubview(emptyButton)
-        emptyButton.backgroundColor = UIColor(white: 0, alpha: 0.2)
-        emptyButton.addTarget(self, action: #selector(SocialController.emptyButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        emptyButton.snp_makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
-        }
-        
+        prepareBackgroundControl()
         prepareIconSheetView()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        backgroundControl.alpha = 0
+        UIView.animateWithDuration(0.2) {[weak self] in
+            self?.backgroundControl.alpha = 1
+        }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        backgroundControl.alpha = 0
     }
 
     override func preferredStatusBarStyle() -> UIStatusBarStyle {
@@ -146,9 +153,20 @@ class SocialController: UIViewController {
         return button
     }
     
+    func prepareBackgroundControl() {
+        backgroundControl = UIButton()
+        view.addSubview(backgroundControl)
+        backgroundControl.backgroundColor = UIColor(white: 0, alpha: 0.2)
+        backgroundControl.alpha = 0
+        backgroundControl.addTarget(self, action: #selector(SocialController.backgroundControlPressed(_:)), forControlEvents: .TouchUpInside)
+        backgroundControl.snp_makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+        }
+    }
+    
     
     //MARK: events
-    func emptyButtonPressed(button: UIButton) {
+    func backgroundControlPressed(button: UIButton) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -162,7 +180,7 @@ class SocialController: UIViewController {
             shareToWechat(WXSceneTimeline)
             break
         case 2:
-            shareToQZone()
+            
             break
         case 3:
             shareToWeibo()
@@ -199,28 +217,6 @@ class SocialController: UIViewController {
         req.message = message
         req.scene = Int32(scene.rawValue)
         WXApi.sendReq(req)
-    }
-    
-    func shareToQZone() {
-        
-        if shareAudio {
-            let title = music?.songName
-            let description = music?.artistsName!.stringByAppendingString(" - ").stringByAppendingString((music?.salbumsName)!)
-            let previewImageUrl = NSURL(string: (music?.picURL)!)
-            let audioUrl = NSURL(string:  (music?.audioURL)!)
-
-            let audioObject = QQApiAudioObject.objectWithURL(audioUrl, title: title, description: description, previewImageURL: previewImageUrl)
-            let req = SendMessageToQQReq(content: audioObject as! QQApiAudioObject)
-            QQApiInterface.sendReq(req)
-        }else {
-            let imageData = UIImageJPEGRepresentation(shareImage!, 0.9)
-            let previewData = UIImageJPEGRepresentation(shareImage!, 0.5)
-            let imageObject = QQApiImageObject.objectWithData(imageData, previewImageData: previewData, title: title, description: description)
-            let req = SendMessageToQQReq(content: imageObject as! QQApiImageObject)
-            QQApiInterface.sendReq(req)
-        }
-        
-        
     }
     
     func shareToWeibo() {

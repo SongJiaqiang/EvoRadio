@@ -13,8 +13,6 @@
 		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
 		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
-		900C725B1D057C71006EBE78 /* TencentOpenAPI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72591D057C71006EBE78 /* TencentOpenAPI.framework */; };
-		900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */; };
 		9023EA021D06724A004BEE96 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA011D06724A004BEE96 /* DownloadManager.swift */; };
 		9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA031D06725B004BEE96 /* DownloadModel.swift */; };
 		9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA051D0672A2004BEE96 /* DownloadUtility.swift */; };
@@ -114,8 +112,6 @@
 		900C724F1D0563F0006EBE78 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		900C72501D0563F0006EBE78 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		900C72591D057C71006EBE78 /* TencentOpenAPI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = TencentOpenAPI.framework; sourceTree = "<group>"; };
-		900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TencentOpenApi_IOS_Bundle.bundle; sourceTree = "<group>"; };
 		9023EA011D06724A004BEE96 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9023EA031D06725B004BEE96 /* DownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9023EA051D0672A2004BEE96 /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadUtility.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -253,7 +249,6 @@
 				90C32B691D0586A500C87DAF /* libWeiboSDK.a in Frameworks */,
 				905939811D0E689F00FF9848 /* SecurityGuardSDK.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
-				900C725B1D057C71006EBE78 /* TencentOpenAPI.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */,
 			);
@@ -291,7 +286,6 @@
 			children = (
 				905939571D0D5EEB00FF9848 /* YWFramework */,
 				90C32B5B1D0586A500C87DAF /* WeiboSDK */,
-				900C72581D057C71006EBE78 /* Tencent */,
 				900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */,
 			);
 			path = Libs;
@@ -307,15 +301,6 @@
 				900C72501D0563F0006EBE78 /* WXApiObject.h */,
 			);
 			path = OpenSDK1.7.1;
-			sourceTree = "<group>";
-		};
-		900C72581D057C71006EBE78 /* Tencent */ = {
-			isa = PBXGroup;
-			children = (
-				900C72591D057C71006EBE78 /* TencentOpenAPI.framework */,
-				900C725A1D057C71006EBE78 /* TencentOpenApi_IOS_Bundle.bundle */,
-			);
-			path = Tencent;
 			sourceTree = "<group>";
 		};
 		9023EA001D067233004BEE96 /* Downloader */ = {
@@ -595,7 +580,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
-				900C725C1D057C72006EBE78 /* TencentOpenApi_IOS_Bundle.bundle in Resources */,
 				90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */,
 				905939861D0E689F00FF9848 /* yw_1222.jpg in Resources */,
 				900C72521D0563F0006EBE78 /* README.txt in Resources */,
@@ -822,7 +806,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/EvoRadio/Libs/Tencent",
 					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
@@ -852,7 +835,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/build/Debug-iphoneos",
-					"$(PROJECT_DIR)/EvoRadio/Libs/Tencent",
 					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";

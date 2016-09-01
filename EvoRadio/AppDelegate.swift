@@ -159,8 +159,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func prepareSocial()  {
         WXApi.registerApp(WECHAT_APP_ID)
         
-        let _ = TencentOAuth(appId: QQ_APP_ID, andDelegate: nil)
-        
         WeiboSDK.enableDebugMode(true)
         WeiboSDK.registerApp(WEIBO_APP_KEY)
     }
