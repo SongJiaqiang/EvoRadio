@@ -13,7 +13,7 @@ import MJRefresh
 class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
-    private var sortTabBar: TabBar!
+    private var sortTabBar: ScrollTabBar!
     private var playerView: UIView!
     private var contentView = UIScrollView()
     private var playerViewTopConstraint: Constraint?
@@ -46,7 +46,7 @@ class MainViewController: ViewController {
             titles.append(item["radio_name"] as! String)
         }
         titles.append("我的")
-        sortTabBar = TabBar(titles: titles)
+        sortTabBar = ScrollTabBar(titles: titles)
         view.addSubview(sortTabBar)
         sortTabBar.delegate = self
         sortTabBar.snp_makeConstraints { (make) in
@@ -159,8 +159,8 @@ extension MainViewController: UIScrollViewDelegate {
     }
 }
 
-extension MainViewController: TabBarDelegate {
-    func tabBarSelectedItemAtIndex(index: Int) {
+extension MainViewController: ScrollTabBarDelegate {
+    func scrollTabBar(scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int) {
         self.contentView.setContentOffset(CGPointMake(Device.width()*CGFloat(index), 0), animated: true)
     }
 }

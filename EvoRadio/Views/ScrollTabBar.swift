@@ -1,5 +1,5 @@
 //
-//  TabBar.swift
+//  ScrollTabBar.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/15.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class TabBar: UIView {
+class ScrollTabBar: UIView {
     let itemWidth:CGFloat = Device.width()*0.2
     
     var titles: [String]?
@@ -17,7 +17,7 @@ class TabBar: UIView {
     private var sortView = UIView()
     private var lineConstraint: Constraint?
     var itemButtons = [UIButton]()
-    var delegate: TabBarDelegate?
+    var delegate: ScrollTabBarDelegate?
     
     convenience init(titles: [String]) {
         self.init()
@@ -56,13 +56,13 @@ class TabBar: UIView {
             let title = titles![i].stringByReplacingOccurrencesOfString("电台", withString: "")
             button.setTitle(title, forState: .Normal)
             button.tag = i
-            button.addTarget(self, action: #selector(TabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
+            button.addTarget(self, action: #selector(ScrollTabBar.sortButtonPressed(_:)), forControlEvents: .TouchUpInside)
             sortView.addSubview(button)
             
             button.snp_makeConstraints { (make) in
                 make.width.equalTo(itemWidth)
                 make.leftMargin.equalTo(itemWidth * CGFloat(i))
-                make.height.equalTo(34)
+                make.top.equalTo(sortView.snp_top)
                 make.bottom.equalTo(sortView.snp_bottom)
             }
             itemButtons.append(button)
@@ -93,7 +93,7 @@ class TabBar: UIView {
     
     func sortButtonPressed(button: UIButton) {
         
-        delegate?.tabBarSelectedItemAtIndex(button.tag)
+        delegate?.scrollTabBar(self, didSelectedItemIndex: button.tag)
         
         updateCurrentIndex(button.tag)
     }
@@ -120,6 +120,6 @@ class TabBar: UIView {
     
 }
 
-protocol TabBarDelegate {
-    func tabBarSelectedItemAtIndex(index: Int)
+protocol ScrollTabBarDelegate {
+    func scrollTabBar(scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int)
 }

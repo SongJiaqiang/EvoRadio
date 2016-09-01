@@ -59,7 +59,7 @@
 		909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909E65A51CC083A500B0C49B /* Assets.xcassets */; };
 		909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E818B1CF8129500571A76 /* NotificationManager.swift */; };
 		90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B59E671CFD7646001E8F23 /* PlayerView.swift */; };
-		90B59E6A1CFD7AD0001E8F23 /* TabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B59E691CFD7AD0001E8F23 /* TabBar.swift */; };
+		90B59E6A1CFD7AD0001E8F23 /* ScrollTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B59E691CFD7AD0001E8F23 /* ScrollTabBar.swift */; };
 		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
 		90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */; };
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
@@ -169,7 +169,7 @@
 		909E65A51CC083A500B0C49B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		909E818B1CF8129500571A76 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NotificationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B59E671CFD7646001E8F23 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90B59E691CFD7AD0001E8F23 /* TabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = TabBar.swift; path = Views/TabBar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		90B59E691CFD7AD0001E8F23 /* ScrollTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ScrollTabBar.swift; path = Views/ScrollTabBar.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EVReflections.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaylistManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Windows.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -397,7 +397,7 @@
 			isa = PBXGroup;
 			children = (
 				90D7754C1CFA992300899492 /* Cell */,
-				90B59E691CFD7AD0001E8F23 /* TabBar.swift */,
+				90B59E691CFD7AD0001E8F23 /* ScrollTabBar.swift */,
 				90B59E671CFD7646001E8F23 /* PlayerView.swift */,
 				DBB79DA01CCFC554006189B3 /* ChannelCollectionHeaderView.swift */,
 				DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */,
@@ -688,7 +688,7 @@
 				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
-				90B59E6A1CFD7AD0001E8F23 /* TabBar.swift in Sources */,
+				90B59E6A1CFD7AD0001E8F23 /* ScrollTabBar.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */,
