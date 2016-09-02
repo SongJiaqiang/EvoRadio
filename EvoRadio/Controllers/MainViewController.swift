@@ -28,7 +28,7 @@ class MainViewController: ViewController {
         super.viewDidLoad()
         
         title = "EvoRadio"
-    
+        prepareAssistiveTouch()
         prepareTabBar()
         prepareContentView()
 //        preparePlayerView()
@@ -41,9 +41,23 @@ class MainViewController: ViewController {
         
         navigationController?.setNavigationBarHidden(true, animated: false)
         
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(MainViewController.showMenu), forControlEvents: .TouchUpInside)
     }
     
     //MARK: prepare
+    func prepareAssistiveTouch() {
+        let assitiveTouch = AssistiveTouch.sharedTouch
+        assitiveTouch.frame = CGRectMake(10, 30, 40, 40)
+        Device.keyWindow().addSubview(assitiveTouch)
+    }
+    
     func prepareTabBar() {
         
         topTabBar = UIView()
@@ -164,6 +178,10 @@ class MainViewController: ViewController {
 //        sortTabBar.updateTitles(titles)
         
         channel1Controller.updateChannels()
+    }
+    
+    func showMenu() {
+        print("Show top menu")
     }
     
 }

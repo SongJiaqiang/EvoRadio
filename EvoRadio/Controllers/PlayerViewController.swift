@@ -79,11 +79,16 @@ class PlayerViewController: ViewController {
         } else if MusicManager.sharedManager.isPaused() {
             coverRotateAnimation = nil
         }
+        
+        AssistiveTouch.sharedTouch.hide()
+        
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         PlayerView.instance.show()
+        
+        AssistiveTouch.sharedTouch.show()
     }
 
     //MARK: prepare ui

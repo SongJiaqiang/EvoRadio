@@ -36,6 +36,8 @@ class SongListViewController: ViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         PlayerView.instance.hide()
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(SongListViewController.goBack), forControlEvents: .TouchUpInside)
     }
     
     override func viewWillDisappear(animated: Bool) {

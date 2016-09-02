@@ -20,7 +20,7 @@ class ProgramViewController: ViewController {
     
     var showHeaderView: Bool = false
     
-    
+    //MARK life cycle
     convenience init(channel: Channel) {
         self.init()
         
@@ -38,6 +38,18 @@ class ProgramViewController: ViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(ProgramViewController.goBack), forControlEvents: .TouchUpInside)
+    }
+    
+    //MARK: prepare
     func prepareCollectionView() {
         
         let layout = UICollectionViewFlowLayout()
@@ -71,7 +83,7 @@ class ProgramViewController: ViewController {
 
     }
 
-    
+    //MARK events
     func headerRefresh() {
         listChannelPrograms(true)
     }
@@ -83,6 +95,7 @@ class ProgramViewController: ViewController {
             listChannelPrograms(false)
         }
     }
+    
     
     func listChannelPrograms(isRefresh: Bool) {
         let channelID = channel.channelID!
