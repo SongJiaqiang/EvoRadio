@@ -8,6 +8,7 @@
 
 import UIKit
 import iCarousel
+import ReflectionView
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
     func headerView(headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
@@ -63,14 +64,19 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
     
     func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
         
-        let itemView = UIView()
+        let itemView = ReflectionView()
         itemView.frame = CGRectMake(0, 0, 160, 160)
+        
+        itemView.reflectionAlpha = 0.25
+        itemView.reflectionGap = 3.0
+        itemView.reflectionScale = 0.15
         
         let coverImageView = UIImageView()
         itemView.addSubview(coverImageView)
         coverImageView.contentMode = .ScaleAspectFill
         coverImageView.frame = itemView.frame
         coverImageView.clipsToBounds = true
+        coverImageView.layer.cornerRadius = 4
         
         let channel = channels[index]
         if let picURL = channel.picURL {

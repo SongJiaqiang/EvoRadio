@@ -8,6 +8,7 @@ PODS:
   - MBProgressHUD (0.9.2)
   - MJRefresh (3.1.0)
   - pop (1.0.9)
+  - ReflectionView (1.2)
   - SnapKit (0.20.0)
   - StreamingKit (0.1.29)
   - UMengAnalytics (4.0.4)
@@ -22,6 +23,7 @@ DEPENDENCIES:
   - MBProgressHUD (~> 0.9.2)
   - MJRefresh (~> 3.1.0)
   - pop (~> 1.0)
+  - ReflectionView (~> 1.2)
   - SnapKit (~> 0.20.0)
   - StreamingKit (~> 0.1.29)
   - UMengAnalytics
@@ -36,6 +38,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
+  ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
   SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
   UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199

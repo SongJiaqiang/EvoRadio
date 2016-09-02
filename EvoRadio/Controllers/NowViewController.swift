@@ -150,7 +150,6 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         if kind == UICollectionElementKindSectionHeader {
             let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProgramCollectionHeaderView", forIndexPath: indexPath) as! NowCollectionHeaderView
             headerView.frame = CGRectMake(0, 0, Device.width(), 200)
-            headerView.backgroundColor = UIColor.grayColor()
             headerView.delegate = self
             api.fetch_all_now_channels({[weak self] (responseData) in
                 let week = CoreDB.currentDayOfWeek()

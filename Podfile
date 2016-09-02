@@ -16,6 +16,7 @@ pod 'UMengAnalytics'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'StreamingKit', '~> 0.1.29'
 pod 'iCarousel', '~> 1.8.2'
+pod 'ReflectionView', '~> 1.2'
 
 end
 

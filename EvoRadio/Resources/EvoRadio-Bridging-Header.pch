@@ -23,5 +23,6 @@
 #import <StreamingKit/STKAudioPlayer.h>
 #import <StreamingKit/STKAutoRecoveringHTTPDataSource.h>
 #import <iCarousel/iCarousel.h>
+#import <ReflectionView/ReflectionView.h>
 
 #endif /* EvoRadio_Bridge_Header_pch */

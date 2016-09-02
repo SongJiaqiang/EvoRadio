@@ -147,7 +147,7 @@ class MainViewController: ViewController {
         
         let customRadios = CoreDB.getCustomRadios()
         channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        addChildViewControllers([nowViewController, channel1Controller, personalController], inView: contentView)
+        addChildViewControllers([channel1Controller, nowViewController, personalController], inView: contentView)
         
     }
     

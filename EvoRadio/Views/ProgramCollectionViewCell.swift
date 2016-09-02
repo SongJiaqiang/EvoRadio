@@ -34,6 +34,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         addSubview(picImageView)
         picImageView.contentMode = .ScaleAspectFill
         picImageView.clipsToBounds = true
+        picImageView.layer.cornerRadius = 2
         picImageView.snp_makeConstraints { (make) in
             make.height.equalTo(programCollectionCellWidth)
             make.top.equalTo(snp_top)
