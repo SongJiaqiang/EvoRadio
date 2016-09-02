@@ -22,6 +22,7 @@ class API {
         return url
     }
     
+    /** 获取所有Radio以及其下的所有频道 */
     func fetch_all_channels(onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         
         if let responseData = CoreDB.getAllChannels() {
@@ -55,6 +56,7 @@ class API {
         
     }
     
+    /** 获取所有“时刻”频道 */
     func fetch_all_now_channels(onSuccess: [[String : AnyObject]] -> Void, onFailed: (NSError -> Void)?) {
         
         if let responseData = CoreDB.getAllNowChannels() {
@@ -81,6 +83,40 @@ class API {
         }
     }
     
+    /** 获取精品节目单，分页 */
+    func fetch_ground_programs(page: Page, onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
+        let _pn = (page.index+page.size-1) / page.size
+        let endpoint = commonEP("api/radio.listGroundPrograms.json?_pn=\(_pn)&_sz=\(page.size)")
+        
+        if let responseData = CoreDB.getGroundPrograms(endpoint) {
+            let items = [Program](dictArray: responseData)
+            onSuccess(items)
+        }
+        
+        Alamofire.request(.GET, endpoint).responseJSON { (response) in
+            do {
+                
+                let dict = try NSJSONSerialization.JSONObjectWithData(response.data!, options: []) as! [String:AnyObject]
+                
+                if dict["err"] as! String == "hapn.ok" {
+                    let data = dict["data"]!["lists"] as? [[String : AnyObject]]
+                    CoreDB.saveGroundPrograms(endpoint, responseData: data!)
+                    
+                    let items = [Program](dictArray: data)
+                    onSuccess(items)
+                }
+                
+                
+            } catch let error as NSError {
+                if let _ = onFailed {
+                    onFailed!(error)
+                }
+            }
+            
+        }
+    }
+    
+    /** 根据频道ID获取节目单，分页 */
     func fetch_programs(channelID:String, page: Page, onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
@@ -113,6 +149,7 @@ class API {
         }
     }
     
+    /** 根据节目单ID获取其下的所有音乐 */
     func fetch_songs(programID: String, isVIP: Bool,  onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
         var endpoint = commonEP("api/play.playProgram.json?device=iPhone%20OS%209.3.2&luid=&program_id=\(programID)")
         if isVIP {
@@ -144,6 +181,7 @@ class API {
         }
     }
     
+    /** 获取当前登录用户的相关信息 */
     func fetch_userinfo(onSuccess: [String : AnyObject] -> Void, onFailed: (NSError -> Void)?) {
         let endpoint = commonEP("api/user.getUserInfo")
         

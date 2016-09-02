@@ -12,6 +12,7 @@ let DB_ALLCHANNELS = "all_channels"
 let DB_ALLNOWCHANNELS = "all_now_channels"
 let DB_CUSTOMRADIOS = "custom_radios"
 let DB_PROGRAMS = "programs"
+let DB_GROUND_PROGRAMS = "ground_programs"
 let DB_SONGS = "songs"
 let DB_SELECTEDINDEXES = "selected_indexes"
 let DB_PLAYLSIT = "playlist"
@@ -61,6 +62,18 @@ class CoreDB {
     
     class func getPrograms(endpoint: String) -> [[String : AnyObject]]?{
         let responseData = WLevelDb.sharedDb().objectForKey(DB_PROGRAMS+endpoint)
+        if let _ = responseData {
+            return responseData as? [[String : AnyObject]]
+        }
+        return nil
+    }
+    
+    class func saveGroundPrograms(endpoint: String, responseData: [[String : AnyObject]]) {
+        WLevelDb.sharedDb().setObject(responseData, forKey: DB_GROUND_PROGRAMS+endpoint)
+    }
+    
+    class func getGroundPrograms(endpoint: String) -> [[String : AnyObject]]?{
+        let responseData = WLevelDb.sharedDb().objectForKey(DB_GROUND_PROGRAMS+endpoint)
         if let _ = responseData {
             return responseData as? [[String : AnyObject]]
         }

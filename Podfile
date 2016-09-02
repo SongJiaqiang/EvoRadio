@@ -15,6 +15,7 @@ pod 'pop', '~> 1.0'
 pod 'UMengAnalytics'
 pod 'MBProgressHUD', '~> 0.9.2'
 pod 'StreamingKit', '~> 0.1.29'
+pod 'iCarousel', '~> 1.8.2'
 
 end
 

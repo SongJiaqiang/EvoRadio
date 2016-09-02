@@ -1,37 +1,29 @@
 //
-//  ProgramViewController.swift
+//  NowViewController.swift
 //  EvoRadio
 //
-//  Created by Jarvis on 16/4/18.
-//  Copyright © 2016年 JQTech. All rights reserved.
+//  Created by Jarvis on 9/1/16.
+//  Copyright © 2016 JQTech. All rights reserved.
 //
 
 import UIKit
+import iCarousel
 import MJRefresh
 
-class ProgramViewController: ViewController {
-    let cellID = "programCellID"
+class NowViewController: ViewController {
     
-    var channel: Channel!
+    let cellID = "groundProgramCellID"
+    
     var dataSource = [Program]()
-    var collectionView: UICollectionView?
+    var nowChannels = [Channel]()
+    var collectionView: UICollectionView!
     private var endOfFeed = false
     private let pageSize: Int = 30
     
-    var showHeaderView: Bool = false
-    
-    
-    convenience init(channel: Channel) {
-        self.init()
-        
-        self.channel = channel
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        setupBackButton()
-        title = channel.channelName
+        
+        title = "Now"
         
         prepareCollectionView()
         
@@ -54,6 +46,9 @@ class ProgramViewController: ViewController {
         collectionView!.delegate = self
         collectionView!.dataSource = self
         collectionView!.registerClass(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.registerClass(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
+        collectionView!.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
+        
         collectionView!.backgroundColor = UIColor.clearColor()
         collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
@@ -64,13 +59,10 @@ class ProgramViewController: ViewController {
         collectionView!.mj_footer.automaticallyHidden = true
         
         
-        if showHeaderView {
-            collectionView?.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
-            collectionView?.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
-        }
-
+        
+        
     }
-
+    
     
     func headerRefresh() {
         listChannelPrograms(true)
@@ -85,17 +77,15 @@ class ProgramViewController: ViewController {
     }
     
     func listChannelPrograms(isRefresh: Bool) {
-        let channelID = channel.channelID!
         
         var pageIndex = dataSource.count
         if isRefresh {
             pageIndex = 0
         }
         
-        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
+        api.fetch_ground_programs(Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
             
             if items.count > 0 {
-//                let newData = Program.programsWithDict(responseData)
                 let newData = items as! [Program]
                 if isRefresh {
                     self?.dataSource.removeAll()
@@ -125,11 +115,11 @@ class ProgramViewController: ViewController {
         }
         
     }
-
+    
 }
 
-extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-
+extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+    
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -155,9 +145,45 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         navigationController?.pushViewController(listController, animated: true)
     }
     
+    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        
+        if kind == UICollectionElementKindSectionHeader {
+            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProgramCollectionHeaderView", forIndexPath: indexPath) as! NowCollectionHeaderView
+            headerView.frame = CGRectMake(0, 0, Device.width(), 200)
+            headerView.backgroundColor = UIColor.grayColor()
+            headerView.delegate = self
+            api.fetch_all_now_channels({[weak self] (responseData) in
+                let week = CoreDB.currentDayOfWeek()
+                let time = CoreDB.currentTimeOfDay()
+                
+                let anyList = responseData[week*8+time]
+                
+                
+                
+                let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
+                dispatch_async(dispatch_get_main_queue(), {
+                    self?.nowChannels = channels
+                    headerView.updateChannels(channels)
+                })
+                
+                }, onFailed: nil)
+
+            
+            return headerView
+        }else {
+            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "footerView", forIndexPath: indexPath)
+            return footerView
+        }
+        
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: Device.width(), height: 200);
+    }
+    
 }
 
-extension ProgramViewController: ProgramCollectionViewCellDelegate {
+extension NowViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(programID: String) {
         TrackManager.playMusicTypeEvent(.ProgramCover)
         
@@ -172,3 +198,9 @@ extension ProgramViewController: ProgramCollectionViewCellDelegate {
     }
 }
 
+extension NowViewController: NowCollectionHeaderViewDelegate {
+    func headerView(headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int) {
+        let channel = nowChannels[index]
+        navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
+    }
+}
