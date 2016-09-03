@@ -13,15 +13,18 @@ import MJRefresh
 class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
-    var topTabBar: UIView!
+    var topTabBar: TopTabBar!
     private var playerView: UIView!
     private var contentView = UIScrollView()
     private var playerViewTopConstraint: Constraint?
     
     private var channel1Controller = ChannelViewController()
+    private var radioController = RadioViewController()
     private var nowViewController = NowViewController()
     private var personalController = PersonalViewController()
     private var playerController = PlayerViewController()
+    
+    private var topTabBarHeightConstraint: Constraint!
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -60,54 +63,16 @@ class MainViewController: ViewController {
     
     func prepareTabBar() {
         
-        topTabBar = UIView()
+        topTabBar = TopTabBar(titles: ["电台","当下","本地"])
         view.addSubview(topTabBar)
         topTabBar.backgroundColor = UIColor.blackColor()
         topTabBar.snp_makeConstraints { (make) in
-            make.height.equalTo(20)
+            topTabBarHeightConstraint = make.height.equalTo(20).constraint
             make.top.equalTo(view.snp_top)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
         }
         
-        let label0 = UILabel()
-        topTabBar.addSubview(label0)
-        label0.textColor = UIColor.whiteColor()
-        label0.font = UIFont.systemFontOfSize(10)
-        label0.text = "电台"
-        label0.snp_makeConstraints { (make) in
-            make.left.equalTo(topTabBar.snp_left).offset(2)
-            make.bottom.equalTo(topTabBar.snp_bottom).offset(-2)
-        }
-        
-        let label1 = UILabel()
-        topTabBar.addSubview(label1)
-        label1.textColor = UIColor.whiteColor()
-        label1.font = UIFont.systemFontOfSize(10)
-        label1.text = "首页"
-        label1.snp_makeConstraints { (make) in
-            make.centerX.equalTo(topTabBar.snp_centerX)
-            make.bottom.equalTo(topTabBar.snp_bottom).offset(-2)
-        }
-        
-        let label2 = UILabel()
-        topTabBar.addSubview(label2)
-        label2.textColor = UIColor.whiteColor()
-        label2.font = UIFont.systemFontOfSize(10)
-        label2.text = "本地"
-        label2.snp_makeConstraints { (make) in
-            make.right.equalTo(topTabBar.snp_right).offset(-2)
-            make.bottom.equalTo(topTabBar.snp_bottom).offset(-2)
-        }
-        
-        let topLine = UIView()
-        view.addSubview(topLine)
-        topLine.backgroundColor = UIColor.redColor()
-        topLine.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 2))
-            make.centerX.equalTo(view.snp_centerX)
-            make.top.equalTo(view.snp_top)
-        }
         
     }
     
@@ -157,12 +122,12 @@ class MainViewController: ViewController {
         }
         
         contentView.contentSize = CGSizeMake(Device.width()*5, 0)
+        contentView.contentOffset = CGPointMake(Device.width(), 0)
         
         
         let customRadios = CoreDB.getCustomRadios()
         channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        addChildViewControllers([channel1Controller, nowViewController, personalController], inView: contentView)
-        
+        addChildViewControllers([radioController, nowViewController, personalController], inView: contentView)
     }
     
     //MARK: event

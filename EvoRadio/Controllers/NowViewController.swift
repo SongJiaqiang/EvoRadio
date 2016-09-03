@@ -13,12 +13,16 @@ import MJRefresh
 class NowViewController: ViewController {
     
     let cellID = "groundProgramCellID"
+    let headerViewID = "NowCollectionHeaderViewID"
+    let footerViewID = "footerViewID"
     
     var dataSource = [Program]()
     var nowChannels = [Channel]()
     var collectionView: UICollectionView!
+    var collectionHeaderView: NowCollectionHeaderView?
     private var endOfFeed = false
-    private let pageSize: Int = 30
+    private let pageSize: Int = 60
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,20 +50,17 @@ class NowViewController: ViewController {
         collectionView!.delegate = self
         collectionView!.dataSource = self
         collectionView!.registerClass(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView!.registerClass(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
-        collectionView!.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
+        collectionView!.registerClass(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerViewID)
+        collectionView!.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerViewID)
         
         collectionView!.backgroundColor = UIColor.clearColor()
         collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
-        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
+        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
         collectionView!.mj_footer.automaticallyHidden = true
-        
-        
-        
         
     }
     
@@ -118,7 +119,7 @@ class NowViewController: ViewController {
     
 }
 
-extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
@@ -148,29 +149,28 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionElementKindSectionHeader {
-            let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "ProgramCollectionHeaderView", forIndexPath: indexPath) as! NowCollectionHeaderView
-            headerView.frame = CGRectMake(0, 0, Device.width(), 200)
-            headerView.delegate = self
+            if let headerView = collectionHeaderView {
+                return headerView
+            }
+            collectionHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewID, forIndexPath: indexPath) as! NowCollectionHeaderView
+            collectionHeaderView!.frame = CGRectMake(0, 0, Device.width(), 200)
+            collectionHeaderView!.delegate = self
             api.fetch_all_now_channels({[weak self] (responseData) in
                 let week = CoreDB.currentDayOfWeek()
                 let time = CoreDB.currentTimeOfDay()
                 
                 let anyList = responseData[week*8+time]
-                
-                
-                
                 let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
-                dispatch_async(dispatch_get_main_queue(), {
+                dispatch_async(dispatch_get_main_queue(), {[weak self] in
                     self?.nowChannels = channels
-                    headerView.updateChannels(channels)
+                    self?.collectionHeaderView!.updateChannels(channels)
                 })
                 
                 }, onFailed: nil)
 
-            
-            return headerView
+            return collectionHeaderView!
         }else {
-            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: "footerView", forIndexPath: indexPath)
+            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: footerViewID, forIndexPath: indexPath)
             return footerView
         }
         
@@ -196,6 +196,8 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
             }, onFailed: nil)
     }
 }
+
+
 
 extension NowViewController: NowCollectionHeaderViewDelegate {
     func headerView(headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int) {
