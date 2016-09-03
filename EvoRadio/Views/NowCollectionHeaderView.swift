@@ -80,10 +80,17 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         coverImageView.clipsToBounds = true
 //        coverImageView.layer.cornerRadius = 4
         
+        let nameLabel = UILabel()
+        itemView.addSubview(nameLabel)
+        nameLabel.frame = CGRectMake(10, itemWidth-30, itemWidth-20, 30)
+        nameLabel.font = UIFont.systemFontOfSize(14)
+        nameLabel.textColor = UIColor.whiteColor()
+        
         let channel = channels[index]
         if let picURL = channel.picURL {
             coverImageView.kf_setImageWithURL(NSURL(string: picURL)!, placeholderImage: UIImage.placeholder_cover())
         }
+        nameLabel.text = channel.channelName
         
         return itemView
     }
