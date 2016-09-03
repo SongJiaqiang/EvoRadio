@@ -64,8 +64,10 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
     
     func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
         
+        let itemWidth: CGFloat = 160
+        
         let itemView = ReflectionView()
-        itemView.frame = CGRectMake(0, 0, 160, 160)
+        itemView.frame = CGRectMake(0, 0, itemWidth, itemWidth)
         
         itemView.reflectionAlpha = 0.25
         itemView.reflectionGap = 3.0
@@ -73,10 +75,10 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         
         let coverImageView = UIImageView()
         itemView.addSubview(coverImageView)
-        coverImageView.contentMode = .ScaleAspectFill
         coverImageView.frame = itemView.frame
+        coverImageView.contentMode = .ScaleAspectFill
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = 4
+//        coverImageView.layer.cornerRadius = 4
         
         let channel = channels[index]
         if let picURL = channel.picURL {

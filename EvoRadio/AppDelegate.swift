@@ -39,8 +39,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupRootControllerAndVisible() {
         window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.clipsToBounds = true
-        window?.layer.cornerRadius = 10
+//        window?.clipsToBounds = true
+//        window?.layer.cornerRadius = 10
         
         let controller = MainViewController()
         let homeNavC = NavigationController(rootViewController: controller)

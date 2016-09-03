@@ -44,7 +44,7 @@ class SongListTableViewCell: UITableViewCell {
         contentView.addSubview(coverImageView)
         coverImageView.image = UIImage.placeholder_cover()
         coverImageView.clipsToBounds = true
-        coverImageView.layer.cornerRadius = 4
+//        coverImageView.layer.cornerRadius = 4
         coverImageView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(30, 30))
             make.leftMargin.equalTo(6)

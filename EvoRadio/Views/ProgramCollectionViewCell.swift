@@ -34,7 +34,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         addSubview(picImageView)
         picImageView.contentMode = .ScaleAspectFill
         picImageView.clipsToBounds = true
-        picImageView.layer.cornerRadius = 2
+//        picImageView.layer.cornerRadius = 2
         picImageView.snp_makeConstraints { (make) in
             make.height.equalTo(programCollectionCellWidth)
             make.top.equalTo(snp_top)
@@ -75,7 +75,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         addSubview(vipView)
         vipView.backgroundColor = UIColor.goldColor()
         vipView.clipsToBounds = true
-        vipView.layer.cornerRadius = 2
+//        vipView.layer.cornerRadius = 2
         vipView.hidden = true
         vipView.snp_makeConstraints { (make) in
             make.size.equalTo(CGSizeMake(4, 4))
