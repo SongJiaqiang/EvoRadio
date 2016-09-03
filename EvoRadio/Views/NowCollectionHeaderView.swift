@@ -83,7 +83,7 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         let nameLabel = UILabel()
         itemView.addSubview(nameLabel)
         nameLabel.frame = CGRectMake(10, itemWidth-30, itemWidth-20, 30)
-        nameLabel.font = UIFont.systemFontOfSize(14)
+        nameLabel.font = UIFont.systemFontOfSize(12)
         nameLabel.textColor = UIColor.whiteColor()
         
         let channel = channels[index]

@@ -23,7 +23,7 @@ class API {
     }
     
     /** 获取所有Radio以及其下的所有频道 */
-    func fetch_all_channels(onSuccess: [EVObject] -> Void, onFailed: (NSError -> Void)?) {
+    func fetch_all_channels(onSuccess: [Radio] -> Void, onFailed: (NSError -> Void)?) {
         
         if let responseData = CoreDB.getAllChannels() {
             let items = [Radio](dictArray: responseData)
