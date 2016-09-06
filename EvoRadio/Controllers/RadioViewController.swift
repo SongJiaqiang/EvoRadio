@@ -74,7 +74,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! RadioTableViewCell
         let radio = dataSource[indexPath.section]
         cell.delegate = self
-        cell.setupChannels(radio.channels!)
+        cell.setupChannels(radio)
         
         return cell
     }
@@ -109,7 +109,12 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension RadioViewController: RadioTableViewCellDelegate {
-    func radioTableViewCell(tableViewCell: RadioTableViewCell, didSelectedItem channel: Channel) {
+    func radioTableViewCell(cell: RadioTableViewCell, didSelectedItem channel: Channel) {
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
+    }
+    
+    func radioTableViewCell(cell: RadioTableViewCell, showMoreChannelWithRadio radioId: Int) {
+        let channelController = ChannelViewController(radioID: radioId)
+        navigationController?.pushViewController(channelController, animated: true)
     }
 }

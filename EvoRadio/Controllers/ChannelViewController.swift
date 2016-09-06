@@ -12,7 +12,7 @@ import Kingfisher
 import MJRefresh
 
 
-class ChannelViewController: UIViewController {
+class ChannelViewController: ViewController {
     let cellID = "channelCellID"
     let headerID = "channelHeaderID"
     
@@ -43,6 +43,11 @@ class ChannelViewController: UIViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(ChannelViewController.goBack), forControlEvents: .TouchUpInside)
+    }
 
     func prepareCollectionView() {
         
