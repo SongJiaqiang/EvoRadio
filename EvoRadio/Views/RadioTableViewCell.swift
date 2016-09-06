@@ -29,6 +29,7 @@ class RadioTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = UIColor.clearColor()
+        selectionStyle = .None
         
         prepareUI()
     }
