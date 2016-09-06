@@ -52,6 +52,7 @@ class MainViewController: ViewController {
         
         AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
         AssistiveTouch.sharedTouch.addTarget(self, action: #selector(MainViewController.showMenu), forControlEvents: .TouchUpInside)
+        AssistiveTouch.sharedTouch.setImage(UIImage(named: "ring_white")!, forState: .Normal)
     }
     
     //MARK: prepare

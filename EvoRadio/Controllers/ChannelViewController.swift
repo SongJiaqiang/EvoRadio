@@ -47,6 +47,7 @@ class ChannelViewController: ViewController {
         super.viewDidAppear(animated)
         AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
         AssistiveTouch.sharedTouch.addTarget(self, action: #selector(ChannelViewController.goBack), forControlEvents: .TouchUpInside)
+        AssistiveTouch.sharedTouch.setImage(UIImage(named: "arrow_left_white")!, forState: .Normal)
     }
 
     func prepareCollectionView() {
