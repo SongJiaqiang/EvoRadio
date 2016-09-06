@@ -166,14 +166,7 @@ extension MainViewController: UIScrollViewDelegate {
 //        
 ////        sortTabBar.updateCurrentIndex(max(min(pageIndex, 4), 0))
 //    }
-    
-    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        let offsetX = scrollView.contentOffset.x        
-        if offsetX < -80 {
-            let panel = SelectiveTimePanel(frame: Device.keyWindow().bounds)
-            Device.keyWindow().addSubview(panel)
-        }
-    }
+
 }
 
 extension MainViewController: ScrollTabBarDelegate {

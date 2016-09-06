@@ -113,12 +113,11 @@ class ChannelViewController: ViewController {
             let week = CoreDB.currentDayOfWeek()
             let time = CoreDB.currentTimeOfDay()
             
-            let anyList = responseData[week*8+time]
+            let channelList = responseData[week*8+time]
+            let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
             
             self?.dataSource.removeAll()
-            
-            let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
-            self?.dataSource.appendContentsOf(channels)
+            self?.dataSource.appendContentsOf(newChannels)
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()
@@ -140,10 +139,12 @@ class ChannelViewController: ViewController {
             let timeIndex = userInfo["timeIndex"] as! Int
 
             api.fetch_all_now_channels({[weak self] (responseData) in
-                let someList = responseData[dayIndex*8+timeIndex]
+                let channelList = responseData[dayIndex*8+timeIndex]
+                let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
 
                 self?.dataSource.removeAll()
-                self?.dataSource.appendContentsOf(Channel.channelsWithDict(someList["channels"] as! [[String : AnyObject]]))
+                self?.dataSource.appendContentsOf(newChannels)
+                
                 self?.collectionView!.reloadData()
                 }, onFailed: nil)
         }

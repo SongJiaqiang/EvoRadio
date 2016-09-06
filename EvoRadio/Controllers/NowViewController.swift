@@ -23,15 +23,24 @@ class NowViewController: ViewController {
     private var endOfFeed = false
     private let pageSize: Int = 60
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Now"
         
         prepareCollectionView()
-        
         collectionView!.mj_header.beginRefreshing()
+        
+        prepareClock()
+        
+        Device.defaultNotificationCenter().addObserver(self, selector: #selector(ChannelViewController.nowTimeChanged(_:)), name: NOWTIME_CHANGED, object: nil)
+    }
+    
+    func prepareClock() {
+        let clockFrame = CGRectMake(Device.width()-50, 10, 40, 40)
+        let clock = ClockView(frame: clockFrame)
+        view.addSubview(clock)
+        clock.addTarget(self, action: #selector(NowViewController.clockViewPressed), forControlEvents: .TouchUpInside)
     }
     
     func prepareCollectionView() {
@@ -65,19 +74,46 @@ class NowViewController: ViewController {
     }
     
     
+    //MARK: events
+    func clockViewPressed() {
+        let panel = SelectiveTimePanel(frame: Device.keyWindow().bounds)
+        Device.keyWindow().addSubview(panel)
+    }
+    
+    func nowTimeChanged(notification: NSNotification) {
+        
+        if let userInfo = notification.userInfo {
+            let dayIndex = userInfo["dayIndex"] as! Int
+            let timeIndex = userInfo["timeIndex"] as! Int
+            
+            api.fetch_all_now_channels({[weak self] (responseData) in
+                let channelList = responseData[dayIndex*8+timeIndex]
+                let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
+                print("newChannels:\(newChannels.count)")
+                
+                self?.nowChannels.removeAll()
+                self?.nowChannels.appendContentsOf(newChannels)
+                
+                self?.collectionHeaderView = nil
+                self?.collectionView!.reloadData()
+                }, onFailed: nil)
+        }
+    }
+    
     func headerRefresh() {
-        listChannelPrograms(true)
+        listNowChannels()
+        listGroundPrograms(true)
     }
     
     func footerRefresh() {
         if endOfFeed {
             collectionView!.mj_footer.endRefreshing()
         }else {
-            listChannelPrograms(false)
+            listGroundPrograms(false)
         }
     }
     
-    func listChannelPrograms(isRefresh: Bool) {
+    func listGroundPrograms(isRefresh: Bool) {
         
         var pageIndex = dataSource.count
         if isRefresh {
@@ -106,6 +142,22 @@ class NowViewController: ViewController {
             }, onFailed: nil)
     }
     
+    func listNowChannels() {
+        api.fetch_all_now_channels({[weak self] (responseData) in
+            let week = CoreDB.currentDayOfWeek()
+            let time = CoreDB.currentTimeOfDay()
+            
+            let anyList = responseData[week*8+time]
+            let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
+            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+                self?.nowChannels = channels
+                self?.collectionHeaderView!.updateChannels(channels)
+                })
+            
+            }, onFailed: nil)
+    }
+    
+    
     func endRefreshing() {
         if collectionView!.mj_header.isRefreshing() {
             collectionView!.mj_header.endRefreshing()
@@ -114,7 +166,6 @@ class NowViewController: ViewController {
         if collectionView!.mj_footer.isRefreshing() {
             collectionView!.mj_footer.endRefreshing()
         }
-        
     }
     
 }
@@ -152,22 +203,11 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
             if let headerView = collectionHeaderView {
                 return headerView
             }
-            collectionHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewID, forIndexPath: indexPath) as! NowCollectionHeaderView
+            collectionHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewID, forIndexPath: indexPath) as? NowCollectionHeaderView
             collectionHeaderView!.frame = CGRectMake(0, 0, Device.width(), 200)
             collectionHeaderView!.delegate = self
-            api.fetch_all_now_channels({[weak self] (responseData) in
-                let week = CoreDB.currentDayOfWeek()
-                let time = CoreDB.currentTimeOfDay()
-                
-                let anyList = responseData[week*8+time]
-                let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
-                dispatch_async(dispatch_get_main_queue(), {[weak self] in
-                    self?.nowChannels = channels
-                    self?.collectionHeaderView!.updateChannels(channels)
-                })
-                
-                }, onFailed: nil)
-
+            collectionHeaderView?.updateChannels(nowChannels)
+            
             return collectionHeaderView!
         }else {
             let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: footerViewID, forIndexPath: indexPath)

@@ -32,6 +32,7 @@ class AssistiveTouch: UIControl {
         backgroundColor = UIColor.blackColor()
         alpha = 0.8
         
+        prepareUI()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,8 +51,11 @@ class AssistiveTouch: UIControl {
     func prepareUI() {
         imageView = UIImageView()
         addSubview(imageView)
+        imageView.frame = CGRectMake(10, 10, 20, 20)
+        if let image = UIImage(named: "ring_white") {
+            imageView.image = image
+        }
         
-        imageView.image = UIImage(named: "")
         
     }
     
@@ -69,6 +73,10 @@ class AssistiveTouch: UIControl {
     
     func drawIcon() {
         
+    }
+    
+    func setImage(image: UIImage, forState state: UIControlState) {
+        imageView.image = image
     }
 }
 
