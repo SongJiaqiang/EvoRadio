@@ -21,10 +21,12 @@ class MainViewController: ViewController {
     private var channel1Controller = ChannelViewController()
     private var radioController = RadioViewController()
     private var nowViewController = NowViewController()
-    private var personalController = PersonalViewController()
+    private var localViewController = LocalViewController()
     private var playerController = PlayerViewController()
     
     private var topTabBarHeightConstraint: Constraint!
+    
+    var touchIcon: UIImage?
     
     //MARK: life cycle
     override func viewDidLoad() {
@@ -52,7 +54,8 @@ class MainViewController: ViewController {
         
         AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
         AssistiveTouch.sharedTouch.addTarget(self, action: #selector(MainViewController.showMenu), forControlEvents: .TouchUpInside)
-        AssistiveTouch.sharedTouch.setImage(UIImage(named: "ring_white")!, forState: .Normal)
+
+        AssistiveTouch.sharedTouch.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
     }
     
     //MARK: prepare
@@ -106,9 +109,7 @@ class MainViewController: ViewController {
 //        }
     }
     
-    func prepareContentView() {
-//        contentView.backgroundColor = UIColor.whiteColor()
-        
+    func prepareContentView() {        
         view.addSubview(contentView)
         contentView.pagingEnabled = true
         contentView.showsVerticalScrollIndicator = false
@@ -122,13 +123,13 @@ class MainViewController: ViewController {
             make.right.equalTo(0)
         }
         
-        contentView.contentSize = CGSizeMake(Device.width()*5, 0)
+        contentView.contentSize = CGSizeMake(Device.width()*3, 0)
         contentView.contentOffset = CGPointMake(Device.width(), 0)
         
         
         let customRadios = CoreDB.getCustomRadios()
         channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        addChildViewControllers([radioController, nowViewController, personalController], inView: contentView)
+        addChildViewControllers([radioController, nowViewController, localViewController], inView: contentView)
     }
     
     //MARK: event
@@ -156,16 +157,24 @@ extension MainViewController: UIScrollViewDelegate {
 //    func scrollViewDidScroll(scrollView: UIScrollView) {
 //        let offsetX = scrollView.contentOffset.x
 //        
-////        self.sortTabBar.updateLineConstraint(offsetX*0.2)
+//        self.sortTabBar.updateLineConstraint(offsetX*0.2)
 //    }
-//    
-//    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
-//        let offsetX = scrollView.contentOffset.x
-//        
-//        let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width()) + 1
-//        
-////        sortTabBar.updateCurrentIndex(max(min(pageIndex, 4), 0))
-//    }
+    
+    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        
+        let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
+        
+        
+        if pageIndex == 0 {
+            touchIcon = UIImage(named: "touch_refresh")
+        } else if pageIndex == 1 {
+            touchIcon = UIImage(named: "touch_ring")
+        } else if pageIndex == 2 {
+            touchIcon = UIImage(named: "touch_sound")
+        }
+        AssistiveTouch.sharedTouch.updateImage(touchIcon!)
+    }
 
 }
 

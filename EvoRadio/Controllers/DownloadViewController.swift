@@ -30,11 +30,18 @@ class DownloadViewController: ViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         PlayerView.instance.hide()
+        
+        navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(DownloadViewController.goBack), forControlEvents: .TouchUpInside)
+        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
     }
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         PlayerView.instance.show()
+        navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
     override func didReceiveMemoryWarning() {

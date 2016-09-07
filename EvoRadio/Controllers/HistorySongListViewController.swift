@@ -19,8 +19,6 @@ class HistorySongListViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.yellowColor()
-        
         prepareTableView()
         
         loadDataSource()
@@ -30,6 +28,14 @@ class HistorySongListViewController: ViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
+        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(HistorySongListViewController.goBack), forControlEvents: .TouchUpInside)
+        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
     }
     
     //MARK: prepare ui

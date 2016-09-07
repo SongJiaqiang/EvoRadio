@@ -72,13 +72,7 @@ class ChannelViewController: ViewController {
         collectionView!.snp_makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
-        
-        //        if radioID == 0 {
-//            collectionView!.registerClass(ChannelCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerID)
-//        }
-        
-        
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))        
     }
     
     func headerRefresh() {

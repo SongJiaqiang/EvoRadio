@@ -26,8 +26,6 @@ class DownloadingSongListViewController: ViewController {
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.redColor()
         
         prepareTableView()
         

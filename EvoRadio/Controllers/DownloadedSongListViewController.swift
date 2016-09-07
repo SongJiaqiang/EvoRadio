@@ -18,8 +18,6 @@ class DownloadedSongListViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.yellowColor()
         
         prepareTableView()
         

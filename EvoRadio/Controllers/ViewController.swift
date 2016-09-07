@@ -17,9 +17,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.whiteColor()
+        view.backgroundColor = UIColor.grayColor3()
         
-        insertGradientLayer()
+//        insertGradientLayer()
         
         navigationController?.navigationBar.barTintColor = UIColor.grayColor1()
         navigationController?.navigationBar.tintColor = UIColor.whiteColor()
