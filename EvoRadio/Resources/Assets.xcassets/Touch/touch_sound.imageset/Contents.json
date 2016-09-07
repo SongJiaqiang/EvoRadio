@@ -6,12 +6,12 @@
     },
     {
       "idiom" : "universal",
-      "filename" : "ring_white@2x.png",
+      "filename" : "touch_sound@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "ring_white@3x.png",
+      "filename" : "touch_sound@3x.png",
       "scale" : "3x"
     }
   ],

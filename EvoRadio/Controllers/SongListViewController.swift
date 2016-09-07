@@ -38,7 +38,7 @@ class SongListViewController: ViewController {
         PlayerView.instance.hide()
         AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
         AssistiveTouch.sharedTouch.addTarget(self, action: #selector(SongListViewController.goBack), forControlEvents: .TouchUpInside)
-        AssistiveTouch.sharedTouch.setImage(UIImage(named: "arrow_left_white")!, forState: .Normal)
+        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
     }
     
     override func viewWillDisappear(animated: Bool) {

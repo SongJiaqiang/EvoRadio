@@ -52,7 +52,7 @@ class AssistiveTouch: UIControl {
         imageView = UIImageView()
         addSubview(imageView)
         imageView.frame = CGRectMake(10, 10, 20, 20)
-        if let image = UIImage(named: "ring_white") {
+        if let image = UIImage(named: "touch_ring") {
             imageView.image = image
         }
         
@@ -75,8 +75,20 @@ class AssistiveTouch: UIControl {
         
     }
     
-    func setImage(image: UIImage, forState state: UIControlState) {
-        imageView.image = image
+    func updateImage(image: UIImage) {
+        if image == imageView.image {
+            return
+        }
+        
+        UIView.animateWithDuration(0.2, animations: {[weak self] in
+            self?.imageView.alpha = 0
+            }) {[weak self] (finished) in
+                self?.imageView.image = image
+                UIView.animateWithDuration(0.2, animations: {[weak self] in
+                    self?.imageView.alpha = 1
+                })
+        }
+        
     }
 }
 
