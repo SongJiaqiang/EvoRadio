@@ -30,7 +30,7 @@ class CustomRadioViewController: ViewController {
         
         api.fetch_all_channels({[weak self] (items) in
             
-            let allRadios = items as! [Radio]
+            let allRadios = items
             self?.dataSource.appendContentsOf(allRadios)
             
             self?.tableView.reloadData()

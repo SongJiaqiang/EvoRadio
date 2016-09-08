@@ -12,7 +12,7 @@ class LocalTableViewCell: UITableViewCell {
 
     var iconImageView: UIImageView!
     var titleLabel: UILabel!
-    var countLabel: UILabel!
+    var detailLabel: UILabel!
     
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -46,11 +46,11 @@ class LocalTableViewCell: UITableViewCell {
             make.left.equalTo(iconImageView.snp_right).offset(10)
         }
         
-        countLabel = UILabel()
-        contentView.addSubview(countLabel)
-        countLabel.font = UIFont.systemFontOfSize(12)
-        countLabel.textColor = UIColor.grayColor()
-        countLabel.snp_makeConstraints { (make) in
+        detailLabel = UILabel()
+        contentView.addSubview(detailLabel)
+        detailLabel.font = UIFont.systemFontOfSize(12)
+        detailLabel.textColor = UIColor.grayColor()
+        detailLabel.snp_makeConstraints { (make) in
             make.centerY.equalTo(contentView.snp_centerY).offset(10)
             make.left.equalTo(iconImageView.snp_right).offset(10)
         }
@@ -86,7 +86,7 @@ class LocalTableViewCell: UITableViewCell {
         }
         
         if let count = dataInfo["count"] {
-            countLabel.text = count.stringByAppendingString(" 首")
+            detailLabel.text = count
         }
     }
 

@@ -51,7 +51,7 @@ class DownloadingSongListViewController: ViewController {
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
         tableView.separatorStyle = .None
         tableView.snp_makeConstraints(closure: {(make) in
-            make.edges.equalTo(UIEdgeInsetsMake(64, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         })
         
         tableView.registerClass(DownloadingSongListTableViewCell.self, forCellReuseIdentifier: cellID)

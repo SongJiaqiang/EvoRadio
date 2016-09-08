@@ -19,10 +19,17 @@ class DownloadedProgramListViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = UIColor.greenColor()
         
         prepareTableView()
+        
+        let label = UILabel()
+        view.addSubview(label)
+        label.font = UIFont.systemFontOfSize(20)
+        label.textColor = UIColor.whiteColor()
+        label.text = "以歌单形式展现，利于播放"
+        label.snp_makeConstraints { (make) in
+            make.center.equalTo(view.snp_center)
+        }
     }
 
     override func didReceiveMemoryWarning() {

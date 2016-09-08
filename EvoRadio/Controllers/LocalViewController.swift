@@ -14,10 +14,10 @@ class LocalViewController: ViewController {
     
     var tableView: UITableView!
     var dataSource = [
-        ["key":"recently", "title": "最近播放", "icon":"setting_download", "count":"12"],
-        ["key":"favorite", "title": "我的收藏", "icon":"setting_download", "count":"1"],
-        ["key":"download", "title": "我的下载", "icon":"setting_download", "count":"2"],
-        ["key":"import", "title": "导入歌曲", "icon":"setting_download", "count":"121"]
+        ["key":"recently", "title": "最近播放", "icon":"setting_history", "count":"12 🎵"],
+        ["key":"favorite", "title": "歌单收藏", "icon":"setting_hearts", "count":"3 💿"],
+        ["key":"download", "title": "音乐下载", "icon":"player_download", "count":"21/32 🎵"],
+        ["key":"import", "title": "音乐导入", "icon":"setting_download", "count":"121 🎵"]
     ]
     
     override func viewDidLoad() {
