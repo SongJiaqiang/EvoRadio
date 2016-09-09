@@ -42,7 +42,7 @@ class RadioViewController: ViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
+//        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))
         
     }
     
@@ -53,7 +53,7 @@ class RadioViewController: ViewController {
             if radios.count > 0 {
                 self?.dataSource = radios
                 self?.tableView!.reloadData()
-                self?.tableView!.mj_header.endRefreshing()
+//                self?.tableView!.mj_header.endRefreshing()
             }
             }, onFailed: nil)
     }
