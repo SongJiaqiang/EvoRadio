@@ -139,20 +139,14 @@ class MainViewController: ViewController {
 extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
-        var ox = offsetX-scrollView.bounds.size.width
-        if ox > 0 {
-            ox -= 22
-        }else if ox < 0 {
-            ox += 22
-        }
-        topTabBar.updateContentViewConstraint(-ox*0.5)
+        
+        topTabBar.animationWithOffsetX(offsetX)
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
         let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
-        
         
         if pageIndex == 0 {
             touchIcon = UIImage(named: "touch_refresh")
@@ -162,6 +156,9 @@ extension MainViewController: UIScrollViewDelegate {
             touchIcon = UIImage(named: "touch_sound")
         }
         AssistiveTouch.sharedTouch.updateImage(touchIcon!)
+        
+        topTabBar.currentIndex = pageIndex
+        topTabBar.updateFrames()
     }
 
 }

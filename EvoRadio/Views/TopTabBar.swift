@@ -11,19 +11,15 @@ import SnapKit
 
 class TopTabBar: UIView {
 
-    
-    
     var titles: [String]!
+    var labels = [UILabel]()
     var contentView: UIView!
-    var label0: UILabel!
-    var label1: UILabel!
-    var label2: UILabel!
     var topLine: UIView!
     
     var topLineWidth: CGFloat = 40
     var topLineHeight: CGFloat = 2
     
-    var contentViewLeftConstaint: Constraint!
+    var currentIndex:Int = 0
    
     convenience init(titles: [String]) {
         self.init()
@@ -38,55 +34,70 @@ class TopTabBar: UIView {
         
         contentView = UIView()
         addSubview(contentView)
-        contentView.snp_makeConstraints { (make) in
-            make.height.equalTo(20)
-            make.width.equalTo(Device.width())
-            contentViewLeftConstaint = make.left.equalTo(snp_left).offset(0).constraint
-//            make.right.equalTo(snp_right)
-            make.bottom.equalTo(snp_bottom)
-        }
+        contentView.frame = CGRectMake(0, 6, Device.width(), 14)
         
-        label0 = UILabel()
-        contentView.addSubview(label0)
-        label0.font = UIFont.systemFontOfSize(10)
-        label0.textColor = UIColor.whiteColor()
-        label0.textAlignment = .Center
-        label0.text = titles[0]
-        label0.snp_makeConstraints { (make) in
-            make.left.equalTo(contentView.snp_left).offset(2)
-            make.centerY.equalTo(contentView.snp_centerY)
-        }
+        let textAttrs = [
+            NSForegroundColorAttributeName: UIColor.whiteColor(),
+            NSFontAttributeName: UIFont.systemFontOfSize(10)
+        ]
+        let maxSize = CGSizeMake(Device.width(), Device.height())
         
-        label1 = UILabel()
-        contentView.addSubview(label1)
-        label1.font = UIFont.systemFontOfSize(10)
-        label1.textColor = UIColor.whiteColor()
-        label1.textAlignment = .Center
-        label1.text = titles[1]
-        label1.snp_makeConstraints { (make) in
-            make.center.equalTo(contentView.snp_center)
-        }
-        
-        label2 = UILabel()
-        contentView.addSubview(label2)
-        label2.font = UIFont.systemFontOfSize(10)
-        label2.textColor = UIColor.whiteColor()
-        label2.textAlignment = .Center
-        label2.text = titles[2]
-        label2.snp_makeConstraints { (make) in
-            make.right.equalTo(contentView.snp_right).offset(-2)
-            make.centerY.equalTo(contentView.snp_centerY)
+        for i in 0..<titles.count {
+            let text = titles[i]
+            let label = UILabel()
+            label.textColor = UIColor.whiteColor()
+            label.font = UIFont.systemFontOfSize(10)
+            label.text = text
+            contentView.addSubview(label)
+            let textRect = (text as NSString).boundingRectWithSize(maxSize, options: .UsesLineFragmentOrigin, attributes: textAttrs, context: nil)
+            label.frame = CGRect(origin: CGPointMake(Device.width() / 2 * CGFloat(i), 0), size: textRect.size)
+            
+            labels.append(label)
         }
         
         topLine = UIView()
         addSubview(topLine)
         topLine.backgroundColor = UIColor.redColor()
-        topLine.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 2))
-            make.centerX.equalTo(snp_centerX)
-            make.top.equalTo(snp_top)
-        }
+        topLine.frame = CGRectMake((Device.width() - 40) / 2, 0, 40, 2)
         
+    }
+    
+    
+    func updateFrames() {
+        
+        for i in 0..<labels.count{
+            let label = labels[i]
+            let labelSize = label.frame.size
+            
+            let t = i - currentIndex
+            
+            if t == 0 {
+                label.frame = CGRect(origin: CGPointMake((Device.width() - label.frame.size.width) / 2, 0), size: labelSize)
+            } else if t == -1 {
+                label.frame = CGRect(origin: CGPointMake(0, 0), size: labelSize)
+            } else if t == 1 {
+                label.frame = CGRect(origin: CGPointMake(Device.width() - label.frame.size.width, 0), size: labelSize)
+            } else {
+                label.frame = CGRect(origin: CGPointMake((Device.width() / 2) * CGFloat(t), 0), size: labelSize)
+            }
+            
+        }
+    }
+    
+    func animationWithOffsetX(offsetX: CGFloat) {
+        // 计算公式： x / distance = (offsetX - SCREEN_WIDTH * index) / SCREEN_WIDTH
+        
+        for i in 0..<labels.count{
+            let label = labels[i]
+            let labelSize = label.frame.size
+            
+            let t = i - currentIndex
+            
+            let totleDistance = (Device.width() - CGRectGetWidth(label.frame)) / 2
+            let moveDistance = totleDistance * ((offsetX - Device.width() * CGFloat(currentIndex)) / Device.width())
+            let x = totleDistance - moveDistance + (Device.width() - CGRectGetWidth(label.frame)) / 2 * CGFloat(t)
+            label.frame = CGRect(origin: CGPointMake(x, 0), size: labelSize)
+        }
     }
     
     func updateTopLineFrame() {
@@ -98,7 +109,4 @@ class TopTabBar: UIView {
         topLine.frame = CGRectMake((frame.size.width-40)/2, 0, topLineWidth, topLineHeight)
     }
     
-    func updateContentViewConstraint(offsetX: CGFloat) {
-        contentViewLeftConstaint.updateOffset(offsetX)
-    }
 }
