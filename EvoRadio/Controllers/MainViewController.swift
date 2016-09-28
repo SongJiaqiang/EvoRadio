@@ -18,10 +18,9 @@ class MainViewController: ViewController {
     private var contentView = UIScrollView()
     private var playerViewTopConstraint: Constraint?
     
-    private var channel1Controller = ChannelViewController()
-    private var radioController = RadioViewController()
-    private var nowViewController = NowViewController()
-    private var localViewController = LocalViewController()
+    private var radioController: RadioViewController?
+    private var nowViewController: NowViewController?
+    private var localViewController: LocalViewController?
     private var playerController = PlayerViewController()
     
     private var topTabBarHeightConstraint: Constraint!
@@ -38,15 +37,12 @@ class MainViewController: ViewController {
         prepareContentView()
 //        preparePlayerView()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(MainViewController.customRadiosChanged), name: "CustomRadiosChanged", object: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
-        
-        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -69,14 +65,12 @@ class MainViewController: ViewController {
         
         topTabBar = TopTabBar(titles: ["电台","当下","本地"])
         view.addSubview(topTabBar)
-        topTabBar.backgroundColor = UIColor.blackColor()
         topTabBar.snp_makeConstraints { (make) in
-            topTabBarHeightConstraint = make.height.equalTo(20).constraint
-            make.top.equalTo(view.snp_top)
+            make.height.equalTo(20)
             make.left.equalTo(view.snp_left)
             make.right.equalTo(view.snp_right)
+            make.top.equalTo(view.snp_top)
         }
-        
         
     }
     
@@ -117,7 +111,7 @@ class MainViewController: ViewController {
         contentView.clipsToBounds = true
         contentView.delegate = self
         contentView.snp_makeConstraints { (make) in
-            make.top.equalTo(topTabBar.snp_bottom)
+            make.top.equalTo(view.snp_top).offset(20)
             make.bottomMargin.equalTo(0)
             make.left.equalTo(0)
             make.right.equalTo(0)
@@ -126,26 +120,15 @@ class MainViewController: ViewController {
         contentView.contentSize = CGSizeMake(Device.width()*3, 0)
         contentView.contentOffset = CGPointMake(Device.width(), 0)
         
+        // 初始化子控制器，并添加到ContentView中
+        radioController = RadioViewController()
+        nowViewController = NowViewController()
+        localViewController = LocalViewController()
         
-        let customRadios = CoreDB.getCustomRadios()
-        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        addChildViewControllers([radioController, nowViewController, localViewController], inView: contentView)
+        addChildViewControllers([radioController!, nowViewController!, localViewController!], inView: contentView)
     }
     
     //MARK: event
-    func customRadiosChanged(notification: NSNotification) {
-        let customRadios = CoreDB.getCustomRadios()
-        channel1Controller.radioID = customRadios[0]["radio_id"] as! Int
-        
-        var titles = ["时刻"]
-        for item in customRadios {
-            titles.append(item["radio_name"] as! String)
-        }
-        titles.append("我的")
-//        sortTabBar.updateTitles(titles)
-        
-        channel1Controller.updateChannels()
-    }
     
     func showMenu() {
         print("Show top menu")
@@ -154,17 +137,16 @@ class MainViewController: ViewController {
 }
 
 extension MainViewController: UIScrollViewDelegate {
-//    func scrollViewDidScroll(scrollView: UIScrollView) {
-//        let offsetX = scrollView.contentOffset.x
-//        
-//        self.sortTabBar.updateLineConstraint(offsetX*0.2)
-//    }
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offsetX = scrollView.contentOffset.x
+        
+        topTabBar.animationWithOffsetX(offsetX)
+    }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
         let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
-        
         
         if pageIndex == 0 {
             touchIcon = UIImage(named: "touch_refresh")
@@ -174,6 +156,9 @@ extension MainViewController: UIScrollViewDelegate {
             touchIcon = UIImage(named: "touch_sound")
         }
         AssistiveTouch.sharedTouch.updateImage(touchIcon!)
+        
+        topTabBar.currentIndex = pageIndex
+        topTabBar.updateFrames()
     }
 
 }

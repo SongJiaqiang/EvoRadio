@@ -29,7 +29,8 @@ class NowViewController: ViewController {
         title = "Now"
         
         prepareCollectionView()
-        collectionView!.mj_header.beginRefreshing()
+//        collectionView!.mj_header.beginRefreshing()
+        headerRefresh()
         
         prepareClock()
         
@@ -67,7 +68,7 @@ class NowViewController: ViewController {
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
-        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
+//        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
         collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
         collectionView!.mj_footer.automaticallyHidden = true
         
@@ -159,9 +160,9 @@ class NowViewController: ViewController {
     
     
     func endRefreshing() {
-        if collectionView!.mj_header.isRefreshing() {
-            collectionView!.mj_header.endRefreshing()
-        }
+//        if collectionView!.mj_header.isRefreshing() {
+//            collectionView!.mj_header.endRefreshing()
+//        }
         
         if collectionView!.mj_footer.isRefreshing() {
             collectionView!.mj_footer.endRefreshing()
@@ -222,6 +223,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
 }
 
+
 extension NowViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(programID: String) {
         TrackManager.playMusicTypeEvent(.ProgramCover)
@@ -236,7 +238,6 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
             }, onFailed: nil)
     }
 }
-
 
 
 extension NowViewController: NowCollectionHeaderViewDelegate {
