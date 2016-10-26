@@ -87,5 +87,7 @@ class ClockView: UIControl {
         
         dayLabel.text = dayTimeString?.substring(to: idx!)
         timeLabel.text = day_time.last
+        
+        print("formatterText: \(formatterText)")
     }
 }
