@@ -11,10 +11,10 @@ import EVReflection
 
 class Song: EVObject {
 
-    var songID: String?
+    var songID: String!
     var jujingID: String?
     var programID: String?
-    var songName: String?
+    var songName: String!
     var artistID: String?
     var salbumID: String?
     var language: String?

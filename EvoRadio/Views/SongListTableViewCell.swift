@@ -115,7 +115,9 @@ class SongListTableViewCell: UITableViewCell {
     func updateSongInfo(_ songModel: Song) {
         song = songModel
         
-        coverImageView.kf.setImage(with: URL(string: songModel.picURL!)!, placeholder: UIImage.placeholder_cover())
+        if let picURL = URL(string: songModel.picURL!) {
+            coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
+        }
         
         titleLabel.text = songModel.songName
         
