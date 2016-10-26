@@ -6,7 +6,7 @@ PODS:
   - Kingfisher (3.1.4)
   - leveldb (1.18)
   - MBProgressHUD (1.0.0)
-  - MJRefresh (3.1.0)
+  - MJRefresh (3.1.12)
   - pop (1.0.9)
   - ReflectionView (1.2)
   - SnapKit (3.0.2)
@@ -20,7 +20,7 @@ DEPENDENCIES:
   - Kingfisher (~> 3.0)
   - leveldb (~> 1.18)
   - MBProgressHUD (~> 1.0.0)
-  - MJRefresh (~> 3.1.0)
+  - MJRefresh (~> 3.1.10)
   - pop (~> 1.0)
   - ReflectionView (~> 1.2)
   - SnapKit (~> 3.0.0)
@@ -44,12 +44,12 @@ SPEC CHECKSUMS:
   Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
-  MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
+  MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
 
-PODFILE CHECKSUM: 72c516ec38318ecf88350d40ce11f83fd6744d1e
+PODFILE CHECKSUM: 6cec67b6c84476b44aa8a31b4131769c7eda2dd9
 
 COCOAPODS: 1.1.1

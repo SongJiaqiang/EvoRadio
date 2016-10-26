@@ -69,8 +69,8 @@ class NowViewController: ViewController {
         }
         
 //        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
-//        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
-//        collectionView!.mj_footer.isAutomaticallyHidden = true
+        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
+        collectionView!.mj_footer.isAutomaticallyHidden = true
         
     }
     
@@ -164,9 +164,9 @@ class NowViewController: ViewController {
 //            collectionView!.mj_header.endRefreshing()
 //        }
         
-//        if collectionView!.mj_footer.isRefreshing() {
-//            collectionView!.mj_footer.endRefreshing()
-//        }
+        if collectionView!.mj_footer.isRefreshing() {
+            collectionView!.mj_footer.endRefreshing()
+        }
     }
     
 }

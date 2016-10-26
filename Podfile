@@ -9,7 +9,7 @@ target 'EvoRadio' do
 ## 数据存储
 pod 'leveldb', '~> 1.18'
 ## 刷新组件
-pod 'MJRefresh', '~> 3.1.0'
+pod 'MJRefresh', '~> 3.1.10'
 ## 图像处理，滤镜、模糊
 pod 'GPUImage', '~> 0.1.7'
 ## 动画特效
