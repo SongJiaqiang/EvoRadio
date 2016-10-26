@@ -806,7 +806,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
@@ -815,7 +814,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EvoRadio/Libs/OpenSDK1.7.1",
-					"$(PROJECT_DIR)/EvoRadio/Libs/WeiboSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -838,7 +836,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/build/Debug-iphoneos",
 					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
@@ -847,7 +844,6 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/EvoRadio/Libs/OpenSDK1.7.1",
-					"$(PROJECT_DIR)/EvoRadio/Libs/WeiboSDK",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
