@@ -7,17 +7,28 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 extension UIImage {
-    static func original(name: String) -> UIImage {
+    static func original(_ name: String) -> UIImage {
         return (UIImage(named: name)?.originalImage())!
     }
     
     func originalImage() -> UIImage {
-        return self.imageWithRenderingMode(.AlwaysOriginal)
+        return self.withRenderingMode(.alwaysOriginal)
     }
     
-    static func rectImage(color: UIColor, size destSize: CGSize? = nil) -> UIImage {
+    static func rectImage(_ color: UIColor, size destSize: CGSize? = nil) -> UIImage {
         let size:CGSize
         if let destSize = destSize {
             size = destSize
@@ -27,23 +38,23 @@ extension UIImage {
         UIGraphicsBeginImageContext(size)
         let ctx = UIGraphicsGetCurrentContext()
         color.setFill()
-        CGContextFillRect(ctx, CGRect(origin: CGPointZero, size: size))
+        ctx?.fill(CGRect(origin: CGPoint.zero, size: size))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image.resizableImageWithCapInsets(UIEdgeInsetsZero)
+        return image!.resizableImage(withCapInsets: UIEdgeInsets.zero)
     }
     
-    static func circleImage(color: UIColor, radius: CGFloat) -> UIImage {
-        UIGraphicsBeginImageContext(CGSizeMake(radius*2, radius*2))
+    static func circleImage(_ color: UIColor, radius: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(CGSize(width: radius*2, height: radius*2))
         let ctx = UIGraphicsGetCurrentContext()
         color.set()
-        CGContextFillEllipseInRect(ctx, CGRectMake(0, 0, radius*2, radius*2))
+        ctx?.fillEllipse(in: CGRect(x: 0, y: 0, width: radius*2, height: radius*2))
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
     
-    func resizeImage(size: CGSize) -> UIImage {
+    func resizeImage(_ size: CGSize) -> UIImage {
         var scaleWidth = self.size.width
         var scaleHeight = self.size.height
         if self.size.width > size.width && self.size.height > size.height {
@@ -58,184 +69,184 @@ extension UIImage {
             }
         }
         
-        UIGraphicsBeginImageContext(CGSizeMake(scaleWidth, scaleHeight))
-        self.drawInRect(CGRectMake(0, 0, scaleWidth, scaleHeight))
+        UIGraphicsBeginImageContext(CGSize(width: scaleWidth, height: scaleHeight))
+        self.draw(in: CGRect(x: 0, y: 0, width: scaleWidth, height: scaleHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return newImage
+        return newImage!
     }
     
     /** 
         压缩图片尺寸到一定内存大小
         memorySize: kb
      */
-    func compressImageToLessThan(memorySize: Int) -> UIImage {
+    func compressImageToLessThan(_ memorySize: Int) -> UIImage {
         if memorySize < 1 {
             return self
         }
         let imageData = UIImageJPEGRepresentation(self, 0.8)
-        if imageData?.length < memorySize*1000 {
+        if imageData?.count < memorySize*1000 {
             return UIImage(data: imageData!)!
         }else {
-            UIImage(data: imageData!)?.compressImageToLessThan(memorySize)
+            _ = UIImage(data: imageData!)?.compressImageToLessThan(memorySize)
         }
         
         return self
     }
     
-    func alphaImage(alpha: CGFloat) -> UIImage {
+    func alphaImage(_ alpha: CGFloat) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.size, false, self.scale);
         let ctx = UIGraphicsGetCurrentContext();
-        let area = CGRectMake(0, 0, self.size.width, self.size.height);
-        CGContextScaleCTM(ctx, 1, -1);
-        CGContextTranslateCTM(ctx, 0, -area.size.height);
-        CGContextSetBlendMode(ctx, .Multiply);
-        CGContextSetAlpha(ctx, alpha);
-        CGContextDrawImage(ctx, area, self.CGImage);
+        let area = CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height);
+        ctx?.scaleBy(x: 1, y: -1);
+        ctx?.translateBy(x: 0, y: -area.size.height);
+        ctx?.setBlendMode(.multiply);
+        ctx?.setAlpha(alpha);
+        ctx?.draw(self.cgImage!, in: area);
         let newImage = UIGraphicsGetImageFromCurrentImageContext();
         UIGraphicsEndImageContext();
-        return newImage;
+        return newImage!;
     }
     
-    func scaleToSize(size:CGSize) -> UIImage {
+    func scaleToSize(_ size:CGSize) -> UIImage {
         UIGraphicsBeginImageContext(size)
-        self.drawInRect(CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height))
+        self.draw(in: CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height))
         let scaledImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return scaledImage
+        return scaledImage!
     }
     
     enum ClipImagePosition {
-        case Begin
-        case Center
-        case End
+        case begin
+        case center
+        case end
     }
     
-    func clipSquareImage(position: ClipImagePosition) -> UIImage {
+    func clipSquareImage(_ position: ClipImagePosition) -> UIImage {
         
         let interval: CGFloat
         switch position {
-        case .Begin:
+        case .begin:
             interval = 0
             break
-        case .Center:
+        case .center:
             interval = (abs(size.height - size.width))*0.5
             break
-        case .End:
+        case .end:
             interval = abs(size.height - size.width)
             break
         }
         
         var area: CGRect
         if size.width < size.height {
-            area = CGRectMake(0, interval, size.width, size.width);
+            area = CGRect(x: 0, y: interval, width: size.width, height: size.width);
         }else {
-            area = CGRectMake(interval, 0, size.height, size.height);
+            area = CGRect(x: interval, y: 0, width: size.height, height: size.height);
         }
-        let imageRef = CGImageCreateWithImageInRect(self.CGImage, area)
-        let squareImage = UIImage(CGImage: imageRef!)
+        let imageRef = self.cgImage?.cropping(to: area)
+        let squareImage = UIImage(cgImage: imageRef!)
         return squareImage
     }
     
-    func clipSquareImage(resizeWidth: CGFloat, position: ClipImagePosition) -> UIImage {
+    func clipSquareImage(_ resizeWidth: CGFloat, position: ClipImagePosition) -> UIImage {
         
         let fixedImage = fixOrientationOfImage()
         
         let interval: CGFloat
         switch position {
-        case .Begin:
+        case .begin:
             interval = 0
             break
-        case .Center:
+        case .center:
             interval = (abs(size.height - size.width))*0.5
             break
-        case .End:
+        case .end:
             interval = abs(size.height - size.width)
             break
         }
         
         var area: CGRect
         if size.width < size.height {
-            area = CGRectMake(0, interval, size.width, size.width);
+            area = CGRect(x: 0, y: interval, width: size.width, height: size.width);
         }else {
-            area = CGRectMake(interval, 0, size.height, size.height);
+            area = CGRect(x: interval, y: 0, width: size.height, height: size.height);
         }
-        let imageRef = CGImageCreateWithImageInRect(fixedImage!.CGImage, area)
-        let squareImage = UIImage(CGImage: imageRef!)
+        let imageRef = fixedImage!.cgImage?.cropping(to: area)
+        let squareImage = UIImage(cgImage: imageRef!)
         
-        UIGraphicsBeginImageContext(CGSizeMake(resizeWidth, resizeWidth))
-        squareImage.drawInRect(CGRectMake(0, 0, resizeWidth, resizeWidth))
+        UIGraphicsBeginImageContext(CGSize(width: resizeWidth, height: resizeWidth))
+        squareImage.draw(in: CGRect(x: 0, y: 0, width: resizeWidth, height: resizeWidth))
         let resizeSquareImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return resizeSquareImage
+        return resizeSquareImage!
     }
     
     func fixOrientationOfImage() -> UIImage? {
-        if imageOrientation == .Up {
+        if imageOrientation == .up {
             return self
         }
         
-        var transform = CGAffineTransformIdentity
+        var transform = CGAffineTransform.identity
         
         switch imageOrientation {
-        case .Down, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, size.width, size.height)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI))
-        case .Left, .LeftMirrored:
-            transform = CGAffineTransformTranslate(transform, size.width, 0)
-            transform = CGAffineTransformRotate(transform, CGFloat(M_PI_2))
-        case .Right, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, 0, size.height)
-            transform = CGAffineTransformRotate(transform, -CGFloat(M_PI_2))
+        case .down, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: size.height)
+            transform = transform.rotated(by: CGFloat(M_PI))
+        case .left, .leftMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.rotated(by: CGFloat(M_PI_2))
+        case .right, .rightMirrored:
+            transform = transform.translatedBy(x: 0, y: size.height)
+            transform = transform.rotated(by: -CGFloat(M_PI_2))
         default:
             break
         }
         
         switch imageOrientation {
-        case .UpMirrored, .DownMirrored:
-            transform = CGAffineTransformTranslate(transform, size.width, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
-        case .LeftMirrored, .RightMirrored:
-            transform = CGAffineTransformTranslate(transform, size.height, 0)
-            transform = CGAffineTransformScale(transform, -1, 1)
+        case .upMirrored, .downMirrored:
+            transform = transform.translatedBy(x: size.width, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
+        case .leftMirrored, .rightMirrored:
+            transform = transform.translatedBy(x: size.height, y: 0)
+            transform = transform.scaledBy(x: -1, y: 1)
         default:
             break
         }
         
-        guard let context = CGBitmapContextCreate(nil, Int(size.width), Int(size.height), CGImageGetBitsPerComponent(self.CGImage), 0, CGImageGetColorSpace(self.CGImage), CGImageGetBitmapInfo(self.CGImage).rawValue) else {
+        guard let context = CGContext(data: nil, width: Int(size.width), height: Int(size.height), bitsPerComponent: (self.cgImage?.bitsPerComponent)!, bytesPerRow: 0, space: (self.cgImage?.colorSpace!)!, bitmapInfo: (self.cgImage?.bitmapInfo.rawValue)!) else {
             return nil
         }
         
-        CGContextConcatCTM(context, transform)
+        context.concatenate(transform)
         
         switch imageOrientation {
-        case .Left, .LeftMirrored, .Right, .RightMirrored:
-            CGContextDrawImage(context, CGRect(x: 0, y: 0, width: size.height, height: size.width), CGImage)
+        case .left, .leftMirrored, .right, .rightMirrored:
+            context.draw(cgImage!, in: CGRect(x: 0, y: 0, width: size.height, height: size.width))
         default:
-            CGContextDrawImage(context, CGRect(origin: .zero, size: size), self.CGImage)
+            context.draw(self.cgImage!, in: CGRect(origin: .zero, size: size))
         }
         
         // And now we just create a new UIImage from the drawing context
-        guard let CGImage = CGBitmapContextCreateImage(context) else {
+        guard let CGImage = context.makeImage() else {
             return nil
         }
         
-        return UIImage(CGImage: CGImage)
+        return UIImage(cgImage: CGImage)
     }
     
     func writeToFile() -> String!{
         // creating a temp url
-        let imageUUID = NSUUID().UUIDString
-        let imageName = imageUUID.stringByAppendingString(".jpg")
+        let imageUUID = Foundation.UUID().uuidString
+        let imageName = imageUUID + ".jpg"
         
         // default Storage path
-        let path = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(imageName)
+        let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageName)
         
         // storage image
         let data = UIImageJPEGRepresentation(self, 0.9)
-        data?.writeToURL(path, atomically: true)
+        try? data?.write(to: path, options: [.atomic])
         
         return path.path
     }

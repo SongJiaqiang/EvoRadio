@@ -11,8 +11,8 @@ import UIKit
 let itemMargin: CGFloat = 10
 
 protocol RadioTableViewCellDelegate: NSObjectProtocol {
-    func radioTableViewCell(cell: RadioTableViewCell, didSelectedItem channel: Channel)
-    func radioTableViewCell(cell: RadioTableViewCell, showMoreChannelWithRadio radioId: Int)
+    func radioTableViewCell(_ cell: RadioTableViewCell, didSelectedItem channel: Channel)
+    func radioTableViewCell(_ cell: RadioTableViewCell, showMoreChannelWithRadio radioId: Int)
 }
 
 class RadioTableViewCell: UITableViewCell {
@@ -28,8 +28,8 @@ class RadioTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor.clearColor()
-        selectionStyle = .None
+        backgroundColor = UIColor.clear
+        selectionStyle = .none
         
         prepareUI()
     }
@@ -53,20 +53,20 @@ class RadioTableViewCell: UITableViewCell {
         
         containerView = UIView()
         contentView.addSubview(containerView)
-        containerView.frame = CGRectMake(0, 0, Device.width(), itemWidth+itemMargin*2)
+        containerView.frame = CGRect(x: 0, y: 0, width: Device.width(), height: itemWidth+itemMargin*2)
         
         let moreButton = UIButton()
         contentView.addSubview(moreButton)
-        moreButton.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-        moreButton.setTitle("More", forState: .Normal)
+        moreButton.setTitleColor(UIColor.white, for: UIControlState())
+        moreButton.setTitle("More", for: UIControlState())
         moreButton.titleLabel?.font = UIFont.sizeOf10()
-        moreButton.frame = CGRectMake(Device.width()-itemWidth/2, 10, itemWidth/2, itemWidth)
-        moreButton.setBackgroundImage(UIImage(named: "gradient_white"), forState: .Normal)
-        moreButton.addTarget(self, action: #selector(RadioTableViewCell.moreButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        moreButton.frame = CGRect(x: Device.width()-itemWidth/2, y: 10, width: itemWidth/2, height: itemWidth)
+        moreButton.setBackgroundImage(UIImage(named: "gradient_white"), for: UIControlState())
+        moreButton.addTarget(self, action: #selector(RadioTableViewCell.moreButtonPressed(_:)), for: .touchUpInside)
         
     }
     
-    func setupChannels(radio: Radio) {
+    func setupChannels(_ radio: Radio) {
         self.radio = radio
         
         if let channels = radio.channels {
@@ -75,21 +75,21 @@ class RadioTableViewCell: UITableViewCell {
                 
                 let imageView = UIButton()
                 containerView.addSubview(imageView)
-                imageView.frame = CGRectMake(itemMargin+(itemWidth+itemMargin) * CGFloat(i), itemMargin, itemWidth, itemWidth)
-                imageView.contentMode = .ScaleAspectFill
+                imageView.frame = CGRect(x: itemMargin+(itemWidth+itemMargin) * CGFloat(i), y: itemMargin, width: itemWidth, height: itemWidth)
+                imageView.contentMode = .scaleAspectFill
                 imageView.clipsToBounds = true
-                imageView.addTarget(self, action: #selector(RadioTableViewCell.selectItem(_:)), forControlEvents: .TouchUpInside)
+                imageView.addTarget(self, action: #selector(RadioTableViewCell.selectItem(_:)), for: .touchUpInside)
                 imageView.tag = i
                 
                 let nameLabel = UILabel()
                 imageView.addSubview(nameLabel)
-                nameLabel.frame = CGRectMake(10, itemWidth-30, itemWidth-20, 30)
-                nameLabel.font = UIFont.systemFontOfSize(12)
-                nameLabel.textColor = UIColor.whiteColor()
+                nameLabel.frame = CGRect(x: 10, y: itemWidth-30, width: itemWidth-20, height: 30)
+                nameLabel.font = UIFont.systemFont(ofSize: 12)
+                nameLabel.textColor = UIColor.white
                 
                 let channel = channels[i]
                 if let picURL = channel.picURL {
-                    imageView.kf_setImageWithURL(NSURL(string: picURL)!, forState: .Normal, placeholderImage: UIImage.placeholder_cover())
+                    imageView.kf.setImage(with: URL(string: picURL)!, for: .normal, placeholder: UIImage.placeholder_cover(), options: nil, progressBlock: nil, completionHandler: nil)
                 }
                 nameLabel.text = channel.channelName
                 
@@ -98,15 +98,15 @@ class RadioTableViewCell: UITableViewCell {
     }
     
     //MARK: events
-    func moreButtonPressed(button: UIButton) {
+    func moreButtonPressed(_ button: UIButton) {
         if let _ = delegate {
             if let radioId = radio!.radioID {
-                delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId.integerValue)
+                delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId.intValue)
             }
         }
     }
     
-    func selectItem(button: UIButton) {
+    func selectItem(_ button: UIButton) {
         if let _ = delegate {
             if let channels = radio!.channels {
                 delegate?.radioTableViewCell(self, didSelectedItem: channels[button.tag])

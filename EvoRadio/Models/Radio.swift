@@ -22,20 +22,20 @@ class Radio: EVObject {
         ]
     }
     
-    class func dictForRadio(radio: Radio) -> [String : AnyObject]{
+    class func dictForRadio(_ radio: Radio) -> [String : AnyObject]{
         var radioDict = [String : AnyObject]()
         radioDict["radio_id"] = radio.radioID
-        radioDict["radio_name"] = radio.radioName
+        radioDict["radio_name"] = radio.radioName as AnyObject?
         
         return radioDict
     }
     
-    class func dictArrayForRadios(radios: [Radio]) -> [[String : AnyObject]]{
+    class func dictArrayForRadios(_ radios: [Radio]) -> [[String : AnyObject]]{
         var dictArray = [[String : AnyObject]]()
         for radio in radios {
             var radioDict = [String : AnyObject]()
             radioDict["radio_id"] = radio.radioID
-            radioDict["radio_name"] = radio.radioName
+            radioDict["radio_name"] = radio.radioName as AnyObject?
             
             dictArray.append(radioDict)
         }

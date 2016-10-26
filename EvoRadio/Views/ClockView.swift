@@ -14,15 +14,15 @@ class ClockView: UIControl {
     var dayLabel: UILabel!
     var lineView: UIView!
     
-    var timer: NSTimer?
+    var timer: Timer?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         prepareUI()
         
-        timer = NSTimer(timeInterval: 1, target: self, selector: #selector(timerHandle), userInfo: nil, repeats: true)
-        NSRunLoop.currentRunLoop().addTimer(timer!, forMode: NSRunLoopCommonModes)
+        timer = Timer(timeInterval: 1, target: self, selector: #selector(timerHandle), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -35,9 +35,9 @@ class ClockView: UIControl {
         let w = frame.size.width
         let h = frame.size.height
         
-        lineView.frame = CGRectMake(4, h*0.55, w-8, 1)
-        timeLabel.frame = CGRectMake(0, 2, w, h*0.55)
-        dayLabel.frame = CGRectMake(0, h*0.55, w, h*0.45)
+        lineView.frame = CGRect(x: 4, y: h*0.55, width: w-8, height: 1)
+        timeLabel.frame = CGRect(x: 0, y: 2, width: w, height: h*0.55)
+        dayLabel.frame = CGRect(x: 0, y: h*0.55, width: w, height: h*0.45)
     }
     
     deinit {
@@ -51,22 +51,22 @@ class ClockView: UIControl {
         clipsToBounds = true
         layer.cornerRadius = 4
         layer.borderWidth = 2
-        layer.borderColor = UIColor.grayColor().CGColor
+        layer.borderColor = UIColor.gray.cgColor
         backgroundColor = UIColor(netHex: 0x000000, alpha: 0.8)
         
         timeLabel = UILabel()
         addSubview(timeLabel)
         timeLabel.font = UIFont.sizeOf12()
-        timeLabel.textColor = UIColor.whiteColor()
+        timeLabel.textColor = UIColor.white
         timeLabel.text = "00:00"
-        timeLabel.textAlignment = .Center
+        timeLabel.textAlignment = .center
         
         dayLabel = UILabel()
         addSubview(dayLabel)
-        dayLabel.font = UIFont.systemFontOfSize(8)
-        dayLabel.textColor = UIColor.whiteColor()
+        dayLabel.font = UIFont.systemFont(ofSize: 8)
+        dayLabel.textColor = UIColor.white
         dayLabel.text = "星期日"
-        dayLabel.textAlignment = .Center
+        dayLabel.textAlignment = .center
 
         lineView = UIView()
         addSubview(lineView)
@@ -75,12 +75,12 @@ class ClockView: UIControl {
     }
     
     func timerHandle() {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .MediumStyle
+        let formatter = DateFormatter()
+        formatter.timeStyle = .medium
         formatter.dateFormat = "EEEE-HH:mm"
         
-        let formatterText = formatter.stringFromDate(NSDate())
-        let day_time = formatterText.componentsSeparatedByString("-")
+        let formatterText = formatter.string(from: Date())
+        let day_time = formatterText.components(separatedBy: "-")
         
         dayLabel.text = day_time.first
         timeLabel.text = day_time.last

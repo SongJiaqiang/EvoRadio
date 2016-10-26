@@ -20,18 +20,18 @@ class CustomRadioViewController: ViewController {
         
 //        setupBackButton()
         title = "定制电台"
-        let rightItem = UIBarButtonItem(title: "确定", style: .Plain, target: self, action: #selector(CustomRadioViewController.rightItemPressed))
+        let rightItem = UIBarButtonItem(title: "确定", style: .plain, target: self, action: #selector(CustomRadioViewController.rightItemPressed))
         navigationItem.rightBarButtonItem = rightItem
         
         prepareTableView()
         
         let customRadiosData = CoreDB.getCustomRadios()
-        selectedRadios = [Radio](dictArray: customRadiosData)
+        selectedRadios = [Radio](dictArray: customRadiosData as [NSDictionary]?)
         
         api.fetch_all_channels({[weak self] (items) in
             
             let allRadios = items
-            self?.dataSource.appendContentsOf(allRadios)
+            self?.dataSource.append(contentsOf: allRadios)
             
             self?.tableView.reloadData()
             }, onFailed: nil)
@@ -42,8 +42,8 @@ class CustomRadioViewController: ViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.snp_makeConstraints { (make) in
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
@@ -55,27 +55,28 @@ class CustomRadioViewController: ViewController {
         
         CoreDB.saveCustomRadios(Radio.dictArrayForRadios(selectedRadios))
         
-        NSNotificationCenter.defaultCenter().postNotificationName("CustomRadiosChanged", object: nil)
-        navigationController?.popViewControllerAnimated(true)
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "CustomRadiosChanged"), object: nil)
+        
+        _ = navigationController?.popViewController(animated: true)
     }
 }
 
 
 extension CustomRadioViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         
-        let radio = dataSource[indexPath.row]
+        let radio = dataSource[(indexPath as NSIndexPath).row]
         cell!.textLabel?.text = radio.radioName
         cell?.textLabel?.textColor = UIColor.grayColor7()
 
         let aView = UIImageView()
         aView.image = UIImage(named: "icon_check")
-        aView.frame = CGRectMake(0, 0, 20, 20)
+        aView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
         cell?.accessoryView = aView
         
         
@@ -95,15 +96,15 @@ extension CustomRadioViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
 
-        let radio = dataSource[indexPath.row]
+        let radio = dataSource[(indexPath as NSIndexPath).row]
         
         for i in 0..<selectedRadios.count {
             let r = selectedRadios[i]
             if r.radioID == radio.radioID {
-                selectedRadios.removeAtIndex(i)
+                selectedRadios.remove(at: i)
                 tableView.reloadData()
                 return
             }

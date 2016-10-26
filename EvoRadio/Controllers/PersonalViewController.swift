@@ -36,12 +36,12 @@ class PersonalViewController: ViewController {
     
     func prepareTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .None
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.snp_makeConstraints { (make) in
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
@@ -50,26 +50,26 @@ class PersonalViewController: ViewController {
 
 
 extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = dataSource[section]
         return section.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         cell?.backgroundColor = UIColor.grayColor3()
         cell?.textLabel?.textColor = UIColor.grayColor7()
         let selectedView = UIView()
         selectedView.backgroundColor = UIColor.grayColor2()
         cell?.selectedBackgroundView = selectedView
         
-        let section = dataSource[indexPath.section]
-        let item = section[indexPath.row]
+        let section = dataSource[(indexPath as NSIndexPath).section]
+        let item = section[(indexPath as NSIndexPath).row]
         cell?.textLabel?.text = item["title"]
         cell?.imageView?.image = UIImage(named: item["icon"]!)
         
@@ -78,19 +78,19 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         if item["key"] == "clean" {
-            cell?.accessoryType = .None
+            cell?.accessoryType = .none
         }else {
-            cell?.accessoryType = .DisclosureIndicator
+            cell?.accessoryType = .disclosureIndicator
         }
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let section = dataSource[indexPath.section]
-        let item = section[indexPath.row]
+        let section = dataSource[(indexPath as NSIndexPath).section]
+        let item = section[(indexPath as NSIndexPath).row]
         let key:String = item["key"]!
         switch  key {
         case "custom":
@@ -118,13 +118,13 @@ extension PersonalViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        header.backgroundColor = UIColor.clearColor()
+        header.backgroundColor = UIColor.clear
         return header
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
 }

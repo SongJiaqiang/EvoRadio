@@ -10,7 +10,7 @@ import UIKit
 
 extension UIViewController {
     
-    func addChildController(childController: UIViewController, toView: UIView?) {
+    func addChildController(_ childController: UIViewController, toView: UIView?) {
         
         addChildViewController(childController)
         
@@ -18,16 +18,16 @@ extension UIViewController {
             toView?.addSubview(childController.view)
             childController.view.frame = (toView?.bounds)!
             
-//            childController.viewsnp_makeConstraints(closure: { (make) in
-//                make.size.equalTo((toView?.snp_size)!)
-//                make.center.equalTo((toView?.snp_center)!)
+//            childController.viewsnp.makeConstraints(closure: { (make) in
+//                make.size.equalTo((toView?.snp.size)!)
+//                make.center.equalTo((toView?.snp.center)!)
 //            })
         }else {
             view.addSubview(childController.view)
             childController.view.frame = view.bounds
-//            childController.view.snp_makeConstraints(closure: { (make) in
-//                make.size.equalTo(view.snp_size)
-//                make.center.equalTo(view.snp_center)
+//            childController.view.snp.makeConstraints(closure: { (make) in
+//                make.size.equalTo(view.snp.size)
+//                make.center.equalTo(view.snp.center)
 //            })
         }
         

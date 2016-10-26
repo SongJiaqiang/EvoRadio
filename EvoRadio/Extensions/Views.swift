@@ -13,7 +13,7 @@ extension UIView {
     convenience init(color: UIColor, andSize size: CGSize) {
         self.init()
         
-        self.frame = CGRect(origin: CGPointZero, size: size)
+        self.frame = CGRect(origin: CGPoint.zero, size: size)
         self.backgroundColor = color
     }
 }

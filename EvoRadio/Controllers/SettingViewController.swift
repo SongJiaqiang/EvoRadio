@@ -39,25 +39,25 @@ class SettingViewController: ViewController {
         prepareTableView()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        PlayerView.instance.hide()
+        PlayerView.main.hide()
     }
 
     deinit {
-        PlayerView.instance.show()
+        PlayerView.main.show()
     }
     
     
     //MARK: prepare UI
     func prepareTableView() {
         view.addSubview(tableView)
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.separatorStyle = .None
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.snp_makeConstraints { (make) in
+        tableView.separatorStyle = .none
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
     }
@@ -66,20 +66,20 @@ class SettingViewController: ViewController {
 
 
 extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let section = dataSource[section]
         return section.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        var cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+        var cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         if cell != nil {
-            cell = UITableViewCell(style: .Value1, reuseIdentifier: cellID)
+            cell = UITableViewCell(style: .value1, reuseIdentifier: cellID)
         }
         cell?.backgroundColor = UIColor.grayColor3()
         cell?.textLabel?.textColor = UIColor.grayColor7()
@@ -87,8 +87,8 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         selectedView.backgroundColor = UIColor.grayColor2()
         cell?.selectedBackgroundView = selectedView
         
-        let section = dataSource[indexPath.section]
-        let item = section[indexPath.row]
+        let section = dataSource[(indexPath as NSIndexPath).section]
+        let item = section[(indexPath as NSIndexPath).row]
         cell?.textLabel?.text = item["title"]
         cell?.imageView?.image = UIImage(named: item["icon"]!)
         
@@ -105,11 +105,11 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let section = dataSource[indexPath.section]
-        let item = section[indexPath.row]
+        let section = dataSource[(indexPath as NSIndexPath).section]
+        let item = section[(indexPath as NSIndexPath).row]
         let key:String = item["key"]!
         switch  key {
         case "clean":
@@ -122,7 +122,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             
             break
         case "version":
-            if let requestURL = NSURL(string: DOMAIN) {
+            if let requestURL = URL(string: DOMAIN) {
                 Device.shareApplication().openURL(requestURL)
             }
             break
@@ -141,29 +141,30 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
 //            feedbackKit!.customUIPlist = ["bgColor":"#212121",
 //                                          "color":"#FFFFFF"]
             
-            let hud = MBProgressHUD.showHUDAddedTo(Device.keyWindow(), animated: true)
-            feedbackKit!.makeFeedbackViewControllerWithCompletionBlock({[weak self] (feedbackController, error) in
-                hud.hide(true)
+            let hud = MBProgressHUD.showAdded(to: Device.keyWindow(), animated: true)
+            feedbackKit!.makeFeedbackViewController(completionBlock: {[weak self] (feedbackController, error) in
+                hud.hide(animated: true)
                 
                 if let _ = feedbackController {
-                    feedbackController.title = "意见反馈"
+                    feedbackController?.title = "意见反馈"
                     
-                    let navController = NavigationController(rootViewController: feedbackController)
-                    feedbackController.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .Plain, target: self, action: #selector(SettingViewController.closeFeedbackController))
+                    let navController = NavigationController(rootViewController: feedbackController!)
+                    feedbackController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(SettingViewController.closeFeedbackController))
                     
-                    feedbackController.openURLBlock = {[weak navController](urlString, parentController) -> Void in
+                    feedbackController?.openURLBlock = {[weak navController](urlString, parentController) -> Void in
                         let webVC = UIViewController()
                         let webView = UIWebView(frame: webVC.view.bounds)
-                        webView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+                        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
                         webVC.view.addSubview(webView)
                         navController?.pushViewController(webVC, animated: true)
-                        webView.loadRequest(NSURLRequest(URL: (NSURL(string: urlString)!)))
+                        webView.loadRequest(URLRequest(url: (URL(string: urlString!)!)))
                         
                     }
-                    Device.shareApplication().statusBarStyle = .Default
-                    self?.navigationController?.presentViewController(navController, animated: true, completion: nil)
+                    Device.shareApplication().statusBarStyle = .default
+                    self?.navigationController?.present(navController, animated: true, completion: nil)
                 }else {
-                    let title = error.userInfo["msg"] ?? "接口调用失败，请保持网络通畅！"
+                    let e: NSError = error as! NSError
+                    let title = e.userInfo["msg"] ?? "接口调用失败，请保持网络通畅！"
                     HudManager.showText(title as! String)
                 }
             })
@@ -172,19 +173,19 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let header = UIView()
-        header.backgroundColor = UIColor.clearColor()
+        header.backgroundColor = UIColor.clear
         return header
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
     }
     
     func closeFeedbackController() {
-        Device.shareApplication().statusBarStyle = .LightContent
-        dismissViewControllerAnimated(true, completion: nil)
+        Device.shareApplication().statusBarStyle = .lightContent
+        dismiss(animated: true, completion: nil)
     }
     
 

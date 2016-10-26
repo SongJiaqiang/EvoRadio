@@ -12,11 +12,12 @@ import Kingfisher
 import MJRefresh
 
 
+
 class ChannelViewController: ViewController {
     let cellID = "channelCellID"
     let headerID = "channelHeaderID"
     
-    private var collectionView: UICollectionView?
+    fileprivate var collectionView: UICollectionView?
     var dataSource = [Channel]()
     var radioID: Int = 0
     
@@ -27,12 +28,13 @@ class ChannelViewController: ViewController {
         self.radioID = radioID
         
         if radioID == 0 {
-            Device.defaultNotificationCenter().addObserver(self, selector: #selector(ChannelViewController.nowTimeChanged(_:)), name: NOWTIME_CHANGED, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(nowTimeChanged(_:)), name: NOTI_NOWTIME_CHANGED, object: nil)
         }
     }
     
     deinit{
-        Device.defaultNotificationCenter().removeObserver(self, name: NOWTIME_CHANGED, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NOTI_NOWTIME_CHANGED, object: nil)
+        
     }
     
     override func viewDidLoad() {
@@ -43,11 +45,11 @@ class ChannelViewController: ViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
-        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(ChannelViewController.goBack), forControlEvents: .TouchUpInside)
-        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
+        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
+        AssistiveTouch.shared.addTarget(self, action: #selector(ChannelViewController.goBack), for: .touchUpInside)
+        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
     }
 
     func prepareCollectionView() {
@@ -57,19 +59,19 @@ class ChannelViewController: ViewController {
         let itemW: CGFloat = channelCollectionCellWidth
         let itemH: CGFloat = itemW + 30
         
-        layout.itemSize = CGSizeMake(itemW, itemH)
+        layout.itemSize = CGSize(width: itemW, height: itemH)
         layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
         layout.minimumInteritemSpacing = margin
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         view.addSubview(collectionView!)
         collectionView!.delegate = self
         collectionView!.dataSource = self
-        collectionView!.registerClass(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.register(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
 
-        collectionView!.backgroundColor = UIColor.clearColor()
+        collectionView!.backgroundColor = UIColor.clear
         collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
-        collectionView!.snp_makeConstraints { (make) in
+        collectionView!.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))        
@@ -89,10 +91,10 @@ class ChannelViewController: ViewController {
         api.fetch_all_channels({[weak self] (items) in
             
             for reflect in items {
-                let radio = reflect as! Radio
-                if radio.radioID == self?.radioID {
+                let radio = reflect 
+                if radio.radioID as? Int == self?.radioID {
                     self?.dataSource.removeAll()
-                    self?.dataSource.appendContentsOf(radio.channels!)
+                    self?.dataSource.append(contentsOf: radio.channels!)
                     break
                 }
             }
@@ -111,7 +113,7 @@ class ChannelViewController: ViewController {
             let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
             
             self?.dataSource.removeAll()
-            self?.dataSource.appendContentsOf(newChannels)
+            self?.dataSource.append(contentsOf: newChannels)
             
             self?.collectionView!.reloadData()
             self?.collectionView!.mj_header.endRefreshing()
@@ -126,9 +128,9 @@ class ChannelViewController: ViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
-    func nowTimeChanged(notification: NSNotification) {
+    func nowTimeChanged(_ notification: Notification) {
         
-        if let userInfo = notification.userInfo {
+        if let userInfo = (notification as NSNotification).userInfo {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
 
@@ -137,7 +139,7 @@ class ChannelViewController: ViewController {
                 let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
 
                 self?.dataSource.removeAll()
-                self?.dataSource.appendContentsOf(newChannels)
+                self?.dataSource.append(contentsOf: newChannels)
                 
                 self?.collectionView!.reloadData()
                 }, onFailed: nil)
@@ -150,23 +152,23 @@ class ChannelViewController: ViewController {
 
 extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ChannelCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChannelCollectionViewCell
         
-        let channel = dataSource[indexPath.item]
-        cell.updateContent(channel, isNow: !Bool(radioID))
+        let channel = dataSource[(indexPath as NSIndexPath).item]
+        cell.updateContent(channel, isNow: ((radioID == 0) ? false : true))
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         
-        let channel = dataSource[indexPath.item]
+        let channel = dataSource[(indexPath as NSIndexPath).item]
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
     }
     

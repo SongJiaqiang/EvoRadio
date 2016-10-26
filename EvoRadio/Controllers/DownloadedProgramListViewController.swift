@@ -24,11 +24,11 @@ class DownloadedProgramListViewController: ViewController {
         
         let label = UILabel()
         view.addSubview(label)
-        label.font = UIFont.systemFontOfSize(20)
-        label.textColor = UIColor.whiteColor()
+        label.font = UIFont.systemFont(ofSize: 20)
+        label.textColor = UIColor.white
         label.text = "以歌单形式展现，利于播放"
-        label.snp_makeConstraints { (make) in
-            make.center.equalTo(view.snp_center)
+        label.snp.makeConstraints { (make) in
+            make.center.equalTo(view.snp.center)
         }
     }
 
@@ -41,14 +41,14 @@ class DownloadedProgramListViewController: ViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
-        tableView.separatorStyle = .None
-        tableView.snp_makeConstraints(closure: {(make) in
-            make.edges.equalTo(UIEdgeInsetsZero)
+        tableView.separatorStyle = .none
+        tableView.snp.makeConstraints({(make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
         })
         
-        tableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
         
     }
     
@@ -56,26 +56,26 @@ class DownloadedProgramListViewController: ViewController {
 }
 
 extension DownloadedProgramListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! SongListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
         
         
         
         return cell
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 54
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let program = dataSource[indexPath.row]
+        let program = dataSource[(indexPath as NSIndexPath).row]
         
         let listController = SongListViewController()
         listController.program = program

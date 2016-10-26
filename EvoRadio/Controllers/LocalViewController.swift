@@ -38,11 +38,11 @@ class LocalViewController: ViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(LocalTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.register(LocalTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.backgroundColor = UIColor.clear
         tableView.contentInset = UIEdgeInsetsMake(60, 0, 50, 0)
-        tableView.separatorStyle  = .None
-        tableView.snp_makeConstraints { (make) in
+        tableView.separatorStyle  = .none
+        tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
@@ -55,20 +55,20 @@ class LocalViewController: ViewController {
         searchBar.clipsToBounds = true
         searchBar.layer.cornerRadius = 6
         searchBar.layer.borderWidth = 2
-        searchBar.layer.borderColor = UIColor.grayColor().CGColor
-        searchBar.backgroundColor = UIColor.blackColor()
+        searchBar.layer.borderColor = UIColor.gray.cgColor
+        searchBar.backgroundColor = UIColor.black
         searchBar.alpha = 0.8
-        searchBar.snp_makeConstraints { (make) in
+        searchBar.snp.makeConstraints { (make) in
             make.height.equalTo(40)
-            make.top.equalTo(view.snp_top).offset(10)
-            make.left.equalTo(view.snp_left).offset(60)
-            make.right.equalTo(view.snp_right).offset(-10)
+            make.top.equalTo(view.snp.top).offset(10)
+            make.left.equalTo(view.snp.left).offset(60)
+            make.right.equalTo(view.snp.right).offset(-10)
         }
-        searchBar.contentHorizontalAlignment = .Left
+        searchBar.contentHorizontalAlignment = .left
         searchBar.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
-        searchBar.titleLabel?.font = UIFont.systemFontOfSize(14)
-        searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), forState: .Normal)
-        searchBar.setTitle("输入歌单名、歌曲名", forState: .Normal)
+        searchBar.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), for: UIControlState())
+        searchBar.setTitle("输入歌单名、歌曲名", for: UIControlState())
         
     }
     
@@ -82,13 +82,13 @@ class LocalViewController: ViewController {
 
 extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! LocalTableViewCell
-        let cellInfo = dataSource[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! LocalTableViewCell
+        let cellInfo = dataSource[(indexPath as NSIndexPath).row]
         cell.setupData(cellInfo)
         
         return cell
@@ -116,14 +116,14 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
 //        return 0.01
 //    }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 60
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        let cellInfo = dataSource[indexPath.row]
+        let cellInfo = dataSource[(indexPath as NSIndexPath).row]
         if let key = cellInfo["key"] {
             
             switch key {

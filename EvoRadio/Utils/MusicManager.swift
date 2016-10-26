@@ -10,6 +10,17 @@ import UIKit
 import StreamingKit
 import MediaPlayer
 import Kingfisher
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 enum SoundQueuePlayMode: String {
     case ListLoop = "list_loop"
@@ -19,26 +30,20 @@ enum SoundQueuePlayMode: String {
 
 class MusicManager: NSObject {
     
+    
+    // Singleton Instance
+    open static let shared = MusicManager()
+    
+    //MARK: properties
     var audioPlayer: STKAudioPlayer = STKAudioPlayer()
-    private var playTimer: NSTimer?
+    fileprivate var playTimer: Timer?
 
     var playlist = [Song]()
     var currentIndex: Int = -1
     
-    //MARK: instance
-    class var sharedManager: MusicManager {
-        struct Static {
-            static var onceToken: dispatch_once_t = 0
-            static var instance: MusicManager! = nil
-        }
-        dispatch_once(&Static.onceToken) { () -> Void in
-            Static.instance = MusicManager()
-        }
-        
-        return Static.instance
-    }
 
-    func appendSongsToPlaylist(songs: [Song], autoPlay: Bool) {
+    //MARK: functions
+    func appendSongsToPlaylist(_ songs: [Song], autoPlay: Bool) {
         if songs.count == 0 {
             return
         }
@@ -48,13 +53,13 @@ class MusicManager: NSObject {
         }
         
         if autoPlay {
-            currentIndex = playlist.indexOf(songs.first!)!
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            currentIndex = playlist.index(of: songs.first!)!
+            NotificationManager.shared.postUpdatePlayerControllerNotification()
             play()
         }
     }
     
-    func appendSongToPlaylist(song: Song, autoPlay: Bool){
+    func appendSongToPlaylist(_ song: Song, autoPlay: Bool){
         
         for item in playlist {
             if item.songID == song.songID {
@@ -64,18 +69,18 @@ class MusicManager: NSObject {
         playlist.append(song)
         
         if autoPlay {
-            currentIndex = playlist.indexOf(song)!
+            currentIndex = playlist.index(of: song)!
             play()
         }
         
     }
     
-    func removeSongFromPlaylist(song: Song) {
+    func removeSongFromPlaylist(_ song: Song) {
         
         for item in playlist {
             if item.songID == song.songID {
-                let index = playlist.indexOf(item)
-                playlist.removeAtIndex(index!)
+                let index = playlist.index(of: item)
+                playlist.remove(at: index!)
                 if index < currentIndex {
                     currentIndex -= 1
                 }
@@ -112,34 +117,36 @@ class MusicManager: NSObject {
             
             var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
             if let _ = song.picURL {
-                let downloader = KingfisherManager.sharedManager.downloader
-                downloader.downloadImageWithURL(NSURL(string: song.picURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
+                let downloader = KingfisherManager.shared.downloader
+                downloader.downloadImage(with: URL(string: song.picURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
                     if let _ = image {
                         artwork = MPMediaItemArtwork(image:image!)
                     }
                     
-                    let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title,
-                        MPMediaItemPropertyArtist: artist,
+                    let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title as AnyObject,
+                        MPMediaItemPropertyArtist: artist as AnyObject,
                         MPMediaItemPropertyArtwork: artwork,
-                        MPMediaItemPropertyPlaybackDuration: duration
+                        MPMediaItemPropertyPlaybackDuration: duration as AnyObject
                     ]
-                    MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = info
+                    
+                    MPNowPlayingInfoCenter.default().nowPlayingInfo = info
                 })
+                
             }
         }
     }
     
     // 更新控制中心上的音乐信息 - 时间
-    func updatePlaybackTime(elapsedTime: Double) {
-        if let info = MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo {
-            var playingInfo:[String:AnyObject] = info
-            playingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime
+    func updatePlaybackTime(_ elapsedTime: Double) {
+        if let info = MPNowPlayingInfoCenter.default().nowPlayingInfo {
+            var playingInfo:[String:AnyObject] = info as [String : AnyObject]
+            playingInfo[MPNowPlayingInfoPropertyElapsedPlaybackTime] = elapsedTime as AnyObject?
             
-            MPNowPlayingInfoCenter.defaultCenter().nowPlayingInfo = playingInfo
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = playingInfo
         }
     }
     
-    func playItemAtIndex(index: Int) {
+    func playItemAtIndex(_ index: Int) {
         currentIndex = index
         
         audioPlayer.pause()
@@ -160,19 +167,19 @@ class MusicManager: NSObject {
             // 缓存历史播放歌曲
             CoreDB.addSongToHistoryList(currentSong()!)
             
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }
         
     }
     
     func pause() {
-        if audioPlayer.state == .Playing {
+        if audioPlayer.state == .playing {
             audioPlayer.pause()
         }
     }
     
     func resume() {
-        if audioPlayer.state == .Paused {
+        if audioPlayer.state == .paused {
             audioPlayer.resume()
         }
     }
@@ -190,11 +197,11 @@ class MusicManager: NSObject {
         if currentMode == .Random {
             currentIndex = Int(arc4random_uniform(UInt32(playlist.count)))
             play()
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }else if currentMode == .ListLoop {
             incrementIndex()
             play()
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }else {
             play()
         }
@@ -209,7 +216,7 @@ class MusicManager: NSObject {
     }
     
     func isPlaying() -> Bool{
-        if audioPlayer.state == .Playing {
+        if audioPlayer.state == .playing {
             return true
         }else {
             return false
@@ -217,7 +224,7 @@ class MusicManager: NSObject {
     }
     
     func isPaused() -> Bool{
-        if audioPlayer.state == .Paused {
+        if audioPlayer.state == .paused {
             return true
         }else {
             return false
@@ -225,7 +232,7 @@ class MusicManager: NSObject {
     }
     
     func isStoped() -> Bool{
-        if audioPlayer.state == .Stopped {
+        if audioPlayer.state == .stopped {
             return true
         }else {
             return false
@@ -251,8 +258,8 @@ class MusicManager: NSObject {
 //        return -1
 //    }
     
-    func playAtSecond(second: Int) {
-        audioPlayer.seekToTime(Double(second))
+    func playAtSecond(_ second: Int) {
+        audioPlayer.seek(toTime: Double(second))
     }
     
     func currentSong() -> Song? {
@@ -280,8 +287,8 @@ class MusicManager: NSObject {
     func loadLastPlaylist() {
         if let lastPlaylist = CoreDB.getLastPlaylist() {
             playlist = lastPlaylist.playlist!
-            currentIndex = (lastPlaylist.indexOfPlaylist?.integerValue)!
-            NotificationManager.instance.postUpdatePlayerControllerNotification()
+            currentIndex = (lastPlaylist.indexOfPlaylist?.intValue)!
+            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }
     }
     

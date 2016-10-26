@@ -11,74 +11,71 @@ import UIKit
 class Device: NSObject {
 
     static func width() -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.width
+        return UIScreen.main.bounds.size.width
     }
     static func height() -> CGFloat {
-        return UIScreen.mainScreen().bounds.size.height
+        return UIScreen.main.bounds.size.height
     }
     static func size() -> CGSize {
-        return UIScreen.mainScreen().bounds.size
+        return UIScreen.main.bounds.size
     }
     static func screenScale() -> CGFloat {
-        return UIScreen.mainScreen().scale
+        return UIScreen.main.scale
     }
     
     static func systemVersionString() -> String{
-        return UIDevice.currentDevice().systemVersion
+        return UIDevice.current.systemVersion
     }
     static func systemVersion() -> Float{
-        let sys = UIDevice.currentDevice().systemVersion
+        let sys = UIDevice.current.systemVersion
         return Float(sys)!
     }
     
     static func appVersionString() -> String {
-        if let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] {
+        if let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] {
             return version as! String
         }
         return "未知"
     }
     
     static func aboveIOS9() -> Bool{
-        let sys = UIDevice.currentDevice().systemVersion
+        let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 9.0)
     }
     static func aboveIOS8() -> Bool{
-        let sys = UIDevice.currentDevice().systemVersion
+        let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 8.0)
     }
     static func aboveIOS7() -> Bool{
-        let sys = UIDevice.currentDevice().systemVersion
+        let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 7.0)
     }
     
     static func keyWindow() -> UIWindow {
-        return UIApplication.sharedApplication().keyWindow!
+        return UIApplication.shared.keyWindow!
     }
     static func frontWindow() -> UIWindow {
-        return UIApplication.sharedApplication().windows.last!
+        return UIApplication.shared.windows.last!
     }
     static func rootController() -> UIViewController {
-        return UIApplication.sharedApplication().keyWindow!.rootViewController!
+        return UIApplication.shared.keyWindow!.rootViewController!
     }
     
     static func mainScreen() -> UIScreen {
-        return UIScreen.mainScreen()
+        return UIScreen.main
     }
     static func shareApplication() -> UIApplication {
-        return UIApplication.sharedApplication()
+        return UIApplication.shared
     }
     static func appDelegate() -> AppDelegate {
-        return UIApplication.sharedApplication().delegate as! AppDelegate
+        return UIApplication.shared.delegate as! AppDelegate
     }
-    static func defaultNotificationCenter() -> NSNotificationCenter {
-        return NSNotificationCenter.defaultCenter()
-    }
-    static func fileManager() -> NSFileManager {
-        return NSFileManager.defaultManager()
+    static func fileManager() -> FileManager {
+        return FileManager.default
     }
     
     static func isInBackground() -> Bool {
-        return Device.shareApplication().applicationState == .Background
+        return Device.shareApplication().applicationState == .background
     }
 }
 
@@ -87,19 +84,19 @@ private var _UDID:String? = nil
 
 func GET_UDID() -> String {
     if (_UDID == nil) {
-        if let udid = NSUserDefaults.standardUserDefaults().objectForKey("UDID") as! String? {
+        if let udid = UserDefaults.standard.object(forKey: "UDID") as! String? {
             _UDID = udid
         } else {
             let uuid = UUID()
             _UDID = uuid
-            NSUserDefaults.standardUserDefaults().setObject(uuid, forKey: "UDID")
+            UserDefaults.standard.set(uuid, forKey: "UDID")
         }
     }
     return _UDID!
 }
 
 func UUID() -> String {
-    return NSUUID().UUIDString
+    return Foundation.UUID().uuidString
 }
 
 public extension UIDevice {
@@ -109,7 +106,7 @@ public extension UIDevice {
         uname(&systemInfo)
         let machineMirror = Mirror(reflecting: systemInfo.machine)
         let identifier = machineMirror.children.reduce("") { identifier, element in
-            guard let value = element.value as? Int8 where value != 0 else { return identifier }
+            guard let value = element.value as? Int8 , value != 0 else { return identifier }
             return identifier + String(UnicodeScalar(UInt8(value)))
         }
         return identifier

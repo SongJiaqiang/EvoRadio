@@ -20,7 +20,7 @@ class StreamingKitViewController: ViewController {
     
     var dataSource: [Song] = [Song]()
     var audioPlayer: STKAudioPlayer = STKAudioPlayer()
-    var playTimer: NSTimer?
+    var playTimer: Timer?
     
     var currentIndex: Int = -1
     
@@ -49,15 +49,15 @@ class StreamingKitViewController: ViewController {
     func prepareTableView() {
         
         view.addSubview(tableView)
-        tableView.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
-            make.bottom.equalTo(controlView.snp_top)
+        tableView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.bottom.equalTo(controlView.snp.top)
         }
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellID)
         
     }
     
@@ -65,50 +65,50 @@ class StreamingKitViewController: ViewController {
         
         view.addSubview(controlView)
         controlView.backgroundColor = UIColor(netHex: 0x414141)
-        controlView.snp_makeConstraints { (make) in
-            make.bottom.equalTo(view.snp_bottom)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
+        controlView.snp.makeConstraints { (make) in
+            make.bottom.equalTo(view.snp.bottom)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
             make.height.equalTo(100)
         }
         
         
         controlView.addSubview(playButton)
-        playButton.setTitle("Play", forState: .Normal)
-        playButton.addTarget(self, action: #selector(playButtonPressed), forControlEvents: .TouchUpInside)
-        playButton.snp_makeConstraints { (make) in
-            make.center.equalTo(controlView.snp_center)
+        playButton.setTitle("Play", for: UIControlState())
+        playButton.addTarget(self, action: #selector(playButtonPressed), for: .touchUpInside)
+        playButton.snp.makeConstraints { (make) in
+            make.center.equalTo(controlView.snp.center)
         }
         
         let prevButton = UIButton()
         controlView.addSubview(prevButton)
-        prevButton.setTitle("<", forState: .Normal)
-        prevButton.addTarget(self, action: #selector(prevButtonPressed), forControlEvents: .TouchUpInside)
-        prevButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
-            make.centerY.equalTo(controlView.snp_centerY)
-            make.right.equalTo(playButton.snp_left).offset(-20)
+        prevButton.setTitle("<", for: UIControlState())
+        prevButton.addTarget(self, action: #selector(prevButtonPressed), for: .touchUpInside)
+        prevButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
+            make.centerY.equalTo(controlView.snp.centerY)
+            make.right.equalTo(playButton.snp.left).offset(-20)
         }
         
         let nextButton = UIButton()
         controlView.addSubview(nextButton)
-        nextButton.setTitle(">", forState: .Normal)
-        nextButton.addTarget(self, action: #selector(nextButtonPressed), forControlEvents: .TouchUpInside)
-        nextButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
-            make.centerY.equalTo(controlView.snp_centerY)
-            make.left.equalTo(playButton.snp_right).offset(20)
+        nextButton.setTitle(">", for: UIControlState())
+        nextButton.addTarget(self, action: #selector(nextButtonPressed), for: .touchUpInside)
+        nextButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
+            make.centerY.equalTo(controlView.snp.centerY)
+            make.left.equalTo(playButton.snp.right).offset(20)
         }
         
         
         controlView.addSubview(playSlider)
-        playSlider.addTarget(self, action: #selector(playSliderChanged), forControlEvents: .ValueChanged)
+        playSlider.addTarget(self, action: #selector(playSliderChanged), for: .valueChanged)
         playSlider.minimumValue = 0
         playSlider.maximumValue = 0
-        playSlider.snp_makeConstraints { (make) in
-            make.left.equalTo(controlView.snp_left).offset(20)
-            make.right.equalTo(controlView.snp_right).offset(-20)
-            make.top.equalTo(controlView.snp_top)
+        playSlider.snp.makeConstraints { (make) in
+            make.left.equalTo(controlView.snp.left).offset(20)
+            make.right.equalTo(controlView.snp.right).offset(-20)
+            make.top.equalTo(controlView.snp.top)
         }
         
     }
@@ -126,8 +126,8 @@ class StreamingKitViewController: ViewController {
     
     func prepareTimer() {
         if playTimer == nil {
-            playTimer = NSTimer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
-            NSRunLoop.currentRunLoop().addTimer(playTimer!, forMode: NSRunLoopCommonModes)
+            playTimer = Timer(timeInterval: 1, target: self, selector: #selector(timerAction), userInfo: nil, repeats: true)
+            RunLoop.current.add(playTimer!, forMode: RunLoopMode.commonModes)
         }
     }
     
@@ -140,7 +140,7 @@ class StreamingKitViewController: ViewController {
             if items.count > 0 {
                 let songs = items as! [Song]
                 self?.dataSource = songs
-                PlaylistManager.instance.saveList(songs)
+                PlaylistManager.playlist.saveList(songs)
                 
                 self?.tableView.reloadData()
             }else {
@@ -153,10 +153,10 @@ class StreamingKitViewController: ViewController {
     //MARK: events
     func playButtonPressed() {
         
-        if audioPlayer.state == .Paused {
+        if audioPlayer.state == .paused {
             audioPlayer.resume()
         }
-        else if audioPlayer.state == .Playing {
+        else if audioPlayer.state == .playing {
             audioPlayer.pause()
         } else {
             HudManager.showText("Opps~还没有播放的音乐。")
@@ -190,7 +190,7 @@ class StreamingKitViewController: ViewController {
     }
     
     func playSliderChanged() {
-        audioPlayer.seekToTime(Double(playSlider.value))
+        audioPlayer.seek(toTime: Double(playSlider.value))
     }
     
     func timerAction() {
@@ -210,37 +210,37 @@ class StreamingKitViewController: ViewController {
 
 
 extension StreamingKitViewController: STKAudioPlayerDelegate {
-    func audioPlayer(audioPlayer: STKAudioPlayer, didStartPlayingQueueItemId queueItemId: NSObject) {
+    func audioPlayer(_ audioPlayer: STKAudioPlayer, didStartPlayingQueueItemId queueItemId: NSObject) {
         debugPrint("queueid: \(queueItemId)")
     }
     
-    func audioPlayer(audioPlayer: STKAudioPlayer, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject) {
+    func audioPlayer(_ audioPlayer: STKAudioPlayer, didFinishBufferingSourceWithQueueItemId queueItemId: NSObject) {
         debugPrint("didFinishBufferingSourceWithQueueItemId")
         
         
     }
     
-    func audioPlayer(audioPlayer: STKAudioPlayer, didFinishPlayingQueueItemId queueItemId: NSObject, withReason stopReason: STKAudioPlayerStopReason, andProgress progress: Double, andDuration duration: Double) {
+    func audioPlayer(_ audioPlayer: STKAudioPlayer, didFinishPlayingQueueItemId queueItemId: NSObject, with stopReason: STKAudioPlayerStopReason, andProgress progress: Double, andDuration duration: Double) {
         debugPrint("didFinishPlayingQueueItemId")
         
     }
     
-    func audioPlayer(audioPlayer: STKAudioPlayer, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState) {
+    func audioPlayer(_ audioPlayer: STKAudioPlayer, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState) {
         debugPrint("stateChanged: \(state)")
         
-        if state == .Playing {
-            playButton.setTitle("Pause", forState: .Normal)
+        if state == .playing {
+            playButton.setTitle("Pause", for: UIControlState())
         }
-        else if state == .Paused {
-            playButton.setTitle("Play", forState: .Normal)
+        else if state == .paused {
+            playButton.setTitle("Play", for: UIControlState())
         }
-        else if state == .Stopped {
+        else if state == .stopped {
             nextButtonPressed()
         }
         
     }
     
-    func audioPlayer(audioPlayer: STKAudioPlayer, unexpectedError errorCode: STKAudioPlayerErrorCode) {
+    func audioPlayer(_ audioPlayer: STKAudioPlayer, unexpectedError errorCode: STKAudioPlayerErrorCode) {
         debugPrint("unexpectedError")
     }
     
@@ -250,31 +250,31 @@ extension StreamingKitViewController: STKAudioPlayerDelegate {
 
 extension StreamingKitViewController: UITableViewDelegate, UITableViewDataSource {
 
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID)
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID)
         
-        let song = dataSource[indexPath.row]
+        let song = dataSource[(indexPath as NSIndexPath).row]
         
         cell?.textLabel!.text = song.songName
         
         return cell!
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         
-        if currentIndex == indexPath.row {
+        if currentIndex == (indexPath as NSIndexPath).row {
             return
         }
         
         reset()
         
-        currentIndex = indexPath.row
+        currentIndex = (indexPath as NSIndexPath).row
         playMusic()
         
         
@@ -283,7 +283,7 @@ extension StreamingKitViewController: UITableViewDelegate, UITableViewDataSource
     func reset() {
         playSlider.maximumValue = 0
         playSlider.value = 0
-        playButton.setTitle("Play", forState: .Normal)
+        playButton.setTitle("Play", for: UIControlState())
     }
 
 }

@@ -17,10 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        prepareUMeng()
-        prepareSocial()
+//        prepareSocial()
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
@@ -38,7 +37,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func setupRootControllerAndVisible() {
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window = UIWindow(frame: UIScreen.main.bounds)
 //        window?.clipsToBounds = true
 //        window?.layer.cornerRadius = 10
         
@@ -53,10 +52,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preparePlayer() {
-        PlayerView.instance.prepare()
-        PlayerViewController.playerController.prepare()
+        PlayerView.main.prepare()
+        PlayerViewController.mainController.prepare()
         
-        MusicManager.sharedManager.loadLastPlaylist()
+        MusicManager.shared.loadLastPlaylist()
     }
     
     func setupRemoteControl() {
@@ -66,73 +65,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             debugPrint("set category error: \(error)")
         }
         
-        UIApplication.sharedApplication().beginReceivingRemoteControlEvents()
+        UIApplication.shared.beginReceivingRemoteControlEvents()
         becomeFirstResponder()
     }
 
-    func applicationWillResignActive(application: UIApplication) {
+    func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
     }
 
-    func applicationDidEnterBackground(application: UIApplication) {
+    func applicationDidEnterBackground(_ application: UIApplication) {
         // 保存播放列表
-        MusicManager.sharedManager.saveLastPlaylist()
+        MusicManager.shared.saveLastPlaylist()
     }
 
-    func applicationWillEnterForeground(application: UIApplication) {
+    func applicationWillEnterForeground(_ application: UIApplication) {
         
     }
 
-    func applicationDidBecomeActive(application: UIApplication) {
+    func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     }
 
-    func applicationWillTerminate(application: UIApplication) {
+    func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(application: UIApplication, handleOpenURL url: NSURL) -> Bool {
+    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
         
-        WeiboSDK.handleOpenURL(url, delegate: nil)
-        return WXApi.handleOpenURL(url, delegate: nil)
+//        WeiboSDK.handleOpen(url, delegate: nil)
+        return WXApi.handleOpen(url, delegate: nil)
     }
     
-    func application(application: UIApplication, openURL url: NSURL, sourceApplication: String?, annotation: AnyObject) -> Bool {
-        
-        WeiboSDK.handleOpenURL(url, delegate: nil)
-        return WXApi.handleOpenURL(url, delegate: nil)
-    }
+//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+//
+//        WeiboSDK.handleOpen(url, delegate: nil)
+//        return WXApi.handleOpen(url, delegate: nil)
+//    }
     
-    override func canBecomeFirstResponder() -> Bool {
+    override var canBecomeFirstResponder : Bool {
         return true
     }
     
-    override func remoteControlReceivedWithEvent(event: UIEvent?) {
+    override func remoteControlReceived(with event: UIEvent?) {
         if let e = event {
-            if e.type == .RemoteControl {
+            if e.type == .remoteControl {
                 switch e.subtype {
-                case .RemoteControlPause:
+                case .remoteControlPause:
                     debugPrint("RemoteControlPause")
-                    MusicManager.sharedManager.pause()
+                    MusicManager.shared.pause()
                     break;
-                case .RemoteControlStop:
+                case .remoteControlStop:
                     debugPrint("RemoteControlPause")
                     break;
-                case .RemoteControlPlay:
+                case .remoteControlPlay:
                     debugPrint("RemoteControlPlay")
-                    MusicManager.sharedManager.play()
+                    MusicManager.shared.play()
                     break;
-                case .RemoteControlTogglePlayPause:
+                case .remoteControlTogglePlayPause:
                     debugPrint("RemoteControlTogglePlayPause")
                     break;
-                case .RemoteControlNextTrack:
+                case .remoteControlNextTrack:
                     debugPrint("RemoteControlNextTrack")
-                    MusicManager.sharedManager.playNext()
+                    MusicManager.shared.playNext()
                     break;
-                case .RemoteControlPreviousTrack:
+                case .remoteControlPreviousTrack:
                     debugPrint("RemoteControlPreviousTrack")
-                    MusicManager.sharedManager.playPrev()
+                    MusicManager.shared.playPrev()
                     break;
                 default:
                     break;
@@ -141,28 +140,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    func prepareUMeng() {
-        let config = UMAnalyticsConfig.sharedInstance()
-        config.appKey = UM_KEY
-        config.channelId = ""
-        
-        // 上报App版本
-        let version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"]
-        MobClick.setAppVersion(version as! String)
-        
-        // 设置加密
-        MobClick.setEncryptEnabled(true)
-        
-        // 开始统计
-        MobClick.startWithConfigure(config)
-        
-    }
+//    func prepareUMeng() {
+//        let config = UMAnalyticsConfig.sharedInstance()
+//        config?.appKey = UM_KEY
+//        config?.channelId = ""
+//        
+//        // 上报App版本
+//        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]
+//        MobClick.setAppVersion(version as! String)
+//        
+//        // 设置加密
+//        MobClick.setEncryptEnabled(true)
+//        
+//        // 开始统计
+//        MobClick.start(withConfigure: config)
+//        
+//    }
     
     func prepareSocial()  {
-        WXApi.registerApp(WECHAT_APP_ID)
+//        WXApi.registerApp(WECHAT_APP_ID)
         
-        WeiboSDK.enableDebugMode(true)
-        WeiboSDK.registerApp(WEIBO_APP_KEY)
+//        WeiboSDK.enableDebugMode(true)
+//        WeiboSDK.registerApp(WEIBO_APP_KEY)
     }
     
     

@@ -9,11 +9,11 @@
 import UIKit
 
 class SelectiveTimePanel: UIView {
-    private var weekView = UIView()
-    private let nowButton = UIButton()
-    private let okButton = UIButton()
-    private let randomButton = UIButton()
-    private let resultLabel = UILabel()
+    fileprivate var weekView = UIView()
+    fileprivate let nowButton = UIButton()
+    fileprivate let okButton = UIButton()
+    fileprivate let randomButton = UIButton()
+    fileprivate let resultLabel = UILabel()
     
     var daysButtons = [UIButton]()
     var timesButtons = [UIButton]()
@@ -43,59 +43,59 @@ class SelectiveTimePanel: UIView {
     
     func insertGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor(netHex: 0x283E51).CGColor,UIColor(netHex: 0x4B79A1).CGColor]
+        gradientLayer.colors = [UIColor(netHex: 0x283E51).cgColor,UIColor(netHex: 0x4B79A1).cgColor]
         gradientLayer.locations = [0, 1]
-        gradientLayer.startPoint = CGPointMake(0, 0)
-        gradientLayer.endPoint = CGPointMake(1, 1)
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         gradientLayer.frame = frame
-        layer.insertSublayer(gradientLayer, atIndex: 0)
+        layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func prepareBottomButtons() {
         
         addSubview(nowButton)
         nowButton.titleLabel?.font = UIFont.sizeOf14()
-        nowButton.titleLabel?.textColor = UIColor.whiteColor()
-        nowButton.setTitle("当前时刻", forState: .Normal)
+        nowButton.titleLabel?.textColor = UIColor.white
+        nowButton.setTitle("当前时刻", for: UIControlState())
         nowButton.backgroundColor = UIColor(netHex: 0x457fca)
-        nowButton.addTarget(self, action: #selector(SelectiveTimePanel.nowButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        nowButton.addTarget(self, action: #selector(SelectiveTimePanel.nowButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(okButton)
-        okButton.titleLabel?.font = UIFont.boldSystemFontOfSize(14)
-        okButton.titleLabel?.textColor = UIColor.whiteColor()
-        okButton.setTitle("确定", forState: .Normal)
+        okButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        okButton.titleLabel?.textColor = UIColor.white
+        okButton.setTitle("确定", for: UIControlState())
         okButton.backgroundColor = UIColor.goldColor()
-        okButton.addTarget(self, action: #selector(SelectiveTimePanel.okButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        okButton.addTarget(self, action: #selector(SelectiveTimePanel.okButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(randomButton)
         randomButton.titleLabel?.font = UIFont.sizeOf14()
-        randomButton.titleLabel?.textColor = UIColor.whiteColor()
-        randomButton.setTitle("随机时刻", forState: .Normal)
+        randomButton.titleLabel?.textColor = UIColor.white
+        randomButton.setTitle("随机时刻", for: UIControlState())
         randomButton.backgroundColor = UIColor(netHex: 0x457fca)
-        randomButton.addTarget(self, action: #selector(SelectiveTimePanel.randomButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        randomButton.addTarget(self, action: #selector(SelectiveTimePanel.randomButtonPressed(_:)), for: .touchUpInside)
         
         let buttonHeight: CGFloat = 40
-        nowButton.snp_makeConstraints { (make) in
+        nowButton.snp.makeConstraints { (make) in
             make.height.equalTo(buttonHeight)
             make.leftMargin.equalTo(0)
             make.bottomMargin.equalTo(0)
-            make.right.equalTo(okButton.snp_left)
+            make.right.equalTo(okButton.snp.left)
             make.width.equalTo(okButton)
         }
         
-        randomButton.snp_makeConstraints { (make) in
+        randomButton.snp.makeConstraints { (make) in
             make.height.equalTo(buttonHeight)
             make.rightMargin.equalTo(0)
             make.bottomMargin.equalTo(0)
-            make.left.equalTo(okButton.snp_right)
+            make.left.equalTo(okButton.snp.right)
             make.width.equalTo(okButton)
         }
         
-        okButton.snp_makeConstraints { (make) in
+        okButton.snp.makeConstraints { (make) in
             make.height.equalTo(buttonHeight)
             make.bottomMargin.equalTo(0)
-            make.left.equalTo(nowButton.snp_right)
-            make.right.equalTo(randomButton.snp_left)
+            make.left.equalTo(nowButton.snp.right)
+            make.right.equalTo(randomButton.snp.left)
             make.width.equalTo(randomButton)
         }
         
@@ -114,30 +114,30 @@ class SelectiveTimePanel: UIView {
         let contentHeight:CGFloat = CGFloat(max(daysCount, timesCount))*(buttonHeight+margin)
         
         addSubview(weekView)
-        weekView.snp_makeConstraints { (make) in
-            make.center.equalTo(snp_center)
+        weekView.snp.makeConstraints { (make) in
+            make.center.equalTo(snp.center)
             make.height.equalTo(height)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
         }
         
         addSubview(resultLabel)
-        resultLabel.textAlignment = .Center
+        resultLabel.textAlignment = .center
         resultLabel.font = UIFont.sizeOf16()
-        resultLabel.textColor = UIColor.whiteColor()
+        resultLabel.textColor = UIColor.white
         resultLabel.text = "星期一 ▪ 清晨"
-        resultLabel.snp_makeConstraints { (make) in
-            make.bottom.equalTo(weekView.snp_top).offset(-30)
+        resultLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(weekView.snp.top).offset(-30)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
         }
         
         let closeButton = UIButton()
         addSubview(closeButton)
-        closeButton.setImage(UIImage(named: "icon_close"), forState: .Normal)
-        closeButton.addTarget(self, action: #selector(SelectiveTimePanel.closeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        closeButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+        closeButton.setImage(UIImage(named: "icon_close"), for: UIControlState())
+        closeButton.addTarget(self, action: #selector(SelectiveTimePanel.closeButtonPressed(_:)), for: .touchUpInside)
+        closeButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
             make.leftMargin.equalTo(10)
             make.topMargin.equalTo(30)
         }
@@ -148,40 +148,40 @@ class SelectiveTimePanel: UIView {
         let timesContentView = UIView()
         addSubview(timesContentView)
         
-        daysContentView.snp_makeConstraints { (make) in
+        daysContentView.snp.makeConstraints { (make) in
             make.height.equalTo(contentHeight)
-            make.centerY.equalTo(snp_centerY)
+            make.centerY.equalTo(snp.centerY)
             make.leftMargin.equalTo(0)
-            make.right.equalTo(timesContentView.snp_left)
-            make.width.equalTo(timesContentView.snp_width)
+            make.right.equalTo(timesContentView.snp.left)
+            make.width.equalTo(timesContentView.snp.width)
         }
-        timesContentView.snp_makeConstraints { (make) in
+        timesContentView.snp.makeConstraints { (make) in
             make.height.equalTo(contentHeight)
-            make.centerY.equalTo(snp_centerY)
-            make.left.equalTo(daysContentView.snp_right)
+            make.centerY.equalTo(snp.centerY)
+            make.left.equalTo(daysContentView.snp.right)
             make.rightMargin.equalTo(0)
-            make.width.equalTo(timesContentView.snp_width)
+            make.width.equalTo(timesContentView.snp.width)
         }
         
         for i in 0..<daysCount {
             let button = UIButton()
             button.titleLabel?.font = UIFont.sizeOf12()
-            button.titleLabel?.textColor = UIColor.whiteColor()
-            button.setTitle(daysOfWeek[i], forState: .Normal)
+            button.titleLabel?.textColor = UIColor.white
+            button.setTitle(daysOfWeek[i], for: UIControlState())
             button.clipsToBounds = true
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), forState: .Selected)
-            button.addTarget(self, action: #selector(SelectiveTimePanel.daysButtonPressed(_:)), forControlEvents: .TouchUpInside)
+            button.layer.borderColor = UIColor.white.cgColor
+            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), for: .selected)
+            button.addTarget(self, action: #selector(SelectiveTimePanel.daysButtonPressed(_:)), for: .touchUpInside)
             button.tag = 10+i
             daysContentView.addSubview(button)
             daysButtons.append(button)
             
-            button.snp_makeConstraints(closure: { (make) in
-                make.size.equalTo(CGSizeMake(buttonwidth, buttonHeight))
-                make.centerX.equalTo(daysContentView.snp_centerX)
+            button.snp.makeConstraints({ (make) in
+                make.size.equalTo(CGSize(width: buttonwidth, height: buttonHeight))
+                make.centerX.equalTo(daysContentView.snp.centerX)
                 make.topMargin.equalTo((buttonHeight+margin)*CGFloat(i))
             })
             
@@ -190,22 +190,22 @@ class SelectiveTimePanel: UIView {
         for i in 0..<timesCount {
             let button = UIButton()
             button.titleLabel?.font = UIFont.sizeOf12()
-            button.titleLabel?.textColor = UIColor.whiteColor()
-            button.setTitle(timesOfDay[i], forState: .Normal)
+            button.titleLabel?.textColor = UIColor.white
+            button.setTitle(timesOfDay[i], for: UIControlState())
             button.clipsToBounds = true
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.whiteColor().CGColor
-            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), forState: .Highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), forState: .Selected)
-            button.addTarget(self, action: #selector(SelectiveTimePanel.timesButtonPressed(_:)), forControlEvents: .TouchUpInside)
+            button.layer.borderColor = UIColor.white.cgColor
+            button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
+            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), for: .selected)
+            button.addTarget(self, action: #selector(SelectiveTimePanel.timesButtonPressed(_:)), for: .touchUpInside)
             button.tag = 20+i
             timesContentView.addSubview(button)
             timesButtons.append(button)
             
-            button.snp_makeConstraints(closure: { (make) in
-                make.size.equalTo(CGSizeMake(buttonwidth, buttonHeight))
-                make.centerX.equalTo(timesContentView.snp_centerX)
+            button.snp.makeConstraints({ (make) in
+                make.size.equalTo(CGSize(width: buttonwidth, height: buttonHeight))
+                make.centerX.equalTo(timesContentView.snp.centerX)
                 make.topMargin.equalTo((buttonHeight+margin)*CGFloat(i))
             })
             
@@ -214,71 +214,71 @@ class SelectiveTimePanel: UIView {
     }
 
     //MARK: event
-    func nowButtonPressed(button: UIButton) {
+    func nowButtonPressed(_ button: UIButton) {
         selectButtonAtDaysIndex(CoreDB.currentDayOfWeek(), timeOfDayIndex: CoreDB.currentTimeOfDay())
     }
     
-    func randomButtonPressed(button: UIButton) {
+    func randomButtonPressed(_ button: UIButton) {
         let d = arc4random_uniform(7)
         let t = arc4random_uniform(8)
         selectButtonAtDaysIndex(Int(d), timeOfDayIndex: Int(t))
     }
     
-    func okButtonPressed(button: UIButton) {
+    func okButtonPressed(_ button: UIButton) {
         removeFromSuperview()
         
         let dict = ["dayIndex": selectedDayIndex, "timeIndex": selectedTimeIndex]
         CoreDB.saveSelectedIndexes(dict)
-        Device.defaultNotificationCenter().postNotificationName(NOWTIME_CHANGED, object: nil, userInfo: dict)
+        NotificationCenter.default.post(name: NOTI_NOWTIME_CHANGED, object: nil, userInfo: dict)
     }
     
     
-    func daysButtonPressed(button: UIButton) {
+    func daysButtonPressed(_ button: UIButton) {
         selectedDayIndex = button.tag-10
         for btn in daysButtons {
-            btn.selected = false
+            btn.isSelected = false
         }
-        button.selected = true
+        button.isSelected = true
         
     }
     
-    func timesButtonPressed(button: UIButton) {
+    func timesButtonPressed(_ button: UIButton) {
         selectedTimeIndex = button.tag-20
         for btn in timesButtons {
-            btn.selected = false
+            btn.isSelected = false
         }
-        button.selected = true
+        button.isSelected = true
     }
     
-    func selectButtonAtDaysIndex(dayOfWeekIndex: Int, timeOfDayIndex: Int) {
+    func selectButtonAtDaysIndex(_ dayOfWeekIndex: Int, timeOfDayIndex: Int) {
         selectedDayIndex = dayOfWeekIndex
         selectedTimeIndex = timeOfDayIndex
         
         for btn in daysButtons {
-            btn.selected = false
+            btn.isSelected = false
         }
         for btn in timesButtons {
-            btn.selected = false
+            btn.isSelected = false
         }
         
-        daysButtons[dayOfWeekIndex].selected = true
-        timesButtons[timeOfDayIndex].selected = true
+        daysButtons[dayOfWeekIndex].isSelected = true
+        timesButtons[timeOfDayIndex].isSelected = true
         
         updateResultLabel(nil)
     }
     
-    func closeButtonPressed(button: UIButton) {
+    func closeButtonPressed(_ button: UIButton) {
         removeFromSuperview()
     }
 
-    func updateResultLabel(result: String?) {
+    func updateResultLabel(_ result: String?) {
         
         if let _ = result {
             resultLabel.text = result
         }else {
             let dayString = daysButtons[selectedDayIndex].titleLabel!.text
             let timeString = timesButtons[selectedTimeIndex].titleLabel!.text
-            resultLabel.text = dayString?.stringByAppendingString("・").stringByAppendingString(timeString!)
+            resultLabel.text = (dayString! + "・") + timeString!
         }
     }
    

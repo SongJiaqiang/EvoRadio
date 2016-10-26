@@ -1,22 +1,39 @@
 source 'https://github.com/CocoaPods/Specs.git'
-platform :ios, '8.0'
+platform :ios, '9.0'
 use_frameworks!
 
 target 'EvoRadio' do
 
-pod 'Alamofire', '~> 3.3'
-pod 'Kingfisher', '~> 2.2'
-pod 'SnapKit', '~> 0.20.0'
+# Objctive-C
+
+## 数据存储
 pod 'leveldb', '~> 1.18'
+## 刷新组件
 pod 'MJRefresh', '~> 3.1.0'
-pod 'EVReflection', '~> 2.6'
+## 图像处理，滤镜、模糊
 pod 'GPUImage', '~> 0.1.7'
+## 动画特效
 pod 'pop', '~> 1.0'
-pod 'UMengAnalytics'
-pod 'MBProgressHUD', '~> 0.9.2'
+## 音频播放
 pod 'StreamingKit', '~> 0.1.29'
+## 3D画廊
 pod 'iCarousel', '~> 1.8.2'
+## 倒影
 pod 'ReflectionView', '~> 1.2'
+## 加载蒙版
+pod 'MBProgressHUD', '~> 1.0.0'
+
+
+# Swift
+
+## 网络组件
+pod 'Alamofire', '~> 4.0'
+## 图片加载
+pod 'Kingfisher', '~> 3.0'
+## 自动布局
+pod 'SnapKit', '~> 3.0.0'
+## Swift映射
+pod 'EVReflection', :git => 'https://github.com/evermeer/EVReflection', :branch => 'Swift3'
 
 end
 

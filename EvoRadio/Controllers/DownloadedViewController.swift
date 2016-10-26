@@ -54,13 +54,13 @@ class DownloadedViewController: ViewController {
     }
     
     //MARK: events
-    func itemButtonPressed(button: UIButton) {
+    func itemButtonPressed(_ button: UIButton) {
         if button.tag == 0 {
-            item1Button.selected = true
-            item2Button.selected = false
+            item1Button.isSelected = true
+            item2Button.isSelected = false
         }else {
-            item1Button.selected = false
-            item2Button.selected = true
+            item1Button.isSelected = false
+            item2Button.isSelected = true
         }
         
         selectedIndex = button.tag

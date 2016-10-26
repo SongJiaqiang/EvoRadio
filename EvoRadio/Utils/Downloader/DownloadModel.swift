@@ -64,7 +64,7 @@ class DownloadModel: NSObject {
     var remainingTime: JQTime?
     var speed: JQSpeed?
     
-    var task: NSURLSessionDownloadTask?
+    var task: URLSessionDownloadTask?
     var startTime: NSDate?
     var progress: Float = 0
 

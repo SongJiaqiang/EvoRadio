@@ -32,7 +32,7 @@ class LoginUser: EVObject {
         ]
     }
     
-    class func userWithDict(dict: [String : AnyObject]) -> LoginUser {
+    class func userWithDict(_ dict: [String : AnyObject]) -> LoginUser {
         let user = LoginUser()
         user.uID = dict["uid"] as? String
         user.uName = dict["uname"] as? String

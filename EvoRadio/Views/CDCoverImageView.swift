@@ -22,11 +22,11 @@ class CDCoverImageView: UIImageView {
         
         super.init(frame: frame)
         
-        contentMode = .ScaleAspectFill
+        contentMode = .scaleAspectFill
         clipsToBounds = true
         layer.cornerRadius = 120
         layer.borderWidth = 10
-        layer.borderColor = UIColor(white: 0, alpha: 0.8).CGColor
+        layer.borderColor = UIColor(white: 0, alpha: 0.8).cgColor
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -48,7 +48,7 @@ class CDCoverImageView: UIImageView {
         rotateAnimation.repeatForever = true
         rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
         rotateAnimation.beginTime = CACurrentMediaTime()+0.2
-        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
+        layer.pop_add(rotateAnimation, forKey: "rotateAnimation")
         
         pauseAnimate()
     }
@@ -57,16 +57,16 @@ class CDCoverImageView: UIImageView {
         
         rotateAnimation.toValue = 0
         rotateAnimation.duration = 0.5
-        layer.pop_addAnimation(rotateAnimation, forKey: "rotateAnimation")
+        layer.pop_add(rotateAnimation, forKey: "rotateAnimation")
         
     }
     
     func pauseAnimate() {
-        rotateAnimation.paused = true
+        rotateAnimation.isPaused = true
     }
     
     func resumeAnimate() {
-        rotateAnimation.paused = false
+        rotateAnimation.isPaused = false
     }
     
     

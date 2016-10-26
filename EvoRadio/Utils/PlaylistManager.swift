@@ -8,26 +8,13 @@
 
 import Foundation
 
-let instance_playlist = PlaylistManager.instance
-
 class PlaylistManager {
     
     var playlist: [Song]?
     var currentItem: Song?
     
     //MARK: instance
-    class var instance: PlaylistManager {
-        struct Static {
-            static var onceToken: dispatch_once_t = 0
-            static var instance: PlaylistManager! = nil
-        }
-        dispatch_once(&Static.onceToken) { () -> Void in
-            Static.instance = PlaylistManager()
-        }
-        
-        return Static.instance
-    }
-    
+    open static let playlist = PlaylistManager()
     
     func savedList() -> [Song] {
         
@@ -39,12 +26,12 @@ class PlaylistManager {
         }
     }
     
-    func saveList(songs: [Song]) {
+    func saveList(_ songs: [Song]) {
         playlist = songs
         CoreDB.savePlaylist(playlist!)
     }
     
-    func appendSong(song: Song) {
+    func appendSong(_ song: Song) {
         playlist?.append(song)
         CoreDB.savePlaylist(playlist!)
     }

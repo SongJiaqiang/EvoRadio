@@ -10,11 +10,10 @@ import Foundation
 
 let DOMAIN = "http://www.songjiaqiang.cn/evoradio"
 
-//MARK: notification names
-let NOWTIME_CHANGED = "NOWTIME_CHANGED"
+//MARK: Notification names
+let NOTI_NOWTIME_CHANGED = Notification.Name("NOWTIME_CHANGED")
 
-
-//MARK: UMeng
+//MARK: Social Keys
 let UM_KEY = "57528884e0f55a77fe0009c4"
 let QQ_APP_ID = "1105376939"
 let QQ_APP_KEY = "SCkXvk1zQlJDed6b"

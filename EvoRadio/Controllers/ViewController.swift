@@ -22,61 +22,61 @@ class ViewController: UIViewController {
 //        insertGradientLayer()
         
         navigationController?.navigationBar.barTintColor = UIColor.grayColor1()
-        navigationController?.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navigationController?.navigationBar.tintColor = UIColor.white
+        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         // 友盟统计 － 进入页面
-        MobClick.beginLogPageView(NSStringFromClass(self.classForCoder))
+//        MobClick.beginLogPageView(NSStringFromClass(self.classForCoder))
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         // 友盟统计 － 退出页面
-        MobClick.endLogPageView(NSStringFromClass(self.classForCoder))
+//        MobClick.endLogPageView(NSStringFromClass(self.classForCoder))
     }
     
-    override func preferredStatusBarStyle() -> UIStatusBarStyle {
-        return .LightContent
+    override var preferredStatusBarStyle : UIStatusBarStyle {
+        return .lightContent
     }
 
     func insertGradientLayer() {
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.grayColor3().CGColor,UIColor.grayColor5().CGColor]
+        gradientLayer.colors = [UIColor.grayColor3().cgColor,UIColor.grayColor5().cgColor]
         gradientLayer.locations = [0, 1]
-        gradientLayer.startPoint = CGPointMake(0, 0)
-        gradientLayer.endPoint = CGPointMake(1, 1)
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         gradientLayer.frame = view.frame
-        view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        view.layer.insertSublayer(gradientLayer, at: 0)
     }
     
-    func addChildViewController(childController: UIViewController, inView: UIView) {
+    func addChildViewController(_ childController: UIViewController, inView: UIView) {
         addChildViewController(childController)
         inView.addSubview(childController.view)
         childController.view.frame = inView.bounds
     }
     
-    func addChildViewControllers(childControllers: [UIViewController], inView: UIView) {
+    func addChildViewControllers(_ childControllers: [UIViewController], inView: UIView) {
         for i in 0..<childControllers.count {
             let controller = childControllers[i]
             addChildViewController(controller)
             inView.addSubview(controller.view)
-            controller.view.frame = CGRectMake(Device.width()*CGFloat(i), 0, inView.bounds.width, inView.bounds.height)
+            controller.view.frame = CGRect(x: Device.width()*CGFloat(i), y: 0, width: inView.bounds.width, height: inView.bounds.height)
         }
     }
 
     func setupBackButton() {
-        let backItem = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .Plain, target: self, action: #selector(ViewController.goBack))
+        let backItem = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: self, action: #selector(ViewController.goBack))
         navigationItem.leftBarButtonItem = backItem
     }
     
     func goBack() {
-        navigationController?.popViewControllerAnimated(true)
+        _ = navigationController?.popViewController(animated: true)
     }
 }
 

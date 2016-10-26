@@ -10,27 +10,27 @@ import Foundation
 
 
 
-extension NSDate {
+extension Date {
     
-    class func getSomeDate(format: NSCalendarUnit) -> Int {
-        let date = NSDate()
-        let calendar = NSCalendar.currentCalendar()
-        let components = calendar.components([.Hour, .Weekday, .WeekdayOrdinal], fromDate: date)
+    static func getSomeDate(_ format: NSCalendar.Unit) -> Int {
+        let date = Date()
+        let calendar = Calendar.current
+        let components = (calendar as NSCalendar).components([.hour, .weekday, .weekdayOrdinal], from: date)
         
         var value: Int = -1
         switch format {
-        case [.Hour]:
-            value = components.hour
-        case [.Weekday]:
-            value = components.weekday
-        case [.WeekdayOrdinal]:
-            value = components.weekdayOrdinal
+        case [.hour]:
+            value = components.hour!
+        case [.weekday]:
+            value = components.weekday!
+        case [.weekdayOrdinal]:
+            value = components.weekdayOrdinal!
         default: break
         }
         return value
     }
     
-    class func secondsToMinuteString(seconds: Int) -> String {
+    static func secondsToMinuteString(_ seconds: Int) -> String {
         
         if seconds < 0 {
             return "0:00"

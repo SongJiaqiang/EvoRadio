@@ -38,7 +38,7 @@ class Channel: EVObject {
         ]
     }
     
-    class func channelWithDict(dict: [String : AnyObject]) -> Channel {
+    class func channelWithDict(_ dict: [String : AnyObject]) -> Channel {
         let channel = Channel()
         channel.channelID = dict["channel_id"] as? String
         channel.channelName = dict["channel_name"] as? String
@@ -56,7 +56,7 @@ class Channel: EVObject {
         return channel
     }
     
-    class func channelsWithDict(dicts: [[String : AnyObject]]) -> [Channel] {
+    class func channelsWithDict(_ dicts: [[String : AnyObject]]) -> [Channel] {
         var channels = [Channel]()
         for dict in dicts {
             channels.append(Channel.channelWithDict(dict))

@@ -14,16 +14,16 @@ class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
     var topTabBar: TopTabBar!
-    private var playerView: UIView!
-    private var contentView = UIScrollView()
-    private var playerViewTopConstraint: Constraint?
+    fileprivate var playerView: UIView!
+    fileprivate var contentView = UIScrollView()
+    fileprivate var playerViewTopConstraint: Constraint?
     
-    private var radioController: RadioViewController?
-    private var nowViewController: NowViewController?
-    private var localViewController: LocalViewController?
-    private var playerController = PlayerViewController()
+    fileprivate var radioController: RadioViewController?
+    fileprivate var nowViewController: NowViewController?
+    fileprivate var localViewController: LocalViewController?
+    fileprivate var playerController = PlayerViewController()
     
-    private var topTabBarHeightConstraint: Constraint!
+    fileprivate var topTabBarHeightConstraint: Constraint!
     
     var touchIcon: UIImage?
     
@@ -39,25 +39,25 @@ class MainViewController: ViewController {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
-        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(MainViewController.showMenu), forControlEvents: .TouchUpInside)
+        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
+        AssistiveTouch.shared.addTarget(self, action: #selector(MainViewController.showMenu), for: .touchUpInside)
 
-        AssistiveTouch.sharedTouch.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
+        AssistiveTouch.shared.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
     }
     
     //MARK: prepare
     func prepareAssistiveTouch() {
-        let assitiveTouch = AssistiveTouch.sharedTouch
-        assitiveTouch.frame = CGRectMake(10, 30, 40, 40)
+        let assitiveTouch = AssistiveTouch.shared
+        assitiveTouch.frame = CGRect(x: 10, y: 30, width: 40, height: 40)
         Device.keyWindow().addSubview(assitiveTouch)
     }
     
@@ -65,11 +65,11 @@ class MainViewController: ViewController {
         
         topTabBar = TopTabBar(titles: ["电台","当下","本地"])
         view.addSubview(topTabBar)
-        topTabBar.snp_makeConstraints { (make) in
+        topTabBar.snp.makeConstraints { (make) in
             make.height.equalTo(20)
-            make.left.equalTo(view.snp_left)
-            make.right.equalTo(view.snp_right)
-            make.top.equalTo(view.snp_top)
+            make.left.equalTo(view.snp.left)
+            make.right.equalTo(view.snp.right)
+            make.top.equalTo(view.snp.top)
         }
         
     }
@@ -79,7 +79,7 @@ class MainViewController: ViewController {
         playerView = UIView()
         playerView.backgroundColor = UIColor.goldColor()
         Device.keyWindow().addSubview(playerView)
-        playerView.snp_makeConstraints { (make) in
+        playerView.snp.makeConstraints { (make) in
             make.size.equalTo(Device.size())
             make.leftMargin.equalTo(0)
             make.right.equalTo(0)
@@ -88,14 +88,14 @@ class MainViewController: ViewController {
         
         
         playerView.addSubview(playerController.view)
-        playerController.view.snp_makeConstraints { (make) in
+        playerController.view.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
 //        
 //        playerBar = PlayerBar()
 //        playerView.addSubview(playerBar)
 //        playerBar.delegate = self
-//        playerBar.snp_makeConstraints { (make) in
+//        playerBar.snp.makeConstraints { (make) in
 //            make.height.equalTo(barHeight)
 //            make.topMargin.equalTo(0)
 //            make.leftMargin.equalTo(0)
@@ -105,20 +105,20 @@ class MainViewController: ViewController {
     
     func prepareContentView() {        
         view.addSubview(contentView)
-        contentView.pagingEnabled = true
+        contentView.isPagingEnabled = true
         contentView.showsVerticalScrollIndicator = false
         contentView.showsHorizontalScrollIndicator = false
         contentView.clipsToBounds = true
         contentView.delegate = self
-        contentView.snp_makeConstraints { (make) in
-            make.top.equalTo(view.snp_top).offset(20)
+        contentView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.top).offset(20)
             make.bottomMargin.equalTo(0)
             make.left.equalTo(0)
             make.right.equalTo(0)
         }
         
-        contentView.contentSize = CGSizeMake(Device.width()*3, 0)
-        contentView.contentOffset = CGPointMake(Device.width(), 0)
+        contentView.contentSize = CGSize(width: Device.width()*3, height: 0)
+        contentView.contentOffset = CGPoint(x: Device.width(), y: 0)
         
         // 初始化子控制器，并添加到ContentView中
         radioController = RadioViewController()
@@ -137,16 +137,16 @@ class MainViewController: ViewController {
 }
 
 extension MainViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
         topTabBar.animationWithOffsetX(offsetX)
     }
     
-    func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
-        let pageIndex = offsetX % Device.width() == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
+        let pageIndex = offsetX.truncatingRemainder(dividingBy: Device.width()) == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
         
         if pageIndex == 0 {
             touchIcon = UIImage(named: "touch_refresh")
@@ -155,7 +155,7 @@ extension MainViewController: UIScrollViewDelegate {
         } else if pageIndex == 2 {
             touchIcon = UIImage(named: "touch_sound")
         }
-        AssistiveTouch.sharedTouch.updateImage(touchIcon!)
+        AssistiveTouch.shared.updateImage(touchIcon!)
         
         topTabBar.currentIndex = pageIndex
         topTabBar.updateFrames()
@@ -164,8 +164,8 @@ extension MainViewController: UIScrollViewDelegate {
 }
 
 extension MainViewController: ScrollTabBarDelegate {
-    func scrollTabBar(scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int) {
-        self.contentView.setContentOffset(CGPointMake(Device.width()*CGFloat(index), 0), animated: true)
+    func scrollTabBar(_ scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int) {
+        self.contentView.setContentOffset(CGPoint(x: Device.width()*CGFloat(index), y: 0), animated: true)
     }
 }
 

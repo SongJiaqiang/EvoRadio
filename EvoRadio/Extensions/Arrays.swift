@@ -9,7 +9,7 @@
 import Foundation
 
 extension Array {
-    func groupBy<G: Hashable>(groupClosure: (Element) -> G) -> [G: [Element]] {
+    func groupBy<G: Hashable>(_ groupClosure: (Element) -> G) -> [G: [Element]] {
         var dictionary = [G: [Element]]()
         
         for element in self {

@@ -11,18 +11,18 @@ import Foundation
 extension String {
     
     func lastPathComponent() -> String {
-        return NSURL(string: self)!.lastPathComponent!
+        return URL(string: self)!.lastPathComponent
     }
     
-    func appendPathComponent(component: String) -> String {
-        return self.stringByAppendingString("/").stringByAppendingString(component)
+    func appendPathComponent(_ component: String) -> String {
+        return (self + "/") + component
     }
     
-    func appendPathComponents(components: [String]) -> String {
+    func appendPathComponents(_ components: [String]) -> String {
         
         var newPath: String = self
         for comp in components {
-            newPath = newPath.stringByAppendingString("/").stringByAppendingString(comp)
+            newPath = (newPath + "/") + comp
         }
         
         return newPath

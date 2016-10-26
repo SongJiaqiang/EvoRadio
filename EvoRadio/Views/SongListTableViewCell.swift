@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SongListTableViewCellDelegate {
-    func openToolPanelOfSong(song: Song)
+    func openToolPanelOfSong(_ song: Song)
 }
 
 class SongListTableViewCell: UITableViewCell {
@@ -30,7 +30,7 @@ class SongListTableViewCell: UITableViewCell {
         let v = UIView()
         v.backgroundColor = UIColor.grayColor2()
         selectedBackgroundView = v
-        backgroundColor = UIColor.clearColor()
+        backgroundColor = UIColor.clear
         
         prepareUI()
     }
@@ -45,61 +45,61 @@ class SongListTableViewCell: UITableViewCell {
         coverImageView.image = UIImage.placeholder_cover()
         coverImageView.clipsToBounds = true
 //        coverImageView.layer.cornerRadius = 4
-        coverImageView.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+        coverImageView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
             make.leftMargin.equalTo(6)
-            make.centerY.equalTo(snp_centerY)
+            make.centerY.equalTo(snp.centerY)
         }
         
         contentView.addSubview(moreButton)
-        moreButton.setImage(UIImage(named: "cell_more"), forState: .Normal)
+        moreButton.setImage(UIImage(named: "cell_more"), for: UIControlState())
         moreButton.clipsToBounds = true
         moreButton.layer.cornerRadius = 10
-        moreButton.layer.borderColor = UIColor.grayColor7().CGColor
+        moreButton.layer.borderColor = UIColor.grayColor7().cgColor
         moreButton.layer.borderWidth = 1
-        moreButton.addTarget(self, action: #selector(SongListTableViewCell.moreButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        moreButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(40, 20))
+        moreButton.addTarget(self, action: #selector(SongListTableViewCell.moreButtonPressed(_:)), for: .touchUpInside)
+        moreButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 40, height: 20))
             make.rightMargin.equalTo(-6)
-            make.centerY.equalTo(snp_centerY)
+            make.centerY.equalTo(snp.centerY)
         }
         
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.grayColor7()
         titleLabel.text = "祝君好"
-        titleLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(coverImageView.snp_right).offset(5)
-            make.right.equalTo(moreButton.snp_left).offset(-5)
-            make.centerY.equalTo(snp_centerY).offset(-6)
+        titleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(coverImageView.snp.right).offset(5)
+            make.right.equalTo(moreButton.snp.left).offset(-5)
+            make.centerY.equalTo(snp.centerY).offset(-6)
         }
         
         contentView.addSubview(subTitleLabel)
         subTitleLabel.font = UIFont.sizeOf10()
         subTitleLabel.textColor = UIColor.grayColor6()
         subTitleLabel.text = "高凯 - 粤语情话"
-        subTitleLabel.snp_makeConstraints { (make) in
-            make.left.equalTo(coverImageView.snp_right).offset(6)
-            make.right.equalTo(moreButton.snp_left).offset(-5)
-            make.centerY.equalTo(snp_centerY).offset(8)
+        subTitleLabel.snp.makeConstraints { (make) in
+            make.left.equalTo(coverImageView.snp.right).offset(6)
+            make.right.equalTo(moreButton.snp.left).offset(-5)
+            make.centerY.equalTo(snp.centerY).offset(8)
         }
         
         
         contentView.addSubview(separatorView)
         separatorView.backgroundColor = UIColor.grayColor6()
-        separatorView.snp_makeConstraints { (make) in
+        separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
-            make.left.equalTo(contentView.snp_left)
-            make.right.equalTo(contentView.snp_right)
-            make.bottom.equalTo(contentView.snp_bottom)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(contentView.snp.right)
+            make.bottom.equalTo(contentView.snp.bottom)
         }
         
         if let _ = song {
-            coverImageView.kf_setImageWithURL(NSURL(string: song!.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+            coverImageView.kf.setImage(with: URL(string: song!.picURL!)!, placeholder: UIImage.placeholder_cover())
             
             titleLabel.text = song?.songName
             
-            subTitleLabel.text = song?.artistsName?.stringByAppendingString(" - ").stringByAppendingString(song!.salbumsName!)
+            subTitleLabel.text = ((song?.artistsName)! + " - ") + song!.salbumsName!
         }
         
         
@@ -108,18 +108,18 @@ class SongListTableViewCell: UITableViewCell {
     
     
     //MARK: events
-    func moreButtonPressed(button: UIButton) {
+    func moreButtonPressed(_ button: UIButton) {
         delegate?.openToolPanelOfSong(song!)
     }
     
-    func updateSongInfo(songModel: Song) {
+    func updateSongInfo(_ songModel: Song) {
         song = songModel
         
-        coverImageView.kf_setImageWithURL(NSURL(string: songModel.picURL!)!, placeholderImage: UIImage.placeholder_cover())
+        coverImageView.kf.setImage(with: URL(string: songModel.picURL!)!, placeholder: UIImage.placeholder_cover())
         
         titleLabel.text = songModel.songName
         
-        subTitleLabel.text = songModel.artistsName?.stringByAppendingString(" - ").stringByAppendingString(songModel.salbumsName!)
+        subTitleLabel.text = ((songModel.artistsName)! + " - ") + songModel.salbumsName!
         
     }
     

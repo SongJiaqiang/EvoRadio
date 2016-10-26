@@ -14,10 +14,8 @@
 #import "WLevelDb.h"
 #import <pop/POP.h>
 
-//MARK: UMeng
-#import <UMMobClick/MobClick.h>
 #import "WXApi.h"
-#import "WeiboSDK.h"
+
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <YWFeedbackFMWK/YWFeedbackKit.h>
 #import <StreamingKit/STKAudioPlayer.h>

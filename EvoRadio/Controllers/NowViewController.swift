@@ -20,8 +20,8 @@ class NowViewController: ViewController {
     var nowChannels = [Channel]()
     var collectionView: UICollectionView!
     var collectionHeaderView: NowCollectionHeaderView?
-    private var endOfFeed = false
-    private let pageSize: Int = 60
+    fileprivate var endOfFeed = false
+    fileprivate let pageSize: Int = 60
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,14 +34,14 @@ class NowViewController: ViewController {
         
         prepareClock()
         
-        Device.defaultNotificationCenter().addObserver(self, selector: #selector(ChannelViewController.nowTimeChanged(_:)), name: NOWTIME_CHANGED, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChannelViewController.nowTimeChanged(_:)), name: NOTI_NOWTIME_CHANGED, object: nil)
     }
     
     func prepareClock() {
-        let clockFrame = CGRectMake(Device.width()-50, 10, 40, 40)
+        let clockFrame = CGRect(x: Device.width()-50, y: 10, width: 40, height: 40)
         let clock = ClockView(frame: clockFrame)
         view.addSubview(clock)
-        clock.addTarget(self, action: #selector(NowViewController.clockViewPressed), forControlEvents: .TouchUpInside)
+        clock.addTarget(self, action: #selector(NowViewController.clockViewPressed), for: .touchUpInside)
     }
     
     func prepareCollectionView() {
@@ -51,26 +51,26 @@ class NowViewController: ViewController {
         let itemW: CGFloat = programCollectionCellWidth
         let itemH: CGFloat = itemW + 30
         
-        layout.itemSize = CGSizeMake(itemW, itemH)
+        layout.itemSize = CGSize(width: itemW, height: itemH)
         layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
         layout.minimumInteritemSpacing = margin
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         view.addSubview(collectionView!)
         collectionView!.delegate = self
         collectionView!.dataSource = self
-        collectionView!.registerClass(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView!.registerClass(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerViewID)
-        collectionView!.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerViewID)
+        collectionView!.register(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.register(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerViewID)
+        collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerViewID)
         
-        collectionView!.backgroundColor = UIColor.clearColor()
-        collectionView!.snp_makeConstraints { (make) in
+        collectionView!.backgroundColor = UIColor.clear
+        collectionView!.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
 //        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
-        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
-        collectionView!.mj_footer.automaticallyHidden = true
+//        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(NowViewController.footerRefresh))
+//        collectionView!.mj_footer.isAutomaticallyHidden = true
         
     }
     
@@ -81,9 +81,9 @@ class NowViewController: ViewController {
         Device.keyWindow().addSubview(panel)
     }
     
-    func nowTimeChanged(notification: NSNotification) {
+    func nowTimeChanged(_ notification: Notification) {
         
-        if let userInfo = notification.userInfo {
+        if let userInfo = (notification as NSNotification).userInfo {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
             
@@ -93,7 +93,7 @@ class NowViewController: ViewController {
                 print("newChannels:\(newChannels.count)")
                 
                 self?.nowChannels.removeAll()
-                self?.nowChannels.appendContentsOf(newChannels)
+                self?.nowChannels.append(contentsOf: newChannels)
                 
                 self?.collectionHeaderView = nil
                 self?.collectionView!.reloadData()
@@ -114,7 +114,7 @@ class NowViewController: ViewController {
         }
     }
     
-    func listGroundPrograms(isRefresh: Bool) {
+    func listGroundPrograms(_ isRefresh: Bool) {
         
         var pageIndex = dataSource.count
         if isRefresh {
@@ -129,7 +129,7 @@ class NowViewController: ViewController {
                     self?.dataSource.removeAll()
                 }
                 
-                self?.dataSource.appendContentsOf(newData)
+                self?.dataSource.append(contentsOf: newData)
                 
                 self?.collectionView!.reloadData()
                 self?.endRefreshing()
@@ -150,7 +150,7 @@ class NowViewController: ViewController {
             
             let anyList = responseData[week*8+time]
             let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
-            dispatch_async(dispatch_get_main_queue(), {[weak self] in
+            DispatchQueue.main.async(execute: {[weak self] in
                 self?.nowChannels = channels
                 self?.collectionHeaderView!.updateChannels(channels)
                 })
@@ -164,60 +164,60 @@ class NowViewController: ViewController {
 //            collectionView!.mj_header.endRefreshing()
 //        }
         
-        if collectionView!.mj_footer.isRefreshing() {
-            collectionView!.mj_footer.endRefreshing()
-        }
+//        if collectionView!.mj_footer.isRefreshing() {
+//            collectionView!.mj_footer.endRefreshing()
+//        }
     }
     
 }
 
 extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ProgramCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ProgramCollectionViewCell
         
-        let program = dataSource[indexPath.item]
+        let program = dataSource[(indexPath as NSIndexPath).item]
         cell.updateContent(program)
         cell.delegate = self
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         
-        let program = dataSource[indexPath.item]
+        let program = dataSource[(indexPath as NSIndexPath).item]
         
         let listController = SongListViewController()
         listController.program = program
         navigationController?.pushViewController(listController, animated: true)
     }
     
-    func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if kind == UICollectionElementKindSectionHeader {
             if let headerView = collectionHeaderView {
                 return headerView
             }
-            collectionHeaderView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: headerViewID, forIndexPath: indexPath) as? NowCollectionHeaderView
-            collectionHeaderView!.frame = CGRectMake(0, 0, Device.width(), 200)
+            collectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerViewID, for: indexPath) as? NowCollectionHeaderView
+            collectionHeaderView!.frame = CGRect(x: 0, y: 0, width: Device.width(), height: 200)
             collectionHeaderView!.delegate = self
             collectionHeaderView?.updateChannels(nowChannels)
             
             return collectionHeaderView!
         }else {
-            let footerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: footerViewID, forIndexPath: indexPath)
+            let footerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: footerViewID, for: indexPath)
             return footerView
         }
         
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: Device.width(), height: 200);
     }
     
@@ -225,14 +225,14 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 
 extension NowViewController: ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(programID: String) {
+    func playMusicOfProgram(_ programID: String) {
         TrackManager.playMusicTypeEvent(.ProgramCover)
         
         api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
-                MusicManager.sharedManager.clearList()
-                MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+                MusicManager.shared.clearList()
+                MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
+                Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
             }
             
             }, onFailed: nil)
@@ -241,7 +241,7 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
 
 
 extension NowViewController: NowCollectionHeaderViewDelegate {
-    func headerView(headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int) {
+    func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int) {
         let channel = nowChannels[index]
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
     }

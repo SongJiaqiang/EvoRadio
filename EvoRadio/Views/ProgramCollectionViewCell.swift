@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ProgramCollectionViewCell: UICollectionViewCell {
     
@@ -32,53 +52,53 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     
     func prepareUI() {
         addSubview(picImageView)
-        picImageView.contentMode = .ScaleAspectFill
+        picImageView.contentMode = .scaleAspectFill
         picImageView.clipsToBounds = true
 //        picImageView.layer.cornerRadius = 2
-        picImageView.snp_makeConstraints { (make) in
+        picImageView.snp.makeConstraints { (make) in
             make.height.equalTo(programCollectionCellWidth)
-            make.top.equalTo(snp_top)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(snp.top)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
         
         addSubview(channelNameLabel)
-        channelNameLabel.font = UIFont.systemFontOfSize(12)
+        channelNameLabel.font = UIFont.systemFont(ofSize: 12)
         channelNameLabel.textColor = UIColor.grayColor7()
-        channelNameLabel.snp_makeConstraints { (make) in
+        channelNameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(18)
-            make.top.equalTo(picImageView.snp_bottom)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(picImageView.snp.bottom)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
         
         addSubview(radioNameLabel)
-        radioNameLabel.font = UIFont.systemFontOfSize(10)
+        radioNameLabel.font = UIFont.systemFont(ofSize: 10)
         radioNameLabel.textColor = UIColor.grayColor6()
-        radioNameLabel.snp_makeConstraints { (make) in
+        radioNameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(12)
-            make.top.equalTo(channelNameLabel.snp_bottom)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(channelNameLabel.snp.bottom)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
         
         addSubview(playButton)
-        playButton.setImage(UIImage(named: "player_play_border"), forState: .Normal)
-        playButton.setImage(UIImage(named: "player_play_border_prs"), forState: .Highlighted)
-        playButton.addTarget(self, action: #selector(ProgramCollectionViewCell.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
+        playButton.setImage(UIImage(named: "player_play_border"), for: UIControlState())
+        playButton.setImage(UIImage(named: "player_play_border_prs"), for: .highlighted)
+        playButton.addTarget(self, action: #selector(ProgramCollectionViewCell.playButtonPressed(_:)), for: .touchUpInside)
+        playButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
             make.leftMargin.equalTo(5)
-            make.bottom.equalTo(picImageView.snp_bottom).offset(-5)
+            make.bottom.equalTo(picImageView.snp.bottom).offset(-5)
         }
 
         addSubview(vipView)
         vipView.backgroundColor = UIColor.goldColor()
         vipView.clipsToBounds = true
 //        vipView.layer.cornerRadius = 2
-        vipView.hidden = true
-        vipView.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(4, 4))
+        vipView.isHidden = true
+        vipView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 4, height: 4))
             make.rightMargin.equalTo(-2)
             make.bottomMargin.equalTo(-2)
         }
@@ -86,13 +106,13 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: event
-    func playButtonPressed(button: UIButton) {
+    func playButtonPressed(_ button: UIButton) {
         if let p = program {
             delegate?.playMusicOfProgram(p.programID!)
         }
     }
     
-    func updateContent(program: Program) {
+    func updateContent(_ program: Program) {
         self.program = program
 
         if let programName = program.programName {
@@ -100,7 +120,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         }
         
         if let picURL = program.picURL {
-            picImageView.kf_setImageWithURL(NSURL(string: picURL)!, placeholderImage: UIImage.placeholder_cover())
+            picImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
         }
         
         if let channels = program.channels {
@@ -113,14 +133,14 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         
         if let vip = program.vipLevel {
             if Int(vip) > 0 {
-                vipView.hidden = false
+                vipView.isHidden = false
             }else {
-                vipView.hidden = true
+                vipView.isHidden = true
             }
         }
     }
 }
 
 protocol ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(programID: String)
+    func playMusicOfProgram(_ programID: String)
 }

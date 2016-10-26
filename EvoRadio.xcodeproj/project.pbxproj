@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A29258049669E5F330022BB /* Pods_EvoRadio.framework */; };
+		49ED37AB1C63B65EE5BF6EFC /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		631884621D78486000D7399A /* NowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 631884611D78486000D7399A /* NowViewController.swift */; };
 		632DA7DC1D79229300A78DBD /* NowCollectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA7DB1D79229300A78DBD /* NowCollectionHeaderView.swift */; };
@@ -19,13 +19,13 @@
 		63A4E5381D7FFCFF00E18FD6 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */; };
 		63A4E53A1D801A2300E18FD6 /* LocalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E5391D801A2300E18FD6 /* LocalTableViewCell.swift */; };
 		63A4E53C1D80384600E18FD6 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E53B1D80384600E18FD6 /* Views.swift */; };
+		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
+		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
+		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
 		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
 		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
 		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
-		9023EA021D06724A004BEE96 /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA011D06724A004BEE96 /* DownloadManager.swift */; };
-		9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA031D06725B004BEE96 /* DownloadModel.swift */; };
-		9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9023EA051D0672A2004BEE96 /* DownloadUtility.swift */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
 		903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */; };
@@ -71,8 +71,6 @@
 		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
 		90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */; };
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
-		90C32B691D0586A500C87DAF /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */; };
-		90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 90C32B661D0586A500C87DAF /* WeiboSDK.bundle */; };
 		90C32B6C1D0586D400C87DAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6B1D0586D400C87DAF /* CoreText.framework */; };
 		90C32B6E1D0586E200C87DAF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6D1D0586E200C87DAF /* ImageIO.framework */; };
 		90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */; };
@@ -91,7 +89,6 @@
 		90E7FB571CC4DDC70018A532 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB561CC4DDC70018A532 /* PlayerViewController.swift */; };
 		90E7FB591CC536720018A532 /* Images.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB581CC536720018A532 /* Images.swift */; };
 		90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */; };
-		90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90ECDFCF1CC877380061CB6F /* Downloader.swift */; };
 		90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A61D02C528002ECC8C /* libz.tbd */; };
 		90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90FB91A81D02C867002ECC8C /* CoreTelephony.framework */; };
 		90FB91AD1D02CDD6002ECC8C /* TrackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90FB91AC1D02CDD6002ECC8C /* TrackManager.swift */; };
@@ -111,19 +108,21 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
-		631884611D78486000D7399A /* NowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NowViewController.swift; path = Controllers/NowViewController.swift; sourceTree = "<group>"; };
+		631884611D78486000D7399A /* NowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = NowViewController.swift; path = Controllers/NowViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		632DA7DB1D79229300A78DBD /* NowCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NowCollectionHeaderView.swift; path = Views/NowCollectionHeaderView.swift; sourceTree = "<group>"; };
 		632DA7E11D7967D400A78DBD /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
 		632DA7E31D7979F100A78DBD /* TopTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = Views/TopTabBar.swift; sourceTree = "<group>"; };
 		632DA80B1D7B259300A78DBD /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioTableViewCell.swift; path = Views/RadioTableViewCell.swift; sourceTree = "<group>"; };
 		6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamingKitViewController.swift; path = Controllers/StreamingKitViewController.swift; sourceTree = "<group>"; };
 		638DD7731D7EA7D900C2EFC0 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockView.swift; path = Views/ClockView.swift; sourceTree = "<group>"; };
-		63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalViewController.swift; path = Controllers/LocalViewController.swift; sourceTree = "<group>"; };
-		63A4E5391D801A2300E18FD6 /* LocalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocalTableViewCell.swift; path = Views/LocalTableViewCell.swift; sourceTree = "<group>"; };
+		63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocalViewController.swift; path = Controllers/LocalViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63A4E5391D801A2300E18FD6 /* LocalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocalTableViewCell.swift; path = Views/LocalTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A4E53B1D80384600E18FD6 /* Views.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Views.swift; sourceTree = "<group>"; };
-		8A29258049669E5F330022BB /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
+		63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
+		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
+		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
 		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		900C724C1D0563F0006EBE78 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		900C724D1D0563F0006EBE78 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -131,9 +130,6 @@
 		900C724F1D0563F0006EBE78 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
 		900C72501D0563F0006EBE78 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
-		9023EA011D06724A004BEE96 /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9023EA031D06725B004BEE96 /* DownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9023EA051D0672A2004BEE96 /* DownloadUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadUtility.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Device.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		902FBCD01CBEAC020051A93B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AppDelegate.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -188,19 +184,6 @@
 		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EVReflections.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = PlaylistManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Windows.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
-		90C32B5D1D0586A500C87DAF /* WBHttpRequest+WeiboGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboGame.h"; sourceTree = "<group>"; };
-		90C32B5E1D0586A500C87DAF /* WBHttpRequest+WeiboShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboShare.h"; sourceTree = "<group>"; };
-		90C32B5F1D0586A500C87DAF /* WBHttpRequest+WeiboToken.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboToken.h"; sourceTree = "<group>"; };
-		90C32B601D0586A500C87DAF /* WBHttpRequest+WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WBHttpRequest+WeiboUser.h"; sourceTree = "<group>"; };
-		90C32B611D0586A500C87DAF /* WBHttpRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBHttpRequest.h; sourceTree = "<group>"; };
-		90C32B621D0586A500C87DAF /* WBSDKBasicButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKBasicButton.h; sourceTree = "<group>"; };
-		90C32B631D0586A500C87DAF /* WBSDKCommentButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKCommentButton.h; sourceTree = "<group>"; };
-		90C32B641D0586A500C87DAF /* WBSDKRelationshipButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WBSDKRelationshipButton.h; sourceTree = "<group>"; };
-		90C32B651D0586A500C87DAF /* WeiboSDK+Statistics.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "WeiboSDK+Statistics.h"; sourceTree = "<group>"; };
-		90C32B661D0586A500C87DAF /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
-		90C32B671D0586A500C87DAF /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
-		90C32B681D0586A500C87DAF /* WeiboUser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboUser.h; sourceTree = "<group>"; };
 		90C32B6B1D0586D400C87DAF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		90C32B6D1D0586E200C87DAF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
@@ -219,7 +202,6 @@
 		90E7FB561CC4DDC70018A532 /* PlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PlayerViewController.swift; path = Controllers/PlayerViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90E7FB581CC536720018A532 /* Images.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Images.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = MusicManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90ECDFCF1CC877380061CB6F /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Downloader.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90FB91A61D02C528002ECC8C /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		90FB91A81D02C867002ECC8C /* CoreTelephony.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreTelephony.framework; path = System/Library/Frameworks/CoreTelephony.framework; sourceTree = SDKROOT; };
 		90FB91AA1D02C877002ECC8C /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
@@ -229,6 +211,7 @@
 		90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		90FB91B61D02D503002ECC8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CustomRadioViewController.swift; path = Controllers/CustomRadioViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		DBB79DA21CD046E6006189B3 /* SelectiveTimePanel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectiveTimePanel.swift; path = Views/SelectiveTimePanel.swift; sourceTree = "<group>"; };
@@ -237,7 +220,7 @@
 		DBDC7F471CD90A8D0093812C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ChannelCollectionViewCell.swift; path = Views/ChannelCollectionViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		DBF1E7E11CCE7CA300B554A2 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
-		FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
+		E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -264,11 +247,10 @@
 				900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */,
 				905939881D0E689F00FF9848 /* YWFeedbackFMWK.framework in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
-				90C32B691D0586A500C87DAF /* libWeiboSDK.a in Frameworks */,
 				905939811D0E689F00FF9848 /* SecurityGuardSDK.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
-				47684679BB1C84E828A351A9 /* Pods_EvoRadio.framework in Frameworks */,
+				49ED37AB1C63B65EE5BF6EFC /* Pods_EvoRadio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,7 +276,7 @@
 				9096D78A1CFC0FED00DA6923 /* pop.framework */,
 				90659F111CC92CB00026539F /* AudioToolbox.framework */,
 				90659F0F1CC92CA30026539F /* MediaPlayer.framework */,
-				8A29258049669E5F330022BB /* Pods_EvoRadio.framework */,
+				D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -303,7 +285,6 @@
 			isa = PBXGroup;
 			children = (
 				905939571D0D5EEB00FF9848 /* YWFramework */,
-				90C32B5B1D0586A500C87DAF /* WeiboSDK */,
 				900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */,
 			);
 			path = Libs;
@@ -324,9 +305,9 @@
 		9023EA001D067233004BEE96 /* Downloader */ = {
 			isa = PBXGroup;
 			children = (
-				9023EA011D06724A004BEE96 /* DownloadManager.swift */,
-				9023EA031D06725B004BEE96 /* DownloadModel.swift */,
-				9023EA051D0672A2004BEE96 /* DownloadUtility.swift */,
+				63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */,
+				63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */,
+				63B2E4E71DC08A6700A2A146 /* MZUtility.swift */,
 			);
 			path = Downloader;
 			sourceTree = "<group>";
@@ -337,7 +318,7 @@
 				902FBCCF1CBEAC020051A93B /* EvoRadio */,
 				902FBCCE1CBEAC020051A93B /* Products */,
 				5A94393BB0E9EEBD2CED84BF /* Frameworks */,
-				B461353B916D64FF79E130B1 /* Pods */,
+				9208D87DD2FC6602AD9895EE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -490,7 +471,6 @@
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
 				90ECDFCD1CC8737F0061CB6F /* MusicManager.swift */,
 				90B95CA91CF6EF9A00105090 /* PlaylistManager.swift */,
-				90ECDFCF1CC877380061CB6F /* Downloader.swift */,
 				90659F261CC9C1A50026539F /* CoreDB.swift */,
 				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
 				DBDC7F471CD90A8D0093812C /* Constants.swift */,
@@ -499,26 +479,6 @@
 				9070928E1D07B51000E11D88 /* HudManager.swift */,
 			);
 			path = Utils;
-			sourceTree = "<group>";
-		};
-		90C32B5B1D0586A500C87DAF /* WeiboSDK */ = {
-			isa = PBXGroup;
-			children = (
-				90C32B5C1D0586A500C87DAF /* libWeiboSDK.a */,
-				90C32B5D1D0586A500C87DAF /* WBHttpRequest+WeiboGame.h */,
-				90C32B5E1D0586A500C87DAF /* WBHttpRequest+WeiboShare.h */,
-				90C32B5F1D0586A500C87DAF /* WBHttpRequest+WeiboToken.h */,
-				90C32B601D0586A500C87DAF /* WBHttpRequest+WeiboUser.h */,
-				90C32B611D0586A500C87DAF /* WBHttpRequest.h */,
-				90C32B621D0586A500C87DAF /* WBSDKBasicButton.h */,
-				90C32B631D0586A500C87DAF /* WBSDKCommentButton.h */,
-				90C32B641D0586A500C87DAF /* WBSDKRelationshipButton.h */,
-				90C32B651D0586A500C87DAF /* WeiboSDK+Statistics.h */,
-				90C32B661D0586A500C87DAF /* WeiboSDK.bundle */,
-				90C32B671D0586A500C87DAF /* WeiboSDK.h */,
-				90C32B681D0586A500C87DAF /* WeiboUser.h */,
-			);
-			path = WeiboSDK;
 			sourceTree = "<group>";
 		};
 		90D7754C1CFA992300899492 /* Cell */ = {
@@ -535,11 +495,11 @@
 			name = Cell;
 			sourceTree = "<group>";
 		};
-		B461353B916D64FF79E130B1 /* Pods */ = {
+		9208D87DD2FC6602AD9895EE /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */,
-				FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */,
+				270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */,
+				E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -551,12 +511,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 902FBCDF1CBEAC020051A93B /* Build configuration list for PBXNativeTarget "EvoRadio" */;
 			buildPhases = (
-				639835856B81C9E6CE30994C /* Check Pods Manifest.lock */,
+				50C02F175FE02547C1EEFD77 /* [CP] Check Pods Manifest.lock */,
 				902FBCC91CBEAC020051A93B /* Sources */,
 				902FBCCA1CBEAC020051A93B /* Frameworks */,
 				902FBCCB1CBEAC020051A93B /* Resources */,
-				E339869DE481EA59E214B84B /* Embed Pods Frameworks */,
-				EC5B78D310CCD90B1AAE94C4 /* Copy Pods Resources */,
+				F77F545B71165DFE7CC6C092 /* [CP] Embed Pods Frameworks */,
+				EDEEEB40C21616683F27DA57 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -574,12 +534,13 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = JQTech;
 				TargetAttributes = {
 					902FBCCC1CBEAC020051A93B = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = 4T9J35ZW6C;
+						LastSwiftMigration = 0800;
 					};
 				};
 			};
@@ -607,7 +568,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
-				90C32B6A1D0586A500C87DAF /* WeiboSDK.bundle in Resources */,
 				905939861D0E689F00FF9848 /* yw_1222.jpg in Resources */,
 				900C72521D0563F0006EBE78 /* README.txt in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
@@ -617,49 +577,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		639835856B81C9E6CE30994C /* Check Pods Manifest.lock */ = {
+		50C02F175FE02547C1EEFD77 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		E339869DE481EA59E214B84B /* Embed Pods Frameworks */ = {
+		EDEEEB40C21616683F27DA57 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EC5B78D310CCD90B1AAE94C4 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F77F545B71165DFE7CC6C092 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -677,10 +637,10 @@
 				90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */,
 				DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
-				9023EA021D06724A004BEE96 /* DownloadManager.swift in Sources */,
 				90ECDFCE1CC8737F0061CB6F /* MusicManager.swift in Sources */,
 				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,
 				90659F181CC9B6440026539F /* Radio.swift in Sources */,
+				63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */,
 				638DD7741D7EA7D900C2EFC0 /* ClockView.swift in Sources */,
 				9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */,
 				632DA80C1D7B259300A78DBD /* RadioTableViewCell.swift in Sources */,
@@ -698,21 +658,20 @@
 				632DA7DC1D79229300A78DBD /* NowCollectionHeaderView.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				90B59E681CFD7646001E8F23 /* PlayerView.swift in Sources */,
+				63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */,
 				632DA7E21D7967D400A78DBD /* AssistiveTouch.swift in Sources */,
 				6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
-				9023EA061D0672A2004BEE96 /* DownloadUtility.swift in Sources */,
 				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				90B59E6A1CFD7AD0001E8F23 /* ScrollTabBar.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
-				9023EA041D06725B004BEE96 /* DownloadModel.swift in Sources */,
+				63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */,
 				631884601D78482200D7399A /* RadioViewController.swift in Sources */,
 				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				90D775491CFA37F800899492 /* CDCoverImageView.swift in Sources */,
-				90ECDFD01CC877380061CB6F /* Downloader.swift in Sources */,
 				90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */,
 				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
 				90E7FB531CC4CAF80018A532 /* Song.swift in Sources */,
@@ -761,8 +720,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -806,8 +767,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -826,14 +789,16 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		902FBCE01CBEAC020051A93B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8F0E5DBD989B134A790AC833 /* Pods-EvoRadio.debug.xcconfig */;
+			baseConfigurationReference = 270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -856,14 +821,16 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		902FBCE11CBEAC020051A93B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FCFA8CA14577447CE82B985C /* Pods-EvoRadio.release.xcconfig */;
+			baseConfigurationReference = E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -886,6 +853,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

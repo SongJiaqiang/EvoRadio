@@ -23,9 +23,9 @@ enum PlayMusciType: String {
 
 class TrackManager {
     
-    class func playMusicTypeEvent(type: PlayMusciType) {
-        let attrs = ["type":type.rawValue]
-        MobClick.event("play_music_type", attributes: attrs)
+    class func playMusicTypeEvent(_ type: PlayMusciType) {
+//        let attrs = ["type":type.rawValue]
+//        MobClick.event("play_music_type", attributes: attrs)
     }
     
 }

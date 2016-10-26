@@ -18,8 +18,8 @@ class LocalTableViewCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = UIColor.clearColor()
-        selectedBackgroundView = UIView(color: UIColor(netHex: 0x222222), andSize: CGSizeMake(1, 1))
+        backgroundColor = UIColor.clear
+        selectedBackgroundView = UIView(color: UIColor(netHex: 0x222222), andSize: CGSize(width: 1, height: 1))
         
         prepareUI()
     }
@@ -31,52 +31,52 @@ class LocalTableViewCell: UITableViewCell {
     func prepareUI() {
         iconImageView = UIImageView()
         contentView.addSubview(iconImageView)
-        iconImageView.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(30, 30))
-            make.left.equalTo(contentView.snp_left).offset(10)
-            make.centerY.equalTo(contentView.snp_centerY)
+        iconImageView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 30, height: 30))
+            make.left.equalTo(contentView.snp.left).offset(10)
+            make.centerY.equalTo(contentView.snp.centerY)
         }
         
         titleLabel = UILabel()
         contentView.addSubview(titleLabel)
-        titleLabel.font = UIFont.systemFontOfSize(16)
-        titleLabel.textColor = UIColor.whiteColor()
-        titleLabel.snp_makeConstraints { (make) in
-            make.centerY.equalTo(contentView.snp_centerY).offset(-10)
-            make.left.equalTo(iconImageView.snp_right).offset(10)
+        titleLabel.font = UIFont.systemFont(ofSize: 16)
+        titleLabel.textColor = UIColor.white
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentView.snp.centerY).offset(-10)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
         }
         
         detailLabel = UILabel()
         contentView.addSubview(detailLabel)
-        detailLabel.font = UIFont.systemFontOfSize(12)
-        detailLabel.textColor = UIColor.grayColor()
-        detailLabel.snp_makeConstraints { (make) in
-            make.centerY.equalTo(contentView.snp_centerY).offset(10)
-            make.left.equalTo(iconImageView.snp_right).offset(10)
+        detailLabel.font = UIFont.systemFont(ofSize: 12)
+        detailLabel.textColor = UIColor.gray
+        detailLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(contentView.snp.centerY).offset(10)
+            make.left.equalTo(iconImageView.snp.right).offset(10)
         }
         
         let lineView = UIView()
         contentView.addSubview(lineView)
         lineView.backgroundColor = UIColor(netHex: 0x222222)
-        lineView.snp_makeConstraints { (make) in
+        lineView.snp.makeConstraints { (make) in
             make.height.equalTo(1)
-            make.bottom.equalTo(contentView.snp_bottom)
-            make.left.equalTo(contentView.snp_left)
-            make.right.equalTo(contentView.snp_right)
+            make.bottom.equalTo(contentView.snp.bottom)
+            make.left.equalTo(contentView.snp.left)
+            make.right.equalTo(contentView.snp.right)
         }
         
         let arrowImageView = UIImageView()
         contentView.addSubview(arrowImageView)
         arrowImageView.image = UIImage(named: "cell_assistive")
-        arrowImageView.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(14, 20))
-            make.right.equalTo(contentView.snp_right).offset(-10)
-            make.centerY.equalTo(contentView.snp_centerY)
+        arrowImageView.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 14, height: 20))
+            make.right.equalTo(contentView.snp.right).offset(-10)
+            make.centerY.equalTo(contentView.snp.centerY)
         }
         
     }
     
-    func setupData(dataInfo: [String: String]) {
+    func setupData(_ dataInfo: [String: String]) {
         if let image = dataInfo["icon"] {
             iconImageView.image = UIImage(named: image)
         }

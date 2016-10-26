@@ -10,16 +10,24 @@ import UIKit
 
 class DownloadingSongListViewController: ViewController {
     
-    lazy var downloadManager: DownloadManager = {[unowned self] in
+    lazy var downloadManager: MZDownloadManager = {[unowned self] in
         let sessionIdentifer = "cn.songjiaqiang.evoradio.downloader"
-        let completion = Device.appDelegate().backgroundSessionCompletionHandler
         
-        return DownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        var completion = appDelegate.backgroundSessionCompletionHandler
+        
+        let manager = MZDownloadManager(session: sessionIdentifer, delegate: self, completion: completion)
+        
+        return manager
     }()
+    
+    
+    
+    
     
     let cellID = "downloadingSongCellID"
     
-    let tableView = UITableView(frame: CGRectZero, style: .Grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var dataSource = [Song]()
     var downloadingSongs = [Song]()
     
@@ -29,7 +37,7 @@ class DownloadingSongListViewController: ViewController {
         
         prepareTableView()
         
-        NotificationManager.instance.addDownloadingListChangedObserver(self, action: #selector(DownloadingSongListViewController.downloadingListChanged(_:)))
+        NotificationManager.shared.addDownloadingListChangedObserver(self, action: #selector(DownloadingSongListViewController.downloadingListChanged(_:)))
         
         loadDataSource()
     }
@@ -39,7 +47,7 @@ class DownloadingSongListViewController: ViewController {
     }
     
     deinit {
-        NotificationManager.instance.removeObserver(self)
+        NotificationManager.shared.removeObserver(self)
     }
     
     //MARK: prepare ui
@@ -47,36 +55,36 @@ class DownloadingSongListViewController: ViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
-        tableView.separatorStyle = .None
-        tableView.snp_makeConstraints(closure: {(make) in
+        tableView.separatorStyle = .none
+        tableView.snp.makeConstraints({(make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         })
         
-        tableView.registerClass(DownloadingSongListTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(DownloadingSongListTableViewCell.self, forCellReuseIdentifier: cellID)
         
     }
     
     func loadDataSource() {
         if let songs = CoreDB.getDownloadingSongs() {
             dataSource.removeAll()
-            dataSource.appendContentsOf(songs)
+            dataSource.append(contentsOf: songs)
             tableView.reloadData()
         }
     }
     
     //MARK: events 
-    func downloadingListChanged(notification: NSNotification) {
-        if let songs = notification.userInfo {
+    func downloadingListChanged(_ notification: Notification) {
+        if let songs = (notification as NSNotification).userInfo {
             dataSource.removeAll()
-            dataSource.appendContentsOf(songs["songs"] as! [Song])
+            dataSource.append(contentsOf: songs["songs"] as! [Song])
             
             tableView.reloadData()
         }
     }
     
-    func refreshCellForIndex(downloadModel: DownloadModel, index: Int) {
+    func refreshCellForIndex(_ downloadModel: MZDownloadModel, index: Int) {
         
     }
 
@@ -84,21 +92,21 @@ class DownloadingSongListViewController: ViewController {
 
 
 extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! DownloadingSongListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! DownloadingSongListTableViewCell
         
-        let song = dataSource[indexPath.row]
+        let song = dataSource[(indexPath as NSIndexPath).row]
         cell.updateSongInfo(song)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectMake(0,0,tableView.bounds.width,40))
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0,y: 0,width: tableView.bounds.width,height: 40))
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
@@ -106,10 +114,10 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         playButton.backgroundColor = UIColor.grayColor3()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
-        playButton.setTitle("Start All", forState: .Normal)
-        playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(80, 30))
-            make.centerY.equalTo(headerView.snp_centerY)
+        playButton.setTitle("Start All", for: UIControlState())
+        playButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 80, height: 30))
+            make.centerY.equalTo(headerView.snp.centerY)
             make.leftMargin.equalTo(12)
         }
         
@@ -119,64 +127,65 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         deleteButton.backgroundColor = UIColor.grayColor3()
         deleteButton.clipsToBounds = true
         deleteButton.layer.cornerRadius = 15
-        deleteButton.setTitle("Delete All", forState: .Normal)
-        deleteButton.addTarget(self, action: #selector(DownloadingSongListViewController.deleteButtonPressed), forControlEvents: .TouchUpInside)
-        deleteButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(80, 30))
-            make.centerY.equalTo(headerView.snp_centerY)
+        deleteButton.setTitle("Delete All", for: UIControlState())
+        deleteButton.addTarget(self, action: #selector(DownloadingSongListViewController.deleteButtonPressed), for: .touchUpInside)
+        deleteButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 80, height: 30))
+            make.centerY.equalTo(headerView.snp.centerY)
             make.rightMargin.equalTo(-12)
         }
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
         separatorView.backgroundColor = UIColor.grayColor6()
-        separatorView.snp_makeConstraints { (make) in
+        separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
-            make.left.equalTo(headerView.snp_left)
-            make.right.equalTo(headerView.snp_right)
-            make.bottom.equalTo(headerView.snp_bottom)
+            make.left.equalTo(headerView.snp.left)
+            make.right.equalTo(headerView.snp.right)
+            make.bottom.equalTo(headerView.snp.bottom)
         }
         
         return headerView
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
-        let song = dataSource[indexPath.row]
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let song = dataSource[(indexPath as NSIndexPath).row]
         
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! DownloadingSongListTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! DownloadingSongListTableViewCell
         cell.paused = !cell.paused!
         
         if cell.paused! {
             // pause task
-            self.downloadManager.pauseDownloadTaskAtIndex(indexPath.row)
+            self.downloadManager.pauseDownloadTaskAtIndex((indexPath as NSIndexPath).row)
         }else {
             if isDownloading(song) {
                 // resume task
-                self.downloadManager.resumeDownloadTaskAtIndex(self.downloadingSongs.indexOf(song)!)
+                self.downloadManager.resumeDownloadTaskAtIndex(self.downloadingSongs.index(of: song)!)
             }else {
                 // new task
                 let fileName = song.audioURL!.lastPathComponent()
-                let downloadPath = DownloadUtility.baseFilePath.appendPathComponents(["download",song.programID!])
+                let downloadPath = MZUtility.baseFilePath.appendPathComponents(["download",song.programID!])
                 
-                self.downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, designatedDirectory: downloadPath as String, dispalyInfo: nil)
+                self.downloadManager.addDownloadTask(fileName, fileURL: song.audioURL!, destinationPath: downloadPath as String)
+                
                 self.downloadingSongs.append(song)
             }
         }
     }
     
-    func isDownloading(song: Song) -> Bool{
+    func isDownloading(_ song: Song) -> Bool{
         for item in downloadManager.downloadingArray {
             if item.fileURL == song.audioURL {
                 return true
@@ -193,57 +202,57 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
 }
 
 
-extension DownloadingSongListViewController: DownloadManagerDelegate {
+extension DownloadingSongListViewController: MZDownloadManagerDelegate {
 
-    func downloadRequestDidUpdateProgress(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestDidUpdateProgress(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("downloading \(downloadModel.progress) - \(downloadModel.downloadedFile?.size)\(downloadModel.downloadedFile?.unit)")
         
         let song = downloadingSongs[index]
         
-        let indexOfDatasource = dataSource.indexOf(song)!
-        let cell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: indexOfDatasource, inSection: 0)) as! DownloadingSongListTableViewCell
+        let indexOfDatasource = dataSource.index(of: song)!
+        let cell = tableView.cellForRow(at: IndexPath(row: indexOfDatasource, section: 0)) as! DownloadingSongListTableViewCell
         cell.updateProgressBar(downloadModel.progress, speed: (received: (downloadModel.downloadedFile?.size)!, total: (downloadModel.file?.size)!))
     }
     
-    func downloadRequestDidPopulatedInterruptedTasks(downloadModels: [DownloadModel]) {
+    func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
         debugPrint("download interrupted")
         tableView.reloadData()
     }
     
-    func downloadRequestFinished(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("download finished")
         let song = downloadingSongs[index]
         
-        let indexOfDatasource = dataSource.indexOf(song)!
-        dataSource.removeAtIndex(indexOfDatasource)
-        tableView.deleteRowsAtIndexPaths([NSIndexPath(forRow: indexOfDatasource, inSection: 0)], withRowAnimation: .Bottom)
+        let indexOfDatasource = dataSource.index(of: song)!
+        dataSource.remove(at: indexOfDatasource)
+        tableView.deleteRows(at: [IndexPath(row: indexOfDatasource, section: 0)], with: .bottom)
         
-        downloadingSongs.removeAtIndex(index)
+        downloadingSongs.remove(at: index)
         CoreDB.addSongToDownloadedList(song)
         CoreDB.removeSongFromDownloadingList(song)
         
-        NotificationManager.instance.postDownloadASongFinishedNotification(["song":song])
+        NotificationManager.shared.postDownloadASongFinishedNotification(["song":song])
     }
     
-    func downloadRequestDidFailedWithError(error: NSError, downloadModel: DownloadModel, index: Int){
+    func downloadRequestDidFailedWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int){
         debugPrint("download error")
     }
     
-    func downloadRequestStarted(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestStarted(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("download start")
     }
-    func downloadRequestDidPaused(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestDidPaused(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("download paused")
     }
     
-    func downloadRequestDidResumed(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestDidResumed(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("download resumed")
     }
-    func downloadRequestDidRetry(downloadModel: DownloadModel, index: Int){
+    func downloadRequestDidRetry(_ downloadModel: MZDownloadModel, index: Int){
         debugPrint("download retry")
     }
 
-    func downloadRequestCanceled(downloadModel: DownloadModel, index: Int) {
+    func downloadRequestCanceled(_ downloadModel: MZDownloadModel, index: Int) {
         debugPrint("download cancel")
     }
 

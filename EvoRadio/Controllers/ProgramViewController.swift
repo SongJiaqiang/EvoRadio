@@ -15,8 +15,8 @@ class ProgramViewController: ViewController {
     var channel: Channel!
     var dataSource = [Program]()
     var collectionView: UICollectionView?
-    private var endOfFeed = false
-    private let pageSize: Int = 30
+    fileprivate var endOfFeed = false
+    fileprivate let pageSize: Int = 30
     
     var showHeaderView: Bool = false
     
@@ -38,16 +38,16 @@ class ProgramViewController: ViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
-        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(ProgramViewController.goBack), forControlEvents: .TouchUpInside)
-        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
+        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
+        AssistiveTouch.shared.addTarget(self, action: #selector(ProgramViewController.goBack), for: .touchUpInside)
+        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
     }
     
     //MARK: prepare
@@ -58,28 +58,28 @@ class ProgramViewController: ViewController {
         let itemW: CGFloat = programCollectionCellWidth
         let itemH: CGFloat = itemW + 30
         
-        layout.itemSize = CGSizeMake(itemW, itemH)
+        layout.itemSize = CGSize(width: itemW, height: itemH)
         layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
         layout.minimumInteritemSpacing = margin
         
-        collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: layout)
+        collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         view.addSubview(collectionView!)
         collectionView!.delegate = self
         collectionView!.dataSource = self
-        collectionView!.registerClass(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView!.backgroundColor = UIColor.clearColor()
-        collectionView!.snp_makeConstraints { (make) in
+        collectionView!.register(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
+        collectionView!.backgroundColor = UIColor.clear
+        collectionView!.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
         
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
         collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
-        collectionView!.mj_footer.automaticallyHidden = true
+        collectionView!.mj_footer.isAutomaticallyHidden = true
         
         
         if showHeaderView {
-            collectionView?.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
-            collectionView?.registerClass(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
         }
 
     }
@@ -98,7 +98,7 @@ class ProgramViewController: ViewController {
     }
     
     
-    func listChannelPrograms(isRefresh: Bool) {
+    func listChannelPrograms(_ isRefresh: Bool) {
         let channelID = channel.channelID!
         
         var pageIndex = dataSource.count
@@ -115,7 +115,7 @@ class ProgramViewController: ViewController {
                     self?.dataSource.removeAll()
                 }
                 
-                self?.dataSource.appendContentsOf(newData)
+                self?.dataSource.append(contentsOf: newData)
                 
                 self?.collectionView!.reloadData()
                 self?.endRefreshing()
@@ -144,25 +144,25 @@ class ProgramViewController: ViewController {
 
 extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(cellID, forIndexPath: indexPath) as! ProgramCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ProgramCollectionViewCell
         
-        let program = dataSource[indexPath.item]
+        let program = dataSource[(indexPath as NSIndexPath).item]
         cell.updateContent(program)
         cell.delegate = self
         
         return cell
     }
     
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
-        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: true)
         
-        let program = dataSource[indexPath.item]
+        let program = dataSource[(indexPath as NSIndexPath).item]
         
         let listController = SongListViewController()
         listController.program = program
@@ -172,14 +172,14 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 }
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(programID: String) {
+    func playMusicOfProgram(_ programID: String) {
         TrackManager.playMusicTypeEvent(.ProgramCover)
         
         api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
-                MusicManager.sharedManager.clearList()
-                MusicManager.sharedManager.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+                MusicManager.shared.clearList()
+                MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
+                Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
             }
             
             }, onFailed: nil)

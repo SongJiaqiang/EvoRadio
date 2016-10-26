@@ -26,7 +26,7 @@ class LastPlaylist: EVObject {
         self.init()
         
         self.playlist = list
-        self.indexOfPlaylist = index
-        self.timePlayed = time
+        self.indexOfPlaylist = index as NSNumber?
+        self.timePlayed = time as NSNumber?
     }
 }

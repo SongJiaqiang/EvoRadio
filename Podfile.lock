@@ -1,46 +1,55 @@
 PODS:
-  - Alamofire (3.3.1)
-  - EVReflection (2.33.3)
+  - Alamofire (4.0.1)
+  - EVReflection (3.1.2)
   - GPUImage (0.1.7)
   - iCarousel (1.8.2)
-  - Kingfisher (2.2.2)
+  - Kingfisher (3.1.4)
   - leveldb (1.18)
-  - MBProgressHUD (0.9.2)
+  - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.0)
   - pop (1.0.9)
   - ReflectionView (1.2)
-  - SnapKit (0.20.0)
+  - SnapKit (3.0.2)
   - StreamingKit (0.1.29)
-  - UMengAnalytics (4.0.4)
 
 DEPENDENCIES:
-  - Alamofire (~> 3.3)
-  - EVReflection (~> 2.6)
+  - Alamofire (~> 4.0)
+  - EVReflection (from `https://github.com/evermeer/EVReflection`, branch `Swift3`)
   - GPUImage (~> 0.1.7)
   - iCarousel (~> 1.8.2)
-  - Kingfisher (~> 2.2)
+  - Kingfisher (~> 3.0)
   - leveldb (~> 1.18)
-  - MBProgressHUD (~> 0.9.2)
+  - MBProgressHUD (~> 1.0.0)
   - MJRefresh (~> 3.1.0)
   - pop (~> 1.0)
   - ReflectionView (~> 1.2)
-  - SnapKit (~> 0.20.0)
+  - SnapKit (~> 3.0.0)
   - StreamingKit (~> 0.1.29)
-  - UMengAnalytics
+
+EXTERNAL SOURCES:
+  EVReflection:
+    :branch: Swift3
+    :git: https://github.com/evermeer/EVReflection
+
+CHECKOUT OPTIONS:
+  EVReflection:
+    :commit: a1c0d785d3df90de27a52135d8071ea1bb7defc7
+    :git: https://github.com/evermeer/EVReflection
 
 SPEC CHECKSUMS:
-  Alamofire: 369bc67b6f5ac33ded3648d7bd21c5bfb91c2ecc
-  EVReflection: 6bd52883617c745514e8fabb5d4208e42079f907
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  EVReflection: 102d8ca777db55200f48b80d9628c8d50fb4109d
   GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
-  Kingfisher: 7e8de5b0cf7b5dc8ec559d193029a0859df93ef1
+  Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
-  MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: 743e6404967d1c2c688472ea3ecfde247d872db4
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
-  SnapKit: 5fce3c1bbbf1fbd31de9aa92f33eb9fa03f15650
+  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
-  UMengAnalytics: 4ed421fb3bca63b26fc13c947743cabf3831d199
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 72c516ec38318ecf88350d40ce11f83fd6744d1e
+
+COCOAPODS: 1.1.1

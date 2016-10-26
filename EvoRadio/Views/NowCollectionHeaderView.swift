@@ -11,7 +11,7 @@ import iCarousel
 import ReflectionView
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
-    func headerView(headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
+    func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
 }
 
 class NowCollectionHeaderView: UICollectionReusableView {
@@ -41,14 +41,14 @@ class NowCollectionHeaderView: UICollectionReusableView {
     func prepareCarousel() {
         carousel = iCarousel()
         addSubview(carousel)
-        carousel.type = .Rotary
+        carousel.type = .rotary
         carousel.dataSource = self
         carousel.delegate = self
         
         carousel.frame = bounds
     }
     
-    func updateChannels(channels: [Channel]) {
+    func updateChannels(_ channels: [Channel]) {
         self.channels = channels
         
         carousel.reloadData()
@@ -58,16 +58,16 @@ class NowCollectionHeaderView: UICollectionReusableView {
 
 
 extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
-    func numberOfItemsInCarousel(carousel: iCarousel) -> Int {
+    func numberOfItems(in carousel: iCarousel) -> Int {
         return channels.count
     }
     
-    func carousel(carousel: iCarousel, viewForItemAtIndex index: Int, reusingView view: UIView?) -> UIView {
+    func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         
         let itemWidth: CGFloat = 160
         
         let itemView = ReflectionView()
-        itemView.frame = CGRectMake(0, 0, itemWidth, itemWidth)
+        itemView.frame = CGRect(x: 0, y: 0, width: itemWidth, height: itemWidth)
         
         itemView.reflectionAlpha = 0.25
         itemView.reflectionGap = 3.0
@@ -76,43 +76,43 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         let coverImageView = UIImageView()
         itemView.addSubview(coverImageView)
         coverImageView.frame = itemView.frame
-        coverImageView.contentMode = .ScaleAspectFill
+        coverImageView.contentMode = .scaleAspectFill
         coverImageView.clipsToBounds = true
 //        coverImageView.layer.cornerRadius = 4
         
         let nameLabel = UILabel()
         itemView.addSubview(nameLabel)
-        nameLabel.frame = CGRectMake(10, itemWidth-30, itemWidth-20, 30)
-        nameLabel.font = UIFont.systemFontOfSize(12)
-        nameLabel.textColor = UIColor.whiteColor()
+        nameLabel.frame = CGRect(x: 10, y: itemWidth-30, width: itemWidth-20, height: 30)
+        nameLabel.font = UIFont.systemFont(ofSize: 12)
+        nameLabel.textColor = UIColor.white
         
         let channel = channels[index]
         if let picURL = channel.picURL {
-            coverImageView.kf_setImageWithURL(NSURL(string: picURL)!, placeholderImage: UIImage.placeholder_cover())
+            coverImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
         }
         nameLabel.text = channel.channelName
         
         return itemView
     }
     
-    func carousel(carousel: iCarousel, valueForOption option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if option == .Spacing {
+    func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
+        if option == .spacing {
             return value * 1.2
         }
         return value
     }
     
-    func carousel(carousel: iCarousel, didSelectItemAtIndex index: Int) {
+    func carousel(_ carousel: iCarousel, didSelectItemAt index: Int) {
         if let _ = delegate {
             delegate?.headerView(self, didSelectedAtIndex: index)
         }
     }
     
-    func carouselCurrentItemIndexDidChange(carousel: iCarousel) {
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         print("changing :\(carousel.currentItemIndex)")
     }
     
-    func carouselDidEndScrollingAnimation(carousel: iCarousel) {
+    func carouselDidEndScrollingAnimation(_ carousel: iCarousel) {
         print("end scroll :\(carousel.currentItemIndex)")
     }
     

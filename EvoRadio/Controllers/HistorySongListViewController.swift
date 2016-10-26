@@ -12,7 +12,7 @@ class HistorySongListViewController: ViewController {
     
     let cellID = "historySongsCell"
     
-    let tableView = UITableView(frame: CGRectZero, style: .Grouped)
+    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var dataSource = [Song]()
     
     
@@ -23,19 +23,19 @@ class HistorySongListViewController: ViewController {
         
         loadDataSource()
         
-        NotificationManager.instance.addDownloadASongFinishedObserver(self, action: #selector(DownloadedSongListViewController.downloadASongFinished(_:)))
+        NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(DownloadedSongListViewController.downloadASongFinished(_:)))
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        AssistiveTouch.sharedTouch.removeTarget(nil, action: nil, forControlEvents: .AllTouchEvents)
-        AssistiveTouch.sharedTouch.addTarget(self, action: #selector(HistorySongListViewController.goBack), forControlEvents: .TouchUpInside)
-        AssistiveTouch.sharedTouch.updateImage(UIImage(named: "touch_back")!)
+        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
+        AssistiveTouch.shared.addTarget(self, action: #selector(HistorySongListViewController.goBack), for: .touchUpInside)
+        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
     }
     
     //MARK: prepare ui
@@ -43,48 +43,48 @@ class HistorySongListViewController: ViewController {
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundColor = UIColor.clearColor()
+        tableView.backgroundColor = UIColor.clear
         tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
-        tableView.separatorStyle = .None
-        tableView.snp_makeConstraints(closure: {(make) in
-            make.edges.equalTo(UIEdgeInsetsZero)
+        tableView.separatorStyle = .none
+        tableView.snp.makeConstraints({(make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
         })
         
-        tableView.registerClass(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
         
     }
     
     func loadDataSource() {
         if let songs = CoreDB.getHistorySongs() {
             dataSource.removeAll()
-            dataSource.appendContentsOf(songs)
+            dataSource.append(contentsOf: songs)
             tableView.reloadData()
         }
     }
     
     //MARK: events
-    func downloadASongFinished(noti: NSNotification) {
+    func downloadASongFinished(_ noti: Notification) {
         loadDataSource()
     }
     
 }
 extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(cellID) as! SongListTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
         cell.delegate = self
         
-        let song = dataSource[indexPath.row]
+        let song = dataSource[(indexPath as NSIndexPath).row]
         cell.updateSongInfo(song)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerView = UIView(frame: CGRectMake(0,0,tableView.bounds.width,40))
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView(frame: CGRect(x: 0,y: 0,width: tableView.bounds.width,height: 40))
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
@@ -92,11 +92,11 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         playButton.backgroundColor = UIColor.grayColor3()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
-        playButton.setTitle("Play All", forState: .Normal)
-        playButton.addTarget(self, action: #selector(HistorySongListViewController.playButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        playButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(80, 30))
-            make.centerY.equalTo(headerView.snp_centerY)
+        playButton.setTitle("Play All", for: UIControlState())
+        playButton.addTarget(self, action: #selector(HistorySongListViewController.playButtonPressed(_:)), for: .touchUpInside)
+        playButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 80, height: 30))
+            make.centerY.equalTo(headerView.snp.centerY)
             make.leftMargin.equalTo(10)
         }
         
@@ -106,60 +106,60 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         clearButton.backgroundColor = UIColor.grayColor3()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
-        clearButton.setTitle("Clear", forState: .Normal)
-        clearButton.addTarget(self, action: #selector(HistorySongListViewController.clearButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        clearButton.snp_makeConstraints { (make) in
-            make.size.equalTo(CGSizeMake(60, 30))
-            make.centerY.equalTo(headerView.snp_centerY)
-            make.right.equalTo(headerView.snp_right).offset(-12)
+        clearButton.setTitle("Clear", for: UIControlState())
+        clearButton.addTarget(self, action: #selector(HistorySongListViewController.clearButtonPressed(_:)), for: .touchUpInside)
+        clearButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.centerY.equalTo(headerView.snp.centerY)
+            make.right.equalTo(headerView.snp.right).offset(-12)
         }
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
         separatorView.backgroundColor = UIColor.grayColor6()
-        separatorView.snp_makeConstraints { (make) in
+        separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
-            make.left.equalTo(headerView.snp_left)
-            make.right.equalTo(headerView.snp_right)
-            make.bottom.equalTo(headerView.snp_bottom)
+            make.left.equalTo(headerView.snp.left)
+            make.right.equalTo(headerView.snp.right)
+            make.bottom.equalTo(headerView.snp.bottom)
         }
         
         return headerView
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 48
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 42
     }
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.01
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
         TrackManager.playMusicTypeEvent(.HistorySongListCell)
         
-        let song = dataSource[indexPath.row]
-        MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: true)
+        let song = dataSource[(indexPath as NSIndexPath).row]
+        MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        NotificationManager.instance.postUpdatePlayerControllerNotification()
-        presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+        NotificationManager.shared.postUpdatePlayerControllerNotification()
+        present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
-    func playButtonPressed(button: UIButton) {
+    func playButtonPressed(_ button: UIButton) {
         if let songs = CoreDB.getHistorySongs() {
-            MusicManager.sharedManager.clearList()
-            MusicManager.sharedManager.appendSongsToPlaylist(songs, autoPlay: true)
-            Device.keyWindow().topMostController()!.presentViewController(PlayerViewController.playerController, animated: true, completion: nil)
+            MusicManager.shared.clearList()
+            MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
             
             TrackManager.playMusicTypeEvent(.HistorySongList)
         }
     }
     
-    func clearButtonPressed(button: UIButton) {
+    func clearButtonPressed(_ button: UIButton) {
         CoreDB.clearHistory()
         dataSource.removeAll()
         tableView.reloadData()
@@ -168,22 +168,22 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension HistorySongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(song: Song) {
+    func openToolPanelOfSong(_ song: Song) {
         
         let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "加入播放列表", style: .Default, handler: { (action) in
-            MusicManager.sharedManager.appendSongToPlaylist(song, autoPlay: false)
+        let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
+            MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)
         })
-        let action2 = UIAlertAction(title: "收藏歌曲", style: .Default, handler: { (action) in
+        let action2 = UIAlertAction(title: "收藏歌曲", style: .default, handler: { (action) in
             debugPrint("add to collecte")
         })
         
-        let cancelAction = UIAlertAction(title: "取消", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alertController.addAction(action1)
         alertController.addAction(action2)
         alertController.addAction(cancelAction)
         
-        navigationController!.presentViewController(alertController, animated: true, completion: nil)
+        navigationController!.present(alertController, animated: true, completion: nil)
     }
 }

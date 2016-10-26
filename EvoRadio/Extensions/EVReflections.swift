@@ -19,7 +19,7 @@ public extension EVReflection {
      
      - returns: The array of dictionaries representation of the json
      */
-    public class func objectArrayFromDictionaryArray<T>(theObject: NSObject? = nil, type: T, dictArray: [NSDictionary]?, conversionOptions: ConversionOptions = .DefaultDeserialize) -> [T] {
+    public class func objectArrayFromDictionaryArray<T>(_ theObject: NSObject? = nil, type: T, dictArray: [NSDictionary]?, conversionOptions: ConversionOptions = .DefaultDeserialize) -> [T] {
         var result = [T]()
         if dictArray == nil {
             return result
@@ -34,7 +34,7 @@ public extension EVReflection {
             
             result = jsonDic.map({
                 let nsobject: NSObject = nsobjectype!.init()
-                return (setPropertiesfromDictionary($0, anyObject: nsobject, conversionOptions: conversionOptions) as? T)!
+                return (setPropertiesfromDictionary($0 as NSDictionary, anyObject: nsobject, conversionOptions: conversionOptions) as? T)!
             })
         }
         
@@ -42,7 +42,7 @@ public extension EVReflection {
     }
 }
 
-public extension Array {
+public extension Array where Element: NSObject {
     /**
      Initialize an array based on a dictionary array
      
@@ -61,10 +61,10 @@ public extension Array {
 
 public extension String {
     public func jsonToDictionary() -> NSDictionary {
-        let jsonData = self.dataUsingEncoding(NSUTF8StringEncoding)
+        let jsonData = self.data(using: String.Encoding.utf8)
         var jsonDict = NSDictionary()
         do {
-            jsonDict = try NSJSONSerialization.JSONObjectWithData(jsonData!, options: .AllowFragments) as! NSDictionary
+            jsonDict = try JSONSerialization.jsonObject(with: jsonData!, options: .allowFragments) as! NSDictionary
         }catch let error as NSError {
             debugPrint("Convert json data to json dictionary failed with error: \(error)")
         }

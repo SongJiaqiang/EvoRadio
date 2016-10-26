@@ -10,26 +10,16 @@ import UIKit
 
 class AssistiveTouch: UIControl {
 
-    
     var imageView: UIImageView!
     
     //MARK: instance
-    class var sharedTouch: AssistiveTouch {
-        struct Static {
-            static var onceToken: dispatch_once_t = 0
-            static var sharedTouch: AssistiveTouch! = nil
-        }
-        dispatch_once(&Static.onceToken) { () -> Void in
-            Static.sharedTouch = AssistiveTouch(frame: CGRectZero)
-        }
-        return Static.sharedTouch
-    }
+    open static let shared = AssistiveTouch()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         clipsToBounds = true
-        backgroundColor = UIColor.blackColor()
+        backgroundColor = UIColor.black
         alpha = 0.8
         
         prepareUI()
@@ -44,14 +34,14 @@ class AssistiveTouch: UIControl {
         
         layer.cornerRadius = frame.size.width / 2
         layer.borderWidth = 2
-        layer.borderColor = UIColor.grayColor().CGColor
+        layer.borderColor = UIColor.gray.cgColor
         
     }
 
     func prepareUI() {
         imageView = UIImageView()
         addSubview(imageView)
-        imageView.frame = CGRectMake(10, 10, 20, 20)
+        imageView.frame = CGRect(x: 10, y: 10, width: 20, height: 20)
         if let image = UIImage(named: "touch_ring") {
             imageView.image = image
         }
@@ -60,34 +50,34 @@ class AssistiveTouch: UIControl {
     }
     
     func show() {
-        UIView.animateWithDuration(0.2) {[weak self] in
+        UIView.animate(withDuration: 0.2, animations: {[weak self] in
             self?.alpha = 0.8
-        }
+        }) 
     }
     
     func hide() {
-        UIView.animateWithDuration(0.2) {[weak self] in
+        UIView.animate(withDuration: 0.2, animations: {[weak self] in
             self?.alpha = 0
-        }
+        }) 
     }
     
     func drawIcon() {
         
     }
     
-    func updateImage(image: UIImage) {
+    func updateImage(_ image: UIImage) {
         if image == imageView.image {
             return
         }
         
-        UIView.animateWithDuration(0.2, animations: {[weak self] in
+        UIView.animate(withDuration: 0.2, animations: {[weak self] in
             self?.imageView.alpha = 0
-            }) {[weak self] (finished) in
+            }, completion: {[weak self] (finished) in
                 self?.imageView.image = image
-                UIView.animateWithDuration(0.2, animations: {[weak self] in
+                UIView.animate(withDuration: 0.2, animations: {[weak self] in
                     self?.imageView.alpha = 1
                 })
-        }
+        }) 
         
     }
 }

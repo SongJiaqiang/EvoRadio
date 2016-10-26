@@ -30,43 +30,43 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     
     func prepareUI() {
         addSubview(picImageView)
-        picImageView.contentMode = .ScaleAspectFill
+        picImageView.contentMode = .scaleAspectFill
         picImageView.clipsToBounds = true
-        picImageView.snp_makeConstraints { (make) in
+        picImageView.snp.makeConstraints { (make) in
             make.height.equalTo(channelCollectionCellWidth)
-            make.top.equalTo(snp_top)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(snp.top)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
         
         addSubview(channelNameLabel)
-        channelNameLabel.font = UIFont.systemFontOfSize(12)
+        channelNameLabel.font = UIFont.systemFont(ofSize: 12)
         channelNameLabel.textColor = UIColor.grayColor7()
-        channelNameLabel.snp_makeConstraints { (make) in
+        channelNameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(18)
-            make.top.equalTo(picImageView.snp_bottom)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(picImageView.snp.bottom)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
         
         addSubview(tipLabel)
-        tipLabel.font = UIFont.systemFontOfSize(10)
+        tipLabel.font = UIFont.systemFont(ofSize: 10)
         tipLabel.textColor = UIColor.grayColor6()
-        tipLabel.snp_makeConstraints { (make) in
+        tipLabel.snp.makeConstraints { (make) in
             make.height.equalTo(12)
-            make.top.equalTo(channelNameLabel.snp_bottom)
-            make.left.equalTo(snp_left)
-            make.right.equalTo(snp_right)
+            make.top.equalTo(channelNameLabel.snp.bottom)
+            make.left.equalTo(snp.left)
+            make.right.equalTo(snp.right)
         }
 
     }
     
     //MARK: event
-    func updateContent(channel: Channel, isNow: Bool) {
+    func updateContent(_ channel: Channel, isNow: Bool) {
         self.channel = channel
         
         if let picURL = channel.picURL {
-            picImageView.kf_setImageWithURL(NSURL(string: picURL)!, placeholderImage: UIImage.placeholder_cover())
+            picImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
         }
         
         if let channelName = channel.channelName {
