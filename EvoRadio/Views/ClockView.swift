@@ -21,7 +21,7 @@ class ClockView: UIControl {
         
         prepareUI()
         
-        timer = Timer(timeInterval: 1, target: self, selector: #selector(timerHandle), userInfo: nil, repeats: true)
+        timer = Timer(timeInterval: 30, target: self, selector: #selector(timerHandle), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
     }
     
@@ -82,7 +82,12 @@ class ClockView: UIControl {
         let formatterText = formatter.string(from: Date())
         let day_time = formatterText.components(separatedBy: "-")
         
-        dayLabel.text = day_time.first
+        let dayTimeString = day_time.first
+        let idx = dayTimeString?.index((dayTimeString?.endIndex)!, offsetBy: 3 - (dayTimeString?.characters.count)!)
+        
+        dayLabel.text = day_time.first?.substring(to: idx!)
         timeLabel.text = day_time.last
+        
+        print("formatterText: \(formatterText)")
     }
 }
