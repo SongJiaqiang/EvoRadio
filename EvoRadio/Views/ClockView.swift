@@ -21,7 +21,10 @@ class ClockView: UIControl {
         
         prepareUI()
         
-        timer = Timer(timeInterval: 30, target: self, selector: #selector(timerHandle), userInfo: nil, repeats: true)
+        // 由于周期时间较长，这里手动调用一次Selector
+        timerHandler()
+        
+        timer = Timer(timeInterval: 30, target: self, selector: #selector(timerHandler), userInfo: nil, repeats: true)
         RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
     }
     
@@ -70,11 +73,10 @@ class ClockView: UIControl {
 
         lineView = UIView()
         addSubview(lineView)
-        lineView.backgroundColor = UIColor.grayColor3()
-        
+        lineView.backgroundColor = UIColor.grayColor3()   
     }
     
-    func timerHandle() {
+    func timerHandler() {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         formatter.dateFormat = "EEEE-HH:mm"
@@ -87,7 +89,5 @@ class ClockView: UIControl {
         
         dayLabel.text = dayTimeString?.substring(to: idx!)
         timeLabel.text = day_time.last
-        
-        print("formatterText: \(formatterText)")
     }
 }
