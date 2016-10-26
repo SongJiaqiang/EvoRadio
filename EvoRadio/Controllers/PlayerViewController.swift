@@ -32,6 +32,7 @@ class PlayerViewController: ViewController {
     let loopButton = UIButton()
     let timerButton = UIButton()
     let titleLabel = UILabel()
+    let subTitleLabel = UILabel()
     let playlistTableView = UITableView(frame: CGRect.zero, style: .grouped)
     let playlistContentView = UIView()
     var playlistTableViewBottomConstraint: Constraint?
@@ -140,15 +141,26 @@ class PlayerViewController: ViewController {
             make.right.equalTo(view.snp.right)
         }
         
+        navBar.addSubview(subTitleLabel)
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.font = UIFont.sizeOf12()
+        subTitleLabel.textColor = UIColor.grayColor7()
+        subTitleLabel.snp.makeConstraints { (make) in
+            make.height.equalTo(20)
+            make.leftMargin.equalTo(60)
+            make.rightMargin.equalTo(-60)
+            make.bottom.equalTo(navBar.snp.bottom)
+        }
+        
         navBar.addSubview(titleLabel)
         titleLabel.textAlignment = .center
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.white
         titleLabel.snp.makeConstraints { (make) in
-            make.height.equalTo(44)
+            make.height.equalTo(20)
             make.leftMargin.equalTo(60)
             make.rightMargin.equalTo(-60)
-            make.bottom.equalTo(navBar.snp.bottom)
+            make.bottom.equalTo(subTitleLabel.snp.top)
         }
         
         let closeButton = UIButton()
@@ -158,7 +170,7 @@ class PlayerViewController: ViewController {
         closeButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 40, height: 40))
             make.leftMargin.equalTo(10)
-            make.bottom.equalTo(navBar.snp.bottom)
+            make.centerY.equalTo(navBar.snp.centerY)
         }
   
     }
@@ -191,7 +203,7 @@ class PlayerViewController: ViewController {
         timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed(_:)), for: .touchUpInside)
         timerButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
-            make.center.equalTo(toolsView.center)
+            make.center.equalTo(toolsView.snp.center)
         }
         
         let downloadButton = UIButton()
@@ -240,7 +252,6 @@ class PlayerViewController: ViewController {
     
     func preparePlayerControlView() {
         view.addSubview(controlView)
-//        controlView.backgroundColor = UIColor(white: 0.2, alpha: 1)
         controlView.snp.makeConstraints { (make) in
             make.height.equalTo(200)
             make.bottom.equalTo(view.snp.bottom)
@@ -254,7 +265,7 @@ class PlayerViewController: ViewController {
         playButton.addTarget(self, action: #selector(PlayerViewController.playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 60, height: 60))
-            make.center.equalTo(controlView.center)
+            make.center.equalTo(controlView.snp.center)
         }
         
         controlView.addSubview(nextButton)
@@ -563,6 +574,7 @@ class PlayerViewController: ViewController {
     func updateCoverImage(_ song: Song) {
         debugPrint("update cover image")
         titleLabel.text = song.songName
+        subTitleLabel.text = song.artistsName?.appending(" - ").appending(song.salbumsName!)
         
         if let picUrl = song.picURL {
             coverImageView.kf.setImage(with: URL(string: picUrl)!, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
