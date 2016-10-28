@@ -17,7 +17,7 @@ class API {
     
     func commonEP(_ api:String) -> String{
         let url = "\(host)\(api)"
-        debugPrint("request url--> \(url)")
+        debugPrint(">>> request url: \(url)")
         
         return url
     }
@@ -76,9 +76,15 @@ class API {
                         
                         onSuccess(responseData)
                     }
-                } catch {}
+                } catch let error{
+                    if let _ = onFailed {
+                        onFailed!(error)
+                    }
+                }
             }else {
-                onFailed!(response.result.error!)
+                if let _ = onFailed {
+                    onFailed!(response.result.error!)
+                }
             }
         }
     }

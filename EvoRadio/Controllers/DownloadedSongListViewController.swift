@@ -12,7 +12,7 @@ class DownloadedSongListViewController: ViewController {
 
     let cellID = "downloadedSongsCell"
     
-    let tableView = UITableView(frame: CGRect.zero, style: .grouped)
+    var tableView: UITableView!
     var dataSource = [Song]()
     
     
@@ -32,6 +32,8 @@ class DownloadedSongListViewController: ViewController {
     
     //MARK: prepare ui
     func prepareTableView() {
+        
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
@@ -42,7 +44,7 @@ class DownloadedSongListViewController: ViewController {
             make.edges.equalTo(UIEdgeInsets.zero)
         })
         
-        tableView.register(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(DownloadedTableViewCell.self, forCellReuseIdentifier: cellID)
 
     }
     
@@ -66,49 +68,54 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! DownloadedTableViewCell
         cell.delegate = self
         
         let song = dataSource[(indexPath as NSIndexPath).row]
-        cell.updateSongInfo(song)
+
+        cell.updateMusicInfo(song, atIndex: indexPath.row)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0,y: 0,width: tableView.bounds.width,height: 40))
+        headerView.backgroundColor = UIColor.grayColor3()
         
-        let playButton = UIButton()
-        headerView.addSubview(playButton)
-        playButton.titleLabel?.font = UIFont.sizeOf12()
-        playButton.backgroundColor = UIColor.grayColor3()
-        playButton.clipsToBounds = true
-        playButton.layer.cornerRadius = 15
-        playButton.setTitle("Play All", for: UIControlState())
-        playButton.addTarget(self, action: #selector(DownloadedSongListViewController.playButtonPressed(_:)), for: .touchUpInside)
-        playButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 80, height: 30))
+        let leftButton = UIButton()
+        headerView.addSubview(leftButton)
+        leftButton.titleLabel?.font = UIFont.sizeOf12()
+        leftButton.backgroundColor = UIColor.grayColor3()
+        leftButton.setTitle("Play All", for: UIControlState())
+        leftButton.addTarget(self, action: #selector(DownloadedSongListViewController.leftButtonPressed), for: .touchUpInside)
+
+        let rightButton = UIButton()
+        headerView.addSubview(rightButton)
+        rightButton.titleLabel?.font = UIFont.sizeOf12()
+        rightButton.backgroundColor = UIColor.grayColor3()
+        rightButton.setTitle("Delete All", for: UIControlState())
+        rightButton.addTarget(self, action: #selector(DownloadedSongListViewController.rightButtonPressed), for: .touchUpInside)
+        
+        leftButton.snp.makeConstraints { (make) in
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
-            make.leftMargin.equalTo(10)
+            make.left.equalTo(headerView.snp.left).offset(12)
+            make.right.equalTo(rightButton.snp.left)
+            
+            make.width.equalTo(rightButton.snp.width)
         }
         
-        let clearButton = UIButton()
-        headerView.addSubview(clearButton)
-        clearButton.titleLabel?.font = UIFont.sizeOf12()
-        clearButton.backgroundColor = UIColor.grayColor3()
-        clearButton.clipsToBounds = true
-        clearButton.layer.cornerRadius = 15
-        clearButton.setTitle("Clear", for: UIControlState())
-        clearButton.addTarget(self, action: #selector(DownloadedSongListViewController.clearButtonPressed(_:)), for: .touchUpInside)
-        clearButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 60, height: 30))
+        rightButton.snp.makeConstraints { (make) in
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
             make.right.equalTo(headerView.snp.right).offset(-12)
+            make.left.equalTo(leftButton.snp.right)
         }
+        
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.backgroundColor = UIColor.grayColor5()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(headerView.snp.left)
@@ -120,7 +127,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 48
+        return 54
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -137,7 +144,6 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         let song = dataSource[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        NotificationManager.shared.postUpdatePlayerControllerNotification()
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
@@ -151,10 +157,19 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-    func clearButtonPressed(_ button: UIButton) {
-        CoreDB.clearHistory()
-        dataSource.removeAll()
-        tableView.reloadData()
+    func leftButtonPressed() {
+        print("Play all downloaded musics")
+    }
+    
+    func rightButtonPressed() {
+        
+        self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在已下载的歌曲吗？", DestructiveTitle: "确定") {[weak self] (action) in
+            
+            self?.dataSource.removeAll()
+            self?.tableView.reloadData()
+            
+            CoreDB.removeAllDownloadedSongs()
+        }
     }
 
 }
@@ -169,11 +184,19 @@ extension DownloadedSongListViewController: SongListTableViewCellDelegate {
         let action2 = UIAlertAction(title: "收藏歌曲", style: .default, handler: { (action) in
             debugPrint("add to collecte")
         })
+        let action3 = UIAlertAction(title: "删除", style: .destructive, handler: { (action) in
+            debugPrint("delete music file")
+            
+            CoreDB.removeSongFromDownloadedList(song)
+            self.loadDataSource()
+            self.tableView.reloadData()
+        })
         
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         
         alertController.addAction(action1)
         alertController.addAction(action2)
+        alertController.addAction(action3)
         alertController.addAction(cancelAction)
         
         navigationController!.present(alertController, animated: true, completion: nil)

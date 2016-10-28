@@ -1,5 +1,5 @@
 //
-//  DownloadingSongListTableViewCell.swift
+//  DownloadingTableViewCell.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 6/1/16.
@@ -8,27 +8,15 @@
 
 import UIKit
 
-class DownloadingSongListTableViewCell: UITableViewCell {
+class DownloadingTableViewCell: UITableViewCell {
 
-    var titleLabel = UILabel()
-    var subtitleLabel = UILabel()
-    var progressBar = UIProgressView()
-    var sizeLabel = UILabel()
-    var deleteButton = UIButton()
-    var separatorView = UIView()
+    var titleLabel: UILabel!
+    var subtitleLabel: UILabel!
+    var progressBar: UIProgressView!
+    var sizeLabel: UILabel!
+    var deleteButton: UIButton!
     
-    var song: Song?
-    
-    var paused: Bool? = false {
-        willSet {
-            if let value = newValue {
-                subtitleLabel.isHidden = !value
-                progressBar.isHidden = value
-                sizeLabel.isHidden = value
-            }
-        }
-    }
-    
+    var downloadSong: DownloadSongInfo?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -39,7 +27,6 @@ class DownloadingSongListTableViewCell: UITableViewCell {
         backgroundColor = UIColor.clear
         
         prepareUI()
-        paused = true
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,15 +37,17 @@ class DownloadingSongListTableViewCell: UITableViewCell {
     //MARK: prepare ui
     func prepareUI() {
         
+        deleteButton = UIButton()
         contentView.addSubview(deleteButton)
         deleteButton.setImage(UIImage(named: "download_delete"), for: UIControlState())
-        deleteButton.addTarget(self, action: #selector(DownloadingSongListTableViewCell.deleteButtonPressed(_:)), for: .touchUpInside)
+        deleteButton.addTarget(self, action: #selector(DownloadingTableViewCell.deleteButtonPressed(_:)), for: .touchUpInside)
         deleteButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 30, height: 30))
             make.right.equalTo(snp.right).offset(-6)
             make.centerY.equalTo(snp.centerY)
         }
         
+        titleLabel = UILabel()
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.grayColor7()
@@ -66,32 +55,34 @@ class DownloadingSongListTableViewCell: UITableViewCell {
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left).offset(12)
             make.right.equalTo(deleteButton.snp.left).offset(-6)
-            make.centerY.equalTo(snp.centerY).offset(-6)
+            make.centerY.equalTo(snp.centerY).offset(-8)
         }
         
+        subtitleLabel = UILabel()
         contentView.addSubview(subtitleLabel)
         subtitleLabel.font = UIFont.sizeOf10()
         subtitleLabel.textColor = UIColor.grayColor6()
-        subtitleLabel.text = "准备下载"
+        subtitleLabel.text = "waiting..."
         subtitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left).offset(12)
             make.right.equalTo(deleteButton.snp.left).offset(-6)
             make.centerY.equalTo(snp.centerY).offset(8)
         }
-        subtitleLabel.isHidden = false
         
+        sizeLabel = UILabel()
         contentView.addSubview(sizeLabel)
         sizeLabel.font = UIFont.sizeOf10()
         sizeLabel.textColor = UIColor.grayColor6()
-        sizeLabel.textAlignment = .center
+        sizeLabel.textAlignment = .right
         sizeLabel.text = "0.0M/0.0M"
         sizeLabel.snp.makeConstraints { (make) in
-            make.width.equalTo(60)
+            make.width.equalTo(80)
             make.right.equalTo(deleteButton.snp.left).offset(-6)
             make.centerY.equalTo(snp.centerY).offset(8)
         }
         sizeLabel.isHidden = true
         
+        progressBar = UIProgressView()
         contentView.addSubview(progressBar)
         progressBar.progressTintColor = UIColor.goldColor()
         progressBar.snp.makeConstraints { (make) in
@@ -101,20 +92,47 @@ class DownloadingSongListTableViewCell: UITableViewCell {
         }
         progressBar.isHidden = true
         
+        let separatorView = UIView()
         contentView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.backgroundColor = UIColor.grayColor5()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
-            make.left.equalTo(snp.left)
-            make.right.equalTo(snp.right)
-            make.bottom.equalTo(snp.bottom)
+            make.left.equalTo(titleLabel.snp.left)
+            make.right.equalTo(titleLabel.snp.right)
+            make.bottom.equalTo(contentView.snp.bottom)
         }
     }
     
-    func updateSongInfo(_ songModel: Song) {
-        song = songModel
+    func setupSongInfo(_ songInfo: DownloadSongInfo) {
+        downloadSong = songInfo
         
-        titleLabel.text = song?.songName
+        titleLabel.text = downloadSong?.song?.songName
+        subtitleLabel.text = getSubtitleText(status: (downloadSong?.status?.intValue)!)
+        
+        subtitleLabel.isHidden = downloadSong?.status?.intValue == TaskStatus.downloading.rawValue
+        progressBar.isHidden = !subtitleLabel.isHidden
+        sizeLabel.isHidden = !subtitleLabel.isHidden
+    }
+    
+    func updateProgress(downloadModel: MZDownloadModel) {
+
+        var fileSize = "0.0M"
+        if let _ = downloadModel.file?.size {
+            fileSize = String(format: "%.1f %@", (downloadModel.file?.size)!, (downloadModel.file?.unit)!)
+        }
+        
+        var downloadedFileSize = "0.0M"
+        if let _ = downloadModel.downloadedFile?.size {
+            downloadedFileSize = String(format: "%.1f %@", (downloadModel.downloadedFile?.size)!, (downloadModel.downloadedFile?.unit)!)
+        }
+        
+        progressBar.progress = downloadModel.progress
+        sizeLabel.text = "\(downloadedFileSize)/\(fileSize)"
+        subtitleLabel.text = downloadModel.status
+        
+        subtitleLabel.isHidden = downloadModel.status == TaskStatus.downloading.description()
+        progressBar.isHidden = !subtitleLabel.isHidden
+        sizeLabel.isHidden = !subtitleLabel.isHidden
     }
     
     func updateProgressBar(_ progress: Float, speed:(received: Float, total: Float)) {
@@ -123,9 +141,22 @@ class DownloadingSongListTableViewCell: UITableViewCell {
     }
     
     func deleteButtonPressed(_ button: UIButton) {
-        CoreDB.removeSongFromDownloadingList(song!)
+        CoreDB.removeSongFromDownloadingList(downloadSong!)
     }
     
+    func getSubtitleText(status: Int) -> String {
+        if status == TaskStatus.gettingInfo.rawValue {
+            return "准备下载..."
+        }else if status == TaskStatus.downloading.rawValue {
+            return "正在下载..."
+        }else if status == TaskStatus.paused.rawValue {
+            return "已暂停，点击继续下载"
+        }else if status == TaskStatus.failed.rawValue {
+            return "下载失败，点击重试"
+        }else {
+            return "点击下载"
+        }
+    }
     
 }
 

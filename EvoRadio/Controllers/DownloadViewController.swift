@@ -29,7 +29,6 @@ class DownloadViewController: ViewController {
         updateDownloadCount()
 
         NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(DownloadViewController.downloadASongFinished(_:)))
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -47,8 +46,8 @@ class DownloadViewController: ViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override var preferredStatusBarStyle : UIStatusBarStyle {
-        return .lightContent
+    override var prefersStatusBarHidden: Bool {
+        return false
     }
     
     override func didReceiveMemoryWarning() {

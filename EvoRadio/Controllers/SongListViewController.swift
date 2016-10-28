@@ -217,7 +217,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
             debugPrint("add to collecte")
         })
         let action3 = UIAlertAction(title: "下载全部歌曲", style: .default, handler: { (action) in
-            debugPrint("download music")
+            debugPrint("download musics")
             CoreDB.addSongsToDownloadingList(self.dataSource)
         })
 //        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: {[weak self] (action) in

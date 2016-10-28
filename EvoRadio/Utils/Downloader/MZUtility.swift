@@ -80,6 +80,18 @@ open class MZUtility: NSObject {
         }
     }
     
+    open class func calculateUnit2(_ contentLength : Int64) -> NSString {
+        if(contentLength >= (1024*1024*1024)) {
+            return "G"
+        } else if contentLength >= (1024*1024) {
+            return "M"
+        } else if contentLength >= 1024 {
+            return "K"
+        } else {
+            return "b"
+        }
+    }
+    
     open class func addSkipBackupAttributeToItemAtURL(_ docDirectoryPath : NSString) -> Bool {
         let url : URL = URL(fileURLWithPath: docDirectoryPath as String)
         let fileManager = FileManager.default

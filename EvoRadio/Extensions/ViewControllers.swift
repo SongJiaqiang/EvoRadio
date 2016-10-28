@@ -32,5 +32,18 @@ extension UIViewController {
         }
         
     }
+    
+    func showDestructiveAlert(title: String?,
+                              message: String?,
+                              DestructiveTitle: String?,
+                              handler: ((UIAlertAction) -> Swift.Void)? = nil)
+    {
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: DestructiveTitle, style: .destructive, handler: handler))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
 }
 

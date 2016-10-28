@@ -205,13 +205,13 @@ extension MZDownloadManager: URLSessionDelegate {
                     let seconds = Int(remainingTime) - hours * 3600 - minutes * 60
                     
                     let totalFileSize = MZUtility.calculateFileSizeInUnit(totalBytesExpectedToWrite)
-                    let totalFileSizeUnit = MZUtility.calculateUnit(totalBytesExpectedToWrite)
+                    let totalFileSizeUnit = MZUtility.calculateUnit2(totalBytesExpectedToWrite)
                     
                     let downloadedFileSize = MZUtility.calculateFileSizeInUnit(totalBytesWritten)
-                    let downloadedSizeUnit = MZUtility.calculateUnit(totalBytesWritten)
+                    let downloadedSizeUnit = MZUtility.calculateUnit2(totalBytesWritten)
                     
                     let speedSize = MZUtility.calculateFileSizeInUnit(Int64(speed))
-                    let speedUnit = MZUtility.calculateUnit(Int64(speed))
+                    let speedUnit = MZUtility.calculateUnit2(Int64(speed))
                     
                     downloadModel.remainingTime = (hours, minutes, seconds)
                     downloadModel.file = (totalFileSize, totalFileSizeUnit as String)
@@ -370,6 +370,8 @@ extension MZDownloadManager {
     
     public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
         
+        creatDestinationPath(destinationPath)
+        
         let url = URL(string: fileURL as String)!
         let request = URLRequest(url: url)
         
@@ -451,6 +453,13 @@ extension MZDownloadManager {
         downloadTask!.cancel()
     }
     
+    public func cancelAllTasks() {
+        for downloadInfo in downloadingArray {
+            let downloadTask = downloadInfo.task
+            downloadTask!.cancel()
+        }
+    }
+    
     public func presentNotificationForDownload(_ notifAction: String, notifBody: String) {
         let application = UIApplication.shared
         let applicationState = application.applicationState
@@ -462,6 +471,22 @@ extension MZDownloadManager {
             localNotification.soundName = UILocalNotificationDefaultSoundName
             localNotification.applicationIconBadgeNumber += 1
             application.presentLocalNotificationNow(localNotification)
+        }
+    }
+    
+    public func creatDestinationPath(_ destinationPath: String) {
+        
+        var objcTrue = ObjCBool(true)
+        if FileManager.default.fileExists(atPath: destinationPath, isDirectory: &objcTrue) == false {
+            do{
+                
+                try FileManager.default.createDirectory(atPath: destinationPath, withIntermediateDirectories: true, attributes: nil)
+                
+                debugPrint("Create new directory: \(destinationPath)")
+                
+            }catch let error {
+                debugPrint("Create destination directory failed with error: \(error)")
+            }
         }
     }
 }
