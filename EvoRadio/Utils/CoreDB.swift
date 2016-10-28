@@ -252,6 +252,26 @@ class CoreDB {
         return programs
     }
     
+    
+    /** 删除一首歌曲下载数据 */
+    class func removeSongFromDownloadedList(_ song: Song) {
+        var newSongs: [NSDictionary]
+        if let songs = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+            newSongs = songs as! [NSDictionary]
+            for item in newSongs {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.remove(at: newSongs.index(of: item)!)
+                    break
+                }
+            }
+        }else {
+            newSongs = [NSDictionary]()
+        }
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
+        
+        NotificationManager.shared.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
+    }
+    
     /** 添加歌曲下载 */
     class func addSongToDownloadingList(_ song: Song) {
         let dict = song.toDictionary()
@@ -268,8 +288,6 @@ class CoreDB {
         }
         newSongs.append(dict)
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
-        
-        NotificationManager.shared.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
     
     /** 添加一波歌曲下载 */
@@ -295,8 +313,6 @@ class CoreDB {
         }
         
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
-        
-        NotificationManager.shared.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
     
     /** 删除一首歌曲下载数据 */

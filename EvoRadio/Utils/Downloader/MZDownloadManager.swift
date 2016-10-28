@@ -370,6 +370,8 @@ extension MZDownloadManager {
     
     public func addDownloadTask(_ fileName: String, fileURL: String, destinationPath: String) {
         
+        creatDestinationPath(destinationPath)
+        
         let url = URL(string: fileURL as String)!
         let request = URLRequest(url: url)
         
@@ -462,6 +464,22 @@ extension MZDownloadManager {
             localNotification.soundName = UILocalNotificationDefaultSoundName
             localNotification.applicationIconBadgeNumber += 1
             application.presentLocalNotificationNow(localNotification)
+        }
+    }
+    
+    public func creatDestinationPath(_ destinationPath: String) {
+        
+        var objcTrue = ObjCBool(true)
+        if FileManager.default.fileExists(atPath: destinationPath, isDirectory: &objcTrue) == false {
+            do{
+                
+                try FileManager.default.createDirectory(atPath: destinationPath, withIntermediateDirectories: true, attributes: nil)
+                
+                debugPrint("Create new directory: \(destinationPath)")
+                
+            }catch let error {
+                debugPrint("Create destination directory failed with error: \(error)")
+            }
         }
     }
 }

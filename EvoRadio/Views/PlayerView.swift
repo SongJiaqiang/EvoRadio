@@ -154,7 +154,9 @@ class PlayerView: UIView {
         if let song = MusicManager.shared.currentSong() {
             titleLabel.text = song.songName
             subTitleLabel.text = song.artistsName
-            coverView.kf.setImage(with: URL(string: song.picURL!)!, placeholder: UIImage.placeholder_cover())
+            if let picURL = URL(string: song.picURL!) {
+                coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
+            }
         }
     }
     

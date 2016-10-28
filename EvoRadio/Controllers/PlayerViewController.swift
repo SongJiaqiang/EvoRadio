@@ -576,8 +576,8 @@ class PlayerViewController: ViewController {
         titleLabel.text = song.songName
         subTitleLabel.text = song.artistsName?.appending(" - ").appending(song.salbumsName!)
         
-        if let picUrl = song.picURL {
-            coverImageView.kf.setImage(with: URL(string: picUrl)!, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+        if let picURL = URL(string: song.picURL!) {
+            coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
                 if let _ = image{
                     self?.configureFilterImage(image!)
                 }

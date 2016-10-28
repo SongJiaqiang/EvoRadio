@@ -95,11 +95,13 @@ class SongListTableViewCell: UITableViewCell {
         }
         
         if let _ = song {
-            coverImageView.kf.setImage(with: URL(string: song!.picURL!)!, placeholder: UIImage.placeholder_cover())
-            
+
             titleLabel.text = song?.songName
+            subTitleLabel.text = ((song?.artistsName)! + " - ") + (song?.salbumsName)!
             
-            subTitleLabel.text = ((song?.artistsName)! + " - ") + song!.salbumsName!
+            if let picURL = URL(string: (song?.picURL)!) {
+                coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
+            }
         }
         
         

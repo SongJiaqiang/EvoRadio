@@ -15,6 +15,7 @@
 		632DA7E41D7979F100A78DBD /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA7E31D7979F100A78DBD /* TopTabBar.swift */; };
 		632DA80C1D7B259300A78DBD /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA80B1D7B259300A78DBD /* RadioTableViewCell.swift */; };
 		6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */; };
+		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
 		638DD7741D7EA7D900C2EFC0 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DD7731D7EA7D900C2EFC0 /* ClockView.swift */; };
 		63A4E5381D7FFCFF00E18FD6 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */; };
 		63A4E53A1D801A2300E18FD6 /* LocalTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E5391D801A2300E18FD6 /* LocalTableViewCell.swift */; };
@@ -22,6 +23,8 @@
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
 		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
+		63EF920A1DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */; };
+		63EF920C1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */; };
 		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
 		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
 		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
@@ -59,7 +62,7 @@
 		9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */; };
 		9097BB291CFEC40400FA5BD9 /* Arrays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB281CFEC40400FA5BD9 /* Arrays.swift */; };
 		9097BB2B1CFEC88A00FA5BD9 /* DownloadItemQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */; };
-		9097BB2D1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2C1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift */; };
+		9097BB2D1CFEE4E800FA5BD9 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2C1CFEE4E800FA5BD9 /* DownloadingTableViewCell.swift */; };
 		9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */; };
 		9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB301D00380800FA5BD9 /* LastPlaylist.swift */; };
 		909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E659F1CC0831B00B0C49B /* MainViewController.swift */; };
@@ -116,6 +119,7 @@
 		632DA7E31D7979F100A78DBD /* TopTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = Views/TopTabBar.swift; sourceTree = "<group>"; };
 		632DA80B1D7B259300A78DBD /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioTableViewCell.swift; path = Views/RadioTableViewCell.swift; sourceTree = "<group>"; };
 		6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamingKitViewController.swift; path = Controllers/StreamingKitViewController.swift; sourceTree = "<group>"; };
+		636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSongInfo.swift; sourceTree = "<group>"; };
 		638DD7731D7EA7D900C2EFC0 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockView.swift; path = Views/ClockView.swift; sourceTree = "<group>"; };
 		63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocalViewController.swift; path = Controllers/LocalViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63A4E5391D801A2300E18FD6 /* LocalTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocalTableViewCell.swift; path = Views/LocalTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -123,6 +127,8 @@
 		63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
 		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
+		63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedTableViewCell.swift; path = Views/DownloadedTableViewCell.swift; sourceTree = "<group>"; };
+		63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedCollectionViewCell.swift; path = Views/DownloadedCollectionViewCell.swift; sourceTree = "<group>"; };
 		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		900C724C1D0563F0006EBE78 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
 		900C724D1D0563F0006EBE78 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
@@ -171,7 +177,7 @@
 		9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ViewControllers.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9097BB281CFEC40400FA5BD9 /* Arrays.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Arrays.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DownloadItemQueue.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		9097BB2C1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DownloadingSongListTableViewCell.swift; path = Views/DownloadingSongListTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9097BB2C1CFEE4E800FA5BD9 /* DownloadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = DownloadingTableViewCell.swift; path = Views/DownloadingTableViewCell.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Strings.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9097BB301D00380800FA5BD9 /* LastPlaylist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = LastPlaylist.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		909E659D1CC0831100B0C49B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = Resources/Info.plist; sourceTree = "<group>"; };
@@ -441,6 +447,7 @@
 				DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */,
 				9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */,
 				9097BB301D00380800FA5BD9 /* LastPlaylist.swift */,
+				636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -489,7 +496,9 @@
 				DBF1E7DF1CCE77D600B554A2 /* ChannelCollectionViewCell.swift */,
 				DBD507941CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift */,
 				90D7754A1CFA991B00899492 /* SongListTableViewCell.swift */,
-				9097BB2C1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift */,
+				9097BB2C1CFEE4E800FA5BD9 /* DownloadingTableViewCell.swift */,
+				63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */,
+				63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */,
 				632DA7DB1D79229300A78DBD /* NowCollectionHeaderView.swift */,
 			);
 			name = Cell;
@@ -633,6 +642,7 @@
 				90E7FB4B1CC4B6C50018A532 /* API.swift in Sources */,
 				63A4E5381D7FFCFF00E18FD6 /* LocalViewController.swift in Sources */,
 				90E7FB4D1CC4BD5B0018A532 /* Channel.swift in Sources */,
+				63EF920A1DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift in Sources */,
 				9097BB291CFEC40400FA5BD9 /* Arrays.swift in Sources */,
 				90D7754B1CFA991B00899492 /* SongListTableViewCell.swift in Sources */,
 				DB4F76E91CCC5CC00021D068 /* CustomRadioViewController.swift in Sources */,
@@ -653,6 +663,7 @@
 				9097BB1B1CFE898800FA5BD9 /* DownloadViewController.swift in Sources */,
 				90E7FB511CC4C3680018A532 /* User.swift in Sources */,
 				DBB79DA31CD046E6006189B3 /* SelectiveTimePanel.swift in Sources */,
+				636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */,
 				9097BB2B1CFEC88A00FA5BD9 /* DownloadItemQueue.swift in Sources */,
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				632DA7DC1D79229300A78DBD /* NowCollectionHeaderView.swift in Sources */,
@@ -688,11 +699,12 @@
 				90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */,
 				DBF1E7E01CCE77D600B554A2 /* ChannelCollectionViewCell.swift in Sources */,
 				DBD507951CCFA6C0001FDCE1 /* ProgramCollectionViewCell.swift in Sources */,
+				63EF920C1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift in Sources */,
 				9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */,
 				90E7FB551CC4D4330018A532 /* ProgramViewController.swift in Sources */,
 				631884621D78486000D7399A /* NowViewController.swift in Sources */,
 				90D775461CF9F89700899492 /* SongListViewController.swift in Sources */,
-				9097BB2D1CFEE4E800FA5BD9 /* DownloadingSongListTableViewCell.swift in Sources */,
+				9097BB2D1CFEE4E800FA5BD9 /* DownloadingTableViewCell.swift in Sources */,
 				63A4E53A1D801A2300E18FD6 /* LocalTableViewCell.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				903DEB6D1CC9D57500D79DC1 /* SettingViewController.swift in Sources */,

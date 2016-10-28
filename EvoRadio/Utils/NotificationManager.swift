@@ -82,6 +82,13 @@ class NotificationManager {
         NotificationCenter.default.addObserver(target, selector: action, name: NOTI_DOWNLOADING_LIST_CHANGED, object: nil)
     }
     
+    func postDownloadedListChangedNotification(_ userInfo: [AnyHashable: Any]) {
+        NotificationCenter.default.post(name: NOTI_DOWNLOADED_LIST_CHANGED, object: nil, userInfo: userInfo)
+    }
+    func addDownloadedListChangedObserver(_ target: AnyObject, action: Selector) {
+        NotificationCenter.default.addObserver(target, selector: action, name: NOTI_DOWNLOADED_LIST_CHANGED, object: nil)
+    }
+    
     func postDownloadASongFinishedNotification(_ userInfo: [AnyHashable: Any]) {
         NotificationCenter.default.post(name: NOTI_DOWNLOAD_A_SONG_FINISHED, object: nil, userInfo: userInfo)
     }

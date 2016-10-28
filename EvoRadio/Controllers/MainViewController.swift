@@ -54,6 +54,10 @@ class MainViewController: ViewController {
         AssistiveTouch.shared.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     //MARK: prepare
     func prepareAssistiveTouch() {
         let assitiveTouch = AssistiveTouch.shared

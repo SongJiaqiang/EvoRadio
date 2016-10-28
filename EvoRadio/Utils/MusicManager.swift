@@ -35,12 +35,20 @@ class MusicManager: NSObject {
     open static let shared = MusicManager()
     
     //MARK: properties
-    var audioPlayer: STKAudioPlayer = STKAudioPlayer()
+    var audioPlayer: STKAudioPlayer!
     fileprivate var playTimer: Timer?
 
     var playlist = [Song]()
     var currentIndex: Int = -1
     
+    override init() {
+        super.init()
+        
+        audioPlayer = STKAudioPlayer()
+        audioPlayer.meteringEnabled = true
+        
+        
+    }
 
     //MARK: functions
     func appendSongsToPlaylist(_ songs: [Song], autoPlay: Bool) {
@@ -60,13 +68,16 @@ class MusicManager: NSObject {
     }
     
     func appendSongToPlaylist(_ song: Song, autoPlay: Bool){
-        
+        var exit = false
         for item in playlist {
             if item.songID == song.songID {
-                return
+                exit = true
+                break
             }
         }
-        playlist.append(song)
+        if exit == false {
+            playlist.append(song)
+        }
         
         if autoPlay {
             currentIndex = playlist.index(of: song)!
@@ -116,22 +127,23 @@ class MusicManager: NSObject {
             }
             
             var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
-            if let _ = song.picURL {
+            
+            if let picURL = URL(string: song.picURL!) {
                 let downloader = KingfisherManager.shared.downloader
-                downloader.downloadImage(with: URL(string: song.picURL!)!, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
+
+                downloader.downloadImage(with: picURL, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
                     if let _ = image {
                         artwork = MPMediaItemArtwork(image:image!)
                     }
                     
                     let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title as AnyObject,
-                        MPMediaItemPropertyArtist: artist as AnyObject,
-                        MPMediaItemPropertyArtwork: artwork,
-                        MPMediaItemPropertyPlaybackDuration: duration as AnyObject
+                                                    MPMediaItemPropertyArtist: artist as AnyObject,
+                                                    MPMediaItemPropertyArtwork: artwork,
+                                                    MPMediaItemPropertyPlaybackDuration: duration as AnyObject
                     ]
                     
                     MPNowPlayingInfoCenter.default().nowPlayingInfo = info
                 })
-                
             }
         }
     }
@@ -158,7 +170,13 @@ class MusicManager: NSObject {
         
         if let cSong = currentSong() {
             let audioURL = cSong.audioURL
-            audioPlayer.play(audioURL!)
+            
+            if let audioPath = self.findMusicFileCachedPath(cSong) {
+                let url = URL(fileURLWithPath: audioPath)
+                audioPlayer.play(url)
+            }else {
+                audioPlayer.play(audioURL!)
+            }
             
             // 更新控制中心的音乐播放信息
             updatePlayingInfo()
@@ -170,6 +188,22 @@ class MusicManager: NSObject {
             NotificationManager.shared.postUpdatePlayerControllerNotification()
         }
         
+    }
+    
+    func findMusicFileCachedPath(_ song: Song) -> String? {
+        if song.audioURL?.isEmpty == true {
+            return nil
+        }
+        
+        let fileName = song.audioURL!.lastPathComponent()
+        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
+        let filePath = downloadPath.appendPathComponent(fileName)
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            return filePath
+        }
+        
+        return nil
     }
     
     func pause() {
