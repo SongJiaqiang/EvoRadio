@@ -273,6 +273,7 @@ class CoreDB {
         NotificationManager.shared.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
     
+
     /** 删除所有已下载歌曲 */
     class func removeAllDownloadedSongs() {
         if let _ = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
@@ -298,7 +299,7 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         newSongs.append(dict)
-        
+
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
     }
     

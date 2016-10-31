@@ -65,6 +65,7 @@ class DownloadingSongListViewController: ViewController {
     
     func loadDataSource() {
         if let songs = CoreDB.getDownloadingSongs() {
+
             Downloader.downloadSongs.removeAll()
             
             for s in songs {
@@ -77,6 +78,7 @@ class DownloadingSongListViewController: ViewController {
     //MARK: events
     func downloadingListChanged(_ notification: Notification) {
         if let userInfo = (notification as NSNotification).userInfo {
+
             Downloader.downloadSongs.removeAll()
             let songs = userInfo["song"] as! [Song]
             for s in songs {
@@ -104,7 +106,6 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         
         let songInfo = Downloader.downloadSongs[(indexPath as NSIndexPath).row]
         cell.setupSongInfo(songInfo)
-        
         return cell
     }
     
@@ -168,7 +169,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+
         let selectedSong = Downloader.downloadSongs[(indexPath as NSIndexPath).row]
         
         if let index = Downloader.downloadingSongs.index(of: selectedSong) {
@@ -181,6 +182,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
             }else if selectedSong.status?.intValue == TaskStatus.failed.rawValue {
                 // retry task
                 downloadManager.retryDownloadTaskAtIndex(index)
+
             }
         }else {
             // 先添加到下载中列表，再添加下载任务
@@ -209,11 +211,9 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
     
     func leftButtonPressed() {
         print("Start or pause downloading")
-        
     }
-    
-    func rightButtonPressed() {
 
+    func rightButtonPressed() {
         self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在下载的歌曲吗？", DestructiveTitle: "确定") {[weak self] (action) in
             
             self?.downloadManager.cancelAllTasks()
@@ -234,7 +234,6 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
 extension DownloadingSongListViewController: MZDownloadManagerDelegate {
 
     func downloadRequestDidUpdateProgress(_ downloadModel: MZDownloadModel, index: Int) {
-        
         let downloadingSong = Downloader.downloadingSongs[index]
         
         if let row = Downloader.downloadSongs.index(of: downloadingSong) {
@@ -243,7 +242,12 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
                 (cell as! DownloadingTableViewCell).updateProgress(downloadModel: downloadModel)
             }
         }
-        
+
+    }
+    
+    func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
+        debugPrint("download interrupted")
+        tableView.reloadData()
     }
     
     func downloadRequestFinished(_ downloadModel: MZDownloadModel, index: Int) {
@@ -266,13 +270,6 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
             
             // NotificationManager.shared.postDownloadASongFinishedNotification(["song":downloadSong.song])
         }
-        
-        
-    }
-    
-    func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
-        debugPrint("download interrupted")
-//        updateDownloadStatus(status: .failed, index: index)
     }
     
     func downloadRequestDidFailedWithError(_ error: NSError, downloadModel: MZDownloadModel, index: Int){

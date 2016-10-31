@@ -18,6 +18,7 @@ class DownloadingTableViewCell: UITableViewCell {
     
     var downloadSong: DownloadSongInfo?
     
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -103,6 +104,7 @@ class DownloadingTableViewCell: UITableViewCell {
         }
     }
     
+
     func setupSongInfo(_ songInfo: DownloadSongInfo) {
         downloadSong = songInfo
         
@@ -129,10 +131,6 @@ class DownloadingTableViewCell: UITableViewCell {
         progressBar.progress = downloadModel.progress
         sizeLabel.text = "\(downloadedFileSize)/\(fileSize)"
         subtitleLabel.text = downloadModel.status
-        
-        subtitleLabel.isHidden = downloadModel.status == TaskStatus.downloading.description()
-        progressBar.isHidden = !subtitleLabel.isHidden
-        sizeLabel.isHidden = !subtitleLabel.isHidden
     }
     
     func updateProgressBar(_ progress: Float, speed:(received: Float, total: Float)) {
