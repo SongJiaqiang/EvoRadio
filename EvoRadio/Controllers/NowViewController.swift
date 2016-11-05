@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import iCarousel
 import MJRefresh
 
 class NowViewController: ViewController {
@@ -22,6 +21,8 @@ class NowViewController: ViewController {
     var collectionHeaderView: NowCollectionHeaderView?
     fileprivate var endOfFeed = false
     fileprivate let pageSize: Int = 60
+    // tH : w = 200 : 375
+    let heardViewHeight = Device.width() * (200 / 375)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -205,7 +206,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
                 return headerView
             }
             collectionHeaderView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerViewID, for: indexPath) as? NowCollectionHeaderView
-            collectionHeaderView!.frame = CGRect(x: 0, y: 0, width: Device.width(), height: 200)
+            collectionHeaderView!.frame = CGRect(x: 0, y: 0, width: Device.width(), height: heardViewHeight)
             collectionHeaderView!.delegate = self
             collectionHeaderView?.updateChannels(nowChannels)
             
@@ -218,7 +219,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: Device.width(), height: 200);
+        return CGSize(width: Device.width(), height: heardViewHeight);
     }
     
 }

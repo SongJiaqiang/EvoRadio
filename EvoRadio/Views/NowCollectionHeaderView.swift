@@ -19,6 +19,8 @@ class NowCollectionHeaderView: UICollectionReusableView {
     var carousel: iCarousel!
     var channels = [Channel]()
     var delegate: NowCollectionHeaderViewDelegate?
+    // itemW : screenW = 160 : 375
+    let itemWidth = Device.width() * (160 / 375)
     
     convenience init(channels: [Channel]) {
         self.init()
@@ -63,8 +65,6 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        
-        let itemWidth: CGFloat = 160
         
         let itemView = ReflectionView()
         itemView.frame = CGRect(x: 0, y: 0, width: itemWidth, height: itemWidth)
