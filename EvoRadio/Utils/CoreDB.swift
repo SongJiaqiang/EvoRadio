@@ -269,8 +269,6 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
-        
-        NotificationManager.shared.postDownloadingListChangedNotification(["songs":[Song](dictArray:newSongs)])
     }
     
 
@@ -349,8 +347,6 @@ class CoreDB {
             newSongs = [NSDictionary]()
         }
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
-        
-        NotificationManager.shared.postDownloadingListChangedNotification(["songs":[DownloadSongInfo](dictArray:newSongs)])
     }
     
     /** 获取下载中的歌曲 */

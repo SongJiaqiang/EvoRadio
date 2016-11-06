@@ -130,7 +130,6 @@ class DownloadingTableViewCell: UITableViewCell {
         
         progressBar.progress = downloadModel.progress
         sizeLabel.text = "\(downloadedFileSize)/\(fileSize)"
-        subtitleLabel.text = downloadModel.status
     }
     
     func updateProgressBar(_ progress: Float, speed:(received: Float, total: Float)) {
@@ -144,7 +143,7 @@ class DownloadingTableViewCell: UITableViewCell {
     
     func getSubtitleText(status: Int) -> String {
         if status == TaskStatus.gettingInfo.rawValue {
-            return "准备下载..."
+            return "等待下载..."
         }else if status == TaskStatus.downloading.rawValue {
             return "正在下载..."
         }else if status == TaskStatus.paused.rawValue {

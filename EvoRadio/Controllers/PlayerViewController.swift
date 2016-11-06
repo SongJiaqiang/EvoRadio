@@ -656,6 +656,20 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
             make.leftMargin.equalTo(10)
         }
         
+        let clearButton = UIButton()
+        headerView.addSubview(clearButton)
+        clearButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+        clearButton.backgroundColor = UIColor.grayColor3()
+        clearButton.clipsToBounds = true
+        clearButton.layer.cornerRadius = 15
+        clearButton.setTitle("Clear All", for: UIControlState())
+        clearButton.addTarget(self, action: #selector(PlayerViewController.clearAllButtonPressed(_:)), for: .touchUpInside)
+        clearButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 100, height: 30))
+            make.centerY.equalTo(headerView.snp.centerY)
+            make.rightMargin.equalTo(-10)
+        }
+        
         let separatorView = UIView()
         headerView.addSubview(separatorView)
         separatorView.backgroundColor = UIColor.grayColor6()
@@ -693,6 +707,13 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     func downloadAllButtonPressed(_ button: UIButton) {
         if MusicManager.shared.playlist.count > 0 {
             CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
+            showPlaylistTableView(false)
+        }
+    }
+    func clearAllButtonPressed(_ button: UIButton) {
+        if MusicManager.shared.playlist.count > 0 {
+            MusicManager.shared.clearList()
+            playlistTableView.reloadData()
             showPlaylistTableView(false)
         }
     }

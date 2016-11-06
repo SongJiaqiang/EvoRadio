@@ -24,10 +24,10 @@ class DownloadViewController: ViewController {
         super.viewDidLoad()
         
         prepareSegmentControl()
-        updateContentView()
-        
         updateDownloadCount()
-
+        
+        
+        
         NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(DownloadViewController.downloadASongFinished(_:)))
     }
     
@@ -44,6 +44,12 @@ class DownloadViewController: ViewController {
         super.viewWillDisappear(animated)
         PlayerView.main.show()
         navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        updateContentView()
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -111,7 +117,7 @@ class DownloadViewController: ViewController {
             }
         }else {
             if downloadingController == nil {
-                downloadingController = DownloadingSongListViewController()
+                downloadingController = DownloadingSongListViewController.mainController
             }
             addChildController(downloadingController!, toView: containerView)
             if let _ = downloadedController {

@@ -10,9 +10,9 @@ import UIKit
 
 class DownloadedProgramListViewController: ViewController {
 
-    let cellID = "downloadedProgramsCellID"
+    var cellID = "downloadedProgramsCellID"
     
-    let tableView = UITableView()
+    var tableView: UITableView!
     var dataSource = [Program]()
     
 
@@ -38,6 +38,7 @@ class DownloadedProgramListViewController: ViewController {
     
     //MARK: prepare ui
     func prepareTableView() {
+        tableView = UITableView(frame: CGRect.zero, style: .plain)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self

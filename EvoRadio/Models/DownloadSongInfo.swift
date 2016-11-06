@@ -12,6 +12,7 @@ import EVReflection
 class DownloadSongInfo: EVObject {
     
     var taskid: String?
+//    var taskIndex: NSNumber?
     var status: NSNumber?
     var song: Song?
     

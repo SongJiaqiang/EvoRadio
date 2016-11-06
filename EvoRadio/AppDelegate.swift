@@ -77,6 +77,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidEnterBackground(_ application: UIApplication) {
         // 保存播放列表
         MusicManager.shared.saveLastPlaylist()
+//        DownloadingSongListViewController.mainController.saveDownloadingList()
     }
 
     func applicationWillEnterForeground(_ application: UIApplication) {

@@ -219,6 +219,8 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let action3 = UIAlertAction(title: "下载全部歌曲", style: .default, handler: { (action) in
             debugPrint("download musics")
             CoreDB.addSongsToDownloadingList(self.dataSource)
+            
+            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSource])
         })
 //        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: {[weak self] (action) in
 //            debugPrint("sharing")
@@ -250,6 +252,7 @@ extension SongListViewController: SongListTableViewCellDelegate {
         })
         let action3 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
             CoreDB.addSongToDownloadingList(song)
+            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : [song]])
         })
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         

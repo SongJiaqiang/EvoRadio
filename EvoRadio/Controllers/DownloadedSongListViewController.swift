@@ -159,6 +159,14 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     
     func leftButtonPressed() {
         print("Play all downloaded musics")
+        
+        if dataSource.count > 0 {
+            MusicManager.shared.appendSongsToPlaylist(dataSource, autoPlay: true)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            
+            TrackManager.playMusicTypeEvent(.SongList)
+        }
+        
     }
     
     func rightButtonPressed() {

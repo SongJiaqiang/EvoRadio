@@ -79,7 +79,8 @@ open class MZDownloadManager: NSObject {
         
         self.delegate = delegate
         self.sessionManager = self.backgroundSession(sessionIdentifer)
-        self.populateOtherDownloadTasks()
+        // Warning: 禁止加载缓存任务，保证自定义的下载机制不被打乱
+//        self.populateOtherDownloadTasks()
     }
     
     public convenience init(session sessionIdentifer: String, delegate: MZDownloadManagerDelegate, completion: (() -> Void)?) {

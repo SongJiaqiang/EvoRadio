@@ -67,4 +67,8 @@ extension UIColor {
         return UIColor(netHex: 0xFBFBFB)
     }
     
+    /** 0xF8F8F8 */
+    open var grayF8: UIColor {
+        return UIColor(netHex: 0xF8F8F8)
+    }
 }

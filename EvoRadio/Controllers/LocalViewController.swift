@@ -124,7 +124,7 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let cellInfo = dataSource[(indexPath as NSIndexPath).row]
+        let cellInfo = dataSource[indexPath.row]
         if let key = cellInfo["key"] {
             
             switch key {

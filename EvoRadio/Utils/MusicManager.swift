@@ -332,6 +332,7 @@ class MusicManager: NSObject {
         }
     }
     
+    
     func changePlayMode() -> SoundQueuePlayMode {
         var newMode: SoundQueuePlayMode = .ListLoop
         if let mode = CoreDB.playerPlayMode() {
