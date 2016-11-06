@@ -31,6 +31,7 @@ class LocalTableViewCell: UITableViewCell {
     func prepareUI() {
         iconImageView = UIImageView()
         contentView.addSubview(iconImageView)
+        iconImageView.contentMode = .center
         iconImageView.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 30, height: 30))
             make.left.equalTo(contentView.snp.left).offset(10)

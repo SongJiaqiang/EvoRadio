@@ -14,11 +14,12 @@ class LocalViewController: ViewController {
     
     var tableView: UITableView!
     var dataSource = [
-        ["key":"download", "title": "音乐下载", "icon":"player_download", "count":"21/32 🎵"],
-        ["key":"itunes", "title": "iTunes音乐", "icon":"setting_itunes", "count":"65 🎵"],
-        ["key":"import", "title": "音乐导入", "icon":"setting_download", "count":"121 🎵"],
-        ["key":"recently", "title": "最近播放", "icon":"setting_history", "count":"12 🎵"],
-        ["key":"favorite", "title": "歌单收藏", "icon":"setting_hearts", "count":"3 💿"],
+        ["key":"download", "title": "下载音乐", "icon":"local_download", "count":"21/32 首"],
+        ["key":"import", "title": "导入音乐", "icon":"local_import", "count":"121 首"],
+        ["key":"itunes", "title": "iTunes音乐", "icon":"local_itunes", "count":"65 首"],
+        ["key":"recently", "title": "最近播放的音乐", "icon":"local_history", "count":"12 首"],
+        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"8 首"],
+        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"3 张"],
     ]
     
     override func viewDidLoad() {
@@ -130,7 +131,7 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
             case "recently":
                 navigationController?.pushViewController(HistorySongListViewController(), animated: true)
                 break
-            case "favorite":
+            case "favorites":
                 navigationController?.pushViewController(DownloadViewController(), animated: true)
                 break
             case "download":
