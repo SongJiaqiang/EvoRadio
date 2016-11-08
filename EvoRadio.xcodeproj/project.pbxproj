@@ -37,15 +37,6 @@
 		9054AE101CC3BFB400E876FF /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9054AE0F1CC3BFB400E876FF /* Colors.swift */; };
 		9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059396A1D0E65A200FF9848 /* AVFoundation.framework */; };
 		9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90659F111CC92CB00026539F /* AudioToolbox.framework */; };
-		9059397F1D0E689F00FF9848 /* AmrCodecFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */; };
-		905939811D0E689F00FF9848 /* SecurityGuardSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939721D0E689F00FF9848 /* SecurityGuardSDK.framework */; };
-		905939831D0E689F00FF9848 /* UTDID.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939741D0E689F00FF9848 /* UTDID.framework */; };
-		905939841D0E689F00FF9848 /* UTMini.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939751D0E689F00FF9848 /* UTMini.framework */; };
-		905939851D0E689F00FF9848 /* WQConnectorBundle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939761D0E689F00FF9848 /* WQConnectorBundle.framework */; };
-		905939861D0E689F00FF9848 /* yw_1222.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 905939771D0E689F00FF9848 /* yw_1222.jpg */; };
-		905939871D0E689F00FF9848 /* YWFeedbackAudioExtentionFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939781D0E689F00FF9848 /* YWFeedbackAudioExtentionFMWK.framework */; };
-		905939881D0E689F00FF9848 /* YWFeedbackFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 905939791D0E689F00FF9848 /* YWFeedbackFMWK.framework */; };
-		905939891D0E689F00FF9848 /* YWHybridWebViewFMWK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059397A1D0E689F00FF9848 /* YWHybridWebViewFMWK.framework */; };
 		90659F141CC9451E0026539F /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F131CC9451E0026539F /* PersonalViewController.swift */; };
 		90659F181CC9B6440026539F /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F171CC9B6440026539F /* Radio.swift */; };
 		90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F1D1CC9C0B70026539F /* WLevelDb.mm */; };
@@ -145,15 +136,6 @@
 		9053D44E1CF483DB000392EF /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Cover.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9054AE0F1CC3BFB400E876FF /* Colors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Colors.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9059396A1D0E65A200FF9848 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
-		905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AmrCodecFMWK.framework; sourceTree = "<group>"; };
-		905939721D0E689F00FF9848 /* SecurityGuardSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SecurityGuardSDK.framework; sourceTree = "<group>"; };
-		905939741D0E689F00FF9848 /* UTDID.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTDID.framework; sourceTree = "<group>"; };
-		905939751D0E689F00FF9848 /* UTMini.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = UTMini.framework; sourceTree = "<group>"; };
-		905939761D0E689F00FF9848 /* WQConnectorBundle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = WQConnectorBundle.framework; sourceTree = "<group>"; };
-		905939771D0E689F00FF9848 /* yw_1222.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = yw_1222.jpg; sourceTree = "<group>"; };
-		905939781D0E689F00FF9848 /* YWFeedbackAudioExtentionFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackAudioExtentionFMWK.framework; sourceTree = "<group>"; };
-		905939791D0E689F00FF9848 /* YWFeedbackFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWFeedbackFMWK.framework; sourceTree = "<group>"; };
-		9059397A1D0E689F00FF9848 /* YWHybridWebViewFMWK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = YWHybridWebViewFMWK.framework; sourceTree = "<group>"; };
 		90659F0F1CC92CA30026539F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		90659F111CC92CB00026539F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		90659F131CC9451E0026539F /* PersonalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = PersonalViewController.swift; path = Controllers/PersonalViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -236,26 +218,18 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				905939891D0E689F00FF9848 /* YWHybridWebViewFMWK.framework in Frameworks */,
-				905939871D0E689F00FF9848 /* YWFeedbackAudioExtentionFMWK.framework in Frameworks */,
 				9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */,
 				9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */,
-				9059397F1D0E689F00FF9848 /* AmrCodecFMWK.framework in Frameworks */,
 				90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */,
 				90C32B6E1D0586E200C87DAF /* ImageIO.framework in Frameworks */,
-				905939831D0E689F00FF9848 /* UTDID.framework in Frameworks */,
 				90C32B6C1D0586D400C87DAF /* CoreText.framework in Frameworks */,
 				900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */,
 				90FB91B71D02D503002ECC8C /* CoreGraphics.framework in Frameworks */,
 				90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */,
 				90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */,
 				90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */,
-				905939851D0E689F00FF9848 /* WQConnectorBundle.framework in Frameworks */,
-				905939841D0E689F00FF9848 /* UTMini.framework in Frameworks */,
 				900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */,
-				905939881D0E689F00FF9848 /* YWFeedbackFMWK.framework in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
-				905939811D0E689F00FF9848 /* SecurityGuardSDK.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				49ED37AB1C63B65EE5BF6EFC /* Pods_EvoRadio.framework in Frameworks */,
@@ -292,7 +266,6 @@
 		900C724A1D0563F0006EBE78 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				905939571D0D5EEB00FF9848 /* YWFramework */,
 				900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */,
 			);
 			path = Libs;
@@ -354,22 +327,6 @@
 				909E659C1CC0831100B0C49B /* Resources */,
 			);
 			path = EvoRadio;
-			sourceTree = "<group>";
-		};
-		905939571D0D5EEB00FF9848 /* YWFramework */ = {
-			isa = PBXGroup;
-			children = (
-				905939701D0E689F00FF9848 /* AmrCodecFMWK.framework */,
-				905939721D0E689F00FF9848 /* SecurityGuardSDK.framework */,
-				905939741D0E689F00FF9848 /* UTDID.framework */,
-				905939751D0E689F00FF9848 /* UTMini.framework */,
-				905939761D0E689F00FF9848 /* WQConnectorBundle.framework */,
-				905939771D0E689F00FF9848 /* yw_1222.jpg */,
-				905939781D0E689F00FF9848 /* YWFeedbackAudioExtentionFMWK.framework */,
-				905939791D0E689F00FF9848 /* YWFeedbackFMWK.framework */,
-				9059397A1D0E689F00FF9848 /* YWHybridWebViewFMWK.framework */,
-			);
-			path = YWFramework;
 			sourceTree = "<group>";
 		};
 		90659F1B1CC9C0B70026539F /* levelDb */ = {
@@ -580,7 +537,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
-				905939861D0E689F00FF9848 /* yw_1222.jpg in Resources */,
 				900C72521D0563F0006EBE78 /* README.txt in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
 			);
@@ -819,11 +775,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -849,11 +802,8 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)/EvoRadio/Libs/YWFramework",
-				);
+				ENABLE_BITCODE = YES;
+				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

@@ -30,8 +30,6 @@ class SettingViewController: ViewController {
     
     var tableView = UITableView()
     
-    var feedbackKit: YWFeedbackKit?
-    
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -127,47 +125,7 @@ extension SettingViewController: UITableViewDataSource, UITableViewDelegate {
             }
             break
         case "feedback":
-            
-            feedbackKit = YWFeedbackKit(appKey: YW_APP_KEY)
-
-            feedbackKit!.environment = YWEnvironmentRelease
-            
-            // 存储一些有参考价值的用户信息
-//            feedbackKit!.extInfo = ["loginTime":NSDate().description,
-//                                    "visitPath":"Main->我的->设置->反馈",
-//                                    "customInfo":"My custom info"]
-            
-            // 配置FeedbackViewController的样式 https://baichuan.taobao.com/doc2/detail.htm?spm=a3c0d.7629140.0.0.WOXUmL&treeId=118&articleId=104173&docType=1
-//            feedbackKit!.customUIPlist = ["bgColor":"#212121",
-//                                          "color":"#FFFFFF"]
-            
-            let hud = MBProgressHUD.showAdded(to: Device.keyWindow(), animated: true)
-            feedbackKit!.makeFeedbackViewController(completionBlock: {[weak self] (feedbackController, error) in
-                hud.hide(animated: true)
-                
-                if let _ = feedbackController {
-                    feedbackController?.title = "意见反馈"
-                    
-                    let navController = NavigationController(rootViewController: feedbackController!)
-                    feedbackController?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "关闭", style: .plain, target: self, action: #selector(SettingViewController.closeFeedbackController))
-                    
-                    feedbackController?.openURLBlock = {[weak navController](urlString, parentController) -> Void in
-                        let webVC = UIViewController()
-                        let webView = UIWebView(frame: webVC.view.bounds)
-                        webView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-                        webVC.view.addSubview(webView)
-                        navController?.pushViewController(webVC, animated: true)
-                        webView.loadRequest(URLRequest(url: (URL(string: urlString!)!)))
-                        
-                    }
-                    Device.shareApplication().statusBarStyle = .default
-                    self?.navigationController?.present(navController, animated: true, completion: nil)
-                }else {
-                    let e: NSError = error as! NSError
-                    let title = e.userInfo["msg"] ?? "接口调用失败，请保持网络通畅！"
-                    HudManager.showText(title as! String)
-                }
-            })
+            print("feedback")
             break
         default: break
         }

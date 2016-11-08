@@ -17,7 +17,6 @@
 #import "WXApi.h"
 
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <YWFeedbackFMWK/YWFeedbackKit.h>
 #import <StreamingKit/STKAudioPlayer.h>
 #import <StreamingKit/STKAutoRecoveringHTTPDataSource.h>
 #import <iCarousel/iCarousel.h>
