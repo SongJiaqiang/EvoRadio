@@ -20,7 +20,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 
 
 extension UIImage {
-    static func original(_ name: String) -> UIImage {
+    class func original(_ name: String) -> UIImage {
         return (UIImage(named: name)?.originalImage())!
     }
     
@@ -28,7 +28,7 @@ extension UIImage {
         return self.withRenderingMode(.alwaysOriginal)
     }
     
-    static func rectImage(_ color: UIColor, size destSize: CGSize? = nil) -> UIImage {
+    class func rectImage(_ color: UIColor, size destSize: CGSize? = nil) -> UIImage {
         let size:CGSize
         if let destSize = destSize {
             size = destSize
@@ -44,7 +44,7 @@ extension UIImage {
         return image!.resizableImage(withCapInsets: UIEdgeInsets.zero)
     }
     
-    static func circleImage(_ color: UIColor, radius: CGFloat) -> UIImage {
+    class func circleImage(_ color: UIColor, radius: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(CGSize(width: radius*2, height: radius*2))
         let ctx = UIGraphicsGetCurrentContext()
         color.set()

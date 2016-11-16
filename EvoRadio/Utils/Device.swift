@@ -10,71 +10,71 @@ import UIKit
 
 class Device: NSObject {
 
-    static func width() -> CGFloat {
+    class func width() -> CGFloat {
         return UIScreen.main.bounds.size.width
     }
-    static func height() -> CGFloat {
+    class func height() -> CGFloat {
         return UIScreen.main.bounds.size.height
     }
-    static func size() -> CGSize {
+    class func size() -> CGSize {
         return UIScreen.main.bounds.size
     }
-    static func screenScale() -> CGFloat {
+    class func screenScale() -> CGFloat {
         return UIScreen.main.scale
     }
     
-    static func systemVersionString() -> String{
+    class func systemVersionString() -> String{
         return UIDevice.current.systemVersion
     }
-    static func systemVersion() -> Float{
+    class func systemVersion() -> Float{
         let sys = UIDevice.current.systemVersion
         return Float(sys)!
     }
     
-    static func appVersionString() -> String {
+    class func appVersionString() -> String {
         if let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] {
             return version as! String
         }
         return "未知"
     }
     
-    static func aboveIOS9() -> Bool{
+    class func aboveIOS9() -> Bool{
         let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 9.0)
     }
-    static func aboveIOS8() -> Bool{
+    class func aboveIOS8() -> Bool{
         let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 8.0)
     }
-    static func aboveIOS7() -> Bool{
+    class func aboveIOS7() -> Bool{
         let sys = UIDevice.current.systemVersion
         return (Float(sys)! > 7.0)
     }
     
-    static func keyWindow() -> UIWindow {
+    class func keyWindow() -> UIWindow {
         return UIApplication.shared.keyWindow!
     }
-    static func frontWindow() -> UIWindow {
+    class func frontWindow() -> UIWindow {
         return UIApplication.shared.windows.last!
     }
-    static func rootController() -> UIViewController {
+    class func rootController() -> UIViewController {
         return UIApplication.shared.keyWindow!.rootViewController!
     }
     
-    static func mainScreen() -> UIScreen {
+    class func mainScreen() -> UIScreen {
         return UIScreen.main
     }
-    static func shareApplication() -> UIApplication {
+    class func shareApplication() -> UIApplication {
         return UIApplication.shared
     }
-    static func appDelegate() -> AppDelegate {
+    class func appDelegate() -> AppDelegate {
         return UIApplication.shared.delegate as! AppDelegate
     }
-    static func fileManager() -> FileManager {
+    class func fileManager() -> FileManager {
         return FileManager.default
     }
     
-    static func isInBackground() -> Bool {
+    class func isInBackground() -> Bool {
         return Device.shareApplication().applicationState == .background
     }
 }

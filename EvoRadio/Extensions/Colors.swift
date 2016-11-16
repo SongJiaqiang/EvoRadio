@@ -30,45 +30,40 @@ extension UIColor {
     }
     
     /** 0xB89406 */
-    static func goldColor() -> UIColor{
+    class func goldColor() -> UIColor{
         return UIColor(netHex: 0xB89406)
     }
     
     /** 0x121212 */
-    static func grayColor1() -> UIColor{
+    class func grayColor1() -> UIColor{
         return UIColor(netHex: 0x121212)
     }
     /** 0x1C1C1C */
-    static func grayColor2() -> UIColor{
+    class func grayColor2() -> UIColor{
         return UIColor(netHex: 0x1C1C1C)
     }
     /** 0x282828 */
-    static func grayColor3() -> UIColor{
+    class func grayColor3() -> UIColor{
         return UIColor(netHex: 0x282828)
     }
     /** 0x414141 */
-    static func grayColor4() -> UIColor{
+    class func grayColor4() -> UIColor{
         return UIColor(netHex: 0x414141)
     }
     /** 0x4C4C4C */
-    static func grayColor5() -> UIColor{
+    class func grayColor5() -> UIColor{
         return UIColor(netHex: 0x4C4C4C)
     }
     /** 0x979797 */
-    static func grayColor6() -> UIColor{
+    class func grayColor6() -> UIColor{
         return UIColor(netHex: 0x979797)
     }
     /** 0xBFBFBF */
-    static func grayColor7() -> UIColor{
+    class func grayColor7() -> UIColor{
         return UIColor(netHex: 0xBFBFBF)
     }
     /** 0xFBFBFB */
-    static func grayColor8() -> UIColor{
+    class func grayColor8() -> UIColor{
         return UIColor(netHex: 0xFBFBFB)
-    }
-    
-    /** 0xF8F8F8 */
-    open var grayF8: UIColor {
-        return UIColor(netHex: 0xF8F8F8)
     }
 }

@@ -10,16 +10,16 @@ import UIKit
 
 extension UIFont {
     
-    static func sizeOf10() -> UIFont {
+    class func sizeOf10() -> UIFont {
         return UIFont.systemFont(ofSize: 10)
     }
-    static func sizeOf12() -> UIFont {
+    class func sizeOf12() -> UIFont {
         return UIFont.systemFont(ofSize: 12)
     }
-    static func sizeOf14() -> UIFont {
+    class func sizeOf14() -> UIFont {
         return UIFont.systemFont(ofSize: 14)
     }
-    static func sizeOf16() -> UIFont {
+    class func sizeOf16() -> UIFont {
         return UIFont.systemFont(ofSize: 16)
     }
 }
