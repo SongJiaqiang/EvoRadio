@@ -52,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func preparePlayer() {
-        PlayerView.main.prepare()
+        PlayerView.main.prepareUI()
         PlayerViewController.mainController.prepare()
         
         MusicManager.shared.loadLastPlaylist()
