@@ -11,7 +11,8 @@ import SnapKit
 
 class PlayerView: UIView {
     
-    fileprivate var coverView = UIImageView()
+    fileprivate var coverView: UIImageView!
+    fileprivate var backgroundView: UIImageView!
     fileprivate var titleLabel = UILabel()
     fileprivate var subTitleLabel = UILabel()
     fileprivate var playButton = UIButton()
@@ -52,6 +53,12 @@ class PlayerView: UIView {
             make.bottomMargin.equalTo(0)
         }
         
+        backgroundView = UIImageView()
+        addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        
         let contentView = UIView()
         addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
@@ -62,13 +69,14 @@ class PlayerView: UIView {
         }
         
         // init coverImageView
+        coverView = UIImageView()
         contentView.addSubview(coverView)
         coverView.image = UIImage(named: "cd_cover")
         coverView.clipsToBounds = true
         coverView.contentMode = .scaleAspectFill
         coverView.snp.makeConstraints { (make) in
-            make.width.equalTo(playerBarHeight)
-            make.height.equalTo(playerBarHeight)
+            make.width.equalTo(playerBarHeight-2)
+            make.height.equalTo(playerBarHeight-2)
             make.left.equalTo(contentView.snp.left);
             make.centerY.equalTo(contentView.snp.centerY)
         }
@@ -136,7 +144,13 @@ class PlayerView: UIView {
             make.topMargin.equalTo(0)
         }
         
-        
+        // add blur effect
+        let blur = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(effect: blur)
+        backgroundView.addSubview(effectView)
+        effectView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
         
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(PlayerView.handleTap(_:)))
@@ -228,7 +242,19 @@ class PlayerView: UIView {
             subTitleLabel.text = song.artistsName
             
             if let picURL = URL(string: song.picURL!) {
-                coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
+//                coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
+                coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                    if let _ = image{
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self?.backgroundView.alpha = 0.2
+                        }, completion: { (complete) in
+                            self?.backgroundView.image = image!
+                            UIView.animate(withDuration: 1, animations: {
+                                self?.backgroundView.alpha = 1
+                            })
+                        })
+                    }
+                })
             }
         }
     }

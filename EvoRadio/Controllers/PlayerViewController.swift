@@ -9,7 +9,6 @@
 import UIKit
 import Alamofire
 import SnapKit
-import GPUImage
 import StreamingKit
 
 class PlayerViewController: ViewController {
@@ -18,9 +17,7 @@ class PlayerViewController: ViewController {
     let toolButtonWidth: CGFloat = 50
     
     fileprivate var coverImageView = CDCoverImageView(frame: CGRect.zero)
-    var backgroundGPUImageView = GPUImageView()
-    var filterImage: GPUImagePicture?
-    let blurFilter = GPUImageiOSBlurFilter()
+    var backgroundView: UIImageView!
     
     fileprivate var controlView = UIView()
     let progressSlider = UISlider()
@@ -107,11 +104,18 @@ class PlayerViewController: ViewController {
             make.topMargin.equalTo(topMargin)
         }
         
-        backgroundGPUImageView.backgroundColor = UIColor.grayColor5()
-        view.insertSubview(backgroundGPUImageView, belowSubview: coverImageView)
-        backgroundGPUImageView.fillMode = kGPUImageFillModePreserveAspectRatioAndFill
-        backgroundGPUImageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+        backgroundView = UIImageView()
+        view.insertSubview(backgroundView, belowSubview: coverImageView)
+        backgroundView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        
+        // add blur effect
+        let blur = UIBlurEffect(style: .light)
+        let effectView = UIVisualEffectView(effect: blur)
+        backgroundView.addSubview(effectView)
+        effectView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
         }
     }
     
@@ -170,7 +174,7 @@ class PlayerViewController: ViewController {
         closeButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 40, height: 40))
             make.leftMargin.equalTo(10)
-            make.centerY.equalTo(navBar.snp.centerY)
+            make.topMargin.equalTo(20)
         }
   
     }
@@ -253,7 +257,7 @@ class PlayerViewController: ViewController {
     func preparePlayerControlView() {
         view.addSubview(controlView)
         controlView.snp.makeConstraints { (make) in
-            make.height.equalTo(200)
+            make.height.equalTo(180)
             make.bottom.equalTo(view.snp.bottom)
             make.left.equalTo(view.snp.left)
             make.right.equalTo(view.snp.right)
@@ -295,7 +299,7 @@ class PlayerViewController: ViewController {
             make.height.equalTo(20)
             make.left.equalTo(controlView.snp.left).inset(50)
             make.right.equalTo(controlView.snp.right).inset(50)
-            make.top.equalTo(controlView.snp.top)
+            make.top.equalTo(controlView.snp.top).offset(10)
         }
         
         controlView.addSubview(currentTimeLabel)
@@ -547,29 +551,6 @@ class PlayerViewController: ViewController {
     
     
     //MARK: other
-    func configureFilterImage(_ coverImage: UIImage) {
-        if Device.shareApplication().applicationState == .background {
-            return
-        }
-        
-        filterImage = GPUImagePicture(image: coverImage, smoothlyScaleOutput: true)
-        filterImage!.addTarget(blurFilter as GPUImageInput)
-        blurFilter.useNextFrameForImageCapture()
-        blurFilter.addTarget(backgroundGPUImageView)
-        filterImage!.processImage()
-        
-        blurFilter.blurRadiusInPixels = 10
-        filterImage?.processImage(completionHandler: {[weak self] Void in
-            
-            self?.backgroundGPUImageView.alpha = 0.2
-            UIView.animate(withDuration: 2, animations: { Void in
-                self?.backgroundGPUImageView.alpha = 1
-            })
-
-        })
-        
-    }
-    
     
     func updateCoverImage(_ song: Song) {
         debugPrint("update cover image")
@@ -579,9 +560,16 @@ class PlayerViewController: ViewController {
         if let picURL = URL(string: song.picURL!) {
             coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
                 if let _ = image{
-                    self?.configureFilterImage(image!)
+                    UIView.animate(withDuration: 0.5, animations: {
+                        self?.backgroundView.alpha = 0.2
+                    }, completion: { (complete) in
+                        self?.backgroundView.image = image!
+                        UIView.animate(withDuration: 1, animations: {
+                            self?.backgroundView.alpha = 1
+                        })
+                    })
                 }
-                })
+            })
         }
     }
     

@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.0.1)
   - EVReflection (3.1.2)
-  - GPUImage (0.1.7)
   - iCarousel (1.8.2)
   - Kingfisher (3.1.4)
   - leveldb (1.18)
@@ -15,7 +14,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire (~> 4.0)
   - EVReflection (from `https://github.com/evermeer/EVReflection`, branch `Swift3`)
-  - GPUImage (~> 0.1.7)
   - iCarousel (~> 1.8.2)
   - Kingfisher (~> 3.0)
   - leveldb (~> 1.18)
@@ -39,7 +37,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
   EVReflection: 102d8ca777db55200f48b80d9628c8d50fb4109d
-  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
   iCarousel: 67c8a43da5a46795b56aadfc96cd36a16f6149b2
   Kingfisher: 6c67e3e57f2d81a9cfdfa25052cd86f33ceac9bb
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
@@ -50,6 +47,6 @@ SPEC CHECKSUMS:
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
 
-PODFILE CHECKSUM: 6cec67b6c84476b44aa8a31b4131769c7eda2dd9
+PODFILE CHECKSUM: d3dedff24a597ffbc1fc0783cf18dca2e509d834
 
 COCOAPODS: 1.1.1
