@@ -55,6 +55,8 @@ class PlayerView: UIView {
         
         backgroundView = UIImageView()
         addSubview(backgroundView)
+        backgroundView.contentMode = .scaleToFill
+        backgroundView.transform = CGAffineTransform(scaleX: -1, y: 1)
         backgroundView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
@@ -242,7 +244,6 @@ class PlayerView: UIView {
             subTitleLabel.text = song.artistsName
             
             if let picURL = URL(string: song.picURL!) {
-//                coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
                 coverView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
                     if let _ = image{
                         UIView.animate(withDuration: 0.5, animations: {
