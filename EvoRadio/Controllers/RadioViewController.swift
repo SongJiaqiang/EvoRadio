@@ -15,6 +15,7 @@ class RadioViewController: ViewController {
     
     var tableView: UITableView!
     var dataSource = [Radio]()
+    var cellHeight: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,13 +32,14 @@ class RadioViewController: ViewController {
     
     //MARK: prepare
     func prepareTableView() {
-        tableView = UITableView()
+        tableView = UITableView(frame: CGRect.zero, style: .grouped)
         view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(RadioTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+        tableView.separatorStyle = .none
+        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
@@ -103,7 +105,30 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return ((Device.width() - itemMargin * 3) / 2.5) + itemMargin * 2
+        
+        return getCellHeight()
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        var title = "电台"
+        if scrollView.contentOffset.y > 0 {
+            let index = Int(scrollView.contentOffset.y) / Int(getCellHeight() + 30 + 0.01)
+            if index >= 0 {
+                let radio = dataSource[index]
+                title = radio.radioName!
+            }
+        }
+        
+        TopTabBar.mainBar.updateTitle(title: title, atIndex: 0);
+    }
+
+    
+    func getCellHeight() -> CGFloat{
+        if cellHeight == 0 {
+            cellHeight = ((Device.width() - itemMargin * 3) / 2.5) + itemMargin * 2
+        }
+        return cellHeight
     }
     
 }

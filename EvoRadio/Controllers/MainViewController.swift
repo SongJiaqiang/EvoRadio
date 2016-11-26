@@ -23,8 +23,6 @@ class MainViewController: ViewController {
     fileprivate var localViewController: LocalViewController?
     fileprivate var playerController = PlayerViewController()
     
-    fileprivate var topTabBarHeightConstraint: Constraint!
-    
     var touchIcon: UIImage?
     
     //MARK: life cycle
@@ -67,7 +65,7 @@ class MainViewController: ViewController {
     
     func prepareTabBar() {
         
-        topTabBar = TopTabBar(titles: ["电台","当下","本地"])
+        topTabBar = TopTabBar.mainBar
         view.addSubview(topTabBar)
         topTabBar.snp.makeConstraints { (make) in
             make.height.equalTo(20)

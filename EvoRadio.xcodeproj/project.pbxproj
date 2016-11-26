@@ -14,6 +14,7 @@
 		632DA7E21D7967D400A78DBD /* AssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA7E11D7967D400A78DBD /* AssistiveTouch.swift */; };
 		632DA7E41D7979F100A78DBD /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA7E31D7979F100A78DBD /* TopTabBar.swift */; };
 		632DA80C1D7B259300A78DBD /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632DA80B1D7B259300A78DBD /* RadioTableViewCell.swift */; };
+		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */; };
 		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
 		638DD7741D7EA7D900C2EFC0 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DD7731D7EA7D900C2EFC0 /* ClockView.swift */; };
@@ -110,6 +111,7 @@
 		632DA7E11D7967D400A78DBD /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
 		632DA7E31D7979F100A78DBD /* TopTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = Views/TopTabBar.swift; sourceTree = "<group>"; };
 		632DA80B1D7B259300A78DBD /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioTableViewCell.swift; path = Views/RadioTableViewCell.swift; sourceTree = "<group>"; };
+		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamingKitViewController.swift; path = Controllers/StreamingKitViewController.swift; sourceTree = "<group>"; };
 		636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSongInfo.swift; sourceTree = "<group>"; };
 		638DD7731D7EA7D900C2EFC0 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockView.swift; path = Views/ClockView.swift; sourceTree = "<group>"; };
@@ -425,6 +427,7 @@
 				9097BB281CFEC40400FA5BD9 /* Arrays.swift */,
 				9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */,
 				63A4E53B1D80384600E18FD6 /* Views.swift */,
+				633506DF1DE9D97500607693 /* Labels.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -611,6 +614,7 @@
 				90659F181CC9B6440026539F /* Radio.swift in Sources */,
 				63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */,
 				638DD7741D7EA7D900C2EFC0 /* ClockView.swift in Sources */,
+				633506E01DE9D97500607693 /* Labels.swift in Sources */,
 				9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */,
 				632DA80C1D7B259300A78DBD /* RadioTableViewCell.swift in Sources */,
 				9054AE101CC3BFB400E876FF /* Colors.swift in Sources */,
