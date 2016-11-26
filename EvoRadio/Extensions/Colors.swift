@@ -29,9 +29,9 @@ extension UIColor {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
     
-    /** 0xB89406 */
+    /** 0xB89406 D4AF37 */
     class func goldColor() -> UIColor{
-        return UIColor(netHex: 0xB89406)
+        return UIColor(netHex: 0xD4AF37)
     }
     
     /** 0x121212 */
