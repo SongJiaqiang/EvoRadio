@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+protocol TopTabBarDelegate {
+    func tabBarOnTap(tabBar: TopTabBar)
+}
+
 class TopTabBar: UIView {
 
     var titles: [String]!
@@ -19,6 +23,7 @@ class TopTabBar: UIView {
     var currentIndex:Int = 1
    
     open static let mainBar = TopTabBar(titles: ["电台","当下","本地"])
+    open var delegate: TopTabBarDelegate?
     
     
     convenience init(titles: [String]) {
@@ -28,6 +33,9 @@ class TopTabBar: UIView {
         self.backgroundColor = UIColor.black
         
         prepareUI()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(TopTabBar.onTap(_:)))
+        self.addGestureRecognizer(tap)
     }
     
     
@@ -60,8 +68,14 @@ class TopTabBar: UIView {
         labels[currentIndex].textColor = UIColor.white
     }
     
+    func onTap(_ gesture: UIGestureRecognizer) {
+        if let _ = delegate {
+            delegate?.tabBarOnTap(tabBar: TopTabBar.mainBar)
+        }
+    }
     
-    func updateFrames() {
+    
+    open func updateFrames() {
         
         for i in 0..<labels.count{
             let label = labels[i]

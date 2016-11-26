@@ -19,8 +19,8 @@ class MainViewController: ViewController {
     fileprivate var playerViewTopConstraint: Constraint?
     
     fileprivate var radioController: RadioViewController?
-    fileprivate var nowViewController: NowViewController?
-    fileprivate var localViewController: LocalViewController?
+    fileprivate var nowController: NowViewController?
+    fileprivate var localController: LocalViewController?
     fileprivate var playerController = PlayerViewController()
     
     var touchIcon: UIImage?
@@ -67,6 +67,7 @@ class MainViewController: ViewController {
         
         topTabBar = TopTabBar.mainBar
         view.addSubview(topTabBar)
+        topTabBar.delegate = self
         topTabBar.snp.makeConstraints { (make) in
             make.height.equalTo(20)
             make.left.equalTo(view.snp.left)
@@ -124,10 +125,10 @@ class MainViewController: ViewController {
         
         // 初始化子控制器，并添加到ContentView中
         radioController = RadioViewController()
-        nowViewController = NowViewController()
-        localViewController = LocalViewController()
+        nowController = NowViewController()
+        localController = LocalViewController()
         
-        addChildViewControllers([radioController!, nowViewController!, localViewController!], inView: contentView)
+        addChildViewControllers([radioController!, nowController!, localController!], inView: contentView)
     }
     
     //MARK: event
@@ -168,6 +169,16 @@ extension MainViewController: UIScrollViewDelegate {
 extension MainViewController: ScrollTabBarDelegate {
     func scrollTabBar(_ scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int) {
         self.contentView.setContentOffset(CGPoint(x: Device.width()*CGFloat(index), y: 0), animated: true)
+    }
+}
+
+extension MainViewController: TopTabBarDelegate {
+    func tabBarOnTap(tabBar: TopTabBar) {
+        if tabBar.currentIndex == 0 {
+            radioController?.scrollToTop()
+        }else if tabBar.currentIndex == 1 {
+            nowController?.scrollToTop()
+        }
     }
 }
 

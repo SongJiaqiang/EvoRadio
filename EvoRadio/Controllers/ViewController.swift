@@ -78,5 +78,20 @@ class ViewController: UIViewController {
     func goBack() {
         _ = navigationController?.popViewController(animated: true)
     }
+    
+    /**
+        Find first UIScrollView or its sub class, and set contentOffset.y = 0
+     */
+    func scrollToTop() {
+        for v in view.subviews {
+            if (v is UIScrollView) || (v is UITableView) || (v is UICollectionView) {
+                let scrollView = v as! UIScrollView
+                scrollView.setContentOffset(CGPoint(x: scrollView.contentOffset.x, y: 0), animated: true)
+                
+                break
+            }
+        }
+        
+    }
 }
 
