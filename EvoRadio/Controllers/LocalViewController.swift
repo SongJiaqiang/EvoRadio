@@ -43,7 +43,7 @@ class LocalViewController: ViewController {
         tableView.dataSource = self
         tableView.register(LocalTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(60, 0, 50, 0)
+        tableView.contentInset = UIEdgeInsetsMake(60, 0, playerBarHeight, 0)
         tableView.separatorStyle  = .none
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))

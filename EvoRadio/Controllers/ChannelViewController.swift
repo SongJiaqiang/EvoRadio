@@ -70,7 +70,7 @@ class ChannelViewController: ViewController {
         collectionView!.register(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
 
         collectionView!.backgroundColor = UIColor.clear
-        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, 50, 0)
+        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
         collectionView!.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
