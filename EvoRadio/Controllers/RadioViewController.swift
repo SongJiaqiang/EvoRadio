@@ -90,6 +90,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         nameLabel.frame = CGRect(x: 10, y: 10, width: Device.width()-20, height: 20)
         nameLabel.font = UIFont.systemFont(ofSize: 14)
         nameLabel.textColor = UIColor.white
+        nameLabel.textAlignment = .center
         
         let radio = dataSource[section]
         nameLabel.text = radio.radioName
@@ -112,8 +113,8 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         var title = "电台"
-        if scrollView.contentOffset.y > 0 {
-            let index = Int(scrollView.contentOffset.y) / Int(getCellHeight() + 30 + 0.01)
+        if scrollView.contentOffset.y - 30 > 0 {
+            let index = Int(scrollView.contentOffset.y - 30) / Int(getCellHeight() + 30 + 0.01)
             if index >= 0 {
                 let radio = dataSource[index]
                 title = radio.radioName!

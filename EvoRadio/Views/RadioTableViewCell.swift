@@ -76,8 +76,8 @@ class RadioTableViewCell: UITableViewCell {
                 let imageView = UIButton()
                 containerView.addSubview(imageView)
                 imageView.frame = CGRect(x: itemMargin+(itemWidth+itemMargin) * CGFloat(i), y: itemMargin, width: itemWidth, height: itemWidth)
-                imageView.contentMode = .scaleAspectFill
                 imageView.clipsToBounds = true
+                imageView.contentMode = .scaleAspectFill
                 imageView.addTarget(self, action: #selector(RadioTableViewCell.selectItem(_:)), for: .touchUpInside)
                 imageView.tag = i
                 
