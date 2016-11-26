@@ -17,7 +17,7 @@ let NOTI_PLAYMUSICPROGRESS_ENDED = Notification.Name("play_music_progress_ended"
 // 播放暂停
 let NOTI_PLAYMUSICPROGRESS_PAUSED = Notification.Name("play_music_progress_paused")
 // 更新播放控制器
-let NOTI_UPDATE_PLAYERCONTROLLER = Notification.Name("update_playercontroller")
+let NOTI_UPDATE_PLAYER = Notification.Name("update_player")
 // 下载列表发生变化
 let NOTI_DOWNLOADING_LIST_CHANGED = Notification.Name("downloading_list_changed")
 // 已下载列表发生变化
@@ -68,11 +68,11 @@ class NotificationManager {
         NotificationCenter.default.addObserver(target, selector: action, name: NOTI_PLAYMUSICPROGRESS_PAUSED, object: nil)
     }
     
-    func postUpdatePlayerControllerNotification() {
-        NotificationCenter.default.post(name: NOTI_UPDATE_PLAYERCONTROLLER, object: nil)
+    func postUpdatePlayerNotification() {
+        NotificationCenter.default.post(name: NOTI_UPDATE_PLAYER, object: nil)
     }
-    func addUpdatePlayerControllerObserver(_ target: AnyObject, action: Selector) {
-        NotificationCenter.default.addObserver(target, selector: action, name: NOTI_UPDATE_PLAYERCONTROLLER, object: nil)
+    func addUpdatePlayerObserver(_ target: AnyObject, action: Selector) {
+        NotificationCenter.default.addObserver(target, selector: action, name: NOTI_UPDATE_PLAYER, object: nil)
     }
     
     func postDownloadingListChangedNotification(_ userInfo: [AnyHashable: Any]) {

@@ -90,7 +90,7 @@ class PlayerViewController: ViewController {
         prepareNavigationBar()
         prepareTableView()
 
-        NotificationManager.shared.addUpdatePlayerControllerObserver(self, action: #selector(PlayerViewController.updatePlayerController(_:)))
+        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(PlayerViewController.updatePlayer(_:)))
         
     }
     
@@ -516,7 +516,7 @@ class PlayerViewController: ViewController {
         MusicManager.shared.playAtSecond(Int(timePlayed))
     }
     
-    func updatePlayerController(_ noti: Notification) {
+    func updatePlayer(_ noti: Notification) {
         if let song = MusicManager.shared.currentSong() {
             updateCoverImage(song)
         }

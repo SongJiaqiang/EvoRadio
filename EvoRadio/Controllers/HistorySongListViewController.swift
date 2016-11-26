@@ -145,7 +145,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         let song = dataSource[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        NotificationManager.shared.postUpdatePlayerControllerNotification()
+        NotificationManager.shared.postUpdatePlayerNotification()
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     

@@ -62,7 +62,7 @@ class MusicManager: NSObject {
         
         if autoPlay {
             currentIndex = playlist.index(of: songs.first!)!
-            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerNotification()
             play()
         }
     }
@@ -185,7 +185,7 @@ class MusicManager: NSObject {
             // 缓存历史播放歌曲
             CoreDB.addSongToHistoryList(currentSong()!)
             
-            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerNotification()
         }
         
     }
@@ -231,11 +231,11 @@ class MusicManager: NSObject {
         if currentMode == .Random {
             currentIndex = Int(arc4random_uniform(UInt32(playlist.count)))
             play()
-            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerNotification()
         }else if currentMode == .ListLoop {
             incrementIndex()
             play()
-            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            NotificationManager.shared.postUpdatePlayerNotification()
         }else {
             play()
         }
@@ -322,7 +322,7 @@ class MusicManager: NSObject {
         if let lastPlaylist = CoreDB.getLastPlaylist() {
             playlist = lastPlaylist.playlist!
             currentIndex = (lastPlaylist.indexOfPlaylist?.intValue)!
-            NotificationManager.shared.postUpdatePlayerControllerNotification()
+//            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }
     }
     

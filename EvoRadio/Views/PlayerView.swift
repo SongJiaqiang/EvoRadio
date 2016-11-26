@@ -162,7 +162,7 @@ class PlayerView: UIView {
         
         NotificationManager.shared.addPlayMusicProgressStartedObserver(self, action: #selector(PlayerView.playMusicProgressStarted(_:)))
         NotificationManager.shared.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerView.playMusicProgressPaused(_:)))
-        NotificationManager.shared.addUpdatePlayerControllerObserver(self, action: #selector(PlayerView.updatePlayerBar))
+        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(PlayerView.updatePlayer))
     }
     
     
@@ -238,7 +238,7 @@ class PlayerView: UIView {
         playButton.setImage(UIImage(named: "player_play_pressed"), for: .highlighted)
     }
     
-    func updatePlayerBar() {
+    func updatePlayer() {
         if let song = MusicManager.shared.currentSong() {
             titleLabel.text = song.songName
             subTitleLabel.text = song.artistsName
