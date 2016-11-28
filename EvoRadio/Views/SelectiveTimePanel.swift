@@ -14,6 +14,7 @@ class SelectiveTimePanel: UIView {
     fileprivate let okButton = UIButton()
     fileprivate let randomButton = UIButton()
     fileprivate let resultLabel = UILabel()
+    let backgroundView = UIView()
     
     var daysButtons = [UIButton]()
     var timesButtons = [UIButton]()
@@ -21,14 +22,13 @@ class SelectiveTimePanel: UIView {
     var selectedDayIndex: Int = 0
     var selectedTimeIndex: Int = 0
     
+    open static let timePanel = SelectiveTimePanel(frame: CGRect.zero)
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        alpha = 0.9
-        insertGradientLayer()
-        prepareBottomButtons()
-        prepareWeekCollectionView()
-        
+        prepareUI()
+
         if let indexes = CoreDB.getSelectedIndexes() {
             selectButtonAtDaysIndex(indexes["dayIndex"]!, timeOfDayIndex: indexes["timeIndex"]!)
         }else {
@@ -41,7 +41,23 @@ class SelectiveTimePanel: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func insertGradientLayer() {
+    func prepareUI() {
+        
+        prepareBackgroundView()
+        prepareBottomButtons()
+        prepareWeekCollectionView()
+        
+    }
+    
+    func prepareBackgroundView() {
+        
+        addSubview(backgroundView)
+        backgroundView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        
+        backgroundView.alpha = 0.8
+        
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor(netHex: 0x2F0189).cgColor,
                                 UIColor(netHex: 0xB300C2).cgColor,
@@ -49,11 +65,11 @@ class SelectiveTimePanel: UIView {
                                 UIColor(netHex: 0x3CE5D8).cgColor,
                                 UIColor(netHex: 0x309D69).cgColor,
                                 UIColor(netHex: 0xEBEF00).cgColor]
-        gradientLayer.locations = [0, 0.2,0.4,0.6,0.8, 1]
-        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
-        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
-        gradientLayer.frame = frame
-        layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.locations = [0, 0.15,0.4,0.6,0.85, 1]
+        gradientLayer.startPoint = CGPoint(x: 0, y: 1)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 0)
+        gradientLayer.frame = Device.keyWindow().bounds
+        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
     }
 
     func prepareBottomButtons() {
@@ -62,7 +78,7 @@ class SelectiveTimePanel: UIView {
         nowButton.titleLabel?.font = UIFont.sizeOf14()
         nowButton.titleLabel?.textColor = UIColor.white
         nowButton.setTitle("当前时刻", for: UIControlState())
-        nowButton.backgroundColor = UIColor(netHex: 0x457fca)
+        nowButton.backgroundColor = UIColor.grayColor4()
         nowButton.addTarget(self, action: #selector(SelectiveTimePanel.nowButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(okButton)
@@ -76,10 +92,10 @@ class SelectiveTimePanel: UIView {
         randomButton.titleLabel?.font = UIFont.sizeOf14()
         randomButton.titleLabel?.textColor = UIColor.white
         randomButton.setTitle("随机时刻", for: UIControlState())
-        randomButton.backgroundColor = UIColor(netHex: 0x457fca)
+        randomButton.backgroundColor = UIColor.grayColor4()
         randomButton.addTarget(self, action: #selector(SelectiveTimePanel.randomButtonPressed(_:)), for: .touchUpInside)
         
-        let buttonHeight: CGFloat = 40
+        let buttonHeight: CGFloat = playerBarHeight
         nowButton.snp.makeConstraints { (make) in
             make.height.equalTo(buttonHeight)
             make.leftMargin.equalTo(0)
@@ -104,7 +120,9 @@ class SelectiveTimePanel: UIView {
             make.width.equalTo(randomButton)
         }
         
-        
+        nowButton.alpha = 0.9
+        randomButton.alpha = 0.9
+        okButton.alpha = 0.9
     }
     
     func prepareWeekCollectionView() {
@@ -168,7 +186,7 @@ class SelectiveTimePanel: UIView {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.white.cgColor
             button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), for: .selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor4()), for: .selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.daysButtonPressed(_:)), for: .touchUpInside)
             button.tag = 10+i
             daysContentView.addSubview(button)
@@ -192,7 +210,7 @@ class SelectiveTimePanel: UIView {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.white.cgColor
             button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor(netHex: 0x457fca)), for: .selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor4()), for: .selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.timesButtonPressed(_:)), for: .touchUpInside)
             button.tag = 20+i
             timesContentView.addSubview(button)
@@ -220,7 +238,9 @@ class SelectiveTimePanel: UIView {
     }
     
     func okButtonPressed(_ button: UIButton) {
-        removeFromSuperview()
+//        removeFromSuperview()
+
+        hide()
         
         let dict = ["dayIndex": selectedDayIndex, "timeIndex": selectedTimeIndex]
         CoreDB.saveSelectedIndexes(dict)
@@ -274,5 +294,24 @@ class SelectiveTimePanel: UIView {
         }
     }
    
+    open func show() {
+        Device.keyWindow().addSubview(self)
+        self.alpha = 0
+        self.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        
+        UIView.animate(withDuration: 0.5, animations: { Void in
+            self.alpha = 1
+        })
+    }
+    
+    open func hide() {
+        UIView.animate(withDuration: 0.5, animations: { Void in
+            self.alpha = 0
+        }, completion: { completion in
+            self.removeFromSuperview()
+        })
+    }
 }
 

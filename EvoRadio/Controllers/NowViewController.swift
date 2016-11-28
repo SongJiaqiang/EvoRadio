@@ -78,8 +78,7 @@ class NowViewController: ViewController {
     
     //MARK: events
     func clockViewPressed() {
-        let panel = SelectiveTimePanel(frame: Device.keyWindow().bounds)
-        Device.keyWindow().addSubview(panel)
+        SelectiveTimePanel.timePanel.show()
     }
     
     func nowTimeChanged(_ notification: Notification) {
