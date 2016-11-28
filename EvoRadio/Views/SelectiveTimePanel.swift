@@ -24,7 +24,7 @@ class SelectiveTimePanel: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        alpha = 0.98
+        alpha = 0.9
         insertGradientLayer()
         prepareBottomButtons()
         prepareWeekCollectionView()
@@ -43,8 +43,13 @@ class SelectiveTimePanel: UIView {
     
     func insertGradientLayer() {
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor(netHex: 0x283E51).cgColor,UIColor(netHex: 0x4B79A1).cgColor]
-        gradientLayer.locations = [0, 1]
+        gradientLayer.colors = [UIColor(netHex: 0x2F0189).cgColor,
+                                UIColor(netHex: 0xB300C2).cgColor,
+                                UIColor(netHex: 0x1347DE).cgColor,
+                                UIColor(netHex: 0x3CE5D8).cgColor,
+                                UIColor(netHex: 0x309D69).cgColor,
+                                UIColor(netHex: 0xEBEF00).cgColor]
+        gradientLayer.locations = [0, 0.2,0.4,0.6,0.8, 1]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)
         gradientLayer.frame = frame
@@ -130,16 +135,6 @@ class SelectiveTimePanel: UIView {
             make.bottom.equalTo(weekView.snp.top).offset(-30)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
-        }
-        
-        let closeButton = UIButton()
-        addSubview(closeButton)
-        closeButton.setImage(UIImage(named: "icon_close"), for: UIControlState())
-        closeButton.addTarget(self, action: #selector(SelectiveTimePanel.closeButtonPressed(_:)), for: .touchUpInside)
-        closeButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 30, height: 30))
-            make.leftMargin.equalTo(10)
-            make.topMargin.equalTo(30)
         }
         
         let daysContentView = UIView()
@@ -267,9 +262,6 @@ class SelectiveTimePanel: UIView {
         updateResultLabel(nil)
     }
     
-    func closeButtonPressed(_ button: UIButton) {
-        removeFromSuperview()
-    }
 
     func updateResultLabel(_ result: String?) {
         
