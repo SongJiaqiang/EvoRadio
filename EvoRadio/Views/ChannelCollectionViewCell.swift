@@ -65,8 +65,8 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     func updateContent(_ channel: Channel, isNow: Bool) {
         self.channel = channel
         
-        if let picURL = channel.picURL {
-            picImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
+        if let picURL = URL(string: channel.picURL!) {
+            picImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
         }
         
         if let channelName = channel.channelName {

@@ -87,8 +87,8 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         nameLabel.textColor = UIColor.white
         
         let channel = channels[index]
-        if let picURL = channel.picURL {
-            coverImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
+        if let picURL = URL(string: channel.picURL!) {
+            coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
         }
         nameLabel.text = channel.channelName
         

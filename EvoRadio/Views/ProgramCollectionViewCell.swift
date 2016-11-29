@@ -119,8 +119,8 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             channelNameLabel.text = programName
         }
         
-        if let picURL = program.picURL {
-            picImageView.kf.setImage(with: URL(string: picURL)!, placeholder: UIImage.placeholder_cover())
+        if let picURL = URL(string: program.picURL!) {
+            picImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
         }
         
         if let channels = program.channels {

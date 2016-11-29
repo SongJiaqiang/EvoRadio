@@ -88,9 +88,10 @@ class RadioTableViewCell: UITableViewCell {
                 nameLabel.textColor = UIColor.white
                 
                 let channel = channels[i]
-                if let picURL = channel.picURL {
-                    imageView.kf.setImage(with: URL(string: picURL)!, for: .normal, placeholder: UIImage.placeholder_cover(), options: nil, progressBlock: nil, completionHandler: nil)
+                if let picURL = URL(string: channel.picURL!) {
+                    imageView.kf.setImage(with: picURL, for: .normal, placeholder: UIImage.placeholder_cover())
                 }
+                
                 nameLabel.text = channel.channelName
                 
             }
