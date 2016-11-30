@@ -131,13 +131,13 @@ class ProgramCollectionViewCell: UICollectionViewCell {
             }
         }
         
-        if let vip = program.vipLevel {
-            if Int(vip) > 0 {
-                vipView.isHidden = false
-            }else {
-                vipView.isHidden = true
-            }
-        }
+//        if let vip = program.vipLevel {
+//            if Int(vip) > 0 {
+//                vipView.isHidden = false
+//            }else {
+//                vipView.isHidden = true
+//            }
+//        }
     }
 }
 
