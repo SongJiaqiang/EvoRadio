@@ -37,7 +37,6 @@ class NavigationController: UINavigationController {
         }else {
             return super.popViewController(animated: animated)
         }
-        
     }
     
     override func popToViewController(_ viewController: UIViewController, animated: Bool) -> [UIViewController]? {
@@ -48,14 +47,13 @@ class NavigationController: UINavigationController {
         }else {
             return super.popToViewController(viewController, animated: animated)
         }
-        
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         
         interactivePopGestureRecognizer?.isEnabled = false
         
-        if isAnimated || isPopViewController() {
+        if isAnimated || hasPopViewController() {
             return
         }
         
@@ -65,14 +63,14 @@ class NavigationController: UINavigationController {
     }
     
     
-    /** Insert pop view controller to queue */
+    /** Insert view controller to queue */
     func enqueueViewController(_ viewController: UIViewController?, animated: Bool) {
         let item = PopItem(controller: viewController, animated: animated)
         popQueue.append(item)
         
     }
     
-    /** Poping pop view controller from queue */
+    /** Pop view controller from queue */
     func dequeueViewController(_ navigationController: UINavigationController) {
         if popQueue.count > 0 {
             let item = popQueue.first
@@ -85,17 +83,28 @@ class NavigationController: UINavigationController {
         }
     }
     
-    func isPopViewController() -> Bool {
+    func hasPopViewController() -> Bool {
         return popQueue.count > 0
     }
-    
     
 }
 
 
-//MARK: pan gesuture recognizer
-extension NavigationController: UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+//MARK: navigation controller delegates
+extension NavigationController: UINavigationControllerDelegate, UINavigationBarDelegate {
     
+    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        isAnimated = false
+        interactivePopGestureRecognizer?.isEnabled = true
+        
+        // pop next view controller in queue
+        dequeueViewController(navigationController)
+    }
+    
+}
+
+//MARK: gesuture recognizer delegate
+extension NavigationController: UIGestureRecognizerDelegate {
     // if navigation controller's sub view controller more than 1, enable pan gesture to pop itself
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         if viewControllers.count > 1 {
@@ -103,17 +112,6 @@ extension NavigationController: UINavigationControllerDelegate, UINavigationBarD
         }
         return false
     }
-    
-    
-    func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        isAnimated = false
-        interactivePopGestureRecognizer?.isEnabled = true
-        
-        // pop queue view controllers
-        dequeueViewController(navigationController)
-    }
-
-    
 }
 
 struct PopItem {
