@@ -192,15 +192,15 @@ class DownloadingSongListViewController: ViewController {
     }
     
     func rightButtonPressed() {
-        self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在下载的歌曲吗？", DestructiveTitle: "确定") {[weak self] (action) in
+        self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在下载的歌曲吗？", DestructiveTitle: "确定") { (action) in
             
-            self?.downloadManager.cancelAllTasks()
-            self?.downloadManager.downloadingArray.removeAll()
+            self.downloadManager.cancelAllTasks()
+            self.downloadManager.downloadingArray.removeAll()
             
             Downloader.downloadingSongs.removeAll()
             CoreDB.removeAllDownloadingSongs()
             
-            self?.tableView.reloadData()
+            self.tableView.reloadData()
         }
     }
     

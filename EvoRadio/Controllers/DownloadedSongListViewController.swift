@@ -171,12 +171,12 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     
     func rightButtonPressed() {
         
-        self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在已下载的歌曲吗？", DestructiveTitle: "确定") {[weak self] (action) in
+        self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在已下载的歌曲吗？", DestructiveTitle: "确定") { (action) in
+            self.dataSource.removeAll()
+            self.tableView.reloadDataOnMainQueue(after: {
+                CoreDB.removeAllDownloadedSongs()
+            })
             
-            self?.dataSource.removeAll()
-            self?.tableView.reloadData()
-            
-            CoreDB.removeAllDownloadedSongs()
         }
     }
 

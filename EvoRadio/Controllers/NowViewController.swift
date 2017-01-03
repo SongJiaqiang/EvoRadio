@@ -96,7 +96,7 @@ class NowViewController: ViewController {
                 self?.nowChannels.append(contentsOf: newChannels)
                 
                 self?.collectionHeaderView = nil
-                self?.collectionView!.reloadData()
+                self?.collectionView!.reloadDataOnMainQueue(after: nil)
                 }, onFailed: nil)
         }
     }
@@ -115,7 +115,6 @@ class NowViewController: ViewController {
     }
     
     func listGroundPrograms(_ isRefresh: Bool) {
-        
         var pageIndex = dataSource.count
         if isRefresh {
             pageIndex = 0
@@ -131,8 +130,9 @@ class NowViewController: ViewController {
                 
                 self?.dataSource.append(contentsOf: newData)
                 
-                self?.collectionView!.reloadData()
-                self?.endRefreshing()
+                self?.collectionView!.reloadDataOnMainQueue(after: {
+                    self?.endRefreshing()
+                })
                 
             }else {
                 self?.endOfFeed = true

@@ -142,7 +142,7 @@ class StreamingKitViewController: ViewController {
                 self?.dataSource = songs
                 PlaylistManager.playlist.saveList(songs)
                 
-                self?.tableView.reloadData()
+                self?.tableView.reloadDataOnMainQueue(after: nil)
             }else {
                 debugPrint("This program has no songs")
             }

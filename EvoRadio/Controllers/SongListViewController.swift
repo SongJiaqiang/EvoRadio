@@ -97,7 +97,7 @@ class SongListViewController: ViewController {
                     PlaylistManager.playlist.saveList(songs)
                     
                     self?.updateCover()
-                    self?.tableView.reloadData()
+                    self?.tableView.reloadDataOnMainQueue(after: nil)
                 }else {
                     debugPrint("This program has no songs")
                 }

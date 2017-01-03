@@ -26,8 +26,11 @@ class API {
     func fetch_all_channels(_ onSuccess: @escaping ([Radio]) -> Void, onFailed: ((Error) -> Void)?) {
         
         if let responseData = CoreDB.getAllChannels() {
-            let items = [Radio](dictArray: responseData as [NSDictionary]?)
-            onSuccess(items)
+            // 使用EVReflection做字段映射非常耗时，应当放在子线程。建议移除自动映射，手动书写对象-字典转换方法效率会高很多。
+            DispatchQueue.global(qos: .default).async {
+                let items = [Radio](dictArray: responseData as [NSDictionary]?)
+                onSuccess(items)
+            }
             return
         }
         
@@ -40,9 +43,10 @@ class API {
                         let responseData = dict["data"] as! [[String : AnyObject]]
                         CoreDB.saveAllChannels(responseData)
                         
-                        let items = [Radio].init(dictArray: responseData as [NSDictionary]?)
-                        
-                        onSuccess(items)
+                        DispatchQueue.global(qos: .default).async {
+                            let items = [Radio].init(dictArray: responseData as [NSDictionary]?)
+                            onSuccess(items)
+                        }
                     }
                     
                 } catch let error {
@@ -95,30 +99,33 @@ class API {
         let endpoint = commonEP("api/radio.listGroundPrograms.json?_pn=\(_pn)&_sz=\(page.size)")
         
         if let responseData = CoreDB.getGroundPrograms(endpoint) {
-            let items = [Program](dictArray: responseData as [NSDictionary]?)
-            onSuccess(items)
+            DispatchQueue.global(qos: .default).async {
+                let items = [Program](dictArray: responseData as [NSDictionary]?)
+                onSuccess(items)
+            }
+            return
         }
         
         Alamofire.request(endpoint).responseJSON { (response) in
             do {
-                
                 let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
                 
                 if dict["err"] as! String == "hapn.ok" {
+                    
                     let data = dict["data"]!["lists"] as? [[String : AnyObject]]
+                    
                     CoreDB.saveGroundPrograms(endpoint, responseData: data!)
                     
-                    let items = [Program](dictArray: data as [NSDictionary]?)
-                    onSuccess(items)
+                    DispatchQueue.global(qos: .default).async {
+                        let items = [Program](dictArray: data as [NSDictionary]?)
+                        onSuccess(items)
+                    }
                 }
-                
-                
             } catch let error {
                 if let _ = onFailed {
                     onFailed!(error)
                 }
             }
-            
         }
     }
     
@@ -128,8 +135,11 @@ class API {
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
         
         if let responseData = CoreDB.getPrograms(endpoint) {
-            let items = [Program](dictArray: responseData as [NSDictionary]?)
-            onSuccess(items)
+            DispatchQueue.global(qos: .default).async {
+                let items = [Program](dictArray: responseData as [NSDictionary]?)
+                onSuccess(items)
+            }
+            return
         }
         
         Alamofire.request(endpoint).responseJSON { (response) in
@@ -141,8 +151,10 @@ class API {
                     let data = dict["data"]!["lists"] as? [[String : AnyObject]]
                     CoreDB.savePrograms(endpoint, responseData: data!)
                     
-                    let items = [Program](dictArray: data as [NSDictionary]?)
-                    onSuccess(items)
+                    DispatchQueue.global(qos: .default).async {
+                        let items = [Program](dictArray: data as [NSDictionary]?)
+                        onSuccess(items)
+                    }
                 }
                 
                 
@@ -163,8 +175,10 @@ class API {
         }
         
         if let responseData = CoreDB.getSongs(endpoint) {
-            let items = [Song](dictArray: responseData as [NSDictionary]?)
-            onSuccess(items)
+            DispatchQueue.global(qos: .default).async {
+                let items = [Song](dictArray: responseData as [NSDictionary]?)
+                onSuccess(items)
+            }
         }
         
         Alamofire.request(endpoint).responseJSON { (response) in
@@ -173,9 +187,11 @@ class API {
                 if dict["err"] as! String == "hapn.ok" {
                     let data = dict["data"]!["songs"] as? [[String: AnyObject]]
                     CoreDB.saveSongs(endpoint, responseData: data!)
-                    
-                    let items = [Song](dictArray: data! as [NSDictionary]?)
-                    onSuccess(items)
+
+                    DispatchQueue.global(qos: .default).async {
+                        let items = [Song](dictArray: data! as [NSDictionary]?)
+                        onSuccess(items)
+                    }
                 }
                 
             } catch let error {

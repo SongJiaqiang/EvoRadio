@@ -93,8 +93,8 @@ class NavigationController: UINavigationController {
 }
 
 
-//MARK: pan gesuture recognizer
-extension NavigationController: UINavigationControllerDelegate, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+//MARK: gesture delegate
+extension NavigationController: UIGestureRecognizerDelegate {
     
     // if navigation controller's sub view controller more than 1, enable pan gesture to pop itself
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
@@ -103,7 +103,10 @@ extension NavigationController: UINavigationControllerDelegate, UINavigationBarD
         }
         return false
     }
-    
+}
+
+//MARK: navigation delegates
+extension NavigationController: UINavigationControllerDelegate, UINavigationBarDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
         isAnimated = false
@@ -113,8 +116,8 @@ extension NavigationController: UINavigationControllerDelegate, UINavigationBarD
         dequeueViewController(navigationController)
     }
 
-    
 }
+
 
 struct PopItem {
     var controller: UIViewController?

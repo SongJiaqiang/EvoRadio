@@ -762,7 +762,6 @@ extension PlayerViewController: STKAudioPlayerDelegate {
     }
     
     func audioPlayer(_ audioPlayer: STKAudioPlayer, stateChanged state: STKAudioPlayerState, previousState: STKAudioPlayerState) {
-        debugPrint("stateChanged: \(state)")
         
         if state == .playing {
             playButton.setImage(UIImage(named: "player_paused"), for: UIControlState())

@@ -9,6 +9,9 @@ PODS:
   - pop (1.0.9)
   - ReflectionView (1.2)
   - SnapKit (3.0.2)
+  - SQLite.swift (0.11.0):
+    - SQLite.swift/standard (= 0.11.0)
+  - SQLite.swift/standard (0.11.0)
   - StreamingKit (0.1.29)
 
 DEPENDENCIES:
@@ -22,6 +25,7 @@ DEPENDENCIES:
   - pop (~> 1.0)
   - ReflectionView (~> 1.2)
   - SnapKit (~> 3.0.0)
+  - SQLite.swift (~> 0.11.0)
   - StreamingKit (~> 0.1.29)
 
 EXTERNAL SOURCES:
@@ -45,8 +49,9 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
+  SQLite.swift: 9a26273607d3077a2e5a8d33486e9989f8404c7d
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
 
-PODFILE CHECKSUM: d3dedff24a597ffbc1fc0783cf18dca2e509d834
+PODFILE CHECKSUM: 3e8bdb3e64bf50d6218afd3c5f80537f6d3f3cc4
 
 COCOAPODS: 1.1.1

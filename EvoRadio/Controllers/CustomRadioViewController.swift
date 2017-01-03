@@ -33,7 +33,7 @@ class CustomRadioViewController: ViewController {
             let allRadios = items
             self?.dataSource.append(contentsOf: allRadios)
             
-            self?.tableView.reloadData()
+            self?.tableView.reloadDataOnMainQueue(after: nil)
             }, onFailed: nil)
     }
     

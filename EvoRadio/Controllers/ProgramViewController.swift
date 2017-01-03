@@ -117,8 +117,9 @@ class ProgramViewController: ViewController {
                 
                 self?.dataSource.append(contentsOf: newData)
                 
-                self?.collectionView!.reloadData()
-                self?.endRefreshing()
+                self?.collectionView!.reloadDataOnMainQueue(after: { 
+                    self?.endRefreshing()
+                })
                 
             }else {
                 self?.endOfFeed = true

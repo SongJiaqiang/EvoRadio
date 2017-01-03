@@ -98,8 +98,11 @@ class ChannelViewController: ViewController {
                     break
                 }
             }
-            self?.collectionView!.reloadData()
-            self?.collectionView!.mj_header.endRefreshing()
+            
+            self?.collectionView?.reloadDataOnMainQueue(after: { 
+                self?.collectionView!.mj_header.endRefreshing()
+            })
+            
             }, onFailed: nil)
     }
     
@@ -115,8 +118,9 @@ class ChannelViewController: ViewController {
             self?.dataSource.removeAll()
             self?.dataSource.append(contentsOf: newChannels)
             
-            self?.collectionView!.reloadData()
-            self?.collectionView!.mj_header.endRefreshing()
+            self?.collectionView?.reloadDataOnMainQueue(after: {
+                self?.collectionView!.mj_header.endRefreshing()
+            })
 //            if self?.radioID == 0 {
 //                self?.collectionView!.mj_header.hidden = true
 //            }
@@ -141,7 +145,7 @@ class ChannelViewController: ViewController {
                 self?.dataSource.removeAll()
                 self?.dataSource.append(contentsOf: newChannels)
                 
-                self?.collectionView!.reloadData()
+                self?.collectionView!.reloadDataOnMainQueue(after: nil)
                 }, onFailed: nil)
         }
         
