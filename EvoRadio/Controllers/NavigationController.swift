@@ -90,7 +90,7 @@ class NavigationController: UINavigationController {
 }
 
 
-//MARK: navigation controller delegates
+//MARK: navigation delegates
 extension NavigationController: UINavigationControllerDelegate, UINavigationBarDelegate {
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
@@ -100,7 +100,6 @@ extension NavigationController: UINavigationControllerDelegate, UINavigationBarD
         // pop next view controller in queue
         dequeueViewController(navigationController)
     }
-    
 }
 
 //MARK: gesuture recognizer delegate
@@ -113,6 +112,7 @@ extension NavigationController: UIGestureRecognizerDelegate {
         return false
     }
 }
+
 
 struct PopItem {
     var controller: UIViewController?

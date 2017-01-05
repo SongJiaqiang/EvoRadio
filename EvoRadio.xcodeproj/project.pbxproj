@@ -17,6 +17,7 @@
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */; };
 		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
+		636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */; };
 		638DD7741D7EA7D900C2EFC0 /* ClockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 638DD7731D7EA7D900C2EFC0 /* ClockView.swift */; };
 		63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63974EB91DC4E437004D2526 /* Downloader.swift */; };
 		63A4E5381D7FFCFF00E18FD6 /* LocalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */; };
@@ -25,6 +26,7 @@
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
 		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
+		63DB930E1DF2B8F60051FA2B /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DB930D1DF2B8F60051FA2B /* SQLite.framework */; };
 		63EF920A1DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */; };
 		63EF920C1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */; };
 		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
@@ -114,6 +116,7 @@
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StreamingKitViewController.swift; path = Controllers/StreamingKitViewController.swift; sourceTree = "<group>"; };
 		636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSongInfo.swift; sourceTree = "<group>"; };
+		636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		638DD7731D7EA7D900C2EFC0 /* ClockView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClockView.swift; path = Views/ClockView.swift; sourceTree = "<group>"; };
 		63974EB91DC4E437004D2526 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
 		63A4E5371D7FFCFF00E18FD6 /* LocalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = LocalViewController.swift; path = Controllers/LocalViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -122,6 +125,8 @@
 		63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
 		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
+		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; };
+		63DB930D1DF2B8F60051FA2B /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-gskcqilscluuskaefyfvwyrlddxi/Build/Products/Debug-iphoneos/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
 		63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedTableViewCell.swift; path = Views/DownloadedTableViewCell.swift; sourceTree = "<group>"; };
 		63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedCollectionViewCell.swift; path = Views/DownloadedCollectionViewCell.swift; sourceTree = "<group>"; };
 		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -220,6 +225,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63DB930E1DF2B8F60051FA2B /* SQLite.framework in Frameworks */,
 				9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */,
 				9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */,
 				90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */,
@@ -244,6 +250,7 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				63DB930D1DF2B8F60051FA2B /* SQLite.framework */,
 				9059396A1D0E65A200FF9848 /* AVFoundation.framework */,
 				90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */,
 				90C32B6D1D0586E200C87DAF /* ImageIO.framework */,
@@ -263,6 +270,14 @@
 				D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		63DB930B1DF2B88F0051FA2B /* Playgrounds */ = {
+			isa = PBXGroup;
+			children = (
+				63DB930C1DF2B8BB0051FA2B /* sqlite.playground */,
+			);
+			name = Playgrounds;
 			sourceTree = "<group>";
 		};
 		900C724A1D0563F0006EBE78 /* Libs */ = {
@@ -327,6 +342,7 @@
 				909E65B11CC0843700B0C49B /* Utils */,
 				900C724A1D0563F0006EBE78 /* Libs */,
 				909E659C1CC0831100B0C49B /* Resources */,
+				63DB930B1DF2B88F0051FA2B /* Playgrounds */,
 			);
 			path = EvoRadio;
 			sourceTree = "<group>";
@@ -428,6 +444,7 @@
 				9097BB2E1CFFDFEF00FA5BD9 /* Strings.swift */,
 				63A4E53B1D80384600E18FD6 /* Views.swift */,
 				633506DF1DE9D97500607693 /* Labels.swift */,
+				636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -658,6 +675,7 @@
 				90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */,
 				632DA7E41D7979F100A78DBD /* TopTabBar.swift in Sources */,
 				909E65A11CC0831B00B0C49B /* MainViewController.swift in Sources */,
+				636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */,
 				90E7FB4F1CC4C3170018A532 /* Program.swift in Sources */,
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
 				90B95CAA1CF6EF9A00105090 /* PlaylistManager.swift in Sources */,

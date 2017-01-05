@@ -54,7 +54,7 @@ class RadioViewController: ViewController {
             
             if radios.count > 0 {
                 self?.dataSource = radios
-                self?.tableView!.reloadData()
+                self?.tableView!.reloadDataOnMainQueue(after: nil)
 //                self?.tableView!.mj_header.endRefreshing()
             }
             }, onFailed: nil)

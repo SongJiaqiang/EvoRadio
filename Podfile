@@ -32,6 +32,8 @@ pod 'Kingfisher', '~> 3.0'
 pod 'SnapKit', '~> 3.0.0'
 ## Swift映射
 pod 'EVReflection', :git => 'https://github.com/evermeer/EVReflection', :branch => 'Swift3'
+## SQLite
+pod 'SQLite.swift', '~> 0.11.0'
 
 end
 
