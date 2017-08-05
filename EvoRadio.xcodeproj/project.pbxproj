@@ -107,6 +107,7 @@
 
 /* Begin PBXFileReference section */
 		270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
+		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
 		631884611D78486000D7399A /* NowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = NowViewController.swift; path = Controllers/NowViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		632DA7DB1D79229300A78DBD /* NowCollectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NowCollectionHeaderView.swift; path = Views/NowCollectionHeaderView.swift; sourceTree = "<group>"; };
@@ -155,7 +156,6 @@
 		90659F211CC9C0B70026539F /* WLevelWriteBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelWriteBatch.h; sourceTree = "<group>"; };
 		90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelWriteBatch.mm; sourceTree = "<group>"; };
 		90659F261CC9C1A50026539F /* CoreDB.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CoreDB.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = "EvoRadio-Bridging-Header.pch"; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		9070928E1D07B51000E11D88 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HudManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		907092911D08313500E11D88 /* HistorySongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = HistorySongListViewController.swift; path = Controllers/HistorySongListViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9096D78A1CFC0FED00DA6923 /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-ahavzujveykrtgbwgjeponlruqip/Build/Products/Debug-iphonesimulator/pop.framework"; sourceTree = "<group>"; };
@@ -407,8 +407,8 @@
 		909E659C1CC0831100B0C49B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				90659F281CC9C42D0026539F /* EvoRadio-Bridging-Header.pch */,
 				9097BB1C1CFE8B6400FA5BD9 /* Test.xib */,
+				630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -809,7 +809,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/EvoRadio/Resources/EvoRadio-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -836,7 +836,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = cn.songjiaqiang.evoradio;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "EvoRadio/Resources/EvoRadio-Bridging-Header.pch";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/EvoRadio/Resources/EvoRadio-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
