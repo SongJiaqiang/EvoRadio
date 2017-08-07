@@ -12,7 +12,6 @@
 #import "WLevelDb.h"
 #import <pop/POP.h>
 
-#import "WXApi.h"
 
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <StreamingKit/STKAudioPlayer.h>

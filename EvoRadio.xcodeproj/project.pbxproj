@@ -29,9 +29,6 @@
 		63DB930E1DF2B8F60051FA2B /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63DB930D1DF2B8F60051FA2B /* SQLite.framework */; };
 		63EF920A1DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */; };
 		63EF920C1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */; };
-		900C72491D054888006EBE78 /* SocialController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 900C72481D054888006EBE78 /* SocialController.swift */; };
-		900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C724C1D0563F0006EBE78 /* libWeChatSDK.a */; };
-		900C72521D0563F0006EBE78 /* README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 900C724D1D0563F0006EBE78 /* README.txt */; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -130,12 +127,6 @@
 		63DB930D1DF2B8F60051FA2B /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-gskcqilscluuskaefyfvwyrlddxi/Build/Products/Debug-iphoneos/SQLite.swift/SQLite.framework"; sourceTree = "<group>"; };
 		63EF92091DC0C46C00D7D3A4 /* DownloadedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedTableViewCell.swift; path = Views/DownloadedTableViewCell.swift; sourceTree = "<group>"; };
 		63EF920B1DC0C64400D7D3A4 /* DownloadedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedCollectionViewCell.swift; path = Views/DownloadedCollectionViewCell.swift; sourceTree = "<group>"; };
-		900C72481D054888006EBE78 /* SocialController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = SocialController.swift; path = Controllers/SocialController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		900C724C1D0563F0006EBE78 /* libWeChatSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeChatSDK.a; sourceTree = "<group>"; };
-		900C724D1D0563F0006EBE78 /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		900C724E1D0563F0006EBE78 /* WechatAuthSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WechatAuthSDK.h; sourceTree = "<group>"; };
-		900C724F1D0563F0006EBE78 /* WXApi.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApi.h; sourceTree = "<group>"; };
-		900C72501D0563F0006EBE78 /* WXApiObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WXApiObject.h; sourceTree = "<group>"; };
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Device.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,7 +227,6 @@
 				90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */,
 				90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */,
 				90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */,
-				900C72511D0563F0006EBE78 /* libWeChatSDK.a in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
@@ -283,21 +273,8 @@
 		900C724A1D0563F0006EBE78 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
-				900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */,
 			);
 			path = Libs;
-			sourceTree = "<group>";
-		};
-		900C724B1D0563F0006EBE78 /* OpenSDK1.7.1 */ = {
-			isa = PBXGroup;
-			children = (
-				900C724C1D0563F0006EBE78 /* libWeChatSDK.a */,
-				900C724D1D0563F0006EBE78 /* README.txt */,
-				900C724E1D0563F0006EBE78 /* WechatAuthSDK.h */,
-				900C724F1D0563F0006EBE78 /* WXApi.h */,
-				900C72501D0563F0006EBE78 /* WXApiObject.h */,
-			);
-			path = OpenSDK1.7.1;
 			sourceTree = "<group>";
 		};
 		9023EA001D067233004BEE96 /* Downloader */ = {
@@ -397,7 +374,6 @@
 				9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */,
 				9097BB201CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift */,
 				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
-				900C72481D054888006EBE78 /* SocialController.swift */,
 				907092911D08313500E11D88 /* HistorySongListViewController.swift */,
 				6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */,
 			);
@@ -557,7 +533,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
-				900C72521D0563F0006EBE78 /* README.txt in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -653,7 +628,6 @@
 				632DA7E21D7967D400A78DBD /* AssistiveTouch.swift in Sources */,
 				6362F2581D3D4096003E6ED4 /* StreamingKitViewController.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
-				900C72491D054888006EBE78 /* SocialController.swift in Sources */,
 				9097BB211CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				90B59E6A1CFD7AD0001E8F23 /* ScrollTabBar.swift in Sources */,

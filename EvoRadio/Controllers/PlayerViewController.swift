@@ -451,12 +451,20 @@ class PlayerViewController: ViewController {
             HudManager.showText("已经加入下载列表")
         }
     }
+    
     func shareButtonPressed(_ button: UIButton) {
         if let currentSong = MusicManager.shared.currentSong() {
-            let social  = SocialController(music: currentSong, shareImage: coverImageView.image!, shareText: "")
-            present(social, animated: true, completion: nil)
+            
+            let link = URL(string: currentSong.audioURL!)
+            let message = String(format: "EvoRadio请您欣赏：%@", currentSong.songName)
+            
+            let shareItems: [Any] = [message, link as Any]
+            let activityController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+            
+            self.present(activityController, animated: true, completion: nil)
         }
     }
+    
     func infoButtonPressed(_ button: UIButton) {
         debugPrint("infoButtonPressed")
     }
