@@ -262,6 +262,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		634E065A1F3849B400253E9A /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */,
+				9097BB241CFEA6E900FA5BD9 /* DownloadedViewController.swift */,
+				9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */,
+				9097BB201CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift */,
+				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
+			);
+			name = Download;
+			sourceTree = "<group>";
+		};
 		63DB930B1DF2B88F0051FA2B /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,11 +381,7 @@
 				90659F131CC9451E0026539F /* PersonalViewController.swift */,
 				903DEB6C1CC9D57500D79DC1 /* SettingViewController.swift */,
 				DB4F76E81CCC5CC00021D068 /* CustomRadioViewController.swift */,
-				9097BB1A1CFE898800FA5BD9 /* DownloadViewController.swift */,
-				9097BB241CFEA6E900FA5BD9 /* DownloadedViewController.swift */,
-				9097BB1E1CFE9BCD00FA5BD9 /* DownloadedSongListViewController.swift */,
-				9097BB201CFE9BE400FA5BD9 /* DownloadedProgramListViewController.swift */,
-				9097BB221CFE9BF700FA5BD9 /* DownloadingSongListViewController.swift */,
+				634E065A1F3849B400253E9A /* Download */,
 				907092911D08313500E11D88 /* HistorySongListViewController.swift */,
 				6362F2571D3D4096003E6ED4 /* StreamingKitViewController.swift */,
 			);
