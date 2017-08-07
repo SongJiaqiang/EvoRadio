@@ -242,7 +242,11 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
             if songs.count > 0 {
                 MusicManager.shared.clearList()
                 MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+                
+//                if let topVC = Device.keyWindow().topMostController() {
+//                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+//                }
+                
             }
             
             }, onFailed: nil)
