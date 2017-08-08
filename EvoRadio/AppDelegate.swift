@@ -39,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.clipsToBounds = true
 //        window?.layer.cornerRadius = 10
         
-        let controller = MainViewController()
-        let homeNavC = NavigationController(rootViewController: controller)
-        window?.rootViewController = homeNavC
+        let rootVC = MainViewController()
+        let navVC = NavigationController(rootViewController: rootVC)
+        window?.rootViewController = navVC
         
 //        let c = StreamingKitViewController()
 //        window?.rootViewController = c
@@ -95,6 +95,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    
+    /// 远程控制。耳机、蓝牙
+    ///
+    /// - Parameter event: 触发事件
     override func remoteControlReceived(with event: UIEvent?) {
         if let e = event {
             if e.type == .remoteControl {
@@ -127,9 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-    
-    
 
 }
 

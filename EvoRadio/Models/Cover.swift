@@ -7,17 +7,28 @@
 //
 
 import Foundation
-import EVReflection
+import ObjectMapper
 
-class Cover: EVObject {
+class Cover: Mappable {
     var num: NSNumber?
     var pics: [String]?
     
-    convenience init(num: NSNumber, pics: [String]) {
-        self.init()
+//    convenience init(num: NSNumber, pics: [String]) {
+//        self.init()
+//        
+//        self.num = num
+//        self.pics = pics
+//    }
+    
+    
+    required /// This function can be used to validate JSON prior to mapping. Return nil to cancel mapping at this point
+    init?(map: Map) {
         
-        self.num = num
-        self.pics = pics
     }
     
+    func mapping(map: Map) {
+        num    <- map["num"]
+        pics   <- map["pics"]
+    }
+
 }

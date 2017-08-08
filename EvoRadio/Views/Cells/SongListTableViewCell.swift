@@ -67,7 +67,7 @@ class SongListTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.sizeOf14()
         titleLabel.textColor = UIColor.grayColor7()
-        titleLabel.text = "祝君好"
+        titleLabel.text = "歌曲名称"
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(coverImageView.snp.right).offset(5)
             make.right.equalTo(moreButton.snp.left).offset(-5)
@@ -77,7 +77,7 @@ class SongListTableViewCell: UITableViewCell {
         contentView.addSubview(subTitleLabel)
         subTitleLabel.font = UIFont.sizeOf10()
         subTitleLabel.textColor = UIColor.grayColor6()
-        subTitleLabel.text = "高凯 - 粤语情话"
+        subTitleLabel.text = "歌手 - 专辑名称"
         subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(coverImageView.snp.right).offset(6)
             make.right.equalTo(moreButton.snp.left).offset(-5)

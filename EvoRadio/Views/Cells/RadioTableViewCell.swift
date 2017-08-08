@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 let itemMargin: CGFloat = 10
 
@@ -102,7 +103,7 @@ class RadioTableViewCell: UITableViewCell {
     func moreButtonPressed(_ button: UIButton) {
         if let _ = delegate {
             if let radioId = radio!.radioID {
-                delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId.intValue)
+                delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId)
             }
         }
     }

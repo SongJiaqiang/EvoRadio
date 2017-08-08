@@ -61,7 +61,13 @@ class MusicManager: NSObject {
         }
         
         if autoPlay {
-            currentIndex = playlist.index(of: songs.first!)!
+            
+            if let first = songs.first {                
+                if let index = indexOf(array: playlist, song: first) {
+                    currentIndex = index
+                }
+            }
+            
             NotificationManager.shared.postUpdatePlayerNotification()
             play()
         }
@@ -80,7 +86,10 @@ class MusicManager: NSObject {
         }
         
         if autoPlay {
-            currentIndex = playlist.index(of: song)!
+            if let index = indexOf(array: playlist, song: song) {
+                currentIndex = index
+            }
+            
             play()
         }
         
@@ -90,12 +99,13 @@ class MusicManager: NSObject {
         
         for item in playlist {
             if item.songID == song.songID {
-                let index = playlist.index(of: item)
-                playlist.remove(at: index!)
-                if index < currentIndex {
-                    currentIndex -= 1
+                if let index = indexOf(array: playlist, song: item) {
+                    playlist.remove(at: index)
+                    if index < currentIndex {
+                        currentIndex -= 1
+                    }
+                    return
                 }
-                return
             }
         }
     }
@@ -183,7 +193,7 @@ class MusicManager: NSObject {
             // 缓存播放列表
             saveLastPlaylist()
             // 缓存历史播放歌曲
-            CoreDB.addSongToHistoryList(currentSong()!)
+//            CoreDB.addSongToHistoryList(currentSong()!)
             
             NotificationManager.shared.postUpdatePlayerNotification()
         }
@@ -321,7 +331,7 @@ class MusicManager: NSObject {
     func loadLastPlaylist() {
         if let lastPlaylist = CoreDB.getLastPlaylist() {
             playlist = lastPlaylist.playlist!
-            currentIndex = (lastPlaylist.indexOfPlaylist?.intValue)!
+            currentIndex = lastPlaylist.indexOfPlaylist!
 //            NotificationManager.shared.postUpdatePlayerControllerNotification()
         }
     }
@@ -366,5 +376,29 @@ class MusicManager: NSObject {
             }
         }
         return .ListLoop
+    }
+    
+    func indexOf(array: [Song], song: Song) -> Int? {
+        
+        for index in 0..<array.count {
+            let item = array[index]
+            if item.songID == song.songID {
+                return index
+            }
+        }
+        
+        return nil
+    }
+    
+    func indexOfPlaylist(song: Song) -> Int? {
+        
+        for index in 0..<playlist.count {
+            let item = playlist[index]
+            if item.songID == song.songID {
+                return index
+            }
+        }
+        
+        return nil
     }
 }

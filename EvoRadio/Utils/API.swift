@@ -8,7 +8,7 @@
 
 import UIKit
 import Alamofire
-import EVReflection
+import ObjectMapper
 
 let api = API()
 
@@ -25,10 +25,9 @@ class API {
     /** 获取所有Radio以及其下的所有频道 */
     func fetch_all_channels(_ onSuccess: @escaping ([Radio]) -> Void, onFailed: ((Error) -> Void)?) {
         
-        if let responseData = CoreDB.getAllChannels() {
-            // 使用EVReflection做字段映射非常耗时，应当放在子线程。建议移除自动映射，手动书写对象-字典转换方法效率会高很多。
+        if let jsonArray = CoreDB.getAllChannels() {
             DispatchQueue.global(qos: .default).async {
-                let items = [Radio](dictArray: responseData as [NSDictionary]?)
+                let items = Mapper<Radio>().mapArray(JSONArray: jsonArray)
                 onSuccess(items)
             }
             return
@@ -37,169 +36,171 @@ class API {
         let endpoint = commonEP("api/radio.listAllChannels.json")
         Alamofire.request(endpoint).responseJSON { (response) in
             if response.result.isSuccess {
-                do {
-                    let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
-                    if dict["err"] as! String == "hapn.ok" {
-                        let responseData = dict["data"] as! [[String : AnyObject]]
-                        CoreDB.saveAllChannels(responseData)
+
+                if let responseValue = response.value as? [String : Any] {
+                    if let jsonArray = responseValue["data"] as? [[String : Any]] {
+                        CoreDB.saveAllChannels(jsonArray)
                         
-                        DispatchQueue.global(qos: .default).async {
-                            let items = [Radio].init(dictArray: responseData as [NSDictionary]?)
-                            onSuccess(items)
-                        }
-                    }
-                    
-                } catch let error {
-                    debugPrint("convert error:\(error)")
-                    if let _ = onFailed {
-                        onFailed!(error)
+                        let items = Mapper<Radio>().mapArray(JSONArray: jsonArray)
+                        print("radios count: \(items.count)")
+
+                        onSuccess(items)
                     }
                 }
+                
+            }else {
+                print("Request failed: \(endpoint)")
             }
         }
         
     }
     
     /** 获取所有“时刻”频道 */
-    func fetch_all_now_channels(_ onSuccess: @escaping ([[String : AnyObject]]) -> Void, onFailed: ((Error) -> Void)?) {
+    func fetch_all_now_channels(_ onSuccess: @escaping ([NowChannel]) -> Void, onFailed: ((Error) -> Void)?) {
+        let endpoint = commonEP("api/radio.listAllNowChannels.json")
         
-        if let responseData = CoreDB.getAllNowChannels() {
-            onSuccess(responseData)
+        // 从缓存加载
+        if let jsonArray = CoreDB.getAllNowChannels() {
+            let items = Mapper<NowChannel>().mapArray(JSONArray: jsonArray)
+            onSuccess(items)
             return
         }
         
-        let endpoint = commonEP("api/radio.listAllNowChannels.json")
+        // 从网络加载
         Alamofire.request(endpoint).responseJSON { (response) in
             if response.result.isSuccess {
-                do {
-                    let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
-                    
-                    if dict["err"] as! String == "hapn.ok" {
-                        let responseData = dict["data"] as! [[String : AnyObject]]
-                        CoreDB.saveAllNowChannels(responseData)
+                
+                if let responseValue = response.value as? [String : Any] {
+                    if let jsonArray = responseValue["data"] as? [[String : Any]] {
+                        CoreDB.saveAllNowChannels(jsonArray)
                         
-                        onSuccess(responseData)
-                    }
-                } catch let error{
-                    if let _ = onFailed {
-                        onFailed!(error)
+                        let items = Mapper<NowChannel>().mapArray(JSONArray: jsonArray)
+                        print("nowChannels count: \(items.count)")
+                        
+                        onSuccess(items)
                     }
                 }
+                
             }else {
-                if let _ = onFailed {
-                    onFailed!(response.result.error!)
-                }
+                print("Request failed: \(endpoint)")
             }
+            
         }
     }
     
     /** 获取精品节目单，分页 */
-    func fetch_ground_programs(_ page: Page, onSuccess: @escaping ([EVObject]) -> Void, onFailed: ((Error) -> Void)?) {
+    func fetch_ground_programs(_ page: Page, onSuccess: @escaping ([Program]) -> Void, onFailed: ((Error) -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listGroundPrograms.json?_pn=\(_pn)&_sz=\(page.size)")
         
-        if let responseData = CoreDB.getGroundPrograms(endpoint) {
+        
+        // 从缓存加载
+        if let jsonArray = CoreDB.getGroundPrograms(endpoint) {
             DispatchQueue.global(qos: .default).async {
-                let items = [Program](dictArray: responseData as [NSDictionary]?)
+                let items = Mapper<Program>().mapArray(JSONArray: jsonArray)
                 onSuccess(items)
             }
             return
         }
         
+        // 从网络加载
         Alamofire.request(endpoint).responseJSON { (response) in
-            do {
-                let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
+            if response.result.isSuccess {
                 
-                if dict["err"] as! String == "hapn.ok" {
-                    
-                    let data = dict["data"]!["lists"] as? [[String : AnyObject]]
-                    
-                    CoreDB.saveGroundPrograms(endpoint, responseData: data!)
-                    
-                    DispatchQueue.global(qos: .default).async {
-                        let items = [Program](dictArray: data as [NSDictionary]?)
-                        onSuccess(items)
-                    }
-                }
-            } catch let error {
-                if let _ = onFailed {
-                    onFailed!(error)
-                }
-            }
-        }
-    }
-    
-    /** 根据频道ID获取节目单，分页 */
-    func fetch_programs(_ channelID:String, page: Page, onSuccess: @escaping ([EVObject]) -> Void, onFailed: ((Error) -> Void)?) {
-        let _pn = (page.index+page.size-1) / page.size
-        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
-        
-        if let responseData = CoreDB.getPrograms(endpoint) {
-            DispatchQueue.global(qos: .default).async {
-                let items = [Program](dictArray: responseData as [NSDictionary]?)
-                onSuccess(items)
-            }
-            return
-        }
-        
-        Alamofire.request(endpoint).responseJSON { (response) in
-            do {
-                
-                let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
-
-                if dict["err"] as! String == "hapn.ok" {
-                    let data = dict["data"]!["lists"] as? [[String : AnyObject]]
-                    CoreDB.savePrograms(endpoint, responseData: data!)
-                    
-                    DispatchQueue.global(qos: .default).async {
-                        let items = [Program](dictArray: data as [NSDictionary]?)
-                        onSuccess(items)
+                if let responseValue = response.value as? [String : Any] {
+                    if let data = responseValue["data"] as? [String : Any] {
+                        if let jsonArray = data["lists"] as? [[String : Any]] {
+                            CoreDB.saveGroundPrograms(endpoint, jsonArray: jsonArray)
+                            
+                            let items = Mapper<Program>().mapArray(JSONArray: jsonArray)
+                            print("ground programs count: \(items.count)")
+                            
+                            onSuccess(items)
+                        }
                     }
                 }
                 
-                
-            } catch let error {
-                if let _ = onFailed {
-                    onFailed!(error)
-                }
+            }else {
+                print("Request failed: \(endpoint)")
             }
             
         }
     }
     
+    
+    /** 根据频道ID获取节目单，分页 */
+    func fetch_programs(_ channelID:String, page: Page, onSuccess: @escaping ([Program]) -> Void, onFailed: ((Error) -> Void)?) {
+        let _pn = (page.index+page.size-1) / page.size
+        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
+        
+        // 从缓存加载
+        if let jsonArray = CoreDB.getPrograms(endpoint) {
+            DispatchQueue.global(qos: .default).async {
+                let items = Mapper<Program>().mapArray(JSONArray: jsonArray)
+                onSuccess(items)
+            }
+            return
+        }
+        
+        // 从网络加载
+        Alamofire.request(endpoint).responseJSON { (response) in
+            if response.result.isSuccess {
+                
+                if let responseValue = response.value as? [String : Any] {
+                    if let data = responseValue["data"] as? [String : Any] {
+                        if let jsonArray = data["lists"] as? [[String : Any]] {
+                            CoreDB.savePrograms(endpoint, jsonArray: jsonArray)
+                            
+                            let items = Mapper<Program>().mapArray(JSONArray: jsonArray)
+                            print("programs count: \(items.count)")
+                            
+                            onSuccess(items)
+                        }
+                    }
+                }
+                
+            }else {
+                print("Request failed: \(endpoint)")
+            }
+            
+        }
+    }
+
     /** 根据节目单ID获取其下的所有音乐 */
-    func fetch_songs(_ programID: String, isVIP: Bool,  onSuccess: @escaping ([EVObject]) -> Void, onFailed: ((Error) -> Void)?) {
+    func fetch_songs(_ programID: String, isVIP: Bool,  onSuccess: @escaping ([Song]) -> Void, onFailed: ((Error) -> Void)?) {
         var endpoint = commonEP("api/play.playProgram.json?device=iPhone%20OS%209.3.2&luid=&program_id=\(programID)")
         if isVIP {
             endpoint = commonEP("api/play.sharePlayProgram.json?device=iPhone%20OS%209.3.2&luid=&isShare=1&program_id=\(programID)")
         }
-        
-        if let responseData = CoreDB.getSongs(endpoint) {
+
+        // 从缓存加载
+        if let jsonArray = CoreDB.getSongs(endpoint) {
             DispatchQueue.global(qos: .default).async {
-                let items = [Song](dictArray: responseData as [NSDictionary]?)
+                let items = Mapper<Song>().mapArray(JSONArray: jsonArray)
                 onSuccess(items)
             }
         }
         
+        // 从网络加载
         Alamofire.request(endpoint).responseJSON { (response) in
-            do {
-                let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
-                if dict["err"] as! String == "hapn.ok" {
-                    let data = dict["data"]!["songs"] as? [[String: AnyObject]]
-                    CoreDB.saveSongs(endpoint, responseData: data!)
-
-                    DispatchQueue.global(qos: .default).async {
-                        let items = [Song](dictArray: data! as [NSDictionary]?)
-                        onSuccess(items)
+            if response.result.isSuccess {
+                
+                if let responseValue = response.value as? [String : Any] {
+                    if let data = responseValue["data"] as? [String : Any] {
+                        if let jsonArray = data["songs"] as? [[String : Any]] {
+                            CoreDB.saveSongs(endpoint, jsonArray: jsonArray)
+                            
+                            let items = Mapper<Song>().mapArray(JSONArray: jsonArray)
+                            print("songs count: \(items.count)")
+                            
+                            onSuccess(items)
+                        }
                     }
                 }
                 
-            } catch let error {
-                if let _ = onFailed {
-                    onFailed!(error)
-                }
+            }else {
+                print("Request failed: \(endpoint)")
             }
-            
         }
     }
     

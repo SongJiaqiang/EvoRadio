@@ -73,19 +73,19 @@ class ChannelCollectionViewCell: UICollectionViewCell {
             channelNameLabel.text = channelName
         }
         
-        if isNow {
-            if let radioID = channel.radioID {
-                let allChannels = CoreDB.getAllChannels()
-                for c in allChannels! {
-                    if c["radio_id"] as? Int == Int(radioID) {
-                        tipLabel.text = c["radio_name"] as? String
-                    }
-                }
-            }
-        }else {
-            if let programNum = channel.programNum {
-                tipLabel.text = "节目(\(programNum))"
-            }
-        }
+//        if isNow {
+//            if let radioID = channel.radioID {
+//                let allChannels = CoreDB.getAllChannels()
+//                for c in allChannels! {
+//                    if c["radio_id"] as? Int == Int(radioID) {
+//                        tipLabel.text = c["radio_name"] as? String
+//                    }
+//                }
+//            }
+//        }else {
+//            if let programNum = channel.programNum {
+//                tipLabel.text = "节目(\(programNum))"
+//            }
+//        }
     }
 }

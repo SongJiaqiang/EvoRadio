@@ -446,7 +446,7 @@ class PlayerViewController: ViewController {
     
     func downloadButtonPressed(_ button: UIButton) {
         if let cSong = MusicManager.shared.currentSong() {
-            CoreDB.addSongToDownloadingList(cSong)
+//            CoreDB.addSongToDownloadingList(cSong)
 //            button.selected = true
             HudManager.showText("已经加入下载列表")
         }
@@ -702,7 +702,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func downloadAllButtonPressed(_ button: UIButton) {
         if MusicManager.shared.playlist.count > 0 {
-            CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
+//            CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
             showPlaylistTableView(false)
         }
     }
@@ -722,7 +722,8 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension PlayerViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-        let row =  MusicManager.shared.playlist.index(of: song)
+
+        let row = MusicManager.shared.indexOfPlaylist(song: song)
         
         let alertController = UIAlertController()
 
@@ -730,7 +731,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
             debugPrint("add to collecte")
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
-            CoreDB.addSongToDownloadingList(song)
+//            CoreDB.addSongToDownloadingList(song)
             HudManager.showText("已经加入下载列表")
         })
         let action3 = UIAlertAction(title: "从列表中移除", style: .default, handler: { (action) in

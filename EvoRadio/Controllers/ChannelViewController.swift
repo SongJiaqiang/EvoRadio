@@ -18,7 +18,7 @@ class ChannelViewController: ViewController {
     let headerID = "channelHeaderID"
     
     fileprivate var collectionView: UICollectionView?
-    var dataSource = [Channel]()
+    var dataSources = [Channel]()
     var radioID: Int = 0
     
     // init with radioID, if now, pass 0
@@ -92,9 +92,9 @@ class ChannelViewController: ViewController {
             
             for reflect in items {
                 let radio = reflect 
-                if radio.radioID as? Int == self?.radioID {
-                    self?.dataSource.removeAll()
-                    self?.dataSource.append(contentsOf: radio.channels!)
+                if radio.radioID == self?.radioID {
+                    self?.dataSources.removeAll()
+                    self?.dataSources.append(contentsOf: radio.channels!)
                     break
                 }
             }
@@ -108,19 +108,20 @@ class ChannelViewController: ViewController {
     
     func listAllNowChannels() {
         
-        api.fetch_all_now_channels({[weak self] (responseData) in
-            let week = CoreDB.currentDayOfWeek()
-            let time = CoreDB.currentTimeOfDay()
+        api.fetch_all_now_channels({[weak self] (nowChannels) in
+//            let week = CoreDB.currentDayOfWeek()
+//            let time = CoreDB.currentTimeOfDay()
+//            
+//            let channelList = responseData[week*8+time]
+//            let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
+//            
+//            self?.dataSource.removeAll()
+//            self?.dataSource.append(contentsOf: newChannels)
+//            
+//            self?.collectionView?.reloadDataOnMainQueue(after: {
+//                self?.collectionView!.mj_header.endRefreshing()
+//            })
             
-            let channelList = responseData[week*8+time]
-            let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
-            
-            self?.dataSource.removeAll()
-            self?.dataSource.append(contentsOf: newChannels)
-            
-            self?.collectionView?.reloadDataOnMainQueue(after: {
-                self?.collectionView!.mj_header.endRefreshing()
-            })
 //            if self?.radioID == 0 {
 //                self?.collectionView!.mj_header.hidden = true
 //            }
@@ -138,14 +139,17 @@ class ChannelViewController: ViewController {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
 
-            api.fetch_all_now_channels({[weak self] (responseData) in
-                let channelList = responseData[dayIndex*8+timeIndex]
-                let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
+            api.fetch_all_now_channels({[weak self] (nowChannels) in
+                let nowChannel = nowChannels[dayIndex*8+timeIndex]
+                if let newChannels = nowChannel.channels {
+                    
+                    self?.dataSources.removeAll()
+                    self?.dataSources.append(contentsOf: newChannels)
+                    
+                    self?.collectionView!.reloadDataOnMainQueue(after: nil)
+                }
 
-                self?.dataSource.removeAll()
-                self?.dataSource.append(contentsOf: newChannels)
                 
-                self?.collectionView!.reloadDataOnMainQueue(after: nil)
                 }, onFailed: nil)
         }
         
@@ -157,14 +161,14 @@ class ChannelViewController: ViewController {
 extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSources.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChannelCollectionViewCell
         
-        let channel = dataSource[(indexPath as NSIndexPath).item]
+        let channel = dataSources[(indexPath as NSIndexPath).item]
         cell.updateContent(channel, isNow: ((radioID == 0) ? false : true))
         return cell
     }
@@ -172,7 +176,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let channel = dataSource[(indexPath as NSIndexPath).item]
+        let channel = dataSources[(indexPath as NSIndexPath).item]
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
     }
     

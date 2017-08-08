@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import EVReflection
+import ObjectMapper
 
-class Program: EVObject{
+class Program: Mappable{
     var programID: String?
     var programName: String?
     var programDesc: String?
@@ -34,26 +34,36 @@ class Program: EVObject{
     var lavadj: String?
     var recommend: String?
     
-    override func propertyMapping() -> [(String?, String?)] {
-        return [
-            ("programID", "program_id"),
-            ("programName", "program_name"),
-            ("programDesc", "program_desc"),
-            ("picURL", "pic_url"),
-            ("createTime", "create_time"),
-            ("modifyTime", "modify_time"),
-            ("pubTime", "pub_time"),
-            ("applyTime", "apply_time"),
-            ("subscribeNum", "subscribe_num"),
-            ("songNum", "song_num"),
-            ("playNum", "play_num"),
-            ("shareNum", "share_num"),
-            ("refLink", "ref_link"),
-            ("vipLevel", "vip_level"),
-            ("auditStatus", "audit_status"),
-            ("sortOrder", "sort_order"),
-            ("uID", "uid")
-        ]
+    
+    required init?(map: Map) {
+        
+    }
+
+    func mapping(map: Map) {
+        programID    <- map["program_id"]
+        programName    <- map["program_name"]
+        programDesc    <- map["program_desc"]
+        picURL    <- map["pic_url"]
+        createTime    <- map["create_time"]
+        modifyTime    <- map["modify_time"]
+        pubTime    <- map["pub_time"]
+        applyTime    <- map["apply_time"]
+        subscribeNum    <- map["subscribe_num"]
+        songNum    <- map["song_num"]
+        playNum    <- map["play_num"]
+        shareNum    <- map["share_num"]
+        refLink    <- map["ref_link"]
+        vipLevel    <- map["vip_level"]
+        auditStatus    <- map["audit_status"]
+        sortOrder    <- map["sort_order"]
+        
+        channels    <- map["channels"]
+        cover    <- map["cover"]
+        user    <- map["user"]
+        
+        uID    <- map["uid"]
+        lavadj    <- map["lavadj"]
+        recommend    <- map["recommend"]
     }
     
 }

@@ -15,7 +15,7 @@ class NowViewController: ViewController {
     let headerViewID = "NowCollectionHeaderViewID"
     let footerViewID = "footerViewID"
     
-    var dataSource = [Program]()
+    var dataSources = [Program]()
     var nowChannels = [Channel]()
     var collectionView: UICollectionView!
     var collectionHeaderView: NowCollectionHeaderView?
@@ -87,17 +87,20 @@ class NowViewController: ViewController {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
             
-            api.fetch_all_now_channels({[weak self] (responseData) in
-                let channelList = responseData[dayIndex*8+timeIndex]
-                let newChannels = [Channel](dictArray: channelList["channels"] as? [NSDictionary])
-                print("newChannels:\(newChannels.count)")
+            api.fetch_all_now_channels({[weak self] (objects) in
+                let nowChannel = objects[dayIndex*8+timeIndex]
+                if let newChannels = nowChannel.channels {
+                    
+                    print("newChannels:\(newChannels.count)")
+                    
+                    self?.nowChannels.removeAll()
+                    self?.nowChannels.append(contentsOf: newChannels)
+                    
+                    self?.collectionHeaderView = nil
+                    self?.collectionView!.reloadDataOnMainQueue(after: nil)
+                }
                 
-                self?.nowChannels.removeAll()
-                self?.nowChannels.append(contentsOf: newChannels)
-                
-                self?.collectionHeaderView = nil
-                self?.collectionView!.reloadDataOnMainQueue(after: nil)
-                }, onFailed: nil)
+            }, onFailed: nil)
         }
     }
     
@@ -115,7 +118,7 @@ class NowViewController: ViewController {
     }
     
     func listGroundPrograms(_ isRefresh: Bool) {
-        var pageIndex = dataSource.count
+        var pageIndex = dataSources.count
         if isRefresh {
             pageIndex = 0
         }
@@ -125,10 +128,10 @@ class NowViewController: ViewController {
             if items.count > 0 {
                 let newData = items as! [Program]
                 if isRefresh {
-                    self?.dataSource.removeAll()
+                    self?.dataSources.removeAll()
                 }
                 
-                self?.dataSource.append(contentsOf: newData)
+                self?.dataSources.append(contentsOf: newData)
                 
                 self?.collectionView!.reloadDataOnMainQueue(after: {
                     self?.endRefreshing()
@@ -140,20 +143,24 @@ class NowViewController: ViewController {
                 self?.collectionView!.mj_footer.endRefreshingWithNoMoreData()
             }
             
+            
+            
+            
             }, onFailed: nil)
     }
     
     func listNowChannels() {
-        api.fetch_all_now_channels({[weak self] (responseData) in
+        api.fetch_all_now_channels({[weak self] (items) in
             let week = CoreDB.currentDayOfWeek()
             let time = CoreDB.currentTimeOfDay()
             
-            let anyList = responseData[week*8+time]
-            let channels = [Channel](dictArray: anyList["channels"] as? [NSDictionary])
-            DispatchQueue.main.async(execute: {[weak self] in
-                self?.nowChannels = channels
-                self?.collectionHeaderView!.updateChannels(channels)
+            let anyList = items[week*8+time]
+            if let channels = anyList.channels {
+                DispatchQueue.main.async(execute: {[weak self] in
+                    self?.nowChannels = channels
+                    self?.collectionHeaderView!.updateChannels(channels)
                 })
+            }
             
             }, onFailed: nil)
     }
@@ -174,14 +181,14 @@ class NowViewController: ViewController {
 extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UIScrollViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSources.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ProgramCollectionViewCell
         
-        let program = dataSource[(indexPath as NSIndexPath).item]
+        let program = dataSources[(indexPath as NSIndexPath).item]
         cell.updateContent(program)
         cell.delegate = self
         
@@ -191,7 +198,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let program = dataSource[(indexPath as NSIndexPath).item]
+        let program = dataSources[(indexPath as NSIndexPath).item]
         
         let listController = SongListViewController()
         listController.program = program
@@ -236,12 +243,12 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension NowViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programID: String) {
-        TrackManager.playMusicTypeEvent(.ProgramCover)
         
-        api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
+        api.fetch_songs(programID, isVIP: true, onSuccess: { (items) in
+            let songs = items
             if songs.count > 0 {
-                MusicManager.shared.clearList()
-                MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
+//                MusicManager.shared.clearList()
+//                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
                 
 //                if let topVC = Device.keyWindow().topMostController() {
 //                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)

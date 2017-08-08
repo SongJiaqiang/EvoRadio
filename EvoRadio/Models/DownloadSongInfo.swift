@@ -7,28 +7,22 @@
 //
 
 import UIKit
-import EVReflection
+import ObjectMapper
 
-class DownloadSongInfo: EVObject {
+class DownloadSongInfo: Mappable {
     
     var taskid: String?
-//    var taskIndex: NSNumber?
     var status: NSNumber?
     var song: Song?
     
-    convenience init(taskid: String, song: Song, status: Int = TaskStatus.gettingInfo.rawValue) {
-        self.init()
+    
+    required init?(map: Map) {
         
-        self.taskid = taskid
-        self.song = song
-        self.status = status as NSNumber?
     }
     
-    convenience init(_ song: Song) {
-        self.init()
-        
-        self.taskid = song.songID
-        self.song = song
-        self.status = TaskStatus.gettingInfo.rawValue as NSNumber?
+    func mapping(map: Map) {
+        taskid    <- map["taskid"]
+        status    <- map["status"]
+        song    <- map["song"]
     }
 }

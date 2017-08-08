@@ -7,9 +7,9 @@
 //
 
 import UIKit
-import EVReflection
+import ObjectMapper
 
-class Song: EVObject {
+class Song: Mappable {
 
     var songID: String!
     var jujingID: String?
@@ -28,20 +28,25 @@ class Song: EVObject {
     var picURL: String?
     var status: String?
     
-    override func propertyMapping() -> [(String?, String?)] {
-        return [
-            ("songID", "song_id"),
-            ("jujingID", "jujing_id"),
-            ("programID", "program_id"),
-            ("songName", "song_name"),
-            ("artistID", "artist_id"),
-            ("salbumID", "salbum_id"),
-            ("salbumsName", "salbums_name"),
-            ("artistsName", "artists_name"),
-            ("playNum", "play_num"),
-            ("shareNum", "share_num"),
-            ("audioURL", "audio_url"),
-            ("picURL", "pic_url")
-        ]
+
+    required init?(map: Map) {
+        
     }
+    
+    func mapping(map: Map) {
+        songID    <- map["song_id"]
+        jujingID   <- map["jujing_id"]
+        programID    <- map["program_id"]
+        songName   <- map["song_name"]
+        artistID    <- map["artist_id"]
+        salbumID   <- map["salbum_id"]
+        salbumsName    <- map["salbums_name"]
+        artistsName   <- map["artists_name"]
+        playNum    <- map["play_num"]
+        shareNum   <- map["share_num"]
+        audioURL   <- map["audio_url"]
+        picURL   <- map["pic_url"]
+        status   <- map["status"]
+    }
+
 }
