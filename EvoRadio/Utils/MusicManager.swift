@@ -81,6 +81,7 @@ class MusicManager: NSObject {
                 break
             }
         }
+        
         if exit == false {
             playlist.append(song)
         }
@@ -93,6 +94,8 @@ class MusicManager: NSObject {
             play()
         }
         
+        // 更新历史列表
+        saveLastPlaylist()
     }
     
     func removeSongFromPlaylist(_ song: Song) {
@@ -176,6 +179,7 @@ class MusicManager: NSObject {
         
     }
     
+    //MARK: - player control
     func play() {
         
         if let cSong = currentSong() {
@@ -190,31 +194,18 @@ class MusicManager: NSObject {
             
             // 更新控制中心的音乐播放信息
             updatePlayingInfo()
-            // 缓存播放列表
-            saveLastPlaylist()
+
             // 缓存历史播放歌曲
-//            CoreDB.addSongToHistoryList(currentSong()!)
+            CoreDB.addSongToHistoryList(currentSong()!)
             
             NotificationManager.shared.postUpdatePlayerNotification()
+            
+            // 更新历史列表
+            saveLastPlaylist()
         }
         
     }
     
-    func findMusicFileCachedPath(_ song: Song) -> String? {
-        if song.audioURL?.isEmpty == true {
-            return nil
-        }
-        
-        let fileName = song.audioURL!.lastPathComponent()
-        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
-        let filePath = downloadPath.appendPathComponent(fileName)
-        
-        if FileManager.default.fileExists(atPath: filePath) {
-            return filePath
-        }
-        
-        return nil
-    }
     
     func pause() {
         if audioPlayer.state == .playing {
@@ -306,6 +297,7 @@ class MusicManager: NSObject {
         audioPlayer.seek(toTime: Double(second))
     }
     
+    //MARK: -
     func currentSong() -> Song? {
         if currentIndex < 0 || playlist.count <= 0 {
             return nil
@@ -332,12 +324,17 @@ class MusicManager: NSObject {
         if let lastPlaylist = CoreDB.getLastPlaylist() {
             playlist = lastPlaylist.playlist!
             currentIndex = lastPlaylist.indexOfPlaylist!
-//            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            
+            print("Get Last play music: \(currentIndex) / \(playlist.count)")
+            play()
+            
         }
     }
     
     func saveLastPlaylist() {
         if playlist.count > 0 {
+            print("Save Last play music: \(currentIndex) / \(playlist.count)")
+            
             CoreDB.saveLastPlaylist(playlist, indexOfPlaylist: currentIndex, timePlayed: 0)
         }
     }
@@ -397,6 +394,22 @@ class MusicManager: NSObject {
             if item.songID == song.songID {
                 return index
             }
+        }
+        
+        return nil
+    }
+    
+    func findMusicFileCachedPath(_ song: Song) -> String? {
+        if song.audioURL?.isEmpty == true {
+            return nil
+        }
+        
+        let fileName = song.audioURL!.lastPathComponent()
+        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
+        let filePath = downloadPath.appendPathComponent(fileName)
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            return filePath
         }
         
         return nil

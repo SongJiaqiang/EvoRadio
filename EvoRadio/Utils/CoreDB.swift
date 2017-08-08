@@ -197,7 +197,7 @@ class CoreDB {
         
         WLevelDb.shared().setObject(playlistDict, forKey: DB_LAST_PLAYLSIT)
     }
-    
+        
     /** 获取上次的播放列表 */
     class func getLastPlaylist() -> LastPlaylist? {
         if let lastPlaylist = leveldb.object(forKey: DB_LAST_PLAYLSIT) {
@@ -406,28 +406,29 @@ class CoreDB {
         }
     }
     
-//    /** 添加播放历史 */
-//    class func addSongToHistoryList(_ song: Song) {
-//        let dict = song.toJSON()
-//        
-//        var newSongs: [String : Any]
-//        if let songs = leveldb.object(forKey: DB_HISTORY_LIST) {
-//            newSongs = songs as! [[String : Any]]
-//            for item in newSongs {
-//                if (item["song_id"] as! String) == song.songID {
-//                    newSongs.remove(at: newSongs.index(of: item)!)
-//                    break
-//                }
-//            }
-//        }
-//        
-//        newSongs.insert(dict, at: 0)
-//        // The count can not exceed 100
-//        if newSongs.count > 100 {
-//            newSongs.removeLast()
-//        }
-//        leveldb.setObject(newSongs, forKey: DB_HISTORY_LIST)
-//    }
+    /** 添加播放历史 */
+    class func addSongToHistoryList(_ song: Song) {
+        let dict = song.toJSON()
+        
+        var newSongs = [[String : Any]]()
+        if let jsonArray = leveldb.object(forKey: DB_HISTORY_LIST) {
+            newSongs.append(contentsOf: jsonArray as! [[String : Any]])
+            
+            for (index, item) in newSongs.enumerated() {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.remove(at: index)
+                    break
+                }
+            }
+        }
+        
+        newSongs.insert(dict, at: 0)
+        // The count can not exceed 100
+        if newSongs.count > 100 {
+            newSongs.removeLast()
+        }
+        leveldb.setObject(newSongs, forKey: DB_HISTORY_LIST)
+    }
     
     /** 清除播放历史 */
     class func clearHistory() {
