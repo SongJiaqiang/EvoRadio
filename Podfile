@@ -33,5 +33,9 @@ pod 'SnapKit', '~> 3.0.0'
 ## SQLite
 #pod 'SQLite.swift', '~> 0.11.0'
 
+    target 'EvoRadioTests' do
+        inherit! :search_paths
+    end
+    
 end
 
