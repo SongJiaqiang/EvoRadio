@@ -1,44 +1,27 @@
 PODS:
-  - Alamofire (4.5.0)
-  - EVReflection (4.16.3):
-    - EVReflection/Core (= 4.16.3)
-  - EVReflection/Core (4.16.3)
   - iCarousel (1.8.3)
-  - Kingfisher (3.10.2)
   - leveldb (1.18)
-  - MBProgressHUD (1.0.0)
   - MJRefresh (3.1.12)
   - pop (1.0.10)
   - ReflectionView (1.2)
-  - SnapKit (3.0.2)
   - StreamingKit (0.1.29)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.0)
-  - EVReflection
   - iCarousel (~> 1.8.2)
-  - Kingfisher (~> 3.0)
   - leveldb (~> 1.18)
-  - MBProgressHUD (~> 1.0.0)
   - MJRefresh (~> 3.1.10)
   - pop (~> 1.0)
   - ReflectionView (~> 1.2)
-  - SnapKit (~> 3.0.0)
   - StreamingKit (~> 0.1.29)
 
 SPEC CHECKSUMS:
-  Alamofire: f28cdffd29de33a7bfa022cbd63ae95a27fae140
-  EVReflection: 78a60b3c628a2e765652cdc554a903a3e40b16c8
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
-  Kingfisher: 7297492bf8cec9b2e2dee3519f2219948580d98e
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
-  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   MJRefresh: b96cdb21c4aa75a7b07654311ab2f315c497e806
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
-  SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
 
-PODFILE CHECKSUM: e4d31d49ff0b095489cee023f9477ed9ef893833
+PODFILE CHECKSUM: c501a6bc15bc4c1e64ee6582600dacc6aca9fa0b
 
 COCOAPODS: 1.2.1

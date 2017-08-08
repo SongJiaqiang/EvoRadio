@@ -18,20 +18,6 @@ pod 'StreamingKit', '~> 0.1.29'
 pod 'iCarousel', '~> 1.8.2'
 ## 倒影
 pod 'ReflectionView', '~> 1.2'
-## 加载蒙版
-pod 'MBProgressHUD', '~> 1.0.0'
-
-
-# Swift
-
-## 网络组件
-pod 'Alamofire', '~> 4.0'
-## 图片加载
-pod 'Kingfisher', '~> 3.0'
-## 自动布局
-pod 'SnapKit', '~> 3.0.0'
-## SQLite
-#pod 'SQLite.swift', '~> 0.11.0'
 
     target 'EvoRadioTests' do
         inherit! :search_paths

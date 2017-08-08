@@ -22,7 +22,6 @@
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
 		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
-		63EF43EF1F38925100EADC48 /* AlamofireObjectMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43EE1F38925100EADC48 /* AlamofireObjectMapper.swift */; };
 		63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */; };
 		63EF43F31F38A1E600EADC48 /* AssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */; };
 		63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */; };
@@ -44,6 +43,7 @@
 		63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44161F38B41600EADC48 /* CDCoverImageView.swift */; };
 		63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44181F38B42D00EADC48 /* MusicManager.swift */; };
 		63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF441A1F38B81400EADC48 /* PlayerView.swift */; };
+		63EF444D1F39A78A00EADC48 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 63EF444C1F39A78A00EADC48 /* Cartfile */; };
 		86A783E31962C113368E80E8 /* Pods_EvoRadioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B3B61B6D74F76DF8CA8BC3 /* Pods_EvoRadioTests.framework */; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
@@ -66,7 +66,6 @@
 		909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E65A01CC0831B00B0C49B /* ViewController.swift */; };
 		909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 909E65A51CC083A500B0C49B /* Assets.xcassets */; };
 		909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 909E818B1CF8129500571A76 /* NotificationManager.swift */; };
-		90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CA21CF54B2E00105090 /* EVReflections.swift */; };
 		90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90B95CAB1CF6F4FA00105090 /* Windows.swift */; };
 		90C32B6C1D0586D400C87DAF /* CoreText.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6B1D0586D400C87DAF /* CoreText.framework */; };
 		90C32B6E1D0586E200C87DAF /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C32B6D1D0586E200C87DAF /* ImageIO.framework */; };
@@ -124,7 +123,6 @@
 		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
 		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; };
-		63EF43EE1F38925100EADC48 /* AlamofireObjectMapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireObjectMapper.swift; sourceTree = "<group>"; };
 		63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramViewController.swift; path = Controllers/ProgramViewController.swift; sourceTree = "<group>"; };
 		63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
 		63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -146,6 +144,7 @@
 		63EF44161F38B41600EADC48 /* CDCoverImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDCoverImageView.swift; path = Views/CDCoverImageView.swift; sourceTree = "<group>"; };
 		63EF44181F38B42D00EADC48 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		63EF441A1F38B81400EADC48 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; };
+		63EF444C1F39A78A00EADC48 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Device.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,7 +174,6 @@
 		909E65A01CC0831B00B0C49B /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = ViewController.swift; path = Controllers/ViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		909E65A51CC083A500B0C49B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Resources/Assets.xcassets; sourceTree = "<group>"; };
 		909E818B1CF8129500571A76 /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = NotificationManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90B95CA21CF54B2E00105090 /* EVReflections.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = EVReflections.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90B95CAB1CF6F4FA00105090 /* Windows.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Windows.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		90C32B6B1D0586D400C87DAF /* CoreText.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreText.framework; path = System/Library/Frameworks/CoreText.framework; sourceTree = SDKROOT; };
 		90C32B6D1D0586E200C87DAF /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
@@ -298,6 +296,7 @@
 		900C724A1D0563F0006EBE78 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				63EF444C1F39A78A00EADC48 /* Cartfile */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -432,7 +431,6 @@
 				90E7FAFF1CC3E4E60018A532 /* Fonts.swift */,
 				90E7FB581CC536720018A532 /* Images.swift */,
 				DBB79DA41CD11935006189B3 /* Dates.swift */,
-				90B95CA21CF54B2E00105090 /* EVReflections.swift */,
 				90B95CAB1CF6F4FA00105090 /* Windows.swift */,
 				9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */,
 				9097BB281CFEC40400FA5BD9 /* Arrays.swift */,
@@ -450,7 +448,6 @@
 				9023EA001D067233004BEE96 /* Downloader */,
 				90659F1B1CC9C0B70026539F /* levelDb */,
 				902F6B6F1CC3C4EA00F43C2E /* Device.swift */,
-				63EF43EE1F38925100EADC48 /* AlamofireObjectMapper.swift */,
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
 				63EF43FE1F38AB4600EADC48 /* CoreDB.swift */,
 				DBF1E7E11CCE7CA300B554A2 /* Measure.swift */,
@@ -573,6 +570,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63EF444D1F39A78A00EADC48 /* Cartfile in Resources */,
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
 			);
@@ -603,6 +601,9 @@
 			);
 			inputPaths = (
 				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
 			);
 			outputPaths = (
 			);
@@ -739,10 +740,8 @@
 				631884601D78482200D7399A /* RadioViewController.swift in Sources */,
 				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */,
-				90B95CA31CF54B2E00105090 /* EVReflections.swift in Sources */,
 				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
 				90E7FB531CC4CAF80018A532 /* Song.swift in Sources */,
-				63EF43EF1F38925100EADC48 /* AlamofireObjectMapper.swift in Sources */,
 				634E065C1F3857AD00253E9A /* Common.swift in Sources */,
 				63EF44131F38B28200EADC48 /* LocalTableViewCell.swift in Sources */,
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
