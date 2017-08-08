@@ -308,27 +308,35 @@ class CoreDB {
     class func addSongsToDownloadingList(_ songs: [Song]) {
         var newSongs = [[String:Any]]()
         
-        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
-            for song in songs {
-                var isExit = false
+        for song in songs {
+            var isExit = false
+            
+            // 检查正在下载列表
+            if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
                 for item in jsonArray as! [[String:Any]] {
                     if (item["taskid"] as! String) == song.songID {
                         isExit = true
                         break
                     }
                 }
-                if !isExit {
-                    let downloadSong = DownloadSongInfo(song: song)
-                    let dict = downloadSong.toJSON()
-                    newSongs.append(dict)
+            }
+            
+            // 检查已下载列表
+            if let jsonArray2 = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+                for item in jsonArray2 as! [[String:Any]] {
+                    if (item["song_id"] as! String) == song.songID {
+                        isExit = true
+                        break
+                    }
                 }
             }
-        }else {
-            for song in songs {
+            
+            if !isExit {
                 let downloadSong = DownloadSongInfo(song: song)
                 let dict = downloadSong.toJSON()
                 newSongs.append(dict)
             }
+            
         }
         
         leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)

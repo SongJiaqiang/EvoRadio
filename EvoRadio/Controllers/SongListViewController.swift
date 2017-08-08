@@ -143,21 +143,23 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         playButton.setTitle("Play All", for: UIControlState())
         playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 80, height: 30))
+//            make.size.equalTo(CGSize(width: 80, height: 30))
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
             make.leftMargin.equalTo(10)
         }
         
-        let moreButton = UIButton()
-        headerView.addSubview(moreButton)
-        moreButton.titleLabel?.font = UIFont.sizeOf12()
-        moreButton.backgroundColor = UIColor.grayColor3()
-        moreButton.clipsToBounds = true
-        moreButton.layer.cornerRadius = 15
-        moreButton.setTitle("More", for: UIControlState())
-        moreButton.addTarget(self, action: #selector(moreButtonPressed(_:)), for: .touchUpInside)
-        moreButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 60, height: 30))
+        let downloadButton = UIButton()
+        headerView.addSubview(downloadButton)
+        downloadButton.titleLabel?.font = UIFont.sizeOf12()
+        downloadButton.backgroundColor = UIColor.grayColor3()
+        downloadButton.clipsToBounds = true
+        downloadButton.layer.cornerRadius = 15
+        downloadButton.setTitle("Download All", for: UIControlState())
+        downloadButton.addTarget(self, action: #selector(downloadButtonPressed(_:)), for: .touchUpInside)
+        downloadButton.snp.makeConstraints { (make) in
+//            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
             make.right.equalTo(headerView.snp.right).offset(-12)
         }
@@ -206,30 +208,10 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func moreButtonPressed(_ button: UIButton) {
-        let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "全部加入播放列表", style: .default, handler: { (action) in
-            debugPrint("add to playlist")
-            MusicManager.shared.appendSongsToPlaylist(self.dataSources, autoPlay: false)
-        })
-        let action2 = UIAlertAction(title: "收藏全部歌曲", style: .default, handler: { (action) in
-            debugPrint("add to collecte")
-        })
-        let action3 = UIAlertAction(title: "下载全部歌曲", style: .default, handler: { (action) in
-            debugPrint("download musics")
-            CoreDB.addSongsToDownloadingList(self.dataSources)
-            
-            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
-        })
-
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+    func downloadButtonPressed(_ button: UIButton) {
+        CoreDB.addSongsToDownloadingList(self.dataSources)
         
-        alertController.addAction(action1)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-        alertController.addAction(cancelAction)
-        
-        navigationController!.present(alertController, animated: true, completion: nil)
+        NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
     }
 }
 
