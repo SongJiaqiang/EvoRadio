@@ -175,9 +175,9 @@ extension ProgramViewController: ProgramCollectionViewCellDelegate {
         
         api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
-//                MusicManager.shared.clearList()
-//                MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-//                
+                MusicManager.shared.clearList()
+                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+//
 //                if let topVC = Device.keyWindow().topMostController() {
 //                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
 //                }

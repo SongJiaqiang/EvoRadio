@@ -44,6 +44,15 @@
 		63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44181F38B42D00EADC48 /* MusicManager.swift */; };
 		63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF441A1F38B81400EADC48 /* PlayerView.swift */; };
 		63EF444D1F39A78A00EADC48 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 63EF444C1F39A78A00EADC48 /* Cartfile */; };
+		63EF44B01F39F39600EADC48 /* DownloadedProgramListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AB1F39F39600EADC48 /* DownloadedProgramListViewController.swift */; };
+		63EF44B11F39F39600EADC48 /* DownloadedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AC1F39F39600EADC48 /* DownloadedSongListViewController.swift */; };
+		63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AD1F39F39600EADC48 /* DownloadedViewController.swift */; };
+		63EF44B31F39F39600EADC48 /* DownloadingSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AE1F39F39600EADC48 /* DownloadingSongListViewController.swift */; };
+		63EF44B41F39F39600EADC48 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AF1F39F39600EADC48 /* DownloadViewController.swift */; };
+		63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */; };
+		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
+		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
+		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
 		86A783E31962C113368E80E8 /* Pods_EvoRadioTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 51B3B61B6D74F76DF8CA8BC3 /* Pods_EvoRadioTests.framework */; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
@@ -145,6 +154,15 @@
 		63EF44181F38B42D00EADC48 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		63EF441A1F38B81400EADC48 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; };
 		63EF444C1F39A78A00EADC48 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		63EF44AB1F39F39600EADC48 /* DownloadedProgramListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedProgramListViewController.swift; path = Controllers/DownloadedProgramListViewController.swift; sourceTree = "<group>"; };
+		63EF44AC1F39F39600EADC48 /* DownloadedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedSongListViewController.swift; path = Controllers/DownloadedSongListViewController.swift; sourceTree = "<group>"; };
+		63EF44AD1F39F39600EADC48 /* DownloadedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedViewController.swift; path = Controllers/DownloadedViewController.swift; sourceTree = "<group>"; };
+		63EF44AE1F39F39600EADC48 /* DownloadingSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadingSongListViewController.swift; path = Controllers/DownloadingSongListViewController.swift; sourceTree = "<group>"; };
+		63EF44AF1F39F39600EADC48 /* DownloadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadViewController.swift; path = Controllers/DownloadViewController.swift; sourceTree = "<group>"; };
+		63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HistorySongListViewController.swift; path = Controllers/HistorySongListViewController.swift; sourceTree = "<group>"; };
+		63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedCollectionViewCell.swift; sourceTree = "<group>"; };
+		63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadedTableViewCell.swift; sourceTree = "<group>"; };
+		63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadingTableViewCell.swift; sourceTree = "<group>"; };
 		900C72531D056439006EBE78 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		902F6B6F1CC3C4EA00F43C2E /* Device.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Device.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		902FBCCD1CBEAC020051A93B /* EvoRadio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -275,6 +293,9 @@
 		634E06701F38888400253E9A /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */,
+				63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */,
+				63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */,
 				634E06771F38888400253E9A /* RadioTableViewCell.swift */,
 				63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */,
 				63EF43FC1F38A91D00EADC48 /* ChannelCollectionViewCell.swift */,
@@ -291,6 +312,18 @@
 				63DB930C1DF2B8BB0051FA2B /* sqlite.playground */,
 			);
 			name = Playgrounds;
+			sourceTree = "<group>";
+		};
+		63EF44AA1F39F38200EADC48 /* Download */ = {
+			isa = PBXGroup;
+			children = (
+				63EF44AB1F39F39600EADC48 /* DownloadedProgramListViewController.swift */,
+				63EF44AC1F39F39600EADC48 /* DownloadedSongListViewController.swift */,
+				63EF44AD1F39F39600EADC48 /* DownloadedViewController.swift */,
+				63EF44AE1F39F39600EADC48 /* DownloadingSongListViewController.swift */,
+				63EF44AF1F39F39600EADC48 /* DownloadViewController.swift */,
+			);
+			name = Download;
 			sourceTree = "<group>";
 		};
 		900C724A1D0563F0006EBE78 /* Libs */ = {
@@ -393,6 +426,8 @@
 				63EF44001F38AC7800EADC48 /* SongListViewController.swift */,
 				63EF44101F38B1E700EADC48 /* LocalViewController.swift */,
 				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
+				63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */,
+				63EF44AA1F39F38200EADC48 /* Download */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -705,12 +740,15 @@
 				90E7FB4D1CC4BD5B0018A532 /* Channel.swift in Sources */,
 				9097BB291CFEC40400FA5BD9 /* Arrays.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
+				63EF44B31F39F39600EADC48 /* DownloadingSongListViewController.swift in Sources */,
+				63EF44B01F39F39600EADC48 /* DownloadedProgramListViewController.swift in Sources */,
 				63EF44111F38B1E700EADC48 /* LocalViewController.swift in Sources */,
 				63EF44151F38B3D200EADC48 /* PlayerViewController.swift in Sources */,
 				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,
 				90659F181CC9B6440026539F /* Radio.swift in Sources */,
 				63EF440B1F38B03800EADC48 /* SelectiveTimePanel.swift in Sources */,
 				63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */,
+				63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */,
 				633506E01DE9D97500607693 /* Labels.swift in Sources */,
 				63EF44011F38AC7800EADC48 /* SongListViewController.swift in Sources */,
 				634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */,
@@ -729,9 +767,11 @@
 				63EF440F1F38B12700EADC48 /* ClockView.swift in Sources */,
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
+				63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */,
 				63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */,
 				63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
+				63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
@@ -747,11 +787,14 @@
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
 				63EF44031F38ACC800EADC48 /* SongListTableViewCell.swift in Sources */,
 				63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */,
+				63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */,
 				63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */,
+				63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */,
 				90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */,
 				63EF43FB1F38A7F000EADC48 /* NowChannel.swift in Sources */,
 				63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */,
 				636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */,
+				63EF44B11F39F39600EADC48 /* DownloadedSongListViewController.swift in Sources */,
 				634E066F1F38882000253E9A /* TopTabBar.swift in Sources */,
 				90E7FB4F1CC4C3170018A532 /* Program.swift in Sources */,
 				63EF43FF1F38AB4600EADC48 /* CoreDB.swift in Sources */,
@@ -763,6 +806,7 @@
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				63EF43F91F38A6F400EADC48 /* ChannelViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
+				63EF44B41F39F39600EADC48 /* DownloadViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

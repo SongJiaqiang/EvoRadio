@@ -109,9 +109,9 @@ class DownloadingTableViewCell: UITableViewCell {
         downloadSong = songInfo
         
         titleLabel.text = downloadSong?.song?.songName
-        subtitleLabel.text = getSubtitleText(status: (downloadSong?.status?.intValue)!)
+        subtitleLabel.text = getSubtitleText(status: (downloadSong?.status)!)
         
-        subtitleLabel.isHidden = downloadSong?.status?.intValue == TaskStatus.downloading.rawValue
+        subtitleLabel.isHidden = downloadSong?.status == TaskStatus.downloading.rawValue
         progressBar.isHidden = !subtitleLabel.isHidden
         sizeLabel.isHidden = !subtitleLabel.isHidden
     }

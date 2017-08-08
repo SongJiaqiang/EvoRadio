@@ -247,8 +247,8 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
         api.fetch_songs(programID, isVIP: true, onSuccess: { (items) in
             let songs = items
             if songs.count > 0 {
-//                MusicManager.shared.clearList()
-//                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+                MusicManager.shared.clearList()
+                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
                 
 //                if let topVC = Device.keyWindow().topMostController() {
 //                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)

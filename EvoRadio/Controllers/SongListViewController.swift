@@ -123,7 +123,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
-//        cell.delegate = self
+        cell.delegate = self
         
         let song = dataSources[(indexPath as NSIndexPath).row]
         cell.updateSongInfo(song)
@@ -217,9 +217,9 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         })
         let action3 = UIAlertAction(title: "下载全部歌曲", style: .default, handler: { (action) in
             debugPrint("download musics")
-//            CoreDB.addSongsToDownloadingList(self.dataSources)
+            CoreDB.addSongsToDownloadingList(self.dataSources)
             
-//            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
+            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
         })
 
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -233,28 +233,28 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 }
 
-//extension SongListViewController: SongListTableViewCellDelegate {
-//    func openToolPanelOfSong(_ song: Song) {
-//        
-//        let alertController = UIAlertController()
-//        let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
-//            MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)
-//        })
-//        let action2 = UIAlertAction(title: "收藏歌曲", style: .default, handler: { (action) in
-//            debugPrint("add to collecte")
-//        })
-//        let action3 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
-//            CoreDB.addSongToDownloadingList(song)
-//            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : [song]])
-//        })
-//        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
-//        
-//        alertController.addAction(action1)
-//        alertController.addAction(action2)
-//        alertController.addAction(action3)
-//        alertController.addAction(cancelAction)
-//        
-//        navigationController!.present(alertController, animated: true, completion: nil)
-//    }
-//}
+extension SongListViewController: SongListTableViewCellDelegate {
+    func openToolPanelOfSong(_ song: Song) {
+        
+        let alertController = UIAlertController()
+        let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
+            MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)
+        })
+        let action2 = UIAlertAction(title: "收藏歌曲", style: .default, handler: { (action) in
+            debugPrint("add to collecte")
+        })
+        let action3 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
+            CoreDB.addSongToDownloadingList(song)
+            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : [song]])
+        })
+        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+        
+        alertController.addAction(action1)
+        alertController.addAction(action2)
+        alertController.addAction(action3)
+        alertController.addAction(cancelAction)
+        
+        navigationController!.present(alertController, animated: true, completion: nil)
+    }
+}
 

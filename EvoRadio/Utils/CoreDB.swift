@@ -206,24 +206,26 @@ class CoreDB {
         return nil
     }
     
-//    //MARK: 歌曲下载
-//    /** 添加一首已下载的歌曲 */
-//    class func addSongToDownloadedList(_ song: Song) {
-//        let dict = song.toJSON()
-//        
-//        var newSongs: [String : Any]
-//        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
-//            for item in jsonArray as! [[String : Any]] {
-//                if (item["song_id"] as! String) == song.songID {
-//                    return
-//                }
-//            }
-//            newSongs = jsonArray as! [String : Any]
-//        }
-//        
-//        newSongs.append(jsonArray)
-//        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
-//    }
+    //MARK: 歌曲下载
+    /** 添加一首已下载的歌曲 */
+    class func addSongToDownloadedList(_ song: Song) {
+        
+        var newSongs = [[String : Any]]()
+        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+            for item in jsonArray as! [[String : Any]] {
+                if (item["song_id"] as! String) == song.songID {
+                    return
+                }
+            }
+            
+            newSongs.append(contentsOf: jsonArray as! [[String : Any]])
+        }
+        
+        let dict = song.toJSON()
+        newSongs.append(dict)
+        
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
+    }
     
     /** 获取已下载歌曲数据 */
     class func getDownloadedSongs() -> [Song]? {
@@ -282,56 +284,55 @@ class CoreDB {
     }
 
     
-//    /** 添加一首歌曲下载 */
-//    class func addSongToDownloadingList(_ song: Song) {
-//        let downloadSong = DownloadSongInfo(song)
-//        let dict = downloadSong.toDictionary()
-//        var newSongs: [NSDictionary]
-//        if let songs = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
-//            for item in (songs as! [NSDictionary]) {
-//                if (item["taskid"] as! String) == downloadSong.taskid {
-//                    return
-//                }
-//            }
-//            newSongs = songs as! [NSDictionary]
-//        }else {
-//            newSongs = [NSDictionary]()
-//        }
-//        newSongs.append(dict)
-//
-//        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
-//    }
+    /** 添加一首歌曲下载 */
+    class func addSongToDownloadingList(_ song: Song) {
+        let downloadSong = DownloadSongInfo(song: song)
+        let dict = downloadSong.toJSON()
+        
+        var newSongs = [[String : Any]]()
+        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+            for item in jsonArray as! [[String : Any]] {
+                if (item["taskid"] as! String) == downloadSong.taskid {
+                    return
+                }
+            }
+            newSongs.append(contentsOf: jsonArray as! [[String : Any]])
+        }
+        
+        newSongs.append(dict)
 
-//    /** 添加一批歌曲下载 */
-//    class func addSongsToDownloadingList(_ songs: [Song]) {
-//        var newSongs: [NSDictionary]
-//        if let songsArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
-//            newSongs = songsArray as! [NSDictionary]
-//            for song in songs {
-//                var isExit = false
-//                for item in (songsArray as! [NSDictionary]) {
-//                    if (item["taskid"] as! String) == song.songID {
-//                        isExit = true
-//                        break
-//                    }
-//                }
-//                if !isExit {
-//                    let downloadSong = DownloadSongInfo(song)
-//                    let dict = downloadSong.toDictionary()
-//                    newSongs.append(dict)
-//                }
-//            }
-//        }else {
-//            newSongs = [NSDictionary]()
-//            for song in songs {
-//                let downloadSong = DownloadSongInfo(song)
-//                let dict = downloadSong.toDictionary()
-//                newSongs.append(dict)
-//            }
-//        }
-//        
-//        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
-//    }
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
+    }
+
+    /** 添加一批歌曲下载 */
+    class func addSongsToDownloadingList(_ songs: [Song]) {
+        var newSongs = [[String:Any]]()
+        
+        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+            for song in songs {
+                var isExit = false
+                for item in jsonArray as! [[String:Any]] {
+                    if (item["taskid"] as! String) == song.songID {
+                        isExit = true
+                        break
+                    }
+                }
+                if !isExit {
+                    let downloadSong = DownloadSongInfo(song: song)
+                    let dict = downloadSong.toJSON()
+                    newSongs.append(dict)
+                }
+            }
+        }else {
+            for song in songs {
+                let downloadSong = DownloadSongInfo(song: song)
+                let dict = downloadSong.toJSON()
+                newSongs.append(dict)
+            }
+        }
+        
+        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
+    }
     
     /** 删除一首歌曲下载 */
     class func removeSongFromDownloadingList(_ downloadSong: DownloadSongInfo) {
@@ -354,7 +355,7 @@ class CoreDB {
     class func getDownloadingSongs() -> [DownloadSongInfo]? {
         if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
             
-            let infos = Mapper<DownloadSongInfo>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            let infos = DownloadSongInfo.objectsOfJsonArray(jsonArray: jsonArray as! [[String : Any]])
             
             return infos
         }else {

@@ -515,8 +515,6 @@ class PlayerViewController: ViewController {
             present(alertController, animated: true, completion: nil)
         }
         
-        
-        
     }
     
     func progressSliderChanged(_ slider: UISlider) {
@@ -731,7 +729,7 @@ extension PlayerViewController: SongListTableViewCellDelegate {
             debugPrint("add to collecte")
         })
         let action2 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
-//            CoreDB.addSongToDownloadingList(song)
+            CoreDB.addSongToDownloadingList(song)
             HudManager.showText("已经加入下载列表")
         })
         let action3 = UIAlertAction(title: "从列表中移除", style: .default, handler: { (action) in

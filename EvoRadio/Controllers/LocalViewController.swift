@@ -151,24 +151,23 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
         let cellInfo = dataSource[indexPath.row]
         if let key = cellInfo["key"] {
             
-//            switch key {
-//            case "recently":
-//                navigationController?.pushViewController(HistorySongListViewController(), animated: true)
-//                break
-//            case "favorites":
-//                navigationController?.pushViewController(DownloadViewController(), animated: true)
-//                break
-//            case "download":
-//                navigationController?.pushViewController(DownloadViewController(), animated: true)
-//                break
-//            case "import":
-//                navigationController?.pushViewController(DownloadViewController(), animated: true)
-//                break
-//            default:
-//                break
-//            }
+            switch key {
+            case "recently":
+                navigationController?.pushViewController(HistorySongListViewController(), animated: true)
+                break
+            case "favorites":
+                navigationController?.pushViewController(DownloadViewController(), animated: true)
+                break
+            case "download":
+                navigationController?.pushViewController(DownloadViewController(), animated: true)
+                break
+            case "import":
+                navigationController?.pushViewController(DownloadViewController(), animated: true)
+                break
+            default:
+                break
+            }
         }
-        
     }
     
 }
