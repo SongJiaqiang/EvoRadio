@@ -30,10 +30,8 @@ pod 'Alamofire', '~> 4.0'
 pod 'Kingfisher', '~> 3.0'
 ## 自动布局
 pod 'SnapKit', '~> 3.0.0'
-## Swift映射
-pod 'EVReflection', :git => 'https://github.com/evermeer/EVReflection', :branch => 'Swift3'
 ## SQLite
-pod 'SQLite.swift', '~> 0.11.0'
+#pod 'SQLite.swift', '~> 0.11.0'
 
 end
 

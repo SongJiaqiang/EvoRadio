@@ -8,6 +8,11 @@ EvpRadio.xcodeproj/xcuserdata/
 
 # pod
 Pods/
+Podfile.lock
+
+# carthage
+Carthage/
+Cartfile.resolved
 
 # test files
 Test/
