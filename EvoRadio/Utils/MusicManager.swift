@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import StreamingKit
+import AudioKit
 import MediaPlayer
 import Kingfisher
+
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):

@@ -15,3 +15,6 @@ github "jdg/MBProgressHUD" ~> 1.0.0
 
 # 下拉刷新、加载更多
 github "SongJiaqiang/MJRefresh" "master"
+
+# 音频播放
+github "SongJiaqiang/StreamingKit" "master"

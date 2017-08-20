@@ -3,22 +3,19 @@ PODS:
   - leveldb (1.18)
   - pop (1.0.10)
   - ReflectionView (1.2)
-  - StreamingKit (0.1.29)
 
 DEPENDENCIES:
   - iCarousel (~> 1.8.2)
   - leveldb (~> 1.18)
   - pop (~> 1.0)
   - ReflectionView (~> 1.2)
-  - StreamingKit (~> 0.1.29)
 
 SPEC CHECKSUMS:
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
   ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
-  StreamingKit: c329785aaef3ac142d4ae388345bfe1ed23cfd45
 
-PODFILE CHECKSUM: e73d0af1846025b9ca1ac15b87a2fb63bc16b3b1
+PODFILE CHECKSUM: adcf77f4501b201351ee62027a267c17fcb154a7
 
 COCOAPODS: 1.2.1

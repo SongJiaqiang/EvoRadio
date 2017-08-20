@@ -10,8 +10,6 @@ target 'EvoRadio' do
 pod 'leveldb', '~> 1.18'
 ## 动画特效
 pod 'pop', '~> 1.0'
-## 音频播放
-pod 'StreamingKit', '~> 0.1.29'
 ## 3D画廊
 pod 'iCarousel', '~> 1.8.2'
 ## 倒影
