@@ -15,6 +15,7 @@
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
 		634E066F1F38882000253E9A /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E066E1F38882000253E9A /* TopTabBar.swift */; };
 		634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06771F38888400253E9A /* RadioTableViewCell.swift */; };
+		635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD1B41F4981DE002AFE0D /* RefreshKit.framework */; };
 		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
 		636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */; };
 		63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63974EB91DC4E437004D2526 /* Downloader.swift */; };
@@ -124,6 +125,7 @@
 		634E06681F3869F400253E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		634E066E1F38882000253E9A /* TopTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TopTabBar.swift; path = Views/TopTabBar.swift; sourceTree = "<group>"; };
 		634E06771F38888400253E9A /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioTableViewCell.swift; sourceTree = "<group>"; };
+		635AD1B41F4981DE002AFE0D /* RefreshKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RefreshKit.framework; path = Carthage/Build/iOS/RefreshKit.framework; sourceTree = "<group>"; };
 		636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSongInfo.swift; sourceTree = "<group>"; };
 		636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		63974EB91DC4E437004D2526 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */,
 				634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */,
 				9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */,
 				9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */,
@@ -258,6 +261,7 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				635AD1B41F4981DE002AFE0D /* RefreshKit.framework */,
 				634E065E1F38690200253E9A /* ObjectMapper.framework */,
 				9059396A1D0E65A200FF9848 /* AVFoundation.framework */,
 				90C32B6F1D0586EE00C87DAF /* QuartzCore.framework */,
@@ -639,6 +643,8 @@
 				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RefreshKit.framework",
 			);
 			outputPaths = (
 			);
@@ -959,7 +965,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -986,7 +992,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				ENABLE_BITCODE = YES;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",

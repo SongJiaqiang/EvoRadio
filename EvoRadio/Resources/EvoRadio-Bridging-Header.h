@@ -18,5 +18,6 @@
 #import <StreamingKit/STKAutoRecoveringHTTPDataSource.h>
 #import <iCarousel/iCarousel.h>
 #import <ReflectionView/ReflectionView.h>
+#import <RefreshKit/MJRefresh.h>
 
 #endif /* EvoRadio_Bridging_Header_h */

@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import MJRefresh
+import RefreshKit
 
 class NowViewController: ViewController {
     

@@ -47,7 +47,6 @@ class MusicManager: NSObject {
         audioPlayer = STKAudioPlayer()
         audioPlayer.meteringEnabled = true
         
-        
     }
 
     //MARK: functions

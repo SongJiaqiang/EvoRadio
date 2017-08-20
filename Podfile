@@ -8,8 +8,6 @@ target 'EvoRadio' do
 
 ## 数据存储
 pod 'leveldb', '~> 1.18'
-## 刷新组件
-pod 'MJRefresh', '~> 3.1.10'
 ## 动画特效
 pod 'pop', '~> 1.0'
 ## 音频播放
