@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import iCarousel
 import ReflectionView
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {

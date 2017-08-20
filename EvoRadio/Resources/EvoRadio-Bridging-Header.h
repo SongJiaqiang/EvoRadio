@@ -14,7 +14,7 @@
 #import <AudioKit/AudioKit.h>
 #import <RefreshKit/RefreshKit.h>
 
-#import <iCarousel/iCarousel.h>
+#import <CarouselKit/CarouselKit.h>
 #import <ReflectionView/ReflectionView.h>
 #import "WLevelDb.h"
 #import <pop/POP.h>

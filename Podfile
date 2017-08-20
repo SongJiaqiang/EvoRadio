@@ -4,14 +4,10 @@ use_frameworks!
 
 target 'EvoRadio' do
 
-# Objctive-C
-
 ## 数据存储
 pod 'leveldb', '~> 1.18'
 ## 动画特效
 pod 'pop', '~> 1.0'
-## 3D画廊
-pod 'iCarousel', '~> 1.8.2'
 ## 倒影
 pod 'ReflectionView', '~> 1.2'
 

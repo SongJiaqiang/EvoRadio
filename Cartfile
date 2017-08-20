@@ -18,3 +18,6 @@ github "SongJiaqiang/MJRefresh" "master"
 
 # 音频播放
 github "SongJiaqiang/StreamingKit" "master"
+
+# 旋转木马特效
+github "SongJiaqiang/CarouselKit" "master"
