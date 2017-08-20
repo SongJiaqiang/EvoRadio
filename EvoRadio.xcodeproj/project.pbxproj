@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		49ED37AB1C63B65EE5BF6EFC /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
@@ -114,8 +113,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		1FC127596B7A455E531691AF /* Pods-EvoRadioTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadioTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadioTests/Pods-EvoRadioTests.release.xcconfig"; sourceTree = "<group>"; };
-		270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.debug.xcconfig"; sourceTree = "<group>"; };
 		51B3B61B6D74F76DF8CA8BC3 /* Pods_EvoRadioTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadioTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
@@ -214,13 +211,11 @@
 		90FB91B21D02D4C1002ECC8C /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		90FB91B41D02D4E3002ECC8C /* libstdc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.tbd"; path = "usr/lib/libstdc++.tbd"; sourceTree = SDKROOT; };
 		90FB91B61D02D503002ECC8C /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		B64BAE57BE048720E0F12B15 /* Pods-EvoRadioTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadioTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadioTests/Pods-EvoRadioTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EvoRadio.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
 		DBB79DA41CD11935006189B3 /* Dates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Dates.swift; sourceTree = "<group>"; };
 		DBDC7F471CD90A8D0093812C /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBF1E7E11CCE7CA300B554A2 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
-		E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -255,7 +250,6 @@
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
-				49ED37AB1C63B65EE5BF6EFC /* Pods_EvoRadio.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -373,7 +367,6 @@
 				634E06651F3869F400253E9A /* EvoRadioTests */,
 				902FBCCE1CBEAC020051A93B /* Products */,
 				5A94393BB0E9EEBD2CED84BF /* Frameworks */,
-				9208D87DD2FC6602AD9895EE /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -501,17 +494,6 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		9208D87DD2FC6602AD9895EE /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */,
-				E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */,
-				B64BAE57BE048720E0F12B15 /* Pods-EvoRadioTests.debug.xcconfig */,
-				1FC127596B7A455E531691AF /* Pods-EvoRadioTests.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -519,12 +501,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 634E066B1F3869F400253E9A /* Build configuration list for PBXNativeTarget "EvoRadioTests" */;
 			buildPhases = (
-				B0C0C2AD5D7DB0B5C211E7DF /* [CP] Check Pods Manifest.lock */,
 				634E06601F3869F400253E9A /* Sources */,
 				634E06611F3869F400253E9A /* Frameworks */,
 				634E06621F3869F400253E9A /* Resources */,
-				A9D9A3BA9E31CB845AFC4CBC /* [CP] Embed Pods Frameworks */,
-				E2FCACD3AB0C9F9D4478459D /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -540,12 +519,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 902FBCDF1CBEAC020051A93B /* Build configuration list for PBXNativeTarget "EvoRadio" */;
 			buildPhases = (
-				50C02F175FE02547C1EEFD77 /* [CP] Check Pods Manifest.lock */,
 				902FBCC91CBEAC020051A93B /* Sources */,
 				902FBCCA1CBEAC020051A93B /* Frameworks */,
 				902FBCCB1CBEAC020051A93B /* Resources */,
-				F77F545B71165DFE7CC6C092 /* [CP] Embed Pods Frameworks */,
-				EDEEEB40C21616683F27DA57 /* [CP] Copy Pods Resources */,
 				634E065D1F38682D00253E9A /* ShellScript */,
 			);
 			buildRules = (
@@ -620,21 +596,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		50C02F175FE02547C1EEFD77 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
 		634E065D1F38682D00253E9A /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -657,81 +618,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
-		A9D9A3BA9E31CB845AFC4CBC /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadioTests/Pods-EvoRadioTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B0C0C2AD5D7DB0B5C211E7DF /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		E2FCACD3AB0C9F9D4478459D /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadioTests/Pods-EvoRadioTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		EDEEEB40C21616683F27DA57 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		F77F545B71165DFE7CC6C092 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -833,14 +719,13 @@
 /* Begin XCBuildConfiguration section */
 		634E066C1F3869F400253E9A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B64BAE57BE048720E0F12B15 /* Pods-EvoRadioTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 4T9J35ZW6C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				HEADER_SEARCH_PATHS = "\"${PODS_ROOT}/leveldb/\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = EvoRadioTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -854,14 +739,13 @@
 		};
 		634E066D1F3869F400253E9A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FC127596B7A455E531691AF /* Pods-EvoRadioTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				DEVELOPMENT_TEAM = 4T9J35ZW6C;
 				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/Carthage/Build/iOS";
-				HEADER_SEARCH_PATHS = "\"${PODS_ROOT}/leveldb/\"";
+				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = EvoRadioTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -962,7 +846,6 @@
 		};
 		902FBCE01CBEAC020051A93B /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 270BCDC0A448F675CDD6B791 /* Pods-EvoRadio.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -989,7 +872,6 @@
 		};
 		902FBCE11CBEAC020051A93B /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E63E940AFE16ACD2BBBF1072 /* Pods-EvoRadio.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
