@@ -8,7 +8,7 @@
 
 import UIKit
 import SnapKit
-import MJRefresh
+import RefreshKit
 
 class MainViewController: ViewController {
     let barHeight: CGFloat = 50

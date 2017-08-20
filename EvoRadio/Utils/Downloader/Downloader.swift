@@ -24,7 +24,7 @@ class Downloader: NSObject {
     class func downloadingTaskCount() -> Int{
         var count: Int = 0
         for s in Downloader.downloadingSongs {
-            if s.status == TaskStatus.downloading.rawValue as NSNumber {
+            if s.status == TaskStatus.downloading.rawValue {
                 count += 1
             }
         }

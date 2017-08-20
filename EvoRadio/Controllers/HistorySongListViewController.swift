@@ -140,7 +140,6 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        TrackManager.playMusicTypeEvent(.HistorySongListCell)
         
         let song = dataSource[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
@@ -155,7 +154,6 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
             Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
             
-            TrackManager.playMusicTypeEvent(.HistorySongList)
         }
     }
     

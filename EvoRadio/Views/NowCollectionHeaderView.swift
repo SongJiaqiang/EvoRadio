@@ -7,8 +7,6 @@
 //
 
 import UIKit
-import iCarousel
-import ReflectionView
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
     func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
@@ -70,7 +68,7 @@ extension NowCollectionHeaderView: iCarouselDataSource, iCarouselDelegate {
         itemView.frame = CGRect(x: 0, y: 0, width: itemWidth, height: itemWidth)
         
         itemView.reflectionAlpha = 0.25
-        itemView.reflectionGap = 3.0
+        itemView.reflectionGap = 1.0
         itemView.reflectionScale = 0.15
         
         let coverImageView = UIImageView()

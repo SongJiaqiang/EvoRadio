@@ -7,9 +7,11 @@
 //
 
 import UIKit
-import StreamingKit
+import AudioKit
 import MediaPlayer
 import Kingfisher
+
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -47,7 +49,6 @@ class MusicManager: NSObject {
         audioPlayer = STKAudioPlayer()
         audioPlayer.meteringEnabled = true
         
-        
     }
 
     //MARK: functions
@@ -61,7 +62,13 @@ class MusicManager: NSObject {
         }
         
         if autoPlay {
-            currentIndex = playlist.index(of: songs.first!)!
+            
+            if let first = songs.first {                
+                if let index = indexOf(array: playlist, song: first) {
+                    currentIndex = index
+                }
+            }
+            
             NotificationManager.shared.postUpdatePlayerNotification()
             play()
         }
@@ -75,27 +82,34 @@ class MusicManager: NSObject {
                 break
             }
         }
+        
         if exit == false {
             playlist.append(song)
         }
         
         if autoPlay {
-            currentIndex = playlist.index(of: song)!
+            if let index = indexOf(array: playlist, song: song) {
+                currentIndex = index
+            }
+            
             play()
         }
         
+        // 更新历史列表
+        saveLastPlaylist()
     }
     
     func removeSongFromPlaylist(_ song: Song) {
         
         for item in playlist {
             if item.songID == song.songID {
-                let index = playlist.index(of: item)
-                playlist.remove(at: index!)
-                if index < currentIndex {
-                    currentIndex -= 1
+                if let index = indexOf(array: playlist, song: item) {
+                    playlist.remove(at: index)
+                    if index < currentIndex {
+                        currentIndex -= 1
+                    }
+                    return
                 }
-                return
             }
         }
     }
@@ -166,6 +180,7 @@ class MusicManager: NSObject {
         
     }
     
+    //MARK: - player control
     func play() {
         
         if let cSong = currentSong() {
@@ -180,31 +195,18 @@ class MusicManager: NSObject {
             
             // 更新控制中心的音乐播放信息
             updatePlayingInfo()
-            // 缓存播放列表
-            saveLastPlaylist()
+
             // 缓存历史播放歌曲
             CoreDB.addSongToHistoryList(currentSong()!)
             
             NotificationManager.shared.postUpdatePlayerNotification()
+            
+            // 更新历史列表
+            saveLastPlaylist()
         }
         
     }
     
-    func findMusicFileCachedPath(_ song: Song) -> String? {
-        if song.audioURL?.isEmpty == true {
-            return nil
-        }
-        
-        let fileName = song.audioURL!.lastPathComponent()
-        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
-        let filePath = downloadPath.appendPathComponent(fileName)
-        
-        if FileManager.default.fileExists(atPath: filePath) {
-            return filePath
-        }
-        
-        return nil
-    }
     
     func pause() {
         if audioPlayer.state == .playing {
@@ -296,6 +298,7 @@ class MusicManager: NSObject {
         audioPlayer.seek(toTime: Double(second))
     }
     
+    //MARK: -
     func currentSong() -> Song? {
         if currentIndex < 0 || playlist.count <= 0 {
             return nil
@@ -321,13 +324,18 @@ class MusicManager: NSObject {
     func loadLastPlaylist() {
         if let lastPlaylist = CoreDB.getLastPlaylist() {
             playlist = lastPlaylist.playlist!
-            currentIndex = (lastPlaylist.indexOfPlaylist?.intValue)!
-//            NotificationManager.shared.postUpdatePlayerControllerNotification()
+            currentIndex = lastPlaylist.indexOfPlaylist!
+            
+            print("Get Last play music: \(currentIndex) / \(playlist.count)")
+            play()
+            
         }
     }
     
     func saveLastPlaylist() {
         if playlist.count > 0 {
+            print("Save Last play music: \(currentIndex) / \(playlist.count)")
+            
             CoreDB.saveLastPlaylist(playlist, indexOfPlaylist: currentIndex, timePlayed: 0)
         }
     }
@@ -366,5 +374,45 @@ class MusicManager: NSObject {
             }
         }
         return .ListLoop
+    }
+    
+    func indexOf(array: [Song], song: Song) -> Int? {
+        
+        for index in 0..<array.count {
+            let item = array[index]
+            if item.songID == song.songID {
+                return index
+            }
+        }
+        
+        return nil
+    }
+    
+    func indexOfPlaylist(song: Song) -> Int? {
+        
+        for index in 0..<playlist.count {
+            let item = playlist[index]
+            if item.songID == song.songID {
+                return index
+            }
+        }
+        
+        return nil
+    }
+    
+    func findMusicFileCachedPath(_ song: Song) -> String? {
+        if song.audioURL?.isEmpty == true {
+            return nil
+        }
+        
+        let fileName = song.audioURL!.lastPathComponent()
+        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
+        let filePath = downloadPath.appendPathComponent(fileName)
+        
+        if FileManager.default.fileExists(atPath: filePath) {
+            return filePath
+        }
+        
+        return nil
     }
 }

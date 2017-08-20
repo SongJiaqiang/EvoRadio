@@ -168,7 +168,6 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
                 break
             }
         }
-        
     }
     
 }

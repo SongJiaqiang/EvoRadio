@@ -9,15 +9,15 @@
 #ifndef EvoRadio_Bridging_Header_h
 #define EvoRadio_Bridging_Header_h
 
-#import "WLevelDb.h"
-#import <pop/POP.h>
-
-#import "WXApi.h"
 
 #import <MBProgressHUD/MBProgressHUD.h>
-#import <StreamingKit/STKAudioPlayer.h>
-#import <StreamingKit/STKAutoRecoveringHTTPDataSource.h>
-#import <iCarousel/iCarousel.h>
-#import <ReflectionView/ReflectionView.h>
+#import <AudioKit/AudioKit.h>
+#import <RefreshKit/RefreshKit.h>
+#import <CarouselKit/CarouselKit.h>
+#import "ReflectionView.h"
+#import <ObjcLevelDB/ObjcLevelDB.h>
+
+#import <pop/POP.h>
+
 
 #endif /* EvoRadio_Bridging_Header_h */

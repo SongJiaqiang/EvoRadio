@@ -145,8 +145,8 @@ class DownloadingSongListViewController: ViewController {
         if let userInfo = notification.userInfo {
 
             let songs = userInfo["songs"] as! [Song]
-            for s in songs {
-                let donwloadSong = DownloadSongInfo(s)
+            for song in songs {
+                let donwloadSong = DownloadSongInfo(song: song)
                 Downloader.downloadingSongs.append(donwloadSong)
             }
             tableView.reloadData()
@@ -167,7 +167,7 @@ class DownloadingSongListViewController: ViewController {
             for i in 0..<Downloader.downloadingSongs.count {
                 let songInfo = Downloader.downloadingSongs[i]
                 
-                songInfo.status = TaskStatus.gettingInfo.rawValue as NSNumber
+                songInfo.status = TaskStatus.gettingInfo.rawValue
                 updateCell(songInfo, atIndex: IndexPath(row: i, section: 0))
             }
             
@@ -178,14 +178,14 @@ class DownloadingSongListViewController: ViewController {
             
             for i in 0..<Downloader.downloadingSongs.count {
                 let songInfo = Downloader.downloadingSongs[i]
-                if songInfo.status == TaskStatus.paused.rawValue as NSNumber {
+                if songInfo.status == TaskStatus.paused.rawValue {
                     continue
                 }
                 let modelInfo = findDownloadingModel(taskId: (songInfo.song?.audioURL?.lastPathComponent())!)
                 if let index = modelInfo.index {
                     downloadManager.pauseDownloadTaskAtIndex(index)
                 }
-                songInfo.status = TaskStatus.paused.rawValue as NSNumber
+                songInfo.status = TaskStatus.paused.rawValue
                 updateCell(songInfo, atIndex: IndexPath(row: i, section: 0))
             }
         }
@@ -210,7 +210,7 @@ class DownloadingSongListViewController: ViewController {
         
         var isAllTaskPaused = true
         for songInfo in Downloader.downloadingSongs {
-            if songInfo.status != TaskStatus.paused.rawValue as NSNumber {
+            if songInfo.status != TaskStatus.paused.rawValue {
                 isAllTaskPaused = false
                 break
             }
@@ -262,35 +262,35 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         let downloadModelInfo = findDownloadingModel(taskId: (selectedSong.song?.audioURL?.lastPathComponent())!)
         if let index = downloadModelInfo.index {
             let downloadModel = downloadManager.downloadingArray[index]
-            if selectedSong.status?.intValue == TaskStatus.downloading.rawValue || selectedSong.status?.intValue == TaskStatus.gettingInfo.rawValue{
+            if selectedSong.status == TaskStatus.downloading.rawValue || selectedSong.status == TaskStatus.gettingInfo.rawValue {
                 // pause task
                 downloadManager.pauseDownloadTaskAtIndex(index)
-                selectedSong.status = TaskStatus.paused.rawValue as NSNumber
+                selectedSong.status = TaskStatus.paused.rawValue
                 
-            }else if selectedSong.status?.intValue == TaskStatus.paused.rawValue {
+            }else if selectedSong.status == TaskStatus.paused.rawValue {
                 // resume task
 //                downloadManager.resumeDownloadTaskAtIndex(index)
-                selectedSong.status = TaskStatus.gettingInfo.rawValue as NSNumber
+                selectedSong.status = TaskStatus.gettingInfo.rawValue
                 downloadModel.status = TaskStatus.gettingInfo.description()
                 autoStartNextTask()
                 
                 updateCell(selectedSong, atIndex: indexPath)
-            }else if selectedSong.status?.intValue == TaskStatus.failed.rawValue {
+            }else if selectedSong.status == TaskStatus.failed.rawValue {
                 // retry task
 //                downloadManager.retryDownloadTaskAtIndex(index)
-                selectedSong.status = TaskStatus.gettingInfo.rawValue as NSNumber
+                selectedSong.status = TaskStatus.gettingInfo.rawValue
                 downloadModel.status = TaskStatus.gettingInfo.description()
                 autoStartNextTask()
                 
                 updateCell(selectedSong, atIndex: indexPath)
             }
         }else {
-            if selectedSong.status == TaskStatus.gettingInfo.rawValue as NSNumber {
-                selectedSong.status = TaskStatus.paused.rawValue as NSNumber
+            if selectedSong.status == TaskStatus.gettingInfo.rawValue {
+                selectedSong.status = TaskStatus.paused.rawValue
                 
                 updateCell(selectedSong, atIndex: indexPath)
             }else {
-                selectedSong.status = TaskStatus.gettingInfo.rawValue as NSNumber
+                selectedSong.status = TaskStatus.gettingInfo.rawValue
                 if Downloader.downloadingTaskCount() < 3 {
                     addTask(s: selectedSong.song!)
                 }else {
@@ -312,7 +312,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         if Downloader.downloadingTaskCount() < 3 {
             // 下载列表中第一个状态为gettingInfo的任务
             for songInfo in Downloader.downloadingSongs {
-                if songInfo.status == TaskStatus.gettingInfo.rawValue as NSNumber {
+                if songInfo.status == TaskStatus.gettingInfo.rawValue {
                     addTask(s: songInfo.song!)
                     break
                 }
@@ -421,7 +421,7 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
         
         if let row = downloadingSongInfo.row {
             let downloadingSong = Downloader.downloadingSongs[row]
-            downloadingSong.status = status.rawValue as NSNumber?
+            downloadingSong.status = status.rawValue
             updateCell(downloadingSong, atIndex: IndexPath(row: row, section: 0))
         }
     }

@@ -19,8 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//        prepareSocial()
-        
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
         
@@ -41,9 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.clipsToBounds = true
 //        window?.layer.cornerRadius = 10
         
-        let controller = MainViewController()
-        let homeNavC = NavigationController(rootViewController: controller)
-        window?.rootViewController = homeNavC
+        let rootVC = MainViewController()
+        let navVC = NavigationController(rootViewController: rootVC)
+        window?.rootViewController = navVC
         
 //        let c = StreamingKitViewController()
 //        window?.rootViewController = c
@@ -92,22 +90,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
-    func application(_ application: UIApplication, handleOpen url: URL) -> Bool {
-        
-//        WeiboSDK.handleOpen(url, delegate: nil)
-        return WXApi.handleOpen(url, delegate: nil)
-    }
-    
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//
-//        WeiboSDK.handleOpen(url, delegate: nil)
-//        return WXApi.handleOpen(url, delegate: nil)
-//    }
     
     override var canBecomeFirstResponder : Bool {
         return true
     }
     
+    
+    /// 远程控制。耳机、蓝牙
+    ///
+    /// - Parameter event: 触发事件
     override func remoteControlReceived(with event: UIEvent?) {
         if let e = event {
             if e.type == .remoteControl {
@@ -140,32 +131,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-
-//    func prepareUMeng() {
-//        let config = UMAnalyticsConfig.sharedInstance()
-//        config?.appKey = UM_KEY
-//        config?.channelId = ""
-//        
-//        // 上报App版本
-//        let version = Bundle.main.infoDictionary!["CFBundleShortVersionString"]
-//        MobClick.setAppVersion(version as! String)
-//        
-//        // 设置加密
-//        MobClick.setEncryptEnabled(true)
-//        
-//        // 开始统计
-//        MobClick.start(withConfigure: config)
-//        
-//    }
-    
-    func prepareSocial()  {
-//        WXApi.registerApp(WECHAT_APP_ID)
-        
-//        WeiboSDK.enableDebugMode(true)
-//        WeiboSDK.registerApp(WEIBO_APP_KEY)
-    }
-    
-    
 
 }
 

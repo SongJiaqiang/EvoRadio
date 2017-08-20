@@ -7,14 +7,14 @@
 //
 
 import UIKit
-import MJRefresh
+import RefreshKit
 
 class RadioViewController: ViewController {
 
     let cellID = "radioTableViewCellID"
     
     var tableView: UITableView!
-    var dataSource = [Radio]()
+    var dataSources = [Radio]()
     var cellHeight: CGFloat = 0
     
     override func viewDidLoad() {
@@ -53,7 +53,7 @@ class RadioViewController: ViewController {
         api.fetch_all_channels({[weak self] (radios) in
             
             if radios.count > 0 {
-                self?.dataSource = radios
+                self?.dataSources = radios
                 self?.tableView!.reloadDataOnMainQueue(after: nil)
 //                self?.tableView!.mj_header.endRefreshing()
             }
@@ -65,7 +65,7 @@ class RadioViewController: ViewController {
 extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return dataSource.count
+        return dataSources.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,7 +74,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! RadioTableViewCell
-        let radio = dataSource[(indexPath as NSIndexPath).section]
+        let radio = dataSources[(indexPath as NSIndexPath).section]
         cell.delegate = self
         cell.setupChannels(radio)
         
@@ -92,7 +92,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         nameLabel.textColor = UIColor.white
         nameLabel.textAlignment = .center
         
-        let radio = dataSource[section]
+        let radio = dataSources[section]
         nameLabel.text = radio.radioName
         
         return header
@@ -116,7 +116,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         if scrollView.contentOffset.y - 30 > 0 {
             let index = Int(scrollView.contentOffset.y - 30) / Int(getCellHeight() + 30 + 0.01)
             if index >= 0 {
-                let radio = dataSource[index]
+                let radio = dataSources[index]
                 title = radio.radioName!
             }
         }

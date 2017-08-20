@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SnapKit
-import StreamingKit
+import AudioKit
 
 class PlayerViewController: ViewController {
     
@@ -446,17 +446,25 @@ class PlayerViewController: ViewController {
     
     func downloadButtonPressed(_ button: UIButton) {
         if let cSong = MusicManager.shared.currentSong() {
-            CoreDB.addSongToDownloadingList(cSong)
+//            CoreDB.addSongToDownloadingList(cSong)
 //            button.selected = true
             HudManager.showText("已经加入下载列表")
         }
     }
+    
     func shareButtonPressed(_ button: UIButton) {
         if let currentSong = MusicManager.shared.currentSong() {
-            let social  = SocialController(music: currentSong, shareImage: coverImageView.image!, shareText: "")
-            present(social, animated: true, completion: nil)
+            
+            let link = URL(string: currentSong.audioURL!)
+            let message = String(format: "EvoRadio请您欣赏：%@", currentSong.songName)
+            
+            let shareItems: [Any] = [message, link as Any]
+            let activityController = UIActivityViewController(activityItems: shareItems, applicationActivities: nil)
+            
+            self.present(activityController, animated: true, completion: nil)
         }
     }
+    
     func infoButtonPressed(_ button: UIButton) {
         debugPrint("infoButtonPressed")
     }
@@ -506,8 +514,6 @@ class PlayerViewController: ViewController {
             
             present(alertController, animated: true, completion: nil)
         }
-        
-        
         
     }
     
@@ -694,7 +700,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     
     func downloadAllButtonPressed(_ button: UIButton) {
         if MusicManager.shared.playlist.count > 0 {
-            CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
+//            CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
             showPlaylistTableView(false)
         }
     }
@@ -714,7 +720,8 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension PlayerViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-        let row =  MusicManager.shared.playlist.index(of: song)
+
+        let row = MusicManager.shared.indexOfPlaylist(song: song)
         
         let alertController = UIAlertController()
 

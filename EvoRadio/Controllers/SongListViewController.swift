@@ -13,7 +13,7 @@ class SongListViewController: ViewController {
     let cellID = "songCellID"
     
     var program: Program!
-    var dataSource = [Song]()
+    var dataSources = [Song]()
 
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var coverImageView = UIImageView()
@@ -35,7 +35,7 @@ class SongListViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        PlayerView.main.hide()
+//        PlayerView.main.hide()
         AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
         AssistiveTouch.shared.addTarget(self, action: #selector(SongListViewController.goBack), for: .touchUpInside)
         AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
@@ -43,7 +43,7 @@ class SongListViewController: ViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        PlayerView.main.show()
+//        PlayerView.main.show()
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,12 +89,11 @@ class SongListViewController: ViewController {
         
         if let _ = program {
             let programID = program.programID!
-            api.fetch_songs(programID, isVIP: true, onSuccess: {[weak self] (items) in
+            api.fetch_songs(programID, isVIP: true, onSuccess: {[weak self] (songs) in
                 
-                if items.count > 0 {
-                    let songs = items as! [Song]
-                    self?.dataSource = songs
-                    PlaylistManager.playlist.saveList(songs)
+                if songs.count > 0 {
+                    self?.dataSources = songs
+//                    PlaylistManager.playlist.saveList(songs)
                     
                     self?.updateCover()
                     self?.tableView.reloadDataOnMainQueue(after: nil)
@@ -119,14 +118,14 @@ class SongListViewController: ViewController {
 extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSources.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
         cell.delegate = self
         
-        let song = dataSource[(indexPath as NSIndexPath).row]
+        let song = dataSources[(indexPath as NSIndexPath).row]
         cell.updateSongInfo(song)
         
         return cell
@@ -142,23 +141,25 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", for: UIControlState())
-        playButton.addTarget(self, action: #selector(SongListViewController.playButtonPressed(_:)), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 80, height: 30))
+//            make.size.equalTo(CGSize(width: 80, height: 30))
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
             make.leftMargin.equalTo(10)
         }
         
-        let moreButton = UIButton()
-        headerView.addSubview(moreButton)
-        moreButton.titleLabel?.font = UIFont.sizeOf12()
-        moreButton.backgroundColor = UIColor.grayColor3()
-        moreButton.clipsToBounds = true
-        moreButton.layer.cornerRadius = 15
-        moreButton.setTitle("More", for: UIControlState())
-        moreButton.addTarget(self, action: #selector(SongListViewController.moreButtonPressed(_:)), for: .touchUpInside)
-        moreButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 60, height: 30))
+        let downloadButton = UIButton()
+        headerView.addSubview(downloadButton)
+        downloadButton.titleLabel?.font = UIFont.sizeOf12()
+        downloadButton.backgroundColor = UIColor.grayColor3()
+        downloadButton.clipsToBounds = true
+        downloadButton.layer.cornerRadius = 15
+        downloadButton.setTitle("Download All", for: UIControlState())
+        downloadButton.addTarget(self, action: #selector(downloadButtonPressed(_:)), for: .touchUpInside)
+        downloadButton.snp.makeConstraints { (make) in
+//            make.size.equalTo(CGSize(width: 60, height: 30))
+            make.height.equalTo(30)
             make.centerY.equalTo(headerView.snp.centerY)
             make.right.equalTo(headerView.snp.right).offset(-12)
         }
@@ -190,53 +191,28 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        TrackManager.playMusicTypeEvent(.SongListCell)
         
-        let song = dataSource[(indexPath as NSIndexPath).row]
+        let song = dataSources[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
     func playButtonPressed(_ button: UIButton) {
-        if dataSource.count > 0 {
-            MusicManager.shared.appendSongsToPlaylist(dataSource, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+        if dataSources.count > 0 {
+            MusicManager.shared.clearList()
+            MusicManager.shared.appendSongsToPlaylist(dataSources, autoPlay: true)
             
-            TrackManager.playMusicTypeEvent(.SongList)
+            if let topVC = Device.keyWindow().topMostController() {
+                topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+            }
         }
     }
-    
-    func moreButtonPressed(_ button: UIButton) {
-        let alertController = UIAlertController()
-        let action1 = UIAlertAction(title: "全部加入播放列表", style: .default, handler: { (action) in
-            debugPrint("add to playlist")
-            MusicManager.shared.appendSongsToPlaylist(self.dataSource, autoPlay: false)
-        })
-        let action2 = UIAlertAction(title: "收藏全部歌曲", style: .default, handler: { (action) in
-            debugPrint("add to collecte")
-        })
-        let action3 = UIAlertAction(title: "下载全部歌曲", style: .default, handler: { (action) in
-            debugPrint("download musics")
-            CoreDB.addSongsToDownloadingList(self.dataSource)
-            
-            NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSource])
-        })
-//        let action4 = UIAlertAction(title: "和好友分享", style: .Default, handler: {[weak self] (action) in
-//            debugPrint("sharing")
-//            let social  = SocialController(shareTitle: (self?.program.programName)!, shareText: (self?.program.programDesc)!, shareImage: (self?.coverImageView.image)!, shareUrl: DOMAIN)
-//            social.shareAudio = false
-//            self?.navigationController!.presentViewController(social, animated: true, completion: nil)
-//        })
-        let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
+
+    func downloadButtonPressed(_ button: UIButton) {
+        CoreDB.addSongsToDownloadingList(self.dataSources)
         
-        alertController.addAction(action1)
-        alertController.addAction(action2)
-        alertController.addAction(action3)
-//        alertController.addAction(action4)
-        alertController.addAction(cancelAction)
-        
-        navigationController!.present(alertController, animated: true, completion: nil)
+        NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
     }
 }
 

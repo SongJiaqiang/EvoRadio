@@ -7,13 +7,13 @@
 //
 
 import UIKit
-import MJRefresh
+import RefreshKit
 
 class ProgramViewController: ViewController {
     let cellID = "programCellID"
     
     var channel: Channel!
-    var dataSource = [Program]()
+    var dataSources = [Program]()
     var collectionView: UICollectionView?
     fileprivate var endOfFeed = false
     fileprivate let pageSize: Int = 30
@@ -101,21 +101,19 @@ class ProgramViewController: ViewController {
     func listChannelPrograms(_ isRefresh: Bool) {
         let channelID = channel.channelID!
         
-        var pageIndex = dataSource.count
+        var pageIndex = dataSources.count
         if isRefresh {
             pageIndex = 0
         }
         
-        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
+        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
             
-            if items.count > 0 {
-//                let newData = Program.programsWithDict(responseData)
-                let newData = items as! [Program]
+            if newItems.count > 0 {
                 if isRefresh {
-                    self?.dataSource.removeAll()
+                    self?.dataSources.removeAll()
                 }
                 
-                self?.dataSource.append(contentsOf: newData)
+                self?.dataSources.append(contentsOf: newItems)
                 
                 self?.collectionView!.reloadDataOnMainQueue(after: { 
                     self?.endRefreshing()
@@ -146,16 +144,16 @@ class ProgramViewController: ViewController {
 extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataSource.count
+        return dataSources.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ProgramCollectionViewCell
         
-        let program = dataSource[(indexPath as NSIndexPath).item]
+        let program = dataSources[(indexPath as NSIndexPath).item]
         cell.updateContent(program)
-        cell.delegate = self
+//        cell.delegate = self
         
         return cell
     }
@@ -163,7 +161,7 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
         
-        let program = dataSource[(indexPath as NSIndexPath).item]
+        let program = dataSources[(indexPath as NSIndexPath).item]
         
         let listController = SongListViewController()
         listController.program = program
@@ -174,13 +172,15 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programID: String) {
-        TrackManager.playMusicTypeEvent(.ProgramCover)
         
         api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.shared.clearList()
-                MusicManager.shared.appendSongsToPlaylist(songs as! [Song], autoPlay: true)
-                Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+//
+//                if let topVC = Device.keyWindow().topMostController() {
+//                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+//                }
             }
             
             }, onFailed: nil)
