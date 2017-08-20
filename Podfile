@@ -8,8 +8,6 @@ target 'EvoRadio' do
 pod 'leveldb', '~> 1.18'
 ## 动画特效
 pod 'pop', '~> 1.0'
-## 倒影
-pod 'ReflectionView', '~> 1.2'
 
     target 'EvoRadioTests' do
         inherit! :search_paths

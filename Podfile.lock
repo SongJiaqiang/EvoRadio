@@ -1,18 +1,15 @@
 PODS:
   - leveldb (1.18)
   - pop (1.0.10)
-  - ReflectionView (1.2)
 
 DEPENDENCIES:
   - leveldb (~> 1.18)
   - pop (~> 1.0)
-  - ReflectionView (~> 1.2)
 
 SPEC CHECKSUMS:
   leveldb: 06059c65d8480c7775ebca4fd556f49f1a655ce2
   pop: 82ca6b068ce9278fd350fd9dd09482a0ce9492e6
-  ReflectionView: be2a06e597ec6734c0077423c797ff02de765947
 
-PODFILE CHECKSUM: 83f6c3d62257a04d6b7163e4aa16ed09a1594a7a
+PODFILE CHECKSUM: 7603c7e6b6ce39983a97170294ce4898070cf2e3
 
 COCOAPODS: 1.2.1

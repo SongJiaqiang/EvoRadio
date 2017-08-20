@@ -15,7 +15,7 @@
 #import <RefreshKit/RefreshKit.h>
 
 #import <CarouselKit/CarouselKit.h>
-#import <ReflectionView/ReflectionView.h>
+#import "ReflectionView.h"
 #import "WLevelDb.h"
 #import <pop/POP.h>
 
