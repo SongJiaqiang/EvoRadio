@@ -5,7 +5,7 @@ use_frameworks!
 target 'EvoRadio' do
 
 ## 动画特效
-pod 'pop', '~> 1.0'
+#pod 'pop', '~> 1.0'
 
     target 'EvoRadioTests' do
         inherit! :search_paths
