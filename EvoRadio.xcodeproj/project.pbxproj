@@ -19,6 +19,7 @@
 		635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2141F499611002AFE0D /* AudioKit.framework */; };
 		635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */; };
 		635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AD2E31F49BC18002AFE0D /* ReflectionView.m */; };
+		635AD56F1F49D9CC002AFE0D /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */; };
 		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
 		636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */; };
 		63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63974EB91DC4E437004D2526 /* Downloader.swift */; };
@@ -66,9 +67,6 @@
 		9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9059396A1D0E65A200FF9848 /* AVFoundation.framework */; };
 		9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90659F111CC92CB00026539F /* AudioToolbox.framework */; };
 		90659F181CC9B6440026539F /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90659F171CC9B6440026539F /* Radio.swift */; };
-		90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F1D1CC9C0B70026539F /* WLevelDb.mm */; };
-		90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F201CC9C0B70026539F /* WLevelSnapshot.mm */; };
-		90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */ = {isa = PBXBuildFile; fileRef = 90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */; };
 		9070928F1D07B51000E11D88 /* HudManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9070928E1D07B51000E11D88 /* HudManager.swift */; };
 		9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9097BB1C1CFE8B6400FA5BD9 /* Test.xib */; };
 		9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9097BB261CFEA8E900FA5BD9 /* ViewControllers.swift */; };
@@ -133,6 +131,7 @@
 		635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarouselKit.framework; path = Carthage/Build/iOS/CarouselKit.framework; sourceTree = "<group>"; };
 		635AD2E21F49BC18002AFE0D /* ReflectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReflectionView.h; sourceTree = "<group>"; };
 		635AD2E31F49BC18002AFE0D /* ReflectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReflectionView.m; sourceTree = "<group>"; };
+		635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjcLevelDB.framework; path = Carthage/Build/iOS/ObjcLevelDB.framework; sourceTree = "<group>"; };
 		636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadSongInfo.swift; sourceTree = "<group>"; };
 		636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollView.swift; sourceTree = "<group>"; };
 		63974EB91DC4E437004D2526 /* Downloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Downloader.swift; sourceTree = "<group>"; };
@@ -182,13 +181,6 @@
 		90659F0F1CC92CA30026539F /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
 		90659F111CC92CB00026539F /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		90659F171CC9B6440026539F /* Radio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = Radio.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		90659F1C1CC9C0B70026539F /* WLevelDb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelDb.h; sourceTree = "<group>"; };
-		90659F1D1CC9C0B70026539F /* WLevelDb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelDb.mm; sourceTree = "<group>"; };
-		90659F1E1CC9C0B70026539F /* WLevelKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelKeys.h; sourceTree = "<group>"; };
-		90659F1F1CC9C0B70026539F /* WLevelSnapshot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelSnapshot.h; sourceTree = "<group>"; };
-		90659F201CC9C0B70026539F /* WLevelSnapshot.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelSnapshot.mm; sourceTree = "<group>"; };
-		90659F211CC9C0B70026539F /* WLevelWriteBatch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WLevelWriteBatch.h; sourceTree = "<group>"; };
-		90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = WLevelWriteBatch.mm; sourceTree = "<group>"; };
 		9070928E1D07B51000E11D88 /* HudManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = HudManager.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9096D78A1CFC0FED00DA6923 /* pop.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = pop.framework; path = "../../../Library/Developer/Xcode/DerivedData/EvoRadio-ahavzujveykrtgbwgjeponlruqip/Build/Products/Debug-iphonesimulator/pop.framework"; sourceTree = "<group>"; };
 		9097BB1C1CFE8B6400FA5BD9 /* Test.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Test.xib; sourceTree = "<group>"; };
@@ -243,6 +235,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				635AD56F1F49D9CC002AFE0D /* ObjcLevelDB.framework in Frameworks */,
 				635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */,
 				635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */,
 				635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */,
@@ -270,6 +263,7 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */,
 				635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */,
 				635AD2141F499611002AFE0D /* AudioKit.framework */,
 				635AD1B41F4981DE002AFE0D /* RefreshKit.framework */,
@@ -408,20 +402,6 @@
 			path = EvoRadio;
 			sourceTree = "<group>";
 		};
-		90659F1B1CC9C0B70026539F /* levelDb */ = {
-			isa = PBXGroup;
-			children = (
-				90659F1C1CC9C0B70026539F /* WLevelDb.h */,
-				90659F1D1CC9C0B70026539F /* WLevelDb.mm */,
-				90659F1E1CC9C0B70026539F /* WLevelKeys.h */,
-				90659F1F1CC9C0B70026539F /* WLevelSnapshot.h */,
-				90659F201CC9C0B70026539F /* WLevelSnapshot.mm */,
-				90659F211CC9C0B70026539F /* WLevelWriteBatch.h */,
-				90659F221CC9C0B70026539F /* WLevelWriteBatch.mm */,
-			);
-			path = levelDb;
-			sourceTree = "<group>";
-		};
 		909E659A1CC07D2F00B0C49B /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -506,7 +486,6 @@
 			isa = PBXGroup;
 			children = (
 				9023EA001D067233004BEE96 /* Downloader */,
-				90659F1B1CC9C0B70026539F /* levelDb */,
 				902F6B6F1CC3C4EA00F43C2E /* Device.swift */,
 				90E7FB4A1CC4B6C50018A532 /* API.swift */,
 				63EF43FE1F38AB4600EADC48 /* CoreDB.swift */,
@@ -668,6 +647,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RefreshKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CarouselKit.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/ObjcLevelDB.framework",
 			);
 			outputPaths = (
 			);
@@ -784,7 +764,6 @@
 				9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */,
 				63EF44091F38B02200EADC48 /* NowCollectionHeaderView.swift in Sources */,
 				9054AE101CC3BFB400E876FF /* Colors.swift in Sources */,
-				90659F231CC9C0B70026539F /* WLevelDb.mm in Sources */,
 				DBB79DA51CD11935006189B3 /* Dates.swift in Sources */,
 				63A4E53C1D80384600E18FD6 /* Views.swift in Sources */,
 				63EF43FD1F38A91D00EADC48 /* ChannelCollectionViewCell.swift in Sources */,
@@ -809,7 +788,6 @@
 				631884601D78482200D7399A /* RadioViewController.swift in Sources */,
 				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */,
-				90659F251CC9C0B70026539F /* WLevelWriteBatch.mm in Sources */,
 				90E7FB531CC4CAF80018A532 /* Song.swift in Sources */,
 				634E065C1F3857AD00253E9A /* Common.swift in Sources */,
 				63EF44131F38B28200EADC48 /* LocalTableViewCell.swift in Sources */,
@@ -819,7 +797,6 @@
 				63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */,
 				63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */,
 				63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */,
-				90659F241CC9C0B70026539F /* WLevelSnapshot.mm in Sources */,
 				63EF43FB1F38A7F000EADC48 /* NowChannel.swift in Sources */,
 				63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */,
 				636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */,

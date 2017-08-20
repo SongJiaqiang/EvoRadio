@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import ObjcLevelDB
 
 let DB_ALLCHANNELS = "all_channels"
 let DB_ALLNOWCHANNELS = "all_now_channels"
@@ -24,7 +25,8 @@ let DB_HISTORY_LIST = "history_list"
 let DB_PLAY_MODE = "play_mode"
 
 
-let leveldb: WLevelDb = WLevelDb.shared()
+
+let mainDB: LevelDB = LevelDB.databaseInLibrary(withName: "main.db")
 
 class CoreDB {
     
@@ -35,55 +37,55 @@ class CoreDB {
     }
     
     class func saveAllChannels(_ jsonArray: [[String : Any]]) {
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_ALLCHANNELS)
+        mainDB.setObject(jsonArray, forKey: DB_ALLCHANNELS)
     }
     
     class func getAllChannels() -> [[String : Any]]? {
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_ALLCHANNELS) {
+        if let jsonArray = mainDB.object(forKey: DB_ALLCHANNELS) {
             return jsonArray as? [[String : Any]]
         }
         return nil
     }
     
     class func saveAllNowChannels(_ jsonArray: [[String : Any]]) {
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_ALLNOWCHANNELS)
+        mainDB.setObject(jsonArray, forKey: DB_ALLNOWCHANNELS)
     }
     
     class func getAllNowChannels() -> [[String : Any]]?{
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_ALLNOWCHANNELS) {
+        if let jsonArray = mainDB.object(forKey: DB_ALLNOWCHANNELS) {
             return jsonArray as? [[String : Any]]
         }
         return nil
     }
     
     class func savePrograms(_ endpoint: String, jsonArray: [[String : Any]]) {
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_PROGRAMS+endpoint)
+        mainDB.setObject(jsonArray, forKey: DB_PROGRAMS+endpoint)
     }
     
     class func getPrograms(_ endpoint: String) -> [[String : Any]]?{
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_PROGRAMS+endpoint) {
+        if let jsonArray = mainDB.object(forKey: DB_PROGRAMS+endpoint) {
             return jsonArray as? [[String : Any]]
         }
         return nil
     }
     
     class func saveGroundPrograms(_ endpoint: String, jsonArray: [[String : Any]]) {
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_GROUND_PROGRAMS+endpoint)
+        mainDB.setObject(jsonArray, forKey: DB_GROUND_PROGRAMS+endpoint)
     }
     
     class func getGroundPrograms(_ endpoint: String) -> [[String : Any]]?{
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_GROUND_PROGRAMS+endpoint) {
+        if let jsonArray = mainDB.object(forKey: DB_GROUND_PROGRAMS+endpoint) {
             return jsonArray as? [[String : Any]]
         }
         return nil
     }
     
     class func saveSongs(_ endpoint: String, jsonArray: [[String : Any]]) {
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_SONGS+endpoint)
+        mainDB.setObject(jsonArray, forKey: DB_SONGS+endpoint)
     }
     
     class func getSongs(_ endpoint: String) -> [[String : Any]]?{
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_SONGS+endpoint) {
+        if let jsonArray = mainDB.object(forKey: DB_SONGS+endpoint) {
             return jsonArray as? [[String : Any]]
         }
         return nil
@@ -91,11 +93,11 @@ class CoreDB {
     
     
     class func saveCustomRadios(_ customRadios: [[String: Any]]) {
-        WLevelDb.shared().setObject(customRadios, forKey: DB_CUSTOMRADIOS)
+        mainDB.setObject(customRadios, forKey: DB_CUSTOMRADIOS)
     }
     
     class func getCustomRadios() -> [[String: Any]]{
-        if let jsonArray = WLevelDb.shared().object(forKey: DB_CUSTOMRADIOS) {
+        if let jsonArray = mainDB.object(forKey: DB_CUSTOMRADIOS) {
             return jsonArray as! [[String : Any]]
         }
         
@@ -158,11 +160,11 @@ class CoreDB {
     }
     
     class func saveSelectedIndexes(_ indexes: [String : Int]) {
-        WLevelDb.shared().setObject(indexes, forKey: DB_SELECTEDINDEXES)
+        mainDB.setObject(indexes, forKey: DB_SELECTEDINDEXES)
     }
     
     class func getSelectedIndexes() -> [String : Int]? {
-        if let indexes = WLevelDb.shared().object(forKey: DB_SELECTEDINDEXES) {
+        if let indexes = mainDB.object(forKey: DB_SELECTEDINDEXES) {
             return indexes as? [String : Int]
         }else {
             return nil
@@ -170,7 +172,7 @@ class CoreDB {
     }
     // 清除选择时刻缓存
     class func clearSelectedIndexes() {
-        WLevelDb.shared().removeObject(forKey: DB_SELECTEDINDEXES)
+        mainDB.removeObject(forKey: DB_SELECTEDINDEXES)
     }
     
     
@@ -178,12 +180,12 @@ class CoreDB {
     class func savePlaylist(_ songs: [Song]) {
         let jsonArray = songs.toJSON()
         
-        WLevelDb.shared().setObject(jsonArray, forKey: DB_PLAYLSIT)
+        mainDB.setObject(jsonArray, forKey: DB_PLAYLSIT)
     }
     /** 获取播放列表 */
     class func getPlaylist() -> [Song] {
         var songs = [Song]()
-        if let jsonArray = leveldb.object(forKey: DB_PLAYLSIT) {
+        if let jsonArray = mainDB.object(forKey: DB_PLAYLSIT) {
             songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
         }
         
@@ -195,12 +197,12 @@ class CoreDB {
         let lastPlaylist = LastPlaylist(list: playlist, index: indexOfPlaylist, time: timePlayed)
         let playlistDict = lastPlaylist.toJSON()
         
-        WLevelDb.shared().setObject(playlistDict, forKey: DB_LAST_PLAYLSIT)
+        mainDB.setObject(playlistDict, forKey: DB_LAST_PLAYLSIT)
     }
         
     /** 获取上次的播放列表 */
     class func getLastPlaylist() -> LastPlaylist? {
-        if let lastPlaylist = leveldb.object(forKey: DB_LAST_PLAYLSIT) {
+        if let lastPlaylist = mainDB.object(forKey: DB_LAST_PLAYLSIT) {
             return LastPlaylist(json: lastPlaylist as! [String : Any])
         }
         return nil
@@ -211,7 +213,7 @@ class CoreDB {
     class func addSongToDownloadedList(_ song: Song) {
         
         var newSongs = [[String : Any]]()
-        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             for item in jsonArray as! [[String : Any]] {
                 if (item["song_id"] as! String) == song.songID {
                     return
@@ -224,12 +226,12 @@ class CoreDB {
         let dict = song.toJSON()
         newSongs.append(dict)
         
-        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
+        mainDB.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
     }
     
     /** 获取已下载歌曲数据 */
     class func getDownloadedSongs() -> [Song]? {
-        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             
             let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             
@@ -243,7 +245,7 @@ class CoreDB {
     class func getDownloadedPrograms() -> [Program] {
         let programs = [Program]()
         
-//        if let songs = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+//        if let songs = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
 //
 //            (songs as! [NSDictionary])
 //
@@ -260,7 +262,7 @@ class CoreDB {
     /** 删除一首已下载歌曲数据 */
     class func removeSongFromDownloadedList(_ song: Song) {
         var newSongs: [NSDictionary]
-        if let songs = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+        if let songs = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             newSongs = songs as! [NSDictionary]
             for item in newSongs {
                 if (item["song_id"] as! String) == song.songID {
@@ -271,14 +273,14 @@ class CoreDB {
         }else {
             newSongs = [NSDictionary]()
         }
-        leveldb.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
+        mainDB.setObject(newSongs, forKey: DB_DOWNLOADED_LIST)
     }
     
 
     /** 删除所有已下载歌曲 */
     class func removeAllDownloadedSongs() {
-        if let _ = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
-            leveldb.removeObject(forKey: DB_DOWNLOADED_LIST)
+        if let _ = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
+            mainDB.removeObject(forKey: DB_DOWNLOADED_LIST)
         }
         // 同时删除文件
     }
@@ -290,7 +292,7 @@ class CoreDB {
         let dict = downloadSong.toJSON()
         
         var newSongs = [[String : Any]]()
-        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
             for item in jsonArray as! [[String : Any]] {
                 if (item["taskid"] as! String) == downloadSong.taskid {
                     return
@@ -301,7 +303,7 @@ class CoreDB {
         
         newSongs.append(dict)
 
-        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
+        mainDB.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
     }
 
     /** 添加一批歌曲下载 */
@@ -312,7 +314,7 @@ class CoreDB {
             var isExit = false
             
             // 检查正在下载列表
-            if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+            if let jsonArray = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
                 for item in jsonArray as! [[String:Any]] {
                     if (item["taskid"] as! String) == song.songID {
                         isExit = true
@@ -322,7 +324,7 @@ class CoreDB {
             }
             
             // 检查已下载列表
-            if let jsonArray2 = leveldb.object(forKey: DB_DOWNLOADED_LIST) {
+            if let jsonArray2 = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
                 for item in jsonArray2 as! [[String:Any]] {
                     if (item["song_id"] as! String) == song.songID {
                         isExit = true
@@ -339,13 +341,13 @@ class CoreDB {
             
         }
         
-        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
+        mainDB.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
     }
     
     /** 删除一首歌曲下载 */
     class func removeSongFromDownloadingList(_ downloadSong: DownloadSongInfo) {
         var newSongs: [NSDictionary]
-        if let songs = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+        if let songs = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
             newSongs = songs as! [NSDictionary]
             for item in newSongs {
                 if (item["taskid"] as! String) == downloadSong.taskid {
@@ -356,12 +358,12 @@ class CoreDB {
         }else {
             newSongs = [NSDictionary]()
         }
-        leveldb.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
+        mainDB.setObject(newSongs, forKey: DB_DOWNLOADING_LIST)
     }
     
     /** 获取下载中的歌曲 */
     class func getDownloadingSongs() -> [DownloadSongInfo]? {
-        if let jsonArray = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
             
             let infos = DownloadSongInfo.objectsOfJsonArray(jsonArray: jsonArray as! [[String : Any]])
             
@@ -373,8 +375,8 @@ class CoreDB {
     
     /** 删除所有下载中的歌曲 */
     class func removeAllDownloadingSongs() {
-        if let _ = leveldb.object(forKey: DB_DOWNLOADING_LIST) {
-            leveldb.removeObject(forKey: DB_DOWNLOADING_LIST)
+        if let _ = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
+            mainDB.removeObject(forKey: DB_DOWNLOADING_LIST)
         }
         // 同时删除文件
     }
@@ -383,12 +385,12 @@ class CoreDB {
     
     /** 修改播放模式 */
     class func changePlayerPlayMode(_ mode: String) {
-        leveldb.setObject(mode, forKey: DB_PLAY_MODE)
+        mainDB.setObject(mode, forKey: DB_PLAY_MODE)
     }
     
     /** 获取当前播放模式 */
     class func playerPlayMode() -> String? {
-        if let mode = leveldb.object(forKey: DB_PLAY_MODE) {
+        if let mode = mainDB.object(forKey: DB_PLAY_MODE) {
             return mode as? String
         }else {
             return nil
@@ -398,7 +400,7 @@ class CoreDB {
 //MARK: 播放历史
     /** 获取播放历史 */
     class func getHistorySongs() -> [Song]? {
-        if let jsonArray = leveldb.object(forKey: DB_HISTORY_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
             let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             return songs
         }else {
@@ -411,7 +413,7 @@ class CoreDB {
         let dict = song.toJSON()
         
         var newSongs = [[String : Any]]()
-        if let jsonArray = leveldb.object(forKey: DB_HISTORY_LIST) {
+        if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
             newSongs.append(contentsOf: jsonArray as! [[String : Any]])
             
             for (index, item) in newSongs.enumerated() {
@@ -427,12 +429,12 @@ class CoreDB {
         if newSongs.count > 100 {
             newSongs.removeLast()
         }
-        leveldb.setObject(newSongs, forKey: DB_HISTORY_LIST)
+        mainDB.setObject(newSongs, forKey: DB_HISTORY_LIST)
     }
     
     /** 清除播放历史 */
     class func clearHistory() {
-        leveldb.removeObject(forKey: DB_HISTORY_LIST)
+        mainDB.removeObject(forKey: DB_HISTORY_LIST)
     }
     
     
