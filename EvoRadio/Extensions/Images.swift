@@ -252,6 +252,6 @@ extension UIImage {
     }
     
     class func placeholder_cover() -> UIImage {
-        return UIImage(named: "placeholder_cover")!
+        return UIImage(named: "logo_gray")!
     }
 }
