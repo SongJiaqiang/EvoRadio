@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class Song: Mappable {
+class Song : NSObject, Mappable {
 
     var songID: String!
     var jujingID: String?
@@ -28,6 +28,18 @@ class Song: Mappable {
     var picURL: String?
     var status: String?
     
+    var assetURL: URL?
+    var albumImage: UIImage?
+    
+    override init() {
+        super.init()
+    }
+    
+    convenience init(songName: String) {
+        self.init()
+        
+        self.songName = songName
+    }
 
     required init?(map: Map) {
         

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
+		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634E065E1F38690200253E9A /* ObjectMapper.framework */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
@@ -27,6 +28,7 @@
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
 		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
+		63B674661F519B2A00F4341B /* ItunesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B674651F519B2A00F4341B /* ItunesViewController.swift */; };
 		63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */; };
 		63EF43F31F38A1E600EADC48 /* AssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */; };
 		63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */; };
@@ -117,6 +119,7 @@
 		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
+		6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesViewCell.swift; sourceTree = "<group>"; };
 		634E065B1F3857AD00253E9A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		634E065E1F38690200253E9A /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		634E06641F3869F400253E9A /* EvoRadioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EvoRadioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +141,7 @@
 		63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadManager.swift; sourceTree = "<group>"; };
 		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
+		63B674651F519B2A00F4341B /* ItunesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItunesViewController.swift; path = Controllers/ItunesViewController.swift; sourceTree = "<group>"; };
 		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; };
 		63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramViewController.swift; path = Controllers/ProgramViewController.swift; sourceTree = "<group>"; };
 		63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
@@ -306,6 +310,7 @@
 				63EF43FC1F38A91D00EADC48 /* ChannelCollectionViewCell.swift */,
 				63EF44021F38ACC800EADC48 /* SongListTableViewCell.swift */,
 				63EF44121F38B28200EADC48 /* LocalTableViewCell.swift */,
+				6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */,
 			);
 			name = Cells;
 			path = Views/Cells;
@@ -428,6 +433,7 @@
 				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
 				63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */,
 				63EF44AA1F39F38200EADC48 /* Download */,
+				63B674651F519B2A00F4341B /* ItunesViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
 				63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */,
+				6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
@@ -696,6 +703,7 @@
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
 				63EF44051F38AFA500EADC48 /* MainViewController.swift in Sources */,
 				63EF43F31F38A1E600EADC48 /* AssistiveTouch.swift in Sources */,
+				63B674661F519B2A00F4341B /* ItunesViewController.swift in Sources */,
 				635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */,
 				9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,

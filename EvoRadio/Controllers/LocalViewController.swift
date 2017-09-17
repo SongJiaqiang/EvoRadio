@@ -154,16 +154,19 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
             switch key {
             case "recently":
                 navigationController?.pushViewController(HistorySongListViewController(), animated: true)
-                break
+            
             case "favorites":
                 navigationController?.pushViewController(DownloadViewController(), animated: true)
-                break
+            
             case "download":
                 navigationController?.pushViewController(DownloadViewController(), animated: true)
-                break
+            
             case "import":
                 navigationController?.pushViewController(DownloadViewController(), animated: true)
-                break
+                
+            case "itunes":
+                navigationController?.pushViewController(ItunesViewController(), animated: true)
+                
             default:
                 break
             }

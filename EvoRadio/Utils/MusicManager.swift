@@ -140,7 +140,7 @@ class MusicManager: NSObject {
                 duration = Double(d)!
             }
             
-            var artwork = MPMediaItemArtwork(image: UIImage(named: "placeholder_cover")!)
+            var artwork = MPMediaItemArtwork(image: UIImage.placeholder_cover())
             
             if let picURL = URL(string: song.picURL!) {
                 let downloader = KingfisherManager.shared.downloader
