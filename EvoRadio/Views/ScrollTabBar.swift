@@ -52,7 +52,7 @@ class ScrollTabBar: UIView {
             let button = UIButton()
             button.setTitleColor(UIColor.grayColorBF(), for: UIControlState())
             button.setTitleColor(UIColor.goldColor(), for: .selected)
-            button.titleLabel?.font = UIFont.sizeOf14()
+            button.titleLabel?.font = UIFont.size14()
             let title = titles![i].replacingOccurrences(of: "电台", with: "")
             button.setTitle(title, for: UIControlState())
             button.tag = i

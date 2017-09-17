@@ -88,7 +88,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
-        playButton.titleLabel?.font = UIFont.sizeOf12()
+        playButton.titleLabel?.font = UIFont.size12()
         playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
@@ -102,7 +102,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         
         let clearButton = UIButton()
         headerView.addSubview(clearButton)
-        clearButton.titleLabel?.font = UIFont.sizeOf12()
+        clearButton.titleLabel?.font = UIFont.size12()
         clearButton.backgroundColor = UIColor.grayColor1C()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15

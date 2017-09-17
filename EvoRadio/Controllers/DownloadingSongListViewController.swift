@@ -68,14 +68,14 @@ class DownloadingSongListViewController: ViewController {
 
         leftButton = UIButton()
         toolBar.addSubview(leftButton)
-        leftButton.titleLabel?.font = UIFont.sizeOf12()
+        leftButton.titleLabel?.font = UIFont.size12()
         leftButton.backgroundColor = UIColor.grayColor1C()
         leftButton.setTitle("Pause All", for: UIControlState())
         leftButton.addTarget(self, action: #selector(DownloadingSongListViewController.leftButtonPressed), for: .touchUpInside)
         
         let rightButton = UIButton()
         toolBar.addSubview(rightButton)
-        rightButton.titleLabel?.font = UIFont.sizeOf12()
+        rightButton.titleLabel?.font = UIFont.size12()
         rightButton.backgroundColor = UIColor.grayColor1C()
         rightButton.setTitle("Clear All", for: UIControlState())
         rightButton.addTarget(self, action: #selector(DownloadingSongListViewController.rightButtonPressed), for: .touchUpInside)

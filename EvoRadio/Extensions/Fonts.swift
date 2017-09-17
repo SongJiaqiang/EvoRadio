@@ -8,18 +8,22 @@
 
 import UIKit
 
+
+//MARK: special font size
 extension UIFont {
-    
-    class func sizeOf10() -> UIFont {
+    class func size10() -> UIFont {
         return UIFont.systemFont(ofSize: 10)
     }
-    class func sizeOf12() -> UIFont {
+    class func size12() -> UIFont {
         return UIFont.systemFont(ofSize: 12)
     }
-    class func sizeOf14() -> UIFont {
+    class func size14() -> UIFont {
         return UIFont.systemFont(ofSize: 14)
     }
-    class func sizeOf16() -> UIFont {
+    class func size16() -> UIFont {
+        return UIFont.systemFont(ofSize: 16)
+    }
+    class func size18() -> UIFont {
         return UIFont.systemFont(ofSize: 16)
     }
 }

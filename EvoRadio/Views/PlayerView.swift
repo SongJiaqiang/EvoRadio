@@ -107,7 +107,7 @@ class PlayerView: UIView {
         
         contentView.addSubview(titleLabel)
         titleLabel.text = "还没有播放音乐"
-        titleLabel.font = UIFont.sizeOf16()
+        titleLabel.font = UIFont.size16()
         titleLabel.textColor = UIColor.white
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(coverView.snp.right).inset(-10)
@@ -117,7 +117,7 @@ class PlayerView: UIView {
         
         contentView.addSubview(subTitleLabel)
         subTitleLabel.text = "Oops~"
-        subTitleLabel.font = UIFont.sizeOf12()
+        subTitleLabel.font = UIFont.size12()
         subTitleLabel.textColor = UIColor.grayColorBF()
         subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(coverView.snp.right).inset(-10)

@@ -75,7 +75,7 @@ class SelectiveTimePanel: UIView {
     func prepareBottomButtons() {
         
         addSubview(nowButton)
-        nowButton.titleLabel?.font = UIFont.sizeOf14()
+        nowButton.titleLabel?.font = UIFont.size14()
         nowButton.titleLabel?.textColor = UIColor.white
         nowButton.setTitle("当前时刻", for: UIControlState())
         nowButton.backgroundColor = UIColor.grayColor28()
@@ -89,7 +89,7 @@ class SelectiveTimePanel: UIView {
         okButton.addTarget(self, action: #selector(SelectiveTimePanel.okButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(randomButton)
-        randomButton.titleLabel?.font = UIFont.sizeOf14()
+        randomButton.titleLabel?.font = UIFont.size14()
         randomButton.titleLabel?.textColor = UIColor.white
         randomButton.setTitle("随机时刻", for: UIControlState())
         randomButton.backgroundColor = UIColor.grayColor28()
@@ -146,7 +146,7 @@ class SelectiveTimePanel: UIView {
         
         addSubview(resultLabel)
         resultLabel.textAlignment = .center
-        resultLabel.font = UIFont.sizeOf16()
+        resultLabel.font = UIFont.size16()
         resultLabel.textColor = UIColor.white
         resultLabel.text = "星期一 ▪ 清晨"
         resultLabel.snp.makeConstraints { (make) in
@@ -178,7 +178,7 @@ class SelectiveTimePanel: UIView {
         
         for i in 0..<daysCount {
             let button = UIButton()
-            button.titleLabel?.font = UIFont.sizeOf12()
+            button.titleLabel?.font = UIFont.size12()
             button.titleLabel?.textColor = UIColor.white
             button.setTitle(daysOfWeek[i], for: UIControlState())
             button.clipsToBounds = true
@@ -202,7 +202,7 @@ class SelectiveTimePanel: UIView {
         
         for i in 0..<timesCount {
             let button = UIButton()
-            button.titleLabel?.font = UIFont.sizeOf12()
+            button.titleLabel?.font = UIFont.size12()
             button.titleLabel?.textColor = UIColor.white
             button.setTitle(timesOfDay[i], for: UIControlState())
             button.clipsToBounds = true

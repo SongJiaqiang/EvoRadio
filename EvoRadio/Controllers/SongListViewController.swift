@@ -136,7 +136,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let playButton = UIButton()
         headerView.addSubview(playButton)
-        playButton.titleLabel?.font = UIFont.sizeOf12()
+        playButton.titleLabel?.font = UIFont.size12()
         playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
@@ -151,7 +151,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let downloadButton = UIButton()
         headerView.addSubview(downloadButton)
-        downloadButton.titleLabel?.font = UIFont.sizeOf12()
+        downloadButton.titleLabel?.font = UIFont.size12()
         downloadButton.backgroundColor = UIColor.grayColor1C()
         downloadButton.clipsToBounds = true
         downloadButton.layer.cornerRadius = 15

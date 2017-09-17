@@ -60,7 +60,7 @@ class RadioTableViewCell: UITableViewCell {
         contentView.addSubview(moreButton)
         moreButton.setTitleColor(UIColor.white, for: UIControlState())
         moreButton.setTitle("More", for: UIControlState())
-        moreButton.titleLabel?.font = UIFont.sizeOf10()
+        moreButton.titleLabel?.font = UIFont.size10()
         moreButton.frame = CGRect(x: Device.width()-itemWidth/2, y: 10, width: itemWidth/2, height: itemWidth)
         moreButton.setBackgroundImage(UIImage(named: "gradient_white"), for: UIControlState())
         moreButton.addTarget(self, action: #selector(RadioTableViewCell.moreButtonPressed(_:)), for: .touchUpInside)

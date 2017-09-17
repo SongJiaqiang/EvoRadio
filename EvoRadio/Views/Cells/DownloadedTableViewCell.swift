@@ -66,7 +66,7 @@ class DownloadedTableViewCell: UITableViewCell {
         
         titleLabel = UILabel()
         contentView.addSubview(titleLabel)
-        titleLabel.font = UIFont.sizeOf14()
+        titleLabel.font = UIFont.size14()
         titleLabel.textColor = UIColor.grayColorBF()
         titleLabel.text = "Music Name"
         titleLabel.snp.makeConstraints { (make) in
@@ -77,7 +77,7 @@ class DownloadedTableViewCell: UITableViewCell {
         
         subtitleLabel = UILabel()
         contentView.addSubview(subtitleLabel)
-        subtitleLabel.font = UIFont.sizeOf10()
+        subtitleLabel.font = UIFont.size10()
         subtitleLabel.textColor = UIColor.grayColor97()
         subtitleLabel.text = "Artist - AlbumName"
         subtitleLabel.snp.makeConstraints { (make) in

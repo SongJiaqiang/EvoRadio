@@ -59,7 +59,7 @@ class ClockView: UIControl {
         
         timeLabel = UILabel()
         addSubview(timeLabel)
-        timeLabel.font = UIFont.sizeOf12()
+        timeLabel.font = UIFont.size12()
         timeLabel.textColor = UIColor.white
         timeLabel.text = "00:00"
         timeLabel.textAlignment = .center

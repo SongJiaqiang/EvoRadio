@@ -84,14 +84,14 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         
         let leftButton = UIButton()
         headerView.addSubview(leftButton)
-        leftButton.titleLabel?.font = UIFont.sizeOf12()
+        leftButton.titleLabel?.font = UIFont.size12()
         leftButton.backgroundColor = UIColor.grayColor1C()
         leftButton.setTitle("Play All", for: UIControlState())
         leftButton.addTarget(self, action: #selector(DownloadedSongListViewController.leftButtonPressed), for: .touchUpInside)
 
         let rightButton = UIButton()
         headerView.addSubview(rightButton)
-        rightButton.titleLabel?.font = UIFont.sizeOf12()
+        rightButton.titleLabel?.font = UIFont.size12()
         rightButton.backgroundColor = UIColor.grayColor1C()
         rightButton.setTitle("Delete All", for: UIControlState())
         rightButton.addTarget(self, action: #selector(DownloadedSongListViewController.rightButtonPressed), for: .touchUpInside)

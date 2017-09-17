@@ -147,7 +147,7 @@ class PlayerViewController: ViewController {
         
         navBar.addSubview(subTitleLabel)
         subTitleLabel.textAlignment = .center
-        subTitleLabel.font = UIFont.sizeOf12()
+        subTitleLabel.font = UIFont.size12()
         subTitleLabel.textColor = UIColor.grayColorBF()
         subTitleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(20)
@@ -158,7 +158,7 @@ class PlayerViewController: ViewController {
         
         navBar.addSubview(titleLabel)
         titleLabel.textAlignment = .center
-        titleLabel.font = UIFont.sizeOf14()
+        titleLabel.font = UIFont.size14()
         titleLabel.textColor = UIColor.white
         titleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(20)
@@ -304,7 +304,7 @@ class PlayerViewController: ViewController {
         
         controlView.addSubview(currentTimeLabel)
         currentTimeLabel.textAlignment = .center
-        currentTimeLabel.font = UIFont.sizeOf10()
+        currentTimeLabel.font = UIFont.size10()
         currentTimeLabel.textColor = UIColor.white
         currentTimeLabel.text = "0:00"
         currentTimeLabel.snp.makeConstraints { (make) in
@@ -315,7 +315,7 @@ class PlayerViewController: ViewController {
         
         controlView.addSubview(totalTimeLabel)
         totalTimeLabel.textAlignment = .center
-        totalTimeLabel.font = UIFont.sizeOf10()
+        totalTimeLabel.font = UIFont.size10()
         totalTimeLabel.textColor = UIColor.white
         totalTimeLabel.text = "0:00"
         totalTimeLabel.snp.makeConstraints { (make) in
