@@ -41,7 +41,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
         
         addSubview(channelNameLabel)
         channelNameLabel.font = UIFont.systemFont(ofSize: 12)
-        channelNameLabel.textColor = UIColor.grayColor7()
+        channelNameLabel.textColor = UIColor.grayColorBF()
         channelNameLabel.snp.makeConstraints { (make) in
             make.height.equalTo(18)
             make.top.equalTo(picImageView.snp.bottom)
@@ -51,7 +51,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
         
         addSubview(tipLabel)
         tipLabel.font = UIFont.systemFont(ofSize: 10)
-        tipLabel.textColor = UIColor.grayColor6()
+        tipLabel.textColor = UIColor.grayColor97()
         tipLabel.snp.makeConstraints { (make) in
             make.height.equalTo(12)
             make.top.equalTo(channelNameLabel.snp.bottom)

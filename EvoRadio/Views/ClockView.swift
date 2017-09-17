@@ -73,7 +73,7 @@ class ClockView: UIControl {
 
         lineView = UIView()
         addSubview(lineView)
-        lineView.backgroundColor = UIColor.grayColor3()   
+        lineView.backgroundColor = UIColor.grayColor1C()   
     }
     
     func timerHandler() {

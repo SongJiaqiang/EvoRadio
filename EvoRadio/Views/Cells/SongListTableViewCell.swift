@@ -28,7 +28,7 @@ class SongListTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let v = UIView()
-        v.backgroundColor = UIColor.grayColor2()
+        v.backgroundColor = UIColor.grayColor1C()
         selectedBackgroundView = v
         backgroundColor = UIColor.clear
         

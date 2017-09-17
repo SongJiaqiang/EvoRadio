@@ -137,7 +137,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let playButton = UIButton()
         headerView.addSubview(playButton)
         playButton.titleLabel?.font = UIFont.sizeOf12()
-        playButton.backgroundColor = UIColor.grayColor3()
+        playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", for: UIControlState())
@@ -152,7 +152,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let downloadButton = UIButton()
         headerView.addSubview(downloadButton)
         downloadButton.titleLabel?.font = UIFont.sizeOf12()
-        downloadButton.backgroundColor = UIColor.grayColor3()
+        downloadButton.backgroundColor = UIColor.grayColor1C()
         downloadButton.clipsToBounds = true
         downloadButton.layer.cornerRadius = 15
         downloadButton.setTitle("Download All", for: UIControlState())
@@ -166,7 +166,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.backgroundColor = UIColor.grayColor97()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(headerView.snp.left)

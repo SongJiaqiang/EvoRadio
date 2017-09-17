@@ -23,7 +23,7 @@ class DownloadingTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let v = UIView()
-        v.backgroundColor = UIColor.grayColor2()
+        v.backgroundColor = UIColor.grayColor1C()
         selectedBackgroundView = v
         backgroundColor = UIColor.clear
         
@@ -51,7 +51,7 @@ class DownloadingTableViewCell: UITableViewCell {
         titleLabel = UILabel()
         contentView.addSubview(titleLabel)
         titleLabel.font = UIFont.sizeOf14()
-        titleLabel.textColor = UIColor.grayColor7()
+        titleLabel.textColor = UIColor.grayColorBF()
         titleLabel.text = "Music Title"
         titleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left).offset(12)
@@ -62,7 +62,7 @@ class DownloadingTableViewCell: UITableViewCell {
         subtitleLabel = UILabel()
         contentView.addSubview(subtitleLabel)
         subtitleLabel.font = UIFont.sizeOf10()
-        subtitleLabel.textColor = UIColor.grayColor6()
+        subtitleLabel.textColor = UIColor.grayColor97()
         subtitleLabel.text = "waiting..."
         subtitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(snp.left).offset(12)
@@ -73,7 +73,7 @@ class DownloadingTableViewCell: UITableViewCell {
         sizeLabel = UILabel()
         contentView.addSubview(sizeLabel)
         sizeLabel.font = UIFont.sizeOf10()
-        sizeLabel.textColor = UIColor.grayColor6()
+        sizeLabel.textColor = UIColor.grayColor97()
         sizeLabel.textAlignment = .right
         sizeLabel.text = "0.0M/0.0M"
         sizeLabel.snp.makeConstraints { (make) in
@@ -95,7 +95,7 @@ class DownloadingTableViewCell: UITableViewCell {
         
         let separatorView = UIView()
         contentView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor5()
+        separatorView.backgroundColor = UIColor.grayColor41()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(titleLabel.snp.left)

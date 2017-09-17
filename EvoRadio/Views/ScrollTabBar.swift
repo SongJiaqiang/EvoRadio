@@ -31,7 +31,7 @@ class ScrollTabBar: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
-        backgroundColor = UIColor.grayColor2()
+        backgroundColor = UIColor.grayColor1C()
     }
     
     
@@ -50,7 +50,7 @@ class ScrollTabBar: UIView {
         let count = titles!.count
         for i in 0..<count {
             let button = UIButton()
-            button.setTitleColor(UIColor.grayColor7(), for: UIControlState())
+            button.setTitleColor(UIColor.grayColorBF(), for: UIControlState())
             button.setTitleColor(UIColor.goldColor(), for: .selected)
             button.titleLabel?.font = UIFont.sizeOf14()
             let title = titles![i].replacingOccurrences(of: "电台", with: "")

@@ -17,11 +17,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.grayColor3()
+        view.backgroundColor = UIColor.grayColor1C()
         
 //        insertGradientLayer()
         
-        navigationController?.navigationBar.barTintColor = UIColor.grayColor1()
+        navigationController?.navigationBar.barTintColor = UIColor.grayColor12()
         navigationController?.navigationBar.tintColor = UIColor.white
         navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
@@ -47,7 +47,7 @@ class ViewController: UIViewController {
     func insertGradientLayer() {
         
         let gradientLayer = CAGradientLayer()
-        gradientLayer.colors = [UIColor.grayColor3().cgColor,UIColor.grayColor5().cgColor]
+        gradientLayer.colors = [UIColor.grayColor1C().cgColor,UIColor.grayColor41().cgColor]
         gradientLayer.locations = [0, 1]
         gradientLayer.startPoint = CGPoint(x: 0, y: 0)
         gradientLayer.endPoint = CGPoint(x: 1, y: 1)

@@ -78,7 +78,7 @@ class SelectiveTimePanel: UIView {
         nowButton.titleLabel?.font = UIFont.sizeOf14()
         nowButton.titleLabel?.textColor = UIColor.white
         nowButton.setTitle("当前时刻", for: UIControlState())
-        nowButton.backgroundColor = UIColor.grayColor4()
+        nowButton.backgroundColor = UIColor.grayColor28()
         nowButton.addTarget(self, action: #selector(SelectiveTimePanel.nowButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(okButton)
@@ -92,7 +92,7 @@ class SelectiveTimePanel: UIView {
         randomButton.titleLabel?.font = UIFont.sizeOf14()
         randomButton.titleLabel?.textColor = UIColor.white
         randomButton.setTitle("随机时刻", for: UIControlState())
-        randomButton.backgroundColor = UIColor.grayColor4()
+        randomButton.backgroundColor = UIColor.grayColor28()
         randomButton.addTarget(self, action: #selector(SelectiveTimePanel.randomButtonPressed(_:)), for: .touchUpInside)
         
         let buttonHeight: CGFloat = playerBarHeight
@@ -186,7 +186,7 @@ class SelectiveTimePanel: UIView {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.white.cgColor
             button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor4()), for: .selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor28()), for: .selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.daysButtonPressed(_:)), for: .touchUpInside)
             button.tag = 10+i
             daysContentView.addSubview(button)
@@ -210,7 +210,7 @@ class SelectiveTimePanel: UIView {
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.white.cgColor
             button.setBackgroundImage(UIImage.rectImage(UIColor(white: 1, alpha: 0.5)), for: .highlighted)
-            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor4()), for: .selected)
+            button.setBackgroundImage(UIImage.rectImage(UIColor.grayColor28()), for: .selected)
             button.addTarget(self, action: #selector(SelectiveTimePanel.timesButtonPressed(_:)), for: .touchUpInside)
             button.tag = 20+i
             timesContentView.addSubview(button)

@@ -61,7 +61,7 @@ class TopTabBar: UIView {
             contentView.addSubview(label)
             let textRect = (text as NSString).boundingRect(with: maxSize, options: .usesLineFragmentOrigin, attributes: textAttrs, context: nil)
             label.frame = CGRect(origin: CGPoint(x: Device.width() / 2 * CGFloat(i), y: 0), size: textRect.size)
-            label.textColor = UIColor.grayColor5()
+            label.textColor = UIColor.grayColor41()
             
             labels.append(label)
         }
@@ -87,7 +87,7 @@ class TopTabBar: UIView {
             let x = totleDistance + (Device.width() - labelSize.width) / 2 * CGFloat(t)
             label.frame = CGRect(origin: CGPoint(x: x, y: 0), size: labelSize)
             
-            label.textColor = UIColor.grayColor5()
+            label.textColor = UIColor.grayColor41()
         }
         labels[currentIndex].textColor = UIColor.white
     }

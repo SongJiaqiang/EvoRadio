@@ -80,19 +80,19 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerView = UIView(frame: CGRect(x: 0,y: 0,width: tableView.bounds.width,height: 40))
-        headerView.backgroundColor = UIColor.grayColor3()
+        headerView.backgroundColor = UIColor.grayColor1C()
         
         let leftButton = UIButton()
         headerView.addSubview(leftButton)
         leftButton.titleLabel?.font = UIFont.sizeOf12()
-        leftButton.backgroundColor = UIColor.grayColor3()
+        leftButton.backgroundColor = UIColor.grayColor1C()
         leftButton.setTitle("Play All", for: UIControlState())
         leftButton.addTarget(self, action: #selector(DownloadedSongListViewController.leftButtonPressed), for: .touchUpInside)
 
         let rightButton = UIButton()
         headerView.addSubview(rightButton)
         rightButton.titleLabel?.font = UIFont.sizeOf12()
-        rightButton.backgroundColor = UIColor.grayColor3()
+        rightButton.backgroundColor = UIColor.grayColor1C()
         rightButton.setTitle("Delete All", for: UIControlState())
         rightButton.addTarget(self, action: #selector(DownloadedSongListViewController.rightButtonPressed), for: .touchUpInside)
         
@@ -115,7 +115,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor5()
+        separatorView.backgroundColor = UIColor.grayColor41()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(headerView.snp.left)

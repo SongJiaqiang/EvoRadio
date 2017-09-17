@@ -89,7 +89,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         let playButton = UIButton()
         headerView.addSubview(playButton)
         playButton.titleLabel?.font = UIFont.sizeOf12()
-        playButton.backgroundColor = UIColor.grayColor3()
+        playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
         playButton.setTitle("Play All", for: UIControlState())
@@ -103,7 +103,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         let clearButton = UIButton()
         headerView.addSubview(clearButton)
         clearButton.titleLabel?.font = UIFont.sizeOf12()
-        clearButton.backgroundColor = UIColor.grayColor3()
+        clearButton.backgroundColor = UIColor.grayColor1C()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
         clearButton.setTitle("Clear", for: UIControlState())
@@ -116,7 +116,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.backgroundColor = UIColor.grayColor97()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(headerView.snp.left)

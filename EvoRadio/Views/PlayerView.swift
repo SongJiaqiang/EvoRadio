@@ -118,7 +118,7 @@ class PlayerView: UIView {
         contentView.addSubview(subTitleLabel)
         subTitleLabel.text = "Oops~"
         subTitleLabel.font = UIFont.sizeOf12()
-        subTitleLabel.textColor = UIColor.grayColor7()
+        subTitleLabel.textColor = UIColor.grayColorBF()
         subTitleLabel.snp.makeConstraints { (make) in
             make.left.equalTo(coverView.snp.right).inset(-10)
             make.right.equalTo(playButton.snp.left).inset(-10)

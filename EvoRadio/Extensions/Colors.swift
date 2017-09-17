@@ -29,41 +29,48 @@ extension UIColor {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
     
+}
+
+//MARK: colors
+extension UIColor {
     /** 0xB89406 D4AF37 */
     class func goldColor() -> UIColor{
         return UIColor(netHex: 0xD4AF37)
     }
-    
     /** 0x121212 */
-    class func grayColor1() -> UIColor{
+    class func grayColor12() -> UIColor{
         return UIColor(netHex: 0x121212)
     }
     /** 0x1C1C1C */
-    class func grayColor2() -> UIColor{
+    class func grayColor1C() -> UIColor{
         return UIColor(netHex: 0x1C1C1C)
     }
     /** 0x282828 */
-    class func grayColor3() -> UIColor{
+    class func grayColor28() -> UIColor{
         return UIColor(netHex: 0x282828)
     }
     /** 0x414141 */
-    class func grayColor4() -> UIColor{
+    class func grayColor41() -> UIColor{
         return UIColor(netHex: 0x414141)
     }
     /** 0x4C4C4C */
-    class func grayColor5() -> UIColor{
+    class func grayColor4C() -> UIColor{
         return UIColor(netHex: 0x4C4C4C)
     }
+    /** 0x666666 */
+    class func grayColor66() -> UIColor{
+        return UIColor(netHex: 0x666666)
+    }
     /** 0x979797 */
-    class func grayColor6() -> UIColor{
+    class func grayColor97() -> UIColor{
         return UIColor(netHex: 0x979797)
     }
     /** 0xBFBFBF */
-    class func grayColor7() -> UIColor{
+    class func grayColorBF() -> UIColor{
         return UIColor(netHex: 0xBFBFBF)
     }
     /** 0xFBFBFB */
-    class func grayColor8() -> UIColor{
+    class func grayColorFB() -> UIColor{
         return UIColor(netHex: 0xFBFBFB)
     }
 }

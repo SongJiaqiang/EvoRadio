@@ -58,7 +58,7 @@ class DownloadingSongListViewController: ViewController {
         
         toolBar = UIView()
         view.addSubview(toolBar)
-        toolBar.backgroundColor = UIColor.grayColor3()
+        toolBar.backgroundColor = UIColor.grayColor1C()
         toolBar.snp.makeConstraints { (make) in
             make.height.equalTo(40)
             make.left.equalTo(view.snp.left)
@@ -69,14 +69,14 @@ class DownloadingSongListViewController: ViewController {
         leftButton = UIButton()
         toolBar.addSubview(leftButton)
         leftButton.titleLabel?.font = UIFont.sizeOf12()
-        leftButton.backgroundColor = UIColor.grayColor3()
+        leftButton.backgroundColor = UIColor.grayColor1C()
         leftButton.setTitle("Pause All", for: UIControlState())
         leftButton.addTarget(self, action: #selector(DownloadingSongListViewController.leftButtonPressed), for: .touchUpInside)
         
         let rightButton = UIButton()
         toolBar.addSubview(rightButton)
         rightButton.titleLabel?.font = UIFont.sizeOf12()
-        rightButton.backgroundColor = UIColor.grayColor3()
+        rightButton.backgroundColor = UIColor.grayColor1C()
         rightButton.setTitle("Clear All", for: UIControlState())
         rightButton.addTarget(self, action: #selector(DownloadingSongListViewController.rightButtonPressed), for: .touchUpInside)
         
@@ -98,7 +98,7 @@ class DownloadingSongListViewController: ViewController {
         
         let separatorView = UIView()
         toolBar.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor5()
+        separatorView.backgroundColor = UIColor.grayColor41()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(toolBar.snp.left)

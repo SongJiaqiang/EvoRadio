@@ -148,7 +148,7 @@ class PlayerViewController: ViewController {
         navBar.addSubview(subTitleLabel)
         subTitleLabel.textAlignment = .center
         subTitleLabel.font = UIFont.sizeOf12()
-        subTitleLabel.textColor = UIColor.grayColor7()
+        subTitleLabel.textColor = UIColor.grayColorBF()
         subTitleLabel.snp.makeConstraints { (make) in
             make.height.equalTo(20)
             make.leftMargin.equalTo(60)
@@ -639,7 +639,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         let downloadButton = UIButton()
         headerView.addSubview(downloadButton)
         downloadButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        downloadButton.backgroundColor = UIColor.grayColor3()
+        downloadButton.backgroundColor = UIColor.grayColor1C()
         downloadButton.clipsToBounds = true
         downloadButton.layer.cornerRadius = 15
         downloadButton.setTitle("Download All", for: UIControlState())
@@ -653,7 +653,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         let clearButton = UIButton()
         headerView.addSubview(clearButton)
         clearButton.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-        clearButton.backgroundColor = UIColor.grayColor3()
+        clearButton.backgroundColor = UIColor.grayColor1C()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
         clearButton.setTitle("Clear All", for: UIControlState())
@@ -666,7 +666,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         
         let separatorView = UIView()
         headerView.addSubview(separatorView)
-        separatorView.backgroundColor = UIColor.grayColor6()
+        separatorView.backgroundColor = UIColor.grayColor97()
         separatorView.snp.makeConstraints { (make) in
             make.height.equalTo(1.0/Device.screenScale())
             make.left.equalTo(headerView.snp.left)
