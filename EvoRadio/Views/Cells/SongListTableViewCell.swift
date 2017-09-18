@@ -46,7 +46,7 @@ class SongListTableViewCell: UITableViewCell {
         coverImageView.layer.cornerRadius = 6
         contentView.addSubview(coverImageView)
         coverImageView.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: 48, height: 48))
+            make.size.equalTo(CGSize(width: 46, height: 46))
             make.left.equalTo(contentView.snp.left).offset(20)
             make.centerY.equalTo(contentView.snp.centerY)
         }

@@ -40,7 +40,7 @@ class ItunesViewController: ViewController {
     func prepareUI() {
         
         let navBar = UIView()
-        navBar.backgroundColor = UIColor.goldColor()
+        navBar.backgroundColor = UIColor.grayColor1C().alpha(0.98)
         view.addSubview(navBar)
         navBar.snp.makeConstraints { (make) in
             make.height.equalTo(84)
@@ -49,6 +49,37 @@ class ItunesViewController: ViewController {
             make.right.equalTo(view.snp.right)
         }
         
+        let separationLine = UIView()
+        separationLine.backgroundColor = UIColor.goldColor()
+        navBar.addSubview(separationLine)
+        separationLine.snp.makeConstraints { (make) in
+            make.height.equalTo(1)
+            make.left.equalTo(navBar.snp.left)
+            make.right.equalTo(navBar.snp.right)
+            make.bottom.equalTo(navBar.snp.bottom)
+        }
+        
+        let titleLabel = UILabel()
+        titleLabel.text = "iTunes"
+        titleLabel.font = UIFont.boldSize16()
+        titleLabel.textColor = UIColor.grayColorBF()
+        navBar.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.centerX.equalTo(navBar.snp.centerX)
+            make.centerY.equalTo(navBar.snp.centerY).offset(10)
+        }
+        
+        let playAllButton = UIButton()
+        playAllButton.titleLabel?.font = UIFont.size12()
+        playAllButton.setTitleColor(UIColor.grayColor66(), for: .normal)
+        playAllButton.setTitle("PlayAll", for: .normal)
+        navBar.addSubview(playAllButton)
+        playAllButton.snp.makeConstraints { (make) in
+            make.height.equalTo(40)
+            make.right.equalTo(navBar.snp.right).offset(-15)
+            make.centerY.equalTo(navBar.snp.centerY).offset(10)
+        }
+        playAllButton.addTarget(self, action: #selector(playAllButtonPressed(_:)), for: .touchUpInside)
     }
     
     
@@ -68,6 +99,13 @@ class ItunesViewController: ViewController {
         
     }
     
+    //MARK: Event actions
+    func playAllButtonPressed(_ butotn: UIButton) {
+        print(">>> play all itunes musics")
+    }
+    
+    
+    //MARK: others
     func loadMusicFromItunes() {
         
         let mediaQuery = MPMediaQuery()
@@ -97,9 +135,8 @@ class ItunesViewController: ViewController {
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String
         
         if let assetURL = item.value(forKey: MPMediaItemPropertyAssetURL) as? NSURL {
-            print(">>> iTunes song url: \(assetURL)")
-            
             song.assetURL = assetURL as URL
+            //            print(">>> iTunes song url: \(assetURL)")
         }
         
 //        if let duration = song.value(forKey: MPMediaItemPropertyPlaybackDuration) as? NSNumber {
@@ -109,10 +146,8 @@ class ItunesViewController: ViewController {
         if let albumArtwork = item.value(forKey: MPMediaItemPropertyArtwork) as? MPMediaItemArtwork {
             
             let image = albumArtwork.image(at: CGSize(width: 120, height: 120))
-            print(">>> iTunes album image: \(String(describing: image))")
-            
             song.albumImage = image
-            
+            //            print(">>> iTunes album image: \(String(describing: image))")
         }
         
         return song

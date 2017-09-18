@@ -9,6 +9,7 @@
 import UIKit
 
 
+//MARK: convenience init functions
 extension UIColor {
     /** Initialize color with css integer value, example (2, 23, 234) */
     convenience init(red: Int, green: Int, blue: Int) {
@@ -29,6 +30,13 @@ extension UIColor {
         self.init(red:(netHex >> 16) & 0xff, green:(netHex >> 8) & 0xff, blue:netHex & 0xff)
     }
     
+}
+
+//MARK: 
+extension UIColor {
+    func alpha(_ alpha: CGFloat) -> UIColor {
+        return self.withAlphaComponent(alpha)
+    }
 }
 
 //MARK: colors

@@ -26,4 +26,8 @@ extension UIFont {
     class func size18() -> UIFont {
         return UIFont.systemFont(ofSize: 16)
     }
+
+    class func boldSize16() -> UIFont {
+        return UIFont.boldSystemFont(ofSize: 16)
+    }
 }
