@@ -27,3 +27,6 @@ github "SongJiaqiang/ObjcLevelDB" ~> 0.0.1
 
 # 动画特效
 github "facebook/pop" ~> 1.0.7
+
+# UI分析
+github "Flipboard/FLEX"

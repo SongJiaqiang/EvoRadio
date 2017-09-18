@@ -8,7 +8,7 @@
 
 import UIKit
 import AVFoundation
-
+import FLEX
 
 @UIApplicationMain
 
@@ -31,7 +31,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 准备播放界面
         preparePlayer()
         
+        // 配置flex工具
+        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
+        tap.numberOfTouchesRequired = 2
+        self.window?.addGestureRecognizer(tap)
+        
         return true
+    }
+    
+    func doubleTap() {
+        FLEXManager.shared().showExplorer()
     }
     
     func setupRootControllerAndVisible() {

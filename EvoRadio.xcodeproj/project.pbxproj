@@ -10,6 +10,7 @@
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
+		634002331F6F9165001FD26C /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634002321F6F9165001FD26C /* FLEX.framework */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634E065E1F38690200253E9A /* ObjectMapper.framework */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
@@ -120,6 +121,7 @@
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesViewCell.swift; sourceTree = "<group>"; };
+		634002321F6F9165001FD26C /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLEX.framework; path = Carthage/Build/iOS/FLEX.framework; sourceTree = "<group>"; };
 		634E065B1F3857AD00253E9A /* Common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Common.swift; sourceTree = "<group>"; };
 		634E065E1F38690200253E9A /* ObjectMapper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ObjectMapper.framework; path = Carthage/Build/iOS/ObjectMapper.framework; sourceTree = "<group>"; };
 		634E06641F3869F400253E9A /* EvoRadioTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EvoRadioTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				634002331F6F9165001FD26C /* FLEX.framework in Frameworks */,
 				635AD57C1F49DF15002AFE0D /* pop.framework in Frameworks */,
 				635AD56F1F49D9CC002AFE0D /* ObjcLevelDB.framework in Frameworks */,
 				635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */,
@@ -263,6 +266,7 @@
 		5A94393BB0E9EEBD2CED84BF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				634002321F6F9165001FD26C /* FLEX.framework */,
 				635AD57B1F49DF15002AFE0D /* pop.framework */,
 				635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */,
 				635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */,
@@ -618,6 +622,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/CarouselKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/ObjcLevelDB.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/FLEX.framework",
 			);
 			outputPaths = (
 			);
