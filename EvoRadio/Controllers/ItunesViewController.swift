@@ -130,7 +130,7 @@ class ItunesViewController: ViewController {
     func resolverMediaItem(item: MPMediaItem) -> Song {
         
         let song = Song()
-        
+        song.songID = String(format: "%lld", Date().timeIntervalSince1970)
         song.songName = item.value(forKey: MPMediaItemPropertyTitle) as? String
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String
         
@@ -193,6 +193,11 @@ extension ItunesViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        let song = songs[indexPath.row]
+        MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
+        
+        present(PlayerViewController.mainController, animated: true, completion: nil)
         
     }
     

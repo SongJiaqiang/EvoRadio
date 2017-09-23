@@ -123,6 +123,16 @@ class MusicManager: NSObject {
     // 更新控制中心上的音乐信息 - 标题、专辑等
     func updatePlayingInfo() {
         
+        func updateCoverInfo(title: String?, artist: String?, duration: TimeInterval?, image: UIImage?) {
+            let artwork = MPMediaItemArtwork(image:image!)
+            let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title as AnyObject,
+                                      MPMediaItemPropertyArtist: artist as AnyObject,
+                                      MPMediaItemPropertyArtwork: artwork,
+                                      MPMediaItemPropertyPlaybackDuration: duration as AnyObject]
+            
+            MPNowPlayingInfoCenter.default().nowPlayingInfo = info
+        }
+        
         if let song = currentSong() {
             
             var title = ""
@@ -140,25 +150,20 @@ class MusicManager: NSObject {
                 duration = Double(d)!
             }
             
-            var artwork = MPMediaItemArtwork(image: UIImage.placeholder_cover())
-            
-            if let picURL = URL(string: song.picURL!) {
-                let downloader = KingfisherManager.shared.downloader
-
-                downloader.downloadImage(with: picURL, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
-                    if let _ = image {
-                        artwork = MPMediaItemArtwork(image:image!)
-                    }
+            if let picURLString = song.picURL {
+                if let picURL = URL(string: picURLString) {
+                    let downloader = KingfisherManager.shared.downloader
                     
-                    let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title as AnyObject,
-                                                    MPMediaItemPropertyArtist: artist as AnyObject,
-                                                    MPMediaItemPropertyArtwork: artwork,
-                                                    MPMediaItemPropertyPlaybackDuration: duration as AnyObject
-                    ]
-                    
-                    MPNowPlayingInfoCenter.default().nowPlayingInfo = info
-                })
+                    downloader.downloadImage(with: picURL, options: nil, progressBlock: nil, completionHandler: { (image, error, imageURL, originalData) in
+                        updateCoverInfo(title: title, artist: artist, duration: duration, image: image)
+                    })
+                }
+            }else {
+                if let albumImage = song.albumImage {
+                    updateCoverInfo(title: title, artist: artist, duration: duration, image: albumImage)
+                }
             }
+            
         }
     }
     
@@ -184,14 +189,20 @@ class MusicManager: NSObject {
     func play() {
         
         if let cSong = currentSong() {
-            let audioURL = cSong.audioURL
-            
-            if let audioPath = self.findMusicFileCachedPath(cSong) {
-                let url = URL(fileURLWithPath: audioPath)
-                audioPlayer.play(url)
+            if let audioURL = cSong.audioURL {
+                if let audioPath = self.findMusicFileCachedPath(cSong) {
+                    let url = URL(fileURLWithPath: audioPath)
+                    audioPlayer.play(url)
+                }else {
+                    audioPlayer.play(audioURL)
+                }
             }else {
-                audioPlayer.play(audioURL!)
+                if let assetURL = cSong.assetURL {
+                    audioPlayer.play(assetURL)
+                }
             }
+            
+            
             
             // 更新控制中心的音乐播放信息
             updatePlayingInfo()

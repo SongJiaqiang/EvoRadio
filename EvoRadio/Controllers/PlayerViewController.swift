@@ -561,21 +561,25 @@ class PlayerViewController: ViewController {
     func updateCoverImage(_ song: Song) {
         debugPrint("update cover image")
         titleLabel.text = song.songName
-        subTitleLabel.text = song.artistsName?.appending(" - ").appending(song.salbumsName!)
+        if let album = song.salbumsName {
+            subTitleLabel.text = song.artistsName?.appending(" - ").appending(album)
+        }
         
-        if let picURL = URL(string: song.picURL!) {
-            coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
-                if let _ = image{
-                    UIView.animate(withDuration: 0.5, animations: {
-                        self?.backgroundView.alpha = 0.2
-                    }, completion: { (complete) in
-                        self?.backgroundView.image = image!
-                        UIView.animate(withDuration: 1, animations: {
-                            self?.backgroundView.alpha = 1
+        if let picURLString = song.picURL {
+            if let picURL = URL(string: picURLString) {
+                coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover(), completionHandler: {[weak self] (image, error, cacheType, imageURL) in
+                    if let _ = image{
+                        UIView.animate(withDuration: 0.5, animations: {
+                            self?.backgroundView.alpha = 0.2
+                        }, completion: { (complete) in
+                            self?.backgroundView.image = image!
+                            UIView.animate(withDuration: 1, animations: {
+                                self?.backgroundView.alpha = 1
+                            })
                         })
-                    })
-                }
-            })
+                    }
+                })
+            }
         }
     }
     
