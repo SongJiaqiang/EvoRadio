@@ -1,10 +1,9 @@
 # OSX system file
-.DS_Store
+i.DS_Store
 
 # project
-EvoRadio/xcuserdata
-EvoRadio.xcworkspace/xcuserdata/
-EvpRadio.xcodeproj/xcuserdata/
+EvoRadio.xcodeproj/project.xcworkspace/xcuserdata
+EvoRadio.xcworkspace/project.xcworkspace/xcuserdata
 
 # pod
 Pods/
