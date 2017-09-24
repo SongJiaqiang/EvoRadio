@@ -416,8 +416,12 @@ class MusicManager: NSObject {
             return nil
         }
         
+        guard let programId = song.programID else {
+            return nil
+        }
+        
         let fileName = song.audioURL!.lastPathComponent()
-        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",song.programID!])
+        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads",programId])
         let filePath = downloadPath.appendPathComponent(fileName)
         
         if FileManager.default.fileExists(atPath: filePath) {

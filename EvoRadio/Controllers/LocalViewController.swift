@@ -11,7 +11,6 @@ import UIKit
 class LocalViewController: ViewController {
 
     let cellID = "LocalTableViewCell"
-    
     var tableView: UITableView!
     var dataSource = [
         ["key":"download", "title": "下载音乐", "icon":"local_download", "count":"0 / 0 首"],
@@ -72,6 +71,7 @@ class LocalViewController: ViewController {
         searchBar.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), for: UIControlState())
         searchBar.setTitle("输入歌单名、歌曲名", for: UIControlState())
+        searchBar.addTarget(self, action: #selector(searchBarPressed(_:)), for: .touchUpInside)
         
     }
     
@@ -102,6 +102,12 @@ class LocalViewController: ViewController {
         }
     }
     
+    
+    //MARK: events
+    func searchBarPressed(_ button: UIButton) {
+        let search = SearchViewController()
+        present(search, animated: false, completion: nil)
+    }
 
 }
 
