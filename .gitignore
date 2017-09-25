@@ -13,5 +13,8 @@ Podfile.lock
 Carthage/
 Cartfile.resolved
 
+# carthage
+Carthage/
+
 # test files
 Test/

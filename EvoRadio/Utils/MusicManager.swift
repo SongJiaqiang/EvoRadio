@@ -11,19 +11,6 @@ import AudioKit
 import MediaPlayer
 import Kingfisher
 
-
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
-
-
 enum SoundQueuePlayMode: String {
     case ListLoop = "list_loop"
     case SingleLoop = "single_loop"
@@ -192,13 +179,23 @@ class MusicManager: NSObject {
             if let audioURL = cSong.audioURL {
                 if let audioPath = self.findMusicFileCachedPath(cSong) {
                     let url = URL(fileURLWithPath: audioPath)
-                    audioPlayer.play(url)
+//                    audioPlayer.play(url)
+                    let datasource = STKAudioPlayer.dataSource(from: url)
+                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
                 }else {
-                    audioPlayer.play(audioURL)
+                    if let url = URL(string: audioURL) {
+//                        audioPlayer.play(audioURL)
+                        
+                        let datasource = STKAudioPlayer.dataSource(from: url)
+                        audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
+                    }
                 }
             }else {
-                if let assetURL = cSong.assetURL {
-                    audioPlayer.play(assetURL)
+                if let url = cSong.assetURL {
+//                    audioPlayer.play(url)
+                    
+                    let datasource = STKAudioPlayer.dataSource(from: url)
+                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
                 }
             }
             
@@ -431,3 +428,14 @@ class MusicManager: NSObject {
         return nil
     }
 }
+
+final class SampleQueueId: NSObject {
+    var count: Int
+    var url: URL
+    
+    init(url:URL, count: Int) {
+        self.count = count
+        self.url = url
+    }
+}
+

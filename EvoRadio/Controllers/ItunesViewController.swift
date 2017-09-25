@@ -133,6 +133,11 @@ class ItunesViewController: ViewController {
         song.songID = String(format: "%lld", Date().timeIntervalSince1970)
         song.songName = item.value(forKey: MPMediaItemPropertyTitle) as? String
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String
+        song.salbumsName = item.value(forKey: MPMediaItemPropertyAlbumTitle) as? String
+        
+        if let duration = item.value(forKey: MPMediaItemPropertyPlaybackDuration) {
+            song.duration = String(format: "%.0f", duration as! Float)
+        }
         
         if let assetURL = item.value(forKey: MPMediaItemPropertyAssetURL) as? NSURL {
             song.assetURL = assetURL as URL
