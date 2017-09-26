@@ -33,7 +33,7 @@
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "Icon-Spotlight-40@2x-1.png",
+      "filename" : "Icon-Spotlight-40@2x.png",
       "scale" : "2x"
     },
     {
@@ -63,7 +63,7 @@
     {
       "size" : "20x20",
       "idiom" : "ipad",
-      "filename" : "Icon-Spotlight-41.png",
+      "filename" : "Icon-Spotlight-40.png",
       "scale" : "2x"
     },
     {
@@ -75,13 +75,13 @@
     {
       "size" : "29x29",
       "idiom" : "ipad",
-      "filename" : "Icon-Small@2x-1.png",
+      "filename" : "Icon-Small@2x.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "ipad",
-      "filename" : "Icon-Spotlight-42.png",
+      "filename" : "Icon-Spotlight-40.png",
       "scale" : "1x"
     },
     {
@@ -107,6 +107,12 @@
       "idiom" : "ipad",
       "filename" : "Icon-iPadPro@2x.png",
       "scale" : "2x"
+    },
+    {
+      "size" : "1024x1024",
+      "idiom" : "ios-marketing",
+      "filename" : "Icon-AppStore-1024.png",
+      "scale" : "1x"
     }
   ],
   "info" : {
