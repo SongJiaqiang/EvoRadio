@@ -1,6 +1,7 @@
 # EvoRadio
 ### 简介
 EvoRadio是一款开源音乐app，内容主要是各种环境、场景分类歌单，根据时段推荐不同类型的音乐。
+</br>
 <img alt="Now" src="https://raw.githubusercontent.com/SongJiaqiang/EvoRadio/master/screenshots/v0.2/01-Now.png" width="24%" />
 <img alt="Program" src="https://raw.githubusercontent.com/SongJiaqiang/EvoRadio/master/screenshots/v0.2/02-Programs.png" width="24%" />
 <img alt="List" src="https://raw.githubusercontent.com/SongJiaqiang/EvoRadio/master/screenshots/v0.2/03-Songs.png" width="24%" />
