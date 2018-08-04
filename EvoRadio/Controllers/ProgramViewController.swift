@@ -162,9 +162,13 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
         collectionView.deselectItem(at: indexPath, animated: true)
         
         let program = dataSources[(indexPath as NSIndexPath).item]
+        let cell = collectionView.cellForItem(at: indexPath) as! ProgramCollectionViewCell
         
         let listController = SongListViewController()
         listController.program = program
+        if let mainCoverImage = cell.picImageView.image {
+            listController.coverImages = [mainCoverImage]
+        }
         navigationController?.pushViewController(listController, animated: true)
     }
     

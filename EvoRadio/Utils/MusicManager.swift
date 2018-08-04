@@ -109,13 +109,21 @@ class MusicManager: NSObject {
     
     // 更新控制中心上的音乐信息 - 标题、专辑等
     func updatePlayingInfo() {
-        
         func updateCoverInfo(title: String?, artist: String?, duration: TimeInterval?, image: UIImage?) {
-            let artwork = MPMediaItemArtwork(image:image!)
-            let info: [String:AnyObject] = [MPMediaItemPropertyTitle: title as AnyObject,
-                                      MPMediaItemPropertyArtist: artist as AnyObject,
-                                      MPMediaItemPropertyArtwork: artwork,
-                                      MPMediaItemPropertyPlaybackDuration: duration as AnyObject]
+            
+            var info = [String:AnyObject]()
+            
+            info[MPMediaItemPropertyTitle] = (title == nil ? "Untitled" : title) as AnyObject
+            info[MPMediaItemPropertyArtist] = (artist == nil ? "Anonymity" : artist) as AnyObject
+            info[MPMediaItemPropertyPlaybackDuration] = (duration == nil ? 0 : duration) as AnyObject
+            
+            if let img = image {
+                let artwork = MPMediaItemArtwork(image:img)
+                info[MPMediaItemPropertyArtwork] = artwork
+            }else {
+                let artwork = MPMediaItemArtwork(image:UIImage.placeholder_cover())
+                info[MPMediaItemPropertyArtwork] = artwork
+            }
             
             MPNowPlayingInfoCenter.default().nowPlayingInfo = info
         }

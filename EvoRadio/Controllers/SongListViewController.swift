@@ -17,6 +17,7 @@ class SongListViewController: ViewController {
 
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var coverImageView = UIImageView()
+    var coverImages: [UIImage]?
     
     
     //MARK: life cycle
@@ -72,11 +73,20 @@ class SongListViewController: ViewController {
         headerView.addSubview(coverImageView)
         coverImageView.contentMode = .scaleAspectFill
         coverImageView.clipsToBounds = true
-        if let _ = program {
-            coverImageView.kf.setImage(with: URL(string: program.cover!.pics!.first!)!, placeholder: UIImage.placeholder_cover())
-        }else {
-            coverImageView.image = UIImage.placeholder_cover()
+        coverImageView.image = UIImage.placeholder_cover()
+        if let mainCoverImage = coverImages?.first {
+            coverImageView.image = mainCoverImage
         }
+        
+//        if let _ = program {
+//            if let picURL = program.cover!.pics!.first {
+//                if picURL.count > 0 {
+//                    coverImageView.kf.setImage(with: URL(string: picURL), placeholder: UIImage.placeholder_cover())
+//                }
+//            }
+//        }else {
+//            coverImageView.image = UIImage.placeholder_cover()
+//        }
         coverImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
@@ -95,7 +105,7 @@ class SongListViewController: ViewController {
                     self?.dataSources = songs
 //                    PlaylistManager.playlist.saveList(songs)
                     
-                    self?.updateCover()
+//                    self?.updateCover()
                     self?.tableView.reloadDataOnMainQueue(after: nil)
                 }else {
                     debugPrint("This program has no songs")
@@ -106,13 +116,13 @@ class SongListViewController: ViewController {
         
     }
     
-    func updateCover() {
-        if let _ = program {
-            coverImageView.kf.setImage(with: URL(string: program.cover!.pics!.first!)!, placeholder: UIImage.placeholder_cover())
-        }else {
-            coverImageView.image = UIImage.placeholder_cover()
-        }
-    }
+//    func updateCover() {
+//        if let _ = program {
+//            coverImageView.kf.setImage(with: URL(string: program.cover!.pics!.first!)!, placeholder: UIImage.placeholder_cover())
+//        }else {
+//            coverImageView.image = UIImage.placeholder_cover()
+//        }
+//    }
 }
 
 extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
