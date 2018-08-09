@@ -28,9 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置根控制器
         setupRootControllerAndVisible()
         
-        // 准备播放界面
-        preparePlayer()
-        
         // 配置flex工具
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
         tap.numberOfTouchesRequired = 2
@@ -48,21 +45,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.clipsToBounds = true
 //        window?.layer.cornerRadius = 10
         
-        let rootVC = MainViewController()
-        let navVC = NavigationController(rootViewController: rootVC)
-        window?.rootViewController = navVC
+        var rootVC: UIViewController?
+        
+        let ud = UserDefaults.standard
+        let hasInvitationCode = ud.object(forKey: "kEnterInvitationCode")
+        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
+            rootVC = NavigationController(rootViewController: MainViewController())
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+            // 准备播放界面
+            preparePlayer()
+        }else {
+            rootVC = SplashViewController()
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+        }
         
 //        let c = StreamingKitViewController()
 //        window?.rootViewController = c
         
-        window?.makeKeyAndVisible()
-    }
-    
-    func preparePlayer() {
-        PlayerView.main.prepareUI()
-        PlayerViewController.mainController.prepare()
-        
-        MusicManager.shared.loadLastPlaylist()
     }
     
     func setupRemoteControl() {

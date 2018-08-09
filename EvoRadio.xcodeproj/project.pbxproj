@@ -34,6 +34,9 @@
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
 		63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E71DC08A6700A2A146 /* MZUtility.swift */; };
 		63B674661F519B2A00F4341B /* ItunesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B674651F519B2A00F4341B /* ItunesViewController.swift */; };
+		63C9A054211BB97200B507D2 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63C9A052211BB97200B507D2 /* SplashViewController.swift */; };
+		63C9A055211BB97200B507D2 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A053211BB97200B507D2 /* SplashViewController.xib */; };
+		63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A057211BBA8200B507D2 /* splash_image_default.jpg */; };
 		63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */; };
 		63EF43F31F38A1E600EADC48 /* AssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */; };
 		63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */; };
@@ -151,6 +154,9 @@
 		63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZDownloadModel.swift; sourceTree = "<group>"; };
 		63B2E4E71DC08A6700A2A146 /* MZUtility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MZUtility.swift; sourceTree = "<group>"; };
 		63B674651F519B2A00F4341B /* ItunesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ItunesViewController.swift; path = Controllers/ItunesViewController.swift; sourceTree = "<group>"; };
+		63C9A052211BB97200B507D2 /* SplashViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SplashViewController.swift; path = Controllers/SplashViewController.swift; sourceTree = "<group>"; };
+		63C9A053211BB97200B507D2 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SplashViewController.xib; path = Controllers/SplashViewController.xib; sourceTree = "<group>"; };
+		63C9A057211BBA8200B507D2 /* splash_image_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash_image_default.jpg; sourceTree = "<group>"; };
 		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramViewController.swift; path = Controllers/ProgramViewController.swift; sourceTree = "<group>"; };
 		63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
@@ -336,6 +342,14 @@
 			path = ReflectionView;
 			sourceTree = "<group>";
 		};
+		63C9A056211BBA8200B507D2 /* splash */ = {
+			isa = PBXGroup;
+			children = (
+				63C9A057211BBA8200B507D2 /* splash_image_default.jpg */,
+			);
+			path = splash;
+			sourceTree = "<group>";
+		};
 		63DB930B1DF2B88F0051FA2B /* Playgrounds */ = {
 			isa = PBXGroup;
 			children = (
@@ -446,6 +460,8 @@
 				63EF44AA1F39F38200EADC48 /* Download */,
 				63B674651F519B2A00F4341B /* ItunesViewController.swift */,
 				6304E2CB1E9243D100B80494 /* SearchViewController.swift */,
+				63C9A052211BB97200B507D2 /* SplashViewController.swift */,
+				63C9A053211BB97200B507D2 /* SplashViewController.xib */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -455,6 +471,7 @@
 			children = (
 				9097BB1C1CFE8B6400FA5BD9 /* Test.xib */,
 				630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */,
+				63C9A056211BBA8200B507D2 /* splash */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -609,7 +626,9 @@
 			files = (
 				63EF444D1F39A78A00EADC48 /* Cartfile in Resources */,
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
+				63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
+				63C9A055211BB97200B507D2 /* SplashViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -726,6 +745,7 @@
 				635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */,
 				9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
+				63C9A054211BB97200B507D2 /* SplashViewController.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				63EF43F91F38A6F400EADC48 /* ChannelViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
