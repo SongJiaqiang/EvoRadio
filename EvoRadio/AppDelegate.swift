@@ -59,8 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             rootVC = NavigationController(rootViewController: MainViewController())
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
-            // 准备播放界面
-            preparePlayer()
+            
         }else {
             rootVC = SplashViewController()
             window?.rootViewController = rootVC

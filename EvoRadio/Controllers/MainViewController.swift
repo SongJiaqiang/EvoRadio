@@ -35,7 +35,17 @@ class MainViewController: ViewController {
         prepareContentView()
 //        preparePlayerView()
         
+        // 准备播放界面
+        preparePlayer()
     }
+    
+    func preparePlayer() {
+        PlayerView.main.prepareUI()
+        PlayerViewController.mainController.prepare()
+        
+        MusicManager.shared.loadLastPlaylist()
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
