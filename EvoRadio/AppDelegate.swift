@@ -28,12 +28,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置根控制器
         setupRootControllerAndVisible()
         
+        #if DEBUG
         // 配置flex工具
+        setupFlex()
+        #endif
+        
+        return true
+    }
+
+    func setupFlex() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
         tap.numberOfTouchesRequired = 2
         self.window?.addGestureRecognizer(tap)
-        
-        return true
     }
     
     func doubleTap() {
