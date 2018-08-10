@@ -17,12 +17,14 @@ class SplashViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
+        
+        // 监听点击背景
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTap(_:)))
+        view.addGestureRecognizer(tap)
+        
+        // 监听键盘
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardFrameChanged(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     @IBAction func enterButtonPressed(_ sender: UIButton) {
@@ -38,12 +40,33 @@ class SplashViewController: ViewController {
         preparePlayer()
     }
     
+    @objc func onTap(_ gesture: UIGestureRecognizer) {
+        
+        codeTextField.endEditing(true)
+        
+    }
+    
+    @objc func onKeyboardFrameChanged(_ notification: Notification) {
+        let info = notification.userInfo
+        let kbRect = (info?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (info?[UIKeyboardAnimationDurationUserInfoKey] as! Double)
+        let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
+
+        print(">> offsetY:\(offsetY), duration:\(duration)")
+        UIView.animate(withDuration: duration) {
+            self.codeTextField.transform = CGAffineTransform(translationX: 0, y: offsetY)
+            self.enterButton.transform = CGAffineTransform(translationX: 0, y: offsetY)   
+        }
+    }
+    
     func preparePlayer() {
         PlayerView.main.prepareUI()
         PlayerViewController.mainController.prepare()
         
         MusicManager.shared.loadLastPlaylist()
     }
+    
+    
     
 
 }

@@ -48,23 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupRootControllerAndVisible() {
         window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.clipsToBounds = true
-//        window?.layer.cornerRadius = 10
-        
+
         var rootVC: UIViewController?
         
         let ud = UserDefaults.standard
         let hasInvitationCode = ud.object(forKey: "kEnterInvitationCode")
-        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
-            rootVC = NavigationController(rootViewController: MainViewController())
-            window?.rootViewController = rootVC
-            window?.makeKeyAndVisible()
-            
-        }else {
+//        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
+//            rootVC = NavigationController(rootViewController: MainViewController())
+//            window?.rootViewController = rootVC
+//            window?.makeKeyAndVisible()
+//
+//        }else {
             rootVC = SplashViewController()
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
-        }
+//        }
         
 //        let c = StreamingKitViewController()
 //        window?.rootViewController = c
