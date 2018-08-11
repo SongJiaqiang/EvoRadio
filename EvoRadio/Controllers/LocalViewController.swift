@@ -14,11 +14,11 @@ class LocalViewController: ViewController {
     var tableView: UITableView!
     var dataSource = [
         ["key":"download", "title": "下载音乐", "icon":"local_download", "count":"0 / 0 首"],
-        ["key":"import", "title": "导入音乐", "icon":"local_import", "count":"0 首"],
+//        ["key":"import", "title": "导入音乐", "icon":"local_import", "count":"0 首"],
         ["key":"itunes", "title": "iTunes音乐", "icon":"local_itunes", "count":"0 首"],
         ["key":"recently", "title": "最近播放的音乐", "icon":"local_history", "count":"0 首"],
-        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
-        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"0 张"],
+//        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
+//        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"0 张"],
     ]
     
     override func viewDidLoad() {
@@ -28,7 +28,6 @@ class LocalViewController: ViewController {
         prepareSearchBar()
         
         prepareSoundRecognizerView()
-        
         
         updateDownloadCount()
     }
@@ -47,9 +46,7 @@ class LocalViewController: ViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
         }
-        
     }
-    
     
     func prepareSearchBar() {
         let searchBar = UIButton()
@@ -101,7 +98,6 @@ class LocalViewController: ViewController {
             }
         }
     }
-    
     
     //MARK: events
     func searchBarPressed(_ button: UIButton) {
