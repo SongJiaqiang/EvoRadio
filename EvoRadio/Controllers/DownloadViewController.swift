@@ -158,6 +158,8 @@ class DownloadViewController: ViewController {
     
     func downloadASongFinished(_ noti: Notification) {
         updateDownloadCount()
+        
+        NotificationCenter.default.post(name: .updateDownloadCount, object: nil, userInfo: nil)
     }
     
 

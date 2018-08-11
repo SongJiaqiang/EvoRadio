@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		6304E2CC1E9243D100B80494 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304E2CB1E9243D100B80494 /* SearchViewController.swift */; };
+		630D1703211EBB1400803BC5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D1702211EBB1400803BC5 /* Notification.swift */; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
@@ -126,6 +127,7 @@
 
 /* Begin PBXFileReference section */
 		6304E2CB1E9243D100B80494 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Controllers/SearchViewController.swift; sourceTree = "<group>"; };
+		630D1702211EBB1400803BC5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 				63A4E53B1D80384600E18FD6 /* Views.swift */,
 				633506DF1DE9D97500607693 /* Labels.swift */,
 				636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */,
+				630D1702211EBB1400803BC5 /* Notification.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -734,6 +737,7 @@
 				63EF44031F38ACC800EADC48 /* SongListTableViewCell.swift in Sources */,
 				63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */,
 				63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */,
+				630D1703211EBB1400803BC5 /* Notification.swift in Sources */,
 				63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */,
 				6360F24F1F77ACC600070C4E /* SearchedSongInfo.swift in Sources */,
 				63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */,

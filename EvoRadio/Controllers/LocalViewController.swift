@@ -30,6 +30,17 @@ class LocalViewController: ViewController {
         prepareSoundRecognizerView()
         
         updateDownloadCount()
+        
+        observeNotifications()
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    func observeNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateDownloadCount(_:)), name:.updateDownloadCount, object: nil)
+        
     }
     
     //MARK: prepare
@@ -69,7 +80,6 @@ class LocalViewController: ViewController {
         searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), for: UIControlState())
         searchBar.setTitle("输入歌单名、歌曲名", for: UIControlState())
         searchBar.addTarget(self, action: #selector(searchBarPressed(_:)), for: .touchUpInside)
-        
     }
     
     func prepareSoundRecognizerView() {
@@ -103,6 +113,10 @@ class LocalViewController: ViewController {
     func searchBarPressed(_ button: UIButton) {
         let search = SearchViewController()
         present(search, animated: false, completion: nil)
+    }
+    
+    func onUpdateDownloadCount(_ notification: Notification) {
+        updateDownloadCount()
     }
 
 }

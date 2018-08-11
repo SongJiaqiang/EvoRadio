@@ -151,6 +151,8 @@ class DownloadingSongListViewController: ViewController {
             }
             tableView.reloadData()
             autoStartNextTask()
+            
+            NotificationCenter.default.post(name: .updateDownloadCount, object: nil)
         }
     }
     
