@@ -34,7 +34,6 @@ class PlayerView: UIView {
         
         progressTimer = Timer(timeInterval: 1, target: self, selector: #selector(PlayerView.progressHandle), userInfo: nil, repeats: true)
         RunLoop.current.add(progressTimer, forMode: RunLoopMode.commonModes)
-
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,7 +49,7 @@ class PlayerView: UIView {
             make.height.equalTo(playerBarHeight)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
-            make.bottomMargin.equalTo(0)
+            make.bottomMargin.equalTo(IS_IPHONE_X ? -28 : 0)            
         }
         
         backgroundView = UIImageView()
@@ -278,7 +277,6 @@ class PlayerView: UIView {
         
         MusicManager.shared.updatePlaybackTime(Double(timePlayed))
     }
-
     
     func show() {
         self.isHidden = false

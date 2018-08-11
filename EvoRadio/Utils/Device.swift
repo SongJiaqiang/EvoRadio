@@ -111,5 +111,11 @@ public extension UIDevice {
         }
         return identifier
     }
-    
 }
+
+//MARK: iphone device
+let IS_IPAD = (UI_USER_INTERFACE_IDIOM() == .pad)
+let IS_IPHONE = (UI_USER_INTERFACE_IDIOM() == .phone)
+let IS_IPHONE_X = (IS_IPHONE && UIScreen.main.bounds.size.height == 812.0)
+
+
