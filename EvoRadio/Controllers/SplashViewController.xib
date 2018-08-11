@@ -33,21 +33,21 @@
                         <constraint firstAttribute="height" constant="60" id="JAS-zN-dSk"/>
                         <constraint firstAttribute="width" constant="120" id="Qry-05-Zn1"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
                     <state key="normal" title="Enter"/>
                     <connections>
                         <action selector="enterButtonPressed:" destination="-1" eventType="touchUpInside" id="exZ-Uv-gLW"/>
                     </connections>
                 </button>
-                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12341234" placeholder="Invitation code" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="SEq-of-CR7">
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="215085" placeholder="Invitation code" textAlignment="center" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="SEq-of-CR7">
                     <rect key="frame" x="0.0" y="607" width="255" height="60"/>
                     <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="0.40000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="p7g-1A-swX"/>
                     </constraints>
                     <color key="textColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="24"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <fontDescription key="fontDescription" name=".SFNSDisplay" family=".SF NS Display" pointSize="30"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                     <connections>
                         <outlet property="delegate" destination="-1" id="9bE-Qi-mXB"/>
                     </connections>

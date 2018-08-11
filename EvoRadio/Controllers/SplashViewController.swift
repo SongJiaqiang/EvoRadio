@@ -55,7 +55,7 @@ class SplashViewController: ViewController {
         print(">> offsetY:\(offsetY), duration:\(duration)")
         UIView.animate(withDuration: duration) {
             self.codeTextField.transform = CGAffineTransform(translationX: 0, y: offsetY)
-            self.enterButton.transform = CGAffineTransform(translationX: 0, y: offsetY)   
+            self.enterButton.transform = CGAffineTransform(translationX: 0, y: offsetY)
         }
     }
     
@@ -66,7 +66,21 @@ class SplashViewController: ViewController {
         MusicManager.shared.loadLastPlaylist()
     }
     
+    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
+        if action == #selector(paste(_:)) {
+            return false
+        }
+        return true
+    }
     
-    
+}
 
+extension SplashViewController: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        
+        if let count = textField.text?.count, count >= 6 {
+            return false
+        }
+        return true
+    }
 }

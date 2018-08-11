@@ -53,19 +53,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         let ud = UserDefaults.standard
         let hasInvitationCode = ud.object(forKey: "kEnterInvitationCode")
-//        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
-//            rootVC = NavigationController(rootViewController: MainViewController())
-//            window?.rootViewController = rootVC
-//            window?.makeKeyAndVisible()
-//
-//        }else {
+        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
+            rootVC = NavigationController(rootViewController: MainViewController())
+            window?.rootViewController = rootVC
+            window?.makeKeyAndVisible()
+
+        }else {
             rootVC = SplashViewController()
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
-//        }
-        
-//        let c = StreamingKitViewController()
-//        window?.rootViewController = c
+        }
         
     }
     
