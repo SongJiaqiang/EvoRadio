@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 import FLEX
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 
@@ -18,6 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        Fabric.with([Crashlytics.self])
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
