@@ -7,7 +7,6 @@ EvoRadio.xcworkspace/project.xcworkspace/xcuserdata
 
 # pod
 Pods/
-Podfile.lock
 
 # carthage
 Carthage/
