@@ -2,8 +2,8 @@
 i.DS_Store
 
 # project
-EvoRadio.xcodeproj/project.xcworkspace/xcuserdata
-EvoRadio.xcworkspace/project.xcworkspace/xcuserdata
+EvoRadio.xcodeproj/project.xcworkspace/
+EvoRadio.xcworkspace/
 
 # pod
 Pods/
