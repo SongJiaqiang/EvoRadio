@@ -110,6 +110,13 @@ class PlayerViewController: ViewController {
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
+        let blackMaskView = UIImageView()
+        blackMaskView.backgroundColor = UIColor.black.alpha(0.3)
+        view.insertSubview(blackMaskView, aboveSubview: backgroundView)
+        blackMaskView.snp.makeConstraints { (make) in
+            make.edges.equalTo(UIEdgeInsets.zero)
+        }
+        
         // add blur effect
         let blur = UIBlurEffect(style: .light)
         let effectView = UIVisualEffectView(effect: blur)
