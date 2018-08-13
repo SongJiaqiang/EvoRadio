@@ -216,6 +216,7 @@ class MusicManager: NSObject {
             CoreDB.addSongToHistoryList(currentSong()!)
             
             NotificationManager.shared.postUpdatePlayerNotification()
+            NotificationCenter.default.post(name: .updateHistoryCount, object: nil)
             
             // 更新历史列表
             saveLastPlaylist()

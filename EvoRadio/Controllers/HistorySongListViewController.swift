@@ -76,6 +76,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
         cell.delegate = self
+        cell.showMoreButton(false)
         
         let song = dataSource[(indexPath as NSIndexPath).row]
         cell.updateSongInfo(song)
@@ -161,6 +162,8 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         CoreDB.clearHistory()
         dataSource.removeAll()
         tableView.reloadData()
+        
+        NotificationCenter.default.post(name: .updateHistoryCount, object: nil)
     }
     
 }

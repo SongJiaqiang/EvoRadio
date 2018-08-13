@@ -437,5 +437,38 @@ class CoreDB {
         mainDB.removeObject(forKey: DB_HISTORY_LIST)
     }
     
+    //MARK: iTunes音乐
+    /** 获取iTunes音乐 */
+    class func getITunesSongs() -> [Song]? {
+        if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            return songs
+        }else {
+            return nil
+        }
+    }
     
+    /** 添加iTunes音乐缓存 */
+    class func addSongToITunesList(_ song: Song) {
+        let dict = song.toJSON()
+        
+        var newSongs = [[String : Any]]()
+        if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
+            newSongs.append(contentsOf: jsonArray as! [[String : Any]])
+            
+            for (index, item) in newSongs.enumerated() {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.remove(at: index)
+                    break
+                }
+            }
+        }
+        
+        newSongs.insert(dict, at: 0)
+        // The count can not exceed 100
+        if newSongs.count > 100 {
+            newSongs.removeLast()
+        }
+        mainDB.setObject(newSongs, forKey: DB_HISTORY_LIST)
+    }
 }

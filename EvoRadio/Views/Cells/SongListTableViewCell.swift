@@ -99,6 +99,10 @@ class SongListTableViewCell: UITableViewCell {
         
     }
     
+    func showMoreButton(_ isShow: Bool) {
+        moreButton.isHidden = !isShow
+    }
+    
     
     //MARK: events
     func moreButtonPressed(_ button: UIButton) {

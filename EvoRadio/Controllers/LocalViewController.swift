@@ -15,8 +15,8 @@ class LocalViewController: ViewController {
     var dataSource = [
         ["key":"download", "title": "下载音乐", "icon":"local_download", "count":"0 / 0 首"],
 //        ["key":"import", "title": "导入音乐", "icon":"local_import", "count":"0 首"],
-        ["key":"itunes", "title": "iTunes音乐", "icon":"local_itunes", "count":"0 首"],
-        ["key":"recently", "title": "最近播放的音乐", "icon":"local_history", "count":"0 首"],
+//        ["key":"itunes", "title": "iTunes音乐", "icon":"local_itunes", "count":"0 首"],
+        ["key":"history", "title": "最近播放的音乐", "icon":"local_history", "count":"0 首"],
 //        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
 //        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"0 张"],
     ]
@@ -29,7 +29,7 @@ class LocalViewController: ViewController {
         
         prepareSoundRecognizerView()
         
-        updateDownloadCount()
+        loadCaches()
         
         observeNotifications()
     }
@@ -40,7 +40,7 @@ class LocalViewController: ViewController {
     
     func observeNotifications() {
         NotificationCenter.default.addObserver(self, selector: #selector(onUpdateDownloadCount(_:)), name:.updateDownloadCount, object: nil)
-        
+        NotificationCenter.default.addObserver(self, selector: #selector(onUpdateHistoryCount(_:)), name:.updateHistoryCount, object: nil)
     }
     
     //MARK: prepare
@@ -86,7 +86,8 @@ class LocalViewController: ViewController {
         
     }
     
-    func updateDownloadCount() {
+    func loadCaches() {
+        
         var downloadedSongsCount = 0
         var downloadingSongsCount = 0
         
@@ -97,6 +98,16 @@ class LocalViewController: ViewController {
             downloadingSongsCount = songs.count
         }
         
+        var historySongsCount = 0
+        if let songs = CoreDB.getHistorySongs() {
+            historySongsCount = songs.count
+        }
+        
+//        var iTunesSongsCount = 0
+//        if let songs = CoreDB.getITunesSongs() {
+//            iTunesSongsCount = songs.count
+//        }
+        
         for i in 0..<dataSource.count {
             var item = dataSource[i]
             if item["key"] == "download" {
@@ -104,7 +115,15 @@ class LocalViewController: ViewController {
                 dataSource.remove(at: i)
                 dataSource.insert(item, at: i);
                 tableView.reloadData()
-                break
+                continue
+            }
+            
+            if item["key"] == "history" {
+                item["count"] = "\(historySongsCount) 首"
+                dataSource.remove(at: i)
+                dataSource.insert(item, at: i);
+                tableView.reloadData()
+                continue
             }
         }
     }
@@ -116,7 +135,11 @@ class LocalViewController: ViewController {
     }
     
     func onUpdateDownloadCount(_ notification: Notification) {
-        updateDownloadCount()
+        loadCaches()
+    }
+    
+    func onUpdateHistoryCount(_ notification: Notification) {
+        loadCaches()
     }
 
 }
@@ -168,7 +191,7 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
         if let key = cellInfo["key"] {
             
             switch key {
-            case "recently":
+            case "history":
                 navigationController?.pushViewController(HistorySongListViewController(), animated: true)
             
             case "favorites":
