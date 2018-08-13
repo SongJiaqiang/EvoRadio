@@ -134,7 +134,7 @@ class PlayerViewController: ViewController {
     }
     
     func prepareNavigationBar() {
-        let navBarHeight: CGFloat = 64
+        let navBarHeight: CGFloat = IS_IPHONE_X ? 88 : 64
         
         let navBar = UIView()
         view.addSubview(navBar)
