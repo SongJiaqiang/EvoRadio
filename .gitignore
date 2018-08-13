@@ -19,3 +19,4 @@ Carthage/
 
 # test files
 Test/
+fastlane/report.xml
