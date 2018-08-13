@@ -181,7 +181,7 @@ class PlayerViewController: ViewController {
         closeButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 40, height: 40))
             make.leftMargin.equalTo(10)
-            make.topMargin.equalTo(20)
+            make.bottomMargin.equalTo(-2)
         }
   
     }
