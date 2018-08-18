@@ -111,7 +111,6 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>
-		<string>newsstand-content</string>
 		<string>remote-notification</string>
 	</array>
 	<key>UIFileSharingEnabled</key>
