@@ -9,7 +9,7 @@
 import UIKit
 
 class SplashViewController: ViewController {
-
+    let InvitationCodes = ["522008", "869796", "576284"]
     
     @IBOutlet weak var splashImageView: UIImageView!
     @IBOutlet weak var enterButton: UIButton!
@@ -90,7 +90,10 @@ class SplashViewController: ViewController {
 extension SplashViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         
-        if let count = textField.text?.count, count >= 6 {
+        codeTextField.textColor = UIColor.white
+        
+        if let count = textField.text?.count, count+string.count > 6 {
+            textField.text = textField.text?.substring(to: String.Index(encodedOffset: count))
             return false
         }
         return true
