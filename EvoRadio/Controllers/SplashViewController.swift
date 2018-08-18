@@ -28,6 +28,18 @@ class SplashViewController: ViewController {
     }
     
     @IBAction func enterButtonPressed(_ sender: UIButton) {
+        guard let code = codeTextField.text else {
+            print("[Error] Invitation code is empty!")
+            return
+        }
+        
+        if !InvitationCodes.contains(code) {
+            HudManager.showText("邀请码错误", position: .top)
+            codeTextField.textColor = UIColor(netHex: 0xFF5E5E)
+            print("[Error] Invitation code do not matching!")
+            return
+        }
+        
         let ud = UserDefaults.standard
         ud.set(1, forKey: "kEnterInvitationCode")
         ud.synchronize()

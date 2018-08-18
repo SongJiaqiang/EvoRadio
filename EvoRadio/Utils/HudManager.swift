@@ -9,6 +9,12 @@
 import Foundation
 import MBProgressHUD
 
+enum HudPosision: Int {
+    case top
+    case center
+    case bottom
+}
+
 class HudManager {
     
     var canceled = false
@@ -17,11 +23,28 @@ class HudManager {
         HudManager.showText(text, inView: Device.keyWindow())
     }
     
+    class func showText(_ text: String, position: HudPosision) {
+        HudManager.showText(text, inView: Device.keyWindow(), position: position)
+    }
+    
     class func showText(_ text: String, inView: UIView) {
         let hud = MBProgressHUD.showAdded(to: inView, animated: true)
         hud.mode = .text
         hud.label.text = text
         hud.offset.y = Device.height()*0.5-60
+        hud.hide(animated: true, afterDelay: 1)
+    }
+    
+    class func showText(_ text: String, inView: UIView, position: HudPosision) {
+        let hud = MBProgressHUD.showAdded(to: inView, animated: true)
+        hud.mode = .text
+        hud.label.text = text
+        if position == .top {
+            hud.offset.y = -(Device.height()*0.5-60)
+        }else if position == .top {
+            hud.offset.y = Device.height()*0.5-60
+        }
+        
         hud.hide(animated: true, afterDelay: 1)
     }
     

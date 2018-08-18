@@ -221,8 +221,11 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
 
     func downloadButtonPressed(_ button: UIButton) {
         CoreDB.addSongsToDownloadingList(self.dataSources)
-        
         NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
+        
+        DispatchQueue.main.async {
+            HudManager.showText("已经加入下载列表")
+        }
     }
 }
 
@@ -239,6 +242,9 @@ extension SongListViewController: SongListTableViewCellDelegate {
         let action3 = UIAlertAction(title: "下载歌曲", style: .default, handler: { (action) in
             CoreDB.addSongToDownloadingList(song)
             NotificationManager.shared.postDownloadingListChangedNotification(["songs" : [song]])
+            DispatchQueue.main.async {
+                HudManager.showText("已经加入下载列表")
+            }
         })
         let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
         

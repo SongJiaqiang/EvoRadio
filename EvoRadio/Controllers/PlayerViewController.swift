@@ -455,7 +455,9 @@ class PlayerViewController: ViewController {
         if let cSong = MusicManager.shared.currentSong() {
 //            CoreDB.addSongToDownloadingList(cSong)
 //            button.selected = true
-            HudManager.showText("已经加入下载列表")
+            DispatchQueue.main.async {
+                HudManager.showText("已经加入下载列表")
+            }
         }
     }
     
@@ -712,6 +714,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
     func downloadAllButtonPressed(_ button: UIButton) {
         if MusicManager.shared.playlist.count > 0 {
 //            CoreDB.addSongsToDownloadingList(MusicManager.shared.playlist)
+            HudManager.showText("已经加入下载列表")
             showPlaylistTableView(false)
         }
     }
