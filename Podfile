@@ -4,7 +4,8 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'EvoRadio' do
-    
+  pod 'FLEX', '~> 2.4', :configurations => ['Debug'], :inhibit_warnings => true
+
   pod 'Fabric'
   pod 'Crashlytics'
 

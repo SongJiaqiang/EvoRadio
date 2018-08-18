@@ -8,9 +8,12 @@
 
 import UIKit
 import AVFoundation
-import FLEX
 import Fabric
 import Crashlytics
+
+#if DEBUG
+import FLEX
+#endif
 
 @UIApplicationMain
 
@@ -32,23 +35,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 设置根控制器
         setupRootControllerAndVisible()
         
-        #if DEBUG
         // 配置flex工具
         setupFlex()
-        #endif
         
         return true
     }
 
     func setupFlex() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(doubleTap))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTwoFingerTouch))
         tap.numberOfTouchesRequired = 2
         self.window?.addGestureRecognizer(tap)
     }
     
-    func doubleTap() {
+    func onTwoFingerTouch() {
+        #if DEBUG
         FLEXManager.shared().showExplorer()
+        #endif
     }
+    
     
     func setupRootControllerAndVisible() {
         window = UIWindow(frame: UIScreen.main.bounds)

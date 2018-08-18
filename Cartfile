@@ -22,11 +22,5 @@ github "SongJiaqiang/StreamingKit" "master"
 # 旋转木马特效
 github "SongJiaqiang/CarouselKit" "master"
 
-# 键值对存储
-github "SongJiaqiang/ObjcLevelDB" ~> 0.0.1
-
 # 动画特效
 github "facebook/pop" ~> 1.0.7
-
-# UI分析
-github "Flipboard/FLEX"

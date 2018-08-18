@@ -13,7 +13,6 @@
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
-		634002331F6F9165001FD26C /* FLEX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634002321F6F9165001FD26C /* FLEX.framework */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634E065E1F38690200253E9A /* ObjectMapper.framework */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
@@ -23,7 +22,6 @@
 		635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2141F499611002AFE0D /* AudioKit.framework */; };
 		635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */; };
 		635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AD2E31F49BC18002AFE0D /* ReflectionView.m */; };
-		635AD56F1F49D9CC002AFE0D /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */; };
 		635AD57C1F49DF15002AFE0D /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD57B1F49DF15002AFE0D /* pop.framework */; };
 		6360F24B1F779C9500070C4E /* SearchSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24A1F779C9500070C4E /* SearchSongInfo.swift */; };
 		6360F24D1F77A5A800070C4E /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24C1F77A5A800070C4E /* SimpleTableViewCell.swift */; };
@@ -72,7 +70,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -255,7 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* (null) in Frameworks */,
+				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -264,9 +262,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				634002331F6F9165001FD26C /* FLEX.framework in Frameworks */,
 				635AD57C1F49DF15002AFE0D /* pop.framework in Frameworks */,
-				635AD56F1F49D9CC002AFE0D /* ObjcLevelDB.framework in Frameworks */,
 				635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */,
 				635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */,
 				635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */,
@@ -595,6 +591,7 @@
 				634E065D1F38682D00253E9A /* Carthage */,
 				630D1704211F022600803BC5 /* Fabric */,
 				63D44BF52127CAD90060D7F5 /* Remove Unneeded Architectures */,
+				7CDD6E7C20B111D593FBB65F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -719,9 +716,7 @@
 				"$(SRCROOT)/Carthage/Build/iOS/RefreshKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/CarouselKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ObjcLevelDB.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/FLEX.framework",
 			);
 			name = Carthage;
 			outputPaths = (
@@ -760,6 +755,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7CDD6E7C20B111D593FBB65F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1001,7 +1014,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF4F95F4E1AE88110AABC9C4 /* Pods-EvoRadio.debug.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -1031,7 +1043,6 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5DFCD3CC5C6FBAC2F7155651 /* Pods-EvoRadio.release.xcconfig */;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
