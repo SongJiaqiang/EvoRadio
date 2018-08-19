@@ -21,6 +21,16 @@ or alternatively using `brew cask install fastlane`
 fastlane ios test
 ```
 Description of what the lane does
+### ios carthage
+```
+fastlane ios carthage
+```
+Update carthage frameworks
+### ios build_release
+```
+fastlane ios build_release
+```
+
 
 ----
 

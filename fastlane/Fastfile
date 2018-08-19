@@ -12,12 +12,15 @@
 
 # Uncomment the line if you want fastlane to automatically update itself
 # update_fastlane
+import "FastTools.rb"
 
 default_platform(:ios)
 
 platform :ios do
-  desc "Description of what the lane does"
-  lane :test do
+
+  desc ""
+  lane :build_release do
     sh """ echo HELLO FASTLANE """
   end
+
 end
