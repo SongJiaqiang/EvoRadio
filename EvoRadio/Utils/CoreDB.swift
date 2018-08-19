@@ -8,7 +8,6 @@
 
 import Foundation
 import ObjectMapper
-import ObjcLevelDB
 
 let DB_ALLCHANNELS = "all_channels"
 let DB_ALLNOWCHANNELS = "all_now_channels"
