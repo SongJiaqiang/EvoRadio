@@ -4,8 +4,7 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
-target 'EvoRadio' do
-    
+def common_pods
   # UI Debug
   pod 'FLEX', '~> 2.4', :configurations => ['Debug'], :inhibit_warnings => true
   # 自动布局
@@ -18,7 +17,7 @@ target 'EvoRadio' do
   pod 'pop'
   # 旋转木马特效
   pod 'iCarousel'
-
+  
   # 网络请求
   pod 'Alamofire', '~> 4.7'
   # 图片加载
@@ -34,6 +33,11 @@ target 'EvoRadio' do
   
   # 音频播放
   pod 'StreamingKit'
+  
+end
+
+target 'EvoRadio' do
+  common_pods()
 
   target 'EvoRadioTests' do
     inherit! :search_paths
