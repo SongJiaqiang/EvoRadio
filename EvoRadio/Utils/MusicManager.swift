@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import AudioKit
+import StreamingKit
 import MediaPlayer
 import Kingfisher
 

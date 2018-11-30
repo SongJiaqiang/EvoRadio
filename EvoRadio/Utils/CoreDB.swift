@@ -8,6 +8,7 @@
 
 import Foundation
 import ObjectMapper
+import ObjcLevelDB
 
 let DB_ALLCHANNELS = "all_channels"
 let DB_ALLNOWCHANNELS = "all_now_channels"
@@ -22,8 +23,6 @@ let DB_DOWNLOADED_LIST = "downloaded_list"
 let DB_DOWNLOADING_LIST = "downloading_list"
 let DB_HISTORY_LIST = "history_list"
 let DB_PLAY_MODE = "play_mode"
-
-
 
 let mainDB: LevelDB = LevelDB.databaseInLibrary(withName: "main.db")
 

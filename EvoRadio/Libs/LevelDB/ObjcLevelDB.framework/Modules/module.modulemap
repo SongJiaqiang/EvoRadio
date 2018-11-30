@@ -1,0 +1,6 @@
+framework module ObjcLevelDB {
+  umbrella header "ObjcLevelDB.h"
+
+  export *
+  module * { export * }
+}

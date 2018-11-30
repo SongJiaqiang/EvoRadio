@@ -10,26 +10,24 @@
 		1B0B6791D3CB7BC65CE9C63A /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */; };
 		6304E2CC1E9243D100B80494 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304E2CB1E9243D100B80494 /* SearchViewController.swift */; };
 		630D1703211EBB1400803BC5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D1702211EBB1400803BC5 /* Notification.swift */; };
+		6310545621B182DE006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
+		6310545721B184F6006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
+		6310545821B184F6006C8616 /* ObjcLevelDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
+		631BA2C921AFB73100A6D65C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
-		634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 634E065E1F38690200253E9A /* ObjectMapper.framework */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
 		634E066F1F38882000253E9A /* TopTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E066E1F38882000253E9A /* TopTabBar.swift */; };
 		634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06771F38888400253E9A /* RadioTableViewCell.swift */; };
-		635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD1B41F4981DE002AFE0D /* RefreshKit.framework */; };
-		635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2141F499611002AFE0D /* AudioKit.framework */; };
-		635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */; };
 		635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AD2E31F49BC18002AFE0D /* ReflectionView.m */; };
-		635AD57C1F49DF15002AFE0D /* pop.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD57B1F49DF15002AFE0D /* pop.framework */; };
 		6360F24B1F779C9500070C4E /* SearchSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24A1F779C9500070C4E /* SearchSongInfo.swift */; };
 		6360F24D1F77A5A800070C4E /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24C1F77A5A800070C4E /* SimpleTableViewCell.swift */; };
 		6360F24F1F77ACC600070C4E /* SearchedSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24E1F77ACC600070C4E /* SearchedSongInfo.swift */; };
 		636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636449381DC2E53D008FC4A2 /* DownloadSongInfo.swift */; };
 		636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */; };
 		63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63974EB91DC4E437004D2526 /* Downloader.swift */; };
-		6398430D2129184300A5691D /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 635AD56E1F49D9CC002AFE0D /* ObjcLevelDB.framework */; };
 		63A4E53C1D80384600E18FD6 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E53B1D80384600E18FD6 /* Views.swift */; };
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
@@ -61,7 +59,6 @@
 		63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44161F38B41600EADC48 /* CDCoverImageView.swift */; };
 		63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44181F38B42D00EADC48 /* MusicManager.swift */; };
 		63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF441A1F38B81400EADC48 /* PlayerView.swift */; };
-		63EF444D1F39A78A00EADC48 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 63EF444C1F39A78A00EADC48 /* Cartfile */; };
 		63EF44B01F39F39600EADC48 /* DownloadedProgramListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AB1F39F39600EADC48 /* DownloadedProgramListViewController.swift */; };
 		63EF44B11F39F39600EADC48 /* DownloadedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AC1F39F39600EADC48 /* DownloadedSongListViewController.swift */; };
 		63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44AD1F39F39600EADC48 /* DownloadedViewController.swift */; };
@@ -126,12 +123,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		6310545921B184F6006C8616 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				6310545821B184F6006C8616 /* ObjcLevelDB.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5DFCD3CC5C6FBAC2F7155651 /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 		6304E2CB1E9243D100B80494 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Controllers/SearchViewController.swift; sourceTree = "<group>"; };
 		630D1702211EBB1400803BC5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
+		6310545521B182DE006C8616 /* ObjcLevelDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjcLevelDB.framework; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
+		631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesViewCell.swift; sourceTree = "<group>"; };
 		634002321F6F9165001FD26C /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLEX.framework; path = Carthage/Build/iOS/FLEX.framework; sourceTree = "<group>"; };
@@ -187,7 +200,6 @@
 		63EF44161F38B41600EADC48 /* CDCoverImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CDCoverImageView.swift; path = Views/CDCoverImageView.swift; sourceTree = "<group>"; };
 		63EF44181F38B42D00EADC48 /* MusicManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicManager.swift; sourceTree = "<group>"; };
 		63EF441A1F38B81400EADC48 /* PlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlayerView.swift; path = Views/PlayerView.swift; sourceTree = "<group>"; };
-		63EF444C1F39A78A00EADC48 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		63EF44AB1F39F39600EADC48 /* DownloadedProgramListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedProgramListViewController.swift; path = Controllers/DownloadedProgramListViewController.swift; sourceTree = "<group>"; };
 		63EF44AC1F39F39600EADC48 /* DownloadedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedSongListViewController.swift; path = Controllers/DownloadedSongListViewController.swift; sourceTree = "<group>"; };
 		63EF44AD1F39F39600EADC48 /* DownloadedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadedViewController.swift; path = Controllers/DownloadedViewController.swift; sourceTree = "<group>"; };
@@ -263,12 +275,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6398430D2129184300A5691D /* ObjcLevelDB.framework in Frameworks */,
-				635AD57C1F49DF15002AFE0D /* pop.framework in Frameworks */,
-				635AD2BB1F49B4D7002AFE0D /* CarouselKit.framework in Frameworks */,
-				635AD2151F499611002AFE0D /* AudioKit.framework in Frameworks */,
-				635AD1B51F4981DE002AFE0D /* RefreshKit.framework in Frameworks */,
-				634E065F1F38690200253E9A /* ObjectMapper.framework in Frameworks */,
 				9059396C1D0E65C700FF9848 /* AudioToolbox.framework in Frameworks */,
 				9059396B1D0E65A200FF9848 /* AVFoundation.framework in Frameworks */,
 				90C32B701D0586EE00C87DAF /* QuartzCore.framework in Frameworks */,
@@ -279,8 +285,10 @@
 				90FB91B51D02D4E3002ECC8C /* libstdc++.tbd in Frameworks */,
 				90FB91B31D02D4C1002ECC8C /* SystemConfiguration.framework in Frameworks */,
 				90FB91B11D02D4B7002ECC8C /* libiconv.tbd in Frameworks */,
+				6310545621B182DE006C8616 /* ObjcLevelDB.framework in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
+				6310545721B184F6006C8616 /* ObjcLevelDB.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				1B0B6791D3CB7BC65CE9C63A /* Pods_EvoRadio.framework in Frameworks */,
 			);
@@ -318,6 +326,21 @@
 				C9634F17238D29D492403C7B /* Pods_EvoRadioTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6310545321B18266006C8616 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		6310545421B182DE006C8616 /* LevelDB */ = {
+			isa = PBXGroup;
+			children = (
+				6310545521B182DE006C8616 /* ObjcLevelDB.framework */,
+			);
+			path = LevelDB;
 			sourceTree = "<group>";
 		};
 		634E06651F3869F400253E9A /* EvoRadioTests */ = {
@@ -387,8 +410,8 @@
 		900C724A1D0563F0006EBE78 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				6310545421B182DE006C8616 /* LevelDB */,
 				635AD2E11F49BC18002AFE0D /* ReflectionView */,
-				63EF444C1F39A78A00EADC48 /* Cartfile */,
 			);
 			path = Libs;
 			sourceTree = "<group>";
@@ -435,6 +458,7 @@
 				909E65AE1CC0840700B0C49B /* Models */,
 				909E65AF1CC0842100B0C49B /* Extensions */,
 				909E65B11CC0843700B0C49B /* Utils */,
+				6310545321B18266006C8616 /* Services */,
 				900C724A1D0563F0006EBE78 /* Libs */,
 				909E659C1CC0831100B0C49B /* Resources */,
 				63DB930B1DF2B88F0051FA2B /* Playgrounds */,
@@ -484,6 +508,7 @@
 		909E659C1CC0831100B0C49B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */,
 				63C9A079211C965600B507D2 /* LaunchImage.png */,
 				9097BB1C1CFE8B6400FA5BD9 /* Test.xib */,
 				63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */,
@@ -590,10 +615,10 @@
 				902FBCC91CBEAC020051A93B /* Sources */,
 				902FBCCA1CBEAC020051A93B /* Frameworks */,
 				902FBCCB1CBEAC020051A93B /* Resources */,
-				634E065D1F38682D00253E9A /* Carthage */,
 				630D1704211F022600803BC5 /* Fabric */,
 				63D44BF52127CAD90060D7F5 /* Remove Unneeded Architectures */,
 				7CDD6E7C20B111D593FBB65F /* [CP] Embed Pods Frameworks */,
+				6310545921B184F6006C8616 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -659,7 +684,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63EF444D1F39A78A00EADC48 /* Cartfile in Resources */,
+				631BA2C921AFB73100A6D65C /* GoogleService-Info.plist in Resources */,
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
 				63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */,
 				63C9A078211C94A100B507D2 /* LaunchScreen.storyboard in Resources */,
@@ -704,33 +729,9 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 5bc73f380882d7ea9e1a16bf7a742543619bf198 d4d64fe3f3de660b099da6fb3400453f32f5c3e3c48dbac062118ff16bebedd9\n";
 		};
-		634E065D1F38682D00253E9A /* Carthage */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Carthage/Build/iOS/ObjectMapper.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/SnapKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Alamofire.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/MBProgressHUD.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/RefreshKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/AudioKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/CarouselKit.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/pop.framework",
-				"$(SRCROOT)/Carthage/Build/iOS/ObjcLevelDB.framework",
-			);
-			name = Carthage;
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "/usr/local/bin/carthage copy-frameworks";
-		};
 		63D44BF52127CAD90060D7F5 /* Remove Unneeded Architectures */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
@@ -738,7 +739,7 @@
 			name = "Remove Unneeded Architectures";
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "APP_PATH=\"${TARGET_BUILD_DIR}/${WRAPPER_NAME}\"\n\n# This script loops through the frameworks embedded in the application and\n# removes unused architectures.\nfind \"$APP_PATH\" -name '*.framework' -type d | while read -r FRAMEWORK\ndo\nFRAMEWORK_EXECUTABLE_NAME=$(defaults read \"$FRAMEWORK/Info.plist\" CFBundleExecutable)\nFRAMEWORK_EXECUTABLE_PATH=\"$FRAMEWORK/$FRAMEWORK_EXECUTABLE_NAME\"\necho \"Executable is $FRAMEWORK_EXECUTABLE_PATH\"\n\nEXTRACTED_ARCHS=()\na\nfor ARCH in $ARCHS\ndo\necho \"Extracting $ARCH from $FRAMEWORK_EXECUTABLE_NAME\"\nlipo -extract \"$ARCH\" \"$FRAMEWORK_EXECUTABLE_PATH\" -o \"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\"\nEXTRACTED_ARCHS+=(\"$FRAMEWORK_EXECUTABLE_PATH-$ARCH\")\ndone\n\necho \"Merging extracted architectures: ${ARCHS}\"\nlipo -o \"$FRAMEWORK_EXECUTABLE_PATH-merged\" -create \"${EXTRACTED_ARCHS[@]}\"\nrm \"${EXTRACTED_ARCHS[@]}\"\n\necho \"Replacing original executable with thinned version\"\nrm \"$FRAMEWORK_EXECUTABLE_PATH\"\nmv \"$FRAMEWORK_EXECUTABLE_PATH-merged\" \"$FRAMEWORK_EXECUTABLE_PATH\"\n\ndone\n";
 		};
@@ -767,11 +768,33 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/StreamingKit/StreamingKit.framework",
+				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/pop/pop.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/pop.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1025,7 +1048,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/EvoRadio/Libs/LevelDB",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1055,7 +1078,7 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)/EvoRadio/Libs/LevelDB",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/EvoRadio/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

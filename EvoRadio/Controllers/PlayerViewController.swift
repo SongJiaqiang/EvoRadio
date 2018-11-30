@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 import SnapKit
-import AudioKit
+import StreamingKit
 
 class PlayerViewController: ViewController {
     

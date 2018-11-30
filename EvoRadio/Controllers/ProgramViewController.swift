@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import RefreshKit
+import MJRefresh
 
 class ProgramViewController: ViewController {
     let cellID = "programCellID"
@@ -74,7 +74,7 @@ class ProgramViewController: ViewController {
         
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
         collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
-        collectionView!.mj_footer.isAutomaticallyHidden = true
+//        collectionView!.mj_footer.isAutomaticallyHidden = true
         
         
         if showHeaderView {
@@ -129,11 +129,11 @@ class ProgramViewController: ViewController {
     }
     
     func endRefreshing() {
-        if collectionView!.mj_header.isRefreshing() {
+        if collectionView!.mj_header.isRefreshing {
             collectionView!.mj_header.endRefreshing()
         }
         
-        if collectionView!.mj_footer.isRefreshing() {
+        if collectionView!.mj_footer.isRefreshing {
             collectionView!.mj_footer.endRefreshing()
         }
         

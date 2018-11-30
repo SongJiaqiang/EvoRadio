@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import iCarousel
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
     func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
