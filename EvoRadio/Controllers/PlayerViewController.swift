@@ -302,6 +302,8 @@ class PlayerViewController: ViewController {
         progressSlider.setThumbImage(UIImage(named: "dot_white")!, for: UIControlState())
         progressSlider.tintColor = UIColor.goldColor()
         progressSlider.addTarget(self, action: #selector(PlayerViewController.progressSliderChanged(_:)), for: .valueChanged)
+        progressSlider.addTarget(self, action: #selector(PlayerViewController.progressSliderTouchEnd(_:)), for: .touchUpInside)
+        progressSlider.addTarget(self, action: #selector(PlayerViewController.progressSliderTouchEnd(_:)), for: .touchUpOutside)
         progressSlider.snp.makeConstraints { (make) in
             make.height.equalTo(20)
             make.left.equalTo(controlView.snp.left).inset(50)
@@ -527,6 +529,12 @@ class PlayerViewController: ViewController {
     }
     
     func progressSliderChanged(_ slider: UISlider) {
+        print(">> selected value: \(slider.value)")
+//        let timePlayed = slider.value
+//        MusicManager.shared.playAtSecond(Int(timePlayed))
+    }
+    
+    func progressSliderTouchEnd(_ slider: UISlider) {
         let timePlayed = slider.value
         MusicManager.shared.playAtSecond(Int(timePlayed))
     }
