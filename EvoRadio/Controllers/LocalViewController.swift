@@ -17,7 +17,7 @@ class LocalViewController: ViewController {
 //        ["key":"import", "title": "导入音乐", "icon":"local_import", "count":"0 首"],
 //        ["key":"itunes", "title": "iTunes音乐", "icon":"local_itunes", "count":"0 首"],
         ["key":"history", "title": "最近播放的音乐", "icon":"local_history", "count":"0 首"],
-//        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
+        ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
 //        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"0 张"],
     ]
     
@@ -195,7 +195,7 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
                 navigationController?.pushViewController(HistorySongListViewController(), animated: true)
             
             case "favorites":
-                navigationController?.pushViewController(DownloadViewController(), animated: true)
+                navigationController?.pushViewController(CollectedSongListViewController(), animated: true)
             
             case "download":
                 navigationController?.pushViewController(DownloadViewController(), animated: true)

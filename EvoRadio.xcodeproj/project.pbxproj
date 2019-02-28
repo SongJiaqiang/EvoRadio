@@ -38,6 +38,7 @@
 		63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A057211BBA8200B507D2 /* splash_image_default.jpg */; };
 		63C9A078211C94A100B507D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */; };
 		63C9A07A211C965600B507D2 /* LaunchImage.png in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A079211C965600B507D2 /* LaunchImage.png */; };
+		63E1D9392228590E00B5C85D /* CollectedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */; };
 		63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */; };
 		63EF43F31F38A1E600EADC48 /* AssistiveTouch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */; };
 		63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */; };
@@ -68,7 +69,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -179,6 +180,7 @@
 		63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		63C9A079211C965600B507D2 /* LaunchImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LaunchImage.png; sourceTree = "<group>"; };
 		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectedSongListViewController.swift; path = Controllers/CollectedSongListViewController.swift; sourceTree = "<group>"; };
 		63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramViewController.swift; path = Controllers/ProgramViewController.swift; sourceTree = "<group>"; };
 		63EF43F21F38A1E600EADC48 /* AssistiveTouch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AssistiveTouch.swift; path = Views/AssistiveTouch.swift; sourceTree = "<group>"; };
 		63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgramCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -266,7 +268,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
+				86A783E31962C113368E80E8 /* (null) in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -496,6 +498,7 @@
 				63EF44101F38B1E700EADC48 /* LocalViewController.swift */,
 				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
 				63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */,
+				63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */,
 				63EF44AA1F39F38200EADC48 /* Download */,
 				63B674651F519B2A00F4341B /* ItunesViewController.swift */,
 				6304E2CB1E9243D100B80494 /* SearchViewController.swift */,
@@ -845,6 +848,7 @@
 				9097BB2B1CFEC88A00FA5BD9 /* DownloadItemQueue.swift in Sources */,
 				63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */,
 				63EF440F1F38B12700EADC48 /* ClockView.swift in Sources */,
+				63E1D9392228590E00B5C85D /* CollectedSongListViewController.swift in Sources */,
 				9053D44F1CF483DB000392EF /* Cover.swift in Sources */,
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */,

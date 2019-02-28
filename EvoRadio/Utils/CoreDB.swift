@@ -22,6 +22,7 @@ let DB_LAST_PLAYLSIT = "last_playlist"
 let DB_DOWNLOADED_LIST = "downloaded_list"
 let DB_DOWNLOADING_LIST = "downloading_list"
 let DB_HISTORY_LIST = "history_list"
+let DB_COLLECT_MUSIC_LIST = "collect_music_list"
 let DB_PLAY_MODE = "play_mode"
 
 let mainDB: LevelDB = LevelDB.databaseInLibrary(withName: "main.db")
@@ -469,4 +470,45 @@ class CoreDB {
         }
         mainDB.setObject(newSongs, forKey: DB_HISTORY_LIST)
     }
+}
+
+
+// MARK: - 收藏歌曲
+extension CoreDB {
+    class func addMusicToCollectList(_ song: Song) {
+        let dict = song.toJSON()
+        
+        var newSongs = [[String : Any]]()
+        if let jsonArray = mainDB.object(forKey: DB_COLLECT_MUSIC_LIST) {
+            newSongs.append(contentsOf: jsonArray as! [[String : Any]])
+            
+            for (index, item) in newSongs.enumerated() {
+                if (item["song_id"] as! String) == song.songID {
+                    newSongs.remove(at: index)
+                    break
+                }
+            }
+        }
+        
+        newSongs.insert(dict, at: 0)
+        // The count can not exceed 100
+        if newSongs.count > 100 {
+            newSongs.removeLast()
+        }
+        mainDB.setObject(newSongs, forKey: DB_COLLECT_MUSIC_LIST)
+    }
+    
+    class func getCollectedMusics() -> [Song]? {
+        if let jsonArray = mainDB.object(forKey: DB_COLLECT_MUSIC_LIST) {
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            return songs
+        }else {
+            return nil
+        }
+    }
+    
+    class func clearCollectedSongs() {
+        mainDB.removeObject(forKey: DB_COLLECT_MUSIC_LIST)
+    }
+    
 }

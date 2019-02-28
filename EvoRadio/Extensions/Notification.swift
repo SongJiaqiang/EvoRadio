@@ -11,4 +11,6 @@ import Foundation
 extension Notification.Name {
     static let updateDownloadCount = Notification.Name("UpdateDownloadCountNotification")
     static let updateHistoryCount = Notification.Name("UpdateHistoryCountNotification")
+    static let updateCollectedSongsCount = Notification.Name("UpdateCollectedSongsCountNotification")
+    
 }
