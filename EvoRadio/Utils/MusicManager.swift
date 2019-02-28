@@ -19,9 +19,8 @@ enum SoundQueuePlayMode: String {
 
 class MusicManager: NSObject {
     
-    
     // Singleton Instance
-    open static let shared = MusicManager()
+    public static let shared = MusicManager()
     
     //MARK: properties
     var audioPlayer: STKAudioPlayer!
@@ -207,8 +206,6 @@ class MusicManager: NSObject {
                 }
             }
             
-            
-            
             // 更新控制中心的音乐播放信息
             updatePlayingInfo()
 
@@ -237,11 +234,10 @@ class MusicManager: NSObject {
         }
     }
     
-    
+     // BUG：使用stop会自动跳转到下一曲，再增长序号播放，会出现跳曲的问题
     func playNext() {
-        incrementIndex()
-        
         audioPlayer.pause()
+        incrementIndex()
         play()
     }
     
@@ -262,9 +258,8 @@ class MusicManager: NSObject {
     }
     
     func playPrev() {
-        decrementIndex()
-        
         audioPlayer.pause()
+        decrementIndex()
         play()
     }
     
