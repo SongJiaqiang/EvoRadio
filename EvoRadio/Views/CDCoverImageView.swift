@@ -46,7 +46,7 @@ class CDCoverImageView: UIImageView {
         rotateAnimation.toValue = M_PI * 2
         rotateAnimation.duration = 16
         rotateAnimation.repeatForever = true
-        rotateAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotateAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         rotateAnimation.beginTime = CACurrentMediaTime()+0.2
         layer.pop_add(rotateAnimation, forKey: "rotateAnimation")
         

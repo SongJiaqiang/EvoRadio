@@ -47,8 +47,8 @@ class TopTabBar: UIView {
         let fontSize = UIFont.systemFont(ofSize: 12)
         
         let textAttrs = [
-            NSForegroundColorAttributeName: UIColor.white,
-            NSFontAttributeName: fontSize
+            NSAttributedString.Key.foregroundColor: UIColor.white,
+            NSAttributedString.Key.font: fontSize
         ]
         let maxSize = CGSize(width: 100, height: 20)
         
@@ -68,7 +68,7 @@ class TopTabBar: UIView {
         labels[currentIndex].textColor = UIColor.white
     }
     
-    func onTap(_ gesture: UIGestureRecognizer) {
+    @objc func onTap(_ gesture: UIGestureRecognizer) {
         if let _ = delegate {
             delegate?.tabBarOnTap(tabBar: TopTabBar.mainBar)
         }

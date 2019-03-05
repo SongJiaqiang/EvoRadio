@@ -63,9 +63,9 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         }
         
         addSubview(playButton)
-        playButton.setImage(UIImage(named: "player_play_border"), for: UIControlState())
+        playButton.setImage(UIImage(named: "player_play_border"), for: .normal)
         playButton.setImage(UIImage(named: "player_play_border_prs"), for: .highlighted)
-        playButton.addTarget(self, action: #selector(ProgramCollectionViewCell.playButtonPressed(_:)), for: .touchUpInside)
+        playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 30, height: 30))
             make.leftMargin.equalTo(5)
@@ -86,7 +86,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: event
-    func playButtonPressed(_ button: UIButton) {
+    @objc func playButtonPressed(_ button: UIButton) {
         if let p = program {
             delegate?.playMusicOfProgram(p.programID!)
         }

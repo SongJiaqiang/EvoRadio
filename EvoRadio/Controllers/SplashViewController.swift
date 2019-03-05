@@ -23,7 +23,7 @@ class SplashViewController: ViewController {
         view.addGestureRecognizer(tap)
         
         // 监听键盘
-        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardFrameChanged(_:)), name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(onKeyboardFrameChanged(_:)), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
 
     }
     
@@ -60,8 +60,8 @@ class SplashViewController: ViewController {
     
     @objc func onKeyboardFrameChanged(_ notification: Notification) {
         let info = notification.userInfo
-        let kbRect = (info?[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        let duration = (info?[UIKeyboardAnimationDurationUserInfoKey] as! Double)
+        let kbRect = (info?[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let duration = (info?[UIResponder.keyboardAnimationDurationUserInfoKey] as! Double)
         let offsetY = kbRect.origin.y - UIScreen.main.bounds.height
 
         print(">> offsetY:\(offsetY), duration:\(duration)")

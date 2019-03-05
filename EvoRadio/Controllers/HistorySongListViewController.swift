@@ -23,7 +23,7 @@ class HistorySongListViewController: ViewController {
         
         loadDataSource()
         
-        NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(DownloadedSongListViewController.downloadASongFinished(_:)))
+        NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(downloadASongFinished(_:)))
     }
     
     override func didReceiveMemoryWarning() {
@@ -44,7 +44,7 @@ class HistorySongListViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints({(make) in
             make.edges.equalTo(UIEdgeInsets.zero)
@@ -63,7 +63,7 @@ class HistorySongListViewController: ViewController {
     }
     
     //MARK: events
-    func downloadASongFinished(_ noti: Notification) {
+    @objc func downloadASongFinished(_ noti: Notification) {
         loadDataSource()
     }
     
@@ -93,8 +93,8 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
-        playButton.setTitle("Play All", for: UIControlState())
-        playButton.addTarget(self, action: #selector(HistorySongListViewController.playButtonPressed(_:)), for: .touchUpInside)
+        playButton.setTitle("Play All", for: .normal)
+        playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 80, height: 30))
             make.centerY.equalTo(headerView.snp.centerY)
@@ -107,8 +107,8 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         clearButton.backgroundColor = UIColor.grayColor1C()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
-        clearButton.setTitle("Clear", for: UIControlState())
-        clearButton.addTarget(self, action: #selector(HistorySongListViewController.clearButtonPressed(_:)), for: .touchUpInside)
+        clearButton.setTitle("Clear", for: .normal)
+        clearButton.addTarget(self, action: #selector(clearButtonPressed(_:)), for: .touchUpInside)
         clearButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 60, height: 30))
             make.centerY.equalTo(headerView.snp.centerY)
@@ -149,7 +149,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
-    func playButtonPressed(_ button: UIButton) {
+    @objc func playButtonPressed(_ button: UIButton) {
         if let songs = CoreDB.getHistorySongs() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
@@ -158,7 +158,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         }
     }
     
-    func clearButtonPressed(_ button: UIButton) {
+    @objc func clearButtonPressed(_ button: UIButton) {
         CoreDB.clearHistory()
         dataSource.removeAll()
         tableView.reloadData()

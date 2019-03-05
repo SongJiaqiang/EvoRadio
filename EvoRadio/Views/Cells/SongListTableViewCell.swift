@@ -24,7 +24,7 @@ class SongListTableViewCell: UITableViewCell {
     
     var delegate: SongListTableViewCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = UIColor.clear
@@ -49,7 +49,7 @@ class SongListTableViewCell: UITableViewCell {
             make.centerY.equalTo(contentView.snp.centerY)
         }
         
-        moreButton.setImage(UIImage(named: "cell_more"), for: UIControlState())
+        moreButton.setImage(UIImage(named: "cell_more"), for: .normal)
         moreButton.clipsToBounds = true
         moreButton.addTarget(self, action: #selector(SongListTableViewCell.moreButtonPressed(_:)), for: .touchUpInside)
         contentView.addSubview(moreButton)
@@ -105,7 +105,7 @@ class SongListTableViewCell: UITableViewCell {
     
     
     //MARK: events
-    func moreButtonPressed(_ button: UIButton) {
+    @objc func moreButtonPressed(_ button: UIButton) {
         delegate?.openToolPanelOfSong(song!)
     }
     

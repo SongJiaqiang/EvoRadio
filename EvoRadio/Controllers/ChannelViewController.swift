@@ -60,7 +60,7 @@ class ChannelViewController: ViewController {
         let itemH: CGFloat = itemW + 30
         
         layout.itemSize = CGSize(width: itemW, height: itemH)
-        layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout.minimumInteritemSpacing = margin
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -70,14 +70,14 @@ class ChannelViewController: ViewController {
         collectionView!.register(ChannelCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
 
         collectionView!.backgroundColor = UIColor.clear
-        collectionView?.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         collectionView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))        
     }
     
-    func headerRefresh() {
+    @objc func headerRefresh() {
         
         if radioID == 0 {
             listAllNowChannels()
@@ -133,7 +133,7 @@ class ChannelViewController: ViewController {
         collectionView!.mj_header.beginRefreshing()
     }
     
-    func nowTimeChanged(_ notification: Notification) {
+    @objc func nowTimeChanged(_ notification: Notification) {
         
         if let userInfo = (notification as NSNotification).userInfo {
             let dayIndex = userInfo["dayIndex"] as! Int

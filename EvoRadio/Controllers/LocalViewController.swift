@@ -52,10 +52,10 @@ class LocalViewController: ViewController {
         tableView.dataSource = self
         tableView.register(LocalTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(60, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 60, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle  = .none
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
     }
     
@@ -75,10 +75,10 @@ class LocalViewController: ViewController {
             make.right.equalTo(view.snp.right).offset(-10)
         }
         searchBar.contentHorizontalAlignment = .left
-        searchBar.titleEdgeInsets = UIEdgeInsetsMake(0, 10, 0, 0)
+        searchBar.titleEdgeInsets = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         searchBar.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), for: UIControlState())
-        searchBar.setTitle("输入歌单名、歌曲名", for: UIControlState())
+        searchBar.setTitleColor(UIColor(netHex:0xDDDDDD), for: .normal)
+        searchBar.setTitle("输入歌单名、歌曲名", for: .normal)
         searchBar.addTarget(self, action: #selector(searchBarPressed(_:)), for: .touchUpInside)
     }
     
@@ -129,16 +129,16 @@ class LocalViewController: ViewController {
     }
     
     //MARK: events
-    func searchBarPressed(_ button: UIButton) {
+    @objc func searchBarPressed(_ button: UIButton) {
         let search = SearchViewController()
         present(search, animated: false, completion: nil)
     }
     
-    func onUpdateDownloadCount(_ notification: Notification) {
+    @objc func onUpdateDownloadCount(_ notification: Notification) {
         loadCaches()
     }
     
-    func onUpdateHistoryCount(_ notification: Notification) {
+    @objc func onUpdateHistoryCount(_ notification: Notification) {
         loadCaches()
     }
 

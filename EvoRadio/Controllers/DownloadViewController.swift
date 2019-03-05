@@ -84,7 +84,7 @@ class DownloadViewController: ViewController {
         
         listButton = UIButton()
         topView.addSubview(listButton)
-        listButton.setImage(UIImage(named: "list_singleline"), for: UIControlState())
+        listButton.setImage(UIImage(named: "list_singleline"), for: .normal)
         listButton.addTarget(self, action: #selector(DownloadViewController.listButtonPressed(_:)), for: .touchUpInside)
         listButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 40, height: 40))
@@ -113,7 +113,7 @@ class DownloadViewController: ViewController {
             addChildController(downloadedController!, toView: containerView)
             if let _ = downloadingController {
                 downloadingController?.view.removeFromSuperview()
-                downloadingController?.removeFromParentViewController()
+                downloadingController?.removeFromParent()
             }
         }else {
             if downloadingController == nil {
@@ -122,7 +122,7 @@ class DownloadViewController: ViewController {
             addChildController(downloadingController!, toView: containerView)
             if let _ = downloadedController {
                 downloadedController?.view.removeFromSuperview()
-                downloadedController?.removeFromParentViewController()
+                downloadedController?.removeFromParent()
             }
         }
     }
@@ -139,24 +139,24 @@ class DownloadViewController: ViewController {
     
     
     //MARK: events
-    func segmentedCotnrolValueChanged(_ segment: UISegmentedControl) {
+    @objc func segmentedCotnrolValueChanged(_ segment: UISegmentedControl) {
         
         listButton.isHidden = segment.selectedSegmentIndex == 1 ? true : false
         
         updateContentView()
     }
     
-    func listButtonPressed(_ button: UIButton) {
+    @objc func listButtonPressed(_ button: UIButton) {
         button.isSelected = !button.isSelected
         
         let icon = button.isSelected ? UIImage(named: "list_grid") : UIImage(named: "list_singleline")
-        button.setImage(icon, for: UIControlState())
+        button.setImage(icon, for: .normal)
         
         downloadedController?.selectedIndex = button.isSelected ? 1 : 0
         downloadedController?.updateContentView()
     }
     
-    func downloadASongFinished(_ noti: Notification) {
+    @objc func downloadASongFinished(_ noti: Notification) {
         updateDownloadCount()
         
         NotificationCenter.default.post(name: .updateDownloadCount, object: nil, userInfo: nil)

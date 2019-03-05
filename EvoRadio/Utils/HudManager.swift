@@ -53,25 +53,25 @@ class HudManager {
         hud.mode = .annularDeterminate
         hud.label.text = text
         
-        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async(execute: { Void in
+        DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated).async {
             // Do something useful in the background and update the HUD periodically.
             HudManager.simulateProgress(hud)
-            DispatchQueue.main.async(execute: { Void in
+            DispatchQueue.main.async {
                 hud.hide(animated: true)
                 if let _ = completion {
                     completion!()
                 }
-            })
-        })
+            }
+        }
     }
     
     class func simulateProgress(_ hud: MBProgressHUD) {
         var progress: Float = 0;
         while progress < 1 {
             progress += 0.01
-            DispatchQueue.main.async(execute: { Void in
+            DispatchQueue.main.async {
                 hud.progress = progress
-            })
+            }
             usleep(50000)
         }
     }

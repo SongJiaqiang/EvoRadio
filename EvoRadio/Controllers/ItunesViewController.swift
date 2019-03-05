@@ -100,7 +100,7 @@ class ItunesViewController: ViewController {
     }
     
     //MARK: Event actions
-    func playAllButtonPressed(_ butotn: UIButton) {
+    @objc func playAllButtonPressed(_ butotn: UIButton) {
         print(">>> play all itunes musics")
     }
     

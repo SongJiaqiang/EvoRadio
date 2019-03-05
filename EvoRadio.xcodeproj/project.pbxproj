@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		1B0B6791D3CB7BC65CE9C63A /* Pods_EvoRadio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FB490049FC834EB04AD79F /* Pods_EvoRadio.framework */; };
 		6304E2CC1E9243D100B80494 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6304E2CB1E9243D100B80494 /* SearchViewController.swift */; };
+		630BB60E222822B50088B6D7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630BB60D222822B50088B6D7 /* AppDelegate.swift */; };
+		630BB610222822B50088B6D7 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630BB60F222822B50088B6D7 /* ViewController.swift */; };
+		630BB612222822B60088B6D7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 630BB611222822B60088B6D7 /* Assets.xcassets */; };
+		630BB615222822B60088B6D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 630BB613222822B60088B6D7 /* Main.storyboard */; };
+		630BB621222822B60088B6D7 /* EvoRadioMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630BB620222822B60088B6D7 /* EvoRadioMacTests.swift */; };
 		630D1703211EBB1400803BC5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D1702211EBB1400803BC5 /* Notification.swift */; };
 		6310545621B182DE006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
 		6310545721B184F6006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
@@ -68,7 +73,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -114,6 +119,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		630BB61D222822B60088B6D7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 902FBCC51CBEAC010051A93B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 630BB60A222822B50088B6D7;
+			remoteInfo = EvoRadioMac;
+		};
 		634E06691F3869F400253E9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 902FBCC51CBEAC010051A93B /* Project object */;
@@ -140,6 +152,16 @@
 /* Begin PBXFileReference section */
 		5DFCD3CC5C6FBAC2F7155651 /* Pods-EvoRadio.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EvoRadio.release.xcconfig"; path = "Pods/Target Support Files/Pods-EvoRadio/Pods-EvoRadio.release.xcconfig"; sourceTree = "<group>"; };
 		6304E2CB1E9243D100B80494 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SearchViewController.swift; path = Controllers/SearchViewController.swift; sourceTree = "<group>"; };
+		630BB60B222822B50088B6D7 /* EvoRadioMac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EvoRadioMac.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		630BB60D222822B50088B6D7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		630BB60F222822B50088B6D7 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		630BB611222822B60088B6D7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		630BB614222822B60088B6D7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		630BB616222822B60088B6D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		630BB617222822B60088B6D7 /* EvoRadioMac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = EvoRadioMac.entitlements; sourceTree = "<group>"; };
+		630BB61C222822B60088B6D7 /* EvoRadioMacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EvoRadioMacTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		630BB620222822B60088B6D7 /* EvoRadioMacTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvoRadioMacTests.swift; sourceTree = "<group>"; };
+		630BB622222822B60088B6D7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		630D1702211EBB1400803BC5 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
 		630EE9621F35BA540068C04F /* EvoRadio-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "EvoRadio-Bridging-Header.h"; sourceTree = "<group>"; };
 		6310545521B182DE006C8616 /* ObjcLevelDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjcLevelDB.framework; sourceTree = "<group>"; };
@@ -262,11 +284,25 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		630BB608222822B50088B6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		630BB619222822B60088B6D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634E06611F3869F400253E9A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
+				86A783E31962C113368E80E8 /* (null) in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -326,6 +362,28 @@
 				C9634F17238D29D492403C7B /* Pods_EvoRadioTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		630BB60C222822B50088B6D7 /* EvoRadioMac */ = {
+			isa = PBXGroup;
+			children = (
+				630BB60D222822B50088B6D7 /* AppDelegate.swift */,
+				630BB60F222822B50088B6D7 /* ViewController.swift */,
+				630BB611222822B60088B6D7 /* Assets.xcassets */,
+				630BB613222822B60088B6D7 /* Main.storyboard */,
+				630BB616222822B60088B6D7 /* Info.plist */,
+				630BB617222822B60088B6D7 /* EvoRadioMac.entitlements */,
+			);
+			path = EvoRadioMac;
+			sourceTree = "<group>";
+		};
+		630BB61F222822B60088B6D7 /* EvoRadioMacTests */ = {
+			isa = PBXGroup;
+			children = (
+				630BB620222822B60088B6D7 /* EvoRadioMacTests.swift */,
+				630BB622222822B60088B6D7 /* Info.plist */,
+			);
+			path = EvoRadioMacTests;
 			sourceTree = "<group>";
 		};
 		6310545321B18266006C8616 /* Services */ = {
@@ -432,6 +490,8 @@
 			children = (
 				902FBCCF1CBEAC020051A93B /* EvoRadio */,
 				634E06651F3869F400253E9A /* EvoRadioTests */,
+				630BB60C222822B50088B6D7 /* EvoRadioMac */,
+				630BB61F222822B60088B6D7 /* EvoRadioMacTests */,
 				902FBCCE1CBEAC020051A93B /* Products */,
 				5A94393BB0E9EEBD2CED84BF /* Frameworks */,
 				CF0CB102AF13C0FA91DC99B3 /* Pods */,
@@ -443,6 +503,8 @@
 			children = (
 				902FBCCD1CBEAC020051A93B /* EvoRadio.app */,
 				634E06641F3869F400253E9A /* EvoRadioTests.xctest */,
+				630BB60B222822B50088B6D7 /* EvoRadioMac.app */,
+				630BB61C222822B60088B6D7 /* EvoRadioMacTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -588,6 +650,41 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		630BB60A222822B50088B6D7 /* EvoRadioMac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 630BB627222822B60088B6D7 /* Build configuration list for PBXNativeTarget "EvoRadioMac" */;
+			buildPhases = (
+				630BB607222822B50088B6D7 /* Sources */,
+				630BB608222822B50088B6D7 /* Frameworks */,
+				630BB609222822B50088B6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = EvoRadioMac;
+			productName = EvoRadioMac;
+			productReference = 630BB60B222822B50088B6D7 /* EvoRadioMac.app */;
+			productType = "com.apple.product-type.application";
+		};
+		630BB61B222822B60088B6D7 /* EvoRadioMacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 630BB628222822B60088B6D7 /* Build configuration list for PBXNativeTarget "EvoRadioMacTests" */;
+			buildPhases = (
+				630BB618222822B60088B6D7 /* Sources */,
+				630BB619222822B60088B6D7 /* Frameworks */,
+				630BB61A222822B60088B6D7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				630BB61E222822B60088B6D7 /* PBXTargetDependency */,
+			);
+			name = EvoRadioMacTests;
+			productName = EvoRadioMacTests;
+			productReference = 630BB61C222822B60088B6D7 /* EvoRadioMacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		634E06631F3869F400253E9A /* EvoRadioTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 634E066B1F3869F400253E9A /* Build configuration list for PBXNativeTarget "EvoRadioTests" */;
@@ -635,10 +732,21 @@
 		902FBCC51CBEAC010051A93B /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0830;
+				LastSwiftUpdateCheck = 1010;
 				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = JQTech;
 				TargetAttributes = {
+					630BB60A222822B50088B6D7 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 4T9J35ZW6C;
+						ProvisioningStyle = Automatic;
+					};
+					630BB61B222822B60088B6D7 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 4T9J35ZW6C;
+						ProvisioningStyle = Automatic;
+						TestTargetID = 630BB60A222822B50088B6D7;
+					};
 					634E06631F3869F400253E9A = {
 						CreatedOnToolsVersion = 8.3.3;
 						DevelopmentTeam = 4T9J35ZW6C;
@@ -668,11 +776,29 @@
 			targets = (
 				902FBCCC1CBEAC020051A93B /* EvoRadio */,
 				634E06631F3869F400253E9A /* EvoRadioTests */,
+				630BB60A222822B50088B6D7 /* EvoRadioMac */,
+				630BB61B222822B60088B6D7 /* EvoRadioMacTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		630BB609222822B50088B6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				630BB612222822B60088B6D7 /* Assets.xcassets in Resources */,
+				630BB615222822B60088B6D7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		630BB61A222822B60088B6D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634E06621F3869F400253E9A /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -804,6 +930,23 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		630BB607222822B50088B6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				630BB610222822B50088B6D7 /* ViewController.swift in Sources */,
+				630BB60E222822B50088B6D7 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		630BB618222822B60088B6D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				630BB621222822B60088B6D7 /* EvoRadioMacTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		634E06601F3869F400253E9A /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -899,6 +1042,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		630BB61E222822B60088B6D7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 630BB60A222822B50088B6D7 /* EvoRadioMac */;
+			targetProxy = 630BB61D222822B60088B6D7 /* PBXContainerItemProxy */;
+		};
 		634E066A1F3869F400253E9A /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 902FBCCC1CBEAC020051A93B /* EvoRadio */;
@@ -906,7 +1054,160 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		630BB613222822B60088B6D7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				630BB614222822B60088B6D7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		630BB623222822B60088B6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = EvoRadioMac/EvoRadioMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = EvoRadioMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.evoradiomac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		630BB624222822B60088B6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = EvoRadioMac/EvoRadioMac.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = EvoRadioMac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.evoradiomac;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
+		630BB625222822B60088B6D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = EvoRadioMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.EvoRadioMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvoRadioMac.app/Contents/MacOS/EvoRadioMac";
+			};
+			name = Debug;
+		};
+		630BB626222822B60088B6D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = EvoRadioMacTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.EvoRadioMacTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_VERSION = 4.2;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/EvoRadioMac.app/Contents/MacOS/EvoRadioMac";
+			};
+			name = Release;
+		};
 		634E066C1F3869F400253E9A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DB3411BED597091FE14A8A75 /* Pods-EvoRadioTests.debug.xcconfig */;
@@ -1061,7 +1362,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/EvoRadio/Resources/EvoRadio-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1090,7 +1391,7 @@
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/EvoRadio/Resources/EvoRadio-Bridging-Header.h";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -1098,6 +1399,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		630BB627222822B60088B6D7 /* Build configuration list for PBXNativeTarget "EvoRadioMac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				630BB623222822B60088B6D7 /* Debug */,
+				630BB624222822B60088B6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		630BB628222822B60088B6D7 /* Build configuration list for PBXNativeTarget "EvoRadioMacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				630BB625222822B60088B6D7 /* Debug */,
+				630BB626222822B60088B6D7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		634E066B1F3869F400253E9A /* Build configuration list for PBXNativeTarget "EvoRadioTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
