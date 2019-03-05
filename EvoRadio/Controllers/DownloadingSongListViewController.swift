@@ -70,14 +70,14 @@ class DownloadingSongListViewController: ViewController {
         toolBar.addSubview(leftButton)
         leftButton.titleLabel?.font = UIFont.size12()
         leftButton.backgroundColor = UIColor.grayColor1C()
-        leftButton.setTitle("Pause All", for: UIControlState())
+        leftButton.setTitle("Pause All", for: UIControl.State())
         leftButton.addTarget(self, action: #selector(DownloadingSongListViewController.leftButtonPressed), for: .touchUpInside)
         
         let rightButton = UIButton()
         toolBar.addSubview(rightButton)
         rightButton.titleLabel?.font = UIFont.size12()
         rightButton.backgroundColor = UIColor.grayColor1C()
-        rightButton.setTitle("Clear All", for: UIControlState())
+        rightButton.setTitle("Clear All", for: .normal)
         rightButton.addTarget(self, action: #selector(DownloadingSongListViewController.rightButtonPressed), for: .touchUpInside)
         
         leftButton.snp.makeConstraints { (make) in
@@ -115,7 +115,7 @@ class DownloadingSongListViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints({(make) in
             make.left.equalTo(view.snp.left)
@@ -141,7 +141,7 @@ class DownloadingSongListViewController: ViewController {
     }
     
     //MARK: events
-    func downloadingListChanged(_ notification: Notification) {
+    @objc func downloadingListChanged(_ notification: Notification) {
         if let userInfo = notification.userInfo {
 
             let songs = userInfo["songs"] as! [Song]
@@ -156,7 +156,7 @@ class DownloadingSongListViewController: ViewController {
         }
     }
     
-    func leftButtonPressed() {
+    @objc func leftButtonPressed() {
         
         if Downloader.downloadingSongs.count == 0 {
             return
@@ -164,7 +164,7 @@ class DownloadingSongListViewController: ViewController {
         
         if checkAllTaskIsPaused() {
             print(">>> Start all download task")
-            leftButton.setTitle("Pause All", for: UIControlState())
+            leftButton.setTitle("Pause All", for: UIControl.State())
             
             for i in 0..<Downloader.downloadingSongs.count {
                 let songInfo = Downloader.downloadingSongs[i]
@@ -176,7 +176,7 @@ class DownloadingSongListViewController: ViewController {
             autoStartNextTask()
         }else {
             print(">>> Pause all download task")
-            leftButton.setTitle("Start All", for: UIControlState())
+            leftButton.setTitle("Start All", for: UIControl.State())
             
             for i in 0..<Downloader.downloadingSongs.count {
                 let songInfo = Downloader.downloadingSongs[i]
@@ -193,7 +193,7 @@ class DownloadingSongListViewController: ViewController {
         }
     }
     
-    func rightButtonPressed() {
+    @objc func rightButtonPressed() {
         self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在下载的歌曲吗？", DestructiveTitle: "确定") { (action) in
             
             self.downloadManager.cancelAllTasks()
@@ -219,9 +219,9 @@ class DownloadingSongListViewController: ViewController {
         }
         
         if isAllTaskPaused {
-            leftButton.setTitle("Start All", for: UIControlState())
+            leftButton.setTitle("Start All", for: .normal)
         }else {
-            leftButton.setTitle("Pause All", for: UIControlState())
+            leftButton.setTitle("Pause All", for: .normal)
         }
         
         return isAllTaskPaused

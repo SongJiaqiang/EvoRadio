@@ -44,19 +44,19 @@ class ScrollTabBar: UIView {
         
         addSubview(sortView)
         sortView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 2, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 2, right: 0))
         }
         
         let count = titles!.count
         for i in 0..<count {
             let button = UIButton()
-            button.setTitleColor(UIColor.grayColorBF(), for: UIControlState())
+            button.setTitleColor(UIColor.grayColorBF(), for: .normal)
             button.setTitleColor(UIColor.goldColor(), for: .selected)
             button.titleLabel?.font = UIFont.size14()
             let title = titles![i].replacingOccurrences(of: "电台", with: "")
-            button.setTitle(title, for: UIControlState())
+            button.setTitle(title, for: .normal)
             button.tag = i
-            button.addTarget(self, action: #selector(ScrollTabBar.sortButtonPressed(_:)), for: .touchUpInside)
+            button.addTarget(self, action: #selector(sortButtonPressed(_:)), for: .touchUpInside)
             sortView.addSubview(button)
             
             button.snp.makeConstraints { (make) in
@@ -91,7 +91,7 @@ class ScrollTabBar: UIView {
     
     
     
-    func sortButtonPressed(_ button: UIButton) {
+    @objc func sortButtonPressed(_ button: UIButton) {
         
         delegate?.scrollTabBar(self, didSelectedItemIndex: button.tag)
         
@@ -101,7 +101,7 @@ class ScrollTabBar: UIView {
     func updateTitles(_ titles: [String]){
         for i in 0..<itemButtons.count {
             let title = titles[i].replacingOccurrences(of: "电台", with: "")
-            itemButtons[i].setTitle(title, for: UIControlState())
+            itemButtons[i].setTitle(title, for: .normal)
         }
     }
     

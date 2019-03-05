@@ -33,7 +33,7 @@ class PlayerView: UIView {
         prepareUI()
         
         progressTimer = Timer(timeInterval: 1, target: self, selector: #selector(PlayerView.progressHandle), userInfo: nil, repeats: true)
-        RunLoop.current.add(progressTimer, forMode: RunLoopMode.commonModes)
+        RunLoop.current.add(progressTimer, forMode: .common)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -83,7 +83,7 @@ class PlayerView: UIView {
         }
         
         contentView.addSubview(nextButton)
-        nextButton.setImage(UIImage(named: "player_next"), for: UIControlState())
+        nextButton.setImage(UIImage(named: "player_next"), for: .normal)
         nextButton.setImage(UIImage(named: "player_next_pressed"), for: .highlighted)
         nextButton.addTarget(self, action: #selector(PlayerView.nextButtonPressed(_:)), for: .touchUpInside)
         nextButton.snp.makeConstraints { (make) in
@@ -94,7 +94,7 @@ class PlayerView: UIView {
         }
         
         contentView.addSubview(playButton)
-        playButton.setImage(UIImage(named: "player_play"), for: UIControlState())
+        playButton.setImage(UIImage(named: "player_play"), for: .normal)
         playButton.setImage(UIImage(named: "player_play_pressed"), for: .highlighted)
         playButton.addTarget(self, action: #selector(PlayerView.playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
@@ -154,14 +154,14 @@ class PlayerView: UIView {
         }
         
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(PlayerView.handleTap(_:)))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTap(_:)))
         addGestureRecognizer(tap)
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(PlayerView.handleLongPress(_:)))
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(_:)))
         addGestureRecognizer(longPress)
         
-        NotificationManager.shared.addPlayMusicProgressStartedObserver(self, action: #selector(PlayerView.playMusicProgressStarted(_:)))
-        NotificationManager.shared.addPlayMusicProgressPausedObserver(self, action: #selector(PlayerView.playMusicProgressPaused(_:)))
-        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(PlayerView.updatePlayer))
+        NotificationManager.shared.addPlayMusicProgressStartedObserver(self, action: #selector(playMusicProgressStarted(_:)))
+        NotificationManager.shared.addPlayMusicProgressPausedObserver(self, action: #selector(playMusicProgressPaused(_:)))
+        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(updatePlayer))
     }
     
     
@@ -176,7 +176,7 @@ class PlayerView: UIView {
     }
     
     //MARK: events
-    func playButtonPressed(_ button: UIButton) {
+    @objc func playButtonPressed(_ button: UIButton) {
         guard let _ = MusicManager.shared.currentSong() else{
             return
         }
@@ -189,12 +189,12 @@ class PlayerView: UIView {
         }
     }
     
-    func nextButtonPressed(_ button: UIButton) {
+    @objc func nextButtonPressed(_ button: UIButton) {
         MusicManager.shared.playNext()
     }
     
     
-    func handleTap(_ gesture: UIGestureRecognizer) {
+    @objc func handleTap(_ gesture: UIGestureRecognizer) {
         debugPrint("press player bar")
         
         if let _ = MusicManager.shared.currentSong() {
@@ -205,7 +205,7 @@ class PlayerView: UIView {
         }
     }
     
-    func handleLongPress(_ gesture: UIGestureRecognizer) {
+    @objc func handleLongPress(_ gesture: UIGestureRecognizer) {
         let touchPoint = gesture.location(in: self)
         
         let progess = touchPoint.x / Device.width()
@@ -226,18 +226,18 @@ class PlayerView: UIView {
     }
     
     
-    func playMusicProgressStarted(_ noti: Notification) {
-        playButton.setImage(UIImage(named: "player_paused"), for: UIControlState())
+    @objc func playMusicProgressStarted(_ noti: Notification) {
+        playButton.setImage(UIImage(named: "player_paused"), for: .normal)
         playButton.setImage(UIImage(named: "player_paused_pressed"), for: .highlighted)
     }
     
-    func playMusicProgressPaused(_ noti: Notification) {
+    @objc func playMusicProgressPaused(_ noti: Notification) {
         
-        playButton.setImage(UIImage(named: "player_play"), for: UIControlState())
+        playButton.setImage(UIImage(named: "player_play"), for: .normal)
         playButton.setImage(UIImage(named: "player_play_pressed"), for: .highlighted)
     }
     
-    func updatePlayer() {
+    @objc func updatePlayer() {
         if let song = MusicManager.shared.currentSong() {
             titleLabel.text = song.songName
             subTitleLabel.text = song.artistsName
@@ -261,7 +261,7 @@ class PlayerView: UIView {
         }
     }
     
-    func progressHandle() {
+    @objc func progressHandle() {
         let duration:Float = Float(MusicManager.shared.audioPlayer.duration)
         let timePlayed: Float = Float(MusicManager.shared.audioPlayer.progress)
         
@@ -280,16 +280,17 @@ class PlayerView: UIView {
     
     func show() {
         self.isHidden = false
-        UIView.animate(withDuration: 0.5, animations: {[weak self] Void in self?.alpha = 1 })
+        UIView.animate(withDuration: 0.5) {
+            self.alpha = 1
+        }
     }
     
     func hide() {
-        UIView.animate(withDuration: 0.5, animations: {[weak self] Void in
-            self?.alpha = 0
-            
-            }, completion: {[weak self] Void in
-            self?.isHidden = true
-        })
+        UIView.animate(withDuration: 0.5, animations: {
+            self.alpha = 0
+        }) { (result) in
+            self.isHidden = true
+        }
     }
     
 }

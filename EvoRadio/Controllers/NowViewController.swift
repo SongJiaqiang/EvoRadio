@@ -53,7 +53,7 @@ class NowViewController: ViewController {
         let itemH: CGFloat = itemW + 30
         
         layout.itemSize = CGSize(width: itemW, height: itemH)
-        layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout.minimumInteritemSpacing = margin
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -61,12 +61,12 @@ class NowViewController: ViewController {
         collectionView!.delegate = self
         collectionView!.dataSource = self
         collectionView!.register(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
-        collectionView!.register(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerViewID)
-        collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: footerViewID)
+        collectionView!.register(NowCollectionHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerViewID)
+        collectionView!.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: footerViewID)
         
         collectionView!.backgroundColor = UIColor.clear
         collectionView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         
 //        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(NowViewController.headerRefresh))
@@ -77,7 +77,7 @@ class NowViewController: ViewController {
     
     
     //MARK: events
-    func clockViewPressed() {
+    @objc func clockViewPressed() {
         SelectiveTimePanel.timePanel.show()
     }
     
@@ -109,7 +109,7 @@ class NowViewController: ViewController {
         listGroundPrograms(true)
     }
     
-    func footerRefresh() {
+    @objc func footerRefresh() {
         if endOfFeed {
             collectionView!.mj_footer.endRefreshing()
         }else {
@@ -211,7 +211,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if kind == UICollectionElementKindSectionHeader {
+        if kind == UICollectionView.elementKindSectionHeader {
             if let headerView = collectionHeaderView {
                 return headerView
             }

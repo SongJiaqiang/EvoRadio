@@ -12,7 +12,7 @@ extension UIViewController {
     
     func addChildController(_ childController: UIViewController, toView: UIView?) {
         
-        addChildViewController(childController)
+        addChild(childController)
         
         if let _ = toView {
             toView?.addSubview(childController.view)

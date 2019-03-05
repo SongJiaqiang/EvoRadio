@@ -26,7 +26,7 @@ class RadioTableViewCell: UITableViewCell {
     
     var delegate: RadioTableViewCellDelegate?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         backgroundColor = UIColor.clear
@@ -58,11 +58,11 @@ class RadioTableViewCell: UITableViewCell {
         
         let moreButton = UIButton()
         contentView.addSubview(moreButton)
-        moreButton.setTitleColor(UIColor.white, for: UIControlState())
-        moreButton.setTitle("More", for: UIControlState())
+        moreButton.setTitleColor(UIColor.white, for: .normal)
+        moreButton.setTitle("More", for: .normal)
         moreButton.titleLabel?.font = UIFont.size10()
         moreButton.frame = CGRect(x: Device.width()-itemWidth/2, y: 10, width: itemWidth/2, height: itemWidth)
-        moreButton.setBackgroundImage(UIImage(named: "gradient_white"), for: UIControlState())
+        moreButton.setBackgroundImage(UIImage(named: "gradient_white"), for: .normal)
         moreButton.addTarget(self, action: #selector(RadioTableViewCell.moreButtonPressed(_:)), for: .touchUpInside)
         
     }
@@ -100,7 +100,7 @@ class RadioTableViewCell: UITableViewCell {
     }
     
     //MARK: events
-    func moreButtonPressed(_ button: UIButton) {
+    @objc func moreButtonPressed(_ button: UIButton) {
         if let _ = delegate {
             if let radioId = radio!.radioID {
                 delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId)
@@ -108,7 +108,7 @@ class RadioTableViewCell: UITableViewCell {
         }
     }
     
-    func selectItem(_ button: UIButton) {
+    @objc func selectItem(_ button: UIButton) {
         if let _ = delegate {
             if let channels = radio!.channels {
                 delegate?.radioTableViewCell(self, didSelectedItem: channels[button.tag])
