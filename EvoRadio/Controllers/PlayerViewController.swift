@@ -90,7 +90,7 @@ class PlayerViewController: ViewController {
         prepareNavigationBar()
         prepareTableView()
 
-        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(PlayerViewController.updatePlayer(_:)))
+        NotificationManager.shared.addUpdatePlayerObserver(self, action: #selector(updatePlayer(_:)))
         
     }
     
@@ -202,7 +202,7 @@ class PlayerViewController: ViewController {
 //        let infoButton = UIButton()
 //        toolsView.addSubview(infoButton)
 //        infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
-//        infoButton.addTarget(self, action: #selector(PlayerViewController.infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
+//        infoButton.addTarget(self, action: #selector(infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
 //        infoButton.snp.makeConstraints { (make) in
 //            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
 //            make.center.equalTo(toolsView.center)
@@ -211,7 +211,7 @@ class PlayerViewController: ViewController {
         toolsView.addSubview(timerButton)
         timerButton.setImage(UIImage(named: "player_timer"), for: .normal)
         timerButton.setImage(UIImage(named: "player_timer_selected"), for: .selected)
-        timerButton.addTarget(self, action: #selector(PlayerViewController.timerButtonPressed(_:)), for: .touchUpInside)
+        timerButton.addTarget(self, action: #selector(timerButtonPressed(_:)), for: .touchUpInside)
         timerButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
             make.center.equalTo(toolsView.snp.center)
@@ -302,6 +302,8 @@ class PlayerViewController: ViewController {
         progressSlider.setThumbImage(UIImage(named: "dot_white")!, for: .normal)
         progressSlider.tintColor = UIColor.goldColor()
         progressSlider.addTarget(self, action: #selector(progressSliderChanged(_:)), for: .valueChanged)
+        progressSlider.addTarget(self, action: #selector(progressSliderTouchEnd(_:)), for: .touchUpInside)
+        progressSlider.addTarget(self, action: #selector(progressSliderTouchEnd(_:)), for: .touchUpOutside)
         progressSlider.snp.makeConstraints { (make) in
             make.height.equalTo(20)
             make.left.equalTo(controlView.snp.left).inset(50)
@@ -343,7 +345,7 @@ class PlayerViewController: ViewController {
         
         let emptyButton = UIButton()
         playlistContentView.addSubview(emptyButton)
-        emptyButton.addTarget(self, action: #selector(PlayerViewController.emptyButtonPressed(_:)), for: .touchUpInside)
+        emptyButton.addTarget(self, action: #selector(emptyButtonPressed(_:)), for: .touchUpInside)
         emptyButton.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets.zero)
         }
@@ -496,7 +498,7 @@ class PlayerViewController: ViewController {
                 button.isSelected = true
                 self.leftTime = 600
                 if self.autoStopTimer == nil {
-                    self.autoStopTimer = Timer(timeInterval: 5, target: self, selector: #selector(PlayerViewController.autoStopHandle), userInfo: nil, repeats: true)
+                    self.autoStopTimer = Timer(timeInterval: 5, target: self, selector: #selector(self.autoStopHandle), userInfo: nil, repeats: true)
                     RunLoop.main.add(self.autoStopTimer!, forMode: .common)
                 }
                 
@@ -527,6 +529,12 @@ class PlayerViewController: ViewController {
     }
     
     @objc func progressSliderChanged(_ slider: UISlider) {
+        print(">> selected value: \(slider.value)")
+//        let timePlayed = slider.value
+//        MusicManager.shared.playAtSecond(Int(timePlayed))
+    }
+    
+    @objc func progressSliderTouchEnd(_ slider: UISlider) {
         let timePlayed = slider.value
         MusicManager.shared.playAtSecond(Int(timePlayed))
     }
@@ -656,7 +664,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         downloadButton.clipsToBounds = true
         downloadButton.layer.cornerRadius = 15
         downloadButton.setTitle("Download All", for: .normal)
-        downloadButton.addTarget(self, action: #selector(PlayerViewController.downloadAllButtonPressed(_:)), for: .touchUpInside)
+        downloadButton.addTarget(self, action: #selector(downloadAllButtonPressed(_:)), for: .touchUpInside)
         downloadButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 100, height: 30))
             make.centerY.equalTo(headerView.snp.centerY)
@@ -670,7 +678,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
         clearButton.setTitle("Clear All", for: .normal)
-        clearButton.addTarget(self, action: #selector(PlayerViewController.clearAllButtonPressed(_:)), for: .touchUpInside)
+        clearButton.addTarget(self, action: #selector(clearAllButtonPressed(_:)), for: .touchUpInside)
         clearButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 100, height: 30))
             make.centerY.equalTo(headerView.snp.centerY)
