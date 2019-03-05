@@ -27,7 +27,6 @@ class PlayerViewController: ViewController {
     let nextButton = UIButton()
     let prevButton = UIButton()
     let loopButton = UIButton()
-    let timerButton = UIButton()
     let titleLabel = UILabel()
     let subTitleLabel = UILabel()
     let playlistTableView = UITableView(frame: CGRect.zero, style: .grouped)
@@ -37,11 +36,12 @@ class PlayerViewController: ViewController {
     var progressTimer: Timer?
     var autoStopTimer: Timer?
     var leftTime: TimeInterval = 3600
+    var isTimeDown: Bool = false
     
     var coverRotateAnimation: CABasicAnimation?;
     
     //MARK: instance
-    open static let mainController = PlayerViewController()
+    static let mainController = PlayerViewController()
     
     override var preferredStatusBarStyle : UIStatusBarStyle {
         return .lightContent
@@ -183,6 +183,16 @@ class PlayerViewController: ViewController {
             make.leftMargin.equalTo(10)
             make.bottomMargin.equalTo(-2)
         }
+        
+        let menuButton = UIButton()
+        navBar.addSubview(menuButton)
+        menuButton.setImage(UIImage(named: "topbar_menu"), for: UIControl.State())
+        menuButton.addTarget(self, action: #selector(menuButtonPressed), for: .touchUpInside)
+        menuButton.snp.makeConstraints { (make) in
+            make.size.equalTo(CGSize(width: 40, height: 40))
+            make.rightMargin.equalTo(-10)
+            make.bottomMargin.equalTo(-2)
+        }
   
     }
 
@@ -199,24 +209,6 @@ class PlayerViewController: ViewController {
             make.bottom.equalTo(view.snp.bottom)
         }
         
-//        let infoButton = UIButton()
-//        toolsView.addSubview(infoButton)
-//        infoButton.setImage(UIImage(named: "player_info"), forState: .Normal)
-//        infoButton.addTarget(self, action: #selector(infoButtonPressed(_:)), forControlEvents: .TouchUpInside)
-//        infoButton.snp.makeConstraints { (make) in
-//            make.size.equalTo(CGSizeMake(itemWidth, itemWidth))
-//            make.center.equalTo(toolsView.center)
-//        }
-        
-        toolsView.addSubview(timerButton)
-        timerButton.setImage(UIImage(named: "player_timer"), for: .normal)
-        timerButton.setImage(UIImage(named: "player_timer_selected"), for: .selected)
-        timerButton.addTarget(self, action: #selector(timerButtonPressed(_:)), for: .touchUpInside)
-        timerButton.snp.makeConstraints { (make) in
-            make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
-            make.center.equalTo(toolsView.snp.center)
-        }
-        
         let downloadButton = UIButton()
         toolsView.addSubview(downloadButton)
         downloadButton.setImage(UIImage(named: "player_download"), for: .normal)
@@ -225,17 +217,17 @@ class PlayerViewController: ViewController {
         downloadButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
             make.centerY.equalTo(toolsView.snp.centerY)
-            make.right.equalTo(timerButton.snp.left)
+            make.right.equalTo(toolsView.snp.centerX)
         }
         
-        let shareButton = UIButton()
-        toolsView.addSubview(shareButton)
-        shareButton.setImage(UIImage(named: "player_share"), for: .normal)
-        shareButton.addTarget(self, action: #selector(shareButtonPressed(_:)), for: .touchUpInside)
-        shareButton.snp.makeConstraints { (make) in
+        let loveButton = UIButton()
+        toolsView.addSubview(loveButton)
+        loveButton.setImage(UIImage(named: "collect_music"), for: .normal)
+        loveButton.addTarget(self, action: #selector(loveButtonPressed(_:)), for: .touchUpInside)
+        loveButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
             make.centerY.equalTo(toolsView.snp.centerY)
-            make.left.equalTo(timerButton.snp.right)
+            make.left.equalTo(toolsView.snp.centerX)
         }
         
         toolsView.addSubview(loopButton)
@@ -254,7 +246,7 @@ class PlayerViewController: ViewController {
         listButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: itemWidth, height: itemWidth))
             make.centerY.equalTo(toolsView.snp.centerY)
-            make.left.equalTo(shareButton.snp.right)
+            make.left.equalTo(loveButton.snp.right)
         }
 
         loadDefaultData()
@@ -424,7 +416,17 @@ class PlayerViewController: ViewController {
         coverImageView.layer.removeAllAnimations()
         coverRotateAnimation = nil
     }
-    
+
+    @objc func loveButtonPressed(_ button: UIButton) {
+        guard let cSong = MusicManager.shared.currentSong() else {
+            print("Current music is empty")
+            return
+        }
+        
+        CoreDB.addMusicToCollectList(cSong)
+        HudManager.showText("收藏成功", inView: self.view)
+    }
+
     @objc func loopButtonPressed(_ button: UIButton) {
         var imageAssetName: String
         var showText: String
@@ -455,17 +457,16 @@ class PlayerViewController: ViewController {
     
     @objc func downloadButtonPressed(_ button: UIButton) {
         if let cSong = MusicManager.shared.currentSong() {
-//            CoreDB.addSongToDownloadingList(cSong)
-//            button.selected = true
+            CoreDB.addSongToDownloadingList(cSong)
+            button.isSelected = true
             DispatchQueue.main.async {
                 HudManager.showText("已经加入下载列表")
             }
         }
     }
-    
-    @objc func shareButtonPressed(_ button: UIButton) {
+
+    @objc func shareButtonPressed() {
         if let currentSong = MusicManager.shared.currentSong() {
-            
             let link = URL(string: currentSong.audioURL!)
             let message = String(format: "EvoRadio请您欣赏：%@", currentSong.songName)
             
@@ -484,9 +485,24 @@ class PlayerViewController: ViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
-    @objc func timerButtonPressed(_ button: UIButton) {
-        if button.isSelected {
-            button.isSelected = false
+    @objc func menuButtonPressed() {
+        let alertController = UIAlertController(title: "更多功能", message: nil, preferredStyle: .actionSheet)
+        let shareAction = UIAlertAction(title: "分享音乐", style: .default) { (action) in
+            self.shareButtonPressed()
+        }
+        let timerAction = UIAlertAction(title: "定时停止", style: .default) { (action) in
+            self.timerButtonPressed()
+        }
+        let cancelAction = UIAlertAction(title: "关闭", style: .cancel, handler: nil)
+        alertController.addAction(shareAction)
+        alertController.addAction(timerAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    @objc func timerButtonPressed() {
+        if isTimeDown {
+            isTimeDown = false
             if let _ = autoStopTimer {
                 autoStopTimer?.invalidate()
                 autoStopTimer = nil
@@ -495,7 +511,7 @@ class PlayerViewController: ViewController {
         }else {
             let alertController = UIAlertController(title: "设置自动停止播放时间", message: nil, preferredStyle: .actionSheet)
             let action1 = UIAlertAction(title: "10 minutes", style: .default, handler: { (action) in
-                button.isSelected = true
+                self.isTimeDown = true
                 self.leftTime = 600
                 if self.autoStopTimer == nil {
                     self.autoStopTimer = Timer(timeInterval: 5, target: self, selector: #selector(self.autoStopHandle), userInfo: nil, repeats: true)
@@ -504,15 +520,15 @@ class PlayerViewController: ViewController {
                 
             })
             let action2 = UIAlertAction(title: "15 minutes", style: .default, handler: { (action) in
-                button.isSelected = true
+                self.isTimeDown = true
                 self.leftTime = 900
             })
             let action3 = UIAlertAction(title: "30 minutes", style: .default, handler: { (action) in
-                button.isSelected = true
+                self.isTimeDown = true
                 self.leftTime = 1800
             })
             let action4 = UIAlertAction(title: "1 hour", style: .default, handler: { (action) in
-                button.isSelected = true
+                self.isTimeDown = true
                 self.leftTime = 3600
             })
             let cancelAction = UIAlertAction(title: "取消", style: .cancel, handler: nil)
@@ -555,7 +571,7 @@ class PlayerViewController: ViewController {
             autoStopTimer = nil
             
             MusicManager.shared.pause()
-            timerButton.isSelected = false
+//            timerButton.isSelected = false
         }
     }
     
