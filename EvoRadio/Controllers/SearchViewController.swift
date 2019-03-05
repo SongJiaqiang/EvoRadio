@@ -72,7 +72,7 @@ class SearchViewController: ViewController {
         tableView.dataSource = self
         tableView.register(SimpleTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle  = .none
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in

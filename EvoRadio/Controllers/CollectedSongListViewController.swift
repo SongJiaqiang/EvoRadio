@@ -44,7 +44,7 @@ class CollectedSongListViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints({(make) in
             make.edges.equalTo(UIEdgeInsets.zero)
@@ -93,7 +93,7 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
         playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
-        playButton.setTitle("Play All", for: UIControlState())
+        playButton.setTitle("Play All", for: UIControl.State())
         playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 80, height: 30))
@@ -107,7 +107,7 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
         clearButton.backgroundColor = UIColor.grayColor1C()
         clearButton.clipsToBounds = true
         clearButton.layer.cornerRadius = 15
-        clearButton.setTitle("Clear", for: UIControlState())
+        clearButton.setTitle("Clear", for: .normal)
         clearButton.addTarget(self, action: #selector(clearButtonPressed(_:)), for: .touchUpInside)
         clearButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 60, height: 30))
@@ -149,7 +149,7 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
-    func playButtonPressed(_ button: UIButton) {
+    @objc func playButtonPressed(_ button: UIButton) {
         if let songs = CoreDB.getCollectedMusics() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
@@ -158,7 +158,7 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
         }
     }
     
-    func clearButtonPressed(_ button: UIButton) {
+    @objc func clearButtonPressed(_ button: UIButton) {
         CoreDB.clearCollectedSongs()
         dataSource.removeAll()
         tableView.reloadData()

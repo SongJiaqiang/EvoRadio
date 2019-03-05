@@ -25,7 +25,7 @@ class ClockView: UIControl {
         timerHandler()
         
         timer = Timer(timeInterval: 30, target: self, selector: #selector(timerHandler), userInfo: nil, repeats: true)
-        RunLoop.current.add(timer!, forMode: RunLoopMode.commonModes)
+        RunLoop.current.add(timer!, forMode: .common)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,7 +76,7 @@ class ClockView: UIControl {
         lineView.backgroundColor = UIColor.grayColor1C()   
     }
     
-    func timerHandler() {
+    @objc func timerHandler() {
         let formatter = DateFormatter()
         formatter.timeStyle = .medium
         formatter.dateFormat = "EEEE-HH:mm"

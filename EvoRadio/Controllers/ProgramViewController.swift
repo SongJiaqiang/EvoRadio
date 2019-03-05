@@ -46,7 +46,7 @@ class ProgramViewController: ViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(ProgramViewController.goBack), for: .touchUpInside)
+        AssistiveTouch.shared.addTarget(self, action: #selector(goBack), for: .touchUpInside)
         AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
     }
     
@@ -59,7 +59,7 @@ class ProgramViewController: ViewController {
         let itemH: CGFloat = itemW + 30
         
         layout.itemSize = CGSize(width: itemW, height: itemH)
-        layout.sectionInset = UIEdgeInsetsMake(margin, margin, margin, margin)
+        layout.sectionInset = UIEdgeInsets(top: margin, left: margin, bottom: margin, right: margin)
         layout.minimumInteritemSpacing = margin
         
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
@@ -69,27 +69,27 @@ class ProgramViewController: ViewController {
         collectionView!.register(ProgramCollectionViewCell.self, forCellWithReuseIdentifier: cellID)
         collectionView!.backgroundColor = UIColor.clear
         collectionView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         
-        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.headerRefresh))
-        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(ProgramViewController.footerRefresh))
-//        collectionView!.mj_footer.isAutomaticallyHidden = true
+        collectionView!.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(headerRefresh))
+        collectionView!.mj_footer = MJRefreshAutoNormalFooter(refreshingTarget: self, refreshingAction: #selector(footerRefresh))
+        //        collectionView!.mj_footer.isAutomaticallyH@objc idden = true
         
         
         if showHeaderView {
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
-            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, withReuseIdentifier: "footerView")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ProgramCollectionHeaderView")
+            collectionView?.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footerView")
         }
 
     }
 
     //MARK events
-    func headerRefresh() {
+    @objc func headerRefresh() {
         listChannelPrograms(true)
     }
     
-    func footerRefresh() {
+    @objc func footerRefresh() {
         if endOfFeed {
             collectionView!.mj_footer.endRefreshing()
         }else {

@@ -85,7 +85,7 @@ extension UIImage {
         if memorySize < 1 {
             return self
         }
-        let imageData = UIImageJPEGRepresentation(self, 0.8)
+        let imageData = jpegData(compressionQuality: 0.8)
         if imageData?.count < memorySize*1000 {
             return UIImage(data: imageData!)!
         }else {
@@ -245,7 +245,7 @@ extension UIImage {
         let path = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(imageName)
         
         // storage image
-        let data = UIImageJPEGRepresentation(self, 0.9)
+        let data = jpegData(compressionQuality: 0.9)
         try? data?.write(to: path, options: [.atomic])
         
         return path.path

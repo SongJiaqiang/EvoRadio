@@ -88,7 +88,7 @@ class SongListViewController: ViewController {
 //            coverImageView.image = UIImage.placeholder_cover()
 //        }
         coverImageView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         
         tableView.tableHeaderView = headerView
@@ -150,7 +150,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         playButton.backgroundColor = UIColor.grayColor1C()
         playButton.clipsToBounds = true
         playButton.layer.cornerRadius = 15
-        playButton.setTitle("Play All", for: UIControlState())
+        playButton.setTitle("Play All", for: .normal)
         playButton.addTarget(self, action: #selector(playButtonPressed(_:)), for: .touchUpInside)
         playButton.snp.makeConstraints { (make) in
 //            make.size.equalTo(CGSize(width: 80, height: 30))
@@ -165,7 +165,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         downloadButton.backgroundColor = UIColor.grayColor1C()
         downloadButton.clipsToBounds = true
         downloadButton.layer.cornerRadius = 15
-        downloadButton.setTitle("Download All", for: UIControlState())
+        downloadButton.setTitle("Download All", for: .normal)
         downloadButton.addTarget(self, action: #selector(downloadButtonPressed(_:)), for: .touchUpInside)
         downloadButton.snp.makeConstraints { (make) in
 //            make.size.equalTo(CGSize(width: 60, height: 30))
@@ -208,7 +208,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         present(PlayerViewController.mainController, animated: true, completion: nil)
     }
     
-    func playButtonPressed(_ button: UIButton) {
+    @objc func playButtonPressed(_ button: UIButton) {
         if dataSources.count > 0 {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(dataSources, autoPlay: true)
@@ -219,7 +219,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-    func downloadButtonPressed(_ button: UIButton) {
+    @objc func downloadButtonPressed(_ button: UIButton) {
         CoreDB.addSongsToDownloadingList(self.dataSources)
         NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
         

@@ -19,7 +19,7 @@ class DownloadedTableViewCell: UITableViewCell {
     
     var song: Song?
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let v = UIView()
@@ -52,7 +52,7 @@ class DownloadedTableViewCell: UITableViewCell {
         
         moreButton = UIButton()
         contentView.addSubview(moreButton)
-        moreButton.setImage(UIImage(named: "cell_more"), for: UIControlState())
+        moreButton.setImage(UIImage(named: "cell_more"), for: .normal)
         moreButton.clipsToBounds = true
         moreButton.layer.cornerRadius = 10
         moreButton.layer.borderColor = UIColor.grayColorBF().cgColor
@@ -99,7 +99,7 @@ class DownloadedTableViewCell: UITableViewCell {
     }
     
     //MARK: events
-    func moreButtonPressed(_ button: UIButton) {
+    @objc func moreButtonPressed(_ button: UIButton) {
         if let _ = song {
             delegate?.openToolPanelOfSong(song!)
         }

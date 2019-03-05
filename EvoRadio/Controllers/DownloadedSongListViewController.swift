@@ -38,7 +38,7 @@ class DownloadedSongListViewController: ViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.clear
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.separatorStyle = .none
         tableView.snp.makeConstraints({(make) in
             make.edges.equalTo(UIEdgeInsets.zero)
@@ -57,7 +57,7 @@ class DownloadedSongListViewController: ViewController {
     }
 
     //MARK: events 
-    func downloadASongFinished(_ noti: Notification) {
+    @objc func downloadASongFinished(_ noti: Notification) {
         loadDataSource()
         
         NotificationCenter.default.post(name: .updateDownloadCount, object: nil)
@@ -88,14 +88,14 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         headerView.addSubview(leftButton)
         leftButton.titleLabel?.font = UIFont.size12()
         leftButton.backgroundColor = UIColor.grayColor1C()
-        leftButton.setTitle("Play All", for: UIControlState())
+        leftButton.setTitle("Play All", for: .normal)
         leftButton.addTarget(self, action: #selector(DownloadedSongListViewController.leftButtonPressed), for: .touchUpInside)
 
         let rightButton = UIButton()
         headerView.addSubview(rightButton)
         rightButton.titleLabel?.font = UIFont.size12()
         rightButton.backgroundColor = UIColor.grayColor1C()
-        rightButton.setTitle("Delete All", for: UIControlState())
+        rightButton.setTitle("Delete All", for: .normal)
         rightButton.addTarget(self, action: #selector(DownloadedSongListViewController.rightButtonPressed), for: .touchUpInside)
         
         leftButton.snp.makeConstraints { (make) in
@@ -157,7 +157,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-    func leftButtonPressed() {
+    @objc func leftButtonPressed() {
         print("Play all downloaded musics")
         
         if dataSource.count > 0 {
@@ -167,7 +167,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         }
     }
     
-    func rightButtonPressed() {
+    @objc func rightButtonPressed() {
         self.showDestructiveAlert(title: "⚠️危险操作", message: "确定删除所有正在已下载的歌曲吗？", DestructiveTitle: "确定") { (action) in
             self.dataSource.removeAll()
             self.tableView.reloadDataOnMainQueue(after: {

@@ -39,9 +39,9 @@ class RadioViewController: ViewController {
         tableView.register(RadioTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = UIColor.clear
         tableView.separatorStyle = .none
-        tableView.contentInset = UIEdgeInsetsMake(0, 0, playerBarHeight, 0)
+        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: playerBarHeight, right: 0)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
         
 //        tableView.mj_header = MJRefreshNormalHeader(refreshingTarget: self, refreshingAction: #selector(ChannelViewController.headerRefresh))

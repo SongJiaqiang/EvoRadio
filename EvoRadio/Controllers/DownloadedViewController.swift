@@ -39,7 +39,7 @@ class DownloadedViewController: ViewController {
             addChildController(songListController!, toView: view)
             if let _ = programListController {
                 programListController?.view.removeFromSuperview()
-                programListController?.removeFromParentViewController()
+                programListController?.removeFromParent()
             }
         }else {
             if programListController == nil {
@@ -48,7 +48,7 @@ class DownloadedViewController: ViewController {
             addChildController(programListController!, toView: view)
             if let _ = songListController {
                 songListController?.view.removeFromSuperview()
-                songListController?.removeFromParentViewController()
+                songListController?.removeFromParent()
             }
         }
     }

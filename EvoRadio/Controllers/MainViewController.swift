@@ -102,7 +102,7 @@ class MainViewController: ViewController {
         
         playerView.addSubview(playerController.view)
         playerController.view.snp.makeConstraints { (make) in
-            make.edges.equalTo(UIEdgeInsetsMake(0, 0, 0, 0))
+            make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
 //        
 //        playerBar = PlayerBar()
@@ -143,7 +143,7 @@ class MainViewController: ViewController {
     
     //MARK: event
     
-    func showMenu() {
+    @objc func showMenu() {
         print("Show top menu")
     }
     

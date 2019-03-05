@@ -19,7 +19,7 @@ class DownloadingTableViewCell: UITableViewCell {
     var downloadSong: DownloadSongInfo?
     
     
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
         let v = UIView()
@@ -40,7 +40,7 @@ class DownloadingTableViewCell: UITableViewCell {
         
         deleteButton = UIButton()
         contentView.addSubview(deleteButton)
-        deleteButton.setImage(UIImage(named: "download_delete"), for: UIControlState())
+        deleteButton.setImage(UIImage(named: "download_delete"), for: .normal)
         deleteButton.addTarget(self, action: #selector(DownloadingTableViewCell.deleteButtonPressed(_:)), for: .touchUpInside)
         deleteButton.snp.makeConstraints { (make) in
             make.size.equalTo(CGSize(width: 30, height: 30))
@@ -137,7 +137,7 @@ class DownloadingTableViewCell: UITableViewCell {
         sizeLabel.text = NSString(format: "%.1fM/%.1fM", speed.received, speed.total) as String
     }
     
-    func deleteButtonPressed(_ button: UIButton) {
+    @objc func deleteButtonPressed(_ button: UIButton) {
         CoreDB.removeSongFromDownloadingList(downloadSong!)
     }
     

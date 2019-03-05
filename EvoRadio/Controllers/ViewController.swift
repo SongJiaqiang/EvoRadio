@@ -23,7 +23,7 @@ class ViewController: UIViewController {
         
         navigationController?.navigationBar.barTintColor = UIColor.grayColor12()
         navigationController?.navigationBar.tintColor = UIColor.white
-        navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
+        navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor : UIColor.white]
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -56,7 +56,7 @@ class ViewController: UIViewController {
     }
     
     func addChildViewController(_ childController: UIViewController, inView: UIView) {
-        addChildViewController(childController)
+        addChild(childController)
         inView.addSubview(childController.view)
         childController.view.frame = inView.bounds
     }
@@ -64,18 +64,18 @@ class ViewController: UIViewController {
     func addChildViewControllers(_ childControllers: [UIViewController], inView: UIView) {
         for i in 0..<childControllers.count {
             let controller = childControllers[i]
-            addChildViewController(controller)
+            addChild(controller)
             inView.addSubview(controller.view)
             controller.view.frame = CGRect(x: Device.width()*CGFloat(i), y: 0, width: inView.bounds.width, height: inView.bounds.height)
         }
     }
 
     func setupBackButton() {
-        let backItem = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: self, action: #selector(ViewController.goBack))
+        let backItem = UIBarButtonItem(image: UIImage(named: "nav_back"), style: .plain, target: self, action: #selector(goBack))
         navigationItem.leftBarButtonItem = backItem
     }
     
-    func goBack() {
+    @objc func goBack() {
         _ = navigationController?.popViewController(animated: true)
     }
     

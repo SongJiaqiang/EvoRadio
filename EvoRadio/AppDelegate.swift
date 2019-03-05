@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var backgroundSessionCompletionHandler: (() -> Void)?
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         Fabric.with([Crashlytics.self])
         
@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.addGestureRecognizer(tap)
     }
     
-    func onTwoFingerTouch() {
+    @objc func onTwoFingerTouch() {
         #if DEBUG
         FLEXManager.shared().showExplorer()
         #endif
@@ -80,7 +80,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func setupRemoteControl() {
         do {
-            try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayback)
+            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
         } catch let error as NSError {
             debugPrint("set category error: \(error)")
         }

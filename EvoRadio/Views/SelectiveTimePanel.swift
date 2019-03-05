@@ -77,21 +77,21 @@ class SelectiveTimePanel: UIView {
         addSubview(nowButton)
         nowButton.titleLabel?.font = UIFont.size14()
         nowButton.titleLabel?.textColor = UIColor.white
-        nowButton.setTitle("当前时刻", for: UIControlState())
+        nowButton.setTitle("当前时刻", for: .normal)
         nowButton.backgroundColor = UIColor.grayColor28()
         nowButton.addTarget(self, action: #selector(SelectiveTimePanel.nowButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(okButton)
         okButton.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         okButton.titleLabel?.textColor = UIColor.white
-        okButton.setTitle("确定", for: UIControlState())
+        okButton.setTitle("确定", for: .normal)
         okButton.backgroundColor = UIColor.goldColor()
         okButton.addTarget(self, action: #selector(SelectiveTimePanel.okButtonPressed(_:)), for: .touchUpInside)
         
         addSubview(randomButton)
         randomButton.titleLabel?.font = UIFont.size14()
         randomButton.titleLabel?.textColor = UIColor.white
-        randomButton.setTitle("随机时刻", for: UIControlState())
+        randomButton.setTitle("随机时刻", for: .normal)
         randomButton.backgroundColor = UIColor.grayColor28()
         randomButton.addTarget(self, action: #selector(SelectiveTimePanel.randomButtonPressed(_:)), for: .touchUpInside)
         
@@ -180,7 +180,7 @@ class SelectiveTimePanel: UIView {
             let button = UIButton()
             button.titleLabel?.font = UIFont.size12()
             button.titleLabel?.textColor = UIColor.white
-            button.setTitle(daysOfWeek[i], for: UIControlState())
+            button.setTitle(daysOfWeek[i], for: .normal)
             button.clipsToBounds = true
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
@@ -204,7 +204,7 @@ class SelectiveTimePanel: UIView {
             let button = UIButton()
             button.titleLabel?.font = UIFont.size12()
             button.titleLabel?.textColor = UIColor.white
-            button.setTitle(timesOfDay[i], for: UIControlState())
+            button.setTitle(timesOfDay[i], for: .normal)
             button.clipsToBounds = true
             button.layer.cornerRadius = 4
             button.layer.borderWidth = 1
@@ -227,17 +227,17 @@ class SelectiveTimePanel: UIView {
     }
 
     //MARK: event
-    func nowButtonPressed(_ button: UIButton) {
+    @objc func nowButtonPressed(_ button: UIButton) {
         selectButtonAtDaysIndex(CoreDB.currentDayOfWeek(), timeOfDayIndex: CoreDB.currentTimeOfDay())
     }
     
-    func randomButtonPressed(_ button: UIButton) {
+    @objc func randomButtonPressed(_ button: UIButton) {
         let d = arc4random_uniform(7)
         let t = arc4random_uniform(8)
         selectButtonAtDaysIndex(Int(d), timeOfDayIndex: Int(t))
     }
     
-    func okButtonPressed(_ button: UIButton) {
+    @objc func okButtonPressed(_ button: UIButton) {
 //        removeFromSuperview()
 
         hide()
@@ -248,7 +248,7 @@ class SelectiveTimePanel: UIView {
     }
     
     
-    func daysButtonPressed(_ button: UIButton) {
+    @objc func daysButtonPressed(_ button: UIButton) {
         selectedDayIndex = button.tag-10
         for btn in daysButtons {
             btn.isSelected = false
@@ -257,7 +257,7 @@ class SelectiveTimePanel: UIView {
         
     }
     
-    func timesButtonPressed(_ button: UIButton) {
+    @objc func timesButtonPressed(_ button: UIButton) {
         selectedTimeIndex = button.tag-20
         for btn in timesButtons {
             btn.isSelected = false
@@ -301,13 +301,14 @@ class SelectiveTimePanel: UIView {
             make.edges.equalTo(UIEdgeInsets.zero)
         }
         
-        UIView.animate(withDuration: 0.5, animations: { Void in
+        
+        UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 1
         })
     }
     
     open func hide() {
-        UIView.animate(withDuration: 0.5, animations: { Void in
+        UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
         }, completion: { completion in
             self.removeFromSuperview()

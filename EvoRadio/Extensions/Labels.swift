@@ -15,7 +15,7 @@ extension UILabel {
         }
         
         let textString = NSString(string: labelText)
-        let rect = textString.boundingRect(with: Device.size(), options: .usesLineFragmentOrigin, attributes: [NSFontAttributeName: self.font], context: nil)
+        let rect = textString.boundingRect(with: Device.size(), options: .usesLineFragmentOrigin, attributes: [.font: self.font], context: nil)
         
         return rect.size
     }
