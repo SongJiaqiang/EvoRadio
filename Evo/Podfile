@@ -1,0 +1,17 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Evo' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+
+  pod 'Alamofire'
+  pod 'LeanCloud'
+#  pod 'Tiercel', :git => 'https://github.com/Danie1s/Tiercel.git', :branch => 'dataTask'
+
+  target 'EvoTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end
