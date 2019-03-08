@@ -70,34 +70,42 @@ class ViewController: NSViewController {
                             let destination: DownloadRequest.DownloadFileDestination = { _, _ in
                                 return (songFileUrl!, [.removePreviousFile, .createIntermediateDirectories])
                             }
-                            Alamofire.download(audioUrl, to: destination).response { response in
-//                                print(response)
-                                
-                                if response.error == nil, let songPath = response.destinationURL?.path {
-                                    print("Download mp3 success: \(songPath)")
-                                    
-                                    self.songIndex += 1
-                                    if self.songIndex == self.currentSongs?.count {
-                                        self.songIndex = 0
-                                        self.programIndex += 1
-                                        if self.programIndex == self.currentPrograms?.count {
-                                            self.programIndex = 0
-                                            self.channelIndex += 1
-                                            if self.channelIndex == self.currentChannels?.count {
-                                                self.channelIndex = 0
-                                                self.radioIndex += 1
-                                                if self.radioIndex == radios.count {
-                                                    self.radioIndex = 0
-                                                    print("Download finished.")
-                                                }
+                            func inc() {
+                                self.songIndex += 1
+                                if self.songIndex == self.currentSongs?.count {
+                                    self.songIndex = 0
+                                    self.programIndex += 1
+                                    if self.programIndex == self.currentPrograms?.count {
+                                        self.programIndex = 0
+                                        self.channelIndex += 1
+                                        if self.channelIndex == self.currentChannels?.count {
+                                            self.channelIndex = 0
+                                            self.radioIndex += 1
+                                            if self.radioIndex == radios.count {
+                                                self.radioIndex = 0
+                                                print("Download finished.")
                                             }
                                         }
                                     }
-                                    self.download()
                                 }
-                                }.downloadProgress(closure: { (progress) in
-                                    print("progress: \(progress)")
-                                })
+                                self.download()
+                            }
+                            if FileManager.default.fileExists(atPath: (songFileUrl?.path)!) {
+                                inc()
+                            }else {
+                                Alamofire.download(audioUrl, to: destination).response { response in
+                                    if response.error == nil, let songPath = response.destinationURL?.path {
+                                        print("Download mp3 success: \(destination)")
+                                    } else {
+                                        print("Download mp3 failed: \(destination)")
+                                    }
+                                    
+                                    inc()
+                                    
+                                    }.downloadProgress(closure: { (progress) in
+                                        print("progress: \(progress)")
+                                    })
+                            }
                             
                         }
                         
