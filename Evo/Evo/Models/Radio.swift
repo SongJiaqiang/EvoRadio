@@ -6,7 +6,7 @@
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import Cocoa
+import Foundation
 import ObjectMapper
 
 class Radio: Mappable {
