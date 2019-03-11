@@ -40,8 +40,8 @@ class ViewController: NSViewController {
         programIndex = pIndex
         songIndex = sIndex
         
-//        radioIndex = 2
-//        channelIndex = 0
+//        radioIndex = 1
+//        channelIndex = 11
 //        programIndex = 0
 //        songIndex = 0
         
@@ -61,18 +61,12 @@ class ViewController: NSViewController {
         let manager = FileManager.default
         if let desktopDirectory = manager.urls(for: .desktopDirectory, in:.userDomainMask).first {
             var baseUrl = desktopDirectory
-//            baseUrl = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
+            baseUrl = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
             let evoUrl = createFolder("evo", baseUrl: baseUrl)
             
             if let radiosJSONFile = evoUrl?.appendingPathComponent("radios.json") {
                 if !FileManager.default.fileExists(atPath: radiosJSONFile.path) {
-                    let newRadios = radios.map { (r) -> Radio in
-                        let newR = Radio(JSON: [:])
-                        newR?.radioId = r.radioId
-                        newR?.radioName = r.radioName
-                        return newR!
-                    }
-                    let radiosJSON = newRadios.toJSONString()
+                    let radiosJSON = radios.toJSONString()
                     try! radiosJSON?.write(to: radiosJSONFile, atomically: true, encoding: .utf8)
                 }
             }
@@ -83,9 +77,8 @@ class ViewController: NSViewController {
             let radioFolderUrl = self.createFolder(radioFolderName, baseUrl: evoUrl!)
             radioLabel.stringValue = String(format: "电台：%@ (%d/%d)", radioFolderName, radioIndex, radios.count)
             
-            let currentChannels = radio.channels
-            if let channels = currentChannels {
-                let channel = channels[channelIndex]
+            func processChannels(_ channels: [Channel]) {
+                let channel = channels[self.channelIndex]
                 let channelFolderName = String(format: "%@_%@", channel.channelId!, channel.channelName!)
                 let channelFolderUrl = self.createFolder(channelFolderName, baseUrl: radioFolderUrl!)
                 channelLabel.stringValue = String(format: "频道：%@ (%d/%d)", channelFolderName, self.channelIndex, channels.count)
@@ -98,8 +91,8 @@ class ViewController: NSViewController {
                     }
                 }
                 
-                API.fetchPrograms(channelId: channel.channelId!) { (programs) in
-                    self.currentPrograms = programs
+                func processPrograms(_ programs: [Program]) {
+                    
                     let program = programs[self.programIndex]
                     let programFolderName = String(format: "%@_%@", program.programId!, program.programName!)
                     let programFolderUrl = self.createFolder(programFolderName, baseUrl: channelFolderUrl!)
@@ -113,8 +106,7 @@ class ViewController: NSViewController {
                         }
                     }
                     
-                    API.fetchSongs(programId: program.programId!, completion: { (songs) in
-                        self.currentSongs = songs
+                    func processSongs(_ songs: [Song]) {
                         let song = songs[self.songIndex]
                         if let audioURL = song.audioURL {
                             let songFileName = String(format: "%@_%@", song.songId!, song.songName!)
@@ -154,11 +146,43 @@ class ViewController: NSViewController {
                                     })
                             }
                         }
-                    })
+                    }
+                    
+                    if let songs = self.currentSongs, songs.count > 0 {
+                        processSongs(songs)
+                    } else {
+                        API.fetchSongs(programId: program.programId!, completion: { (songs) in
+                            self.currentSongs = songs
+                            processSongs(songs)
+                        })
+                    }
+                    
+                    
+                }
+                
+                if let programs = self.currentPrograms, programs.count > 0 {
+                    processPrograms(programs)
+                } else {
+                    API.fetchPrograms(channelId: channel.channelId!) { (programs) in
+                        self.currentPrograms = programs
+                        processPrograms(programs)
+                    }
+                }
+            }
+            
+            if let channels = self.currentChannels, channels.count > 0 {
+                processChannels(channels)
+                
+            } else {
+                if let channels = radio.channels {
+                    self.currentChannels = channels
+                    processChannels(channels)
                 }
             }
         }
     }
+    
+    
     
 //    func logInfo(text: String) {
 //        let attrString = logTextView.attributedString()
