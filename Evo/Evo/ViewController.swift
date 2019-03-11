@@ -11,11 +11,18 @@ import Alamofire
 
 class ViewController: NSViewController {
 
+    @IBOutlet weak var logTextView: NSTextView!
+    @IBOutlet weak var statusLabel: NSTextField!
+    @IBOutlet weak var radioLabel: NSTextField!
+    @IBOutlet weak var channelLabel: NSTextField!
+    @IBOutlet weak var programLabel: NSTextField!
+    @IBOutlet weak var songLabel: NSTextField!
+    @IBOutlet weak var downloadProgress: NSProgressIndicator!
+    
     var allRadios: [Radio]?
     var currentChannels:[Channel]?
     var currentPrograms:[Program]?
     var currentSongs:[Song]?
-    
     
     var radioIndex: Int = 0
     var channelIndex: Int = 0
@@ -24,14 +31,25 @@ class ViewController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        title = "Downloader"
+        
+        let (rIndex, cIndex, pIndex, sIndex) = fetchIndexesCache()
+        radioIndex = rIndex
+        channelIndex = cIndex
+        programIndex = pIndex
+        songIndex = sIndex
+        
+//        radioIndex = 2
+//        channelIndex = 0
+//        programIndex = 0
+//        songIndex = 0
+        
         API.fetchAllRadios { (radios) in
             self.allRadios = radios
-            
+
             self.download()
         }
-        
-
         
     }
 
@@ -42,93 +60,169 @@ class ViewController: NSViewController {
         // 创建基础目录
         let manager = FileManager.default
         if let desktopDirectory = manager.urls(for: .desktopDirectory, in:.userDomainMask).first {
-            let evoUrl = createFolder("evo", baseUrl: desktopDirectory)
+            var baseUrl = desktopDirectory
+//            baseUrl = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
+            let evoUrl = createFolder("evo", baseUrl: baseUrl)
+            
+            if let radiosJSONFile = evoUrl?.appendingPathComponent("radios.json") {
+                if !FileManager.default.fileExists(atPath: radiosJSONFile.path) {
+                    let newRadios = radios.map { (r) -> Radio in
+                        let newR = Radio(JSON: [:])
+                        newR?.radioId = r.radioId
+                        newR?.radioName = r.radioName
+                        return newR!
+                    }
+                    let radiosJSON = newRadios.toJSONString()
+                    try! radiosJSON?.write(to: radiosJSONFile, atomically: true, encoding: .utf8)
+                }
+            }
             
             // 创建radio文件夹
             let radio = radios[radioIndex]
             let radioFolderName = String(format: "%d_%@", radio.radioId!, radio.radioName!)
             let radioFolderUrl = self.createFolder(radioFolderName, baseUrl: evoUrl!)
+            radioLabel.stringValue = String(format: "电台：%@ (%d/%d)", radioFolderName, radioIndex, radios.count)
             
             let currentChannels = radio.channels
             if let channels = currentChannels {
                 let channel = channels[channelIndex]
                 let channelFolderName = String(format: "%@_%@", channel.channelId!, channel.channelName!)
                 let channelFolderUrl = self.createFolder(channelFolderName, baseUrl: radioFolderUrl!)
+                channelLabel.stringValue = String(format: "频道：%@ (%d/%d)", channelFolderName, self.channelIndex, channels.count)
+                
+                if let channelsJSONFile = radioFolderUrl?.appendingPathComponent("channels.json") {
+                    if !FileManager.default.fileExists(atPath: channelsJSONFile.path) {
+                        let newChannels = channels
+                        let channelsJSON = newChannels.toJSONString()
+                        try! channelsJSON?.write(to: channelsJSONFile, atomically: true, encoding: .utf8)
+                    }
+                }
                 
                 API.fetchPrograms(channelId: channel.channelId!) { (programs) in
                     self.currentPrograms = programs
                     let program = programs[self.programIndex]
                     let programFolderName = String(format: "%@_%@", program.programId!, program.programName!)
                     let programFolderUrl = self.createFolder(programFolderName, baseUrl: channelFolderUrl!)
+                    self.programLabel.stringValue = String(format: "节目：%@ (%d/%d)", programFolderName, self.programIndex, programs.count)
+                    
+                    if let programsJSONFile = channelFolderUrl?.appendingPathComponent("programs.json") {
+                        if !FileManager.default.fileExists(atPath: programsJSONFile.path) {
+                            let newPrograms = programs
+                            let programsJSON = newPrograms.toJSONString()
+                            try! programsJSON?.write(to: programsJSONFile, atomically: true, encoding: .utf8)
+                        }
+                    }
                     
                     API.fetchSongs(programId: program.programId!, completion: { (songs) in
                         self.currentSongs = songs
                         let song = songs[self.songIndex]
-                        if let audioUrl = song.audioUrl {
+                        if let audioURL = song.audioURL {
                             let songFileName = String(format: "%@_%@", song.songId!, song.songName!)
                             let songFileUrl = programFolderUrl?.appendingPathComponent(songFileName).appendingPathExtension("mp3")
                             let destination: DownloadRequest.DownloadFileDestination = { _, _ in
                                 return (songFileUrl!, [.removePreviousFile, .createIntermediateDirectories])
                             }
-                            func inc() {
-                                self.songIndex += 1
-                                if self.songIndex == self.currentSongs?.count {
-                                    self.songIndex = 0
-                                    self.programIndex += 1
-                                    if self.programIndex == self.currentPrograms?.count {
-                                        self.programIndex = 0
-                                        self.channelIndex += 1
-                                        if self.channelIndex == self.currentChannels?.count {
-                                            self.channelIndex = 0
-                                            self.radioIndex += 1
-                                            if self.radioIndex == radios.count {
-                                                self.radioIndex = 0
-                                                print("Download finished.")
-                                            }
-                                        }
-                                    }
+                            self.songLabel.stringValue = String(format: "歌曲：%@ (%d/%d)", songFileName, self.songIndex, songs.count)
+                            
+                            if let songsJSONFile = programFolderUrl?.appendingPathComponent("songs.json") {
+                                if !FileManager.default.fileExists(atPath: songsJSONFile.path) {
+                                    let newSongs = songs
+                                    let songsJSON = newSongs.toJSONString()
+                                    try! songsJSON?.write(to: songsJSONFile, atomically: true, encoding: .utf8)
                                 }
-                                self.download()
                             }
+                            
                             if FileManager.default.fileExists(atPath: (songFileUrl?.path)!) {
-                                inc()
-                            }else {
-                                Alamofire.download(audioUrl, to: destination).response { response in
+                                print("已下载，跳过")
+                                self.increaseIndexes()
+                                self.download()
+                            } else {
+                                print("下载MP3：\(audioURL)")
+                                Alamofire.download(audioURL, to: destination).response { response in
                                     if response.error == nil, let songPath = response.destinationURL?.path {
-                                        print("Download mp3 success: \(destination)")
+                                        print("Download mp3 success: \(songPath)")
                                     } else {
-                                        print("Download mp3 failed: \(destination)")
+                                        print("Download mp3 failed: \(audioURL)")
                                     }
                                     
-                                    inc()
+                                    self.increaseIndexes()
+                                    self.download()
                                     
                                     }.downloadProgress(closure: { (progress) in
                                         print("progress: \(progress)")
+                                        self.downloadProgress.doubleValue = progress.fractionCompleted
                                     })
                             }
-                            
                         }
-                        
-                        
                     })
                 }
             }
         }
-        
-        
-        
-        
+    }
+    
+//    func logInfo(text: String) {
+//        let attrString = logTextView.attributedString()
+//        let logText = attrString.string
+//        let mutableAttrString = NSMutableAttributedString(attributedString: attrString)
+//        let newString = NSAttributedString(string: text)
+//        mutableAttrString.append(newString)
 //
 //
-//        let url = urlForDocument[0]
-//        createFile(name:"test.txt", fileBaseUrl: url)
+//    }
+    
+    func increaseIndexes() {
+        self.songIndex += 1
+        if self.songIndex == self.currentSongs?.count {
+            self.songIndex = 0
+            self.programIndex += 1
+            if self.programIndex == self.currentPrograms?.count {
+                self.programIndex = 0
+                self.channelIndex += 1
+                if self.channelIndex == self.currentChannels?.count {
+                    self.channelIndex = 0
+                    self.radioIndex += 1
+                    if self.radioIndex == self.allRadios?.count {
+                        self.radioIndex = 0
+                        print("Download finished.")
+                    }
+                }
+            }
+        }
         
-        
-        
+        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: songIndex)
+    }
+    
+    func cacheIndexes(rIndex: Int, cIndex: Int, pIndex: Int, sIndex: Int) {
+        let indexes = ["radio_index":rIndex,
+                       "channel_index":cIndex,
+                       "program_index":pIndex,
+                       "song_index":sIndex,
+                       ]
+        let ud = UserDefaults.standard
+        ud.set(indexes, forKey: "download_indexes")
+        ud.synchronize()
+    }
+    
+    func fetchIndexesCache() -> (Int, Int, Int, Int) {
+        let ud = UserDefaults.standard
+        if let indexCache = ud.object(forKey: "download_indexes") as? [String:Int] {
+            let rIndex = indexCache["radio_index"]
+            let cIndex = indexCache["channel_index"]
+            let pIndex = indexCache["program_index"]
+            let sIndex = indexCache["song_index"]
+            return (rIndex!, cIndex!, pIndex!, sIndex!)
+        }
+        return (0,0,0,0)
     }
     
     func createFolder(_ folderName: String, baseUrl: URL) -> URL? {
         let manager = FileManager.default
+        var isDir: ObjCBool = true
+        guard manager.fileExists(atPath: baseUrl.path, isDirectory: &isDir) else {
+            print("base url is not exists.")
+            return nil
+        }
+        
         
         // 创建evo文件夹
         let folderUrl = baseUrl.appendingPathComponent(folderName, isDirectory: true)
@@ -162,162 +256,11 @@ class ViewController: NSViewController {
         // Update the view, if already loaded.
         }
     }
-
-
-}
-
-class API {
-    
-    /// 
-    /// https://www.lavaradio.com/api/radio.listAllChannels.json
-    class func fetchAllRadios(completion: @escaping (([Radio]) -> Void)) {
-        let url = "https://www.lavaradio.com/api/radio.listAllChannels.json"
-        print("Request url: \(url)")
-        Alamofire.request(url).responseJSON { (rsp) in
-//            print("rsp => \(rsp)")
-            if rsp.result.isSuccess {
-                if let jsonValue = rsp.result.value as? [String: Any] {
-                    if let data = jsonValue["data"] as? [[String: Any]] {
-                        let radios = Radio.radios(data: data)
-                        completion(radios)
-                    }
-                }
-            }
-        }
-    }
-    
-    /// https://www.lavaradio.com/api/radio.listAllChannels.json
-    class func fetchAllChannels(radioId: Int) {
-        let url = "https://www.lavaradio.com/api/radio.listAllChannels.json"
-        print("Request url: \(url)")
-        Alamofire.request(url).responseJSON { (rsp) in
-//            print("rsp => \(rsp)")
-        }
-    }
-    
-    /// https://www.lavaradio.com/api/radio.listChannelPrograms.json?channel_id=5&_pn=0&_sz=2
-    class func fetchPrograms(channelId: String, pageSize: Int=300, pageNum: Int=0, completion: @escaping (([Program]) -> Void)) {
-        let url = String(format: "https://www.lavaradio.com/api/radio.listChannelPrograms.json?channel_id=%@&_sz=%d&_pn=%d", channelId, pageSize, pageNum)
-        print("Request url: \(url)")
-        
-        Alamofire.request(url).responseJSON { (rsp) in
-//            print("rsp => \(rsp)")
-            
-            if rsp.result.isSuccess {
-                if let jsonValue = rsp.result.value as? [String: Any] {
-                    if let data = jsonValue["data"] as? [String: Any], let lists = data["lists"] as? [[String: Any]] {
-                        let programs = Program.programs(data: lists)
-                        completion(programs)
-                    }
-                }
-            }
-        }
-    }
-    
-    /// https://www.lavaradio.com/api/play.playProgram.json?program_id=6938
-    class func fetchSongs(programId: String, completion: @escaping (([Song]) -> Void)) {
-        let url = String(format: "https://www.lavaradio.com/api/play.playProgram.json?program_id=%@", programId)
-        print("Request url: \(url)")
-        Alamofire.request(url).responseJSON { (rsp) in
-//            print("rsp => \(rsp)")
-            
-            if rsp.result.isSuccess {
-                if let jsonValue = rsp.result.value as? [String: Any] {
-                    if let data = jsonValue["data"] as? [String: Any], let lists = data["songs"] as? [[String: Any]] {
-                        let songs = Song.songs(data: lists)
-                        completion(songs)
-                    }
-                }
-            }
-        }
-    }
 }
 
 
-class Radio {
-    var radioId: Int?
-    var radioName: String?
-    var channels: [Channel]?
-    
-    init(id: Int, name: String) {
-        self.radioId = id
-        self.radioName = name
-    }
-    
-    class func radios(data: [[String:Any]]) -> [Radio] {
-        return data.map { (d) -> Radio in
-            if let id = d["radio_id"] as? Int, let name = d["radio_name"] as? String {
-                let radio = Radio(id: id, name: name)
-                if let channelsData = d["channels"] as? [[String:Any]] {
-                    radio.channels = Channel.channels(data: channelsData)
-                }
-                return radio
-            }
-            return Radio(id: 0, name: "unknown")
-        }
-    }
-}
 
 
-class Channel {
-    var channelId: String?
-    var channelName: String?
-    
-    init(id: String, name: String) {
-        self.channelId = id
-        self.channelName = name
-    }
-    
-    
-    class func channels(data: [[String:Any]]) -> [Channel] {
-        return data.map { (d) -> Channel in
-            if let id = d["channel_id"] as? String, let name = d["channel_name"] as? String {
-                return Channel(id: id, name: name)
-            }
-            return Channel(id: "0", name: "unknown")
-        }
-    }
-}
 
-class Program {
-    var programId: String?
-    var programName: String?
-    
-    init(id: String, name: String) {
-        self.programId = id
-        self.programName = name
-    }
-    
-    
-    class func programs(data: [[String:Any]]) -> [Program] {
-        return data.map { (d) -> Program in
-            if let id = d["program_id"] as? String, let name = d["program_name"] as? String {
-                return Program(id: id, name: name)
-            }
-            return Program(id: "0", name: "unknown")
-        }
-    }
-}
 
-class Song {
-    var songId: String?
-    var songName: String?
-    var audioUrl: String?
-    
-    init(id: String, name: String) {
-        self.songId = id
-        self.songName = name
-    }
-    
-    
-    class func songs(data: [[String:Any]]) -> [Song] {
-        return data.map { (d) -> Song in
-            if let id = d["song_id"] as? String, let name = d["song_name"] as? String {
-                let song = Song(id: id, name: name)
-                song.audioUrl = d["audio_url"] as? String
-                return song
-            }
-            return Song(id: "0", name: "unknown")
-        }
-    }
-}
+

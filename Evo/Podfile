@@ -7,7 +7,7 @@ target 'Evo' do
 
   pod 'Alamofire'
   pod 'LeanCloud'
-#  pod 'Tiercel', :git => 'https://github.com/Danie1s/Tiercel.git', :branch => 'dataTask'
+  pod 'ObjectMapper'
 
   target 'EvoTests' do
     inherit! :search_paths

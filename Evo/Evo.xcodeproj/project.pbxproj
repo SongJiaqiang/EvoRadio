@@ -14,6 +14,13 @@
 		63755213222F62850091C266 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63755211222F62850091C266 /* Main.storyboard */; };
 		6375521F222F62850091C266 /* EvoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6375521E222F62850091C266 /* EvoTests.swift */; };
 		6378612622300AA400E7C8EB /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6378612522300AA400E7C8EB /* GoogleService-Info.plist */; };
+		63FC248B2232C14E0086C8F0 /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC248A2232C14E0086C8F0 /* Song.swift */; };
+		63FC248D2232C1630086C8F0 /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC248C2232C1630086C8F0 /* Program.swift */; };
+		63FC248F2232C17A0086C8F0 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC248E2232C17A0086C8F0 /* Channel.swift */; };
+		63FC24912232C1870086C8F0 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24902232C1870086C8F0 /* Radio.swift */; };
+		63FC24942232C1FA0086C8F0 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24932232C1FA0086C8F0 /* API.swift */; };
+		63FC24962232CA2E0086C8F0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24952232CA2E0086C8F0 /* User.swift */; };
+		63FC24982232CABC0086C8F0 /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63FC24972232CABC0086C8F0 /* Cover.swift */; };
 		74D5BE60F1467D331CA36E39 /* Pods_Evo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ADF961A5FF94267B095B73BA /* Pods_Evo.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +48,13 @@
 		6375521E222F62850091C266 /* EvoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvoTests.swift; sourceTree = "<group>"; };
 		63755220222F62850091C266 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6378612522300AA400E7C8EB /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		63FC248A2232C14E0086C8F0 /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		63FC248C2232C1630086C8F0 /* Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
+		63FC248E2232C17A0086C8F0 /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		63FC24902232C1870086C8F0 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
+		63FC24932232C1FA0086C8F0 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		63FC24952232CA2E0086C8F0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		63FC24972232CABC0086C8F0 /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
 		ADF961A5FF94267B095B73BA /* Pods_Evo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Evo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D48591A570632C8F3E00B2A2 /* Pods-Evo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evo.debug.xcconfig"; path = "Target Support Files/Pods-Evo/Pods-Evo.debug.xcconfig"; sourceTree = "<group>"; };
 		DCF3952E7B75409F9E94C5C7 /* Pods-Evo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Evo.release.xcconfig"; path = "Target Support Files/Pods-Evo/Pods-Evo.release.xcconfig"; sourceTree = "<group>"; };
@@ -90,6 +104,8 @@
 		6375520A222F62840091C266 /* Evo */ = {
 			isa = PBXGroup;
 			children = (
+				63FC24892232C13A0086C8F0 /* Models */,
+				63FC24922232C1A60086C8F0 /* Network */,
 				6375520B222F62840091C266 /* AppDelegate.swift */,
 				6375520D222F62840091C266 /* ViewController.swift */,
 				6375520F222F62850091C266 /* Assets.xcassets */,
@@ -108,6 +124,27 @@
 				63755220222F62850091C266 /* Info.plist */,
 			);
 			path = EvoTests;
+			sourceTree = "<group>";
+		};
+		63FC24892232C13A0086C8F0 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				63FC248A2232C14E0086C8F0 /* Song.swift */,
+				63FC248C2232C1630086C8F0 /* Program.swift */,
+				63FC248E2232C17A0086C8F0 /* Channel.swift */,
+				63FC24902232C1870086C8F0 /* Radio.swift */,
+				63FC24952232CA2E0086C8F0 /* User.swift */,
+				63FC24972232CABC0086C8F0 /* Cover.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		63FC24922232C1A60086C8F0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				63FC24932232C1FA0086C8F0 /* API.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 		C0847E1A72C3B09E811B1244 /* Pods */ = {
@@ -290,6 +327,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-Evo/Pods-Evo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/LeanCloud/LeanCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
@@ -297,6 +335,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/LeanCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -310,8 +349,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63FC248D2232C1630086C8F0 /* Program.swift in Sources */,
+				63FC24982232CABC0086C8F0 /* Cover.swift in Sources */,
+				63FC248F2232C17A0086C8F0 /* Channel.swift in Sources */,
+				63FC248B2232C14E0086C8F0 /* Song.swift in Sources */,
 				6375520E222F62840091C266 /* ViewController.swift in Sources */,
+				63FC24962232CA2E0086C8F0 /* User.swift in Sources */,
 				6375520C222F62840091C266 /* AppDelegate.swift in Sources */,
+				63FC24912232C1870086C8F0 /* Radio.swift in Sources */,
+				63FC24942232C1FA0086C8F0 /* API.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

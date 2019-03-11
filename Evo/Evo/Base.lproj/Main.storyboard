@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +675,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Evo" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -703,15 +705,133 @@
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="Evo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="358"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="l7O-Eq-kyg">
+                                <rect key="frame" x="8" y="328" width="464" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="6fC-Q9-ETF"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="正在下载" id="CVE-eY-hhI">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jEO-fK-e53">
+                                <rect key="frame" x="8" y="303" width="464" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="cU9-PR-STb"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="RadioId RadioName" id="EbH-NQ-CBr">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dkM-Rw-CXQ">
+                                <rect key="frame" x="8" y="278" width="464" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="gTc-Gr-rj8"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="ChannelId ChannelName" id="1zH-Pp-sZ6">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m80-72-NOV">
+                                <rect key="frame" x="8" y="253" width="464" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="Wuq-Xc-qz4"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="ProgramId ProgramName" id="uC0-9e-UMp">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VqZ-sf-36b">
+                                <rect key="frame" x="8" y="228" width="464" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="sOh-aP-r1e"/>
+                                </constraints>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="SongId SongName" id="elw-J5-b27">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <progressIndicator wantsLayer="YES" maxValue="1" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="1lu-bJ-XFO">
+                                <rect key="frame" x="10" y="202" width="460" height="22"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="UF6-xP-x4L"/>
+                                </constraints>
+                            </progressIndicator>
+                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tsl-1k-rUg">
+                                <rect key="frame" x="10" y="10" width="460" height="183"/>
+                                <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="aGp-4I-teN">
+                                    <rect key="frame" x="0.0" y="0.0" width="460" height="183"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="VfE-OM-KM9">
+                                            <rect key="frame" x="0.0" y="0.0" width="460" height="183"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="460" height="183"/>
+                                            <size key="maxSize" width="460" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="znt-BY-8dV">
+                                    <rect key="frame" x="444" y="0.0" width="16" height="183"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="1lu-bJ-XFO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="5p6-cs-y4a"/>
+                            <constraint firstItem="VqZ-sf-36b" firstAttribute="top" secondItem="m80-72-NOV" secondAttribute="bottom" constant="5" id="7xz-LA-8pC"/>
+                            <constraint firstAttribute="bottom" secondItem="tsl-1k-rUg" secondAttribute="bottom" constant="10" id="94Y-33-7s3"/>
+                            <constraint firstAttribute="trailing" secondItem="l7O-Eq-kyg" secondAttribute="trailing" constant="10" id="AUx-nz-0Qd"/>
+                            <constraint firstItem="m80-72-NOV" firstAttribute="top" secondItem="dkM-Rw-CXQ" secondAttribute="bottom" constant="5" id="Abj-Of-Lyd"/>
+                            <constraint firstAttribute="trailing" secondItem="jEO-fK-e53" secondAttribute="trailing" constant="10" id="B39-Jb-MmD"/>
+                            <constraint firstAttribute="trailing" secondItem="m80-72-NOV" secondAttribute="trailing" constant="10" id="EUA-M6-7mn"/>
+                            <constraint firstAttribute="trailing" secondItem="1lu-bJ-XFO" secondAttribute="trailing" constant="10" id="Iic-rk-0TC"/>
+                            <constraint firstItem="1lu-bJ-XFO" firstAttribute="top" secondItem="VqZ-sf-36b" secondAttribute="bottom" constant="5" id="Kjh-Dk-w89"/>
+                            <constraint firstItem="dkM-Rw-CXQ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="N30-8g-qa5"/>
+                            <constraint firstItem="l7O-Eq-kyg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="NxJ-V1-tj9"/>
+                            <constraint firstItem="jEO-fK-e53" firstAttribute="top" secondItem="l7O-Eq-kyg" secondAttribute="bottom" constant="5" id="bG3-wk-hkb"/>
+                            <constraint firstAttribute="trailing" secondItem="tsl-1k-rUg" secondAttribute="trailing" constant="10" id="cCe-Ee-ahx"/>
+                            <constraint firstItem="jEO-fK-e53" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="chm-wJ-u1K"/>
+                            <constraint firstItem="tsl-1k-rUg" firstAttribute="top" secondItem="1lu-bJ-XFO" secondAttribute="bottom" constant="10" id="dQR-g2-Jbb"/>
+                            <constraint firstItem="m80-72-NOV" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="eQx-fm-mv0"/>
+                            <constraint firstItem="VqZ-sf-36b" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="igN-LO-BIO"/>
+                            <constraint firstItem="l7O-Eq-kyg" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="kgT-OO-b5x"/>
+                            <constraint firstAttribute="trailing" secondItem="dkM-Rw-CXQ" secondAttribute="trailing" constant="10" id="opt-kS-8aN"/>
+                            <constraint firstItem="tsl-1k-rUg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="r5s-Xm-Z1f"/>
+                            <constraint firstItem="dkM-Rw-CXQ" firstAttribute="top" secondItem="jEO-fK-e53" secondAttribute="bottom" constant="5" id="vZg-sl-7kT"/>
+                            <constraint firstAttribute="trailing" secondItem="VqZ-sf-36b" secondAttribute="trailing" constant="10" id="xgT-rk-ZBx"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="channelLabel" destination="dkM-Rw-CXQ" id="1tQ-MH-E4Y"/>
+                        <outlet property="downloadProgress" destination="1lu-bJ-XFO" id="R37-Rj-Slf"/>
+                        <outlet property="logTextView" destination="tsl-1k-rUg" id="vWy-Bp-9HW"/>
+                        <outlet property="programLabel" destination="m80-72-NOV" id="8K5-2d-aQE"/>
+                        <outlet property="radioLabel" destination="jEO-fK-e53" id="9ph-hx-Oft"/>
+                        <outlet property="songLabel" destination="VqZ-sf-36b" id="RcO-YT-p87"/>
+                        <outlet property="statusLabel" destination="l7O-Eq-kyg" id="tmH-nB-5NT"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="793"/>
         </scene>
     </scenes>
 </document>

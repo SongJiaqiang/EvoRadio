@@ -4,20 +4,24 @@ PODS:
     - LeanCloud/Storage (= 11.0.1)
   - LeanCloud/Storage (11.0.1):
     - Alamofire (~> 4.7)
+  - ObjectMapper (3.4.2)
 
 DEPENDENCIES:
   - Alamofire
   - LeanCloud
+  - ObjectMapper
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - LeanCloud
+    - ObjectMapper
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   LeanCloud: f9776746a4cd62bdb441f2768017a91c9516d219
+  ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
 
-PODFILE CHECKSUM: ed7831b6e679de5554d09485ea2da30047fd6b97
+PODFILE CHECKSUM: e01af50c4e939f8fb63a4c6f82a4474fc8c128c1
 
 COCOAPODS: 1.6.1
