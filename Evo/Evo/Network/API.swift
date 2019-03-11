@@ -61,7 +61,7 @@ class API {
     
     /// 获取节目列表
     /// http://www.lavaradio.com/api/radio.listChannelPrograms.json?channel_id=5&_pn=0&_sz=2
-    class func fetchPrograms(channelId: String, pageSize: Int=300, pageNum: Int=0, completion: @escaping (([Program]) -> Void)) {
+    class func fetchPrograms(channelId: String, pageSize: Int=512, pageNum: Int=0, completion: @escaping (([Program]) -> Void)) {
         let url = String(format: "http://www.lavaradio.com/api/radio.listChannelPrograms.json?channel_id=%@&_sz=%d&_pn=%d", channelId, pageSize, pageNum)
         print("Request url: \(url)")
         
