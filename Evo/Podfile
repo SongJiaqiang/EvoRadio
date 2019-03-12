@@ -8,6 +8,7 @@ target 'Evo' do
   pod 'Alamofire'
   pod 'LeanCloud'
   pod 'ObjectMapper'
+#  pod 'SQLite.swift'
 
   target 'EvoTests' do
     inherit! :search_paths
