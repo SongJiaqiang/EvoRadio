@@ -793,6 +793,48 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                             </scrollView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2kG-s4-aNy">
+                                <rect key="frame" x="414" y="321" width="62" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="AO5-oY-IaX"/>
+                                    <constraint firstAttribute="width" constant="50" id="N2J-oQ-FMv"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="停止" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="hEX-GP-Dsv">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="stop:" target="XfG-lQ-9wD" id="JNT-44-RLm"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TTd-yU-Pbj">
+                                <rect key="frame" x="274" y="321" width="62" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="50" id="0fj-v1-fDQ"/>
+                                    <constraint firstAttribute="height" constant="20" id="lev-W5-RUm"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="开始" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="YSP-75-p2Z">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="start:" target="XfG-lQ-9wD" id="4VH-A0-aeG"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6FY-ty-cPY">
+                                <rect key="frame" x="344" y="321" width="62" height="31"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="20" id="V1J-84-B4Y"/>
+                                    <constraint firstAttribute="width" constant="50" id="ppv-yK-ThI"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="暂停" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="b41-qF-eQm">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" size="13" name=".PingFangSC-Regular"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="pause:" target="XfG-lQ-9wD" id="u8t-Pc-5G4"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstItem="1lu-bJ-XFO" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="5p6-cs-y4a"/>
@@ -801,22 +843,28 @@
                             <constraint firstAttribute="trailing" secondItem="l7O-Eq-kyg" secondAttribute="trailing" constant="10" id="AUx-nz-0Qd"/>
                             <constraint firstItem="m80-72-NOV" firstAttribute="top" secondItem="dkM-Rw-CXQ" secondAttribute="bottom" constant="5" id="Abj-Of-Lyd"/>
                             <constraint firstAttribute="trailing" secondItem="jEO-fK-e53" secondAttribute="trailing" constant="10" id="B39-Jb-MmD"/>
+                            <constraint firstItem="TTd-yU-Pbj" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="DmW-iV-1JJ"/>
                             <constraint firstAttribute="trailing" secondItem="m80-72-NOV" secondAttribute="trailing" constant="10" id="EUA-M6-7mn"/>
                             <constraint firstAttribute="trailing" secondItem="1lu-bJ-XFO" secondAttribute="trailing" constant="10" id="Iic-rk-0TC"/>
                             <constraint firstItem="1lu-bJ-XFO" firstAttribute="top" secondItem="VqZ-sf-36b" secondAttribute="bottom" constant="5" id="Kjh-Dk-w89"/>
                             <constraint firstItem="dkM-Rw-CXQ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="N30-8g-qa5"/>
                             <constraint firstItem="l7O-Eq-kyg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="NxJ-V1-tj9"/>
+                            <constraint firstItem="2kG-s4-aNy" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="UuF-Jn-uOe"/>
+                            <constraint firstItem="6FY-ty-cPY" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="UzK-MM-x3i"/>
                             <constraint firstItem="jEO-fK-e53" firstAttribute="top" secondItem="l7O-Eq-kyg" secondAttribute="bottom" constant="5" id="bG3-wk-hkb"/>
                             <constraint firstAttribute="trailing" secondItem="tsl-1k-rUg" secondAttribute="trailing" constant="10" id="cCe-Ee-ahx"/>
                             <constraint firstItem="jEO-fK-e53" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="chm-wJ-u1K"/>
+                            <constraint firstItem="6FY-ty-cPY" firstAttribute="leading" secondItem="TTd-yU-Pbj" secondAttribute="trailing" constant="20" id="cxx-ty-yyS"/>
                             <constraint firstItem="tsl-1k-rUg" firstAttribute="top" secondItem="1lu-bJ-XFO" secondAttribute="bottom" constant="10" id="dQR-g2-Jbb"/>
                             <constraint firstItem="m80-72-NOV" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="eQx-fm-mv0"/>
                             <constraint firstItem="VqZ-sf-36b" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="igN-LO-BIO"/>
                             <constraint firstItem="l7O-Eq-kyg" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="10" id="kgT-OO-b5x"/>
                             <constraint firstAttribute="trailing" secondItem="dkM-Rw-CXQ" secondAttribute="trailing" constant="10" id="opt-kS-8aN"/>
                             <constraint firstItem="tsl-1k-rUg" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="10" id="r5s-Xm-Z1f"/>
+                            <constraint firstItem="2kG-s4-aNy" firstAttribute="leading" secondItem="6FY-ty-cPY" secondAttribute="trailing" constant="20" id="sv1-Js-w7M"/>
                             <constraint firstItem="dkM-Rw-CXQ" firstAttribute="top" secondItem="jEO-fK-e53" secondAttribute="bottom" constant="5" id="vZg-sl-7kT"/>
                             <constraint firstAttribute="trailing" secondItem="VqZ-sf-36b" secondAttribute="trailing" constant="10" id="xgT-rk-ZBx"/>
+                            <constraint firstAttribute="trailing" secondItem="2kG-s4-aNy" secondAttribute="trailing" constant="10" id="zJ9-nn-ho8"/>
                         </constraints>
                     </view>
                     <connections>

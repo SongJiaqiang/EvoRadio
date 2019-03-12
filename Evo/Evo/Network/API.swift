@@ -85,9 +85,9 @@ class API {
     }
     
     /// 获取歌单列表
-    /// http://www.lavaradio.com/api/play.playProgram.json?program_id=6938
+    /// http://www.lavaradio.com/api/play.playProgramNew.json?program_id=6938
     class func fetchSongs(programId: String, isVIP: Bool=false, completion: @escaping (([Song]) -> Void)) {
-        let url = String(format: "http://www.lavaradio.com/api/play.playProgram.json?program_id=%@", programId)
+        let url = String(format: "http://www.lavaradio.com/api/play.playProgramNew.json?program_id=%@", programId)
         print("Request url: \(url)")
         Alamofire.request(url).responseJSON { (response) in
             //            print("rsp => \(rsp)")
