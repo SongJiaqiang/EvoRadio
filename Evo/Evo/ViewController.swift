@@ -23,10 +23,10 @@ class ViewController: NSViewController {
     @IBOutlet weak var songLabel: NSTextField!
     @IBOutlet weak var downloadProgress: NSProgressIndicator!
     
-    var allRadios: [Radio]?
-    var currentChannels:[Channel]?
-    var currentPrograms:[Program]?
-    var currentSongs:[Song]?
+    var allRadios = [Radio]()
+    var currentChannels = [Channel]()
+    var currentPrograms = [Program]()
+    var currentSongs = [Song]()
     
     var radioIndex: Int = 0
     var channelIndex: Int = 0
@@ -79,40 +79,40 @@ class ViewController: NSViewController {
         }
         
         loadRadios {[weak self] (radios) in
-            self?.allRadios = radios
+            self?.allRadios.removeAll()
+            self?.allRadios.append(contentsOf: radios)
             self?.processRadios(radios)
         }
     }
     
     func increaseIndexes() {
-        guard let songs = currentSongs, let programs = currentPrograms, let channels = currentChannels, let radios = allRadios else {
-            print("数据错误")
-            return
-        }
-        
-        self.songIndex += 1
-        if self.songIndex >= songs.count {
-            self.songIndex = 0
-            self.programIndex += 1
-            if self.programIndex >= programs.count {
-                self.songIndex = 0
-                self.programIndex = 0
-                self.channelIndex += 1
-                if self.channelIndex >= channels.count {
-                    self.songIndex = 0
-                    self.programIndex = 0
-                    self.channelIndex = 0
-                    self.radioIndex += 1
-                    if self.radioIndex >= radios.count {
-                        self.songIndex = 0
-                        self.programIndex = 0
-                        self.channelIndex = 0
-                        self.radioIndex = 0
+        songIndex += 1
+        if songIndex >= currentSongs.count {
+            programIndex += 1
+            currentSongs.removeAll()
+            songIndex = 0
+            if programIndex >= currentPrograms.count {
+                channelIndex += 1
+                programIndex = 0
+                songIndex = 0
+                currentPrograms.removeAll()
+                currentSongs.removeAll()
+                if channelIndex >= currentChannels.count {
+                    radioIndex += 1
+                    channelIndex = 0
+                    programIndex = 0
+                    songIndex = 0
+                    currentChannels.removeAll()
+                    currentPrograms.removeAll()
+                    currentSongs.removeAll()
+                    if self.radioIndex >= allRadios.count {
                         print("Download finished.")
                     }
                 }
             }
         }
+        
+        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: radioIndex)
     }
     
     func cacheIndexes(rIndex: Int, cIndex: Int, pIndex: Int, sIndex: Int) {
@@ -189,65 +189,66 @@ class ViewController: NSViewController {
 extension ViewController {
     
     func processSongs(_ songs: [Song], program: Program, channel: Channel, radio: Radio) {
-        let programFolderUrl = programFolderURL(program, channel: channel, radio: radio)
         
         let song = songs[self.songIndex]
         if let audioURL = song.audioURL {
             let songFileName = String(format: "%@_%@", song.songId!, song.songName!)
-//            let songFileUrl = programFolderUrl?.appendingPathComponent(songFileName).appendingPathExtension("mp3")
-            let songFileUrl = rootURL.appendingPathComponent("songs").appendingPathComponent(songFileName).appendingPathExtension("mp3")
+            let songFileUrl = songFileURL(song, program: program, channel: channel, radio: radio)
+//            let songFileUrl = rootURL.appendingPathComponent("songs").appendingPathComponent(songFileName).appendingPathExtension("mp3")
             let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-                return (songFileUrl, [.removePreviousFile, .createIntermediateDirectories])
+                return (songFileUrl!, [.removePreviousFile, .createIntermediateDirectories])
             }
+            print("Song file name: \(songFileName)")
             DispatchQueue.main.async {
                 self.songLabel.stringValue = String(format: "歌曲：%@ (%d/%d)", songFileName, self.songIndex, songs.count)
             }
             
-            if FileManager.default.fileExists(atPath: songFileUrl.path) {
-                print("已下载，跳过")
-                self.increaseIndexes()
-                self.download()
-            } else {
-                print("下载MP3：\(audioURL)")
-                Alamofire.download(audioURL, to: destination).response {[weak self] response in
-                    if response.error == nil, let songPath = response.destinationURL?.path {
-                        print("Download mp3 success: \(songPath)")
-                    } else {
-                        print("Download mp3 failed: \(audioURL)")
-                    }
-                    
-                    self?.increaseIndexes()
-                    self?.download()
-                    
-                    }.downloadProgress(closure: {[weak self] (progress) in
-                        print("progress: \(progress)")
-                        DispatchQueue.main.async {
-                            self?.downloadProgress.doubleValue = progress.fractionCompleted
-                        }
-                    })
-            }
+            print("不下载，跳过")
+            self.increaseIndexes()
+            self.download()
+            
+//            if FileManager.default.fileExists(atPath: songFileUrl!.path) {
+//                print("已下载，跳过")
+//                self.increaseIndexes()
+//                self.download()
+//            } else {
+//                print("下载MP3：\(audioURL)")
+//                Alamofire.download(audioURL, to: destination).response {[weak self] response in
+//                    if response.error == nil, let songPath = response.destinationURL?.path {
+//                        print("Download mp3 success: \(songPath)")
+//                    } else {
+//                        print("Download mp3 failed: \(audioURL)")
+//                    }
+//
+//                    self?.increaseIndexes()
+//                    self?.download()
+//
+//                    }.downloadProgress(closure: {[weak self] (progress) in
+//                        print("progress: \(progress)")
+//                        DispatchQueue.main.async {
+//                            self?.downloadProgress.doubleValue = progress.fractionCompleted
+//                        }
+//                    })
+//            }
         }
     }
     
     func processPrograms(_ programs: [Program], channel: Channel, radio: Radio) {
         let channelFolderUrl = channelFolderURL(channel, radio: radio)
-        
-        if programIndex > programs.count {
-            programIndex = 0
-        }
         let program = programs[programIndex]
         let programFolderName = String(format: "%@_%@", program.programId!, program.programName!)
-        self.createFolder(programFolderName, baseUrl: channelFolderUrl!)
+        let _ = createFolder(programFolderName, baseUrl: channelFolderUrl!)
+        print("Program folder name: \(programFolderName)")
         DispatchQueue.main.async {
             self.programLabel.stringValue = String(format: "节目：%@ (%d/%d)", programFolderName, self.programIndex, programs.count)
         }
         
-        
-        if let songs = self.currentSongs, songs.count > 0 {
-            processSongs(songs, program: program, channel: channel, radio: radio)
+        if currentSongs.count > 0 {
+            processSongs(currentSongs, program: program, channel: channel, radio: radio)
         } else {
             loadSongs(program, channel: channel, radio: radio) {[weak self] (songs) in
-                self?.currentSongs = songs
+                self?.currentSongs.removeAll()
+                self?.currentSongs.append(contentsOf: songs)
                 self?.processSongs(songs, program: program, channel: channel, radio: radio)
             }
         }
@@ -256,44 +257,42 @@ extension ViewController {
     
     func processChannels(_ channels: [Channel], radio: Radio) {
         let radioFolderUrl = radioFolderURL(radio)
-        if channelIndex > channels.count {
-            channelIndex = 0
-        }
         let channel = channels[channelIndex]
         let channelFolderName = String(format: "%@_%@", channel.channelId!, channel.channelName!)
-        createFolder(channelFolderName, baseUrl: radioFolderUrl!)
+        let _ = createFolder(channelFolderName, baseUrl: radioFolderUrl!)
+        print("Channel folder name: \(channelFolderName)")
         DispatchQueue.main.async {
             self.channelLabel.stringValue = String(format: "频道：%@ (%d/%d)", channelFolderName, self.channelIndex, channels.count)
         }
         
-        if let programs = currentPrograms, programs.count > 0 {
-            processPrograms(programs, channel: channel, radio: radio)
+        if currentPrograms.count > 0 {
+            processPrograms(currentPrograms, channel: channel, radio: radio)
         } else {
             loadPrograms(channel: channel, radio: radio) {[weak self] (programs) in
-                self?.currentPrograms = programs
+                self?.currentPrograms.removeAll()
+                self?.currentPrograms.append(contentsOf: programs)
                 self?.processPrograms(programs, channel: channel, radio: radio)
             }
         }
     }
     
     func processRadios(_ radios: [Radio]) {
-        // 创建radio文件夹
-        if radioIndex > radios.count {
-            radioIndex = 0
-        }
+        print("Process radio at index: \(radioIndex)")
         let radio = radios[radioIndex]
         let radioFolderName = String(format: "%d_%@", radio.radioId!, radio.radioName!)
-        let radioFolderUrl = radioFolderURL(radio)
-        createFolder(radioFolderName, baseUrl: rootURL)
+        let _ = radioFolderURL(radio)
+        let _ = createFolder(radioFolderName, baseUrl: rootURL)
+        print("Radio folder name: \(radioFolderName)")
         DispatchQueue.main.async {
             self.radioLabel.stringValue = String(format: "电台：%@ (%d/%d)", radioFolderName, self.radioIndex, radios.count)
         }
         
-        if let channels = currentChannels, channels.count > 0 {
-            self.processChannels(channels, radio: radio)
+        if currentChannels.count > 0 {
+            self.processChannels(currentChannels, radio: radio)
         } else {
             self.loadChannels(radio: radio, completion: {[weak self] (channels) in
-                self?.currentChannels = channels
+                self?.currentChannels.removeAll()
+                self?.currentChannels.append(contentsOf: channels)
                 self?.processChannels(channels, radio: radio)
             })
         }
@@ -304,8 +303,10 @@ extension ViewController {
 
 extension ViewController {
     func loadRadios(_ completion: @escaping (([Radio]) -> Void)) {
+        print("Load radios")
         let radiosJSONFile = rootURL.appendingPathComponent("radios.json")
         if FileManager.default.fileExists(atPath: radiosJSONFile.path) {
+            print("Load radios from json")
             do {
                 let jsonData = try Data(contentsOf: radiosJSONFile)
                 if let jsonObject = try JSONSerialization.jsonObject(with: jsonData
@@ -319,6 +320,7 @@ extension ViewController {
             
         } else {
             API.fetchAllRadios { (radios) in
+                print("Load radios from api")
                 let radiosJSON = radios.toJSONString()
                 try! radiosJSON?.write(to: radiosJSONFile, atomically: true, encoding: .utf8)
                 
@@ -328,9 +330,11 @@ extension ViewController {
     }
     
     func loadChannels(radio: Radio, completion: @escaping (([Channel]) -> Void)) {
+        print("Load channels with radio: \(radio.radioId),\(radio.radioName)")
         let radioFolderUrl = radioFolderURL(radio)
         if let channelsJSONFile = radioFolderUrl?.appendingPathComponent("channels.json") {
             if FileManager.default.fileExists(atPath: channelsJSONFile.path) {
+                print("Load radios from json")
                 do {
                     let jsonData = try Data(contentsOf: channelsJSONFile)
                     if let jsonObject = try JSONSerialization.jsonObject(with: jsonData
@@ -343,6 +347,7 @@ extension ViewController {
                 }
             } else {
                 if let channels = radio.channels {
+                    print("Load radios from radio.channels")
                     let channelsJSON = channels.toJSONString()
                     try! channelsJSON?.write(to: channelsJSONFile, atomically: true, encoding: .utf8)
                     
@@ -448,13 +453,14 @@ extension ViewController {
             return nil
         }
 
-        if let baseURL = programFolderURL(program, channel: channel, radio: radio) {
+//        if let baseURL = programFolderURL(program, channel: channel, radio: radio) {
+            let songsFolderURL = rootURL.appendingPathComponent("songs")
             let newName = name.replacingOccurrences(of: "/", with: "--")
-            let folderName = String(format: "%@_%@", id, newName)
-            let folderURL = baseURL.appendingPathComponent(folderName)
-            return folderURL
-        }
-        return nil
+            let fileName = String(format: "%@_%@.mp3", id, newName)
+            let fileURL = songsFolderURL.appendingPathComponent(fileName)
+            return fileURL
+//        }
+//        return nil
     }
     
 }

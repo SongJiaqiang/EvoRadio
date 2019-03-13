@@ -715,7 +715,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="20" id="6fC-Q9-ETF"/>
                                 </constraints>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="正在下载" id="CVE-eY-hhI">
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Scaning..." id="CVE-eY-hhI">
                                     <font key="font" usesAppearanceFont="YES"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
