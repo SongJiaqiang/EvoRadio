@@ -19,6 +19,12 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 //            key: "bvJxHMx1zB4Vrnx46xw35gRs"
 //        )
         
+        CoreDB().createRadioTable()
+        CoreDB().createChannelTable()
+        CoreDB().createProgramTable()
+        CoreDB().createSongTable()
+        CoreDB().createUserTable()
+        
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

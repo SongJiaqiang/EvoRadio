@@ -54,9 +54,9 @@ class Song : NSObject, Mappable {
     
     func mapping(map: Map) {
         songId    <- map["song_id"]
+        songName   <- map["song_name"]
         jujingId   <- map["jujing_id"]
         programId    <- map["program_id"]
-        songName   <- map["song_name"]
         artistId    <- map["artist_id"]
         salbumId   <- map["salbum_id"]
         salbumsName    <- map["salbums_name"]
