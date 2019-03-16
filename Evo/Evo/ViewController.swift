@@ -85,35 +85,6 @@ class ViewController: NSViewController {
         }
     }
     
-    func increaseIndexes() {
-        songIndex += 1
-        if songIndex >= currentSongs.count {
-            programIndex += 1
-            currentSongs.removeAll()
-            songIndex = 0
-            if programIndex >= currentPrograms.count {
-                channelIndex += 1
-                programIndex = 0
-                songIndex = 0
-                currentPrograms.removeAll()
-                currentSongs.removeAll()
-                if channelIndex >= currentChannels.count {
-                    radioIndex += 1
-                    channelIndex = 0
-                    programIndex = 0
-                    songIndex = 0
-                    currentChannels.removeAll()
-                    currentPrograms.removeAll()
-                    currentSongs.removeAll()
-                    if self.radioIndex >= allRadios.count {
-                        print("Download finished.")
-                    }
-                }
-            }
-        }
-        
-        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: radioIndex)
-    }
     
     func cacheIndexes(rIndex: Int, cIndex: Int, pIndex: Int, sIndex: Int) {
         if isCache {
@@ -189,7 +160,11 @@ class ViewController: NSViewController {
 extension ViewController {
     
     func processSongs(_ songs: [Song], program: Program, channel: Channel, radio: Radio) {
-        
+        if songs.count <= 0 {
+            nextProgram()
+            download()
+            return
+        }
         let song = songs[self.songIndex]
         if let audioURL = song.audioURL {
             let songFileName = String(format: "%@_%@", song.songId!, song.songName!)
@@ -234,6 +209,11 @@ extension ViewController {
     }
     
     func processPrograms(_ programs: [Program], channel: Channel, radio: Radio) {
+        if programs.count <= 0 {
+            nextChannel()
+            download()
+            return
+        }
         let channelFolderUrl = channelFolderURL(channel, radio: radio)
         let program = programs[programIndex]
         let programFolderName = String(format: "%@_%@", program.programId!, program.programName!)
@@ -256,6 +236,11 @@ extension ViewController {
     }
     
     func processChannels(_ channels: [Channel], radio: Radio) {
+        if channels.count <= 0 || channelIndex >= channels.count {
+            nextRadio()
+            download()
+            return
+        }
         let radioFolderUrl = radioFolderURL(radio)
         let channel = channels[channelIndex]
         let channelFolderName = String(format: "%@_%@", channel.channelId!, channel.channelName!)
@@ -277,6 +262,10 @@ extension ViewController {
     }
     
     func processRadios(_ radios: [Radio]) {
+        if radios.count <= 0 {
+            print("radio index error!")
+            return
+        }
         print("Process radio at index: \(radioIndex)")
         let radio = radios[radioIndex]
         let radioFolderName = String(format: "%d_%@", radio.radioId!, radio.radioName!)
@@ -465,7 +454,52 @@ extension ViewController {
     
 }
 
-
-
+extension ViewController {
+    
+    func increaseIndexes() {
+        songIndex += 1
+        if songIndex >= currentSongs.count {
+            nextProgram()
+            if programIndex >= currentPrograms.count {
+                nextChannel()
+                if channelIndex >= currentChannels.count {
+                    nextRadio()
+                    if self.radioIndex >= allRadios.count {
+                        print("Download finished.")
+                    }
+                }
+            }
+        }
+        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: radioIndex)
+    }
+    
+    func nextRadio() {
+        
+    }
+    
+    func nextChannel() {
+        channelIndex += 1
+        programIndex = 0
+        songIndex = 0
+        currentPrograms.removeAll()
+        currentSongs.removeAll()
+    }
+    
+    func nextProgram() {
+        programIndex += 1
+        songIndex = 0
+        currentSongs.removeAll()
+    }
+    
+    func nextSong() {
+        radioIndex += 1
+        channelIndex = 0
+        programIndex = 0
+        songIndex = 0
+        currentChannels.removeAll()
+        currentPrograms.removeAll()
+        currentSongs.removeAll()
+    }
+}
 
 

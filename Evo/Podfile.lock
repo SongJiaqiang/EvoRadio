@@ -5,23 +5,29 @@ PODS:
   - LeanCloud/Storage (11.0.1):
     - Alamofire (~> 4.7)
   - ObjectMapper (3.4.2)
+  - SQLite.swift (0.11.5):
+    - SQLite.swift/standard (= 0.11.5)
+  - SQLite.swift/standard (0.11.5)
 
 DEPENDENCIES:
   - Alamofire
   - LeanCloud
   - ObjectMapper
+  - SQLite.swift
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - LeanCloud
     - ObjectMapper
+    - SQLite.swift
 
 SPEC CHECKSUMS:
   Alamofire: 16ce2c353fb72865124ddae8a57c5942388f4f11
   LeanCloud: f9776746a4cd62bdb441f2768017a91c9516d219
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
+  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
 
-PODFILE CHECKSUM: f37651a8803394a4d287bf10ad5750254b5ce913
+PODFILE CHECKSUM: b715d7f052f8319d9b5c8792cd47a4d4cf5eca11
 
 COCOAPODS: 1.6.1
