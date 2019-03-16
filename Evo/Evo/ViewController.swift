@@ -9,8 +9,10 @@
 import Cocoa
 import Alamofire
 
-let JQHDURL = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
-let baseURL = JQHDURL
+// 移动硬盘
+//let baseURL = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
+// 本地磁盘
+let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let rootURL = baseURL.appendingPathComponent("evo")
 
 class ViewController: NSViewController {
@@ -56,6 +58,7 @@ class ViewController: NSViewController {
     
     @IBAction func start(_ sender: NSButton) {
         downloadStatus = 1
+        createFolder(rootURL)
         self.download()
     }
     
@@ -132,6 +135,21 @@ class ViewController: NSViewController {
         }
         
         return folderUrl
+    }
+    
+    func createFolder(_ folderURL: URL) {
+        let manager = FileManager.default
+        var isDir: ObjCBool = true
+        if manager.fileExists(atPath: folderURL.path, isDirectory: &isDir) {
+            print("Folder url is exists.")
+            return
+        }
+        
+        if !manager.fileExists(atPath: folderURL.path, isDirectory: &isDir) {
+            do {
+                try manager.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
+            } catch _ {}
+        }
     }
     
     //根据文件名和路径创建文件

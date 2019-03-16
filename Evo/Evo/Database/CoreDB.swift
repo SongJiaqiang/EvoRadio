@@ -14,7 +14,7 @@ class CoreDB {
     var db: Connection?
 
     init() {
-        let dbPath = JQHDURL.appendingPathComponent("evo").appendingPathComponent("db").appendingPathComponent("lava.sqlite3")
+        let dbPath = baseURL.appendingPathComponent("evo").appendingPathComponent("db").appendingPathComponent("lava.sqlite3")
         self.db = try! Connection(dbPath.path)
     }
 
