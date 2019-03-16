@@ -58,7 +58,7 @@ class ViewController: NSViewController {
     
     @IBAction func start(_ sender: NSButton) {
         downloadStatus = 1
-        createFolder(rootURL)
+        rootURL.createFolder()
         self.download()
     }
     
@@ -116,40 +116,6 @@ class ViewController: NSViewController {
             return (rIndex!, cIndex!, pIndex!, sIndex!)
         }
         return (0,0,0,0)
-    }
-    
-    func createFolder(_ folderName: String, baseUrl: URL) -> URL? {
-        let manager = FileManager.default
-        var isDir: ObjCBool = true
-        guard manager.fileExists(atPath: baseUrl.path, isDirectory: &isDir) else {
-            print("base url is not exists.")
-            return nil
-        }
-        
-        // 创建evo文件夹
-        let folderUrl = baseUrl.appendingPathComponent(folderName, isDirectory: true)
-        var isDirectory: ObjCBool = true
-        if !manager.fileExists(atPath: folderUrl.path, isDirectory: &isDirectory) {
-            try! manager.createDirectory(at: folderUrl, withIntermediateDirectories: true, attributes: nil)
-            return folderUrl
-        }
-        
-        return folderUrl
-    }
-    
-    func createFolder(_ folderURL: URL) {
-        let manager = FileManager.default
-        var isDir: ObjCBool = true
-        if manager.fileExists(atPath: folderURL.path, isDirectory: &isDir) {
-            print("Folder url is exists.")
-            return
-        }
-        
-        if !manager.fileExists(atPath: folderURL.path, isDirectory: &isDir) {
-            do {
-                try manager.createDirectory(at: folderURL, withIntermediateDirectories: true, attributes: nil)
-            } catch _ {}
-        }
     }
     
     //根据文件名和路径创建文件
@@ -235,7 +201,7 @@ extension ViewController {
         let channelFolderUrl = channelFolderURL(channel, radio: radio)
         let program = programs[programIndex]
         let programFolderName = String(format: "%@_%@", program.programId!, program.programName!)
-        let _ = createFolder(programFolderName, baseUrl: channelFolderUrl!)
+        let _ = URL.createFolder(programFolderName, baseUrl: channelFolderUrl!)
         print("Program folder name: \(programFolderName)")
         DispatchQueue.main.async {
             self.programLabel.stringValue = String(format: "节目：%@ (%d/%d)", programFolderName, self.programIndex, programs.count)
@@ -262,7 +228,7 @@ extension ViewController {
         let radioFolderUrl = radioFolderURL(radio)
         let channel = channels[channelIndex]
         let channelFolderName = String(format: "%@_%@", channel.channelId!, channel.channelName!)
-        let _ = createFolder(channelFolderName, baseUrl: radioFolderUrl!)
+        let _ = URL.createFolder(channelFolderName, baseUrl: radioFolderUrl!)
         print("Channel folder name: \(channelFolderName)")
         DispatchQueue.main.async {
             self.channelLabel.stringValue = String(format: "频道：%@ (%d/%d)", channelFolderName, self.channelIndex, channels.count)
@@ -288,7 +254,7 @@ extension ViewController {
         let radio = radios[radioIndex]
         let radioFolderName = String(format: "%d_%@", radio.radioId!, radio.radioName!)
         let _ = radioFolderURL(radio)
-        let _ = createFolder(radioFolderName, baseUrl: rootURL)
+        let _ = URL.createFolder(radioFolderName, baseUrl: rootURL)
         print("Radio folder name: \(radioFolderName)")
         DispatchQueue.main.async {
             self.radioLabel.stringValue = String(format: "电台：%@ (%d/%d)", radioFolderName, self.radioIndex, radios.count)
