@@ -63,7 +63,7 @@ class MusicManager: NSObject {
     func appendSongToPlaylist(_ song: Song, autoPlay: Bool){
         var exit = false
         for item in playlist {
-            if item.songID == song.songID {
+            if item.songId == song.songId {
                 exit = true
                 break
             }
@@ -88,7 +88,7 @@ class MusicManager: NSObject {
     func removeSongFromPlaylist(_ song: Song) {
         
         for item in playlist {
-            if item.songID == song.songID {
+            if item.songId == song.songId {
                 if let index = indexOf(array: playlist, song: item) {
                     playlist.remove(at: index)
                     if index < currentIndex {
@@ -392,7 +392,7 @@ class MusicManager: NSObject {
         
         for index in 0..<array.count {
             let item = array[index]
-            if item.songID == song.songID {
+            if item.songId == song.songId {
                 return index
             }
         }
@@ -404,7 +404,7 @@ class MusicManager: NSObject {
         
         for index in 0..<playlist.count {
             let item = playlist[index]
-            if item.songID == song.songID {
+            if item.songId == song.songId {
                 return index
             }
         }
@@ -417,7 +417,7 @@ class MusicManager: NSObject {
             return nil
         }
         
-        guard let programId = song.programID else {
+        guard let programId = song.programId else {
             return nil
         }
         

@@ -11,7 +11,7 @@ import ObjectMapper
 
 class Radio: Mappable {
     
-    var radioID: Int?
+    var radioId: Int?
     var radioName: String?
     var channels: [Channel]?
     
@@ -21,7 +21,7 @@ class Radio: Mappable {
     }
     
     func mapping(map: Map) {
-        radioID      <- map["radio_id"]
+        radioId      <- map["radio_id"]
         radioName    <- map["radio_name"]
         channels     <- map["channels"]
     }

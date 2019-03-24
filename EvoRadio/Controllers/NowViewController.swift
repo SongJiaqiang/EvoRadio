@@ -246,9 +246,9 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 
 extension NowViewController: ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(_ programID: String) {
+    func playMusicOfProgram(_ programId: String) {
         
-        api.fetch_songs(programID, isVIP: true, onSuccess: { (items) in
+        api.fetch_songs(programId, isVIP: true, onSuccess: { (items) in
             let songs = items
             if songs.count > 0 {
                 MusicManager.shared.clearList()

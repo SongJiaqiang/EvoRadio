@@ -129,9 +129,9 @@ class API {
     
     
     /** 根据频道ID获取节目单，分页 */
-    func fetch_programs(_ channelID:String, page: Page, onSuccess: @escaping ([Program]) -> Void, onFailed: ((Error) -> Void)?) {
+    func fetch_programs(_ channelId:String, page: Page, onSuccess: @escaping ([Program]) -> Void, onFailed: ((Error) -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
-        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelID)&_pn=\(_pn)&_sz=\(page.size)")
+        let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelId)&_pn=\(_pn)&_sz=\(page.size)")
         
         // 从缓存加载
         if let jsonArray = CoreDB.getPrograms(endpoint) {
@@ -167,10 +167,10 @@ class API {
     }
 
     /** 根据节目单ID获取其下的所有音乐 */
-    func fetch_songs(_ programID: String, isVIP: Bool,  onSuccess: @escaping ([Song]) -> Void, onFailed: ((Error) -> Void)?) {
-        var endpoint = commonEP("api/play.playProgram.json?device=iPhone%20OS%209.3.2&luid=&program_id=\(programID)")
+    func fetch_songs(_ programId: String, isVIP: Bool,  onSuccess: @escaping ([Song]) -> Void, onFailed: ((Error) -> Void)?) {
+        var endpoint = commonEP("api/play.playProgram.json?device=iPhone%20OS%209.3.2&luid=&program_id=\(programId)")
         if isVIP {
-            endpoint = commonEP("api/play.sharePlayProgram.json?device=iPhone%20OS%209.3.2&luid=&isShare=1&program_id=\(programID)")
+            endpoint = commonEP("api/play.sharePlayProgram.json?device=iPhone%20OS%209.3.2&luid=&isShare=1&program_id=\(programId)")
         }
 
         // 从缓存加载

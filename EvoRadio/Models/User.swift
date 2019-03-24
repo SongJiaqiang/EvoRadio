@@ -11,11 +11,10 @@ import ObjectMapper
 
 class User: Mappable {
 
-    var uID: String?
+    var uid: String?
     var uName: String?
     var userType: NSNumber? // JSON返回的数据有的是string，有的是int，郁闷啊！
     var picURL: String?
-    var picUrl : String?
     
     var priLavahomeSimple : NSNumber?
     var priCreateProgram : NSNumber?
@@ -36,7 +35,7 @@ class User: Mappable {
     
     
     func mapping(map: Map) {
-        uID    <- map["uid"]
+        uid    <- map["uid"]
         uName    <- map["uName"]
         userType    <- map["user_type"]
         picURL    <- map["picURL"]

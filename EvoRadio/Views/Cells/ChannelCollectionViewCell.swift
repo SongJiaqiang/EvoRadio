@@ -74,10 +74,10 @@ class ChannelCollectionViewCell: UICollectionViewCell {
         }
         
 //        if isNow {
-//            if let radioID = channel.radioID {
+//            if let radioId = channel.radioId {
 //                let allChannels = CoreDB.getAllChannels()
 //                for c in allChannels! {
-//                    if c["radio_id"] as? Int == Int(radioID) {
+//                    if c["radio_id"] as? Int == Int(radioId) {
 //                        tipLabel.text = c["radio_name"] as? String
 //                    }
 //                }

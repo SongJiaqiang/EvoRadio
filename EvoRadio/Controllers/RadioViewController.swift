@@ -140,7 +140,7 @@ extension RadioViewController: RadioTableViewCellDelegate {
     }
     
     func radioTableViewCell(_ cell: RadioTableViewCell, showMoreChannelWithRadio radioId: Int) {
-        let channelController = ChannelViewController(radioID: radioId)
+        let channelController = ChannelViewController(radioId: radioId)
         navigationController?.pushViewController(channelController, animated: true)
     }
 }

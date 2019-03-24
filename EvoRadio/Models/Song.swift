@@ -11,12 +11,12 @@ import ObjectMapper
 
 class Song : NSObject, Mappable {
 
-    var songID: String!
-    var jujingID: String?
-    var programID: String?
+    var songId: String!
+    var jujingId: String?
+    var programId: String?
     var songName: String!
-    var artistID: String?
-    var salbumID: String?
+    var artistId: String?
+    var salbumId: String?
     var language: String?
     var salbumsName: String?
     var artistsName: String?
@@ -46,12 +46,12 @@ class Song : NSObject, Mappable {
     }
     
     func mapping(map: Map) {
-        songID    <- map["song_id"]
-        jujingID   <- map["jujing_id"]
-        programID    <- map["program_id"]
+        songId    <- map["song_id"]
+        jujingId   <- map["jujing_id"]
+        programId    <- map["program_id"]
         songName   <- map["song_name"]
-        artistID    <- map["artist_id"]
-        salbumID   <- map["salbum_id"]
+        artistId    <- map["artist_id"]
+        salbumId   <- map["salbum_id"]
         salbumsName    <- map["salbums_name"]
         artistsName   <- map["artists_name"]
         playNum    <- map["play_num"]

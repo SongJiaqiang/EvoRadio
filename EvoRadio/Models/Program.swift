@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 class Program: Mappable{
-    var programID: String?
+    var programId: String?
     var programName: String?
     var programDesc: String?
     var picURL: String?
@@ -30,7 +30,7 @@ class Program: Mappable{
     var channels: [Channel]?
     var cover: Cover?
     var user: User?
-    var uID: String?
+    var uid: String?
     var lavadj: String?
     var recommend: String?
     
@@ -40,7 +40,7 @@ class Program: Mappable{
     }
 
     func mapping(map: Map) {
-        programID    <- map["program_id"]
+        programId    <- map["program_id"]
         programName    <- map["program_name"]
         programDesc    <- map["program_desc"]
         picURL    <- map["pic_url"]
@@ -61,7 +61,7 @@ class Program: Mappable{
         cover    <- map["cover"]
         user    <- map["user"]
         
-        uID    <- map["uid"]
+        uid    <- map["uid"]
         lavadj    <- map["lavadj"]
         recommend    <- map["recommend"]
     }

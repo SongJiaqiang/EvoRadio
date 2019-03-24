@@ -99,14 +99,14 @@ class ProgramViewController: ViewController {
     
     
     func listChannelPrograms(_ isRefresh: Bool) {
-        let channelID = channel.channelID!
+        let channelId = channel.channelId!
         
         var pageIndex = dataSources.count
         if isRefresh {
             pageIndex = 0
         }
         
-        api.fetch_programs(channelID, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
+        api.fetch_programs(channelId, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
             
             if newItems.count > 0 {
                 if isRefresh {
@@ -175,9 +175,9 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 }
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(_ programID: String) {
+    func playMusicOfProgram(_ programId: String) {
         
-        api.fetch_songs(programID, isVIP: true, onSuccess: { (songs) in
+        api.fetch_songs(programId, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.shared.clearList()
                 MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)

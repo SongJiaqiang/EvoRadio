@@ -159,7 +159,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 let bitrate = searchedResult.bitrate
                 
                 let song = Song()
-                song.songID = songInfo?.songId
+                song.songId = songInfo?.songId
                 song.songName = songInfo?.title
                 song.picURL = songInfo?.picBig
                 song.artistsName = songInfo?.author

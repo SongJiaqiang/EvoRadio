@@ -102,7 +102,7 @@ class RadioTableViewCell: UITableViewCell {
     //MARK: events
     @objc func moreButtonPressed(_ button: UIButton) {
         if let _ = delegate {
-            if let radioId = radio!.radioID {
+            if let radioId = radio!.radioId {
                 delegate?.radioTableViewCell(self, showMoreChannelWithRadio: radioId)
             }
         }

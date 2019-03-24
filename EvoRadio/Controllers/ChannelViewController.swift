@@ -19,15 +19,15 @@ class ChannelViewController: ViewController {
     
     fileprivate var collectionView: UICollectionView?
     var dataSources = [Channel]()
-    var radioID: Int = 0
+    var radioId: Int = 0
     
-    // init with radioID, if now, pass 0
-    convenience init(radioID: Int) {
+    // init with radioId, if now, pass 0
+    convenience init(radioId: Int) {
         self.init()
         
-        self.radioID = radioID
+        self.radioId = radioId
         
-        if radioID == 0 {
+        if radioId == 0 {
             NotificationCenter.default.addObserver(self, selector: #selector(nowTimeChanged(_:)), name: NOTI_NOWTIME_CHANGED, object: nil)
         }
     }
@@ -79,7 +79,7 @@ class ChannelViewController: ViewController {
     
     @objc func headerRefresh() {
         
-        if radioID == 0 {
+        if radioId == 0 {
             listAllNowChannels()
         }else {
             listAllChannels()
@@ -92,7 +92,7 @@ class ChannelViewController: ViewController {
             
             for reflect in items {
                 let radio = reflect 
-                if radio.radioID == self?.radioID {
+                if radio.radioId == self?.radioId {
                     self?.dataSources.removeAll()
                     self?.dataSources.append(contentsOf: radio.channels!)
                     break
@@ -122,7 +122,7 @@ class ChannelViewController: ViewController {
 //                self?.collectionView!.mj_header.endRefreshing()
 //            })
             
-//            if self?.radioID == 0 {
+//            if self?.radioId == 0 {
 //                self?.collectionView!.mj_header.hidden = true
 //            }
         }, onFailed: nil)
@@ -169,7 +169,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellID, for: indexPath) as! ChannelCollectionViewCell
         
         let channel = dataSources[(indexPath as NSIndexPath).item]
-        cell.updateContent(channel, isNow: ((radioID == 0) ? false : true))
+        cell.updateContent(channel, isNow: ((radioId == 0) ? false : true))
         return cell
     }
     
@@ -188,7 +188,7 @@ extension ChannelViewController: UICollectionViewDelegate, UICollectionViewDataS
 //    
 //    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
 //        
-//        if radioID == 0 {
+//        if radioId == 0 {
 //            return CGSizeMake(Device.width(), 100)
 //        }
 //        

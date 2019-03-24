@@ -10,10 +10,10 @@ import Foundation
 import ObjectMapper
 
 class Channel: Mappable {
-    var channelID: String?
+    var channelId: String?
     var channelName: String?
     var channelNameShengmu: String?
-    var radioID: String?
+    var radioId: String?
     var radioName: String?
     var programNum: String?
     var programFine: String?
@@ -29,10 +29,10 @@ class Channel: Mappable {
     }
     
     func mapping(map: Map) {
-        channelID    <- map["channel_id"]
+        channelId    <- map["channel_id"]
         channelName    <- map["channel_name"]
         channelNameShengmu    <- map["channel_name_shengmu"]
-        radioID    <- map["radio_id"]
+        radioId    <- map["radio_id"]
         radioName    <- map["radio_name"]
         programNum    <- map["program_num"]
         programFine    <- map["program_fine"]

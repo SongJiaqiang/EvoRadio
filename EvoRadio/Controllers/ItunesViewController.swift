@@ -130,7 +130,7 @@ class ItunesViewController: ViewController {
     func resolverMediaItem(item: MPMediaItem) -> Song {
         
         let song = Song()
-        song.songID = String(format: "%lld", Date().timeIntervalSince1970)
+        song.songId = String(format: "%lld", Date().timeIntervalSince1970)
         song.songName = item.value(forKey: MPMediaItemPropertyTitle) as? String
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String
         song.salbumsName = item.value(forKey: MPMediaItemPropertyAlbumTitle) as? String

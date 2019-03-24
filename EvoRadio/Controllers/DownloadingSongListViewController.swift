@@ -324,7 +324,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
     
     func addTask(s: Song) {
         let fileName = s.audioURL!.lastPathComponent()
-        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads", s.programID!])
+        let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads", s.programId!])
         
         self.downloadManager.addDownloadTask(fileName, fileURL: s.audioURL!, destinationPath: downloadPath as String)
         

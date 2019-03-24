@@ -88,7 +88,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     //MARK: event
     @objc func playButtonPressed(_ button: UIButton) {
         if let p = program {
-            delegate?.playMusicOfProgram(p.programID!)
+            delegate?.playMusicOfProgram(p.programId!)
         }
     }
     
@@ -122,5 +122,5 @@ class ProgramCollectionViewCell: UICollectionViewCell {
 }
 
 protocol ProgramCollectionViewCellDelegate {
-    func playMusicOfProgram(_ programID: String)
+    func playMusicOfProgram(_ programId: String)
 }

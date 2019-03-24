@@ -214,7 +214,7 @@ class CoreDB {
         var newSongs = [[String : Any]]()
         if let jsonArray = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             for item in jsonArray as! [[String : Any]] {
-                if (item["song_id"] as! String) == song.songID {
+                if (item["song_id"] as! String) == song.songId {
                     return
                 }
             }
@@ -264,7 +264,7 @@ class CoreDB {
         if let songs = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             newSongs = songs as! [NSDictionary]
             for item in newSongs {
-                if (item["song_id"] as! String) == song.songID {
+                if (item["song_id"] as! String) == song.songId {
                     newSongs.remove(at: newSongs.index(of: item)!)
                     break
                 }
@@ -315,7 +315,7 @@ class CoreDB {
             // 检查正在下载列表
             if let jsonArray = mainDB.object(forKey: DB_DOWNLOADING_LIST) {
                 for item in jsonArray as! [[String:Any]] {
-                    if (item["taskid"] as! String) == song.songID {
+                    if (item["taskid"] as! String) == song.songId {
                         isExit = true
                         break
                     }
@@ -325,7 +325,7 @@ class CoreDB {
             // 检查已下载列表
             if let jsonArray2 = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
                 for item in jsonArray2 as! [[String:Any]] {
-                    if (item["song_id"] as! String) == song.songID {
+                    if (item["song_id"] as! String) == song.songId {
                         isExit = true
                         break
                     }
@@ -416,7 +416,7 @@ class CoreDB {
             newSongs.append(contentsOf: jsonArray as! [[String : Any]])
             
             for (index, item) in newSongs.enumerated() {
-                if (item["song_id"] as! String) == song.songID {
+                if (item["song_id"] as! String) == song.songId {
                     newSongs.remove(at: index)
                     break
                 }
@@ -456,7 +456,7 @@ class CoreDB {
             newSongs.append(contentsOf: jsonArray as! [[String : Any]])
             
             for (index, item) in newSongs.enumerated() {
-                if (item["song_id"] as! String) == song.songID {
+                if (item["song_id"] as! String) == song.songId {
                     newSongs.remove(at: index)
                     break
                 }
@@ -483,7 +483,7 @@ extension CoreDB {
             newSongs.append(contentsOf: jsonArray as! [[String : Any]])
             
             for (index, item) in newSongs.enumerated() {
-                if (item["song_id"] as! String) == song.songID {
+                if (item["song_id"] as! String) == song.songId {
                     newSongs.remove(at: index)
                     break
                 }

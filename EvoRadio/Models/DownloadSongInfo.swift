@@ -32,7 +32,7 @@ class DownloadSongInfo: NSObject {
     convenience init(song: Song) {
         self.init()
         
-        self.taskid = song.songID
+        self.taskid = song.songId
         self.song = song
         self.status = TaskStatus.gettingInfo.rawValue
     }
