@@ -30,11 +30,15 @@ class CoreDB {
         let radio = Table("radio")
         let id = Expression<Int>("radio_id")
         let name = Expression<String>("radio_name")
-
-        try! db.run(radio.create(block: { (t) in
-            t.column(id, primaryKey: true)
-            t.column(name)
-        }))
+        do {
+            try db.run(radio.create(block: { (t) in
+                t.column(id, primaryKey: true)
+                t.column(name)
+            }))
+        }catch let e {
+            print("Create table failed: \(e)")
+        }
+        
     }
     
     func createChannelTable() {
@@ -61,23 +65,27 @@ class CoreDB {
         let recommend = Expression<String>("recommend")
         let rank = Expression<String>("rank")
         
-        try! db.run(channel.create(block: { (t) in
-            t.column(id, primaryKey: true)
-            t.column(name)
-            t.column(channel_name_shengmu)
-            t.column(english_name)
-            t.column(channel_desc)
-            t.column(radio_id)
-            t.column(radio_name)
-            t.column(program_num)
-            t.column(program_fine)
-            t.column(pub_time)
-            t.column(sort_order)
-            t.column(pic_url)
-            t.column(status)
-            t.column(recommend)
-            t.column(rank)
-        }))
+        do {
+            try db.run(channel.create(block: { (t) in
+                t.column(id, primaryKey: true)
+                t.column(name)
+                t.column(channel_name_shengmu)
+                t.column(english_name)
+                t.column(channel_desc)
+                t.column(radio_id)
+                t.column(radio_name)
+                t.column(program_num)
+                t.column(program_fine)
+                t.column(pub_time)
+                t.column(sort_order)
+                t.column(pic_url)
+                t.column(status)
+                t.column(recommend)
+                t.column(rank)
+            }))
+        }catch let e {
+            print("Create table failed: \(e)")
+        }
     }
     
     
@@ -125,43 +133,48 @@ class CoreDB {
         let full_tag = Expression<String>("full_tag")
         let b_public = Expression<String>("b_public")
         
-        try! db.run(program.create(block: { (t) in
-            t.column(id, primaryKey: true)
-            t.column(name)
-            t.column(program_desc)
-            t.column(pic_url)
-            t.column(create_time)
-            t.column(modify_time)
-            t.column(pub_time)
-            t.column(apply_time)
-            t.column(subscribe_num)
-            t.column(song_num)
-            t.column(play_num)
-            t.column(share_num)
-            t.column(collect_num)
-            t.column(ref_link)
-            t.column(vip_level)
-            t.column(audit_status)
-            t.column(sort_order)
-            t.column(status)
-//            t.column(channels)
-//            t.column(cover)
-//            t.column(user)
-            t.column(uid)
-            t.column(lavadj)
-            t.column(recommend)
-            t.column(sourceid)
-            t.column(duration)
-            t.column(comment)
-            t.column(sort_order_self)
-            t.column(play_order)
-            t.column(reject_time)
-            t.column(genre)
-            t.column(key)
-            t.column(full_tag)
-            t.column(b_public)
+        do {
             
-        }))
+            try db.run(program.create(block: { (t) in
+                t.column(id, primaryKey: true)
+                t.column(name)
+                t.column(program_desc)
+                t.column(pic_url)
+                t.column(create_time)
+                t.column(modify_time)
+                t.column(pub_time)
+                t.column(apply_time)
+                t.column(subscribe_num)
+                t.column(song_num)
+                t.column(play_num)
+                t.column(share_num)
+                t.column(collect_num)
+                t.column(ref_link)
+                t.column(vip_level)
+                t.column(audit_status)
+                t.column(sort_order)
+                t.column(status)
+                //            t.column(channels)
+                //            t.column(cover)
+                //            t.column(user)
+                t.column(uid)
+                t.column(lavadj)
+                t.column(recommend)
+                t.column(sourceid)
+                t.column(duration)
+                t.column(comment)
+                t.column(sort_order_self)
+                t.column(play_order)
+                t.column(reject_time)
+                t.column(genre)
+                t.column(key)
+                t.column(full_tag)
+                t.column(b_public)
+                
+            }))
+        } catch let e {
+            print("Create table failed: \(e)")
+        }
     }
     
     
@@ -193,28 +206,33 @@ class CoreDB {
         let size_320 = Expression<String>("size_320")
         let remove_time = Expression<String>("remove_time")
         
-        try! db.run(song.create(block: { (t) in
-            t.column(id, primaryKey: true)
-            t.column(name)
-            t.column(jujing_id)
-            t.column(program_id)
-            t.column(artist_id)
-            t.column(artists_name)
-            t.column(salbum_id)
-            t.column(salbums_name)
-            t.column(play_num)
-            t.column(share_num)
-            t.column(audio_url)
-            t.column(pic_url)
-            t.column(status)
-            t.column(tsid)
-            t.column(copyright_status)
-            t.column(artist_code)
-            t.column(albumAssetCode)
-            t.column(size_128)
-            t.column(size_320)
-            t.column(remove_time)
-        }))
+        do {
+            
+            try db.run(song.create(block: { (t) in
+                t.column(id, primaryKey: true)
+                t.column(name)
+                t.column(jujing_id)
+                t.column(program_id)
+                t.column(artist_id)
+                t.column(artists_name)
+                t.column(salbum_id)
+                t.column(salbums_name)
+                t.column(play_num)
+                t.column(share_num)
+                t.column(audio_url)
+                t.column(pic_url)
+                t.column(status)
+                t.column(tsid)
+                t.column(copyright_status)
+                t.column(artist_code)
+                t.column(albumAssetCode)
+                t.column(size_128)
+                t.column(size_320)
+                t.column(remove_time)
+            }))
+        } catch let e {
+            print("Create table failed: \(e)")
+        }
     }
     
     
@@ -242,24 +260,28 @@ class CoreDB {
         let pri_timer = Expression<String>("pri_timer")
         let pri_user_page = Expression<String>("user_name")
         
-        try! db.run(user.create(block: { (t) in
-            t.column(id, primaryKey: true)
-            t.column(name)
-            t.column(user_type)
-            t.column(picURL)
-            t.column(pri_audit_program)
-            t.column(pri_create_program)
-            t.column(pri_item_edit)
-            t.column(pri_item_view)
-            t.column(pri_lavahome_simple)
-            t.column(pri_login)
-            t.column(pri_cp)
-            t.column(pri_qd)
-            t.column(pri_sc)
-            t.column(pri_vod)
-            t.column(pri_timer)
-            t.column(pri_user_page)
-        }))
+        do {
+            try db.run(user.create(block: { (t) in
+                t.column(id, primaryKey: true)
+                t.column(name)
+                t.column(user_type)
+                t.column(picURL)
+                t.column(pri_audit_program)
+                t.column(pri_create_program)
+                t.column(pri_item_edit)
+                t.column(pri_item_view)
+                t.column(pri_lavahome_simple)
+                t.column(pri_login)
+                t.column(pri_cp)
+                t.column(pri_qd)
+                t.column(pri_sc)
+                t.column(pri_vod)
+                t.column(pri_timer)
+                t.column(pri_user_page)
+            }))
+        }catch let e {
+            print("Create table failed: \(e)")
+        }
     }
 
 }
