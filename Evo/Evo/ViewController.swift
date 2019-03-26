@@ -9,9 +9,8 @@
 import Cocoa
 import Alamofire
 
-// 移动硬盘
+// 指定硬盘
 //let baseURL = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
-// 本地磁盘
 let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
 let rootURL = baseURL.appendingPathComponent("evo")
 
@@ -49,8 +48,8 @@ class ViewController: NSViewController {
         programIndex = pIndex
         songIndex = sIndex
         
-//        radioIndex = 1
-//        channelIndex = 11
+//        radioIndex = 0
+//        channelIndex = 0
 //        programIndex = 0
 //        songIndex = 0
         
@@ -144,6 +143,11 @@ class ViewController: NSViewController {
 extension ViewController {
     
     func processSongs(_ songs: [Song], program: Program, channel: Channel, radio: Radio) {
+        print("跳过下载步骤")
+        self.increaseIndexes()
+        self.download()
+        return
+        
         if songs.count <= 0 {
             nextProgram()
             download()
@@ -162,33 +166,29 @@ extension ViewController {
                 self.songLabel.stringValue = String(format: "歌曲：%@ (%d/%d)", songFileName, self.songIndex, songs.count)
             }
             
-            print("不下载，跳过")
-            self.increaseIndexes()
-            self.download()
-            
-//            if FileManager.default.fileExists(atPath: songFileUrl!.path) {
-//                print("已下载，跳过")
-//                self.increaseIndexes()
-//                self.download()
-//            } else {
-//                print("下载MP3：\(audioURL)")
-//                Alamofire.download(audioURL, to: destination).response {[weak self] response in
-//                    if response.error == nil, let songPath = response.destinationURL?.path {
-//                        print("Download mp3 success: \(songPath)")
-//                    } else {
-//                        print("Download mp3 failed: \(audioURL)")
-//                    }
-//
-//                    self?.increaseIndexes()
-//                    self?.download()
-//
-//                    }.downloadProgress(closure: {[weak self] (progress) in
-//                        print("progress: \(progress)")
-//                        DispatchQueue.main.async {
-//                            self?.downloadProgress.doubleValue = progress.fractionCompleted
-//                        }
-//                    })
-//            }
+            if FileManager.default.fileExists(atPath: songFileUrl!.path) {
+                print("已下载，跳过")
+                self.increaseIndexes()
+                self.download()
+            } else {
+                print("下载MP3：\(audioURL)")
+                Alamofire.download(audioURL, to: destination).response {[weak self] response in
+                    if response.error == nil, let songPath = response.destinationURL?.path {
+                        print("Download mp3 success: \(songPath)")
+                    } else {
+                        print("Download mp3 failed: \(audioURL)")
+                    }
+
+                    self?.increaseIndexes()
+                    self?.download()
+
+                    }.downloadProgress(closure: {[weak self] (progress) in
+                        print("progress: \(progress)")
+                        DispatchQueue.main.async {
+                            self?.downloadProgress.doubleValue = progress.fractionCompleted
+                        }
+                    })
+            }
         }
     }
     
@@ -439,26 +439,27 @@ extension ViewController {
 }
 
 extension ViewController {
-    
     func increaseIndexes() {
-        songIndex += 1
-        if songIndex >= currentSongs.count {
-            nextProgram()
-            if programIndex >= currentPrograms.count {
-                nextChannel()
-                if channelIndex >= currentChannels.count {
-                    nextRadio()
-                    if self.radioIndex >= allRadios.count {
-                        print("Download finished.")
-                    }
-                }
-            }
-        }
-        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: radioIndex)
+        nextSong()
     }
     
-    func nextRadio() {
+    func nextRadio() -> Bool {
+        radioIndex += 1
+        channelIndex = 0
+        programIndex = 0
+        songIndex = 0
+        currentChannels.removeAll()
+        currentPrograms.removeAll()
+        currentSongs.removeAll()
         
+        if self.radioIndex >= allRadios.count {
+            radioIndex = 0
+            print("Download finished.")
+            return false
+        } else {
+            recordIndexes()
+        }
+        return true
     }
     
     func nextChannel() {
@@ -467,22 +468,37 @@ extension ViewController {
         songIndex = 0
         currentPrograms.removeAll()
         currentSongs.removeAll()
+        
+        if channelIndex >= currentChannels.count {
+            let _ = nextRadio()
+        } else {
+            recordIndexes()
+        }
     }
     
     func nextProgram() {
         programIndex += 1
         songIndex = 0
         currentSongs.removeAll()
+        
+        if programIndex >= currentPrograms.count {
+            nextChannel()
+        } else {
+            recordIndexes()
+        }
     }
     
     func nextSong() {
-        radioIndex += 1
-        channelIndex = 0
-        programIndex = 0
-        songIndex = 0
-        currentChannels.removeAll()
-        currentPrograms.removeAll()
-        currentSongs.removeAll()
+        songIndex += 1
+        if songIndex >= currentSongs.count {
+            nextProgram()
+        } else {
+            recordIndexes()
+        }
+    }
+    
+    func recordIndexes() {
+//        cacheIndexes(rIndex: radioIndex, cIndex: channelIndex, pIndex: programIndex, sIndex: radioIndex)
     }
 }
 
