@@ -19,6 +19,7 @@ class LocalViewController: ViewController {
         ["key":"history", "title": "最近播放的音乐", "icon":"local_history", "count":"0 首"],
         ["key":"favorites", "title": "我喜欢的音乐", "icon":"local_favorites", "count":"0 首"],
 //        ["key":"collect", "title": "我收藏的歌单", "icon":"local_collect", "count":"0 张"],
+        ["key":"scanner", "title": "扫描器", "icon":"local_favorites", "count":"0 首"],
     ]
     
     override func viewDidLoad() {
@@ -205,6 +206,9 @@ extension LocalViewController: UITableViewDataSource, UITableViewDelegate {
                 
             case "itunes":
                 navigationController?.pushViewController(ItunesViewController(), animated: true)
+                
+            case "scanner":
+                navigationController?.pushViewController(ScannerViewController(), animated: true)
                 
             default:
                 break
