@@ -27,26 +27,26 @@ public enum TaskStatus: Int {
     }
 }
 
-open class MZDownloadModel: NSObject {
+public class MZDownloadModel: NSObject {
     
-    open var fileName: String!
-    open var fileURL: String!
-    open var status: String = TaskStatus.gettingInfo.description()
+    public var fileName: String!
+    public var fileURL: String!
+    public var status: String = TaskStatus.gettingInfo.description()
     
-    open var file: (size: Float, unit: String)?
-    open var downloadedFile: (size: Float, unit: String)?
+    public var file: (size: Float, unit: String)?
+    public var downloadedFile: (size: Float, unit: String)?
     
-    open var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
+    public var remainingTime: (hours: Int, minutes: Int, seconds: Int)?
     
-    open var speed: (speed: Float, unit: String)?
+    public var speed: (speed: Float, unit: String)?
     
-    open var progress: Float = 0
+    public var progress: Float = 0
     
-    open var task: URLSessionDownloadTask?
+    public var task: URLSessionDownloadTask?
     
-    open var startTime: Date?
+    public var startTime: Date?
     
-    fileprivate(set) open var destinationPath: String = ""
+    fileprivate(set) public var destinationPath: String = ""
     
     fileprivate convenience init(fileName: String, fileURL: String) {
         self.init()

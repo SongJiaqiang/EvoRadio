@@ -62,10 +62,10 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     
 }
 
-open class MZDownloadManager: NSObject {
+public class MZDownloadManager: NSObject {
     
     fileprivate var sessionManager: Foundation.URLSession!
-    open var downloadingArray: [MZDownloadModel] = []
+    public var downloadingArray: [MZDownloadModel] = []
     fileprivate var delegate: MZDownloadManagerDelegate?
     
     fileprivate var backgroundSessionCompletionHandler: (() -> Void)?
@@ -164,10 +164,10 @@ extension MZDownloadManager {
         
         do {
             var resumeDictionary : AnyObject!
-            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject!
+            resumeDictionary = try PropertyListSerialization.propertyList(from: resumeData!, options: PropertyListSerialization.MutabilityOptions(), format: nil) as AnyObject?
             var localFilePath = (resumeDictionary?["NSURLSessionResumeInfoLocalPath"] as? String)
             
-            if localFilePath == nil || localFilePath?.characters.count < 1 {
+            if localFilePath == nil || localFilePath?.count < 1 {
                 localFilePath = (NSTemporaryDirectory() as String) + (resumeDictionary["NSURLSessionResumeInfoTempFileName"] as! String)
             }
             

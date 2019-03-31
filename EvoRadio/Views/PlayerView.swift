@@ -24,7 +24,7 @@ class PlayerView: UIView {
     var progressTimer: Timer!
     
     //MARK: instance
-    open static let main = PlayerView()
+    public static let main = PlayerView()
     
     init() {
         super.init(frame: CGRect(x: 0, y: Device.width()-playerBarHeight, width: Device.width(), height: playerBarHeight))

@@ -22,8 +22,8 @@ class TopTabBar: UIView {
     
     var currentIndex:Int = 1
    
-    open static let mainBar = TopTabBar(titles: ["电台","当下","本地"])
-    open var delegate: TopTabBarDelegate?
+    public static let mainBar = TopTabBar(titles: ["电台","当下","本地"])
+    public var delegate: TopTabBarDelegate?
     
     
     convenience init(titles: [String]) {
@@ -75,7 +75,7 @@ class TopTabBar: UIView {
     }
     
     
-    open func updateFrames() {
+    public func updateFrames() {
         
         for i in 0..<labels.count{
             let label = labels[i]
@@ -92,7 +92,7 @@ class TopTabBar: UIView {
         labels[currentIndex].textColor = UIColor.white
     }
     
-    open func animationWithOffsetX(_ offsetX: CGFloat) {
+    public func animationWithOffsetX(_ offsetX: CGFloat) {
         // 计算公式： x / distance = (offsetX - SCREEN_WIDTH * index) / SCREEN_WIDTH
         
         for i in 0..<labels.count{
@@ -109,7 +109,7 @@ class TopTabBar: UIView {
     }
     
     
-    open func updateTitle(title: String, atIndex: Int) {
+    public func updateTitle(title: String, atIndex: Int) {
 
         titles[atIndex] = title
         labels[atIndex].text = title

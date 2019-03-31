@@ -13,7 +13,7 @@ class AssistiveTouch: UIControl {
     var imageView: UIImageView!
     
     //MARK: instance
-    open static let shared = AssistiveTouch()
+    public static let shared = AssistiveTouch()
     
     override init(frame: CGRect) {
         super.init(frame: frame)

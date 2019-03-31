@@ -85,7 +85,7 @@ class ClockView: UIControl {
         let day_time = formatterText.components(separatedBy: "-")
         
         let dayTimeString = day_time.first
-        let idx = dayTimeString?.index((dayTimeString?.endIndex)!, offsetBy: 3 - (dayTimeString?.characters.count)!)
+        let idx = dayTimeString?.index((dayTimeString?.endIndex)!, offsetBy: 3 - (dayTimeString?.count)!)
         
         dayLabel.text = dayTimeString?.substring(to: idx!)
         timeLabel.text = day_time.last

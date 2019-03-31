@@ -30,7 +30,7 @@ let NOTI_DOWNLOAD_A_SONG_FINISHED = Notification.Name("download_a_song_finished"
 class NotificationManager {
     
     //MARK: instance
-    open static let shared = NotificationManager()
+    public static let shared = NotificationManager()
     
     func removeObserver(_ observer: AnyObject) {
         NotificationCenter.default.removeObserver(observer)

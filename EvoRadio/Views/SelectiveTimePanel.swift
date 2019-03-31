@@ -22,7 +22,7 @@ class SelectiveTimePanel: UIView {
     var selectedDayIndex: Int = 0
     var selectedTimeIndex: Int = 0
     
-    open static let timePanel = SelectiveTimePanel(frame: CGRect.zero)
+    public static let timePanel = SelectiveTimePanel(frame: CGRect.zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -294,7 +294,7 @@ class SelectiveTimePanel: UIView {
         }
     }
    
-    open func show() {
+    public func show() {
         Device.keyWindow().addSubview(self)
         self.alpha = 0
         self.snp.makeConstraints { (make) in
@@ -307,7 +307,7 @@ class SelectiveTimePanel: UIView {
         })
     }
     
-    open func hide() {
+    public func hide() {
         UIView.animate(withDuration: 0.5, animations: {
             self.alpha = 0
         }, completion: { completion in

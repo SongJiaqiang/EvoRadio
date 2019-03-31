@@ -12,7 +12,7 @@ import MBProgressHUD
 class DownloadingSongListViewController: ViewController {
     
     // singleton
-    open static let mainController = DownloadingSongListViewController()
+    public static let mainController = DownloadingSongListViewController()
     
     // 初始化下载管理器
     lazy var downloadManager: MZDownloadManager = {[unowned self] in
