@@ -25,10 +25,6 @@ def common_pods
   # crash监控
   pod 'Fabric'
   pod 'Crashlytics'
-  # 对象远程存储
-  pod 'Firebase/Core'
-  pod 'Firebase/Database'
-  pod 'Firebase/Storage'
   
   # 对象本地持久化
   pod 'ObjectMapper', '~> 3.4'
