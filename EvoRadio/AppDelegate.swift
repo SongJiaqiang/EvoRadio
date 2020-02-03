@@ -8,9 +8,6 @@
 
 import UIKit
 import AVFoundation
-import Fabric
-import Crashlytics
-import Firebase
 
 #if DEBUG
 import FLEX
@@ -24,11 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        Fabric.with([Crashlytics.self])
-        
-        // 对象存储
-        FirebaseApp.configure()
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
@@ -75,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
         }
-        
     }
     
     func setupRemoteControl() {
