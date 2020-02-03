@@ -5,29 +5,26 @@ use_frameworks!
 inhibit_all_warnings!
 
 def common_pods
-  # UI Debug
-  pod 'FLEX', '~> 2.4', :configurations => ['Debug'], :inhibit_warnings => true
+  # UI调试工具
+  pod 'FLEX',           '2.4.0', :configurations => ['Debug'], :inhibit_warnings => true
   # 自动布局
-  pod 'SnapKit'
+  pod 'SnapKit',        '4.2.0'
   # 列表刷新
-  pod 'MJRefresh'
+  pod 'MJRefresh',      '3.1.15.7'
   # 提示蒙版
-  pod 'MBProgressHUD'
+  pod 'MBProgressHUD',  '1.1.0'
   # 动画特效
-  pod 'pop'
+  pod 'pop',            '1.0.12'
   # 旋转木马特效
-  pod 'iCarousel'
-  
+  pod 'iCarousel',      '1.8.3'
   # 网络请求
-  pod 'Alamofire', '~> 4.7'
+  pod 'Alamofire',      '4.8.0'
   # 图片加载
-  pod 'Kingfisher'
-  
+  pod 'Kingfisher',     '4.10.1'
   # 对象本地持久化
-  pod 'ObjectMapper', '~> 3.4'
-  
+  pod 'ObjectMapper',   '3.4.1'
   # 音频播放
-  pod 'StreamingKit'
+  pod 'StreamingKit',   '0.1.30'
   
 end
 

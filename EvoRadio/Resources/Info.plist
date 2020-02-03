@@ -81,10 +81,6 @@
 	</array>
 	<key>CFBundleVersion</key>
 	<string>1.0.0.4</string>
-	<key>FacebookAppID</key>
-	<string>1604171342932985</string>
-	<key>FacebookDisplayName</key>
-	<string>EvoRadio</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>

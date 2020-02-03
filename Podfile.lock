@@ -11,16 +11,16 @@ PODS:
   - StreamingKit (0.1.30)
 
 DEPENDENCIES:
-  - Alamofire (~> 4.7)
-  - FLEX (~> 2.4)
-  - iCarousel
-  - Kingfisher
-  - MBProgressHUD
-  - MJRefresh
-  - ObjectMapper (~> 3.4)
-  - pop
-  - SnapKit
-  - StreamingKit
+  - Alamofire (= 4.8.0)
+  - FLEX (= 2.4.0)
+  - iCarousel (= 1.8.3)
+  - Kingfisher (= 4.10.1)
+  - MBProgressHUD (= 1.1.0)
+  - MJRefresh (= 3.1.15.7)
+  - ObjectMapper (= 3.4.1)
+  - pop (= 1.0.12)
+  - SnapKit (= 4.2.0)
+  - StreamingKit (= 0.1.30)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -47,6 +47,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   StreamingKit: 70ca8608c206864b4d54a577eacb3c8bf7c72209
 
-PODFILE CHECKSUM: d9014d83f7cfc5b00ad03efbe4851402731a20c7
+PODFILE CHECKSUM: 2343714f76eb240bf9a19cc7aebc6e504bc95945
 
 COCOAPODS: 1.7.0
