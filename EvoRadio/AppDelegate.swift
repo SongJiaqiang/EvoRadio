@@ -8,8 +8,6 @@
 
 import UIKit
 import AVFoundation
-import Fabric
-import Crashlytics
 
 #if DEBUG
 import FLEX
@@ -23,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var backgroundSessionCompletionHandler: (() -> Void)?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
-        Fabric.with([Crashlytics.self])
         
         // 清除选择时刻缓存
         CoreDB.clearSelectedIndexes()
@@ -71,7 +67,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
         }
-        
     }
     
     func setupRemoteControl() {

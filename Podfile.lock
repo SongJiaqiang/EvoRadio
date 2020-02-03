@@ -1,8 +1,5 @@
 PODS:
   - Alamofire (4.8.0)
-  - Crashlytics (3.12.0):
-    - Fabric (~> 1.9.0)
-  - Fabric (1.9.0)
   - FLEX (2.4.0)
   - iCarousel (1.8.3)
   - Kingfisher (4.10.1)
@@ -15,8 +12,6 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
-  - Crashlytics
-  - Fabric
   - FLEX (~> 2.4)
   - iCarousel
   - Kingfisher
@@ -30,8 +25,6 @@ DEPENDENCIES:
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
-    - Crashlytics
-    - Fabric
     - FLEX
     - iCarousel
     - Kingfisher
@@ -44,8 +37,6 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
-  Crashlytics: 07fb167b1694128c1c9a5a5cc319b0e9c3ca0933
-  Fabric: f988e33c97f08930a413e08123064d2e5f68d655
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
@@ -56,6 +47,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   StreamingKit: 70ca8608c206864b4d54a577eacb3c8bf7c72209
 
-PODFILE CHECKSUM: fe3c1e91fec5cc1778c3997a76daf27b2c99df0e
+PODFILE CHECKSUM: d9014d83f7cfc5b00ad03efbe4851402731a20c7
 
 COCOAPODS: 1.7.0

@@ -22,9 +22,6 @@ def common_pods
   pod 'Alamofire', '~> 4.7'
   # 图片加载
   pod 'Kingfisher'
-  # crash监控
-  pod 'Fabric'
-  pod 'Crashlytics'
   
   # 对象本地持久化
   pod 'ObjectMapper', '~> 3.4'
