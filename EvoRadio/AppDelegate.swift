@@ -59,14 +59,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let hasInvitationCode = ud.object(forKey: "kEnterInvitationCode")
         if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
             rootVC = NavigationController(rootViewController: MainViewController())
-            window?.rootViewController = rootVC
-            window?.makeKeyAndVisible()
-
         }else {
             rootVC = SplashViewController()
-            window?.rootViewController = rootVC
-            window?.makeKeyAndVisible()
         }
+        rootVC = TabBarController()
+        window?.rootViewController = rootVC
+        window?.makeKeyAndVisible()
     }
     
     func setupRemoteControl() {

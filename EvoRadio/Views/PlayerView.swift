@@ -49,7 +49,7 @@ class PlayerView: UIView {
             make.height.equalTo(playerBarHeight)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
-            make.bottomMargin.equalTo(IS_IPHONE_X ? -28 : 0)            
+            make.bottomMargin.equalTo(-49)            
         }
         
         backgroundView = UIImageView()

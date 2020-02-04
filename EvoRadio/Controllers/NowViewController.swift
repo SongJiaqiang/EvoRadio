@@ -232,15 +232,6 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         return CGSize(width: Device.width(), height: heardViewHeight);
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        var title = "当下"
-        if scrollView.contentOffset.y > heardViewHeight {
-            title = "精品推荐"
-        }
-        
-        TopTabBar.mainBar.updateTitle(title: title, atIndex: 1);
-    }
     
 }
 

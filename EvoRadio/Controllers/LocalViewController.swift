@@ -25,6 +25,8 @@ class LocalViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Me"
+        
         prepareTableView()
         prepareSearchBar()
         
