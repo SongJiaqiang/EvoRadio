@@ -33,26 +33,6 @@ class SongListViewController: ViewController {
         }
     }
     
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        PlayerView.main.hide()
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(SongListViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        PlayerView.main.show()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    
     //MARK: prepare UI
     func prepareTableView() {
         view.addSubview(tableView)

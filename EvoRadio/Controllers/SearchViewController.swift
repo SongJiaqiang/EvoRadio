@@ -24,13 +24,6 @@ class SearchViewController: ViewController {
         prepareSearchBar()
         prepareTableView()
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(SearchViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)

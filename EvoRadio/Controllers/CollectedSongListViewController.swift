@@ -30,14 +30,6 @@ class CollectedSongListViewController: ViewController {
         super.didReceiveMemoryWarning()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-    
     //MARK: prepare ui
     func prepareTableView() {
         view.addSubview(tableView)

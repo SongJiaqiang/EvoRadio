@@ -29,7 +29,7 @@ class MainViewController: ViewController {
         super.viewDidLoad()
         
         title = "EvoRadio"
-        prepareAssistiveTouch()
+        
         prepareContentView()
 //        preparePlayerView()
         
@@ -51,26 +51,11 @@ class MainViewController: ViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(MainViewController.showMenu), for: .touchUpInside)
-
-        AssistiveTouch.shared.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     //MARK: prepare
-    func prepareAssistiveTouch() {
-        let assitiveTouch = AssistiveTouch.shared
-        assitiveTouch.frame = CGRect(x: 10, y: 30, width: 40, height: 40)
-        Device.keyWindow().addSubview(assitiveTouch)
-    }
-    
     
     func preparePlayerView() {
         
@@ -153,8 +138,6 @@ extension MainViewController: UIScrollViewDelegate {
         } else if pageIndex == 2 {
             touchIcon = UIImage(named: "touch_sound")
         }
-        AssistiveTouch.shared.updateImage(touchIcon!)
-        
     }
 
 }
