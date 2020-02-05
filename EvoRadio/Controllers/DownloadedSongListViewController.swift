@@ -145,14 +145,14 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         let song = dataSource[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
     }
     
     func playButtonPressed(_ button: UIButton) {
         if let songs = CoreDB.getDownloadedSongs() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
             
         }
     }
@@ -162,7 +162,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         
         if dataSource.count > 0 {
             MusicManager.shared.appendSongsToPlaylist(dataSource, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
             
         }
     }

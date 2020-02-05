@@ -2,6 +2,7 @@ PODS:
   - Alamofire (4.8.0)
   - FLEX (2.4.0)
   - iCarousel (1.8.3)
+  - JQFisher (0.1.2)
   - Kingfisher (4.10.1)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.7)
@@ -14,6 +15,7 @@ DEPENDENCIES:
   - Alamofire (= 4.8.0)
   - FLEX (= 2.4.0)
   - iCarousel (= 1.8.3)
+  - JQFisher (= 0.1.2)
   - Kingfisher (= 4.10.1)
   - MBProgressHUD (= 1.1.0)
   - MJRefresh (= 3.1.15.7)
@@ -34,11 +36,14 @@ SPEC REPOS:
     - pop
     - SnapKit
     - StreamingKit
+  https://github.com/SongJiaqiang/Specs.git:
+    - JQFisher
 
 SPEC CHECKSUMS:
   Alamofire: 3ec537f71edc9804815215393ae2b1a8ea33a844
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
+  JQFisher: 97796aac19590ece9620d465a7567754a70910eb
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
@@ -47,6 +52,6 @@ SPEC CHECKSUMS:
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   StreamingKit: 70ca8608c206864b4d54a577eacb3c8bf7c72209
 
-PODFILE CHECKSUM: 2343714f76eb240bf9a19cc7aebc6e504bc95945
+PODFILE CHECKSUM: cdbc2313efab7ec3af4b3ebeb3db74cfa7163e18
 
 COCOAPODS: 1.7.0

@@ -13,7 +13,6 @@ import MJRefresh
 class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
-    var topTabBar: TopTabBar!
     fileprivate var playerView: UIView!
     fileprivate var contentView = UIScrollView()
     fileprivate var playerViewTopConstraint: Constraint?
@@ -30,8 +29,7 @@ class MainViewController: ViewController {
         super.viewDidLoad()
         
         title = "EvoRadio"
-        prepareAssistiveTouch()
-        prepareTabBar()
+        
         prepareContentView()
 //        preparePlayerView()
         
@@ -53,39 +51,11 @@ class MainViewController: ViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(MainViewController.showMenu), for: .touchUpInside)
-
-        AssistiveTouch.shared.updateImage(touchIcon != nil ? touchIcon! : UIImage(named: "touch_ring")!)
-    }
-    
     override var prefersStatusBarHidden: Bool {
         return true
     }
     
     //MARK: prepare
-    func prepareAssistiveTouch() {
-        let assitiveTouch = AssistiveTouch.shared
-        assitiveTouch.frame = CGRect(x: 10, y: 30, width: 40, height: 40)
-        Device.keyWindow().addSubview(assitiveTouch)
-    }
-    
-    func prepareTabBar() {
-        
-        topTabBar = TopTabBar.mainBar
-        view.addSubview(topTabBar)
-        topTabBar.delegate = self
-        topTabBar.snp.makeConstraints { (make) in
-            make.height.equalTo(20)
-            make.left.equalTo(view.snp.left)
-            make.right.equalTo(view.snp.right)
-            make.top.equalTo(view.snp.top)
-        }
-        
-    }
     
     func preparePlayerView() {
         
@@ -153,7 +123,7 @@ extension MainViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offsetX = scrollView.contentOffset.x
         
-        topTabBar.animationWithOffsetX(offsetX)
+        
     }
     
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
@@ -168,27 +138,7 @@ extension MainViewController: UIScrollViewDelegate {
         } else if pageIndex == 2 {
             touchIcon = UIImage(named: "touch_sound")
         }
-        AssistiveTouch.shared.updateImage(touchIcon!)
-        
-        topTabBar.currentIndex = pageIndex
-        topTabBar.updateFrames()
     }
 
-}
-
-extension MainViewController: ScrollTabBarDelegate {
-    func scrollTabBar(_ scrollTabBar: ScrollTabBar, didSelectedItemIndex index: Int) {
-        self.contentView.setContentOffset(CGPoint(x: Device.width()*CGFloat(index), y: 0), animated: true)
-    }
-}
-
-extension MainViewController: TopTabBarDelegate {
-    func tabBarOnTap(tabBar: TopTabBar) {
-        if tabBar.currentIndex == 0 {
-            radioController?.scrollToTop()
-        }else if tabBar.currentIndex == 1 {
-            nowController?.scrollToTop()
-        }
-    }
 }
 

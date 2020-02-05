@@ -57,6 +57,22 @@ class Device: NSObject {
     class func frontWindow() -> UIWindow {
         return UIApplication.shared.windows.last!
     }
+    
+//    class func keyWindow() -> UIWindow? {
+//           let window = UIApplication.shared.keyWindow
+//           if window == nil {
+//               print("[e]Key window is nil")
+//           }
+//           return window
+//       }
+//       class func frontWindow() -> UIWindow? {
+//           let window = UIApplication.shared.windows.last
+//           if window == nil {
+//               print("[e]Top window is nil")
+//           }
+//           return window
+//       }
+//
     class func rootController() -> UIViewController {
         return UIApplication.shared.keyWindow!.rootViewController!
     }
@@ -116,6 +132,6 @@ public extension UIDevice {
 //MARK: iphone device
 let IS_IPAD = (UI_USER_INTERFACE_IDIOM() == .pad)
 let IS_IPHONE = (UI_USER_INTERFACE_IDIOM() == .phone)
-let IS_IPHONE_X = (IS_IPHONE && UIScreen.main.bounds.size.height == 812.0)
-
+//let IS_IPHONE_X = (IS_IPHONE && UIScreen.main.bounds.size.height == 812.0)
+let IS_IPHONE_X = ((Device.width() == 375 && Device.height() == 812 ? true : false) || (Device.width() == 414 && Device.height() == 896 ? true : false))
 

@@ -29,13 +29,6 @@ class ItunesViewController: ViewController {
         loadMusicFromItunes()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(ChannelViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-
     //MARK: prepare UI
     func prepareUI() {
         
@@ -202,7 +195,7 @@ extension ItunesViewController: UITableViewDataSource, UITableViewDelegate {
         let song = songs[indexPath.row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
         
     }
     

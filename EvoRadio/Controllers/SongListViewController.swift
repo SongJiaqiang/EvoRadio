@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JQFisher
 
 class SongListViewController: ViewController {
 
@@ -32,26 +33,6 @@ class SongListViewController: ViewController {
             listProgramSongs()
         }
     }
-    
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-//        PlayerView.main.hide()
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(SongListViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        PlayerView.main.show()
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     
     //MARK: prepare UI
     func prepareTableView() {
@@ -205,7 +186,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let song = dataSources[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
     }
     
     @objc func playButtonPressed(_ button: UIButton) {
@@ -214,7 +195,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
             MusicManager.shared.appendSongsToPlaylist(dataSources, autoPlay: true)
             
             if let topVC = Device.keyWindow().topMostController() {
-                topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+                topVC.present(PlayerViewController.mainController)
             }
         }
     }

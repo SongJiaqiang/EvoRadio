@@ -43,13 +43,6 @@ class ProgramViewController: ViewController {
         
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-    
     //MARK: prepare
     func prepareCollectionView() {
         
@@ -183,7 +176,7 @@ extension ProgramViewController: ProgramCollectionViewCellDelegate {
                 MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
 //
 //                if let topVC = Device.keyWindow().topMostController() {
-//                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+//                    topVC.present(PlayerViewController.mainController)
 //                }
             }
             

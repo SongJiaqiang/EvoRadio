@@ -104,9 +104,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         }
         
         if let channels = program.channels {
-            let c = channels.first
-            
-            if let channelName = c!.channelName {
+            if let channelName = channels.first?.channelName {
                 radioNameLabel.text = channelName
             }
         }

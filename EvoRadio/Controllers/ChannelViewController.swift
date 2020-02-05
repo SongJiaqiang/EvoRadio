@@ -44,13 +44,6 @@ class ChannelViewController: ViewController {
         
         collectionView!.mj_header.beginRefreshing()
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(ChannelViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
 
     func prepareCollectionView() {
         

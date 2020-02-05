@@ -49,7 +49,7 @@ class PlayerView: UIView {
             make.height.equalTo(playerBarHeight)
             make.leftMargin.equalTo(0)
             make.rightMargin.equalTo(0)
-            make.bottomMargin.equalTo(IS_IPHONE_X ? -28 : 0)            
+            make.bottomMargin.equalTo(-49)            
         }
         
         backgroundView = UIImageView()
@@ -199,7 +199,7 @@ class PlayerView: UIView {
         
         if let _ = MusicManager.shared.currentSong() {
             hide()
-            Device.keyWindow().topMostController()?.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()?.present(PlayerViewController.mainController)
         }else {
             HudManager.showText("还没有播放音乐")
         }

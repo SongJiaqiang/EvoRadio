@@ -70,15 +70,11 @@ class PlayerViewController: ViewController {
             coverRotateAnimation = nil
         }
         
-        AssistiveTouch.shared.hide()
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         PlayerView.main.show()
-        
-        AssistiveTouch.shared.show()
     }
 
     //MARK: prepare ui

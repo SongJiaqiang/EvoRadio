@@ -20,11 +20,19 @@ class RadioViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = "Radio"
+        
         prepareTableView()
         
         listAllChannels()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -110,20 +118,6 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
         return getCellHeight()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        var title = "电台"
-        if scrollView.contentOffset.y - 30 > 0 {
-            let index = Int(scrollView.contentOffset.y - 30) / Int(getCellHeight() + 30 + 0.01)
-            if index >= 0 {
-                let radio = dataSources[index]
-                title = radio.radioName!
-            }
-        }
-        
-        TopTabBar.mainBar.updateTitle(title: title, atIndex: 0);
-    }
-
     
     func getCellHeight() -> CGFloat{
         if cellHeight == 0 {

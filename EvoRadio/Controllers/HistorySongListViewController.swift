@@ -26,17 +26,6 @@ class HistorySongListViewController: ViewController {
         NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(downloadASongFinished(_:)))
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(HistorySongListViewController.goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
     
     //MARK: prepare ui
     func prepareTableView() {
@@ -146,14 +135,14 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
         NotificationManager.shared.postUpdatePlayerNotification()
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
     }
     
     @objc func playButtonPressed(_ button: UIButton) {
         if let songs = CoreDB.getHistorySongs() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
             
         }
     }

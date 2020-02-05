@@ -44,17 +44,6 @@ class ScannerViewController: ViewController {
         NotificationManager.shared.addDownloadASongFinishedObserver(self, action: #selector(DownloadedSongListViewController.downloadASongFinished(_:)))
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        AssistiveTouch.shared.removeTarget(nil, action: nil, for: .allTouchEvents)
-        AssistiveTouch.shared.addTarget(self, action: #selector(goBack), for: .touchUpInside)
-        AssistiveTouch.shared.updateImage(UIImage(named: "touch_back")!)
-    }
-    
     override func goBack() {
         if let item = currentItem, let type = item.type {
             let newType = (type.rawValue - 1) < 0 ? 0 : (type.rawValue - 1)
@@ -323,7 +312,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
         if let songs = CoreDB.getDownloadedSongs() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
             
         }
     }
@@ -333,7 +322,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
 //
 //        if dataSource.count > 0 {
 //            MusicManager.shared.appendSongsToPlaylist(dataSource, autoPlay: true)
-//            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+//            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
 //
 //        }
 //    }
