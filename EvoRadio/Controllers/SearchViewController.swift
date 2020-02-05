@@ -165,7 +165,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: (self?.view)!, animated: true)
                     
-                    self?.present(PlayerViewController.mainController, animated: true, completion: nil)
+                    self?.present(PlayerViewController.mainController)
                 }
                 
             }) {[weak self] (error) in

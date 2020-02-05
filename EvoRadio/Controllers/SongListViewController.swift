@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JQFisher
 
 class SongListViewController: ViewController {
 
@@ -185,7 +186,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         let song = dataSources[(indexPath as NSIndexPath).row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
     }
     
     @objc func playButtonPressed(_ button: UIButton) {
@@ -194,7 +195,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
             MusicManager.shared.appendSongsToPlaylist(dataSources, autoPlay: true)
             
             if let topVC = Device.keyWindow().topMostController() {
-                topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+                topVC.present(PlayerViewController.mainController)
             }
         }
     }

@@ -312,7 +312,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
         if let songs = CoreDB.getDownloadedSongs() {
             MusicManager.shared.clearList()
             MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
-            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
             
         }
     }
@@ -322,7 +322,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
 //
 //        if dataSource.count > 0 {
 //            MusicManager.shared.appendSongsToPlaylist(dataSource, autoPlay: true)
-//            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController, animated: true, completion: nil)
+//            Device.keyWindow().topMostController()!.present(PlayerViewController.mainController)
 //
 //        }
 //    }

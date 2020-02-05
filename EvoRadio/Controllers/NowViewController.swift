@@ -246,7 +246,7 @@ extension NowViewController: ProgramCollectionViewCellDelegate {
                 MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
                 
 //                if let topVC = Device.keyWindow().topMostController() {
-//                    topVC.present(PlayerViewController.mainController, animated: true, completion: nil)
+//                    topVC.present(PlayerViewController.mainController)
 //                }
                 
             }

@@ -1,4 +1,5 @@
 source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/SongJiaqiang/Specs.git'
 
 platform :ios, '10.0'
 use_frameworks!
@@ -25,7 +26,8 @@ def common_pods
   pod 'ObjectMapper',   '3.4.1'
   # 音频播放
   pod 'StreamingKit',   '0.1.30'
-  
+  # 基础类扩展
+  pod 'JQFisher',       '0.1.2'
 end
 
 target 'EvoRadio' do

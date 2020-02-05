@@ -199,7 +199,7 @@ class PlayerView: UIView {
         
         if let _ = MusicManager.shared.currentSong() {
             hide()
-            Device.keyWindow().topMostController()?.present(PlayerViewController.mainController, animated: true, completion: nil)
+            Device.keyWindow().topMostController()?.present(PlayerViewController.mainController)
         }else {
             HudManager.showText("还没有播放音乐")
         }

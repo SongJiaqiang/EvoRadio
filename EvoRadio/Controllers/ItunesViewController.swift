@@ -195,7 +195,7 @@ extension ItunesViewController: UITableViewDataSource, UITableViewDelegate {
         let song = songs[indexPath.row]
         MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
         
-        present(PlayerViewController.mainController, animated: true, completion: nil)
+        present(PlayerViewController.mainController)
         
     }
     
