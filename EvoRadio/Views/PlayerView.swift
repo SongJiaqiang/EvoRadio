@@ -72,7 +72,7 @@ class PlayerView: UIView {
         // init coverImageView
         coverView = UIImageView()
         contentView.addSubview(coverView)
-        coverView.image = UIImage(named: "cd_cover")
+        coverView.image = UIImage(named: "logo_gray")
         coverView.clipsToBounds = true
         coverView.contentMode = .scaleAspectFill
         coverView.snp.makeConstraints { (make) in
