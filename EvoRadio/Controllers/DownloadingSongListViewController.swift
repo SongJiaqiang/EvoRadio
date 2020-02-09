@@ -144,7 +144,7 @@ class DownloadingSongListViewController: ViewController {
     @objc func downloadingListChanged(_ notification: Notification) {
         if let userInfo = notification.userInfo {
 
-            let songs = userInfo["songs"] as! [Song]
+            let songs = userInfo["songs"] as! [LRSong]
             for song in songs {
                 let donwloadSong = DownloadSongInfo(song: song)
                 Downloader.downloadingSongs.append(donwloadSong)
@@ -322,7 +322,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         }
     }
     
-    func addTask(s: Song) {
+    func addTask(s: LRSong) {
         let fileName = s.audioURL!.lastPathComponent()
         let downloadPath = MZUtility.baseFilePath.appendPathComponents(["downloads", s.programId!])
         
@@ -331,7 +331,7 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
         print(">>> Add a download task: \(fileName)")
     }
     
-    func isDownloading(_ song: Song) -> Bool{
+    func isDownloading(_ song: LRSong) -> Bool{
         for item in downloadManager.downloadingArray {
             if item.fileURL == song.audioURL {
                 return true

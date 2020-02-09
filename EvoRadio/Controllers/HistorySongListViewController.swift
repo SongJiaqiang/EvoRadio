@@ -13,7 +13,7 @@ class HistorySongListViewController: ViewController {
     let cellID = "historySongsCell"
     
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var dataSource = [Song]()
+    var dataSource = [LRSong]()
     
     
     override func viewDidLoad() {
@@ -158,7 +158,7 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
 }
 
 extension HistorySongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: Song) {
+    func openToolPanelOfSong(_ song: LRSong) {
         
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in

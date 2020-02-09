@@ -1,15 +1,15 @@
 //
-//  Song.swift
+//  LRSong.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/18.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ObjectMapper
 
-class Song : NSObject, Mappable {
+class LRSong : NSObject, Mappable {
 
     var songId: String!
     var jujingId: String?
@@ -28,8 +28,10 @@ class Song : NSObject, Mappable {
     var picURL: String?
     var status: String?
     
+    #if os(iOS)
     var assetURL: URL?
     var albumImage: UIImage?
+    #endif
     
     override init() {
         super.init()

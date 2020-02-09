@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: Song)
+    func openToolPanelOfSong(_ song: LRSong)
 }
 
 class SongListTableViewCell: UITableViewCell {
@@ -20,7 +20,7 @@ class SongListTableViewCell: UITableViewCell {
     var moreButton = UIButton()
     var separatorView = UIView()
 
-    var song: Song?
+    var song: LRSong?
     
     var delegate: SongListTableViewCellDelegate?
     
@@ -109,7 +109,7 @@ class SongListTableViewCell: UITableViewCell {
         delegate?.openToolPanelOfSong(song!)
     }
     
-    func updateSongInfo(_ songModel: Song) {
+    func updateSongInfo(_ songModel: LRSong) {
         song = songModel
         
         if let picURLString = songModel.picURL {

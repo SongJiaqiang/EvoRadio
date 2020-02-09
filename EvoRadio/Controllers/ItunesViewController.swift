@@ -16,7 +16,7 @@ class ItunesViewController: ViewController {
     let cellID = "cellID"
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var songs = [Song]()
+    var songs = [LRSong]()
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -120,9 +120,9 @@ class ItunesViewController: ViewController {
         }
     }
     
-    func resolverMediaItem(item: MPMediaItem) -> Song {
+    func resolverMediaItem(item: MPMediaItem) -> LRSong {
         
-        let song = Song()
+        let song = LRSong()
         song.songId = String(format: "%lld", Date().timeIntervalSince1970)
         song.songName = item.value(forKey: MPMediaItemPropertyTitle) as? String
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String

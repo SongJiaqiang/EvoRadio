@@ -13,7 +13,7 @@ class DownloadedProgramListViewController: ViewController {
     var cellID = "downloadedProgramsCellID"
     
     var tableView: UITableView!
-    var dataSource = [Program]()
+    var dataSource = [LRProgram]()
     
 
     

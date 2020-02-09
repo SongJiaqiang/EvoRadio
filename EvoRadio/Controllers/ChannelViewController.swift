@@ -18,7 +18,7 @@ class ChannelViewController: ViewController {
     let headerID = "channelHeaderID"
     
     fileprivate var collectionView: UICollectionView?
-    var dataSources = [Channel]()
+    var dataSources = [LRChannel]()
     var radioId: Int = 0
     
     // init with radioId, if now, pass 0
@@ -81,7 +81,7 @@ class ChannelViewController: ViewController {
     }
     
     func listAllChannels() {
-        api.fetch_all_channels({[weak self] (items) in
+        Lava.fetch_all_radios({[weak self] (items) in
             
             for reflect in items {
                 let radio = reflect 
@@ -101,7 +101,7 @@ class ChannelViewController: ViewController {
     
     func listAllNowChannels() {
         
-        api.fetch_all_now_channels({[weak self] (nowChannels) in
+        Lava.fetch_all_now_channels({[weak self] (nowChannels) in
 //            let week = CoreDB.currentDayOfWeek()
 //            let time = CoreDB.currentTimeOfDay()
 //            
@@ -132,7 +132,7 @@ class ChannelViewController: ViewController {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
 
-            api.fetch_all_now_channels({[weak self] (nowChannels) in
+            Lava.fetch_all_now_channels({[weak self] (nowChannels) in
                 let nowChannel = nowChannels[dayIndex*8+timeIndex]
                 if let newChannels = nowChannel.channels {
                     

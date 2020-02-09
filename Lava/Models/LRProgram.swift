@@ -1,15 +1,15 @@
 //
-//  Program.swift
+//  LRProgram.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/18.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ObjectMapper
 
-class Program: Mappable{
+class LRProgram: Mappable{
     var programId: String?
     var programName: String?
     var programDesc: String?
@@ -27,9 +27,9 @@ class Program: Mappable{
     var auditStatus: String?
     var status: String?
     var sortOrder: String?
-    var channels: [Channel]?
-    var cover: Cover?
-    var user: User?
+    var channels: [LRChannel]?
+    var cover: LRCover?
+    var user: LRUser?
     var uid: String?
     var lavadj: String?
     var recommend: String?

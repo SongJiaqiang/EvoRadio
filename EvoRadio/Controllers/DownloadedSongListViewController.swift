@@ -13,7 +13,7 @@ class DownloadedSongListViewController: ViewController {
     let cellID = "downloadedSongsCell"
     
     var tableView: UITableView!
-    var dataSource = [Song]()
+    var dataSource = [LRSong]()
     
     
     override func viewDidLoad() {
@@ -181,7 +181,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
 }
 
 extension DownloadedSongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: Song) {
+    func openToolPanelOfSong(_ song: LRSong) {
         
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in

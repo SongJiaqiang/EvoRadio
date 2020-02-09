@@ -1,5 +1,5 @@
 //
-//  User.swift
+//  LRUser.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/18.
@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class User: Mappable {
+class LRUser: Mappable {
 
     var uid: String?
     var uName: String?

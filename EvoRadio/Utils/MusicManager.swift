@@ -26,7 +26,7 @@ class MusicManager: NSObject {
     var audioPlayer: STKAudioPlayer!
     fileprivate var playTimer: Timer?
 
-    var playlist = [Song]()
+    var playlist = [LRSong]()
     var currentIndex: Int = -1
     
     override init() {
@@ -38,7 +38,7 @@ class MusicManager: NSObject {
     }
 
     //MARK: functions
-    func appendSongsToPlaylist(_ songs: [Song], autoPlay: Bool) {
+    func appendSongsToPlaylist(_ songs: [LRSong], autoPlay: Bool) {
         if songs.count == 0 {
             return
         }
@@ -60,7 +60,7 @@ class MusicManager: NSObject {
         }
     }
     
-    func appendSongToPlaylist(_ song: Song, autoPlay: Bool){
+    func appendSongToPlaylist(_ song: LRSong, autoPlay: Bool){
         var exit = false
         for item in playlist {
             if item.songId == song.songId {
@@ -85,7 +85,7 @@ class MusicManager: NSObject {
         saveLastPlaylist()
     }
     
-    func removeSongFromPlaylist(_ song: Song) {
+    func removeSongFromPlaylist(_ song: LRSong) {
         
         for item in playlist {
             if item.songId == song.songId {
@@ -311,7 +311,7 @@ class MusicManager: NSObject {
     }
     
     //MARK: -
-    func currentSong() -> Song? {
+    func currentSong() -> LRSong? {
         if currentIndex < 0 || playlist.count <= 0 {
             return nil
         }else {
@@ -388,7 +388,7 @@ class MusicManager: NSObject {
         return .ListLoop
     }
     
-    func indexOf(array: [Song], song: Song) -> Int? {
+    func indexOf(array: [LRSong], song: LRSong) -> Int? {
         
         for index in 0..<array.count {
             let item = array[index]
@@ -400,7 +400,7 @@ class MusicManager: NSObject {
         return nil
     }
     
-    func indexOfPlaylist(song: Song) -> Int? {
+    func indexOfPlaylist(song: LRSong) -> Int? {
         
         for index in 0..<playlist.count {
             let item = playlist[index]
@@ -412,7 +412,7 @@ class MusicManager: NSObject {
         return nil
     }
     
-    func findMusicFileCachedPath(_ song: Song) -> String? {
+    func findMusicFileCachedPath(_ song: LRSong) -> String? {
         if song.audioURL?.isEmpty == true {
             return nil
         }

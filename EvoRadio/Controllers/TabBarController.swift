@@ -17,7 +17,7 @@ class TabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        radioController.tabBarItem = UITabBarItem.init(title: "Radio", image: UIImage(named: "tabVC_music"), tag: 0)
+        radioController.tabBarItem = UITabBarItem.init(title: "LRRadio", image: UIImage(named: "tabVC_music"), tag: 0)
         nowController.tabBarItem = UITabBarItem.init(title: "Now", image: UIImage(named: "tabVC_recommand"), tag: 1)
         localController.tabBarItem = UITabBarItem.init(title: "Me", image: UIImage(named: "tabVC_mine"), tag: 2)
         

@@ -1,5 +1,5 @@
 //
-//  Channel.swift
+//  LRChannel.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/18.
@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class Channel: Mappable {
+class LRChannel: Mappable {
     var channelId: String?
     var channelName: String?
     var channelNameShengmu: String?

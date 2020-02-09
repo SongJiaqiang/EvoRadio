@@ -11,20 +11,20 @@ import ObjectMapper
 
 class LastPlaylist: NSObject {
 
-    var playlist: [Song]?
+    var playlist: [LRSong]?
     var indexOfPlaylist: Int? = 0
     var timePlayed: Int? = 0
     
     convenience init(json: [String : Any]) {
         
-        let songs = Mapper<Song>().mapArray(JSONArray: json["playlist"] as! [[String : Any]])
+        let songs = Mapper<LRSong>().mapArray(JSONArray: json["playlist"] as! [[String : Any]])
         let index = json["indexOfPlaylist"] as! Int
         let time = json["timePlayed"] as! Int
         
         self.init(list: songs, index: index, time: time)
     }
     
-    convenience init(list: [Song], index: Int, time: Int) {
+    convenience init(list: [LRSong], index: Int, time: Int) {
         self.init()
         
         self.playlist = list
@@ -42,7 +42,7 @@ class LastPlaylist: NSObject {
     
     func objectOfJson(json: [String : Any]) -> LastPlaylist {
         
-        let songs = Mapper<Song>().mapArray(JSONArray: json["playlist"] as! [[String : Any]])
+        let songs = Mapper<LRSong>().mapArray(JSONArray: json["playlist"] as! [[String : Any]])
         let index = json["indexOfPlaylist"] as! Int
         let time = json["timePlayed"] as! Int
         

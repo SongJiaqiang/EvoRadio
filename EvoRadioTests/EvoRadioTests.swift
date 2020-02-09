@@ -39,8 +39,8 @@ class EvoRadioTests: XCTestCase {
         let json = ["uid":"123", "uName":"Jarvis"]
         let jsonString = "{\"uid\":\"234\", \"uName\":\"Tia\"}"
         
-        let u1 = User(JSON: json)
-        let u2 = User(JSONString: jsonString)
+        let u1 = LRUser(JSON: json)
+        let u2 = LRUser(JSONString: jsonString)
         
         XCTAssertEqual(u1?.uID, "123")
         XCTAssertEqual(u2?.uID, "Tia")

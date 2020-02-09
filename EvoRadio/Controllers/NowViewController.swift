@@ -15,8 +15,8 @@ class NowViewController: ViewController {
     let headerViewID = "NowCollectionHeaderViewID"
     let footerViewID = "footerViewID"
     
-    var dataSources = [Program]()
-    var nowChannels = [Channel]()
+    var dataSources = [LRProgram]()
+    var nowChannels = [LRChannel]()
     var collectionView: UICollectionView!
     var collectionHeaderView: NowCollectionHeaderView?
     fileprivate var endOfFeed = false
@@ -87,7 +87,7 @@ class NowViewController: ViewController {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
             
-            api.fetch_all_now_channels({[weak self] (objects) in
+            Lava.fetch_all_now_channels({[weak self] (objects) in
                 let nowChannel = objects[dayIndex*8+timeIndex]
                 if let newChannels = nowChannel.channels {
                     
@@ -123,10 +123,10 @@ class NowViewController: ViewController {
             pageIndex = 0
         }
         
-        api.fetch_ground_programs(Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
+        Lava.fetch_ground_programs(LRPage(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
             
             if items.count > 0 {
-                let newData = items as! [Program]
+                let newData = items as! [LRProgram]
                 if isRefresh {
                     self?.dataSources.removeAll()
                 }
@@ -150,7 +150,7 @@ class NowViewController: ViewController {
     }
     
     func listNowChannels() {
-        api.fetch_all_now_channels({[weak self] (items) in
+        Lava.fetch_all_now_channels({[weak self] (items) in
             let week = CoreDB.currentDayOfWeek()
             let time = CoreDB.currentTimeOfDay()
             
@@ -239,7 +239,7 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 extension NowViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programId: String) {
         
-        api.fetch_songs(programId, isVIP: true, onSuccess: { (items) in
+        Lava.fetch_songs(programId, isVIP: true, onSuccess: { (items) in
             let songs = items
             if songs.count > 0 {
                 MusicManager.shared.clearList()

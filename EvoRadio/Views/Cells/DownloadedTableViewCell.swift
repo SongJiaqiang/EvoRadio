@@ -17,7 +17,7 @@ class DownloadedTableViewCell: UITableViewCell {
     
     var delegate: SongListTableViewCellDelegate?
     
-    var song: Song?
+    var song: LRSong?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -105,7 +105,7 @@ class DownloadedTableViewCell: UITableViewCell {
         }
     }
     
-    func updateMusicInfo(_ musicInfo: Song, atIndex: Int) {
+    func updateMusicInfo(_ musicInfo: LRSong, atIndex: Int) {
         song = musicInfo
         
         indexLabel.text = "\(atIndex + 1)"

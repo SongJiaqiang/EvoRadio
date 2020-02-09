@@ -15,7 +15,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     let tipLabel = UILabel()
     let playButton = UIButton()
 
-    var channel: Channel?
+    var channel: LRChannel?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,7 +62,7 @@ class ChannelCollectionViewCell: UICollectionViewCell {
     }
     
     //MARK: event
-    func updateContent(_ channel: Channel, isNow: Bool) {
+    func updateContent(_ channel: LRChannel, isNow: Bool) {
         self.channel = channel
         
         if let picURL = URL(string: channel.picURL!) {

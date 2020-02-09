@@ -587,7 +587,7 @@ class PlayerViewController: ViewController {
     
     //MARK: other
     
-    func updateCoverImage(_ song: Song) {
+    func updateCoverImage(_ song: LRSong) {
         debugPrint("update cover image")
         titleLabel.text = song.songName
         if let album = song.salbumsName {
@@ -753,7 +753,7 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension PlayerViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: Song) {
+    func openToolPanelOfSong(_ song: LRSong) {
 
         let row = MusicManager.shared.indexOfPlaylist(song: song)
         

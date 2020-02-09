@@ -1,19 +1,19 @@
 //
-//  NowChannel.swift
+//  LRNowChannel.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 07/08/2017.
 //  Copyright © 2017 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ObjectMapper
 
-class NowChannel: Mappable {
+class LRNowChannel: Mappable {
 
     var dayofweek: String?
     var timeid: String?
-    var channels: [Channel]?
+    var channels: [LRChannel]?
     
     
     required init?(map: Map) {

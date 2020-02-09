@@ -13,8 +13,8 @@ class SongListViewController: ViewController {
 
     let cellID = "songCellID"
     
-    var program: Program!
-    var dataSources = [Song]()
+    var program: LRProgram!
+    var dataSources = [LRSong]()
 
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var coverImageView = UIImageView()
@@ -28,8 +28,8 @@ class SongListViewController: ViewController {
 //        setupBackButton()
         prepareTableView()
         
-        if let _ = program {
-            title = program.programName
+        if let p = program {
+            title = p.programName
             listProgramSongs()
         }
     }
@@ -80,7 +80,7 @@ class SongListViewController: ViewController {
         
         if let _ = program {
             let programId = program.programId!
-            api.fetch_songs(programId, isVIP: true, onSuccess: {[weak self] (songs) in
+            Lava.fetch_songs(programId, isVIP: true, onSuccess: {[weak self] (songs) in
                 
                 if songs.count > 0 {
                     self?.dataSources = songs
@@ -211,7 +211,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension SongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: Song) {
+    func openToolPanelOfSong(_ song: LRSong) {
         
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in

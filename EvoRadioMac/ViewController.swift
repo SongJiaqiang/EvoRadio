@@ -7,6 +7,7 @@
 //
 
 import Cocoa
+import Alamofire
 
 class ViewController: NSViewController {
 
@@ -14,16 +15,34 @@ class ViewController: NSViewController {
         super.viewDidLoad()
 
         
+    }
+
+    @IBAction func onPressed(_ sender: NSButton) {
+        
+        Lava.fetch_all_radios({ (radios) in
+            if let radio = radios.first {
+                print(radio.radioId.debugDescription)
+            }
+
+        }) { (e) in
+            print("fetch all radios failed: \(e)")
+        }
+        
         
         
     }
-
+    
+    
     override var representedObject: Any? {
         didSet {
         // Update the view, if already loaded.
         }
     }
 
+    
+    func scanData() {
+        
+    }
 
 }
 

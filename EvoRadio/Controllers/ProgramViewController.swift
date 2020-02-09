@@ -12,8 +12,8 @@ import MJRefresh
 class ProgramViewController: ViewController {
     let cellID = "programCellID"
     
-    var channel: Channel!
-    var dataSources = [Program]()
+    var channel: LRChannel!
+    var dataSources = [LRProgram]()
     var collectionView: UICollectionView?
     fileprivate var endOfFeed = false
     fileprivate let pageSize: Int = 30
@@ -21,7 +21,7 @@ class ProgramViewController: ViewController {
     var showHeaderView: Bool = false
     
     //MARK life cycle
-    convenience init(channel: Channel) {
+    convenience init(channel: LRChannel) {
         self.init()
         
         self.channel = channel
@@ -99,7 +99,7 @@ class ProgramViewController: ViewController {
             pageIndex = 0
         }
         
-        api.fetch_programs(channelId, page: Page(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
+        Lava.fetch_programs(channelId, page: LRPage(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
             
             if newItems.count > 0 {
                 if isRefresh {
@@ -170,7 +170,7 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programId: String) {
         
-        api.fetch_songs(programId, isVIP: true, onSuccess: { (songs) in
+        Lava.fetch_songs(programId, isVIP: true, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.shared.clearList()
                 MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
