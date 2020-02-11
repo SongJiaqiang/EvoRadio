@@ -32,6 +32,8 @@
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
 		634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06771F38888400253E9A /* RadioTableViewCell.swift */; };
+		634E802323F1ACED00745BDA /* Database+Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E802223F1ACED00745BDA /* Database+Song.swift */; };
+		634E802523F1AE7500745BDA /* Database+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E802423F1AE7500745BDA /* Database+User.swift */; };
 		635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AD2E31F49BC18002AFE0D /* ReflectionView.m */; };
 		6360F24B1F779C9500070C4E /* SearchSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24A1F779C9500070C4E /* SearchSongInfo.swift */; };
 		6360F24D1F77A5A800070C4E /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24C1F77A5A800070C4E /* SimpleTableViewCell.swift */; };
@@ -64,6 +66,10 @@
 		63CA469223EFCEA3007443F4 /* LRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468123EFCEA3007443F4 /* LRProgram.swift */; };
 		63CA469323EFCEA3007443F4 /* LRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468123EFCEA3007443F4 /* LRProgram.swift */; };
 		63CA469423EFD04E007443F4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB4A1CC4B6C50018A532 /* API.swift */; };
+		63CA469C23EFF2C9007443F4 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA469B23EFF2C9007443F4 /* Database.swift */; };
+		63CA46A023F05608007443F4 /* Database+Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA469F23F05608007443F4 /* Database+Program.swift */; };
+		63CA46A223F05640007443F4 /* Database+Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA46A123F05640007443F4 /* Database+Channel.swift */; };
+		63CA46A423F05658007443F4 /* Database+Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA46A323F05658007443F4 /* Database+Radio.swift */; };
 		63E1D9392228590E00B5C85D /* CollectedSongListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */; };
 		63EF43F11F38A1C700EADC48 /* ProgramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */; };
 		63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF43F41F38A1FD00EADC48 /* ProgramCollectionViewCell.swift */; };
@@ -92,7 +98,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -198,6 +204,8 @@
 		634E06661F3869F400253E9A /* EvoRadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvoRadioTests.swift; sourceTree = "<group>"; };
 		634E06681F3869F400253E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		634E06771F38888400253E9A /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioTableViewCell.swift; sourceTree = "<group>"; };
+		634E802223F1ACED00745BDA /* Database+Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Song.swift"; sourceTree = "<group>"; };
+		634E802423F1AE7500745BDA /* Database+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+User.swift"; sourceTree = "<group>"; };
 		635AD1B41F4981DE002AFE0D /* RefreshKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RefreshKit.framework; path = Carthage/Build/iOS/RefreshKit.framework; sourceTree = "<group>"; };
 		635AD2141F499611002AFE0D /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
 		635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarouselKit.framework; path = Carthage/Build/iOS/CarouselKit.framework; sourceTree = "<group>"; };
@@ -228,6 +236,10 @@
 		63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRNowChannel.swift; sourceTree = "<group>"; };
 		63CA468023EFCEA3007443F4 /* LRSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRSong.swift; sourceTree = "<group>"; };
 		63CA468123EFCEA3007443F4 /* LRProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRProgram.swift; sourceTree = "<group>"; };
+		63CA469B23EFF2C9007443F4 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
+		63CA469F23F05608007443F4 /* Database+Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Program.swift"; sourceTree = "<group>"; };
+		63CA46A123F05640007443F4 /* Database+Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Channel.swift"; sourceTree = "<group>"; };
+		63CA46A323F05658007443F4 /* Database+Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Radio.swift"; sourceTree = "<group>"; };
 		63DB930C1DF2B8BB0051FA2B /* sqlite.playground */ = {isa = PBXFileReference; lastKnownFileType = file.playground; name = sqlite.playground; path = Playgrounds/sqlite.playground; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CollectedSongListViewController.swift; path = Controllers/CollectedSongListViewController.swift; sourceTree = "<group>"; };
 		63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProgramViewController.swift; path = Controllers/ProgramViewController.swift; sourceTree = "<group>"; };
@@ -326,7 +338,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
+				86A783E31962C113368E80E8 /* (null) in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -396,6 +408,7 @@
 				630BB60D222822B50088B6D7 /* AppDelegate.swift */,
 				630BB60F222822B50088B6D7 /* ViewController.swift */,
 				6332093723EEE87A00E6D1AC /* ScanViewController.swift */,
+				63CA469A23EFF2A0007443F4 /* Database */,
 				630BB611222822B60088B6D7 /* Assets.xcassets */,
 				630BB613222822B60088B6D7 /* Main.storyboard */,
 				630BB616222822B60088B6D7 /* Info.plist */,
@@ -494,6 +507,19 @@
 				63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		63CA469A23EFF2A0007443F4 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				63CA469B23EFF2C9007443F4 /* Database.swift */,
+				63CA46A323F05658007443F4 /* Database+Radio.swift */,
+				63CA46A123F05640007443F4 /* Database+Channel.swift */,
+				63CA469F23F05608007443F4 /* Database+Program.swift */,
+				634E802223F1ACED00745BDA /* Database+Song.swift */,
+				634E802423F1AE7500745BDA /* Database+User.swift */,
+			);
+			path = Database;
 			sourceTree = "<group>";
 		};
 		63DB930B1DF2B88F0051FA2B /* Playgrounds */ = {
@@ -945,6 +971,7 @@
 				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher-macOS/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift-macOS/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/StreamingKit-macOS/StreamingKit.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -952,6 +979,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1005,6 +1033,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift-iOS/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StreamingKit-iOS/StreamingKit.framework",
 				"${BUILT_PRODUCTS_DIR}/iCarousel/iCarousel.framework",
@@ -1019,6 +1048,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/iCarousel.framework",
@@ -1038,13 +1068,19 @@
 			files = (
 				63CA469323EFCEA3007443F4 /* LRProgram.swift in Sources */,
 				630BB610222822B50088B6D7 /* ViewController.swift in Sources */,
+				63CA46A023F05608007443F4 /* Database+Program.swift in Sources */,
+				63CA46A223F05640007443F4 /* Database+Channel.swift in Sources */,
+				63CA469C23EFF2C9007443F4 /* Database.swift in Sources */,
 				63CA468723EFCEA3007443F4 /* LRRadio.swift in Sources */,
 				63CA468F23EFCEA3007443F4 /* LRNowChannel.swift in Sources */,
 				6332094623EEFD5300E6D1AC /* SearchedSongInfo.swift in Sources */,
+				634E802523F1AE7500745BDA /* Database+User.swift in Sources */,
+				634E802323F1ACED00745BDA /* Database+Song.swift in Sources */,
 				63CA468D23EFCEA3007443F4 /* LRUser.swift in Sources */,
 				6332093D23EEFA9600E6D1AC /* Lava.swift in Sources */,
 				63CA469123EFCEA3007443F4 /* LRSong.swift in Sources */,
 				630BB60E222822B50088B6D7 /* AppDelegate.swift in Sources */,
+				63CA46A423F05658007443F4 /* Database+Radio.swift in Sources */,
 				6332094523EEFD4000E6D1AC /* SearchSongInfo.swift in Sources */,
 				63CA468B23EFCEA3007443F4 /* LRCover.swift in Sources */,
 				63CA468523EFCEA3007443F4 /* LRChannel.swift in Sources */,

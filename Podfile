@@ -13,6 +13,8 @@ def common_pods
   pod 'ObjectMapper',   '3.4.1'
   # 音频播放
   pod 'StreamingKit',   '0.1.30'
+  # SQLite数据库
+  pod 'SQLite.swift'
 end
 
 target 'EvoRadio' do
