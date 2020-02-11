@@ -13,17 +13,15 @@ class LRChannel: Mappable {
     var channelId: String?
     var channelName: String?
     var channelNameShengmu: String?
+    var channelNameEnglish: String?
+    var channelDesc: String?
     var radioId: String?
     var radioName: String?
-    var programNum: String?
-    var programFine: String?
     var pubTime: String?
-    var sortOrder: String?
     var picURL: String?
     var status: String?
     var recommend: String?
 
-    
     required init?(map: Map) {
         
     }
@@ -32,12 +30,11 @@ class LRChannel: Mappable {
         channelId    <- map["channel_id"]
         channelName    <- map["channel_name"]
         channelNameShengmu    <- map["channel_name_shengmu"]
+        channelNameEnglish    <- map["english_name"]
+        channelDesc    <- map["channel_desc"]
         radioId    <- map["radio_id"]
         radioName    <- map["radio_name"]
-        programNum    <- map["program_num"]
-        programFine    <- map["program_fine"]
         pubTime    <- map["pub_time"]
-        sortOrder    <- map["sort_order"]
         picURL    <- map["pic_url"]
         status    <- map["status"]
         recommend    <- map["recommend"]

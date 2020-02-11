@@ -12,20 +12,16 @@ import ObjectMapper
 class LRSong : NSObject, Mappable {
 
     var songId: String!
-    var jujingId: String?
-    var programId: String?
     var songName: String!
-    var artistId: String?
-    var salbumId: String?
-    var language: String?
     var salbumsName: String?
     var artistsName: String?
-    var playNum: String?
-    var shareNum: String?
+    var language: String?
     var duration: String?
     var filesize: String?
     var audioURL: String?
     var picURL: String?
+    var tsid: String?
+    var programId: String?
     var status: String?
     
     #if os(iOS)
@@ -49,17 +45,16 @@ class LRSong : NSObject, Mappable {
     
     func mapping(map: Map) {
         songId    <- map["song_id"]
-        jujingId   <- map["jujing_id"]
-        programId    <- map["program_id"]
         songName   <- map["song_name"]
-        artistId    <- map["artist_id"]
-        salbumId   <- map["salbum_id"]
         salbumsName    <- map["salbums_name"]
         artistsName   <- map["artists_name"]
-        playNum    <- map["play_num"]
-        shareNum   <- map["share_num"]
+        language   <- map["language"]
+        duration   <- map["duration"]
+        filesize   <- map["filesize"]
         audioURL   <- map["audio_url"]
         picURL   <- map["pic_url"]
+        tsid    <- map["tsid"]
+        programId    <- map["program_id"]
         status   <- map["status"]
     }
 

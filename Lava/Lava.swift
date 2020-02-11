@@ -12,7 +12,7 @@ import Alamofire
 import ObjectMapper
 
 class Lava: NSObject {
-    static let host = "https://www.lavaradio.com/"
+    static let host = "http://www.lavaradio.com/"
     
     static func commonEP(_ api:String) -> String{
         let url = "\(host)\(api)"
@@ -74,17 +74,13 @@ class Lava: NSObject {
                 
                 if let responseValue = response.value as? [String : Any] {
                     if let data = responseValue["data"] as? [String : Any] {
-                        if let jsonArray = data["lists"] as? [[String : Any]] {
-//                            CoreDB.saveGroundPrograms(endpoint, jsonArray: jsonArray)
-                            
+                        if let jsonArray = data["lists"] as? [[String : Any]] {                            
                             let items = Mapper<LRProgram>().mapArray(JSONArray: jsonArray)
-                            print("ground programs count: \(items.count)")
                             
                             onSuccess(items)
                         }
                     }
                 }
-                
             }else {
                 print("Request failed: \(endpoint)")
             }
@@ -106,7 +102,6 @@ class Lava: NSObject {
                     if let data = responseValue["data"] as? [String : Any] {
                         if let jsonArray = data["lists"] as? [[String : Any]] {
                             let items = Mapper<LRProgram>().mapArray(JSONArray: jsonArray)
-                            print("programs count: \(items.count)")
                             
                             onSuccess(items)
                         }
@@ -121,7 +116,7 @@ class Lava: NSObject {
     }
 
     /** 根据节目单ID获取其下的所有音乐 */
-    static func fetch_songs(_ programId: String, isVIP: Bool,  onSuccess: @escaping ([LRSong]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_songs(_ programId: String, isVIP: Bool = true,  onSuccess: @escaping ([LRSong]) -> Void, onFailed: ((Error) -> Void)?) {
         
         let endpoint = commonEP("api/play.sharePlayProgram.json?program_id=\(programId)&isShare=\(isVIP ? 1 : 0)")
         
@@ -133,7 +128,6 @@ class Lava: NSObject {
                     if let data = responseValue["data"] as? [String : Any] {
                         if let jsonArray = data["songs"] as? [[String : Any]] {
                             let items = Mapper<LRSong>().mapArray(JSONArray: jsonArray)
-                            print("songs count: \(items.count)")
                             
                             onSuccess(items)
                         }
