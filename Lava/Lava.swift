@@ -90,7 +90,7 @@ class Lava: NSObject {
     
     
     /** 根据频道ID获取节目单，分页 */
-    static func fetch_programs(_ channelId:String, page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_programs(_ channelId: String, page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error) -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelId)&_pn=\(_pn)&_sz=\(page.size)")
         
