@@ -142,6 +142,7 @@ class ViewController: NSViewController {
          */
 
         if let programIds = Database.shared.queryAllProgramIds() {
+            programIdQueue.removeAll()
             programIdQueue.append(contentsOf: programIds)
             programCount = programIds.count
             
@@ -177,8 +178,11 @@ class ViewController: NSViewController {
 //                    wSelf.loadSongs()
 //                }
                 
-            }) { (e) in
+            }) {[weak self] (e) in
+                guard let wSelf = self else {return}
+                
                 print("fetch songs failed: \(e)")
+                wSelf.loadNextProgram()
             }
         }
         
@@ -191,6 +195,11 @@ class ViewController: NSViewController {
         }
         
         if let programId = programIdQueue.last {
+            if programFilesDownloaded(id: String(format: "%d", programId)) {
+                print("This program was downloaded, skip it")
+                loadNextProgram()
+                return;
+            }
             self.programIdText.stringValue = "\(programId)"
             Lava.fetch_songs("\(programId)", onSuccess: {[weak self] (songs) in
                 guard let wSelf = self else {return}
@@ -211,46 +220,73 @@ class ViewController: NSViewController {
         if downloadSongQueue.count == 0 {
             print("Load next program ")
             let progress = 1.0 - (Float(programIdQueue.count) / Float(programCount))
-            loadSongProgress.stringValue = String(format: "%.1f%", progress * 100)
-            programIdQueue.removeLast()
-            addSongsToQueue()
+            loadSongProgress.stringValue = String(format: "%.2f %%", progress * 100)
+
+            let programId = String(format: "%d", programIdQueue.last!)
+            markProgramDownloadResult(true, id: programId)
+            loadNextProgram()
             return
         }
 
-        if let song = downloadSongQueue.last,
-            let url = song.audioURL,
-            url.count > 0 {
+        if let song = downloadSongQueue.last {
             
             if fileDownloaded(id: song.songId) {
                 print("This file was downloaded, skip it.")
-                self.downloadSongQueue.removeLast()
-                self.downloadSong()
+                downloadNextSong()
                 return
             }
             
-            let destination: DownloadRequest.DownloadFileDestination = { _, _ in
-                let supportDirectory = NSSearchPathForDirectoriesInDomains(
-                    .applicationSupportDirectory, .userDomainMask, true
-                ).first!
-                
-                let rootDirector = supportDirectory + "/" + Bundle.main.bundleIdentifier!
-                let fileURL = URL(fileURLWithPath: rootDirector.appendingFormat("/%@.mp3", song.songId))
-                return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-            }
-            
-            Alamofire.download(url, to: destination).response {[weak self] response in
-                guard let wSelf = self else {return}
-                
-                if response.error == nil, let rstFilePath = response.destinationURL?.path {
-                    print("Download success: \(rstFilePath)")
-                    wSelf.markDownloadResult(true, id: song.songId)
-                } else {
-                    wSelf.markDownloadResult(false, id: song.songId)
+            if let url = song.audioURL, url.count > 0 {
+
+                let destination: DownloadRequest.DownloadFileDestination = { _, _ in
+                    let supportDirectory = NSSearchPathForDirectoriesInDomains(
+                        .applicationSupportDirectory, .userDomainMask, true
+                    ).first!
+                    
+                    let rootDirector = supportDirectory + "/" + Bundle.main.bundleIdentifier!
+                    let fileURL = URL(fileURLWithPath: rootDirector.appendingFormat("/%@.mp3", song.songId))
+                    return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
                 }
-                wSelf.downloadSongQueue.removeLast()
-                wSelf.downloadSong()
+                print("download song from url: \(url)")
+                Alamofire.download(url, to: destination).response {[weak self] response in
+                    guard let wSelf = self else {return}
+                    
+                    if response.error == nil, let rstFilePath = response.destinationURL?.path {
+                        print("Download success: \(rstFilePath)")
+                        wSelf.markDownloadResult(true, id: song.songId)
+                    } else {
+                        print("Download falied: \(song.songId!), \(song.programId!)")
+                        wSelf.recordDownlaodFailedSong(Int64(song.songId!)!, programId: Int64(song.programId!)!)
+                        wSelf.markDownloadResult(false, id: song.songId)
+                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now()+0.1) {
+                        wSelf.downloadNextSong()
+                    }
+                }
+            } else {
+                print("Audio url is empty, skip it.")
+                self.markDownloadResult(false, id: song.songId)
+                self.downloadSongQueue.removeLast()
+                self.downloadSong()
             }
         }
+    }
+    
+    func downloadNextSong() {
+        if downloadSongQueue.count > 0 {
+            downloadSongQueue.removeLast()
+            downloadSong()
+        } else {
+            loadNextProgram()
+        }
+    }
+    
+    func loadNextProgram() {
+        if programIdQueue.count > 0{
+            programIdQueue.removeLast()
+        }
+        downloadSongQueue.removeAll()
+        addSongsToQueue()
     }
     
     func markDownloadResult(_ result: Bool, id: String) {
@@ -266,10 +302,29 @@ class ViewController: NSViewController {
         return false
     }
     
-    override var representedObject: Any? {
-        didSet {
-        // Update the view, if already loaded.
-        }
+    func markProgramDownloadResult(_ result: Bool, id: String) {
+        let ud = UserDefaults.standard
+        ud.set(result, forKey: id)
+        ud.synchronize()
     }
     
+    func programFilesDownloaded(id: String) -> Bool {
+        if let resultValue = UserDefaults.standard.value(forKey: id) as? Bool {
+            return resultValue
+        }
+        return false
+    }
+    
+    func recordDownlaodFailedSong(_ songId: Int64, programId: Int64) {
+        let ud = UserDefaults.standard
+        let key = String(format: "%d", songId)
+        let value = String(format: "%d", programId)
+        ud.set(value, forKey: key)
+        ud.synchronize()
+    }
+    
+    private func removeProgramCache(_ id: String) {
+        UserDefaults.standard.removeObject(forKey: id)
+        UserDefaults.standard.synchronize()
+    }
 }
