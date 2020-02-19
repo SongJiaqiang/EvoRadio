@@ -43,7 +43,7 @@ extension Database {
         let name = Expression<String?>("radio_name")
         let enName = Expression<String?>("radio_name_en")
         
-        let insert = t.insert(or: .replace, id <- Int64(object.radioId!), name <- object.radioName, enName <- object.radioName?.transformToPinYin())
+        let insert = t.insert(or: .replace, id <- Int64(object.radioId!), name <- object.radioName)
         do {
             let rowid = try Database.shared.db?.run(insert)
             print("Insert row success \(rowid.debugDescription)")
@@ -64,11 +64,11 @@ extension Database {
         
         let id = Expression<Int64>("radio_id")
         let name = Expression<String?>("radio_name")
-        let enName = Expression<String?>("radio_name_en")
+//        let enName = Expression<String?>("radio_name_en")
         
         var inserts: [Insert] = []
         for object in objects {
-            let insert = t.insert(or: .replace, id <- Int64(object.radioId!), name <- object.radioName, enName <- object.radioName?.transformToPinYin())
+            let insert = t.insert(or: .replace, id <- Int64(object.radioId!), name <- object.radioName)
             inserts.append(insert)
         }
         do {
