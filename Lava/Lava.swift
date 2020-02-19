@@ -21,7 +21,7 @@ class Lava: NSObject {
     }
     
     /** 获取所有Radio以及其下的所有频道 */
-    static func fetch_all_radios(_ onSuccess: @escaping ([LRRadio]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_all_radios(_ onSuccess: @escaping ([LRRadio]) -> Void, onFailed: ((Error?) -> Void)?) {
         let endpoint = commonEP("api/radio.listAllChannels.json")
         Alamofire.request(endpoint).responseJSON { (response) in
             if response.result.isSuccess {
@@ -34,12 +34,15 @@ class Lava: NSObject {
                 
             }else {
                 print("Request failed: \(endpoint)")
+                if let failed = onFailed {
+                    failed(response.result.error)
+                }
             }
         }
     }
     
     /** 获取所有“时刻”频道 */
-    static func fetch_all_now_channels(_ onSuccess: @escaping ([LRNowChannel]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_all_now_channels(_ onSuccess: @escaping ([LRNowChannel]) -> Void, onFailed: ((Error?) -> Void)?) {
         let endpoint = commonEP("api/radio.listAllNowChannels.json")
         
         // 从网络加载
@@ -58,13 +61,16 @@ class Lava: NSObject {
                 
             }else {
                 print("Request failed: \(endpoint)")
+                if let failed = onFailed {
+                    failed(response.result.error)
+                }
             }
             
         }
     }
     
     /** 获取精品节目单，分页 */
-    static func fetch_ground_programs(_ page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_ground_programs(_ page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error?) -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listGroundPrograms.json?_pn=\(_pn)&_sz=\(page.size)")
         
@@ -83,14 +89,16 @@ class Lava: NSObject {
                 }
             }else {
                 print("Request failed: \(endpoint)")
+                if let failed = onFailed {
+                    failed(response.result.error)
+                }
             }
-            
         }
     }
     
     
     /** 根据频道ID获取节目单，分页 */
-    static func fetch_programs(_ channelId: String, page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_programs(_ channelId: String, page: LRPage, onSuccess: @escaping ([LRProgram]) -> Void, onFailed: ((Error?) -> Void)?) {
         let _pn = (page.index+page.size-1) / page.size
         let endpoint = commonEP("api/radio.listChannelPrograms.json?channel_id=\(channelId)&_pn=\(_pn)&_sz=\(page.size)")
         
@@ -107,16 +115,17 @@ class Lava: NSObject {
                         }
                     }
                 }
-                
             }else {
                 print("Request failed: \(endpoint)")
+                if let failed = onFailed {
+                    failed(response.result.error)
+                }
             }
-            
         }
     }
 
     /** 根据节目单ID获取其下的所有音乐 */
-    static func fetch_songs(_ programId: String, isVIP: Bool = true,  onSuccess: @escaping ([LRSong]) -> Void, onFailed: ((Error) -> Void)?) {
+    static func fetch_songs(_ programId: String, isVIP: Bool = true,  onSuccess: @escaping ([LRSong]) -> Void, onFailed: ((Error?) -> Void)?) {
         
         let endpoint = commonEP("api/play.sharePlayProgram.json?program_id=\(programId)&isShare=\(isVIP ? 1 : 0)")
         
@@ -135,29 +144,12 @@ class Lava: NSObject {
                 }
             }else {
                 print("Request failed: \(endpoint)")
-            }
-        }
-    }
-    
-    /** 获取当前登录用户的相关信息 */
-    static func fetch_userinfo(_ onSuccess: @escaping ([String : AnyObject]) -> Void, onFailed: ((Error) -> Void)?) {
-        let endpoint = commonEP("api/user.getUserInfo")
-        
-        Alamofire.request(endpoint).responseJSON { (response) in
-            do {
-                let dict = try JSONSerialization.jsonObject(with: response.data!, options: []) as! [String:AnyObject]
-                if dict["err"] as! String == "hapn.ok" {
-                    onSuccess(dict["data"] as! [String : AnyObject])
-                }
-                
-            } catch let error {
-                if let _ = onFailed {
-                    onFailed!(error)
+                if let failed = onFailed {
+                    failed(response.result.error)
                 }
             }
         }
     }
-    
 }
 
 struct LRPage {
