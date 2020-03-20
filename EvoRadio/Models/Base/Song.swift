@@ -1,35 +1,35 @@
 //
-//  Song.swift
+//  LRSong.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 16/4/18.
 //  Copyright © 2016年 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ObjectMapper
+import Lava
 
 class Song : NSObject, Mappable {
 
     var songId: String!
-    var jujingId: String?
-    var programId: String?
     var songName: String!
-    var artistId: String?
-    var salbumId: String?
-    var language: String?
     var salbumsName: String?
     var artistsName: String?
-    var playNum: String?
-    var shareNum: String?
+    var language: String?
     var duration: String?
     var filesize: String?
     var audioURL: String?
     var picURL: String?
+    var tsid: String?
+    var programId: String?
     var status: String?
     
+    //TODO: 不要在model中使用非基础类型的属性
+    #if os(iOS)
     var assetURL: URL?
     var albumImage: UIImage?
+    #endif
     
     override init() {
         super.init()
@@ -47,18 +47,40 @@ class Song : NSObject, Mappable {
     
     func mapping(map: Map) {
         songId    <- map["song_id"]
-        jujingId   <- map["jujing_id"]
-        programId    <- map["program_id"]
         songName   <- map["song_name"]
-        artistId    <- map["artist_id"]
-        salbumId   <- map["salbum_id"]
         salbumsName    <- map["salbums_name"]
         artistsName   <- map["artists_name"]
-        playNum    <- map["play_num"]
-        shareNum   <- map["share_num"]
+        language   <- map["language"]
+        duration   <- map["duration"]
+        filesize   <- map["filesize"]
         audioURL   <- map["audio_url"]
         picURL   <- map["pic_url"]
+        tsid    <- map["tsid"]
+        programId    <- map["program_id"]
         status   <- map["status"]
     }
 
+}
+
+extension Song {
+    class func fromLRSong(_ lrSong: LRSong) -> Song? {
+        if let song = Song(JSON: lrSong.toJSON()) {
+            return song
+        }
+        return nil
+    }
+    
+    class func fromLRSongs(_ lrSongs: [LRSong]) -> [Song] {
+        var songs = [Song]();
+        lrSongs.forEach { (lrSong) in
+            if let song = Song(JSON: lrSong.toJSON()) {
+                songs.append(song)
+            }
+        }
+        return songs
+    }
+    
+    func toLRSong() -> LRSong? {
+        return LRSong(JSON: self.toJSON())
+    }
 }

@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import SnapKit
 import StreamingKit
+import Lava
 
 class PlayerViewController: ViewController {
     
@@ -661,7 +662,9 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
         cell.delegate = self
         
         let song =  MusicManager.shared.playlist[(indexPath as NSIndexPath).row]
-        cell.updateSongInfo(song)
+        if let lrSong = song.toLRSong() {        
+            cell.updateSongInfo(lrSong)
+        }
         
         return cell
     }
@@ -754,7 +757,6 @@ extension PlayerViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension PlayerViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-
         let row = MusicManager.shared.indexOfPlaylist(song: song)
         
         let alertController = UIAlertController()

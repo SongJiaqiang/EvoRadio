@@ -8,6 +8,7 @@
 
 import UIKit
 import iCarousel
+import Lava
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
     func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);
@@ -16,12 +17,12 @@ protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
 class NowCollectionHeaderView: UICollectionReusableView {
     
     var carousel: iCarousel!
-    var channels = [Channel]()
+    var channels = [LRChannel]()
     var delegate: NowCollectionHeaderViewDelegate?
     // itemW : screenW = 160 : 375
     let itemWidth = Device.width() * (160 / 375)
     
-    convenience init(channels: [Channel]) {
+    convenience init(channels: [LRChannel]) {
         self.init()
         
         self.channels = channels
@@ -49,7 +50,7 @@ class NowCollectionHeaderView: UICollectionReusableView {
         carousel.frame = bounds
     }
     
-    func updateChannels(_ channels: [Channel]) {
+    func updateChannels(_ channels: [LRChannel]) {
         self.channels = channels
         
         carousel.reloadData()

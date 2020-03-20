@@ -6,7 +6,7 @@
 //  Copyright © 2017 JQTech. All rights reserved.
 //
 
-import UIKit
+import Foundation
 import ObjectMapper
 
 class SearchSongInfo: NSObject, Mappable {

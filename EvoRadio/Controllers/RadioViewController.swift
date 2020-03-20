@@ -8,13 +8,14 @@
 
 import UIKit
 import MJRefresh
+import Lava
 
 class RadioViewController: ViewController {
 
     let cellID = "radioTableViewCellID"
     
     var tableView: UITableView!
-    var dataSources = [Radio]()
+    var dataSources = [LRRadio]()
     var cellHeight: CGFloat = 0
     
     override func viewDidLoad() {
@@ -58,7 +59,7 @@ class RadioViewController: ViewController {
     
     //MARK: loading data
     func listAllChannels() {
-        api.fetch_all_channels({[weak self] (radios) in
+        Lava.shared.fetchAllRadios({[weak self] (radios) in
             
             if radios.count > 0 {
                 self?.dataSources = radios
@@ -129,7 +130,7 @@ extension RadioViewController: UITableViewDataSource, UITableViewDelegate {
 }
 
 extension RadioViewController: RadioTableViewCellDelegate {
-    func radioTableViewCell(_ cell: RadioTableViewCell, didSelectedItem channel: Channel) {
+    func radioTableViewCell(_ cell: RadioTableViewCell, didSelectedItem channel: LRChannel) {
         navigationController?.pushViewController(ProgramViewController(channel: channel), animated: true)
     }
     

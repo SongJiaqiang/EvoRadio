@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Lava
+
 // 指定硬盘
 //let baseURL = URL(fileURLWithPath: "/Volumes/JQHD/", isDirectory: true)
 let baseURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
@@ -21,10 +23,10 @@ class ScannerViewController: ViewController {
     
     var dataSource = [ScanItem]()
     
-    var currentRadios: [Radio]?
-    var currentChannels: [Channel]?
-    var currentPrograms: [Program]?
-    var currentSongs: [Song]?
+    var currentRadios: [LRRadio]?
+    var currentChannels: [LRChannel]?
+    var currentPrograms: [LRProgram]?
+    var currentSongs: [LRSong]?
     var currentItem: ScanItem?
     
     var radioIndex: Int = 0
@@ -202,7 +204,7 @@ class ScannerViewController: ViewController {
     
     //MARK: - fetch data
     func loadDataSource() {
-        api.fetch_all_channels({[weak self] (radios) in
+        Lava.shared.fetchAllRadios({[weak self] (radios) in
             self?.currentRadios = radios
 
             self?.dataSource.removeAll()
@@ -267,7 +269,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
             
             break
         case .channel?:
-            api.fetch_programs(item.id!, page: Page(index: 0,size: 500), onSuccess: {[weak self] (programs) in
+            Lava.shared.fetchPrograms(item.id!, page: LRPage(index: 0), onSuccess: {[weak self] (programs) in
                 self?.currentPrograms = programs
                 
                 self?.dataSource.removeAll()
@@ -283,7 +285,7 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
             
             break
         case .program?:
-            api.fetch_songs(item.id!, isVIP: true, onSuccess: {[weak self] (songs) in
+            Lava.shared.fetchSongs(item.id!, onSuccess: {[weak self] (songs) in
                 self?.currentSongs = songs
                 
                 self?.dataSource.removeAll()
@@ -342,7 +344,6 @@ extension ScannerViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension ScannerViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-        
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
             MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lava
 
 class DownloadedTableViewCell: UITableViewCell {
     
@@ -100,19 +101,19 @@ class DownloadedTableViewCell: UITableViewCell {
     
     //MARK: events
     @objc func moreButtonPressed(_ button: UIButton) {
-        if let _ = song {
-            delegate?.openToolPanelOfSong(song!)
+        if let song = song {
+            delegate?.openToolPanelOfSong(song)
         }
     }
     
-    func updateMusicInfo(_ musicInfo: Song, atIndex: Int) {
-        song = musicInfo
+    func updateMusicInfo(_ musicInfo: LRSong, atIndex: Int) {
+        song = Song.fromLRSong(musicInfo)
         
         indexLabel.text = "\(atIndex + 1)"
-        
-        titleLabel.text = musicInfo.songName
-        
-        subtitleLabel.text = musicInfo.artistsName?.appending(" - ").appending(musicInfo.salbumsName!)
+        if let s = song {
+            titleLabel.text = s.songName
+            subtitleLabel.text = s.artistsName?.appending(" - ").appending(s.salbumsName!)
+        }
         
         
     }

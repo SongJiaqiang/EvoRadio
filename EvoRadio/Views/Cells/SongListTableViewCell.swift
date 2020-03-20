@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lava
 
 protocol SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song)
@@ -106,20 +107,22 @@ class SongListTableViewCell: UITableViewCell {
     
     //MARK: events
     @objc func moreButtonPressed(_ button: UIButton) {
-        delegate?.openToolPanelOfSong(song!)
+        if let song = song {
+            delegate?.openToolPanelOfSong(song)
+        }
     }
     
-    func updateSongInfo(_ songModel: Song) {
-        song = songModel
+    func updateSongInfo(_ songModel: LRSong) {
+        song = Song.fromLRSong(songModel)
         
         if let picURLString = songModel.picURL {
             if let picURL = URL(string: picURLString) {
                 coverImageView.kf.setImage(with: picURL, placeholder: UIImage.placeholder_cover())
             }
         }else {
-            if let albumImage = songModel.albumImage {
-                coverImageView.image = albumImage
-            }
+//            if let albumImage = songModel.albumImage {
+//                coverImageView.image = albumImage
+//            }
         }
         
         titleLabel.text = songModel.songName

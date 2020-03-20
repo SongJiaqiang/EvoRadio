@@ -8,13 +8,13 @@
 
 import UIKit
 import JQFisher
+import Lava
 
 class SongListViewController: ViewController {
-
     let cellID = "songCellID"
     
-    var program: Program!
-    var dataSources = [Song]()
+    var program: LRProgram!
+    var dataSources = [LRSong]()
 
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
     var coverImageView = UIImageView()
@@ -28,8 +28,8 @@ class SongListViewController: ViewController {
 //        setupBackButton()
         prepareTableView()
         
-        if let _ = program {
-            title = program.programName
+        if let p = program {
+            title = p.programName
             listProgramSongs()
         }
     }
@@ -80,7 +80,7 @@ class SongListViewController: ViewController {
         
         if let _ = program {
             let programId = program.programId!
-            api.fetch_songs(programId, isVIP: true, onSuccess: {[weak self] (songs) in
+            Lava.shared.fetchSongs(programId, onSuccess: {[weak self] (songs) in
                 
                 if songs.count > 0 {
                     self?.dataSources = songs
@@ -184,15 +184,16 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let song = dataSources[(indexPath as NSIndexPath).row]
-        MusicManager.shared.appendSongToPlaylist(song, autoPlay: true)
-        
-        present(PlayerViewController.mainController)
+        if let s = Song.fromLRSong(song) {
+            MusicManager.shared.appendSongToPlaylist(s, autoPlay: true)
+            present(PlayerViewController.mainController)
+        }
     }
     
     @objc func playButtonPressed(_ button: UIButton) {
         if dataSources.count > 0 {
             MusicManager.shared.clearList()
-            MusicManager.shared.appendSongsToPlaylist(dataSources, autoPlay: true)
+            MusicManager.shared.appendSongsToPlaylist(Song.fromLRSongs(dataSources), autoPlay: true)
             
             if let topVC = Device.keyWindow().topMostController() {
                 topVC.present(PlayerViewController.mainController)
@@ -201,7 +202,7 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
     }
 
     @objc func downloadButtonPressed(_ button: UIButton) {
-        CoreDB.addSongsToDownloadingList(self.dataSources)
+        CoreDB.addSongsToDownloadingList(Song.fromLRSongs(self.dataSources))
         NotificationManager.shared.postDownloadingListChangedNotification(["songs" : self.dataSources])
         
         DispatchQueue.main.async {
@@ -212,7 +213,6 @@ extension SongListViewController: UITableViewDataSource, UITableViewDelegate {
 
 extension SongListViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-        
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
             MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)

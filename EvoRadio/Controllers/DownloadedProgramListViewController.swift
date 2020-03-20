@@ -9,13 +9,10 @@
 import UIKit
 
 class DownloadedProgramListViewController: ViewController {
-
     var cellID = "downloadedProgramsCellID"
     
     var tableView: UITableView!
-    var dataSource = [Program]()
-    
-
+    var dataSource: [Program] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,10 +47,7 @@ class DownloadedProgramListViewController: ViewController {
         })
         
         tableView.register(SongListTableViewCell.self, forCellReuseIdentifier: cellID)
-        
     }
-    
-    
 }
 
 extension DownloadedProgramListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -63,9 +57,6 @@ extension DownloadedProgramListViewController: UITableViewDelegate, UITableViewD
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as! SongListTableViewCell
-        
-        
-        
         return cell
     }
     
@@ -76,11 +67,10 @@ extension DownloadedProgramListViewController: UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        let program = dataSource[(indexPath as NSIndexPath).row]
-        
-        let listController = SongListViewController()
-        listController.program = program
-        navigationController?.pushViewController(listController, animated: true)
+//        let program = dataSource[(indexPath as NSIndexPath).row]
+//        let listController = SongListViewController()
+//        listController.program = program
+//        navigationController?.pushViewController(listController, animated: true)
     }
     
 }

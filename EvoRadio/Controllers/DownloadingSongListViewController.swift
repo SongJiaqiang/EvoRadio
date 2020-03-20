@@ -294,7 +294,9 @@ extension DownloadingSongListViewController: UITableViewDelegate, UITableViewDat
             }else {
                 selectedSong.status = TaskStatus.gettingInfo.rawValue
                 if Downloader.downloadingTaskCount() < 3 {
-                    addTask(s: selectedSong.song!)
+                    if let song = selectedSong.song {
+                        addTask(s: song)
+                    }
                 }else {
                     updateCell(selectedSong, atIndex: indexPath)
                 }

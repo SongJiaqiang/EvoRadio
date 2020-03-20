@@ -153,9 +153,9 @@ class MusicManager: NSObject {
                     })
                 }
             }else {
-                if let albumImage = song.albumImage {
-                    updateCoverInfo(title: title, artist: artist, duration: duration, image: albumImage)
-                }
+//                if let albumImage = song.albumImage {
+//                    updateCoverInfo(title: title, artist: artist, duration: duration, image: albumImage)
+//                }
             }
             
         }
@@ -198,12 +198,12 @@ class MusicManager: NSObject {
                     }
                 }
             }else {
-                if let url = cSong.assetURL {
-//                    audioPlayer.play(url)
-                    
-                    let datasource = STKAudioPlayer.dataSource(from: url)
-                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
-                }
+//                if let url = cSong.assetURL {
+////                    audioPlayer.play(url)
+//                    
+//                    let datasource = STKAudioPlayer.dataSource(from: url)
+//                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
+//                }
             }
             
             // 更新控制中心的音乐播放信息

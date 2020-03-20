@@ -10,7 +10,6 @@ import UIKit
 import SnapKit
 import MediaPlayer
 
-
 class ItunesViewController: ViewController {
     
     let cellID = "cellID"
@@ -184,7 +183,9 @@ extension ItunesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! SongListTableViewCell
         
         let song = songs[indexPath.row]
-        cell.updateSongInfo(song)
+        if let lrSong = song.toLRSong() {
+            cell.updateSongInfo(lrSong)
+        }
         
         return cell
     }

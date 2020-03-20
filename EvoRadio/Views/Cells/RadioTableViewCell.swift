@@ -8,11 +8,12 @@
 
 import UIKit
 import Kingfisher
+import Lava
 
 let itemMargin: CGFloat = 10
 
 protocol RadioTableViewCellDelegate: NSObjectProtocol {
-    func radioTableViewCell(_ cell: RadioTableViewCell, didSelectedItem channel: Channel)
+    func radioTableViewCell(_ cell: RadioTableViewCell, didSelectedItem channel: LRChannel)
     func radioTableViewCell(_ cell: RadioTableViewCell, showMoreChannelWithRadio radioId: Int)
 }
 
@@ -22,7 +23,7 @@ class RadioTableViewCell: UITableViewCell {
     var scrollView: UIScrollView!
     var containerView: UIView!
     
-    var radio: Radio?
+    var radio: LRRadio?
     
     var delegate: RadioTableViewCellDelegate?
     
@@ -67,7 +68,7 @@ class RadioTableViewCell: UITableViewCell {
         
     }
     
-    func setupChannels(_ radio: Radio) {
+    func setupChannels(_ radio: LRRadio) {
         self.radio = radio
         
         if let channels = radio.channels {

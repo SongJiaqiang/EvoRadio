@@ -13,7 +13,7 @@ class HistorySongListViewController: ViewController {
     let cellID = "historySongsCell"
     
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var dataSource = [Song]()
+    var dataSource: [Song] = []
     
     
     override func viewDidLoad() {
@@ -68,7 +68,9 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
         cell.showMoreButton(false)
         
         let song = dataSource[(indexPath as NSIndexPath).row]
-        cell.updateSongInfo(song)
+        if let s = song.toLRSong() {
+            cell.updateSongInfo(s)
+        }
         
         return cell
     }
@@ -159,7 +161,6 @@ extension HistorySongListViewController: UITableViewDelegate, UITableViewDataSou
 
 extension HistorySongListViewController: SongListTableViewCellDelegate {
     func openToolPanelOfSong(_ song: Song) {
-        
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
             MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)

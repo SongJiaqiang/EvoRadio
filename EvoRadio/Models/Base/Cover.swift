@@ -1,5 +1,5 @@
 //
-//  Cover.swift
+//  LRCover.swift
 //  EvoRadio
 //
 //  Created by Jarvis on 5/24/16.

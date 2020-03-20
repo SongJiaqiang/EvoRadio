@@ -88,7 +88,7 @@ class SearchViewController: ViewController {
         }
         
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        api.search_songs_from_baidu(keyword, onSuccess: {[weak self] (searchSongs) in
+        API.search_songs_from_baidu(keyword, onSuccess: {[weak self] (searchSongs) in
             
             self?.dataSources.removeAll()
             self?.dataSources.append(contentsOf: searchSongs)
@@ -146,7 +146,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         if let songId = songInfo.songId {
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            api.fetch_song_info_from_baidu(songId, onSuccess: {[weak self] (searchedResult) in
+            API.fetch_song_info_from_baidu(songId, onSuccess: {[weak self] (searchedResult) in
                 print(">> fetch song info success")
                 let songInfo = searchedResult.songInfo
                 let bitrate = searchedResult.bitrate

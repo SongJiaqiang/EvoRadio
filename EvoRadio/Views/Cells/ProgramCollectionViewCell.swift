@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lava
 
 class ProgramCollectionViewCell: UICollectionViewCell {
     
@@ -16,7 +17,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
     let playButton = UIButton()
     let vipView = UIView()
     
-    var program: Program?
+    var program: LRProgram?
     var delegate: ProgramCollectionViewCellDelegate?
     
     override init(frame: CGRect) {
@@ -92,7 +93,7 @@ class ProgramCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    func updateContent(_ program: Program) {
+    func updateContent(_ program: LRProgram) {
         self.program = program
 
         if let programName = program.programName {
