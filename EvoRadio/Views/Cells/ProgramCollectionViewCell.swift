@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lava
 
 class ProgramCollectionViewCell: UICollectionViewCell {
     

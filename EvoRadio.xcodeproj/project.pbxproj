@@ -23,12 +23,12 @@
 		63294D08224632900089AC36 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63294D07224632900089AC36 /* ScannerViewController.swift */; };
 		63294D0A224738E10089AC36 /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63294D09224738E10089AC36 /* ScannerTableViewCell.swift */; };
 		6332093823EEE87A00E6D1AC /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332093723EEE87A00E6D1AC /* ScanViewController.swift */; };
-		6332093C23EEE91A00E6D1AC /* Lava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332093A23EEE90E00E6D1AC /* Lava.swift */; };
-		6332093D23EEFA9600E6D1AC /* Lava.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332093A23EEE90E00E6D1AC /* Lava.swift */; };
 		6332094523EEFD4000E6D1AC /* SearchSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24A1F779C9500070C4E /* SearchSongInfo.swift */; };
 		6332094623EEFD5300E6D1AC /* SearchedSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24E1F77ACC600070C4E /* SearchedSongInfo.swift */; };
 		633506E01DE9D97500607693 /* Labels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633506DF1DE9D97500607693 /* Labels.swift */; };
 		6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */; };
+		634B6B772417148E00228C2C /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468023EFCEA3007443F4 /* Song.swift */; };
+		634B6B7824171C8700228C2C /* Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468123EFCEA3007443F4 /* Program.swift */; };
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
 		634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06771F38888400253E9A /* RadioTableViewCell.swift */; };
@@ -42,6 +42,9 @@
 		63659EAE23E9B4B100AAF6EF /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63659EAD23E9B4B100AAF6EF /* TabBarController.swift */; };
 		636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 636CEC9E1E1BEF4E009488D5 /* ScrollView.swift */; };
 		63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63974EB91DC4E437004D2526 /* Downloader.swift */; };
+		63A00451242515ED00241A01 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467A23EFCEA3007443F4 /* Channel.swift */; };
+		63A00452242515F200241A01 /* Cover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467D23EFCEA3007443F4 /* Cover.swift */; };
+		63A00453242515FB00241A01 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467E23EFCEA3007443F4 /* User.swift */; };
 		63A4E53C1D80384600E18FD6 /* Views.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63A4E53B1D80384600E18FD6 /* Views.swift */; };
 		63B2E4E81DC08A6700A2A146 /* MZDownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E51DC08A6700A2A146 /* MZDownloadManager.swift */; };
 		63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2E4E61DC08A6700A2A146 /* MZDownloadModel.swift */; };
@@ -51,20 +54,6 @@
 		63C9A055211BB97200B507D2 /* SplashViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A053211BB97200B507D2 /* SplashViewController.xib */; };
 		63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A057211BBA8200B507D2 /* splash_image_default.jpg */; };
 		63C9A078211C94A100B507D2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */; };
-		63CA468423EFCEA3007443F4 /* LRChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467A23EFCEA3007443F4 /* LRChannel.swift */; };
-		63CA468523EFCEA3007443F4 /* LRChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467A23EFCEA3007443F4 /* LRChannel.swift */; };
-		63CA468623EFCEA3007443F4 /* LRRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467B23EFCEA3007443F4 /* LRRadio.swift */; };
-		63CA468723EFCEA3007443F4 /* LRRadio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467B23EFCEA3007443F4 /* LRRadio.swift */; };
-		63CA468A23EFCEA3007443F4 /* LRCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467D23EFCEA3007443F4 /* LRCover.swift */; };
-		63CA468B23EFCEA3007443F4 /* LRCover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467D23EFCEA3007443F4 /* LRCover.swift */; };
-		63CA468C23EFCEA3007443F4 /* LRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467E23EFCEA3007443F4 /* LRUser.swift */; };
-		63CA468D23EFCEA3007443F4 /* LRUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467E23EFCEA3007443F4 /* LRUser.swift */; };
-		63CA468E23EFCEA3007443F4 /* LRNowChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */; };
-		63CA468F23EFCEA3007443F4 /* LRNowChannel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */; };
-		63CA469023EFCEA3007443F4 /* LRSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468023EFCEA3007443F4 /* LRSong.swift */; };
-		63CA469123EFCEA3007443F4 /* LRSong.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468023EFCEA3007443F4 /* LRSong.swift */; };
-		63CA469223EFCEA3007443F4 /* LRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468123EFCEA3007443F4 /* LRProgram.swift */; };
-		63CA469323EFCEA3007443F4 /* LRProgram.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA468123EFCEA3007443F4 /* LRProgram.swift */; };
 		63CA469423EFD04E007443F4 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7FB4A1CC4B6C50018A532 /* API.swift */; };
 		63CA469C23EFF2C9007443F4 /* Database.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA469B23EFF2C9007443F4 /* Database.swift */; };
 		63CA46A023F05608007443F4 /* Database+Program.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63CA469F23F05608007443F4 /* Database+Program.swift */; };
@@ -194,7 +183,6 @@
 		63294D07224632900089AC36 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScannerViewController.swift; path = Controllers/ScannerViewController.swift; sourceTree = "<group>"; };
 		63294D09224738E10089AC36 /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		6332093723EEE87A00E6D1AC /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScanViewController.swift; path = Controllers/Scanner/ScanViewController.swift; sourceTree = "<group>"; };
-		6332093A23EEE90E00E6D1AC /* Lava.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lava.swift; sourceTree = "<group>"; };
 		633506DF1DE9D97500607693 /* Labels.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Labels.swift; sourceTree = "<group>"; };
 		6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItunesViewCell.swift; sourceTree = "<group>"; };
 		634002321F6F9165001FD26C /* FLEX.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FLEX.framework; path = Carthage/Build/iOS/FLEX.framework; sourceTree = "<group>"; };
@@ -229,13 +217,11 @@
 		63C9A053211BB97200B507D2 /* SplashViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = SplashViewController.xib; path = Controllers/SplashViewController.xib; sourceTree = "<group>"; };
 		63C9A057211BBA8200B507D2 /* splash_image_default.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = splash_image_default.jpg; sourceTree = "<group>"; };
 		63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
-		63CA467A23EFCEA3007443F4 /* LRChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRChannel.swift; sourceTree = "<group>"; };
-		63CA467B23EFCEA3007443F4 /* LRRadio.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRRadio.swift; sourceTree = "<group>"; };
-		63CA467D23EFCEA3007443F4 /* LRCover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRCover.swift; sourceTree = "<group>"; };
-		63CA467E23EFCEA3007443F4 /* LRUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRUser.swift; sourceTree = "<group>"; };
-		63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRNowChannel.swift; sourceTree = "<group>"; };
-		63CA468023EFCEA3007443F4 /* LRSong.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRSong.swift; sourceTree = "<group>"; };
-		63CA468123EFCEA3007443F4 /* LRProgram.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LRProgram.swift; sourceTree = "<group>"; };
+		63CA467A23EFCEA3007443F4 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
+		63CA467D23EFCEA3007443F4 /* Cover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cover.swift; sourceTree = "<group>"; };
+		63CA467E23EFCEA3007443F4 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		63CA468023EFCEA3007443F4 /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		63CA468123EFCEA3007443F4 /* Program.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Program.swift; sourceTree = "<group>"; };
 		63CA469B23EFF2C9007443F4 /* Database.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Database.swift; sourceTree = "<group>"; };
 		63CA469F23F05608007443F4 /* Database+Program.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Program.swift"; sourceTree = "<group>"; };
 		63CA46A123F05640007443F4 /* Database+Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Database+Channel.swift"; sourceTree = "<group>"; };
@@ -441,15 +427,6 @@
 			path = LevelDB;
 			sourceTree = "<group>";
 		};
-		6332093923EEE8EC00E6D1AC /* Lava */ = {
-			isa = PBXGroup;
-			children = (
-				6332093A23EEE90E00E6D1AC /* Lava.swift */,
-				63CA467823EFCE41007443F4 /* Models */,
-			);
-			path = Lava;
-			sourceTree = "<group>";
-		};
 		634E06651F3869F400253E9A /* EvoRadioTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -495,18 +472,16 @@
 			path = splash;
 			sourceTree = "<group>";
 		};
-		63CA467823EFCE41007443F4 /* Models */ = {
+		63CA467823EFCE41007443F4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				63CA467B23EFCEA3007443F4 /* LRRadio.swift */,
-				63CA467A23EFCEA3007443F4 /* LRChannel.swift */,
-				63CA468123EFCEA3007443F4 /* LRProgram.swift */,
-				63CA468023EFCEA3007443F4 /* LRSong.swift */,
-				63CA467D23EFCEA3007443F4 /* LRCover.swift */,
-				63CA467E23EFCEA3007443F4 /* LRUser.swift */,
-				63CA467F23EFCEA3007443F4 /* LRNowChannel.swift */,
+				63CA467A23EFCEA3007443F4 /* Channel.swift */,
+				63CA468123EFCEA3007443F4 /* Program.swift */,
+				63CA468023EFCEA3007443F4 /* Song.swift */,
+				63CA467D23EFCEA3007443F4 /* Cover.swift */,
+				63CA467E23EFCEA3007443F4 /* User.swift */,
 			);
-			path = Models;
+			path = Base;
 			sourceTree = "<group>";
 		};
 		63CA469A23EFF2A0007443F4 /* Database */ = {
@@ -565,7 +540,6 @@
 		902FBCC41CBEAC010051A93B = {
 			isa = PBXGroup;
 			children = (
-				6332093923EEE8EC00E6D1AC /* Lava */,
 				902FBCCF1CBEAC020051A93B /* EvoRadio */,
 				634E06651F3869F400253E9A /* EvoRadioTests */,
 				630BB60C222822B50088B6D7 /* EvoRadioMac */,
@@ -660,6 +634,7 @@
 		909E65AE1CC0840700B0C49B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				63CA467823EFCE41007443F4 /* Base */,
 				DB4F76EA1CCD1EE90021D068 /* LoginUser.swift */,
 				9097BB2A1CFEC88A00FA5BD9 /* DownloadItemQueue.swift */,
 				9097BB301D00380800FA5BD9 /* LastPlaylist.swift */,
@@ -970,6 +945,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-EvoRadioMac/Pods-EvoRadioMac-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire-macOS/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher-macOS/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Lava-macOS/Lava.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-macOS/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift-macOS/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/StreamingKit-macOS/StreamingKit.framework",
@@ -978,6 +954,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lava.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
@@ -1030,6 +1007,7 @@
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/JQFisher/JQFisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher-iOS/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/Lava-iOS/Lava.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework",
@@ -1045,6 +1023,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JQFisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Lava.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
@@ -1066,24 +1045,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CA469323EFCEA3007443F4 /* LRProgram.swift in Sources */,
 				630BB610222822B50088B6D7 /* ViewController.swift in Sources */,
 				63CA46A023F05608007443F4 /* Database+Program.swift in Sources */,
 				63CA46A223F05640007443F4 /* Database+Channel.swift in Sources */,
 				63CA469C23EFF2C9007443F4 /* Database.swift in Sources */,
-				63CA468723EFCEA3007443F4 /* LRRadio.swift in Sources */,
-				63CA468F23EFCEA3007443F4 /* LRNowChannel.swift in Sources */,
 				6332094623EEFD5300E6D1AC /* SearchedSongInfo.swift in Sources */,
 				634E802523F1AE7500745BDA /* Database+User.swift in Sources */,
 				634E802323F1ACED00745BDA /* Database+Song.swift in Sources */,
-				63CA468D23EFCEA3007443F4 /* LRUser.swift in Sources */,
-				6332093D23EEFA9600E6D1AC /* Lava.swift in Sources */,
-				63CA469123EFCEA3007443F4 /* LRSong.swift in Sources */,
 				630BB60E222822B50088B6D7 /* AppDelegate.swift in Sources */,
 				63CA46A423F05658007443F4 /* Database+Radio.swift in Sources */,
 				6332094523EEFD4000E6D1AC /* SearchSongInfo.swift in Sources */,
-				63CA468B23EFCEA3007443F4 /* LRCover.swift in Sources */,
-				63CA468523EFCEA3007443F4 /* LRChannel.swift in Sources */,
 				6332093823EEE87A00E6D1AC /* ScanViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1108,7 +1079,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				63CA469223EFCEA3007443F4 /* LRProgram.swift in Sources */,
 				9097BB291CFEC40400FA5BD9 /* Arrays.swift in Sources */,
 				90E7FB001CC3E4E60018A532 /* Fonts.swift in Sources */,
 				63EF44B31F39F39600EADC48 /* DownloadingSongListViewController.swift in Sources */,
@@ -1125,12 +1095,10 @@
 				9097BB2F1CFFDFEF00FA5BD9 /* Strings.swift in Sources */,
 				63EF44091F38B02200EADC48 /* NowCollectionHeaderView.swift in Sources */,
 				63294D0A224738E10089AC36 /* ScannerTableViewCell.swift in Sources */,
-				63CA468423EFCEA3007443F4 /* LRChannel.swift in Sources */,
 				9054AE101CC3BFB400E876FF /* Colors.swift in Sources */,
 				DBB79DA51CD11935006189B3 /* Dates.swift in Sources */,
 				63CA469423EFD04E007443F4 /* API.swift in Sources */,
 				63A4E53C1D80384600E18FD6 /* Views.swift in Sources */,
-				63CA468623EFCEA3007443F4 /* LRRadio.swift in Sources */,
 				63EF43FD1F38A91D00EADC48 /* ChannelCollectionViewCell.swift in Sources */,
 				636449391DC2E53D008FC4A2 /* DownloadSongInfo.swift in Sources */,
 				6360F24B1F779C9500070C4E /* SearchSongInfo.swift in Sources */,
@@ -1141,41 +1109,40 @@
 				DB4F76EB1CCD1EE90021D068 /* LoginUser.swift in Sources */,
 				63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */,
 				63B2E4E91DC08A6700A2A146 /* MZDownloadModel.swift in Sources */,
-				63CA468A23EFCEA3007443F4 /* LRCover.swift in Sources */,
-				6332093C23EEE91A00E6D1AC /* Lava.swift in Sources */,
 				63EF44191F38B42D00EADC48 /* MusicManager.swift in Sources */,
 				9070928F1D07B51000E11D88 /* HudManager.swift in Sources */,
 				63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */,
 				6340022E1F6EABCE001FD26C /* ItunesViewCell.swift in Sources */,
 				90B95CAC1CF6F4FA00105090 /* Windows.swift in Sources */,
 				909E818C1CF8129500571A76 /* NotificationManager.swift in Sources */,
+				634B6B772417148E00228C2C /* Song.swift in Sources */,
 				902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */,
 				63EF44071F38AFEC00EADC48 /* NowViewController.swift in Sources */,
 				63B2E4EA1DC08A6700A2A146 /* MZUtility.swift in Sources */,
 				631884601D78482200D7399A /* RadioViewController.swift in Sources */,
 				9097BB311D00380800FA5BD9 /* LastPlaylist.swift in Sources */,
 				63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */,
+				63A00452242515F200241A01 /* Cover.swift in Sources */,
 				634E065C1F3857AD00253E9A /* Common.swift in Sources */,
 				63EF44131F38B28200EADC48 /* LocalTableViewCell.swift in Sources */,
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
 				63EF44031F38ACC800EADC48 /* SongListTableViewCell.swift in Sources */,
-				63CA469023EFCEA3007443F4 /* LRSong.swift in Sources */,
 				63974EBA1DC4E437004D2526 /* Downloader.swift in Sources */,
 				63EF44B21F39F39600EADC48 /* DownloadedViewController.swift in Sources */,
 				630D1703211EBB1400803BC5 /* Notification.swift in Sources */,
-				63CA468C23EFCEA3007443F4 /* LRUser.swift in Sources */,
 				63EF43F51F38A1FD00EADC48 /* ProgramCollectionViewCell.swift in Sources */,
 				6360F24F1F77ACC600070C4E /* SearchedSongInfo.swift in Sources */,
 				63659EAE23E9B4B100AAF6EF /* TabBarController.swift in Sources */,
 				63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */,
 				63294D08224632900089AC36 /* ScannerViewController.swift in Sources */,
+				63A00453242515FB00241A01 /* User.swift in Sources */,
 				63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */,
 				636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */,
 				6360F24D1F77A5A800070C4E /* SimpleTableViewCell.swift in Sources */,
-				63CA468E23EFCEA3007443F4 /* LRNowChannel.swift in Sources */,
 				63EF44B11F39F39600EADC48 /* DownloadedSongListViewController.swift in Sources */,
 				63EF43FF1F38AB4600EADC48 /* CoreDB.swift in Sources */,
 				6304E2CC1E9243D100B80494 /* SearchViewController.swift in Sources */,
+				63A00451242515ED00241A01 /* Channel.swift in Sources */,
 				90E7FB591CC536720018A532 /* Images.swift in Sources */,
 				63EF44051F38AFA500EADC48 /* MainViewController.swift in Sources */,
 				63B674661F519B2A00F4341B /* ItunesViewController.swift in Sources */,
@@ -1183,6 +1150,7 @@
 				9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				63C9A054211BB97200B507D2 /* SplashViewController.swift in Sources */,
+				634B6B7824171C8700228C2C /* Program.swift in Sources */,
 				90E7FAFE1CC3DB720018A532 /* NavigationController.swift in Sources */,
 				63EF43F91F38A6F400EADC48 /* ChannelViewController.swift in Sources */,
 				DBDC7F481CD90A8D0093812C /* Constants.swift in Sources */,
@@ -1244,7 +1212,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EvoRadioMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.evoradiomac;
@@ -1282,7 +1250,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EvoRadioMac/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.songjiaqiang.evoradiomac;
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -13,14 +13,14 @@ class DownloadSongInfo: NSObject {
     
     var taskid: String?
     var status: Int?
-    var song: LRSong?
+    var song: Song?
     
     convenience init(json: [String : Any]) {
         self.init()
         
         let taskid = json["taskid"] as! String
         let status = json["status"] as! Int
-        let song = LRSong(JSON: json["song"] as! [String:Any])
+        let song = Song(JSON: json["song"] as! [String:Any])
         
         
         self.taskid = taskid
@@ -29,7 +29,7 @@ class DownloadSongInfo: NSObject {
         
     }
     
-    convenience init(song: LRSong) {
+    convenience init(song: Song) {
         self.init()
         
         self.taskid = song.songId

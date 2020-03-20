@@ -8,6 +8,7 @@
 
 import Cocoa
 import Alamofire
+import Lava
 
 class ViewController: NSViewController {
 
@@ -34,7 +35,7 @@ class ViewController: NSViewController {
 
     @IBAction func onLoadRadioAndChannels(_ sender: NSButton) {
         
-        Lava.fetch_all_radios({[weak self] (radios) in
+        Lava.shared.fetchAllRadios({[weak self] (radios) in
             guard let wSelf = self else {return}
             
             print("result \(radios.count)")
@@ -53,7 +54,7 @@ class ViewController: NSViewController {
             }
 
         }) { (e) in
-            print("fetch all radios failed: \(e)")
+            print("fetch all radios failed: \(String(describing: e))")
         }
         
     }
@@ -70,10 +71,10 @@ class ViewController: NSViewController {
             return
         }
         // 一次性加载500行，
-        let page = LRPage(index: 0, size: 500)
+        let page = LRPage(index: 0)
         if let currentChannel = channelQueue.last, let channelId = currentChannel.channelId {
             channelIdText.stringValue = channelId
-            Lava.fetch_programs(channelId, page: page, onSuccess: {[weak self] (programs) in
+            Lava.shared.fetchPrograms(channelId, page: page, onSuccess: {[weak self] (programs) in
                 guard let wSelf = self else {return}
                 
                 if programs.count > 0 {
@@ -89,7 +90,7 @@ class ViewController: NSViewController {
                     wSelf.loadPrograms()
                 }
             }) { (e) in
-                print("fetch_programs error: \(e)")
+                print("fetch_programs error: \(String(describing: e))")
             }
             
         }
@@ -159,7 +160,7 @@ class ViewController: NSViewController {
 
         if let programId = programIdQueue.last {
             self.programIdText.stringValue = "\(programId)"
-            Lava.fetch_songs("\(programId)", onSuccess: {[weak self] (songs) in
+            Lava.shared.fetchSongs("\(programId)", onSuccess: {[weak self] (songs) in
                 guard let wSelf = self else {return}
                 
                 print("song count: \(songs.count)")
@@ -181,7 +182,7 @@ class ViewController: NSViewController {
             }) {[weak self] (e) in
                 guard let wSelf = self else {return}
                 
-                print("fetch songs failed: \(e)")
+                print("fetch songs failed: \(String(describing: e))")
                 wSelf.loadNextProgram()
             }
         }
@@ -201,7 +202,7 @@ class ViewController: NSViewController {
                 return;
             }
             self.programIdText.stringValue = "\(programId)"
-            Lava.fetch_songs("\(programId)", onSuccess: {[weak self] (songs) in
+            Lava.shared.fetchSongs("\(programId)", onSuccess: {[weak self] (songs) in
                 guard let wSelf = self else {return}
                 
                 print("song count: \(songs.count)")
@@ -211,7 +212,7 @@ class ViewController: NSViewController {
                 }
                 
             }) { (e) in
-                print("fetch songs failed: \(e)")
+                print("fetch songs failed: \(String(describing: e))")
             }
         }
     }

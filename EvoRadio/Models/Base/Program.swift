@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class LRProgram: Mappable{
+class Program: Mappable{
     var programId: String?
     var programName: String?
     var programDesc: String?
@@ -20,9 +20,9 @@ class LRProgram: Mappable{
     var vipLevel: String?
     var auditStatus: String?
     var status: String?
-    var channels: [LRChannel]?
-    var cover: LRCover?
-    var user: LRUser?
+    var channels: [Channel]?
+    var cover: Cover?
+    var user: User?
     var uid: String?
     var lavadj: String?
     var recommend: String?
@@ -52,5 +52,9 @@ class LRProgram: Mappable{
         recommend    <- map["recommend"]
         songNum    <- map["song_num"]
     }
+    
+}
+
+extension Program {
     
 }

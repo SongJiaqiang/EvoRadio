@@ -10,13 +10,12 @@ import UIKit
 import SnapKit
 import MediaPlayer
 
-
 class ItunesViewController: ViewController {
     
     let cellID = "cellID"
     
     var tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var songs = [LRSong]()
+    var songs = [Song]()
     
     //MARK: Life cycle
     override func viewDidLoad() {
@@ -120,9 +119,9 @@ class ItunesViewController: ViewController {
         }
     }
     
-    func resolverMediaItem(item: MPMediaItem) -> LRSong {
+    func resolverMediaItem(item: MPMediaItem) -> Song {
         
-        let song = LRSong()
+        let song = Song()
         song.songId = String(format: "%lld", Date().timeIntervalSince1970)
         song.songName = item.value(forKey: MPMediaItemPropertyTitle) as? String
         song.artistsName = item.value(forKey: MPMediaItemPropertyArtist) as? String
@@ -184,7 +183,9 @@ extension ItunesViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! SongListTableViewCell
         
         let song = songs[indexPath.row]
-        cell.updateSongInfo(song)
+        if let lrSong = song.toLRSong() {
+            cell.updateSongInfo(lrSong)
+        }
         
         return cell
     }

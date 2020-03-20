@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 enum SQLiteStatus {
     case idle, connected, failed, closed

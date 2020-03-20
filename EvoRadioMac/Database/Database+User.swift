@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 // table: user
 extension Database {
@@ -52,8 +53,6 @@ extension Database {
         let programDesc = Expression<String>("program_desc")
         let picURL = Expression<String>("pic_url")
         let channels = Expression<String>("channels")
-        let covers = Expression<String>("covers")
-        let uid = Expression<Int64>("uid")
         let songNum = Expression<Int64>("song_num")
         
         var setters = [Setter]()
@@ -76,8 +75,6 @@ extension Database {
             }
         }
         setters.append(channels <- channelsValue)
-        setters.append(covers <- object.cover?.pics?.description ?? "")
-        setters.append(uid <- Int64(object.uid ?? "0")!)
         setters.append(songNum <- object.songNum ?? 0)
         
         let insert = t.insert(or: .replace, setters)

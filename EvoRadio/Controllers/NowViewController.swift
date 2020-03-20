@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import Lava
 
 class NowViewController: ViewController {
     
@@ -86,8 +87,7 @@ class NowViewController: ViewController {
         if let userInfo = (notification as NSNotification).userInfo {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
-            
-            Lava.fetch_all_now_channels({[weak self] (objects) in
+            Lava.shared.fetchNowChannels({[weak self] (objects) in
                 let nowChannel = objects[dayIndex*8+timeIndex]
                 if let newChannels = nowChannel.channels {
                     
@@ -122,8 +122,7 @@ class NowViewController: ViewController {
         if isRefresh {
             pageIndex = 0
         }
-        
-        Lava.fetch_ground_programs(LRPage(index: pageIndex, size: pageSize), onSuccess: {[weak self] (items) in
+        Lava.shared.fetchGroundPrograms(page: LRPage(index: pageIndex), onSuccess: {[weak self] (items) in
             
             if items.count > 0 {
                 let newData = items as! [LRProgram]
@@ -150,7 +149,7 @@ class NowViewController: ViewController {
     }
     
     func listNowChannels() {
-        Lava.fetch_all_now_channels({[weak self] (items) in
+        Lava.shared.fetchNowChannels({[weak self] (items) in
             let week = CoreDB.currentDayOfWeek()
             let time = CoreDB.currentTimeOfDay()
             
@@ -238,12 +237,11 @@ extension NowViewController: UICollectionViewDelegate, UICollectionViewDataSourc
 
 extension NowViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programId: String) {
-        
-        Lava.fetch_songs(programId, isVIP: true, onSuccess: { (items) in
+        Lava.shared.fetchSongs(programId, onSuccess: { (items) in
             let songs = items
             if songs.count > 0 {
                 MusicManager.shared.clearList()
-                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+                MusicManager.shared.appendSongsToPlaylist(Song.fromLRSongs(songs), autoPlay: true)
                 
 //                if let topVC = Device.keyWindow().topMostController() {
 //                    topVC.present(PlayerViewController.mainController)

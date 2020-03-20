@@ -13,7 +13,7 @@ class DownloadedSongListViewController: ViewController {
     let cellID = "downloadedSongsCell"
     
     var tableView: UITableView!
-    var dataSource = [LRSong]()
+    var dataSource: [Song] = []
     
     
     override func viewDidLoad() {
@@ -74,8 +74,9 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
         cell.delegate = self
         
         let song = dataSource[(indexPath as NSIndexPath).row]
-
-        cell.updateMusicInfo(song, atIndex: indexPath.row)
+        if let lrSong = song.toLRSong() {
+            cell.updateMusicInfo(lrSong, atIndex: indexPath.row)
+        }
         
         return cell
     }
@@ -181,8 +182,7 @@ extension DownloadedSongListViewController: UITableViewDelegate, UITableViewData
 }
 
 extension DownloadedSongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: LRSong) {
-        
+    func openToolPanelOfSong(_ song: Song) {
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
             MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)

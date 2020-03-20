@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 // table: channels
 extension Database {
@@ -16,8 +17,6 @@ extension Database {
         let t = Table("channel")
         let channelId = Expression<Int64>("channel_id")
         let channelName = Expression<String?>("channel_name")
-        let channelNameShengmu = Expression<String?>("channel_name_shengmu")
-        let channelNameEnglish = Expression<String?>("english_name")
         let channelDesc = Expression<String?>("channel_desc")
         let radioId = Expression<Int64>("radio_id")
         let radioName = Expression<String?>("radio_name")
@@ -27,8 +26,6 @@ extension Database {
             try db?.run(t.create(ifNotExists: true) { t in
                 t.column(channelId, primaryKey: true)
                 t.column(channelName, unique: true)
-                t.column(channelNameShengmu)
-                t.column(channelNameEnglish)
                 t.column(channelDesc)
                 t.column(radioId)
                 t.column(radioName)
@@ -50,8 +47,6 @@ extension Database {
         
         let channelId = Expression<Int64>("channel_id")
         let channelName = Expression<String?>("channel_name")
-        let channelNameShengmu = Expression<String?>("channel_name_shengmu")
-        let channelNameEnglish = Expression<String?>("english_name")
         let channelDesc = Expression<String?>("channel_desc")
         let radioId = Expression<Int64>("radio_id")
         let radioName = Expression<String?>("radio_name")
@@ -60,8 +55,6 @@ extension Database {
         var setters = [Setter]()
         setters.append(channelId <- Int64(object.channelId!)!)
         setters.append(channelName <- object.channelName)
-        setters.append(channelNameShengmu <- object.channelNameShengmu)
-        setters.append(channelNameEnglish <- object.channelNameEnglish)
         setters.append(channelDesc <- object.channelDesc)
         setters.append(radioId <- Int64(object.radioId ?? "0")!)
         setters.append(radioName <- object.radioName)
@@ -94,8 +87,6 @@ extension Database {
             valuesString.append("(")
             valuesString.append(String(format: "%@,", object.channelId ?? "0"))
             valuesString.append(String(format: "'%@',", object.channelName ?? ""))
-            valuesString.append(String(format: "'%@',", object.channelNameShengmu ?? ""))
-            valuesString.append(String(format: "'%@',", object.channelNameEnglish ?? ""))
             valuesString.append(String(format: "'%@',", object.channelDesc ?? ""))
             valuesString.append(String(format: "%@,", object.radioId ?? "0"))
             valuesString.append(String(format: "'%@',", object.radioName ?? ""))

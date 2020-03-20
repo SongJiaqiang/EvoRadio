@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import Lava
 
 class ProgramViewController: ViewController {
     let cellID = "programCellID"
@@ -99,7 +100,7 @@ class ProgramViewController: ViewController {
             pageIndex = 0
         }
         
-        Lava.fetch_programs(channelId, page: LRPage(index: pageIndex, size: pageSize), onSuccess: {[weak self] (newItems) in
+        Lava.shared.fetchPrograms(channelId, page: LRPage(index: pageIndex), onSuccess: {[weak self] (newItems) in
             
             if newItems.count > 0 {
                 if isRefresh {
@@ -169,11 +170,10 @@ extension ProgramViewController: UICollectionViewDelegate, UICollectionViewDataS
 
 extension ProgramViewController: ProgramCollectionViewCellDelegate {
     func playMusicOfProgram(_ programId: String) {
-        
-        Lava.fetch_songs(programId, isVIP: true, onSuccess: { (songs) in
+        Lava.shared.fetchSongs(programId, onSuccess: { (songs) in
             if songs.count > 0 {
                 MusicManager.shared.clearList()
-                MusicManager.shared.appendSongsToPlaylist(songs, autoPlay: true)
+                MusicManager.shared.appendSongsToPlaylist(Song.fromLRSongs(songs), autoPlay: true)
 //
 //                if let topVC = Device.keyWindow().topMostController() {
 //                    topVC.present(PlayerViewController.mainController)

@@ -15,6 +15,8 @@ def common_pods
   pod 'StreamingKit',   '0.1.30'
   # SQLite数据库
   pod 'SQLite.swift'
+  # 音乐库
+  pod 'Lava'
 end
 
 target 'EvoRadio' do
@@ -45,7 +47,7 @@ target 'EvoRadio' do
 end
 
 target 'EvoRadioMac' do
-  platform :osx, '10.10'
+  platform :osx, '10.12'
   
   common_pods()
   

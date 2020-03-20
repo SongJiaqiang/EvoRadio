@@ -8,6 +8,7 @@
 
 import UIKit
 import MJRefresh
+import Lava
 
 class RadioViewController: ViewController {
 
@@ -58,7 +59,7 @@ class RadioViewController: ViewController {
     
     //MARK: loading data
     func listAllChannels() {
-        Lava.fetch_all_radios({[weak self] (radios) in
+        Lava.shared.fetchAllRadios({[weak self] (radios) in
             
             if radios.count > 0 {
                 self?.dataSources = radios

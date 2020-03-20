@@ -87,8 +87,8 @@ class ScannerTableViewCell: UITableViewCell {
     
     //MARK: events
     @objc func moreButtonPressed(_ button: UIButton) {
-//        if let _ = item {
-//            delegate?.openToolPanelOfSong(song!)
+//        if let song = Song.fromLRSong(lrSong) {
+//            delegate?.openToolPanelOfSong(song)
 //        }
     }
     

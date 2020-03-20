@@ -176,23 +176,23 @@ class CoreDB {
     
     
     // 存储播放列表
-    class func savePlaylist(_ songs: [LRSong]) {
+    class func savePlaylist(_ songs: [Song]) {
         let jsonArray = songs.toJSON()
         
         mainDB.setObject(jsonArray, forKey: DB_PLAYLSIT)
     }
     /** 获取播放列表 */
-    class func getPlaylist() -> [LRSong] {
-        var songs = [LRSong]()
+    class func getPlaylist() -> [Song] {
+        var songs = [Song]()
         if let jsonArray = mainDB.object(forKey: DB_PLAYLSIT) {
-            songs = Mapper<LRSong>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
         }
         
         return songs
     }
     
     /** 保存最后的播放列表 */
-    class func saveLastPlaylist(_ playlist:[LRSong], indexOfPlaylist: Int, timePlayed: Int) {
+    class func saveLastPlaylist(_ playlist:[Song], indexOfPlaylist: Int, timePlayed: Int) {
         let lastPlaylist = LastPlaylist(list: playlist, index: indexOfPlaylist, time: timePlayed)
         let playlistDict = lastPlaylist.toJSON()
         
@@ -209,7 +209,7 @@ class CoreDB {
     
     //MARK: 歌曲下载
     /** 添加一首已下载的歌曲 */
-    class func addSongToDownloadedList(_ song: LRSong) {
+    class func addSongToDownloadedList(_ song: Song) {
         
         var newSongs = [[String : Any]]()
         if let jsonArray = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
@@ -229,10 +229,10 @@ class CoreDB {
     }
     
     /** 获取已下载歌曲数据 */
-    class func getDownloadedSongs() -> [LRSong]? {
+    class func getDownloadedSongs() -> [Song]? {
         if let jsonArray = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             
-            let songs = Mapper<LRSong>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             
             return songs
         }
@@ -241,8 +241,8 @@ class CoreDB {
     }
 
     /** 获取已下载歌单数据 */
-    class func getDownloadedPrograms() -> [LRProgram] {
-        let programs = [LRProgram]()
+    class func getDownloadedPrograms() -> [Program] {
+        let programs = [Program]()
         
 //        if let songs = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
 //
@@ -259,7 +259,7 @@ class CoreDB {
     
     
     /** 删除一首已下载歌曲数据 */
-    class func removeSongFromDownloadedList(_ song: LRSong) {
+    class func removeSongFromDownloadedList(_ song: Song) {
         var newSongs: [NSDictionary]
         if let songs = mainDB.object(forKey: DB_DOWNLOADED_LIST) {
             newSongs = songs as! [NSDictionary]
@@ -286,7 +286,7 @@ class CoreDB {
 
     
     /** 添加一首歌曲下载 */
-    class func addSongToDownloadingList(_ song: LRSong) {
+    class func addSongToDownloadingList(_ song: Song) {
         let downloadSong = DownloadSongInfo(song: song)
         let dict = downloadSong.toJSON()
         
@@ -306,7 +306,7 @@ class CoreDB {
     }
 
     /** 添加一批歌曲下载 */
-    class func addSongsToDownloadingList(_ songs: [LRSong]) {
+    class func addSongsToDownloadingList(_ songs: [Song]) {
         var newSongs = [[String:Any]]()
         
         for song in songs {
@@ -398,9 +398,9 @@ class CoreDB {
     
 //MARK: 播放历史
     /** 获取播放历史 */
-    class func getHistorySongs() -> [LRSong]? {
+    class func getHistorySongs() -> [Song]? {
         if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
-            let songs = Mapper<LRSong>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             return songs
         }else {
             return nil
@@ -408,7 +408,7 @@ class CoreDB {
     }
     
     /** 添加播放历史 */
-    class func addSongToHistoryList(_ song: LRSong) {
+    class func addSongToHistoryList(_ song: Song) {
         let dict = song.toJSON()
         
         var newSongs = [[String : Any]]()
@@ -438,9 +438,9 @@ class CoreDB {
     
     //MARK: iTunes音乐
     /** 获取iTunes音乐 */
-    class func getITunesSongs() -> [LRSong]? {
+    class func getITunesSongs() -> [Song]? {
         if let jsonArray = mainDB.object(forKey: DB_HISTORY_LIST) {
-            let songs = Mapper<LRSong>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             return songs
         }else {
             return nil
@@ -448,7 +448,7 @@ class CoreDB {
     }
     
     /** 添加iTunes音乐缓存 */
-    class func addSongToITunesList(_ song: LRSong) {
+    class func addSongToITunesList(_ song: Song) {
         let dict = song.toJSON()
         
         var newSongs = [[String : Any]]()
@@ -475,7 +475,7 @@ class CoreDB {
 
 // MARK: - 收藏歌曲
 extension CoreDB {
-    class func addMusicToCollectList(_ song: LRSong) {
+    class func addMusicToCollectList(_ song: Song) {
         let dict = song.toJSON()
         
         var newSongs = [[String : Any]]()
@@ -498,9 +498,9 @@ extension CoreDB {
         mainDB.setObject(newSongs, forKey: DB_COLLECT_MUSIC_LIST)
     }
     
-    class func getCollectedMusics() -> [LRSong]? {
+    class func getCollectedMusics() -> [Song]? {
         if let jsonArray = mainDB.object(forKey: DB_COLLECT_MUSIC_LIST) {
-            let songs = Mapper<LRSong>().mapArray(JSONArray: jsonArray as! [[String : Any]])
+            let songs = Mapper<Song>().mapArray(JSONArray: jsonArray as! [[String : Any]])
             return songs
         }else {
             return nil

@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 // table: radio
 extension Database {

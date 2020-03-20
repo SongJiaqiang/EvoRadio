@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Lava
 
 class CollectedSongListViewController: ViewController {
     
     let cellID = "collectedSongsCell"
     
     let tableView = UITableView(frame: CGRect.zero, style: .grouped)
-    var dataSource = [LRSong]()
+    var dataSource = [Song]()
     
     
     override func viewDidLoad() {
@@ -71,7 +72,9 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
         cell.showMoreButton(false)
         
         let song = dataSource[(indexPath as NSIndexPath).row]
-        cell.updateSongInfo(song)
+        if let lrSong = song.toLRSong() {
+            cell.updateSongInfo(lrSong)
+        }
         
         return cell
     }
@@ -161,11 +164,10 @@ extension CollectedSongListViewController: UITableViewDelegate, UITableViewDataS
 }
 
 extension CollectedSongListViewController: SongListTableViewCellDelegate {
-    func openToolPanelOfSong(_ song: LRSong) {
-        
+    func openToolPanelOfSong(_ song: Song) {
         let alertController = UIAlertController()
         let action1 = UIAlertAction(title: "加入播放列表", style: .default, handler: { (action) in
-            MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)
+            MusicManager.shared.appendSongToPlaylist(song, autoPlay: false)            
         })
         let action2 = UIAlertAction(title: "收藏歌曲", style: .default, handler: { (action) in
             debugPrint("add to collecte")

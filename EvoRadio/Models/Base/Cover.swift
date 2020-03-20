@@ -9,7 +9,7 @@
 import Foundation
 import ObjectMapper
 
-class LRCover: Mappable {
+class Cover: Mappable {
     var num: NSNumber?
     var pics: [String]?
     

@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 // table: programs
 extension Database {
@@ -52,9 +53,6 @@ extension Database {
         let programDesc = Expression<String>("program_desc")
         let picURL = Expression<String>("pic_url")
         let channels = Expression<String>("channels")
-        let covers = Expression<String>("covers")
-        let uid = Expression<Int64>("uid")
-        let songNum = Expression<Int64>("song_num")
         
         var setters = [Setter]()
         setters.append(programId <- Int64(object.programId!)!)
@@ -76,9 +74,6 @@ extension Database {
             }
         }
         setters.append(channels <- channelsValue)
-        setters.append(covers <- object.cover?.pics?.description ?? "")
-        setters.append(uid <- Int64(object.uid ?? "0")!)
-        setters.append(songNum <- object.songNum ?? 0)
         
         let insert = t.insert(or: .replace, setters)
         do {
@@ -124,16 +119,7 @@ extension Database {
             }
             valuesString.append(String(format: "'%@',", channelsValue))
             var coversValue = ""
-            if let pics = object.cover?.pics, pics.count > 0 {
-                coversValue.append("[")
-                for pic in pics {
-                    coversValue.append(String(format: "%@,", pic))
-                }
-                coversValue.remove(at: coversValue.index(before: coversValue.endIndex))
-                coversValue.append("]")
-            }
             valuesString.append(String(format: "'%@',", coversValue))
-            valuesString.append(String(format: "%@,", object.uid ?? "0"))
             valuesString.append(String(format: "%@", object.songNum ?? "0"))
             valuesString.append("),")
         }

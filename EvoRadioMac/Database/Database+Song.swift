@@ -8,6 +8,7 @@
 
 import Foundation
 import SQLite
+import Lava
 
 // table: song
 extension Database {
@@ -18,29 +19,22 @@ extension Database {
         let songName = Expression<String>("song_name")
         let salbumsName = Expression<String>("salbums_name")
         let artistsName = Expression<String>("artists_name")
-        let language = Expression<String>("language")
         let duration = Expression<Int64>("duration")
         let filesize = Expression<Int64>("filesize")
         let audioURL = Expression<String>("audio_url")
         let picURL = Expression<String>("pic_url")
-        let tsid = Expression<String>("tsid")
         let programId = Expression<Int64>("program_id")
-        let status = Expression<Int64>("status")
-        
         do {
             try db?.run(t.create(ifNotExists: true) { t in
                 t.column(songId, primaryKey: true)
                 t.column(songName)
                 t.column(salbumsName)
                 t.column(artistsName)
-                t.column(language)
                 t.column(duration)
                 t.column(filesize)
                 t.column(audioURL)
                 t.column(picURL)
-                t.column(tsid)
                 t.column(programId)
-                t.column(status)
             })
             return t
         } catch let e {
@@ -60,28 +54,22 @@ extension Database {
         let songName = Expression<String>("song_name")
         let salbumsName = Expression<String>("salbums_name")
         let artistsName = Expression<String>("artists_name")
-        let language = Expression<String>("language")
         let duration = Expression<Int64>("duration")
         let filesize = Expression<Int64>("filesize")
         let audioURL = Expression<String>("audio_url")
         let picURL = Expression<String>("pic_url")
-        let tsid = Expression<String>("tsid")
         let programId = Expression<Int64>("program_id")
-        let status = Expression<Int64>("status")
         
         var setters = [Setter]()
         setters.append(songId <- Int64(object.songId)!)
         setters.append(songName <- object.songName ?? "")
         setters.append(salbumsName <- object.salbumsName ?? "")
         setters.append(artistsName <- object.artistsName ?? "")
-        setters.append(language <- object.language ?? "")
         setters.append(duration <- Int64(object.duration ?? "0")!)
         setters.append(filesize <- Int64(object.filesize ?? "0")!)
         setters.append(audioURL <- object.audioURL ?? "")
         setters.append(picURL <- object.picURL ?? "")
-        setters.append(tsid <- object.tsid ?? "")
         setters.append(programId <- Int64(object.programId ?? "0")!)
-        setters.append(status <- Int64(object.status ?? "0")!)
         
         let insert = t.insert(or: .replace, setters)
         do {
@@ -114,14 +102,11 @@ extension Database {
             valuesString.append(String(format: "\"%@\",", salbumsName))
             let artistsName = (object.artistsName ?? "").replacingOccurrences(of: "\"", with: "'")
             valuesString.append(String(format: "\"%@\",", artistsName))
-            valuesString.append(String(format: "'%@',", object.language ?? ""))
             valuesString.append(String(format: "%@,", object.duration ?? "0"))
             valuesString.append(String(format: "%@,", object.filesize ?? "0"))
             valuesString.append(String(format: "'%@',", object.audioURL ?? ""))
             valuesString.append(String(format: "'%@',", object.picURL ?? ""))
-            valuesString.append(String(format: "'%@',", object.tsid ?? ""))
             valuesString.append(String(format: "%@,", object.programId ?? "0"))
-            valuesString.append(String(format: "%@", object.status ?? "0"))
             valuesString.append("),")
         }
         valuesString.remove(at: valuesString.index(before: valuesString.endIndex))

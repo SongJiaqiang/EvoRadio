@@ -26,7 +26,7 @@ class MusicManager: NSObject {
     var audioPlayer: STKAudioPlayer!
     fileprivate var playTimer: Timer?
 
-    var playlist = [LRSong]()
+    var playlist = [Song]()
     var currentIndex: Int = -1
     
     override init() {
@@ -38,7 +38,7 @@ class MusicManager: NSObject {
     }
 
     //MARK: functions
-    func appendSongsToPlaylist(_ songs: [LRSong], autoPlay: Bool) {
+    func appendSongsToPlaylist(_ songs: [Song], autoPlay: Bool) {
         if songs.count == 0 {
             return
         }
@@ -60,7 +60,7 @@ class MusicManager: NSObject {
         }
     }
     
-    func appendSongToPlaylist(_ song: LRSong, autoPlay: Bool){
+    func appendSongToPlaylist(_ song: Song, autoPlay: Bool){
         var exit = false
         for item in playlist {
             if item.songId == song.songId {
@@ -85,7 +85,7 @@ class MusicManager: NSObject {
         saveLastPlaylist()
     }
     
-    func removeSongFromPlaylist(_ song: LRSong) {
+    func removeSongFromPlaylist(_ song: Song) {
         
         for item in playlist {
             if item.songId == song.songId {
@@ -153,9 +153,9 @@ class MusicManager: NSObject {
                     })
                 }
             }else {
-                if let albumImage = song.albumImage {
-                    updateCoverInfo(title: title, artist: artist, duration: duration, image: albumImage)
-                }
+//                if let albumImage = song.albumImage {
+//                    updateCoverInfo(title: title, artist: artist, duration: duration, image: albumImage)
+//                }
             }
             
         }
@@ -198,12 +198,12 @@ class MusicManager: NSObject {
                     }
                 }
             }else {
-                if let url = cSong.assetURL {
-//                    audioPlayer.play(url)
-                    
-                    let datasource = STKAudioPlayer.dataSource(from: url)
-                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
-                }
+//                if let url = cSong.assetURL {
+////                    audioPlayer.play(url)
+//                    
+//                    let datasource = STKAudioPlayer.dataSource(from: url)
+//                    audioPlayer.setDataSource(datasource, withQueueItemId: SampleQueueId(url: url, count: 0))
+//                }
             }
             
             // 更新控制中心的音乐播放信息
@@ -311,7 +311,7 @@ class MusicManager: NSObject {
     }
     
     //MARK: -
-    func currentSong() -> LRSong? {
+    func currentSong() -> Song? {
         if currentIndex < 0 || playlist.count <= 0 {
             return nil
         }else {
@@ -388,7 +388,7 @@ class MusicManager: NSObject {
         return .ListLoop
     }
     
-    func indexOf(array: [LRSong], song: LRSong) -> Int? {
+    func indexOf(array: [Song], song: Song) -> Int? {
         
         for index in 0..<array.count {
             let item = array[index]
@@ -400,7 +400,7 @@ class MusicManager: NSObject {
         return nil
     }
     
-    func indexOfPlaylist(song: LRSong) -> Int? {
+    func indexOfPlaylist(song: Song) -> Int? {
         
         for index in 0..<playlist.count {
             let item = playlist[index]
@@ -412,7 +412,7 @@ class MusicManager: NSObject {
         return nil
     }
     
-    func findMusicFileCachedPath(_ song: LRSong) -> String? {
+    func findMusicFileCachedPath(_ song: Song) -> String? {
         if song.audioURL?.isEmpty == true {
             return nil
         }

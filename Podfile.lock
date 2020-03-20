@@ -4,6 +4,9 @@ PODS:
   - iCarousel (1.8.3)
   - JQFisher (0.1.2)
   - Kingfisher (4.10.1)
+  - Lava (0.0.2):
+    - Alamofire (~> 4.8.0)
+    - ObjectMapper (~> 3.4.0)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.7)
   - ObjectMapper (3.4.1)
@@ -20,6 +23,7 @@ DEPENDENCIES:
   - iCarousel (= 1.8.3)
   - JQFisher (= 0.1.2)
   - Kingfisher (= 4.10.1)
+  - Lava
   - MBProgressHUD (= 1.1.0)
   - MJRefresh (= 3.1.15.7)
   - ObjectMapper (= 3.4.1)
@@ -34,6 +38,7 @@ SPEC REPOS:
     - FLEX
     - iCarousel
     - Kingfisher
+    - Lava
     - MBProgressHUD
     - MJRefresh
     - ObjectMapper
@@ -50,6 +55,7 @@ SPEC CHECKSUMS:
   iCarousel: d782f635afac190c49bb8ee455882284cff8b85f
   JQFisher: 97796aac19590ece9620d465a7567754a70910eb
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
+  Lava: fe81ae744c7877bd5015f83a9deb6c7f8d9f19c4
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
@@ -58,6 +64,6 @@ SPEC CHECKSUMS:
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   StreamingKit: 70ca8608c206864b4d54a577eacb3c8bf7c72209
 
-PODFILE CHECKSUM: ea72fe546c397d68cd988d2a78fb35aa0c434557
+PODFILE CHECKSUM: 79ca4efddf71fd6a2e9e74d054a04f5ff478a271
 
 COCOAPODS: 1.7.0

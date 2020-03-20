@@ -8,6 +8,7 @@
 
 import UIKit
 import iCarousel
+import Lava
 
 protocol NowCollectionHeaderViewDelegate: NSObjectProtocol {
     func headerView(_ headerView: NowCollectionHeaderView, didSelectedAtIndex index: Int);

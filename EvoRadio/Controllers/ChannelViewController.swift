@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import Kingfisher
 import MJRefresh
-
+import Lava
 
 
 class ChannelViewController: ViewController {
@@ -81,7 +81,7 @@ class ChannelViewController: ViewController {
     }
     
     func listAllChannels() {
-        Lava.fetch_all_radios({[weak self] (items) in
+        Lava.shared.fetchAllRadios({[weak self] (items) in
             
             for reflect in items {
                 let radio = reflect 
@@ -100,8 +100,7 @@ class ChannelViewController: ViewController {
     }
     
     func listAllNowChannels() {
-        
-        Lava.fetch_all_now_channels({[weak self] (nowChannels) in
+        Lava.shared.fetchNowChannels({[weak self] (nowChannels) in
 //            let week = CoreDB.currentDayOfWeek()
 //            let time = CoreDB.currentTimeOfDay()
 //            
@@ -131,8 +130,7 @@ class ChannelViewController: ViewController {
         if let userInfo = (notification as NSNotification).userInfo {
             let dayIndex = userInfo["dayIndex"] as! Int
             let timeIndex = userInfo["timeIndex"] as! Int
-
-            Lava.fetch_all_now_channels({[weak self] (nowChannels) in
+            Lava.shared.fetchNowChannels({[weak self] (nowChannels) in
                 let nowChannel = nowChannels[dayIndex*8+timeIndex]
                 if let newChannels = nowChannel.channels {
                     

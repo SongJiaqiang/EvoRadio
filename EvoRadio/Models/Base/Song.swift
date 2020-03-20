@@ -8,8 +8,9 @@
 
 import Foundation
 import ObjectMapper
+import Lava
 
-class LRSong : NSObject, Mappable {
+class Song : NSObject, Mappable {
 
     var songId: String!
     var songName: String!
@@ -24,6 +25,7 @@ class LRSong : NSObject, Mappable {
     var programId: String?
     var status: String?
     
+    //TODO: 不要在model中使用非基础类型的属性
     #if os(iOS)
     var assetURL: URL?
     var albumImage: UIImage?
@@ -58,4 +60,27 @@ class LRSong : NSObject, Mappable {
         status   <- map["status"]
     }
 
+}
+
+extension Song {
+    class func fromLRSong(_ lrSong: LRSong) -> Song? {
+        if let song = Song(JSON: lrSong.toJSON()) {
+            return song
+        }
+        return nil
+    }
+    
+    class func fromLRSongs(_ lrSongs: [LRSong]) -> [Song] {
+        var songs = [Song]();
+        lrSongs.forEach { (lrSong) in
+            if let song = Song(JSON: lrSong.toJSON()) {
+                songs.append(song)
+            }
+        }
+        return songs
+    }
+    
+    func toLRSong() -> LRSong? {
+        return LRSong(JSON: self.toJSON())
+    }
 }
