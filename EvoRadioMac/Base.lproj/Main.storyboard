@@ -385,73 +385,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="400" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Fnu-GV-6Xt">
-                                <rect key="frame" x="20" y="231" width="164" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="roundRect" title="Load Radios and Channels" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Dtn-Qn-t4p">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="controlContent"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="onLoadRadioAndChannels:" target="XfG-lQ-9wD" id="ABJ-vt-E7u"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ppz-dF-BoH">
-                                <rect key="frame" x="20" y="161" width="182" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="roundRect" title="Load Songs with Program ID: " bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fIw-1i-7UO">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="controlContent"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="onLoadSongs:" target="XfG-lQ-9wD" id="a5p-of-OoF"/>
-                                </connections>
-                            </button>
-                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4P2-5W-blf">
-                                <rect key="frame" x="20" y="195" width="201" height="19"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="roundRect" title="Load Programs With Channel ID: " bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WwR-7t-tiT">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="controlContent"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="onLoadPrograms:" target="XfG-lQ-9wD" id="lzn-Zi-4vm"/>
-                                </connections>
-                            </button>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CBg-Ew-MGw">
-                                <rect key="frame" x="237" y="164" width="57" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="pZG-rQ-Oog">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5fV-Or-2Jj">
-                                <rect key="frame" x="327" y="164" width="57" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="0.00" id="kAs-oE-dA8">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8VC-ws-oev">
-                                <rect key="frame" x="237" y="198" width="57" height="16"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" title="0" id="zzb-Qd-r6M">
-                                    <font key="font" metaFont="system"/>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="RFb-IF-SlR">
+                                <rect key="frame" x="139" y="124" width="122" height="23"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="建设中。。。" id="LJ4-oE-sz9">
+                                    <font key="font" size="20" name=".PingFangSC-Regular"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                         </subviews>
+                        <constraints>
+                            <constraint firstItem="RFb-IF-SlR" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="8BO-6z-d8k"/>
+                            <constraint firstItem="RFb-IF-SlR" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Apf-Rd-ldg"/>
+                        </constraints>
                     </view>
-                    <connections>
-                        <outlet property="channelIdText" destination="8VC-ws-oev" id="nua-bo-wk5"/>
-                        <outlet property="loadSongProgress" destination="5fV-Or-2Jj" id="VxU-qe-qOs"/>
-                        <outlet property="programIdText" destination="CBg-Ew-MGw" id="Imi-3r-XCi"/>
-                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
