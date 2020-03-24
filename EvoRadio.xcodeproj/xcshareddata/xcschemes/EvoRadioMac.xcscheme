@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "630BB60A222822B50088B6D7"
-               BuildableName = "EvoRadioMac.app"
+               BuildableName = "Evo.app"
                BlueprintName = "EvoRadioMac"
                ReferencedContainer = "container:EvoRadio.xcodeproj">
             </BuildableReference>
@@ -56,7 +56,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "630BB60A222822B50088B6D7"
-            BuildableName = "EvoRadioMac.app"
+            BuildableName = "Evo.app"
             BlueprintName = "EvoRadioMac"
             ReferencedContainer = "container:EvoRadio.xcodeproj">
          </BuildableReference>
@@ -73,7 +73,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "630BB60A222822B50088B6D7"
-            BuildableName = "EvoRadioMac.app"
+            BuildableName = "Evo.app"
             BlueprintName = "EvoRadioMac"
             ReferencedContainer = "container:EvoRadio.xcodeproj">
          </BuildableReference>
