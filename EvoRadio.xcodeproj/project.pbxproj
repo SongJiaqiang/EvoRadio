@@ -414,6 +414,38 @@
 			path = LevelDB;
 			sourceTree = "<group>";
 		};
+		632546F2242A627B002A49BF /* V1 */ = {
+			isa = PBXGroup;
+			children = (
+				63EF44AA1F39F38200EADC48 /* Download */,
+				63B674651F519B2A00F4341B /* ItunesViewController.swift */,
+				6304E2CB1E9243D100B80494 /* SearchViewController.swift */,
+				63C9A052211BB97200B507D2 /* SplashViewController.swift */,
+				63C9A053211BB97200B507D2 /* SplashViewController.xib */,
+				63294D07224632900089AC36 /* ScannerViewController.swift */,
+				90E7FAFD1CC3DB720018A532 /* NavigationController.swift */,
+				63EF44041F38AFA500EADC48 /* MainViewController.swift */,
+				63659EAD23E9B4B100AAF6EF /* TabBarController.swift */,
+				63EF44061F38AFEC00EADC48 /* NowViewController.swift */,
+				6318845F1D78482200D7399A /* RadioViewController.swift */,
+				63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */,
+				63EF43F81F38A6F400EADC48 /* ChannelViewController.swift */,
+				63EF44001F38AC7800EADC48 /* SongListViewController.swift */,
+				63EF44101F38B1E700EADC48 /* LocalViewController.swift */,
+				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
+				63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */,
+				63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */,
+			);
+			name = V1;
+			sourceTree = "<group>";
+		};
+		632546F3242A6286002A49BF /* V2 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = V2;
+			sourceTree = "<group>";
+		};
 		634E06651F3869F400253E9A /* EvoRadioTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -571,24 +603,8 @@
 			isa = PBXGroup;
 			children = (
 				909E65A01CC0831B00B0C49B /* ViewController.swift */,
-				90E7FAFD1CC3DB720018A532 /* NavigationController.swift */,
-				63EF44041F38AFA500EADC48 /* MainViewController.swift */,
-				63659EAD23E9B4B100AAF6EF /* TabBarController.swift */,
-				63EF44061F38AFEC00EADC48 /* NowViewController.swift */,
-				6318845F1D78482200D7399A /* RadioViewController.swift */,
-				63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */,
-				63EF43F81F38A6F400EADC48 /* ChannelViewController.swift */,
-				63EF44001F38AC7800EADC48 /* SongListViewController.swift */,
-				63EF44101F38B1E700EADC48 /* LocalViewController.swift */,
-				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
-				63EF44B51F39F3CF00EADC48 /* HistorySongListViewController.swift */,
-				63E1D9382228590E00B5C85D /* CollectedSongListViewController.swift */,
-				63EF44AA1F39F38200EADC48 /* Download */,
-				63B674651F519B2A00F4341B /* ItunesViewController.swift */,
-				6304E2CB1E9243D100B80494 /* SearchViewController.swift */,
-				63C9A052211BB97200B507D2 /* SplashViewController.swift */,
-				63C9A053211BB97200B507D2 /* SplashViewController.xib */,
-				63294D07224632900089AC36 /* ScannerViewController.swift */,
+				632546F3242A6286002A49BF /* V2 */,
+				632546F2242A627B002A49BF /* V1 */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
