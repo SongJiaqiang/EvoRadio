@@ -9,41 +9,33 @@
 import UIKit
 import SnapKit
 import MJRefresh
+import PureLayout
 
 class MainViewController: ViewController {
     let barHeight: CGFloat = 50
     
-    fileprivate var playerView: UIView!
-    fileprivate var contentView = UIScrollView()
-    fileprivate var playerViewTopConstraint: Constraint?
+    private let navBar: UIView = UIView();
+    private let titleLabel = UILabel()
+    private var playerView: UIView!
+    private var scrollView = UIScrollView()
+    private var playerViewTopConstraint: Constraint?
     
-    fileprivate var radioController: RadioViewController?
-    fileprivate var nowController: NowViewController?
-    fileprivate var localController: LocalViewController?
-    fileprivate var playerController = PlayerViewController()
+    private var radioController: RadioViewController = RadioViewController()
+    private var fmVC: FMViewController = FMViewController()
+    private var localController: LocalViewController = LocalViewController()
+    private var playerController = PlayerViewController()
+    
+    private let narBarItems = ["所有音乐", "私人电波", "个人中心"]
     
     var touchIcon: UIImage?
     
     //MARK: life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         title = "EvoRadio"
         
-        prepareContentView()
-//        preparePlayerView()
-        
-        // 准备播放界面
-        preparePlayer()
+        prepareUI()
     }
-    
-    func preparePlayer() {
-        PlayerView.main.prepareUI()
-        PlayerViewController.mainController.prepare()
-        
-        MusicManager.shared.loadLastPlaylist()
-    }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -52,10 +44,67 @@ class MainViewController: ViewController {
     }
     
     override var prefersStatusBarHidden: Bool {
-        return true
+        return false
     }
     
     //MARK: prepare
+    func prepareUI() {
+        prepareNavBar()
+        prepareContentView()
+        
+        //        preparePlayerView()
+        
+        // 准备播放界面
+        //        preparePlayer()
+        
+    }
+    
+    func prepareNavBar() {
+        navBar.backgroundColor = UIColor.red
+
+        titleLabel.textColor = ThemeColors.textColorDark
+        titleLabel.text = "私人电台"
+        
+        self.view.addSubview(navBar);
+        navBar.addSubview(titleLabel);
+        
+        navBar.autoPinEdge(toSuperviewSafeArea: .top)
+        navBar.autoPinEdge(toSuperviewEdge: .left)
+        navBar.autoPinEdge(toSuperviewEdge: .right)
+        navBar.autoSetDimension(.height, toSize: 60)
+        
+        titleLabel.autoPinEdge(toSuperviewEdge: .left, withInset: 16)
+        titleLabel.autoAlignAxis(toSuperviewAxis: .horizontal)
+        
+    }
+    
+    func prepareContentView() {
+        self.view.backgroundColor = ThemeColors.bgColorDark;
+        
+        view.addSubview(scrollView)
+        scrollView.isPagingEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.clipsToBounds = true
+        scrollView.delegate = self
+        scrollView.autoPinEdge(toSuperviewEdge: .left)
+        scrollView.autoPinEdge(toSuperviewEdge: .right)
+        scrollView.autoPinEdge(toSuperviewEdge: .bottom)
+        scrollView.autoPinEdge(.top, to: .bottom, of: navBar)
+        
+        scrollView.contentSize = CGSize(width: Device.width()*3, height: 0)
+        scrollView.contentOffset = CGPoint(x: Device.width(), y: 0)
+        
+        // 初始化子控制器，并添加到ContentView中
+        addChildViewControllers([radioController, fmVC, localController], inView: scrollView)
+    }
+    
+    func preparePlayer() {
+        PlayerView.main.prepareUI()
+        PlayerViewController.mainController.prepare()
+        
+        MusicManager.shared.loadLastPlaylist()
+    }
     
     func preparePlayerView() {
         
@@ -74,42 +123,18 @@ class MainViewController: ViewController {
         playerController.view.snp.makeConstraints { (make) in
             make.edges.equalTo(UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
         }
-//        
-//        playerBar = PlayerBar()
-//        playerView.addSubview(playerBar)
-//        playerBar.delegate = self
-//        playerBar.snp.makeConstraints { (make) in
-//            make.height.equalTo(barHeight)
-//            make.topMargin.equalTo(0)
-//            make.leftMargin.equalTo(0)
-//            make.rightMargin.equalTo(0)
-//        }
+        //
+        //        playerBar = PlayerBar()
+        //        playerView.addSubview(playerBar)
+        //        playerBar.delegate = self
+        //        playerBar.snp.makeConstraints { (make) in
+        //            make.height.equalTo(barHeight)
+        //            make.topMargin.equalTo(0)
+        //            make.leftMargin.equalTo(0)
+        //            make.rightMargin.equalTo(0)
+        //        }
     }
-    
-    func prepareContentView() {        
-        view.addSubview(contentView)
-        contentView.isPagingEnabled = true
-        contentView.showsVerticalScrollIndicator = false
-        contentView.showsHorizontalScrollIndicator = false
-        contentView.clipsToBounds = true
-        contentView.delegate = self
-        contentView.snp.makeConstraints { (make) in
-            make.top.equalTo(view.snp.top).offset(20)
-            make.bottomMargin.equalTo(0)
-            make.left.equalTo(0)
-            make.right.equalTo(0)
-        }
-        
-        contentView.contentSize = CGSize(width: Device.width()*3, height: 0)
-        contentView.contentOffset = CGPoint(x: Device.width(), y: 0)
-        
-        // 初始化子控制器，并添加到ContentView中
-        radioController = RadioViewController()
-        nowController = NowViewController()
-        localController = LocalViewController()
-        
-        addChildViewControllers([radioController!, nowController!, localController!], inView: contentView)
-    }
+
     
     //MARK: event
     
@@ -130,6 +155,7 @@ extension MainViewController: UIScrollViewDelegate {
         let offsetX = scrollView.contentOffset.x
         
         let pageIndex = offsetX.truncatingRemainder(dividingBy: Device.width()) == 0 ? Int(offsetX / Device.width()) : Int(offsetX / Device.width())
+        titleLabel.text = narBarItems[pageIndex]
         
         if pageIndex == 0 {
             touchIcon = UIImage(named: "touch_refresh")

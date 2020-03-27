@@ -20,6 +20,8 @@
 		6310545821B184F6006C8616 /* ObjcLevelDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		631BA2C921AFB73100A6D65C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */; };
+		632546F5242D0BDC002A49BF /* ThemeColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632546F4242D0BDC002A49BF /* ThemeColors.swift */; };
+		632546F7242D100F002A49BF /* FMViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 632546F6242D100F002A49BF /* FMViewController.swift */; };
 		63294D08224632900089AC36 /* ScannerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63294D07224632900089AC36 /* ScannerViewController.swift */; };
 		63294D0A224738E10089AC36 /* ScannerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63294D09224738E10089AC36 /* ScannerTableViewCell.swift */; };
 		6332093823EEE87A00E6D1AC /* ScanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6332093723EEE87A00E6D1AC /* ScanViewController.swift */; };
@@ -81,7 +83,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -174,6 +176,8 @@
 		6310545521B182DE006C8616 /* ObjcLevelDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ObjcLevelDB.framework; sourceTree = "<group>"; };
 		6318845F1D78482200D7399A /* RadioViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RadioViewController.swift; path = Controllers/RadioViewController.swift; sourceTree = "<group>"; };
 		631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		632546F4242D0BDC002A49BF /* ThemeColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeColors.swift; sourceTree = "<group>"; };
+		632546F6242D100F002A49BF /* FMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FMViewController.swift; path = Controllers/V2/FMViewController.swift; sourceTree = "<group>"; };
 		63294D07224632900089AC36 /* ScannerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScannerViewController.swift; path = Controllers/ScannerViewController.swift; sourceTree = "<group>"; };
 		63294D09224738E10089AC36 /* ScannerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScannerTableViewCell.swift; sourceTree = "<group>"; };
 		6332093723EEE87A00E6D1AC /* ScanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ScanViewController.swift; path = Controllers/Scanner/ScanViewController.swift; sourceTree = "<group>"; };
@@ -312,7 +316,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* (null) in Frameworks */,
+				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -424,7 +428,6 @@
 				63C9A053211BB97200B507D2 /* SplashViewController.xib */,
 				63294D07224632900089AC36 /* ScannerViewController.swift */,
 				90E7FAFD1CC3DB720018A532 /* NavigationController.swift */,
-				63EF44041F38AFA500EADC48 /* MainViewController.swift */,
 				63659EAD23E9B4B100AAF6EF /* TabBarController.swift */,
 				63EF44061F38AFEC00EADC48 /* NowViewController.swift */,
 				6318845F1D78482200D7399A /* RadioViewController.swift */,
@@ -442,6 +445,8 @@
 		632546F3242A6286002A49BF /* V2 */ = {
 			isa = PBXGroup;
 			children = (
+				63EF44041F38AFA500EADC48 /* MainViewController.swift */,
+				632546F6242D100F002A49BF /* FMViewController.swift */,
 			);
 			name = V2;
 			sourceTree = "<group>";
@@ -667,6 +672,7 @@
 				9070928E1D07B51000E11D88 /* HudManager.swift */,
 				634E065B1F3857AD00253E9A /* Common.swift */,
 				63EF44181F38B42D00EADC48 /* MusicManager.swift */,
+				632546F4242D0BDC002A49BF /* ThemeColors.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1001,6 +1007,7 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper-iOS/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/PureLayout/PureLayout.framework",
 				"${BUILT_PRODUCTS_DIR}/SQLite.swift-iOS/SQLite.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/StreamingKit-iOS/StreamingKit.framework",
@@ -1017,6 +1024,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PureLayout.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StreamingKit.framework",
@@ -1108,6 +1116,7 @@
 				63EF44171F38B41600EADC48 /* CDCoverImageView.swift in Sources */,
 				63A00452242515F200241A01 /* Cover.swift in Sources */,
 				634E065C1F3857AD00253E9A /* Common.swift in Sources */,
+				632546F5242D0BDC002A49BF /* ThemeColors.swift in Sources */,
 				63EF44131F38B28200EADC48 /* LocalTableViewCell.swift in Sources */,
 				902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */,
 				63EF44031F38ACC800EADC48 /* SongListTableViewCell.swift in Sources */,
@@ -1119,6 +1128,7 @@
 				63659EAE23E9B4B100AAF6EF /* TabBarController.swift in Sources */,
 				63EF44B61F39F3CF00EADC48 /* HistorySongListViewController.swift in Sources */,
 				63294D08224632900089AC36 /* ScannerViewController.swift in Sources */,
+				632546F7242D100F002A49BF /* FMViewController.swift in Sources */,
 				63A00453242515FB00241A01 /* User.swift in Sources */,
 				63EF441B1F38B81400EADC48 /* PlayerView.swift in Sources */,
 				636CEC9F1E1BEF4E009488D5 /* ScrollView.swift in Sources */,

@@ -11,6 +11,7 @@ PODS:
   - MJRefresh (3.1.15.7)
   - ObjectMapper (3.4.1)
   - pop (1.0.12)
+  - PureLayout (3.1.5)
   - SnapKit (4.2.0)
   - SQLite.swift (0.12.2):
     - SQLite.swift/standard (= 0.12.2)
@@ -28,6 +29,7 @@ DEPENDENCIES:
   - MJRefresh (= 3.1.15.7)
   - ObjectMapper (= 3.4.1)
   - pop (= 1.0.12)
+  - PureLayout (~> 3.1.0)
   - SnapKit (= 4.2.0)
   - SQLite.swift
   - StreamingKit (= 0.1.30)
@@ -43,6 +45,7 @@ SPEC REPOS:
     - MJRefresh
     - ObjectMapper
     - pop
+    - PureLayout
     - SnapKit
     - SQLite.swift
     - StreamingKit
@@ -60,10 +63,11 @@ SPEC CHECKSUMS:
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
   ObjectMapper: 5311bd50ca732930959e7ca1a2de43ab823a5ced
   pop: d582054913807fd11fd50bfe6a539d91c7e1a55a
+  PureLayout: 9b4ad47b2f0388c84ff534af23d96e720c1b875a
   SnapKit: fe8a619752f3f27075cc9a90244d75c6c3f27e2a
   SQLite.swift: d2b4642190917051ce6bd1d49aab565fe794eea3
   StreamingKit: 70ca8608c206864b4d54a577eacb3c8bf7c72209
 
-PODFILE CHECKSUM: 79ca4efddf71fd6a2e9e74d054a04f5ff478a271
+PODFILE CHECKSUM: c752003bd350eeaa3d06ec45b6a5accbb7d67074
 
 COCOAPODS: 1.7.0

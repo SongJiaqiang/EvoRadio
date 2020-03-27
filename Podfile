@@ -28,6 +28,7 @@ target 'EvoRadio' do
   pod 'FLEX',           '2.4.0', :configurations => ['Debug'], :inhibit_warnings => true
   # 自动布局
   pod 'SnapKit',        '4.2.0'
+  pod 'PureLayout',     '~> 3.1.0'
   # 列表刷新
   pod 'MJRefresh',      '3.1.15.7'
   # 提示蒙版

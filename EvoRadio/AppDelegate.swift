@@ -53,16 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func setupRootControllerAndVisible() {
         window = UIWindow(frame: UIScreen.main.bounds)
 
-        var rootVC: UIViewController?
-        
-        let ud = UserDefaults.standard
-        let hasInvitationCode = ud.object(forKey: "kEnterInvitationCode")
-        if let hasCode = hasInvitationCode as? Int, hasCode == 1 {
-            rootVC = NavigationController(rootViewController: MainViewController())
-        }else {
-            rootVC = SplashViewController()
-        }
-        rootVC = TabBarController()
+        let rootVC = NavigationController(rootViewController: MainViewController())
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
     }
