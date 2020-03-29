@@ -100,7 +100,7 @@ class ChannelViewController: ViewController {
     }
     
     func listAllNowChannels() {
-        Lava.shared.fetchNowChannels({[weak self] (nowChannels) in
+//        Lava.shared.fetchNowChannels({[weak self] (nowChannels) in
 //            let week = CoreDB.currentDayOfWeek()
 //            let time = CoreDB.currentTimeOfDay()
 //            
@@ -117,7 +117,7 @@ class ChannelViewController: ViewController {
 //            if self?.radioId == 0 {
 //                self?.collectionView!.mj_header.hidden = true
 //            }
-        }, onFailed: nil)
+//        }, onFailed: nil)
         
     }
 

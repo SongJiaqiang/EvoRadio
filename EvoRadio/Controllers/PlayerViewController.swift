@@ -361,7 +361,7 @@ class PlayerViewController: ViewController {
             coverRotateAnimation = CABasicAnimation(keyPath: "transform.rotation.z")
             coverRotateAnimation!.duration = 30
             coverRotateAnimation!.fromValue = NSNumber(value: 0 as Double)
-            coverRotateAnimation!.toValue = NSNumber(value: M_PI * 2 as Double)
+            coverRotateAnimation!.toValue = NSNumber(value: Double.pi * 2)
             coverRotateAnimation!.repeatCount = MAXFLOAT
             coverRotateAnimation!.autoreverses = false
             coverRotateAnimation!.isCumulative = true

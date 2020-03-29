@@ -125,7 +125,7 @@ class NowViewController: ViewController {
         Lava.shared.fetchGroundPrograms(page: LRPage(index: pageIndex), onSuccess: {[weak self] (items) in
             
             if items.count > 0 {
-                let newData = items as! [LRProgram]
+                let newData = items
                 if isRefresh {
                     self?.dataSources.removeAll()
                 }

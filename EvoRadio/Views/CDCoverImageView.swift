@@ -43,7 +43,7 @@ class CDCoverImageView: UIImageView {
     
     func prepareAnimation()  {
         
-        rotateAnimation.toValue = M_PI * 2
+        rotateAnimation.toValue = Double.pi * 2
         rotateAnimation.duration = 16
         rotateAnimation.repeatForever = true
         rotateAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)

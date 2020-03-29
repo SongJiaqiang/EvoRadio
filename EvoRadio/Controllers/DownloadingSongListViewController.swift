@@ -383,7 +383,7 @@ extension DownloadingSongListViewController: MZDownloadManagerDelegate {
     }
     
     func downloadRequestDidPopulatedInterruptedTasks(_ downloadModels: [MZDownloadModel]) {
-        debugPrint("download task interrupted: \(index)")
+        debugPrint("download task interrupted: \(String(describing: index))")
         tableView.reloadData()
     }
     
