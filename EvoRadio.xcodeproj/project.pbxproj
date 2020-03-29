@@ -16,7 +16,6 @@
 		630BB621222822B60088B6D7 /* EvoRadioMacTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630BB620222822B60088B6D7 /* EvoRadioMacTests.swift */; };
 		630D1703211EBB1400803BC5 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 630D1702211EBB1400803BC5 /* Notification.swift */; };
 		6310545621B182DE006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
-		6310545721B184F6006C8616 /* ObjcLevelDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; };
 		6310545821B184F6006C8616 /* ObjcLevelDB.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 6310545521B182DE006C8616 /* ObjcLevelDB.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		631884601D78482200D7399A /* RadioViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6318845F1D78482200D7399A /* RadioViewController.swift */; };
 		631BA2C921AFB73100A6D65C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */; };
@@ -344,7 +343,6 @@
 				6310545621B182DE006C8616 /* ObjcLevelDB.framework in Frameworks */,
 				90FB91AF1D02D4A3002ECC8C /* Security.framework in Frameworks */,
 				90FB91A91D02C867002ECC8C /* CoreTelephony.framework in Frameworks */,
-				6310545721B184F6006C8616 /* ObjcLevelDB.framework in Frameworks */,
 				90FB91A71D02C528002ECC8C /* libz.tbd in Frameworks */,
 				1B0B6791D3CB7BC65CE9C63A /* Pods_EvoRadio.framework in Frameworks */,
 			);
@@ -797,7 +795,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1010;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = JQTech;
 				TargetAttributes = {
 					630BB60A222822B50088B6D7 = {
@@ -827,10 +825,9 @@
 			};
 			buildConfigurationList = 902FBCC81CBEAC010051A93B /* Build configuration list for PBXProject "EvoRadio" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -1222,6 +1219,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EvoRadioMac/Info.plist;
@@ -1260,6 +1258,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 4T9J35ZW6C;
+				ENABLE_HARDENED_RUNTIME = YES;
 				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = EvoRadioMac/Info.plist;
@@ -1388,19 +1387,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1435,19 +1443,28 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
