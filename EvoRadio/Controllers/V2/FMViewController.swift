@@ -41,7 +41,7 @@ class FMViewController: ViewController {
     
     private lazy var infoBtn: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor.systemRed()
+        btn.setImage(UIImage(named: "fm_player_info"), for: .normal)
         return btn
     }()
 
@@ -75,19 +75,19 @@ class FMViewController: ViewController {
     
     private lazy var playBtn: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor.systemGreen()
+        btn.setImage(UIImage(named: "fm_player_play"), for: .normal)
         return btn
     }()
     
     private lazy var deleteBtn: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor.systemYellow()
+        btn.setImage(UIImage(named: "fm_player_no"), for: .normal)
         return btn
     }()
     
     private lazy var loveBtn: UIButton = {
         let btn = UIButton()
-        btn.backgroundColor = UIColor.systemPink()
+        btn.setImage(UIImage(named: "fm_player_yes"), for: .normal)
         return btn
     }()
     
@@ -171,19 +171,13 @@ class FMViewController: ViewController {
         deleteBtn.snp_makeConstraints { (maker) in
             maker.right.equalTo(playBtn.snp_left).offset(-16)
             maker.centerY.equalTo(controlView)
-            maker.size.equalTo(CGSize(width: 40, height: 40))
+            maker.size.equalTo(CGSize(width: 30, height: 30))
         }
         
         loveBtn.snp_makeConstraints { (maker) in
             maker.left.equalTo(playBtn.snp_right).offset(16)
             maker.centerY.equalTo(controlView)
-            maker.size.equalTo(CGSize(width: 40, height: 40))
-        }
-        
-        loveBtn.snp_makeConstraints { (maker) in
-            maker.left.equalTo(playBtn.snp_right).offset(16)
-            maker.centerY.equalTo(controlView)
-            maker.size.equalTo(CGSize(width: 40, height: 40))
+            maker.size.equalTo(CGSize(width: 30, height: 30))
         }
         
     }
@@ -191,8 +185,8 @@ class FMViewController: ViewController {
     func loadData() {
         dataSourceItems.removeAll()
         
-        let favItem = FMItem(icon: "local_favorites", name: "私人电波")
-        let hotItem = FMItem(icon: "local_favorites", name: "Evo精选")
+        let favItem = FMItem(icon: "fm_list_love", name: "私人电波")
+        let hotItem = FMItem(icon: "fm_list_hot", name: "Evo精选")
         dataSourceItems.append(favItem)
         dataSourceItems.append(hotItem)
         
