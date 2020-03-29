@@ -8,7 +8,7 @@
 
 import UIKit
 import JQFisher
-import PureLayout
+import SnapKit
 import ObjectMapper
 
 class FMViewController: ViewController {
@@ -25,6 +25,73 @@ class FMViewController: ViewController {
         return tv
     }()
     
+    private lazy var playerPanel: UIView = {
+        let v = UIView()
+        v.backgroundColor = ThemeColors.bgColorDark.alpha(0.6)
+        
+        return v
+    }()
+    
+    private lazy var coverBtn: UIButton = {
+        let btn = UIButton()
+        btn.layer.cornerRadius = 8
+        btn.backgroundColor = UIColor.systemGreen()
+        return btn
+    }()
+    
+    private lazy var infoBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = UIColor.systemRed()
+        return btn
+    }()
+
+    private lazy var infosView: UIView = {
+        let v = UIView()
+        
+        return v
+    }()
+    
+    private lazy var songNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.systemLightGray6();
+        label.font = UIFont.boldSize18()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var programNameLabel: UILabel = {
+        let label = UILabel()
+        label.textColor = UIColor.systemLightGray4();
+        label.font = UIFont.size14()
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var controlView: UIView = {
+        let v = UIView()
+        
+        return v
+    }()
+    
+    private lazy var playBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = UIColor.systemGreen()
+        return btn
+    }()
+    
+    private lazy var deleteBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = UIColor.systemYellow()
+        return btn
+    }()
+    
+    private lazy var loveBtn: UIButton = {
+        let btn = UIButton()
+        btn.backgroundColor = UIColor.systemPink()
+        return btn
+    }()
+    
+    
     fileprivate var dataSourceItems: [FMItem] = []
     fileprivate var selectedIndexPath: IndexPath?
     
@@ -33,17 +100,92 @@ class FMViewController: ViewController {
         loadData()
         
         prepareUI()
+        
+        setupData()
     }
     
     func prepareUI() {
         self.view.backgroundColor = ThemeColors.bgColorDark
         
-        
         self.view.addSubview(tableView)
-        tableView.autoPinEdge(toSuperviewEdge: .left)
-        tableView.autoPinEdge(toSuperviewEdge: .top)
-        tableView.autoPinEdge(toSuperviewEdge: .bottom)
-        tableView.autoSetDimension(.width, toSize: 100)
+        self.view.addSubview(playerPanel)
+        playerPanel.addSubview(coverBtn)
+        playerPanel.addSubview(infoBtn)
+        playerPanel.addSubview(infosView)
+        infosView.addSubview(songNameLabel)
+        infosView.addSubview(programNameLabel)
+        playerPanel.addSubview(controlView)
+        controlView.addSubview(playBtn)
+        controlView.addSubview(deleteBtn)
+        controlView.addSubview(loveBtn)
+        
+        
+        tableView.snp_makeConstraints { (maker) in
+            maker.left.top.bottom.equalTo(self.view)
+            maker.width.equalTo(100)
+        }
+        
+        playerPanel.snp_makeConstraints { (maker) in
+            maker.centerY.equalTo(self.view)
+            maker.left.equalTo(tableView.snp_right).offset(16)
+            maker.right.equalTo(self.view).offset(-16)
+        }
+        
+        coverBtn.snp_makeConstraints { (maker) in
+            maker.top.left.right.equalTo(playerPanel)
+            maker.height.equalTo(playerPanel.snp_width)
+        }
+        
+        infoBtn.snp_makeConstraints { (maker) in
+            maker.top.equalTo(coverBtn).offset(4)
+            maker.right.equalTo(coverBtn).offset(-4)
+            maker.size.equalTo(CGSize(width: 20, height: 20))
+        }
+        
+        infosView.snp_makeConstraints { (maker) in
+            maker.top.equalTo(coverBtn.snp_bottom).offset(16)
+            maker.left.right.equalTo(playerPanel)
+        }
+        
+        songNameLabel.snp_makeConstraints { (maker) in
+            maker.left.right.top.equalTo(infosView)
+        }
+        
+        programNameLabel.snp_makeConstraints { (maker) in
+            maker.left.right.bottom.equalTo(infosView)
+            maker.top.equalTo(songNameLabel.snp_bottom).offset(8)
+        }
+        
+        controlView.snp_makeConstraints { (maker) in
+            maker.top.equalTo(infosView.snp_bottom).offset(16)
+            maker.left.right.bottom.equalTo(playerPanel)
+            maker.height.equalTo(40).priorityHigh()
+            maker.bottom.equalTo(playerPanel).priorityLow()
+        }
+        
+        playBtn.snp_makeConstraints { (maker) in
+            maker.center.equalTo(controlView)
+            maker.size.equalTo(CGSize(width: 40, height: 40))
+        }
+        
+        deleteBtn.snp_makeConstraints { (maker) in
+            maker.right.equalTo(playBtn.snp_left).offset(-16)
+            maker.centerY.equalTo(controlView)
+            maker.size.equalTo(CGSize(width: 40, height: 40))
+        }
+        
+        loveBtn.snp_makeConstraints { (maker) in
+            maker.left.equalTo(playBtn.snp_right).offset(16)
+            maker.centerY.equalTo(controlView)
+            maker.size.equalTo(CGSize(width: 40, height: 40))
+        }
+        
+        loveBtn.snp_makeConstraints { (maker) in
+            maker.left.equalTo(playBtn.snp_right).offset(16)
+            maker.centerY.equalTo(controlView)
+            maker.size.equalTo(CGSize(width: 40, height: 40))
+        }
+        
     }
     
     func loadData() {
@@ -84,6 +226,11 @@ class FMViewController: ViewController {
             }
         }
 
+    }
+    
+    func setupData() {
+        songNameLabel.text = "- - - - -"
+        programNameLabel.text = "- - - - -"
     }
     
     @objc func onTapSectionDetail(_ gesture: UITapGestureRecognizer) {
