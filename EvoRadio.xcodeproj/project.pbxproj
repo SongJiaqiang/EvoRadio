@@ -34,6 +34,9 @@
 		634E065C1F3857AD00253E9A /* Common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E065B1F3857AD00253E9A /* Common.swift */; };
 		634E06671F3869F400253E9A /* EvoRadioTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06661F3869F400253E9A /* EvoRadioTests.swift */; };
 		634E067F1F38888400253E9A /* RadioTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 634E06771F38888400253E9A /* RadioTableViewCell.swift */; };
+		6357545A243084BE007441D7 /* FMChannelTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63575459243084BE007441D7 /* FMChannelTableViewCell.swift */; };
+		6357545D2430A628007441D7 /* api_radios.json in Resources */ = {isa = PBXBuildFile; fileRef = 6357545C2430A628007441D7 /* api_radios.json */; };
+		6357545F2430A94F007441D7 /* Radio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6357545E2430A94F007441D7 /* Radio.swift */; };
 		635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 635AD2E31F49BC18002AFE0D /* ReflectionView.m */; };
 		6360F24B1F779C9500070C4E /* SearchSongInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24A1F779C9500070C4E /* SearchSongInfo.swift */; };
 		6360F24D1F77A5A800070C4E /* SimpleTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6360F24C1F77A5A800070C4E /* SimpleTableViewCell.swift */; };
@@ -83,7 +86,7 @@
 		63EF44BA1F39F48200EADC48 /* DownloadedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B71F39F48200EADC48 /* DownloadedCollectionViewCell.swift */; };
 		63EF44BB1F39F48200EADC48 /* DownloadedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B81F39F48200EADC48 /* DownloadedTableViewCell.swift */; };
 		63EF44BC1F39F48200EADC48 /* DownloadingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63EF44B91F39F48200EADC48 /* DownloadingTableViewCell.swift */; };
-		86A783E31962C113368E80E8 /* BuildFile in Frameworks */ = {isa = PBXBuildFile; };
+		86A783E31962C113368E80E8 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		900C72541D056439006EBE78 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 900C72531D056439006EBE78 /* libsqlite3.0.tbd */; };
 		902F6B701CC3C4EA00F43C2E /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902F6B6F1CC3C4EA00F43C2E /* Device.swift */; };
 		902FBCD11CBEAC020051A93B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 902FBCD01CBEAC020051A93B /* AppDelegate.swift */; };
@@ -190,6 +193,9 @@
 		634E06661F3869F400253E9A /* EvoRadioTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EvoRadioTests.swift; sourceTree = "<group>"; };
 		634E06681F3869F400253E9A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		634E06771F38888400253E9A /* RadioTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadioTableViewCell.swift; sourceTree = "<group>"; };
+		63575459243084BE007441D7 /* FMChannelTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FMChannelTableViewCell.swift; sourceTree = "<group>"; };
+		6357545C2430A628007441D7 /* api_radios.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = api_radios.json; sourceTree = "<group>"; };
+		6357545E2430A94F007441D7 /* Radio.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Radio.swift; sourceTree = "<group>"; };
 		635AD1B41F4981DE002AFE0D /* RefreshKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RefreshKit.framework; path = Carthage/Build/iOS/RefreshKit.framework; sourceTree = "<group>"; };
 		635AD2141F499611002AFE0D /* AudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioKit.framework; path = Carthage/Build/iOS/AudioKit.framework; sourceTree = "<group>"; };
 		635AD2BA1F49B4D7002AFE0D /* CarouselKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CarouselKit.framework; path = Carthage/Build/iOS/CarouselKit.framework; sourceTree = "<group>"; };
@@ -316,7 +322,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				86A783E31962C113368E80E8 /* BuildFile in Frameworks */,
+				86A783E31962C113368E80E8 /* (null) in Frameworks */,
 				FCCE5B204D768259C96DFD55 /* Pods_EvoRadioTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -474,9 +480,18 @@
 				63EF44121F38B28200EADC48 /* LocalTableViewCell.swift */,
 				6340022D1F6EABCE001FD26C /* ItunesViewCell.swift */,
 				63294D09224738E10089AC36 /* ScannerTableViewCell.swift */,
+				63575459243084BE007441D7 /* FMChannelTableViewCell.swift */,
 			);
 			name = Cells;
 			path = Views/Cells;
+			sourceTree = "<group>";
+		};
+		6357545B2430A612007441D7 /* jsons */ = {
+			isa = PBXGroup;
+			children = (
+				6357545C2430A628007441D7 /* api_radios.json */,
+			);
+			path = jsons;
 			sourceTree = "<group>";
 		};
 		635AD2E11F49BC18002AFE0D /* ReflectionView */ = {
@@ -499,6 +514,7 @@
 		63CA467823EFCE41007443F4 /* Base */ = {
 			isa = PBXGroup;
 			children = (
+				6357545E2430A94F007441D7 /* Radio.swift */,
 				63CA467A23EFCEA3007443F4 /* Channel.swift */,
 				63CA468123EFCEA3007443F4 /* Program.swift */,
 				63CA468023EFCEA3007443F4 /* Song.swift */,
@@ -617,6 +633,7 @@
 		909E659C1CC0831100B0C49B /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				6357545B2430A612007441D7 /* jsons */,
 				631BA2C821AFB73100A6D65C /* GoogleService-Info.plist */,
 				9097BB1C1CFE8B6400FA5BD9 /* Test.xib */,
 				63C9A077211C94A100B507D2 /* LaunchScreen.storyboard */,
@@ -861,6 +878,7 @@
 				631BA2C921AFB73100A6D65C /* GoogleService-Info.plist in Resources */,
 				9097BB1D1CFE8B6400FA5BD9 /* Test.xib in Resources */,
 				63C9A058211BBA8200B507D2 /* splash_image_default.jpg in Resources */,
+				6357545D2430A628007441D7 /* api_radios.json in Resources */,
 				63C9A078211C94A100B507D2 /* LaunchScreen.storyboard in Resources */,
 				909E65A91CC083A500B0C49B /* Assets.xcassets in Resources */,
 				63C9A055211BB97200B507D2 /* SplashViewController.xib in Resources */,
@@ -1076,6 +1094,7 @@
 				63EF44B31F39F39600EADC48 /* DownloadingSongListViewController.swift in Sources */,
 				63EF44B01F39F39600EADC48 /* DownloadedProgramListViewController.swift in Sources */,
 				63EF44111F38B1E700EADC48 /* LocalViewController.swift in Sources */,
+				6357545F2430A94F007441D7 /* Radio.swift in Sources */,
 				63EF44151F38B3D200EADC48 /* PlayerViewController.swift in Sources */,
 				909E65A21CC0831B00B0C49B /* ViewController.swift in Sources */,
 				63EF440B1F38B03800EADC48 /* SelectiveTimePanel.swift in Sources */,
@@ -1141,6 +1160,7 @@
 				63EF44051F38AFA500EADC48 /* MainViewController.swift in Sources */,
 				63B674661F519B2A00F4341B /* ItunesViewController.swift in Sources */,
 				635AD2E41F49BC18002AFE0D /* ReflectionView.m in Sources */,
+				6357545A243084BE007441D7 /* FMChannelTableViewCell.swift in Sources */,
 				9097BB271CFEA8E900FA5BD9 /* ViewControllers.swift in Sources */,
 				DBF1E7E21CCE7CA300B554A2 /* Measure.swift in Sources */,
 				63C9A054211BB97200B507D2 /* SplashViewController.swift in Sources */,

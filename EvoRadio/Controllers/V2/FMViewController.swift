@@ -9,12 +9,24 @@
 import UIKit
 import JQFisher
 import PureLayout
+import ObjectMapper
 
 class FMViewController: ViewController {
 
-    private let tableView: UITableView = UITableView()
+    private lazy var tableView: UITableView = {
+        let tv = UITableView(frame: CGRect.zero, style: .plain)
+        tv.dataSource = self
+        tv.delegate = self
+        tv.register(FMChannelTableViewCell.self, forCellReuseIdentifier: "FMChannelTableViewCell")
+        tv.showsVerticalScrollIndicator = false
+        tv.backgroundColor = UIColor.clear
+        tv.separatorStyle = .none
+        
+        return tv
+    }()
     
     fileprivate var dataSourceItems: [FMItem] = []
+    fileprivate var selectedIndexPath: IndexPath?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,52 +38,85 @@ class FMViewController: ViewController {
     func prepareUI() {
         self.view.backgroundColor = ThemeColors.bgColorDark
         
-        tableView.dataSource = self;
-        tableView.delegate = self;
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "UITableViewCell")
-        tableView.showsVerticalScrollIndicator = false
         
         self.view.addSubview(tableView)
         tableView.autoPinEdge(toSuperviewEdge: .left)
         tableView.autoPinEdge(toSuperviewEdge: .top)
         tableView.autoPinEdge(toSuperviewEdge: .bottom)
         tableView.autoSetDimension(.width, toSize: 100)
-        
     }
-    
     
     func loadData() {
-        let item01 = FMItem(icon: "", name: "私人电波")
-        let item02 = FMItem(icon: "", name: "Evo精选")
-        
-        let item11 = FMItem(icon: "", name: "活动场景")
-        let item11_01 = FMItem(icon: "", name: "工作学习")
-        let item11_02 = FMItem(icon: "", name: "在路上")
-        let item11_03 = FMItem(icon: "", name: "编程")
-        let item11_04 = FMItem(icon: "", name: "发呆")
-        let item11_05 = FMItem(icon: "", name: "浴室")
-        item11.subItems = [item11_01, item11_02, item11_03, item11_04, item11_05]
-        
-        let item12 = FMItem(icon: "", name: "情绪场景")
-        let item12_01 = FMItem(icon: "", name: "工作学习")
-        let item12_02 = FMItem(icon: "", name: "在路上")
-        item12.subItems = [item12_01, item12_02]
-        
-        let item13 = FMItem(icon: "", name: "文化场景")
-        let item13_01 = FMItem(icon: "", name: "工作学习")
-        let item13_02 = FMItem(icon: "", name: "在路上")
-        item13.subItems = [item13_01, item13_02]
-        
-        let item14 = FMItem(icon: "", name: "流派场景")
-        let item14_01 = FMItem(icon: "", name: "工作学习")
-        let item14_02 = FMItem(icon: "", name: "在路上")
-        item14.subItems = [item14_01, item14_02]
-        
         dataSourceItems.removeAll()
-        dataSourceItems.append(contentsOf: [item01, item02, item11, item12, item13, item14])
         
+        let favItem = FMItem(icon: "local_favorites", name: "私人电波")
+        let hotItem = FMItem(icon: "local_favorites", name: "Evo精选")
+        dataSourceItems.append(favItem)
+        dataSourceItems.append(hotItem)
+        
+        if let radiosJsonPath = Bundle.main.path(forResource: "api_radios.json", ofType: nil) {
+            do {
+                let radiosJsonURL = URL(fileURLWithPath: radiosJsonPath)
+                let radiosJsonData = try Data(contentsOf: radiosJsonURL)
+                if let radiosJson = try JSONSerialization.jsonObject(with: radiosJsonData, options: .allowFragments) as? [String: Any] {
+                    if let radiosArray = radiosJson["data"] as? [[String: Any]]{
+                        let radios = Mapper<Radio>().mapArray(JSONArray: radiosArray)
+                        for radio in radios {
+                            if let radioName = radio.radioName, let channels = radio.channels {
+                                let radioItem = FMItem(icon: "local_favorites", name: radioName)
+                                
+                                var channelItems: [FMItem] = []
+                                for channel in channels {
+                                    if let channelName = channel.channelName {
+                                        let channelItem = FMItem(icon: nil, name: channelName)
+                                        channelItems.append(channelItem)
+                                    }
+                                }
+                                radioItem.subItems = channelItems
+                                dataSourceItems.append(radioItem)
+                            }
+                        }
+                    }
+                }
+                
+            } catch let error {
+                print(error)
+            }
+        }
+
     }
     
+    @objc func onTapSectionDetail(_ gesture: UITapGestureRecognizer) {
+        guard let tapedView = gesture.view else {
+            return
+        }
+        
+        let index = tapedView.tag
+        if index > 0 && index < dataSourceItems.count {
+            toggleSectionDetail(atIndex: index)
+        }
+    }
+    
+    func toggleSectionDetail(atIndex index: Int) {
+        let sectionItem = dataSourceItems[index]
+        sectionItem.isOpen = !sectionItem.isOpen
+        
+        tableView.reloadSections([index], with: .none)
+        //TODO: 滚动到合适位置
+//        if sectionItem.isOpen {
+//            tableView.scrollToRow(at: IndexPath(row: 0, section: index), at: .top, animated: true)
+//        }
+    }
+    
+    func toggleCellStatus(atIndexPath indexPath: IndexPath, isOpen: Bool) -> Bool {
+        let sectionItem = dataSourceItems[indexPath.section]
+        if let subItems = sectionItem.subItems {
+            let item = subItems[indexPath.row]
+            item.isOpen = isOpen
+        }
+        
+        return sectionItem.isOpen
+    }
     
 }
 
@@ -82,7 +127,7 @@ extension FMViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionItem = dataSourceItems[section]
-        if let subItems = sectionItem.subItems {
+        if sectionItem.isOpen, let subItems = sectionItem.subItems {
             return subItems.count
         }
         
@@ -90,12 +135,14 @@ extension FMViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "UITableViewCell", for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "FMChannelTableViewCell", for: indexPath) as? FMChannelTableViewCell else {
+            return UITableViewCell()
+        }
         
         let sectionItem = dataSourceItems[indexPath.section]
         if let subItems = sectionItem.subItems {
             let item = subItems[indexPath.row]
-            cell.textLabel?.text = item.name
+            cell.setupTitle(item.name, isSelected: item.isOpen)
         }
         
         return cell
@@ -105,11 +152,12 @@ extension FMViewController: UITableViewDataSource, UITableViewDelegate {
         let header = UIView()
         header.frame = CGRect(w: 100, h: 100)
         header.backgroundColor = ThemeColors.bgColorDark
+        header.tag = section
         
         let iconView = UIImageView()
+        iconView.contentMode = .scaleAspectFit
         iconView.layer.cornerRadius = 20
         iconView.layer.masksToBounds = true
-        iconView.backgroundColor = UIColor.green
         
         header.addSubview(iconView)
         iconView.autoAlignAxis(toSuperviewAxis: .vertical)
@@ -136,29 +184,57 @@ extension FMViewController: UITableViewDataSource, UITableViewDelegate {
         arrowView.autoSetDimension(.height, toSize: 10)
         
         let sectionItem = dataSourceItems[section]
-        iconView.image = UIImage(named: sectionItem.icon)
+        if let itemIcon = sectionItem.icon {
+            iconView.image = UIImage(named: itemIcon)
+        }
         nameLabel.text = sectionItem.name
         if let subItems = sectionItem.subItems, subItems.count > 0 {
             arrowView.isHidden = false
         }
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(onTapSectionDetail(_:)))
+        header.addGestureRecognizer(tap)
+        
         return header
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 40
+    }
+    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 100;
+        return 100
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var needReloadPaths: [IndexPath] = []
+        
+        if let oldIndexPath = selectedIndexPath {
+            let sectionIsOpened = toggleCellStatus(atIndexPath: oldIndexPath, isOpen: false)
+            if sectionIsOpened {
+                needReloadPaths.append(oldIndexPath)
+            }
+        }
+        let _ = toggleCellStatus(atIndexPath: indexPath, isOpen: true)
+        needReloadPaths.append(indexPath)
+        
+//        tableView.reloadRows(at: needReloadPaths, with: .none)
+        tableView.reloadData()
+        selectedIndexPath = indexPath
     }
 }
 
 
 class FMItem {
-    var icon: String
+    var icon: String?
     var name: String
     var subItems: [FMItem]?
+    var isOpen: Bool = false
     
-    init(icon: String, name: String, subItems: [FMItem]? = nil) {
+    init(icon: String?, name: String, subItems: [FMItem]? = nil, isOpen: Bool = false) {
         self.icon = icon
         self.name = name
         self.subItems = subItems
+        self.isOpen = isOpen
     }
 }
