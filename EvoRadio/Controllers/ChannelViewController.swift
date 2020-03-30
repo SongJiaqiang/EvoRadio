@@ -11,13 +11,19 @@ import Alamofire
 import Kingfisher
 import MJRefresh
 import Lava
-
+import SnapKit
 
 class ChannelViewController: ViewController {
     let cellID = "channelCellID"
     let headerID = "channelHeaderID"
     
-    fileprivate var collectionView: UICollectionView?
+    private lazy var scrollBar: UIScrollView = {
+        let sv = UIScrollView()
+        
+        return sv
+    }()
+    private var collectionView: UICollectionView?
+    
     var dataSources = [LRChannel]()
     var radioId: Int = 0
     
@@ -34,15 +40,20 @@ class ChannelViewController: ViewController {
     
     deinit{
         NotificationCenter.default.removeObserver(self, name: NOTI_NOWTIME_CHANGED, object: nil)
-        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        prepareUI()
         prepareCollectionView()
         
         collectionView!.mj_header.beginRefreshing()
+    }
+    
+    func prepareUI() {
+        self.view.addSubview(scrollBar)
+        
     }
 
     func prepareCollectionView() {

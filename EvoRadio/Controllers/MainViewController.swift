@@ -26,7 +26,7 @@ class MainViewController: ViewController {
     private var localController: LocalViewController = LocalViewController()
     private var playerController = PlayerViewController()
     
-    private let narBarItems = ["私人电波", "所有音乐", "个人中心"]
+    private let narBarItems = ["私人电波", "所有歌单", "个人中心"]
     
     var touchIcon: UIImage?
     
@@ -55,10 +55,9 @@ class MainViewController: ViewController {
         prepareNavBar()
         prepareContentView()
         
-        //        preparePlayerView()
-        
         // 准备播放界面
-        //        preparePlayer()
+        preparePlayerView()
+        preparePlayer()
         
     }
     

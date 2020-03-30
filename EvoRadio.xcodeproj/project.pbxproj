@@ -436,7 +436,6 @@
 				63EF44061F38AFEC00EADC48 /* NowViewController.swift */,
 				6318845F1D78482200D7399A /* RadioViewController.swift */,
 				63EF43F01F38A1C700EADC48 /* ProgramViewController.swift */,
-				63EF43F81F38A6F400EADC48 /* ChannelViewController.swift */,
 				63EF44001F38AC7800EADC48 /* SongListViewController.swift */,
 				63EF44101F38B1E700EADC48 /* LocalViewController.swift */,
 				63EF44141F38B3D200EADC48 /* PlayerViewController.swift */,
@@ -451,6 +450,7 @@
 			children = (
 				63EF44041F38AFA500EADC48 /* MainViewController.swift */,
 				632546F6242D100F002A49BF /* FMViewController.swift */,
+				63EF43F81F38A6F400EADC48 /* ChannelViewController.swift */,
 			);
 			name = V2;
 			sourceTree = "<group>";
